@@ -204,9 +204,6 @@ algorithms.</p>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">k_means</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">t_batch</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="n">k_means_labels</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">labels_</span>
-<span class="n">k_means_cluster_centers</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">cluster_centers_</span>
-<span class="n">k_means_labels_unique</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.unique.html#numpy.unique"><span class="n">np</span><span class="o">.</span><span class="n">unique</span></a><span class="p">(</span><span class="n">k_means_labels</span><span class="p">)</span>
 
 <span class="c">##############################################################################</span>
 <span class="c"># Compute clustering with MiniBatchKMeans</span>
@@ -216,9 +213,6 @@ algorithms.</p>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">mbk</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">t_mini_batch</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="n">mbk_means_labels</span> <span class="o">=</span> <span class="n">mbk</span><span class="o">.</span><span class="n">labels_</span>
-<span class="n">mbk_means_cluster_centers</span> <span class="o">=</span> <span class="n">mbk</span><span class="o">.</span><span class="n">cluster_centers_</span>
-<span class="n">mbk_means_labels_unique</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.unique.html#numpy.unique"><span class="n">np</span><span class="o">.</span><span class="n">unique</span></a><span class="p">(</span><span class="n">mbk_means_labels</span><span class="p">)</span>
 
 <span class="c">##############################################################################</span>
 <span class="c"># Plot result</span>
@@ -230,7 +224,10 @@ algorithms.</p>
 <span class="c"># We want to have the same colors for the same cluster from the</span>
 <span class="c"># MiniBatchKMeans and the KMeans algorithm. Let&#39;s pair the cluster centers per</span>
 <span class="c"># closest one.</span>
-
+<span class="n">k_means_cluster_centers</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sort.html#numpy.sort"><span class="n">np</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="n">k_means</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mbk_means_cluster_centers</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sort.html#numpy.sort"><span class="n">np</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="n">mbk</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">k_means_labels</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.pairwise_distances_argmin.html#sklearn.metrics.pairwise_distances_argmin"><span class="n">pairwise_distances_argmin</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k_means_cluster_centers</span><span class="p">)</span>
+<span class="n">mbk_means_labels</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.pairwise_distances_argmin.html#sklearn.metrics.pairwise_distances_argmin"><span class="n">pairwise_distances_argmin</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mbk_means_cluster_centers</span><span class="p">)</span>
 <span class="n">order</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.pairwise_distances_argmin.html#sklearn.metrics.pairwise_distances_argmin"><span class="n">pairwise_distances_argmin</span></a><span class="p">(</span><span class="n">k_means_cluster_centers</span><span class="p">,</span>
                                   <span class="n">mbk_means_cluster_centers</span><span class="p">)</span>
 
@@ -283,8 +280,8 @@ algorithms.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.40 seconds
-( 0 minutes  0.40 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.35 seconds
+( 0 minutes  0.35 seconds)</p>
 </div>
 
 
