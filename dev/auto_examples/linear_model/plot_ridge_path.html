@@ -173,9 +173,17 @@
 Each color represents a different feature of the
 coefficient vector, and this is displayed as a function of the
 regularization parameter.</p>
-<p>At the end of the path, as alpha tends toward zero
+<p>This example also shows the usefulness of applying Ridge regression
+to highly ill-conditioned matrices. For such matrices, a slight
+change in the target variable can cause huge variances in the
+calculated weights. In such cases, it is useful to set a certain
+regularization (alpha) to reduce this variation (noise).</p>
+<p>When alpha is very large, the regularization effect dominates the
+squared loss function and the coefficients tend to zero.
+At the end of the path, as alpha tends toward zero
 and the solution tends towards the ordinary least squares, coefficients
-exhibit big oscillations.</p>
+exhibit big oscillations. In practise it is necessary to tune alpha
+in such a way that a balance is maintained between both.</p>
 <img alt="../../_images/plot_ridge_path_001.png" class="align-center" src="../../_images/plot_ridge_path_001.png" />
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ridge_path.py"><tt class="xref download docutils literal"><span class="pre">plot_ridge_path.py</span></tt></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Author: Fabian Pedregosa -- &lt;fabian.pedregosa@inria.fr&gt;</span>
@@ -219,8 +227,8 @@ exhibit big oscillations.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.32 seconds
-( 0 minutes  0.32 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.24 seconds
+( 0 minutes  0.24 seconds)</p>
 </div>
 
 

@@ -16,9 +16,18 @@ Each color represents a different feature of the
 coefficient vector, and this is displayed as a function of the
 regularization parameter.
 
+This example also shows the usefulness of applying Ridge regression
+to highly ill-conditioned matrices. For such matrices, a slight
+change in the target variable can cause huge variances in the
+calculated weights. In such cases, it is useful to set a certain
+regularization (alpha) to reduce this variation (noise).
+
+When alpha is very large, the regularization effect dominates the
+squared loss function and the coefficients tend to zero.
 At the end of the path, as alpha tends toward zero
 and the solution tends towards the ordinary least squares, coefficients
-exhibit big oscillations.
+exhibit big oscillations. In practise it is necessary to tune alpha
+in such a way that a balance is maintained between both.
 
 
 
@@ -31,8 +40,8 @@ exhibit big oscillations.
 **Python source code:** :download:`plot_ridge_path.py <plot_ridge_path.py>`
 
 .. literalinclude:: plot_ridge_path.py
-    :lines: 19-
+    :lines: 28-
 
-**Total running time of the example:**  0.32 seconds
-( 0 minutes  0.32 seconds)
+**Total running time of the example:**  0.24 seconds
+( 0 minutes  0.24 seconds)
     
