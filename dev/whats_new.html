@@ -344,7 +344,7 @@ available from <tt class="xref py py-mod docutils literal"><span class="pre">mod
 that takes in the data and yields a generator for the different splits.
 This change makes it possible to do nested cross-validation with ease,
 facilitated by <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><tt class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></tt></a> and similar
-utilities.  (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/4294">#4294</a>) by <a class="reference external" href="https://github.com/ragv">Raghav R V</a>.</li>
+utilities.  (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/4294">#4294</a>) by <a class="reference external" href="https://github.com/rvraghav93">Raghav R V</a>.</li>
 <li>The random forest, extra trees and decision tree estimators now has a
 method <tt class="docutils literal"><span class="pre">decision_path</span></tt> which returns the decision path of samples in
 the tree. By <a class="reference external" href="http://www.ajoly.org">Arnaud Joly</a>.</li>
@@ -371,6 +371,8 @@ the score on the test folds in parallel. By <a class="reference external" href="
 parameter. By <a class="reference external" href="https://bmcfee.github.io">Brian McFee</a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier" title="sklearn.multiclass.OneVsOneClassifier"><tt class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsOneClassifier</span></tt></a> and <a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="sklearn.multiclass.OneVsRestClassifier"><tt class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsRestClassifier</span></tt></a>
 now support <tt class="docutils literal"><span class="pre">partial_fit</span></tt>. By <a class="reference external" href="https://github.com/kaichogami">Asish Panda</a> and <a class="reference external" href="https://github.com/phdowling">Philipp Dowling</a>.</li>
+<li>Add <tt class="docutils literal"><span class="pre">sample_weight</span></tt> parameter to <a class="reference internal" href="modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef" title="sklearn.metrics.matthews_corrcoef"><tt class="xref py py-func docutils literal"><span class="pre">metrics.matthews_corrcoef</span></tt></a>.
+By <a class="reference external" href="http://jatinshah.org/">Jatin Shah</a> and <a class="reference external" href="https://github.com/rvraghav93">Raghav R V</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -407,7 +409,7 @@ are required to split a decision tree node. By <a class="reference external" hre
 <li>The <tt class="xref py py-mod docutils literal"><span class="pre">cross_validation</span></tt>, <tt class="xref py py-mod docutils literal"><span class="pre">grid_search</span></tt> and <tt class="xref py py-mod docutils literal"><span class="pre">learning_curve</span></tt>
 have been deprecated and the classes and functions have been reorganized into
 the <tt class="xref py py-mod docutils literal"><span class="pre">model_selection</span></tt> module.
-(<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/4294">#4294</a>) by <a class="reference external" href="https://github.com/ragv">Raghav R V</a>.</li>
+(<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/4294">#4294</a>) by <a class="reference external" href="https://github.com/rvraghav93">Raghav R V</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -915,7 +917,7 @@ By <a class="reference external" href="http://twitter.com/ogrisel">Olivier Grise
 <li>Add <tt class="docutils literal"><span class="pre">n_iter_</span></tt> attribute to estimators that accept a <tt class="docutils literal"><span class="pre">max_iter</span></tt> attribute
 in their constructor. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
 <li>Added decision function for <a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier" title="sklearn.multiclass.OneVsOneClassifier"><tt class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsOneClassifier</span></tt></a>
-By <a class="reference external" href="https://github.com/ragv">Raghav R V</a> and <a class="reference external" href="https://github.com/kyleabeauchamp">Kyle Beauchamp</a>.</li>
+By <a class="reference external" href="https://github.com/rvraghav93">Raghav R V</a> and <a class="reference external" href="https://github.com/kyleabeauchamp">Kyle Beauchamp</a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><tt class="xref py py-func docutils literal"><span class="pre">neighbors.kneighbors_graph</span></tt></a> and <tt class="xref py py-func docutils literal"><span class="pre">radius_neighbors_graph</span></tt>
 support non-Euclidean metrics. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a></li>
 <li>Parameter <tt class="docutils literal"><span class="pre">connectivity</span></tt> in <a class="reference internal" href="modules/generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><tt class="xref py py-class docutils literal"><span class="pre">cluster.AgglomerativeClustering</span></tt></a>
@@ -1129,7 +1131,7 @@ been removed. They were deprecated since 0.14</p>
 </li>
 <li><p class="first">From now onwards, all estimators will uniformly raise <tt class="docutils literal"><span class="pre">NotFittedError</span></tt>
 (<tt class="xref py py-class docutils literal"><span class="pre">utils.validation.NotFittedError</span></tt>), when any of the <tt class="docutils literal"><span class="pre">predict</span></tt>
-like methods are called before the model is fit. By <a class="reference external" href="https://github.com/ragv">Raghav R V</a>.</p>
+like methods are called before the model is fit. By <a class="reference external" href="https://github.com/rvraghav93">Raghav R V</a>.</p>
 </li>
 <li><p class="first">Input data validation was refactored for more consistent input
 validation. The <tt class="docutils literal"><span class="pre">check_arrays</span></tt> function was replaced by <tt class="docutils literal"><span class="pre">check_array</span></tt>
