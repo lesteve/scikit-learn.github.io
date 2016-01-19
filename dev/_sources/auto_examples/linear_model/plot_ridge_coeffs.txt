@@ -1,0 +1,58 @@
+
+
+.. _example_linear_model_plot_ridge_coeffs.py:
+
+
+==============================================================
+Plot Ridge coefficients as a function of the L2 regularization
+==============================================================
+
+.. currentmodule:: sklearn.linear_model
+
+:class:`Ridge` Regression is the estimator used in this example.
+Each color in the left plot represents one different dimension of the
+coefficient vector, and this is displayed as a function of the
+regularization parameter. The right plot shows how exact the solution
+is. This example illustrates how a well defined solution is
+found by Ridge regression and how regularization affects the
+coefficients and their values. The plot on the right shows how
+the difference of the coefficients from the estimator changes
+as a function of regularization.
+
+In this example the dependent variable Y is set as a function
+of the input features: y = X*w + c. The coefficient vector w is
+randomly sampled from a normal distribution, whereas the bias term c is
+set to a constant.
+
+As alpha tends toward zero the coefficients found by Ridge
+regression stabilize towards the randomly sampled vector w.
+For big alpha (strong regularisation) the coefficients
+are smaller (eventually converging at 0) leading to a
+simpler and biased solution.
+These dependencies can be observed on the left plot.
+
+The right plot shows the mean squared error between the
+coefficients found by the model and the chosen vector w.
+Less regularised models retrieve the exact
+coefficients (error is equal to 0), stronger regularised
+models increase the error.
+
+Please note that in this example the data is non-noisy, hence
+it is possible to extract the exact coefficients.
+
+
+
+.. image:: images/plot_ridge_coeffs_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_ridge_coeffs.py <plot_ridge_coeffs.py>`
+
+.. literalinclude:: plot_ridge_coeffs.py
+    :lines: 39-
+
+**Total running time of the example:**  0.31 seconds
+( 0 minutes  0.31 seconds)
+    
