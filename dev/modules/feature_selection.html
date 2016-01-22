@@ -220,23 +220,16 @@ univariate statistical tests. It can be seen as a preprocessing step
 to an estimator. Scikit-learn exposes feature selection routines
 as objects that implement the <tt class="docutils literal"><span class="pre">transform</span></tt> method:</p>
 <blockquote>
-<div><ul>
-<li><p class="first"><a class="reference internal" href="generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><tt class="xref py py-class docutils literal"><span class="pre">SelectKBest</span></tt></a> removes all but the <span class="math">k</span> highest scoring features</p>
-</li>
-<li><p class="first"><a class="reference internal" href="generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><tt class="xref py py-class docutils literal"><span class="pre">SelectPercentile</span></tt></a> removes all but a user-specified highest scoring
-percentage of features</p>
-</li>
-<li><p class="first">using common univariate statistical tests for each feature:
+<div><ul class="simple">
+<li><a class="reference internal" href="generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><tt class="xref py py-class docutils literal"><span class="pre">SelectKBest</span></tt></a> removes all but the <span class="math">k</span> highest scoring features</li>
+<li><a class="reference internal" href="generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><tt class="xref py py-class docutils literal"><span class="pre">SelectPercentile</span></tt></a> removes all but a user-specified highest scoring
+percentage of features</li>
+<li>using common univariate statistical tests for each feature:
 false positive rate <a class="reference internal" href="generated/sklearn.feature_selection.SelectFpr.html#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><tt class="xref py py-class docutils literal"><span class="pre">SelectFpr</span></tt></a>, false discovery rate
-<a class="reference internal" href="generated/sklearn.feature_selection.SelectFdr.html#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><tt class="xref py py-class docutils literal"><span class="pre">SelectFdr</span></tt></a>, or family wise error <a class="reference internal" href="generated/sklearn.feature_selection.SelectFwe.html#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><tt class="xref py py-class docutils literal"><span class="pre">SelectFwe</span></tt></a>.</p>
-</li>
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="generated/sklearn.feature_selection.GenericUnivariateSelect.html#sklearn.feature_selection.GenericUnivariateSelect" title="sklearn.feature_selection.GenericUnivariateSelect"><tt class="xref py py-class docutils literal"><span class="pre">GenericUnivariateSelect</span></tt></a> allows to perform univariate feature</dt>
-<dd><p class="first last">selection with a configurable strategy. This allows to select the best
-univariate selection strategy with hyper-parameter search estimator.</p>
-</dd>
-</dl>
-</li>
+<a class="reference internal" href="generated/sklearn.feature_selection.SelectFdr.html#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><tt class="xref py py-class docutils literal"><span class="pre">SelectFdr</span></tt></a>, or family wise error <a class="reference internal" href="generated/sklearn.feature_selection.SelectFwe.html#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><tt class="xref py py-class docutils literal"><span class="pre">SelectFwe</span></tt></a>.</li>
+<li><a class="reference internal" href="generated/sklearn.feature_selection.GenericUnivariateSelect.html#sklearn.feature_selection.GenericUnivariateSelect" title="sklearn.feature_selection.GenericUnivariateSelect"><tt class="xref py py-class docutils literal"><span class="pre">GenericUnivariateSelect</span></tt></a> allows to perform univariate feature
+selection with a configurable strategy. This allows to select the best
+univariate selection strategy with hyper-parameter search estimator.</li>
 </ul>
 </div></blockquote>
 <p>For instance, we can perform a <span class="math">\chi^2</span> test to the samples
@@ -253,18 +246,24 @@ to retrieve only the two best features as follows:</p>
 <span class="go">(150, 2)</span>
 </pre></div>
 </div>
-<p>These objects take as input a scoring function that returns
-univariate p-values:</p>
+<p>These objects take as input a scoring function that returns univariate scores
+and p-values (or only scores for <a class="reference internal" href="generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><tt class="xref py py-class docutils literal"><span class="pre">SelectKBest</span></tt></a> and
+<a class="reference internal" href="generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><tt class="xref py py-class docutils literal"><span class="pre">SelectPercentile</span></tt></a>):</p>
 <blockquote>
 <div><ul class="simple">
-<li>For regression: <a class="reference internal" href="generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><tt class="xref py py-func docutils literal"><span class="pre">f_regression</span></tt></a></li>
-<li>For classification: <a class="reference internal" href="generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><tt class="xref py py-func docutils literal"><span class="pre">chi2</span></tt></a> or <a class="reference internal" href="generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><tt class="xref py py-func docutils literal"><span class="pre">f_classif</span></tt></a></li>
+<li>For regression: <a class="reference internal" href="generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><tt class="xref py py-func docutils literal"><span class="pre">f_regression</span></tt></a>, <a class="reference internal" href="generated/sklearn.feature_selection.mutual_info_regression.html#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><tt class="xref py py-func docutils literal"><span class="pre">mutual_info_regression</span></tt></a></li>
+<li>For classification: <a class="reference internal" href="generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><tt class="xref py py-func docutils literal"><span class="pre">chi2</span></tt></a>, <a class="reference internal" href="generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><tt class="xref py py-func docutils literal"><span class="pre">f_classif</span></tt></a>, <a class="reference internal" href="generated/sklearn.feature_selection.mutual_info_classif.html#sklearn.feature_selection.mutual_info_classif" title="sklearn.feature_selection.mutual_info_classif"><tt class="xref py py-func docutils literal"><span class="pre">mutual_info_classif</span></tt></a></li>
 </ul>
 </div></blockquote>
+<p>The methods based on F-test estimate the degree of linear dependency between
+two random variables. On the other hand, mutual information methods can capture
+any kind of statistical dependency, but being nonparametric, they require more
+samples for accurate estimation.</p>
 <div class="topic">
 <p class="topic-title first">Feature selection with sparse data</p>
 <p>If you use sparse data (i.e. data represented as sparse matrices),
-only <a class="reference internal" href="generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><tt class="xref py py-func docutils literal"><span class="pre">chi2</span></tt></a> will deal with the data without making it dense.</p>
+<a class="reference internal" href="generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><tt class="xref py py-func docutils literal"><span class="pre">chi2</span></tt></a>, <a class="reference internal" href="generated/sklearn.feature_selection.mutual_info_regression.html#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><tt class="xref py py-func docutils literal"><span class="pre">mutual_info_regression</span></tt></a>, <a class="reference internal" href="generated/sklearn.feature_selection.mutual_info_classif.html#sklearn.feature_selection.mutual_info_classif" title="sklearn.feature_selection.mutual_info_classif"><tt class="xref py py-func docutils literal"><span class="pre">mutual_info_classif</span></tt></a>
+will deal with the data without making it dense.</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -273,7 +272,10 @@ problem, you will get useless results.</p>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
-<p><a class="reference internal" href="../auto_examples/feature_selection/plot_feature_selection.html#example-feature-selection-plot-feature-selection-py"><em>Univariate Feature Selection</em></a></p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/feature_selection/plot_feature_selection.html#example-feature-selection-plot-feature-selection-py"><em>Univariate Feature Selection</em></a></li>
+<li><a class="reference internal" href="../auto_examples/feature_selection/plot_f_test_vs_mi.html#example-feature-selection-plot-f-test-vs-mi-py"><em>Comparison of F-test and mutual information</em></a></li>
+</ul>
 </div>
 </div>
 <div class="section" id="recursive-feature-elimination">
