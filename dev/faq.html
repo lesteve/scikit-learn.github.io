@@ -154,8 +154,7 @@
 <li><a class="reference internal" href="#why-scikit">Why scikit?</a></li>
 <li><a class="reference internal" href="#how-can-i-contribute-to-scikit-learn">How can I contribute to scikit-learn?</a></li>
 <li><a class="reference internal" href="#how-can-i-create-a-bunch-object">How can I create a bunch object?</a></li>
-<li><a class="reference internal" href="#can-i-add-this-new-algorithm-that-i-or-someone-else-just-published">Can I add this new algorithm that I (or someone else) just published?</a></li>
-<li><a class="reference internal" href="#can-i-add-this-classical-algorithm-from-the-80s">Can I add this classical algorithm from the 80s?</a></li>
+<li><a class="reference internal" href="#what-are-the-inclusion-criteria-for-new-algorithms">What are the inclusion criteria for new algorithms ?</a></li>
 <li><a class="reference internal" href="#why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn">Why are you so selective on what algorithms you include in scikit-learn?</a></li>
 <li><a class="reference internal" href="#why-did-you-remove-hmms-from-scikit-learn">Why did you remove HMMs from scikit-learn?</a></li>
 <li><a class="reference internal" href="#will-you-add-graphical-models-or-sequence-prediction-to-scikit-learn">Will you add graphical models or sequence prediction to scikit-learn?</a></li>
@@ -235,27 +234,30 @@ optimized file format such as HDF5 to reduce data load times. Various libraries
 such as H5Py, PyTables and pandas provides a Python interface for reading and
 writing data in that format.</p>
 </div>
-<div class="section" id="can-i-add-this-new-algorithm-that-i-or-someone-else-just-published">
-<h2>Can I add this new algorithm that I (or someone else) just published?<a class="headerlink" href="#can-i-add-this-new-algorithm-that-i-or-someone-else-just-published" title="Permalink to this headline">¶</a></h2>
-<p>No. As a rule we only add well-established algorithms. A rule of thumb is at least
-3 years since publications, 200+ citations and wide use and usefullness. A
-technique that provides a clear-cut improvement (e.g. an enhanced  data
-structure or efficient approximation) on a widely-used method will also be
-considered for inclusion.
-Your implementation doesn&#8217;t need to be in scikit-learn to be used together
-with scikit-learn tools, though. Implement your favorite algorithm
-in a scikit-learn compatible way, upload it to github and we will list
-it under <a class="reference internal" href="related_projects.html#related-projects"><em>Related Projects</em></a>.
-Also see <a class="reference internal" href="#selectiveness">selectiveness</a>.</p>
-</div>
-<div class="section" id="can-i-add-this-classical-algorithm-from-the-80s">
-<h2>Can I add this classical algorithm from the 80s?<a class="headerlink" href="#can-i-add-this-classical-algorithm-from-the-80s" title="Permalink to this headline">¶</a></h2>
-<p>Depends. If there is a common usecase within the scope of scikit-learn, such
-as classification, regression or clustering, where it outperforms methods
-that are already implemented in scikit-learn, we will consider it.</p>
+<div class="section" id="what-are-the-inclusion-criteria-for-new-algorithms">
+<h2>What are the inclusion criteria for new algorithms ?<a class="headerlink" href="#what-are-the-inclusion-criteria-for-new-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>We only consider well-established algorithms for inclusion. A rule of thumb is
+at least 3 years since publication, 200+ citations and wide use and
+usefulness. A technique that provides a clear-cut improvement (e.g. an
+enhanced data structure or a more efficient approximation technique) on
+a widely-used method will also be considered for inclusion.</p>
+<p>From the algorithms or techniques that meet the above criteria, only those
+which fit well within the current API of scikit-learn, that is a <tt class="docutils literal"><span class="pre">fit</span></tt>,
+<tt class="docutils literal"><span class="pre">predict/transform</span></tt> interface and ordinarily having input/output that is a
+numpy array or sparse matrix, are accepted.</p>
+<p>The contributor should support the importance of the proposed addition with
+research papers and/or implementations in other similar packages, demonstrate
+its usefulness via common use-cases/applications and corroborate performance
+improvements, if any, with benchmarks and/or plots. It is expected that the
+proposed algorithm should outperform the methods that are already implemented
+in scikit-learn at least in some areas.</p>
+<p>Also note that your implementation need not be in scikit-learn to be used
+together with scikit-learn tools. You can implement your favorite algorithm in
+a scikit-learn compatible way, upload it to github and let us know. We will
+list it under <a class="reference internal" href="related_projects.html#related-projects"><em>Related Projects</em></a>.</p>
 </div>
 <div class="section" id="why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn">
-<span id="selectiveness"></span><h2>Why are you so selective on what algorithms you include in scikit-learn?<a class="headerlink" href="#why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn" title="Permalink to this headline">¶</a></h2>
+<h2>Why are you so selective on what algorithms you include in scikit-learn?<a class="headerlink" href="#why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn" title="Permalink to this headline">¶</a></h2>
 <p>Code is maintenance cost, and we need to balance the amount of
 code we have with the size of the team (and add to this the fact that
 complexity scales non linearly with the number of features).
