@@ -208,21 +208,21 @@ necessarily related to visualisation.</p>
 Extracting reference patches...
 done in 0.02s.
 Learning the dictionary...
-done in 6.94s.
+done in 7.08s.
 Extracting noisy patches...
 done in 0.01s.
 Orthogonal Matching Pursuit
 1 atom...
-done in 3.33s.
+done in 3.34s.
 Orthogonal Matching Pursuit
 2 atoms...
-done in 6.85s.
+done in 6.62s.
 Least-angle regression
 5 atoms...
-done in 37.08s.
+done in 37.40s.
 Thresholding
  alpha=0.1...
-done in 0.65s.
+done in 0.64s.
 </pre></div>
 </div>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_image_denoising.py"><tt class="xref download docutils literal"><span class="pre">plot_image_denoising.py</span></tt></a></p>
@@ -233,7 +233,7 @@ done in 0.65s.
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a>
+<span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">lena</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.MiniBatchDictionaryLearning.html#sklearn.decomposition.MiniBatchDictionaryLearning"><span class="n">MiniBatchDictionaryLearning</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.image</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d"><span class="n">extract_patches_2d</span></a>
@@ -241,16 +241,16 @@ done in 0.65s.
 
 <span class="c">###############################################################################</span>
 <span class="c"># Load Lena image and extract patches</span>
-<a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="p">()</span> <span class="o">/</span> <span class="mf">256.0</span>
+<span class="n">lena</span> <span class="o">=</span> <span class="n">lena</span><span class="p">()</span> <span class="o">/</span> <span class="mf">256.0</span>
 
 <span class="c"># downsample for higher speed</span>
-<a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
-<a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a> <span class="o">/=</span> <span class="mf">4.0</span>
-<span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="o">.</span><span class="n">shape</span>
+<span class="n">lena</span> <span class="o">=</span> <span class="n">lena</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lena</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lena</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lena</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">lena</span> <span class="o">/=</span> <span class="mf">4.0</span>
+<span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">lena</span><span class="o">.</span><span class="n">shape</span>
 
 <span class="c"># Distort the right half of the image</span>
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;Distorting image...&#39;</span><span class="p">)</span>
-<span class="n">distorted</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">distorted</span> <span class="o">=</span> <span class="n">lena</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">distorted</span><span class="p">[:,</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">+=</span> <span class="mf">0.075</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
 
 <span class="c"># Extract all reference patches from the left half of the image</span>
@@ -259,8 +259,8 @@ done in 0.65s.
 <span class="n">patch_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d"><span class="n">extract_patches_2d</span></a><span class="p">(</span><span class="n">distorted</span><span class="p">[:,</span> <span class="p">:</span><span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">],</span> <span class="n">patch_size</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">-=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">/=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.std.html#numpy.std"><span class="n">np</span><span class="o">.</span><span class="n">std</span></a><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;done in </span><span class="si">%.2f</span><span class="s">s.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
 <span class="c">###############################################################################</span>
@@ -294,13 +294,13 @@ done in 0.65s.
     <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">))</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&#39;Image&#39;</span><span class="p">)</span>
-    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(())</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.yticks"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span></a><span class="p">(())</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">difference</span> <span class="o">=</span> <span class="n">image</span> <span class="o">-</span> <span class="n">reference</span>
 
-    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&#39;Difference (norm: </span><span class="si">%.2f</span><span class="s">)&#39;</span> <span class="o">%</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">difference</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&#39;Difference (norm: </span><span class="si">%.2f</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">difference</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">difference</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">PuOr</span><span class="p">,</span>
                <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(())</span>
@@ -308,7 +308,7 @@ done in 0.65s.
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.suptitle"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span></a><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.79</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
 
-<span class="n">show_with_diff</span><span class="p">(</span><span class="n">distorted</span><span class="p">,</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="p">,</span> <span class="s">&#39;Distorted image&#39;</span><span class="p">)</span>
+<span class="n">show_with_diff</span><span class="p">(</span><span class="n">distorted</span><span class="p">,</span> <span class="n">lena</span><span class="p">,</span> <span class="s">&#39;Distorted image&#39;</span><span class="p">)</span>
 
 <span class="c">###############################################################################</span>
 <span class="c"># Extract noisy patches and reconstruct them using the dictionary</span>
@@ -317,7 +317,7 @@ done in 0.65s.
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d"><span class="n">extract_patches_2d</span></a><span class="p">(</span><span class="n">distorted</span><span class="p">[:,</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:],</span> <span class="n">patch_size</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">intercept</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">intercept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">-=</span> <span class="n">intercept</span>
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;done in </span><span class="si">%.2f</span><span class="s">s.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
@@ -333,11 +333,11 @@ done in 0.65s.
 <span class="n">reconstructions</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">transform_algorithm</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">transform_algorithms</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s">&#39;...&#39;</span><span class="p">)</span>
-    <span class="n">reconstructions</span><span class="p">[</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">reconstructions</span><span class="p">[</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="n">lena</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">dico</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">transform_algorithm</span><span class="o">=</span><span class="n">transform_algorithm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">code</span> <span class="o">=</span> <span class="n">dico</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">patches</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.dot.html#numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="n">patches</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
 
     <span class="n">patches</span> <span class="o">+=</span> <span class="n">intercept</span>
     <span class="n">patches</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="o">*</span><span class="n">patch_size</span><span class="p">)</span>
@@ -348,14 +348,14 @@ done in 0.65s.
         <span class="n">patches</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
     <span class="k">print</span><span class="p">(</span><span class="s">&#39;done in </span><span class="si">%.2f</span><span class="s">s.&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
-    <span class="n">show_with_diff</span><span class="p">(</span><span class="n">reconstructions</span><span class="p">[</span><span class="n">title</span><span class="p">],</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.lena.html#scipy.misc.lena"><span class="n">lena</span></a><span class="p">,</span>
+    <span class="n">show_with_diff</span><span class="p">(</span><span class="n">reconstructions</span><span class="p">[</span><span class="n">title</span><span class="p">],</span> <span class="n">lena</span><span class="p">,</span>
                    <span class="n">title</span> <span class="o">+</span> <span class="s">&#39; (time: </span><span class="si">%.1f</span><span class="s">s)&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  60.71 seconds
-( 1 minutes  0.71 seconds)</p>
+<p><strong>Total running time of the example:</strong>  61.08 seconds
+( 1 minutes  1.08 seconds)</p>
 </div>
 
 
