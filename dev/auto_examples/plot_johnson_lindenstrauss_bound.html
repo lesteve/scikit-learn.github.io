@@ -255,15 +255,15 @@ from 56436 down to 10000 while reasonably preserving pairwise distances.</p>
 </ul>
 <p><strong>Script output</strong>:</p>
 <div class="highlight-python"><div class="highlight"><pre>Embedding 500 samples with dim 64 using various random projections
-Projected 500 samples from 64 to 300 in 0.005s
-Random matrix with size: 0.029MB
-Mean distances rate: 0.98 (0.08)
-Projected 500 samples from 64 to 1000 in 0.014s
-Random matrix with size: 0.097MB
-Mean distances rate: 1.02 (0.05)
-Projected 500 samples from 64 to 10000 in 0.135s
-Random matrix with size: 0.958MB
-Mean distances rate: 1.00 (0.02)
+Projected 500 samples from 64 to 300 in 0.006s
+Random matrix with size: 0.028MB
+Mean distances rate: 1.06 (0.08)
+Projected 500 samples from 64 to 1000 in 0.015s
+Random matrix with size: 0.095MB
+Mean distances rate: 0.99 (0.05)
+Projected 500 samples from 64 to 10000 in 0.138s
+Random matrix with size: 0.959MB
+Mean distances rate: 0.99 (0.01)
 </pre></div>
 </div>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_johnson_lindenstrauss_bound.py"><tt class="xref download docutils literal"><span class="pre">plot_johnson_lindenstrauss_bound.py</span></tt></a></p>
@@ -283,11 +283,11 @@ Mean distances rate: 1.00 (0.02)
 <span class="c"># n_samples</span>
 
 <span class="c"># range of admissible distortions</span>
-<span class="n">eps_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eps_range</span><span class="p">)))</span>
+<span class="n">eps_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eps_range</span><span class="p">)))</span>
 
 <span class="c"># range of number of samples (observation) to embed</span>
-<span class="n">n_samples_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">n_samples_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
 <span class="k">for</span> <span class="n">eps</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">eps_range</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
@@ -300,11 +300,11 @@ Mean distances rate: 1.00 (0.02)
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Johnson-Lindenstrauss bounds:</span><span class="se">\n</span><span class="s">n_samples vs n_components&quot;</span><span class="p">)</span>
 
 <span class="c"># range of admissible distortions</span>
-<span class="n">eps_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">eps_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
 <span class="c"># range of number of samples (observation) to embed</span>
-<span class="n">n_samples_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_samples_range</span><span class="p">)))</span>
+<span class="n">n_samples_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_samples_range</span><span class="p">)))</span>
 
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
 <span class="k">for</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
@@ -330,7 +330,7 @@ Mean distances rate: 1.00 (0.02)
 <span class="k">print</span><span class="p">(</span><span class="s">&quot;Embedding </span><span class="si">%d</span><span class="s"> samples with dim </span><span class="si">%d</span><span class="s"> using various random projections&quot;</span>
       <span class="o">%</span> <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
 
-<span class="n">n_components_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">])</span>
+<span class="n">n_components_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">])</span>
 <span class="n">dists</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
 <span class="c"># select only non-identical samples pairs</span>
@@ -362,7 +362,7 @@ Mean distances rate: 1.00 (0.02)
 
     <span class="n">rates</span> <span class="o">=</span> <span class="n">projected_dists</span> <span class="o">/</span> <span class="n">dists</span>
     <span class="k">print</span><span class="p">(</span><span class="s">&quot;Mean distances rate: </span><span class="si">%0.2f</span><span class="s"> (</span><span class="si">%0.2f</span><span class="s">)&quot;</span>
-          <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rates</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rates</span><span class="p">)))</span>
+          <span class="o">%</span> <span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">rates</span><span class="p">),</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.std.html#numpy.std"><span class="n">np</span><span class="o">.</span><span class="n">std</span></a><span class="p">(</span><span class="n">rates</span><span class="p">)))</span>
 
     <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.hist"><span class="n">plt</span><span class="o">.</span><span class="n">hist</span></a><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">))</span>
@@ -377,8 +377,8 @@ Mean distances rate: 1.00 (0.02)
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  10.32 seconds
-( 0 minutes  10.32 seconds)</p>
+<p><strong>Total running time of the example:</strong>  10.69 seconds
+( 0 minutes  10.69 seconds)</p>
 </div>
 </div>
 

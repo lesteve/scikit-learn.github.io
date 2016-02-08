@@ -187,14 +187,14 @@ that of representing a flat map of the Earth, as with
 <a class="reference external" href="http://en.wikipedia.org/wiki/Map_projection">map projection</a></p>
 <img alt="../../_images/plot_manifold_sphere_001.png" class="align-center" src="../../_images/plot_manifold_sphere_001.png" />
 <p><strong>Script output</strong>:</p>
-<div class="highlight-python"><div class="highlight"><pre>standard: 0.092 sec
-ltsa: 0.23 sec
-hessian: 0.27 sec
+<div class="highlight-python"><div class="highlight"><pre>standard: 0.096 sec
+ltsa: 0.24 sec
+hessian: 0.28 sec
 modified: 0.23 sec
-ISO: 0.27 sec
-MDS: 1.4 sec
-Spectral Embedding: 0.24 sec
-t-SNE: 2.3 sec
+ISO: 0.28 sec
+MDS: 1.6 sec
+Spectral Embedding: 0.23 sec
+t-SNE: 2.8 sec
 </pre></div>
 </div>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_manifold_sphere.py"><tt class="xref download docutils literal"><span class="pre">plot_manifold_sphere.py</span></tt></a></p>
@@ -228,9 +228,9 @@ t-SNE: 2.3 sec
 <span class="c"># Sever the poles from the sphere.</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="p">((</span><span class="n">t</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">8</span><span class="p">))))</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">indices</span><span class="p">]),</span> \
-    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">indices</span><span class="p">]),</span> \
-    <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sin.html#numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.cos.html#numpy.cos"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">indices</span><span class="p">]),</span> \
+    <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sin.html#numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sin.html#numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">indices</span><span class="p">]),</span> \
+    <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.cos.html#numpy.cos"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span>
 
 <span class="c"># Plot our dataset.</span>
 <span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -245,7 +245,7 @@ t-SNE: 2.3 sec
 <span class="k">except</span><span class="p">:</span>
     <span class="k">pass</span>
 
-<span class="n">sphere_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">sphere_data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 
 <span class="c"># Perform Locally Linear Embedding Manifold learning</span>
 <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;standard&#39;</span><span class="p">,</span> <span class="s">&#39;ltsa&#39;</span><span class="p">,</span> <span class="s">&#39;hessian&#39;</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">]</span>
@@ -326,8 +326,8 @@ t-SNE: 2.3 sec
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  5.57 seconds
-( 0 minutes  5.57 seconds)</p>
+<p><strong>Total running time of the example:</strong>  6.20 seconds
+( 0 minutes  6.20 seconds)</p>
 </div>
 
 
