@@ -173,15 +173,15 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.feature_selection" title="sklearn.feature_selection"><tt class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_selection</span></tt></a>.f_regression<a class="headerlink" href="#sklearn-feature-selection-f-regression" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.feature_selection.f_regression">
-<tt class="descclassname">sklearn.feature_selection.</tt><tt class="descname">f_regression</tt><big>(</big><em>X</em>, <em>y</em>, <em>center=True</em><big>)</big><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2dc389c/sklearn/feature_selection/univariate_selection.py#L229"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_selection.f_regression" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">sklearn.feature_selection.</tt><tt class="descname">f_regression</tt><big>(</big><em>X</em>, <em>y</em>, <em>center=True</em><big>)</big><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71ec574/sklearn/feature_selection/univariate_selection.py#L229"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_selection.f_regression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Univariate linear regression tests.</p>
 <p>Quick linear model for testing the effect of a single regressor,
 sequentially for many regressors.</p>
-<p>This is done in 3 steps:</p>
+<p>This is done in 2 steps:</p>
 <ol class="arabic simple">
-<li>The regressor of interest and the data are orthogonalized
-wrt constant regressors.</li>
-<li>The cross correlation between data and regressors is computed.</li>
+<li>The cross correlation between each regressor and the target is computed,
+that is, ((X[:, i] - mean(X[:, i])) * (y - mean_y)) / (std(X[:, i]) *
+std(y)).</li>
 <li>It is converted to an F score then to a p-value.</li>
 </ol>
 <p>Read more in the <a class="reference internal" href="../feature_selection.html#univariate-feature-selection"><em>User Guide</em></a>.</p>
