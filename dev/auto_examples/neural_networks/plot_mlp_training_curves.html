@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Visualization of...
+        Visualization...
         </span>
             <span class="hiddenrellink">
             Visualization of MLP weights on MNIST
@@ -164,7 +164,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="compare-stochastic-learning-strategies-for-mlpclassifier">
 <span id="example-neural-networks-plot-mlp-training-curves-py"></span><h1>Compare Stochastic learning strategies for MLPClassifier<a class="headerlink" href="#compare-stochastic-learning-strategies-for-mlpclassifier" title="Permalink to this headline">¶</a></h1>
@@ -268,68 +268,69 @@ Training set score: 0.870000
 Training set loss: 0.334795
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mlp_training_curves.py"><tt class="xref download docutils literal"><span class="pre">plot_mlp_training_curves.py</span></tt></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mlp_training_curves.py"><code class="xref download docutils literal"><span class="pre">plot_mlp_training_curves.py</span></code></a></p>
+<div class="highlight-python"><div class="highlight"><pre>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler"><span class="n">MinMaxScaler</span></a>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
-<span class="c"># different learning rate schedules and momentum parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">&#39;sgd&#39;</span><span class="p">,</span> <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s">&#39;constant&#39;</span><span class="p">,</span> <span class="s">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-           <span class="s">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">&#39;sgd&#39;</span><span class="p">,</span> <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s">&#39;constant&#39;</span><span class="p">,</span> <span class="s">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
-           <span class="s">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">&#39;sgd&#39;</span><span class="p">,</span> <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s">&#39;constant&#39;</span><span class="p">,</span> <span class="s">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
-           <span class="s">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">&#39;sgd&#39;</span><span class="p">,</span> <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-           <span class="s">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">&#39;sgd&#39;</span><span class="p">,</span> <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
-           <span class="s">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">&#39;sgd&#39;</span><span class="p">,</span> <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
-           <span class="s">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">&#39;adam&#39;</span><span class="p">}]</span>
+<span class="c1"># different learning rate schedules and momentum parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+           <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+           <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+           <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+           <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+           <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+           <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;adam&#39;</span><span class="p">}]</span>
 
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;constant learning-rate&quot;</span><span class="p">,</span> <span class="s">&quot;constant with momentum&quot;</span><span class="p">,</span>
-          <span class="s">&quot;constant with Nesterov&#39;s momentum&quot;</span><span class="p">,</span>
-          <span class="s">&quot;inv-scaling learning-rate&quot;</span><span class="p">,</span> <span class="s">&quot;inv-scaling with momentum&quot;</span><span class="p">,</span>
-          <span class="s">&quot;inv-scaling with Nesterov&#39;s momentum&quot;</span><span class="p">,</span> <span class="s">&quot;adam&quot;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;constant learning-rate&quot;</span><span class="p">,</span> <span class="s2">&quot;constant with momentum&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;constant with Nesterov&#39;s momentum&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;inv-scaling learning-rate&quot;</span><span class="p">,</span> <span class="s2">&quot;inv-scaling with momentum&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;inv-scaling with Nesterov&#39;s momentum&quot;</span><span class="p">,</span> <span class="s2">&quot;adam&quot;</span><span class="p">]</span>
 
-<span class="n">plot_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s">&#39;-&#39;</span><span class="p">},</span>
-             <span class="p">{</span><span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s">&#39;-&#39;</span><span class="p">},</span>
-             <span class="p">{</span><span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s">&#39;-&#39;</span><span class="p">},</span>
-             <span class="p">{</span><span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s">&#39;--&#39;</span><span class="p">},</span>
-             <span class="p">{</span><span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s">&#39;--&#39;</span><span class="p">},</span>
-             <span class="p">{</span><span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s">&#39;--&#39;</span><span class="p">},</span>
-             <span class="p">{</span><span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s">&#39;-&#39;</span><span class="p">}]</span>
+<span class="n">plot_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;--&#39;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;--&#39;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;--&#39;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">}]</span>
 
 
 <span class="k">def</span> <span class="nf">plot_on_dataset</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="c"># for each dataset, plot learning for each learning strategy</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">learning on dataset </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+    <span class="c1"># for each dataset, plot learning for each learning strategy</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">learning on dataset </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">X</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler"><span class="n">MinMaxScaler</span></a><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">mlps</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&quot;digits&quot;</span><span class="p">:</span>
-        <span class="c"># digits is larger but converges fairly quickly</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;digits&quot;</span><span class="p">:</span>
+        <span class="c1"># digits is larger but converges fairly quickly</span>
         <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">15</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">400</span>
 
     <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;training: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">label</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;training: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">label</span><span class="p">)</span>
         <span class="n">mlp</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                             <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
         <span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="n">mlps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mlp</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Training set score: </span><span class="si">%f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Training set loss: </span><span class="si">%f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">loss_</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Training set score: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Training set loss: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">loss_</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">mlp</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">args</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mlps</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">plot_args</span><span class="p">):</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mlp</span><span class="o">.</span><span class="n">loss_curve_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
 
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="c"># load / generate some toy datasets</span>
+<span class="c1"># load / generate some toy datasets</span>
 <span class="n">iris</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris"><span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span></a><span class="p">()</span>
 <span class="n">digits</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span></a><span class="p">()</span>
 <span class="n">data_sets</span> <span class="o">=</span> <span class="p">[(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
@@ -337,16 +338,16 @@ Training set loss: 0.334795
              <span class="n">datasets</span><span class="o">.</span><span class="n">make_circles</span><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
              <a href="../../modules/generated/sklearn.datasets.make_moons.html#sklearn.datasets.make_moons"><span class="n">datasets</span><span class="o">.</span><span class="n">make_moons</span></a><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)]</span>
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">data_sets</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;iris&#39;</span><span class="p">,</span> <span class="s">&#39;digits&#39;</span><span class="p">,</span>
-                                                    <span class="s">&#39;circles&#39;</span><span class="p">,</span> <span class="s">&#39;moons&#39;</span><span class="p">]):</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">data_sets</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="s1">&#39;digits&#39;</span><span class="p">,</span>
+                                                    <span class="s1">&#39;circles&#39;</span><span class="p">,</span> <span class="s1">&#39;moons&#39;</span><span class="p">]):</span>
     <span class="n">plot_on_dataset</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">(),</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">&quot;upper center&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">(),</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  6.85 seconds
-( 0 minutes  6.85 seconds)</p>
+<p><strong>Total running time of the example:</strong>  9.56 seconds
+( 0 minutes  9.56 seconds)</p>
 </div>
 
 

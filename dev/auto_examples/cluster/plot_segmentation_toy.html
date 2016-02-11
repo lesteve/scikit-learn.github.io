@@ -37,7 +37,7 @@
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
     <link rel="next" title="Color Quantization using K-Means" href="plot_color_quantization.html" />
-    <link rel="prev" title="Various Agglomerative Clustering on a 2D embedding of digits" href="plot_digits_linkage.html" />
+    <link rel="prev" title="Vector Quantization Example" href="plot_face_compress.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -114,14 +114,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_digits_linkage.html"
+        <a href="plot_face_compress.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Various Agglomer...
+        Vector Quanti...
         </span>
             <span class="hiddenrellink">
-            Various Agglomerative Clustering on a 2D embedding of digits
+            Vector Quantization Example
             </span>
         </a>
         </div>
@@ -164,13 +164,13 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="spectral-clustering-for-image-segmentation">
 <span id="example-cluster-plot-segmentation-toy-py"></span><h1>Spectral clustering for image segmentation<a class="headerlink" href="#spectral-clustering-for-image-segmentation" title="Permalink to this headline">¶</a></h1>
 <p>In this example, an image with connected circles is generated and
 spectral clustering is used to separate the circles.</p>
-<p>In these settings, the <a class="reference internal" href="../../modules/clustering.html#spectral-clustering"><em>Spectral clustering</em></a> approach solves the problem
+<p>In these settings, the <a class="reference internal" href="../../modules/clustering.html#spectral-clustering"><span>Spectral clustering</span></a> approach solves the problem
 know as &#8216;normalized graph cuts&#8217;: the image is seen as a graph of
 connected voxels, and the spectral clustering algorithm amounts to
 choosing graph cuts defining regions while minimizing the ratio of the
@@ -194,12 +194,12 @@ separating the objects one from the other, and not from the background.</p>
 <li><a class="first reference internal image-reference" href="../../_images/plot_segmentation_toy_004.png"><img alt="../../_images/plot_segmentation_toy_004.png" src="../../_images/plot_segmentation_toy_004.png" style="width: 282.0px; height: 282.0px;" /></a>
 </li>
 </ul>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_segmentation_toy.py"><tt class="xref download docutils literal"><span class="pre">plot_segmentation_toy.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_segmentation_toy.py"><code class="xref download docutils literal"><span class="pre">plot_segmentation_toy.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="c"># Authors:  Emmanuelle Gouillart &lt;emmanuelle.gouillart@normalesup.org&gt;</span>
-<span class="c">#           Gael Varoquaux &lt;gael.varoquaux@normalesup.org&gt;</span>
-<span class="c"># License: BSD 3 clause</span>
+<span class="c1"># Authors:  Emmanuelle Gouillart &lt;emmanuelle.gouillart@normalesup.org&gt;</span>
+<span class="c1">#           Gael Varoquaux &lt;gael.varoquaux@normalesup.org&gt;</span>
+<span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -207,7 +207,7 @@ separating the objects one from the other, and not from the background.</p>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">image</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.cluster.spectral_clustering.html#sklearn.cluster.spectral_clustering"><span class="n">spectral_clustering</span></a>
 
-<span class="c">###############################################################################</span>
+<span class="c1">###############################################################################</span>
 <span class="n">l</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.indices.html#numpy.indices"><span class="n">np</span><span class="o">.</span><span class="n">indices</span></a><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">))</span>
 
@@ -223,37 +223,37 @@ separating the objects one from the other, and not from the background.</p>
 <span class="n">circle3</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">center3</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">center3</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">radius3</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="n">circle4</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">center4</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">center4</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">radius4</span> <span class="o">**</span> <span class="mi">2</span>
 
-<span class="c">###############################################################################</span>
-<span class="c"># 4 circles</span>
+<span class="c1">###############################################################################</span>
+<span class="c1"># 4 circles</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">circle1</span> <span class="o">+</span> <span class="n">circle2</span> <span class="o">+</span> <span class="n">circle3</span> <span class="o">+</span> <span class="n">circle4</span>
 
-<span class="c"># We use a mask that limits to the foreground: the problem that we are</span>
-<span class="c"># interested in here is not separating the objects from the background,</span>
-<span class="c"># but separating them one from the other.</span>
+<span class="c1"># We use a mask that limits to the foreground: the problem that we are</span>
+<span class="c1"># interested in here is not separating the objects from the background,</span>
+<span class="c1"># but separating them one from the other.</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
 
 <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">img</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="c"># Convert the image into a graph with the value of the gradient on the</span>
-<span class="c"># edges.</span>
+<span class="c1"># Convert the image into a graph with the value of the gradient on the</span>
+<span class="c1"># edges.</span>
 <span class="n">graph</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">img_to_graph</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
 
-<span class="c"># Take a decreasing function of the gradient: we take it weakly</span>
-<span class="c"># dependent from the gradient the segmentation is close to a voronoi</span>
+<span class="c1"># Take a decreasing function of the gradient: we take it weakly</span>
+<span class="c1"># dependent from the gradient the segmentation is close to a voronoi</span>
 <span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.exp.html#numpy.exp"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="o">-</span><span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">/</span> <span class="n">graph</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 
-<span class="c"># Force the solver to be arpack, since amg is numerically</span>
-<span class="c"># unstable on this example</span>
-<span class="n">labels</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.spectral_clustering.html#sklearn.cluster.spectral_clustering"><span class="n">spectral_clustering</span></a><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">eigen_solver</span><span class="o">=</span><span class="s">&#39;arpack&#39;</span><span class="p">)</span>
+<span class="c1"># Force the solver to be arpack, since amg is numerically</span>
+<span class="c1"># unstable on this example</span>
+<span class="n">labels</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.spectral_clustering.html#sklearn.cluster.spectral_clustering"><span class="n">spectral_clustering</span></a><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">eigen_solver</span><span class="o">=</span><span class="s1">&#39;arpack&#39;</span><span class="p">)</span>
 <span class="n">label_im</span> <span class="o">=</span> <span class="o">-</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.ones.html#numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">label_im</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">label_im</span><span class="p">)</span>
 
-<span class="c">###############################################################################</span>
-<span class="c"># 2 circles</span>
+<span class="c1">###############################################################################</span>
+<span class="c1"># 2 circles</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">circle1</span> <span class="o">+</span> <span class="n">circle2</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
@@ -263,7 +263,7 @@ separating the objects one from the other, and not from the background.</p>
 <span class="n">graph</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">img_to_graph</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
 <span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.exp.html#numpy.exp"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="o">-</span><span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">/</span> <span class="n">graph</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 
-<span class="n">labels</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.spectral_clustering.html#sklearn.cluster.spectral_clustering"><span class="n">spectral_clustering</span></a><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">eigen_solver</span><span class="o">=</span><span class="s">&#39;arpack&#39;</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.spectral_clustering.html#sklearn.cluster.spectral_clustering"><span class="n">spectral_clustering</span></a><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">eigen_solver</span><span class="o">=</span><span class="s1">&#39;arpack&#39;</span><span class="p">)</span>
 <span class="n">label_im</span> <span class="o">=</span> <span class="o">-</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.ones.html#numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">label_im</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
 
@@ -273,8 +273,8 @@ separating the objects one from the other, and not from the background.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.54 seconds
-( 0 minutes  1.54 seconds)</p>
+<p><strong>Total running time of the example:</strong>  2.61 seconds
+( 0 minutes  2.61 seconds)</p>
 </div>
 
 
@@ -292,7 +292,7 @@ separating the objects one from the other, and not from the background.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_digits_linkage.html">Previous
+      <a href="plot_face_compress.html">Previous
       </a>
     </div>
     

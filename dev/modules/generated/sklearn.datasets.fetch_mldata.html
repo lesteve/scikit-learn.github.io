@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        sklearn.datasets...
+        sklearn.datas...
         </span>
             <span class="hiddenrellink">
             sklearn.datasets.mldata_filename
@@ -148,8 +148,8 @@
       <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.dev0</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
-<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">sklearn.datasets</span></tt>.fetch_mldata</a><ul>
-<li><a class="reference internal" href="#examples-using-sklearn-datasets-fetch-mldata">Examples using <tt class="docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></tt></a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.datasets</span></code>.fetch_mldata</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-datasets-fetch-mldata">Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -167,13 +167,13 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="sklearn-datasets-fetch-mldata">
-<h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><tt class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></tt></a>.fetch_mldata<a class="headerlink" href="#sklearn-datasets-fetch-mldata" title="Permalink to this headline">¶</a></h1>
+<h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.fetch_mldata<a class="headerlink" href="#sklearn-datasets-fetch-mldata" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.fetch_mldata">
-<tt class="descclassname">sklearn.datasets.</tt><tt class="descname">fetch_mldata</tt><big>(</big><em>dataname</em>, <em>target_name='label'</em>, <em>data_name='data'</em>, <em>transpose_data=True</em>, <em>data_home=None</em><big>)</big><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3280f88/sklearn/datasets/mldata.py#L37"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_mldata" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_mldata</code><span class="sig-paren">(</span><em>dataname</em>, <em>target_name='label'</em>, <em>data_name='data'</em>, <em>transpose_data=True</em>, <em>data_home=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c761ba7/sklearn/datasets/mldata.py#L37"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_mldata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch an mldata.org data set</p>
 <p>If the file does not exist yet, it is downloaded from mldata.org .</p>
 <p>mldata.org does not have an enforced convention for storing data or
@@ -241,7 +241,7 @@ all scikit learn data is stored in &#8216;~/scikit_learn_data&#8217; subfolders.
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test_data_home</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s">&#39;iris&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">test_data_home</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">test_data_home</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(150,)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
@@ -250,7 +250,7 @@ all scikit learn data is stored in &#8216;~/scikit_learn_data&#8217; subfolders.
 </div>
 <p>Load the &#8216;leukemia&#8217; dataset from mldata.org, which needs to be transposed
 to respects the sklearn axes convention:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">leuk</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s">&#39;leukemia&#39;</span><span class="p">,</span> <span class="n">transpose_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">leuk</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;leukemia&#39;</span><span class="p">,</span> <span class="n">transpose_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="n">data_home</span><span class="o">=</span><span class="n">test_data_home</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">leuk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(72, 7129)</span>
@@ -258,10 +258,10 @@ to respects the sklearn axes convention:</p>
 </div>
 <p>Load an alternative &#8216;iris&#8217; dataset, which has different names for the
 columns:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">iris2</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">iris2</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="gp">... </span>                     <span class="n">data_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">test_data_home</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">iris3</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s">&#39;datasets-UCI iris&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                     <span class="n">target_name</span><span class="o">=</span><span class="s">&#39;class&#39;</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s">&#39;double0&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris3</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">target_name</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;double0&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                     <span class="n">data_home</span><span class="o">=</span><span class="n">test_data_home</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -272,14 +272,14 @@ columns:</p>
 </dd></dl>
 
 <div class="section" id="examples-using-sklearn-datasets-fetch-mldata">
-<h2>Examples using <tt class="docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></tt><a class="headerlink" href="#examples-using-sklearn-datasets-fetch-mldata" title="Permalink to this headline">¶</a></h2>
-<div class="thumbnailContainer" tooltip="This example is based on Section 5.4.3 of "Gaussian Processes for Machine Learning" [RW2006]. I..."><div class="figure">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code><a class="headerlink" href="#examples-using-sklearn-datasets-fetch-mldata" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="This example is based on Section 5.4.3 of "Gaussian Processes for Machine Learning" [RW2006]. I..."><div class="figure" id="id1">
 <a class="reference external image-reference" href="./../../auto_examples/gaussian_process/plot_gpr_co2.html"><img alt="../../_images/plot_gpr_co21.png" src="../../_images/plot_gpr_co21.png" /></a>
-<p class="caption"><a class="reference internal" href="../../auto_examples/gaussian_process/plot_gpr_co2.html#example-gaussian-process-plot-gpr-co2-py"><em>Gaussian process regression (GPR) on Mauna Loa CO2 data.</em></a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/gaussian_process/plot_gpr_co2.html#example-gaussian-process-plot-gpr-co2-py"><span>Gaussian process regression (GPR) on Mauna Loa CO2 data.</span></a></span></p>
 </div>
-</div><div class="thumbnailContainer" tooltip="Sometimes looking at the learned coefficients of a neural network can provide insight into the ..."><div class="figure">
+</div><div class="thumbnailContainer" tooltip="Sometimes looking at the learned coefficients of a neural network can provide insight into the ..."><div class="figure" id="id2">
 <a class="reference external image-reference" href="./../../auto_examples/neural_networks/plot_mnist_filters.html"><img alt="../../_images/plot_mnist_filters1.png" src="../../_images/plot_mnist_filters1.png" /></a>
-<p class="caption"><a class="reference internal" href="../../auto_examples/neural_networks/plot_mnist_filters.html#example-neural-networks-plot-mnist-filters-py"><em>Visualization of MLP weights on MNIST</em></a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/neural_networks/plot_mnist_filters.html#example-neural-networks-plot-mnist-filters-py"><span>Visualization of MLP weights on MNIST</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>

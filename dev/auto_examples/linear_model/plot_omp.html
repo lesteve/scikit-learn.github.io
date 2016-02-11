@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Plot multi-class...
+        Plot multi-cl...
         </span>
             <span class="hiddenrellink">
             Plot multi-class SGD on the iris dataset
@@ -164,14 +164,14 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="orthogonal-matching-pursuit">
 <span id="example-linear-model-plot-omp-py"></span><h1>Orthogonal Matching Pursuit<a class="headerlink" href="#orthogonal-matching-pursuit" title="Permalink to this headline">¶</a></h1>
 <p>Using orthogonal matching pursuit for recovering a sparse signal from a noisy
 measurement encoded with a dictionary</p>
 <img alt="../../_images/plot_omp_001.png" class="align-center" src="../../_images/plot_omp_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_omp.py"><tt class="xref download docutils literal"><span class="pre">plot_omp.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_omp.py"><code class="xref download docutils literal"><span class="pre">plot_omp.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -183,11 +183,11 @@ measurement encoded with a dictionary</p>
 <span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">100</span>
 <span class="n">n_nonzero_coefs</span> <span class="o">=</span> <span class="mi">17</span>
 
-<span class="c"># generate the data</span>
-<span class="c">###################</span>
+<span class="c1"># generate the data</span>
+<span class="c1">###################</span>
 
-<span class="c"># y = Xw</span>
-<span class="c"># |x|_0 = n_nonzero_coefs</span>
+<span class="c1"># y = Xw</span>
+<span class="c1"># |x|_0 = n_nonzero_coefs</span>
 
 <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_sparse_coded_signal.html#sklearn.datasets.make_sparse_coded_signal"><span class="n">make_sparse_coded_signal</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                    <span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span>
@@ -197,20 +197,20 @@ measurement encoded with a dictionary</p>
 
 <span class="n">idx</span><span class="p">,</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
 
-<span class="c"># distort the clean signal</span>
-<span class="c">##########################</span>
+<span class="c1"># distort the clean signal</span>
+<span class="c1">##########################</span>
 <span class="n">y_noisy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 
-<span class="c"># plot the sparse signal</span>
-<span class="c">########################</span>
+<span class="c1"># plot the sparse signal</span>
+<span class="c1">########################</span>
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Sparse signal&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Sparse signal&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.stem"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
 
-<span class="c"># plot the noise-free reconstruction</span>
-<span class="c">####################################</span>
+<span class="c1"># plot the noise-free reconstruction</span>
+<span class="c1">####################################</span>
 
 <span class="n">omp</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.OrthogonalMatchingPursuit.html#sklearn.linear_model.OrthogonalMatchingPursuit"><span class="n">OrthogonalMatchingPursuit</span></a><span class="p">(</span><span class="n">n_nonzero_coefs</span><span class="o">=</span><span class="n">n_nonzero_coefs</span><span class="p">)</span>
 <span class="n">omp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -218,38 +218,38 @@ measurement encoded with a dictionary</p>
 <span class="n">idx_r</span><span class="p">,</span> <span class="o">=</span> <span class="n">coef</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Recovered signal from noise-free measurements&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Recovered signal from noise-free measurements&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.stem"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">idx_r</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="n">idx_r</span><span class="p">])</span>
 
-<span class="c"># plot the noisy reconstruction</span>
-<span class="c">###############################</span>
+<span class="c1"># plot the noisy reconstruction</span>
+<span class="c1">###############################</span>
 <span class="n">omp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_noisy</span><span class="p">)</span>
 <span class="n">coef</span> <span class="o">=</span> <span class="n">omp</span><span class="o">.</span><span class="n">coef_</span>
 <span class="n">idx_r</span><span class="p">,</span> <span class="o">=</span> <span class="n">coef</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Recovered signal from noisy measurements&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Recovered signal from noisy measurements&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.stem"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">idx_r</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="n">idx_r</span><span class="p">])</span>
 
-<span class="c"># plot the noisy reconstruction with number of non-zeros set by CV</span>
-<span class="c">##################################################################</span>
+<span class="c1"># plot the noisy reconstruction with number of non-zeros set by CV</span>
+<span class="c1">##################################################################</span>
 <span class="n">omp_cv</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.OrthogonalMatchingPursuitCV.html#sklearn.linear_model.OrthogonalMatchingPursuitCV"><span class="n">OrthogonalMatchingPursuitCV</span></a><span class="p">()</span>
 <span class="n">omp_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_noisy</span><span class="p">)</span>
 <span class="n">coef</span> <span class="o">=</span> <span class="n">omp_cv</span><span class="o">.</span><span class="n">coef_</span>
 <span class="n">idx_r</span><span class="p">,</span> <span class="o">=</span> <span class="n">coef</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Recovered signal from noisy measurements with CV&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Recovered signal from noisy measurements with CV&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.stem"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">idx_r</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="n">idx_r</span><span class="p">])</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.38</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.suptitle"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span></a><span class="p">(</span><span class="s">&#39;Sparse signal recovery with Orthogonal Matching Pursuit&#39;</span><span class="p">,</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.suptitle"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span></a><span class="p">(</span><span class="s1">&#39;Sparse signal recovery with Orthogonal Matching Pursuit&#39;</span><span class="p">,</span>
              <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.33 seconds
-( 0 minutes  0.33 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.49 seconds
+( 0 minutes  0.49 seconds)</p>
 </div>
 
 

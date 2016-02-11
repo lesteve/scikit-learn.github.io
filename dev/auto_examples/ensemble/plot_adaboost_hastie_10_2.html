@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Two-class AdaBoo...
+        Two-class Ada...
         </span>
             <span class="hiddenrellink">
             Two-class AdaBoost
@@ -164,7 +164,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="discrete-versus-real-adaboost">
 <span id="example-ensemble-plot-adaboost-hastie-10-2-py"></span><h1>Discrete versus Real AdaBoost<a class="headerlink" href="#discrete-versus-real-adaboost" title="Permalink to this headline">¶</a></h1>
@@ -192,13 +192,13 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 </tbody>
 </table>
 <img alt="../../_images/plot_adaboost_hastie_10_2_001.png" class="align-center" src="../../_images/plot_adaboost_hastie_10_2_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_hastie_10_2.py"><tt class="xref download docutils literal"><span class="pre">plot_adaboost_hastie_10_2.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_hastie_10_2.py"><code class="xref download docutils literal"><span class="pre">plot_adaboost_hastie_10_2.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="c"># Author: Peter Prettenhofer &lt;peter.prettenhofer@gmail.com&gt;,</span>
-<span class="c">#         Noel Dawe &lt;noel.dawe@gmail.com&gt;</span>
-<span class="c">#</span>
-<span class="c"># License: BSD 3 clause</span>
+<span class="c1"># Author: Peter Prettenhofer &lt;peter.prettenhofer@gmail.com&gt;,</span>
+<span class="c1">#         Noel Dawe &lt;noel.dawe@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -210,7 +210,7 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 
 
 <span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">400</span>
-<span class="c"># A learning rate of 1. may not be optimal for both SAMME and SAMME.R</span>
+<span class="c1"># A learning rate of 1. may not be optimal for both SAMME and SAMME.R</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1.</span>
 
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">make_hastie_10_2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">12000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -230,23 +230,23 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
     <span class="n">base_estimator</span><span class="o">=</span><span class="n">dt_stump</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
     <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span>
-    <span class="n">algorithm</span><span class="o">=</span><span class="s">&quot;SAMME&quot;</span><span class="p">)</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;SAMME&quot;</span><span class="p">)</span>
 <span class="n">ada_discrete</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">ada_real</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a><span class="p">(</span>
     <span class="n">base_estimator</span><span class="o">=</span><span class="n">dt_stump</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
     <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span>
-    <span class="n">algorithm</span><span class="o">=</span><span class="s">&quot;SAMME.R&quot;</span><span class="p">)</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;SAMME.R&quot;</span><span class="p">)</span>
 <span class="n">ada_real</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">],</span> <span class="p">[</span><span class="n">dt_stump_err</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;k-&#39;</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s">&#39;Decision Stump Error&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">],</span> <span class="p">[</span><span class="n">dt_err</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;k--&#39;</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s">&#39;Decision Tree Error&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">],</span> <span class="p">[</span><span class="n">dt_stump_err</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Decision Stump Error&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">],</span> <span class="p">[</span><span class="n">dt_err</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Decision Tree Error&#39;</span><span class="p">)</span>
 
 <span class="n">ada_discrete_err</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ada_discrete</span><span class="o">.</span><span class="n">staged_predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)):</span>
@@ -265,30 +265,30 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
     <span class="n">ada_real_err_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_discrete_err</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s">&#39;Discrete AdaBoost Test Error&#39;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discrete AdaBoost Test Error&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_discrete_err_train</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s">&#39;Discrete AdaBoost Train Error&#39;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discrete AdaBoost Train Error&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_real_err</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s">&#39;Real AdaBoost Test Error&#39;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s">&#39;orange&#39;</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real AdaBoost Test Error&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_real_err_train</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s">&#39;Real AdaBoost Train Error&#39;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s">&#39;green&#39;</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real AdaBoost Train Error&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">&#39;n_estimators&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">&#39;error rate&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;error rate&#39;</span><span class="p">)</span>
 
-<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">leg</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  6.33 seconds
-( 0 minutes  6.33 seconds)</p>
+<p><strong>Total running time of the example:</strong>  6.50 seconds
+( 0 minutes  6.50 seconds)</p>
 </div>
 
 

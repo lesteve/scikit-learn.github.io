@@ -36,7 +36,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Vector Quantization Example" href="plot_lena_compress.html" />
+    <link rel="next" title="A demo of structured Ward hierarchical clustering on a raccoon face image" href="plot_face_ward_segmentation.html" />
     <link rel="prev" title="Demo of DBSCAN clustering algorithm" href="plot_dbscan.html" />
   
   
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Demo of DBSCAN c...
+        Demo of DBSCA...
         </span>
             <span class="hiddenrellink">
             Demo of DBSCAN clustering algorithm
@@ -164,7 +164,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="online-learning-of-a-dictionary-of-parts-of-faces">
 <span id="example-cluster-plot-dict-face-patches-py"></span><h1>Online learning of a dictionary of parts of faces<a class="headerlink" href="#online-learning-of-a-dictionary-of-parts-of-faces" title="Permalink to this headline">¶</a></h1>
@@ -209,10 +209,10 @@ Partial fit of 2100 out of 2400
 Partial fit of 2200 out of 2400
 Partial fit of 2300 out of 2400
 Partial fit of 2400 out of 2400
-done in 12.84s.
+done in 4.13s.
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_dict_face_patches.py"><tt class="xref download docutils literal"><span class="pre">plot_dict_face_patches.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_dict_face_patches.py"><code class="xref download docutils literal"><span class="pre">plot_dict_face_patches.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
@@ -227,10 +227,10 @@ done in 12.84s.
 
 <span class="n">faces</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">datasets</span><span class="o">.</span><span class="n">fetch_olivetti_faces</span></a><span class="p">()</span>
 
-<span class="c">###############################################################################</span>
-<span class="c"># Learn the dictionary of images</span>
+<span class="c1">###############################################################################</span>
+<span class="c1"># Learn the dictionary of images</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Learning the dictionary... &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Learning the dictionary... &#39;</span><span class="p">)</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">kmeans</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans"><span class="n">MiniBatchKMeans</span></a><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">81</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">rng</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">patch_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -239,7 +239,7 @@ done in 12.84s.
 <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-<span class="c"># The online learning part: cycle over the whole dataset 6 times</span>
+<span class="c1"># The online learning part: cycle over the whole dataset 6 times</span>
 <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">faces</span><span class="o">.</span><span class="n">images</span><span class="p">:</span>
@@ -255,32 +255,32 @@ done in 12.84s.
             <span class="n">kmeans</span><span class="o">.</span><span class="n">partial_fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="nb">buffer</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">index</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Partial fit of </span><span class="si">%4i</span><span class="s"> out of </span><span class="si">%i</span><span class="s">&#39;</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Partial fit of </span><span class="si">%4i</span><span class="s1"> out of </span><span class="si">%i</span><span class="s1">&#39;</span>
                   <span class="o">%</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">6</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="o">.</span><span class="n">images</span><span class="p">)))</span>
 
 <span class="n">dt</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;done in </span><span class="si">%.2f</span><span class="s">s.&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;done in </span><span class="si">%.2f</span><span class="s1">s.&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
 
-<span class="c">###############################################################################</span>
-<span class="c"># Plot the results</span>
+<span class="c1">###############################################################################</span>
+<span class="c1"># Plot the results</span>
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">patch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">):</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">patch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">patch_size</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span>
-               <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
+               <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(())</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.yticks"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span></a><span class="p">(())</span>
 
 
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.suptitle"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span></a><span class="p">(</span><span class="s">&#39;Patches of faces</span><span class="se">\n</span><span class="s">Train time </span><span class="si">%.1f</span><span class="s">s on </span><span class="si">%d</span><span class="s"> patches&#39;</span> <span class="o">%</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.suptitle"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span></a><span class="p">(</span><span class="s1">&#39;Patches of faces</span><span class="se">\n</span><span class="s1">Train time </span><span class="si">%.1f</span><span class="s1">s on </span><span class="si">%d</span><span class="s1"> patches&#39;</span> <span class="o">%</span>
              <span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="mi">8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="o">.</span><span class="n">images</span><span class="p">)),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  17.12 seconds
-( 0 minutes  17.12 seconds)</p>
+<p><strong>Total running time of the example:</strong>  9.45 seconds
+( 0 minutes  9.45 seconds)</p>
 </div>
 
 

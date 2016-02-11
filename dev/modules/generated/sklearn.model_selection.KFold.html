@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        sklearn.covarian...
+        sklearn.covar...
         </span>
             <span class="hiddenrellink">
             sklearn.covariance.graph_lasso
@@ -148,8 +148,8 @@
       <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.dev0</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
-<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">sklearn.model_selection</span></tt>.KFold</a><ul>
-<li><a class="reference internal" href="#examples-using-sklearn-model-selection-kfold">Examples using <tt class="docutils literal"><span class="pre">sklearn.model_selection.KFold</span></tt></a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.model_selection</span></code>.KFold</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-model-selection-kfold">Examples using <code class="docutils literal"><span class="pre">sklearn.model_selection.KFold</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -167,19 +167,19 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="sklearn-model-selection-kfold">
-<h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><tt class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></tt></a>.KFold<a class="headerlink" href="#sklearn-model-selection-kfold" title="Permalink to this headline">¶</a></h1>
+<h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.KFold<a class="headerlink" href="#sklearn-model-selection-kfold" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.model_selection.KFold">
-<em class="property">class </em><tt class="descclassname">sklearn.model_selection.</tt><tt class="descname">KFold</tt><big>(</big><em>n_folds=3</em>, <em>shuffle=False</em>, <em>random_state=None</em><big>)</big><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3280f88/sklearn/model_selection/_split.py#L341"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.model_selection.</code><code class="descname">KFold</code><span class="sig-paren">(</span><em>n_folds=3</em>, <em>shuffle=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c761ba7/sklearn/model_selection/_split.py#L341"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold" title="Permalink to this definition">¶</a></dt>
 <dd><p>K-Folds cross-validator</p>
 <p>Provides train/test indices to split data in train/test sets. Split
 dataset into k consecutive folds (without shuffling by default).</p>
 <p>Each fold is then used once as a validation while the k - 1 remaining
 folds form the training set.</p>
-<p>Read more in the <a class="reference internal" href="../cross_validation.html#cross-validation"><em>User Guide</em></a>.</p>
+<p>Read more in the <a class="reference internal" href="../cross_validation.html#cross-validation"><span>User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -204,16 +204,16 @@ shuffling. If None, use default numpy RNG for shuffling.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
-<dt><a class="reference internal" href="sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><tt class="xref py py-obj docutils literal"><span class="pre">StratifiedKFold</span></tt></a></dt>
+<dt><a class="reference internal" href="sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-obj docutils literal"><span class="pre">StratifiedKFold</span></code></a></dt>
 <dd>Takes label information into account to avoid building folds with imbalanced class distributions (for binary or multiclass classification tasks).</dd>
-<dt><a class="reference internal" href="sklearn.model_selection.LabelKFold.html#sklearn.model_selection.LabelKFold" title="sklearn.model_selection.LabelKFold"><tt class="xref py py-obj docutils literal"><span class="pre">LabelKFold</span></tt></a></dt>
+<dt><a class="reference internal" href="sklearn.model_selection.LabelKFold.html#sklearn.model_selection.LabelKFold" title="sklearn.model_selection.LabelKFold"><code class="xref py py-obj docutils literal"><span class="pre">LabelKFold</span></code></a></dt>
 <dd>K-fold iterator variant with non-overlapping labels.</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The first <tt class="docutils literal"><span class="pre">n_samples</span> <span class="pre">%</span> <span class="pre">n_folds</span></tt> folds have size
-<tt class="docutils literal"><span class="pre">n_samples</span> <span class="pre">//</span> <span class="pre">n_folds</span> <span class="pre">+</span> <span class="pre">1</span></tt>, other folds have size
-<tt class="docutils literal"><span class="pre">n_samples</span> <span class="pre">//</span> <span class="pre">n_folds</span></tt>, where <tt class="docutils literal"><span class="pre">n_samples</span></tt> is the number of samples.</p>
+<p>The first <code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">%</span> <span class="pre">n_folds</span></code> folds have size
+<code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">//</span> <span class="pre">n_folds</span> <span class="pre">+</span> <span class="pre">1</span></code>, other folds have size
+<code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">//</span> <span class="pre">n_folds</span></code>, where <code class="docutils literal"><span class="pre">n_samples</span></code> is the number of samples.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
@@ -224,7 +224,7 @@ shuffling. If None, use default numpy RNG for shuffling.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">kf</span><span class="p">)</span>  
 <span class="go">KFold(n_folds=2, random_state=None, shuffle=False)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-<span class="gp">... </span>   <span class="k">print</span><span class="p">(</span><span class="s">&quot;TRAIN:&quot;</span><span class="p">,</span> <span class="n">train_index</span><span class="p">,</span> <span class="s">&quot;TEST:&quot;</span><span class="p">,</span> <span class="n">test_index</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TRAIN:&quot;</span><span class="p">,</span> <span class="n">train_index</span><span class="p">,</span> <span class="s2">&quot;TEST:&quot;</span><span class="p">,</span> <span class="n">test_index</span><span class="p">)</span>
 <span class="gp">... </span>   <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
 <span class="gp">... </span>   <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
 <span class="go">TRAIN: [2 3] TEST: [0 1]</span>
@@ -238,22 +238,22 @@ shuffling. If None, use default numpy RNG for shuffling.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#sklearn.model_selection.KFold.get_n_splits" title="sklearn.model_selection.KFold.get_n_splits"><tt class="xref py py-obj docutils literal"><span class="pre">get_n_splits</span></tt></a>([X,&nbsp;y,&nbsp;labels])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.model_selection.KFold.get_n_splits" title="sklearn.model_selection.KFold.get_n_splits"><code class="xref py py-obj docutils literal"><span class="pre">get_n_splits</span></code></a>([X,&nbsp;y,&nbsp;labels])</td>
 <td>Returns the number of splitting iterations in the cross-validator</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#sklearn.model_selection.KFold.split" title="sklearn.model_selection.KFold.split"><tt class="xref py py-obj docutils literal"><span class="pre">split</span></tt></a>(X[,&nbsp;y,&nbsp;labels])</td>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.model_selection.KFold.split" title="sklearn.model_selection.KFold.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a>(X[,&nbsp;y,&nbsp;labels])</td>
 <td>Generate indices to split data into training and test set.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="sklearn.model_selection.KFold.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>n_folds=3</em>, <em>shuffle=False</em>, <em>random_state=None</em><big>)</big><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3280f88/sklearn/model_selection/_split.py#L397"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_folds=3</em>, <em>shuffle=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c761ba7/sklearn/model_selection/_split.py#L397"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.model_selection.KFold.get_n_splits">
-<tt class="descname">get_n_splits</tt><big>(</big><em>X=None</em>, <em>y=None</em>, <em>labels=None</em><big>)</big><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3280f88/sklearn/model_selection/_split.py#L319"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold.get_n_splits" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_n_splits</code><span class="sig-paren">(</span><em>X=None</em>, <em>y=None</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c761ba7/sklearn/model_selection/_split.py#L319"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold.get_n_splits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the number of splitting iterations in the cross-validator</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -285,7 +285,7 @@ shuffling. If None, use default numpy RNG for shuffling.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.KFold.split">
-<tt class="descname">split</tt><big>(</big><em>X</em>, <em>y=None</em>, <em>labels=None</em><big>)</big><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3280f88/sklearn/model_selection/_split.py#L284"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold.split" title="Permalink to this definition">¶</a></dt>
+<code class="descname">split</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c761ba7/sklearn/model_selection/_split.py#L284"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.KFold.split" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate indices to split data into training and test set.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -324,18 +324,18 @@ train/test set.</p>
 </dd></dl>
 
 <div class="section" id="examples-using-sklearn-model-selection-kfold">
-<h2>Examples using <tt class="docutils literal"><span class="pre">sklearn.model_selection.KFold</span></tt><a class="headerlink" href="#examples-using-sklearn-model-selection-kfold" title="Permalink to this headline">¶</a></h2>
-<div class="thumbnailContainer" tooltip="This example compares 2 dimensionality reduction strategies:"><div class="figure">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.model_selection.KFold</span></code><a class="headerlink" href="#examples-using-sklearn-model-selection-kfold" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="This example compares 2 dimensionality reduction strategies:"><div class="figure" id="id1">
 <a class="reference external image-reference" href="./../../auto_examples/cluster/plot_feature_agglomeration_vs_univariate_selection.html"><img alt="../../_images/plot_feature_agglomeration_vs_univariate_selection1.png" src="../../_images/plot_feature_agglomeration_vs_univariate_selection1.png" /></a>
-<p class="caption"><a class="reference internal" href="../../auto_examples/cluster/plot_feature_agglomeration_vs_univariate_selection.html#example-cluster-plot-feature-agglomeration-vs-univariate-selection-py"><em>Feature agglomeration vs. univariate selection</em></a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_feature_agglomeration_vs_univariate_selection.html#example-cluster-plot-feature-agglomeration-vs-univariate-selection-py"><span>Feature agglomeration vs. univariate selection</span></a></span></p>
 </div>
-</div><div class="thumbnailContainer" tooltip="Out-of-bag (OOB) estimates can be a useful heuristic to estimate the "optimal" number of boosti..."><div class="figure">
+</div><div class="thumbnailContainer" tooltip="Out-of-bag (OOB) estimates can be a useful heuristic to estimate the "optimal" number of boosti..."><div class="figure" id="id2">
 <a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_gradient_boosting_oob.html"><img alt="../../_images/plot_gradient_boosting_oob1.png" src="../../_images/plot_gradient_boosting_oob1.png" /></a>
-<p class="caption"><a class="reference internal" href="../../auto_examples/ensemble/plot_gradient_boosting_oob.html#example-ensemble-plot-gradient-boosting-oob-py"><em>Gradient Boosting Out-of-Bag estimates</em></a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_gradient_boosting_oob.html#example-ensemble-plot-gradient-boosting-oob-py"><span>Gradient Boosting Out-of-Bag estimates</span></a></span></p>
 </div>
-</div><div class="thumbnailContainer" tooltip="A tutorial exercise which uses cross-validation with linear models."><div class="figure">
+</div><div class="thumbnailContainer" tooltip="A tutorial exercise which uses cross-validation with linear models."><div class="figure" id="id3">
 <a class="reference external image-reference" href="./../../auto_examples/exercises/plot_cv_diabetes.html"><img alt="../../_images/plot_cv_diabetes1.png" src="../../_images/plot_cv_diabetes1.png" /></a>
-<p class="caption"><a class="reference internal" href="../../auto_examples/exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py"><em>Cross-validation on diabetes Dataset Exercise</em></a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py"><span>Cross-validation on diabetes Dataset Exercise</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>

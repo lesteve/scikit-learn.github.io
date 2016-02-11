@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Selecting the nu...
+        Selecting the...
         </span>
             <span class="hiddenrellink">
             Selecting the number of clusters with silhouette analysis on KMeans clustering
@@ -164,7 +164,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="ledoit-wolf-vs-oas-estimation">
 <span id="example-covariance-plot-lw-vs-oas-py"></span><h1>Ledoit-Wolf vs OAS estimation<a class="headerlink" href="#ledoit-wolf-vs-oas-estimation" title="Permalink to this headline">¶</a></h1>
@@ -181,7 +181,7 @@ distributed data.</p>
 <p>[1] &#8220;Shrinkage Algorithms for MMSE Covariance Estimation&#8221;
 Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
 <img alt="../../_images/plot_lw_vs_oas_001.png" class="align-center" src="../../_images/plot_lw_vs_oas_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_lw_vs_oas.py"><tt class="xref download docutils literal"><span class="pre">plot_lw_vs_oas.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_lw_vs_oas.py"><code class="xref download docutils literal"><span class="pre">plot_lw_vs_oas.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -191,9 +191,9 @@ Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
 <span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS"><span class="n">OAS</span></a>
 
 <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="c">###############################################################################</span>
+<span class="c1">###############################################################################</span>
 <span class="n">n_features</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="c"># simulation covariance matrix (AR(1) process)</span>
+<span class="c1"># simulation covariance matrix (AR(1) process)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">real_cov</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.toeplitz.html#scipy.linalg.toeplitz"><span class="n">toeplitz</span></a><span class="p">(</span><span class="n">r</span> <span class="o">**</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_features</span><span class="p">))</span>
 <span class="n">coloring_matrix</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.cholesky.html#scipy.linalg.cholesky"><span class="n">cholesky</span></a><span class="p">(</span><span class="n">real_cov</span><span class="p">)</span>
@@ -219,34 +219,34 @@ Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
         <span class="n">oa_mse</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">oa</span><span class="o">.</span><span class="n">error_norm</span><span class="p">(</span><span class="n">real_cov</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">oa_shrinkage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">oa</span><span class="o">.</span><span class="n">shrinkage_</span>
 
-<span class="c"># plot MSE</span>
+<span class="c1"># plot MSE</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.errorbar"><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span></a><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">lw_mse</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">yerr</span><span class="o">=</span><span class="n">lw_mse</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-             <span class="n">label</span><span class="o">=</span><span class="s">&#39;Ledoit-Wolf&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;navy&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ledoit-Wolf&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.errorbar"><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span></a><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">oa_mse</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">yerr</span><span class="o">=</span><span class="n">oa_mse</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-             <span class="n">label</span><span class="o">=</span><span class="s">&#39;OAS&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s">&quot;Squared error&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&quot;upper right&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Comparison of covariance estimators&quot;</span><span class="p">)</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;OAS&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Squared error&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Comparison of covariance estimators&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
 
-<span class="c"># plot shrinkage coefficient</span>
+<span class="c1"># plot shrinkage coefficient</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.errorbar"><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span></a><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">lw_shrinkage</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">yerr</span><span class="o">=</span><span class="n">lw_shrinkage</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-             <span class="n">label</span><span class="o">=</span><span class="s">&#39;Ledoit-Wolf&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;navy&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ledoit-Wolf&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.errorbar"><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span></a><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">oa_shrinkage</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">yerr</span><span class="o">=</span><span class="n">oa_shrinkage</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-             <span class="n">label</span><span class="o">=</span><span class="s">&#39;OAS&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s">&quot;n_samples&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s">&quot;Shrinkage&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&quot;lower right&quot;</span><span class="p">)</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;OAS&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;n_samples&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Shrinkage&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">(</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.</span> <span class="o">+</span> <span class="p">(</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">10.</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  4.62 seconds
-( 0 minutes  4.62 seconds)</p>
+<p><strong>Total running time of the example:</strong>  3.48 seconds
+( 0 minutes  3.48 seconds)</p>
 </div>
 
 

@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -118,7 +118,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        A demo of the Sp...
+        A demo of the...
         </span>
             <span class="hiddenrellink">
             A demo of the Spectral Biclustering algorithm
@@ -164,7 +164,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="biclustering-documents-with-the-spectral-co-clustering-algorithm">
 <span id="example-bicluster-bicluster-newsgroups-py"></span><h1>Biclustering documents with the Spectral Co-clustering algorithm<a class="headerlink" href="#biclustering-documents-with-the-spectral-co-clustering-algorithm" title="Permalink to this headline">¶</a></h1>
@@ -212,7 +212,7 @@ categories   : 100% rec.sport.hockey
 words        : scorer, unassisted, reichel, semak, sweeney, kovalenko, ricci, audette, momesso, nedved
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/bicluster_newsgroups.py"><tt class="xref download docutils literal"><span class="pre">bicluster_newsgroups.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/bicluster_newsgroups.py"><code class="xref download docutils literal"><span class="pre">bicluster_newsgroups.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
@@ -239,46 +239,46 @@ words        : scorer, unassisted, reichel, semak, sweeney, kovalenko, ricci, au
 <span class="sd">    useful, but the fact that such a token exists can be relevant.  By applying</span>
 <span class="sd">    this form of dimensionality reduction, some methods may perform better.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">token_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">u&#39;(?u)</span><span class="se">\\</span><span class="s">b</span><span class="se">\\</span><span class="s">w</span><span class="se">\\</span><span class="s">w+</span><span class="se">\\</span><span class="s">b&#39;</span><span class="p">)</span>
+    <span class="n">token_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">u&#39;(?u)</span><span class="se">\\</span><span class="s1">b</span><span class="se">\\</span><span class="s1">w</span><span class="se">\\</span><span class="s1">w+</span><span class="se">\\</span><span class="s1">b&#39;</span><span class="p">)</span>
     <span class="n">tokens</span> <span class="o">=</span> <span class="n">token_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;#NUMBER&quot;</span> <span class="k">if</span> <span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&quot;0123456789_&quot;</span> <span class="k">else</span> <span class="n">token</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#NUMBER&quot;</span> <span class="k">if</span> <span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;0123456789_&quot;</span> <span class="k">else</span> <span class="n">token</span>
               <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">tokens</span>
 
-<span class="c"># exclude &#39;comp.os.ms-windows.misc&#39;</span>
-<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;alt.atheism&#39;</span><span class="p">,</span> <span class="s">&#39;comp.graphics&#39;</span><span class="p">,</span>
-              <span class="s">&#39;comp.sys.ibm.pc.hardware&#39;</span><span class="p">,</span> <span class="s">&#39;comp.sys.mac.hardware&#39;</span><span class="p">,</span>
-              <span class="s">&#39;comp.windows.x&#39;</span><span class="p">,</span> <span class="s">&#39;misc.forsale&#39;</span><span class="p">,</span> <span class="s">&#39;rec.autos&#39;</span><span class="p">,</span>
-              <span class="s">&#39;rec.motorcycles&#39;</span><span class="p">,</span> <span class="s">&#39;rec.sport.baseball&#39;</span><span class="p">,</span>
-              <span class="s">&#39;rec.sport.hockey&#39;</span><span class="p">,</span> <span class="s">&#39;sci.crypt&#39;</span><span class="p">,</span> <span class="s">&#39;sci.electronics&#39;</span><span class="p">,</span>
-              <span class="s">&#39;sci.med&#39;</span><span class="p">,</span> <span class="s">&#39;sci.space&#39;</span><span class="p">,</span> <span class="s">&#39;soc.religion.christian&#39;</span><span class="p">,</span>
-              <span class="s">&#39;talk.politics.guns&#39;</span><span class="p">,</span> <span class="s">&#39;talk.politics.mideast&#39;</span><span class="p">,</span>
-              <span class="s">&#39;talk.politics.misc&#39;</span><span class="p">,</span> <span class="s">&#39;talk.religion.misc&#39;</span><span class="p">]</span>
+<span class="c1"># exclude &#39;comp.os.ms-windows.misc&#39;</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;alt.atheism&#39;</span><span class="p">,</span> <span class="s1">&#39;comp.graphics&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;comp.sys.ibm.pc.hardware&#39;</span><span class="p">,</span> <span class="s1">&#39;comp.sys.mac.hardware&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;comp.windows.x&#39;</span><span class="p">,</span> <span class="s1">&#39;misc.forsale&#39;</span><span class="p">,</span> <span class="s1">&#39;rec.autos&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;rec.motorcycles&#39;</span><span class="p">,</span> <span class="s1">&#39;rec.sport.baseball&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;rec.sport.hockey&#39;</span><span class="p">,</span> <span class="s1">&#39;sci.crypt&#39;</span><span class="p">,</span> <span class="s1">&#39;sci.electronics&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;sci.med&#39;</span><span class="p">,</span> <span class="s1">&#39;sci.space&#39;</span><span class="p">,</span> <span class="s1">&#39;soc.religion.christian&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;talk.politics.guns&#39;</span><span class="p">,</span> <span class="s1">&#39;talk.politics.mideast&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;talk.politics.misc&#39;</span><span class="p">,</span> <span class="s1">&#39;talk.religion.misc&#39;</span><span class="p">]</span>
 <span class="n">newsgroups</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">)</span>
 <span class="n">y_true</span> <span class="o">=</span> <span class="n">newsgroups</span><span class="o">.</span><span class="n">target</span>
 
-<span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s">&#39;english&#39;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                              <span class="n">tokenizer</span><span class="o">=</span><span class="n">number_aware_tokenizer</span><span class="p">)</span>
 <span class="n">cocluster</span> <span class="o">=</span> <span class="n">SpectralCoclustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">),</span>
-                                 <span class="n">svd_method</span><span class="o">=</span><span class="s">&#39;arpack&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                                 <span class="n">svd_method</span><span class="o">=</span><span class="s1">&#39;arpack&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">kmeans</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans"><span class="n">MiniBatchKMeans</span></a><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
                          <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;Vectorizing...&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Vectorizing...&quot;</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">newsgroups</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;Coclustering...&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Coclustering...&quot;</span><span class="p">)</span>
 <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">cocluster</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">y_cocluster</span> <span class="o">=</span> <span class="n">cocluster</span><span class="o">.</span><span class="n">row_labels_</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;Done in {:.2f}s. V-measure: {:.4f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Done in {:.2f}s. V-measure: {:.4f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span>
     <a href="../../modules/generated/sklearn.metrics.v_measure_score.html#sklearn.metrics.v_measure_score"><span class="n">v_measure_score</span></a><span class="p">(</span><span class="n">y_cocluster</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)))</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;MiniBatchKMeans...&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;MiniBatchKMeans...&quot;</span><span class="p">)</span>
 <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">y_kmeans</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;Done in {:.2f}s. V-measure: {:.4f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Done in {:.2f}s. V-measure: {:.4f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span>
     <a href="../../modules/generated/sklearn.metrics.v_measure_score.html#sklearn.metrics.v_measure_score"><span class="n">v_measure_score</span></a><span class="p">(</span><span class="n">y_kmeans</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)))</span>
 
@@ -293,8 +293,8 @@ words        : scorer, unassisted, reichel, semak, sweeney, kovalenko, ricci, au
         <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span><span class="o">.</span><span class="n">max</span>
     <span class="n">row_complement</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.nonzero.html#numpy.nonzero"><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span></a><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">cocluster</span><span class="o">.</span><span class="n">rows_</span><span class="p">[</span><span class="n">i</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">col_complement</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.nonzero.html#numpy.nonzero"><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span></a><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">cocluster</span><span class="o">.</span><span class="n">columns_</span><span class="p">[</span><span class="n">i</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c"># Note: the following is identical to X[rows[:, np.newaxis], cols].sum() but</span>
-    <span class="c"># much faster in scipy &lt;= 0.16</span>
+    <span class="c1"># Note: the following is identical to X[rows[:, np.newaxis], cols].sum() but</span>
+    <span class="c1"># much faster in scipy &lt;= 0.16</span>
     <span class="n">weight</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">rows</span><span class="p">][:,</span> <span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     <span class="n">cut</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">row_complement</span><span class="p">][:,</span> <span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span>
            <span class="n">X</span><span class="p">[</span><span class="n">rows</span><span class="p">][:,</span> <span class="n">col_complement</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
@@ -314,22 +314,22 @@ words        : scorer, unassisted, reichel, semak, sweeney, kovalenko, ricci, au
 <span class="n">best_idx</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.argsort.html#numpy.argsort"><span class="n">np</span><span class="o">.</span><span class="n">argsort</span></a><span class="p">(</span><span class="n">bicluster_ncuts</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
 
 <span class="k">print</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;Best biclusters:&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;----------------&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Best biclusters:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;----------------&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">best_idx</span><span class="p">):</span>
     <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="n">cocluster</span><span class="o">.</span><span class="n">get_shape</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
     <span class="n">cluster_docs</span><span class="p">,</span> <span class="n">cluster_words</span> <span class="o">=</span> <span class="n">cocluster</span><span class="o">.</span><span class="n">get_indices</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_docs</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_words</span><span class="p">):</span>
         <span class="k">continue</span>
 
-    <span class="c"># categories</span>
+    <span class="c1"># categories</span>
     <span class="n">counter</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cluster_docs</span><span class="p">:</span>
         <span class="n">counter</span><span class="p">[</span><span class="n">document_names</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">cat_string</span> <span class="o">=</span> <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;{:.0f}% {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_rows</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">cat_string</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;{:.0f}% {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_rows</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
                            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">most_common</span><span class="p">(</span><span class="n">counter</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
 
-    <span class="c"># words</span>
+    <span class="c1"># words</span>
     <span class="n">out_of_cluster_docs</span> <span class="o">=</span> <span class="n">cocluster</span><span class="o">.</span><span class="n">row_labels_</span> <span class="o">!=</span> <span class="n">cluster</span>
     <span class="n">out_of_cluster_docs</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.where.html#numpy.where"><span class="n">np</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">out_of_cluster_docs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">word_col</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">cluster_words</span><span class="p">]</span>
@@ -339,10 +339,10 @@ words        : scorer, unassisted, reichel, semak, sweeney, kovalenko, ricci, au
     <span class="n">important_words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[</span><span class="n">cluster_words</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word_scores</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;bicluster {} : {} documents, {} words&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;bicluster {} : {} documents, {} words&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">idx</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;categories   : {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cat_string</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;words        : {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">important_words</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;categories   : {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cat_string</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;words        : {}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">important_words</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
