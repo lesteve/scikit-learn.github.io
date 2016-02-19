@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>4.8. Transforming the prediction target (y) &mdash; scikit-learn 0.17 documentation</title>
+    <title>4.8. Transforming the prediction target (y) &mdash; scikit-learn 0.17.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.17',
+        VERSION:     '0.17.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
-    <link rel="top" title="scikit-learn 0.17 documentation" href="../index.html" />
+    <link rel="top" title="scikit-learn 0.17.1 documentation" href="../index.html" />
     <link rel="up" title="4. Dataset transformations" href="../data_transforms.html" />
     <link rel="next" title="5. Dataset loading utilities" href="../datasets/index.html" />
     <link rel="prev" title="4.7. Pairwise metrics, Affinities and Kernels" href="metrics.html" />
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -78,7 +78,7 @@
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="classes.html">API</a></li>
             <li><a href="../faq.html">FAQ</a></li>
-            <li><a href="../developers.html">Contributing</a></li>
+            <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
                 <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
                 <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
@@ -117,7 +117,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        4.7. Pairwise me...
+        4.7. Pairwise...
         </span>
             <span class="hiddenrellink">
             4.7. Pairwise metrics, Affinities and Kernels
@@ -134,7 +134,7 @@
         Up
         <br/>
         <span class="smallrellink">
-        4. Dataset trans...
+        4. Dataset tr...
         </span>
             <span class="hiddenrellink">
             4. Dataset transformations
@@ -144,10 +144,10 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
-<li><a class="reference internal" href="#">4.8. Transforming the prediction target (<tt class="docutils literal"><span class="pre">y</span></tt>)</a><ul>
+<li><a class="reference internal" href="#">4.8. Transforming the prediction target (<code class="docutils literal"><span class="pre">y</span></code>)</a><ul>
 <li><a class="reference internal" href="#label-binarization">4.8.1. Label binarization</a></li>
 <li><a class="reference internal" href="#label-encoding">4.8.2. Label encoding</a></li>
 </ul>
@@ -167,15 +167,15 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="transforming-the-prediction-target-y">
-<span id="preprocessing-targets"></span><h1>4.8. Transforming the prediction target (<tt class="docutils literal"><span class="pre">y</span></tt>)<a class="headerlink" href="#transforming-the-prediction-target-y" title="Permalink to this headline">¶</a></h1>
+<span id="preprocessing-targets"></span><h1>4.8. Transforming the prediction target (<code class="docutils literal"><span class="pre">y</span></code>)<a class="headerlink" href="#transforming-the-prediction-target-y" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="label-binarization">
 <h2>4.8.1. Label binarization<a class="headerlink" href="#label-binarization" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.LabelBinarizer.html#sklearn.preprocessing.LabelBinarizer" title="sklearn.preprocessing.LabelBinarizer"><tt class="xref py py-class docutils literal"><span class="pre">LabelBinarizer</span></tt></a> is a utility class to help create a label indicator
+<p><a class="reference internal" href="generated/sklearn.preprocessing.LabelBinarizer.html#sklearn.preprocessing.LabelBinarizer" title="sklearn.preprocessing.LabelBinarizer"><code class="xref py py-class docutils literal"><span class="pre">LabelBinarizer</span></code></a> is a utility class to help create a label indicator
 matrix from a list of multi-class labels:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelBinarizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="go">LabelBinarizer(neg_label=0, pos_label=1, sparse_output=False)</span>
@@ -186,8 +186,8 @@ matrix from a list of multi-class labels:</p>
 <span class="go">       [0, 0, 0, 1]])</span>
 </pre></div>
 </div>
-<p>For multiple labels per instance, use <a class="reference internal" href="generated/sklearn.preprocessing.MultiLabelBinarizer.html#sklearn.preprocessing.MultiLabelBinarizer" title="sklearn.preprocessing.MultiLabelBinarizer"><tt class="xref py py-class docutils literal"><span class="pre">MultiLabelBinarizer</span></tt></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MultiLabelBinarizer</span><span class="p">()</span>
+<p>For multiple labels per instance, use <a class="reference internal" href="generated/sklearn.preprocessing.MultiLabelBinarizer.html#sklearn.preprocessing.MultiLabelBinarizer" title="sklearn.preprocessing.MultiLabelBinarizer"><code class="xref py py-class docutils literal"><span class="pre">MultiLabelBinarizer</span></code></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MultiLabelBinarizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)])</span>
 <span class="go">array([[1, 1, 0],</span>
 <span class="go">       [0, 0, 1]])</span>
@@ -198,11 +198,11 @@ matrix from a list of multi-class labels:</p>
 </div>
 <div class="section" id="label-encoding">
 <h2>4.8.2. Label encoding<a class="headerlink" href="#label-encoding" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.LabelEncoder.html#sklearn.preprocessing.LabelEncoder" title="sklearn.preprocessing.LabelEncoder"><tt class="xref py py-class docutils literal"><span class="pre">LabelEncoder</span></tt></a> is a utility class to help normalize labels such that
+<p><a class="reference internal" href="generated/sklearn.preprocessing.LabelEncoder.html#sklearn.preprocessing.LabelEncoder" title="sklearn.preprocessing.LabelEncoder"><code class="xref py py-class docutils literal"><span class="pre">LabelEncoder</span></code></a> is a utility class to help normalize labels such that
 they contain only values between 0 and n_classes-1. This is sometimes useful
-for writing efficient Cython routines. <a class="reference internal" href="generated/sklearn.preprocessing.LabelEncoder.html#sklearn.preprocessing.LabelEncoder" title="sklearn.preprocessing.LabelEncoder"><tt class="xref py py-class docutils literal"><span class="pre">LabelEncoder</span></tt></a> can be used as
+for writing efficient Cython routines. <a class="reference internal" href="generated/sklearn.preprocessing.LabelEncoder.html#sklearn.preprocessing.LabelEncoder" title="sklearn.preprocessing.LabelEncoder"><code class="xref py py-class docutils literal"><span class="pre">LabelEncoder</span></code></a> can be used as
 follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">le</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 <span class="go">LabelEncoder()</span>
@@ -216,12 +216,12 @@ follows:</p>
 </div>
 <p>It can also be used to transform non-numerical labels (as long as they are
 hashable and comparable) to numerical labels:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">le</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s">&quot;paris&quot;</span><span class="p">,</span> <span class="s">&quot;paris&quot;</span><span class="p">,</span> <span class="s">&quot;tokyo&quot;</span><span class="p">,</span> <span class="s">&quot;amsterdam&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">le</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;paris&quot;</span><span class="p">,</span> <span class="s2">&quot;paris&quot;</span><span class="p">,</span> <span class="s2">&quot;tokyo&quot;</span><span class="p">,</span> <span class="s2">&quot;amsterdam&quot;</span><span class="p">])</span>
 <span class="go">LabelEncoder()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
 <span class="go">[&#39;amsterdam&#39;, &#39;paris&#39;, &#39;tokyo&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s">&quot;tokyo&quot;</span><span class="p">,</span> <span class="s">&quot;tokyo&quot;</span><span class="p">,</span> <span class="s">&quot;paris&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;tokyo&quot;</span><span class="p">,</span> <span class="s2">&quot;tokyo&quot;</span><span class="p">,</span> <span class="s2">&quot;paris&quot;</span><span class="p">])</span>
 <span class="go">array([2, 2, 1])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 <span class="go">[&#39;tokyo&#39;, &#39;tokyo&#39;, &#39;paris&#39;]</span>

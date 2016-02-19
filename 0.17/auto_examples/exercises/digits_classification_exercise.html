@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Digits Classification Exercise &mdash; scikit-learn 0.17 documentation</title>
+    <title>Digits Classification Exercise &mdash; scikit-learn 0.17.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.17',
+        VERSION:     '0.17.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
-    <link rel="top" title="scikit-learn 0.17 documentation" href="../../index.html" />
+    <link rel="top" title="scikit-learn 0.17.1 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
     <link rel="next" title="Cross-validation on Digits Dataset Exercise" href="plot_cv_digits.html" />
     <link rel="prev" title="Single estimator versus bagging: bias-variance decomposition" href="../ensemble/plot_bias_variance.html" />
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -78,7 +78,7 @@
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
-            <li><a href="../../developers.html">Contributing</a></li>
+            <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
                 <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
                 <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
@@ -117,7 +117,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Single estimator...
+        Single estima...
         </span>
             <span class="hiddenrellink">
             Single estimator versus bagging: bias-variance decomposition
@@ -144,7 +144,7 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
 <li><a class="reference internal" href="#">Digits Classification Exercise</a></li>
@@ -163,16 +163,16 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="digits-classification-exercise">
 <span id="example-exercises-digits-classification-exercise-py"></span><h1>Digits Classification Exercise<a class="headerlink" href="#digits-classification-exercise" title="Permalink to this headline">¶</a></h1>
 <p>A tutorial exercise regarding the use of classification techniques on
 the Digits dataset.</p>
-<p>This exercise is used in the <a class="reference internal" href="../../tutorial/statistical_inference/supervised_learning.html#clf-tut"><em>Classification</em></a> part of the
-<a class="reference internal" href="../../tutorial/statistical_inference/supervised_learning.html#supervised-learning-tut"><em>Supervised learning: predicting an output variable from high-dimensional observations</em></a> section of the
-<a class="reference internal" href="../../tutorial/statistical_inference/index.html#stat-learn-tut-index"><em>A tutorial on statistical-learning for scientific data processing</em></a>.</p>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/digits_classification_exercise.py"><tt class="xref download docutils literal"><span class="pre">digits_classification_exercise.py</span></tt></a></p>
+<p>This exercise is used in the <a class="reference internal" href="../../tutorial/statistical_inference/supervised_learning.html#clf-tut"><span>Classification</span></a> part of the
+<a class="reference internal" href="../../tutorial/statistical_inference/supervised_learning.html#supervised-learning-tut"><span>Supervised learning: predicting an output variable from high-dimensional observations</span></a> section of the
+<a class="reference internal" href="../../tutorial/statistical_inference/index.html#stat-learn-tut-index"><span>A tutorial on statistical-learning for scientific data processing</span></a>.</p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/digits_classification_exercise.py"><code class="xref download docutils literal"><span class="pre">digits_classification_exercise.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">linear_model</span>
@@ -191,8 +191,8 @@ the Digits dataset.</p>
 <span class="n">knn</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier"><span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsClassifier</span></a><span class="p">()</span>
 <span class="n">logistic</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;KNN score: </span><span class="si">%f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;LogisticRegression score: </span><span class="si">%f</span><span class="s">&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;KNN score: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;LogisticRegression score: </span><span class="si">%f</span><span class="s1">&#39;</span>
       <span class="o">%</span> <span class="n">logistic</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 </pre></div>
 </div>

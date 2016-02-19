@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Compressive sensing: tomography reconstruction with L1 prior (Lasso) &mdash; scikit-learn 0.17 documentation</title>
+    <title>Compressive sensing: tomography reconstruction with L1 prior (Lasso) &mdash; scikit-learn 0.17.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.17',
+        VERSION:     '0.17.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
-    <link rel="top" title="scikit-learn 0.17 documentation" href="../../index.html" />
+    <link rel="top" title="scikit-learn 0.17.1 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
     <link rel="next" title="Faces recognition example using eigenfaces and SVMs" href="face_recognition.html" />
     <link rel="prev" title="Outlier detection on a real data set" href="plot_outlier_detection_housing.html" />
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -78,7 +78,7 @@
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
-            <li><a href="../../developers.html">Contributing</a></li>
+            <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
                 <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
                 <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
@@ -117,7 +117,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Outlier detectio...
+        Outlier detec...
         </span>
             <span class="hiddenrellink">
             Outlier detection on a real data set
@@ -144,7 +144,7 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
 <li><a class="reference internal" href="#">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</a></li>
@@ -163,7 +163,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="compressive-sensing-tomography-reconstruction-with-l1-prior-lasso">
 <span id="example-applications-plot-tomography-l1-reconstruction-py"></span><h1>Compressive sensing: tomography reconstruction with L1 prior (Lasso)<a class="headerlink" href="#compressive-sensing-tomography-reconstruction-with-l1-prior-lasso" title="Permalink to this headline">¶</a></h1>
@@ -172,34 +172,35 @@ projections, acquired along different angles. Such a dataset is acquired in
 <strong>computed tomography</strong> (CT).</p>
 <p>Without any prior information on the sample, the number of projections
 required to reconstruct the image is of the order of the linear size
-<tt class="docutils literal"><span class="pre">l</span></tt> of the image (in pixels). For simplicity we consider here a sparse
+<code class="docutils literal"><span class="pre">l</span></code> of the image (in pixels). For simplicity we consider here a sparse
 image, where only pixels on the boundary of objects have a non-zero
 value. Such data could correspond for example to a cellular material.
 Note however that most images are sparse in a different basis, such as
-the Haar wavelets. Only <tt class="docutils literal"><span class="pre">l/7</span></tt> projections are acquired, therefore it is
+the Haar wavelets. Only <code class="docutils literal"><span class="pre">l/7</span></code> projections are acquired, therefore it is
 necessary to use prior information available on the sample (its
 sparsity): this is an example of <strong>compressive sensing</strong>.</p>
 <p>The tomography projection operation is a linear transformation. In
 addition to the data-fidelity term corresponding to a linear regression,
 we penalize the L1 norm of the image to account for its sparsity. The
-resulting optimization problem is called the <a class="reference internal" href="../../modules/linear_model.html#lasso"><em>Lasso</em></a>. We use the
-class <a class="reference internal" href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Lasso</span></tt></a>, that uses the coordinate descent
+resulting optimization problem is called the <a class="reference internal" href="../../modules/linear_model.html#lasso"><span>Lasso</span></a>. We use the
+class <a class="reference internal" href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Lasso</span></code></a>, that uses the coordinate descent
 algorithm. Importantly, this implementation is more computationally efficient
 on a sparse matrix, than the projection operator used here.</p>
 <p>The reconstruction with L1 penalization gives a result with zero error
 (all pixels are successfully labeled with 0 or 1), even if noise was
 added to the projections. In comparison, an L2 penalization
-(<a class="reference internal" href="../../modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Ridge</span></tt></a>) produces a large number of labeling
+(<a class="reference internal" href="../../modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Ridge</span></code></a>) produces a large number of labeling
 errors for the pixels. Important artifacts are observed on the
 reconstructed image, contrary to the L1 penalization. Note in particular
 the circular artifact separating the pixels in the corners, that have
 contributed to fewer projections than the central disk.</p>
 <img alt="../../_images/plot_tomography_l1_reconstruction_001.png" class="align-center" src="../../_images/plot_tomography_l1_reconstruction_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_tomography_l1_reconstruction.py"><tt class="xref download docutils literal"><span class="pre">plot_tomography_l1_reconstruction.py</span></tt></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_tomography_l1_reconstruction.py"><code class="xref download docutils literal"><span class="pre">plot_tomography_l1_reconstruction.py</span></code></a></p>
+<div class="highlight-python"><div class="highlight"><pre>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="c"># Author: Emmanuelle Gouillart &lt;emmanuelle.gouillart@nsup.org&gt;</span>
-<span class="c"># License: BSD 3 clause</span>
+<span class="c1"># Author: Emmanuelle Gouillart &lt;emmanuelle.gouillart@nsup.org&gt;</span>
+<span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
@@ -253,7 +254,7 @@ contributed to fewer projections than the central disk.</p>
         <span class="n">weights</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
         <span class="n">camera_inds</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">inds</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">l_x</span><span class="p">)</span>
         <span class="n">data_inds</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_unravel_indices</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
-    <span class="n">proj_operator</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.coo_matrix.floor.html#scipy.sparse.coo_matrix"><span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span></a><span class="p">((</span><span class="n">weights</span><span class="p">,</span> <span class="p">(</span><span class="n">camera_inds</span><span class="p">,</span> <span class="n">data_inds</span><span class="p">)))</span>
+    <span class="n">proj_operator</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.coo_matrix.tolil.html#scipy.sparse.coo_matrix"><span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span></a><span class="p">((</span><span class="n">weights</span><span class="p">,</span> <span class="p">(</span><span class="n">camera_inds</span><span class="p">,</span> <span class="n">data_inds</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">proj_operator</span>
 
 
@@ -271,38 +272,38 @@ contributed to fewer projections than the central disk.</p>
     <span class="k">return</span> <span class="n">res</span> <span class="o">-</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
 
-<span class="c"># Generate synthetic images, and projections</span>
+<span class="c1"># Generate synthetic images, and projections</span>
 <span class="n">l</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="n">proj_operator</span> <span class="o">=</span> <span class="n">build_projection_operator</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span> <span class="o">/</span> <span class="mf">7.</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">generate_synthetic_data</span><span class="p">()</span>
 <span class="n">proj</span> <span class="o">=</span> <span class="n">proj_operator</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/arrays.indexing.html#numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">]</span>
 <span class="n">proj</span> <span class="o">+=</span> <span class="mf">0.15</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="c"># Reconstruction with L2 (Ridge) penalization</span>
+<span class="c1"># Reconstruction with L2 (Ridge) penalization</span>
 <span class="n">rgr_ridge</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge"><span class="n">Ridge</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 <span class="n">rgr_ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">proj_operator</span><span class="p">,</span> <span class="n">proj</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
 <span class="n">rec_l2</span> <span class="o">=</span> <span class="n">rgr_ridge</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
 
-<span class="c"># Reconstruction with L1 (Lasso) penalization</span>
-<span class="c"># the best value of alpha was determined using cross validation</span>
-<span class="c"># with LassoCV</span>
+<span class="c1"># Reconstruction with L1 (Lasso) penalization</span>
+<span class="c1"># the best value of alpha was determined using cross validation</span>
+<span class="c1"># with LassoCV</span>
 <span class="n">rgr_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 <span class="n">rgr_lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">proj_operator</span><span class="p">,</span> <span class="n">proj</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
 <span class="n">rec_l1</span> <span class="o">=</span> <span class="n">rgr_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&#39;off&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&#39;original image&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;original image&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">rec_l2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&#39;L2 penalization&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&#39;off&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">rec_l2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;L2 penalization&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">rec_l1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&#39;L1 penalization&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&#39;off&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">rec_l1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;L1 penalization&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                     <span class="n">right</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -310,8 +311,8 @@ contributed to fewer projections than the central disk.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  7.94 seconds
-( 0 minutes  7.94 seconds)</p>
+<p><strong>Total running time of the example:</strong>  15.03 seconds
+( 0 minutes  15.03 seconds)</p>
 </div>
 
 

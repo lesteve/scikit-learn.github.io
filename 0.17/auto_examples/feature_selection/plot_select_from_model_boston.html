@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Feature selection using SelectFromModel and LassoCV &mdash; scikit-learn 0.17 documentation</title>
+    <title>Feature selection using SelectFromModel and LassoCV &mdash; scikit-learn 0.17.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.17',
+        VERSION:     '0.17.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
-    <link rel="top" title="scikit-learn 0.17 documentation" href="../../index.html" />
+    <link rel="top" title="scikit-learn 0.17.1 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
     <link rel="next" title="Test with permutations the significance of a classification score" href="plot_permutation_test_for_classification.html" />
     <link rel="prev" title="Recursive feature elimination with cross-validation" href="plot_rfe_with_cross_validation.html" />
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -78,7 +78,7 @@
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
-            <li><a href="../../developers.html">Contributing</a></li>
+            <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
                 <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
                 <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
@@ -117,7 +117,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Recursive featur...
+        Recursive fea...
         </span>
             <span class="hiddenrellink">
             Recursive feature elimination with cross-validation
@@ -144,7 +144,7 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
 <li><a class="reference internal" href="#">Feature selection using SelectFromModel and LassoCV</a></li>
@@ -163,16 +163,16 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="feature-selection-using-selectfrommodel-and-lassocv">
 <span id="example-feature-selection-plot-select-from-model-boston-py"></span><h1>Feature selection using SelectFromModel and LassoCV<a class="headerlink" href="#feature-selection-using-selectfrommodel-and-lassocv" title="Permalink to this headline">¶</a></h1>
 <p>Use SelectFromModel meta-transformer along with Lasso to select the best
 couple of features from the Boston dataset.</p>
 <img alt="../../_images/plot_select_from_model_boston_001.png" class="align-center" src="../../_images/plot_select_from_model_boston_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_select_from_model_boston.py"><tt class="xref download docutils literal"><span class="pre">plot_select_from_model_boston.py</span></tt></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># Author: Manoj Kumar &lt;mks542@nyu.edu&gt;</span>
-<span class="c"># License: BSD 3 clause</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_select_from_model_boston.py"><code class="xref download docutils literal"><span class="pre">plot_select_from_model_boston.py</span></code></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># Author: Manoj Kumar &lt;mks542@nyu.edu&gt;</span>
+<span class="c1"># License: BSD 3 clause</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
@@ -183,41 +183,41 @@ couple of features from the Boston dataset.</p>
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel"><span class="n">SelectFromModel</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV"><span class="n">LassoCV</span></a>
 
-<span class="c"># Load the boston dataset.</span>
+<span class="c1"># Load the boston dataset.</span>
 <span class="n">boston</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a><span class="p">()</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">],</span> <span class="n">boston</span><span class="p">[</span><span class="s">&#39;target&#39;</span><span class="p">]</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">boston</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
 
-<span class="c"># We use the base estimator LassoCV since the L1 norm promotes sparsity of features.</span>
+<span class="c1"># We use the base estimator LassoCV since the L1 norm promotes sparsity of features.</span>
 <span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV"><span class="n">LassoCV</span></a><span class="p">()</span>
 
-<span class="c"># Set a minimum threshold of 0.25</span>
+<span class="c1"># Set a minimum threshold of 0.25</span>
 <span class="n">sfm</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel"><span class="n">SelectFromModel</span></a><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">sfm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">n_features</span> <span class="o">=</span> <span class="n">sfm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="c"># Reset the threshold till the number of features equals two.</span>
-<span class="c"># Note that the attribute can be set directly instead of repeatedly</span>
-<span class="c"># fitting the metatransformer.</span>
+<span class="c1"># Reset the threshold till the number of features equals two.</span>
+<span class="c1"># Note that the attribute can be set directly instead of repeatedly</span>
+<span class="c1"># fitting the metatransformer.</span>
 <span class="k">while</span> <span class="n">n_features</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
     <span class="n">sfm</span><span class="o">.</span><span class="n">threshold</span> <span class="o">+=</span> <span class="mf">0.1</span>
     <span class="n">X_transform</span> <span class="o">=</span> <span class="n">sfm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">n_features</span> <span class="o">=</span> <span class="n">X_transform</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="c"># Plot the selected two features from X.</span>
+<span class="c1"># Plot the selected two features from X.</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span>
-    <span class="s">&quot;Features selected from Boston using SelectFromModel with &quot;</span>
-    <span class="s">&quot;threshold </span><span class="si">%0.3f</span><span class="s">.&quot;</span> <span class="o">%</span> <span class="n">sfm</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span>
+    <span class="s2">&quot;Features selected from Boston using SelectFromModel with &quot;</span>
+    <span class="s2">&quot;threshold </span><span class="si">%0.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">sfm</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span>
 <span class="n">feature1</span> <span class="o">=</span> <span class="n">X_transform</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">feature2</span> <span class="o">=</span> <span class="n">X_transform</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> 
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">feature1</span><span class="p">,</span> <span class="n">feature2</span><span class="p">,</span> <span class="s">&#39;r.&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;Feature number 1&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s">&quot;Feature number 2&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">feature1</span><span class="p">,</span> <span class="n">feature2</span><span class="p">,</span> <span class="s1">&#39;r.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature number 1&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Feature number 2&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">feature2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">feature2</span><span class="p">)])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.07 seconds
-( 0 minutes  0.07 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.11 seconds
+( 0 minutes  0.11 seconds)</p>
 </div>
 
 

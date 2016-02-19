@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Pixel importances with a parallel forest of trees &mdash; scikit-learn 0.17 documentation</title>
+    <title>Pixel importances with a parallel forest of trees &mdash; scikit-learn 0.17.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.17',
+        VERSION:     '0.17.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
-    <link rel="top" title="scikit-learn 0.17 documentation" href="../../index.html" />
+    <link rel="top" title="scikit-learn 0.17.1 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
     <link rel="next" title="Decision Tree Regression with AdaBoost" href="plot_adaboost_regression.html" />
     <link rel="prev" title="Image denoising using dictionary learning" href="../decomposition/plot_image_denoising.html" />
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -78,7 +78,7 @@
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
-            <li><a href="../../developers.html">Contributing</a></li>
+            <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
                 <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
                 <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
@@ -117,7 +117,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Image denoising ...
+        Image denoisi...
         </span>
             <span class="hiddenrellink">
             Image denoising using dictionary learning
@@ -144,7 +144,7 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
 <li><a class="reference internal" href="#">Pixel importances with a parallel forest of trees</a></li>
@@ -163,7 +163,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="pixel-importances-with-a-parallel-forest-of-trees">
 <span id="example-ensemble-plot-forest-importances-faces-py"></span><h1>Pixel importances with a parallel forest of trees<a class="headerlink" href="#pixel-importances-with-a-parallel-forest-of-trees" title="Permalink to this headline">¶</a></h1>
@@ -175,10 +175,10 @@ of the predictions can be parallelized within multiple jobs.</p>
 <img alt="../../_images/plot_forest_importances_faces_001.png" class="align-center" src="../../_images/plot_forest_importances_faces_001.png" />
 <p><strong>Script output</strong>:</p>
 <div class="highlight-python"><div class="highlight"><pre>Fitting ExtraTreesClassifier on faces data with 1 cores...
-done in 1.093s
+done in 1.906s
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances_faces.py"><tt class="xref download docutils literal"><span class="pre">plot_forest_importances_faces.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances_faces.py"><code class="xref download docutils literal"><span class="pre">plot_forest_importances_faces.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
@@ -187,20 +187,20 @@ done in 1.093s
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
 
-<span class="c"># Number of cores to use to perform parallel fitting of the forest model</span>
+<span class="c1"># Number of cores to use to perform parallel fitting of the forest model</span>
 <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="c"># Load the faces dataset</span>
+<span class="c1"># Load the faces dataset</span>
 <span class="n">data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">images</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">target</span>
 
-<span class="n">mask</span> <span class="o">=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">5</span>  <span class="c"># Limit to 5 classes</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">5</span>  <span class="c1"># Limit to 5 classes</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
-<span class="c"># Build a forest and compute the pixel importances</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;Fitting ExtraTreesClassifier on faces data with </span><span class="si">%d</span><span class="s"> cores...&quot;</span> <span class="o">%</span> <span class="n">n_jobs</span><span class="p">)</span>
+<span class="c1"># Build a forest and compute the pixel importances</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitting ExtraTreesClassifier on faces data with </span><span class="si">%d</span><span class="s2"> cores...&quot;</span> <span class="o">%</span> <span class="n">n_jobs</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">forest</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
                               <span class="n">max_features</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
@@ -208,18 +208,18 @@ done in 1.093s
                               <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">forest</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;done in </span><span class="si">%0.3f</span><span class="s">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%0.3f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 <span class="n">importances</span> <span class="o">=</span> <span class="n">forest</span><span class="o">.</span><span class="n">feature_importances_</span>
 <span class="n">importances</span> <span class="o">=</span> <span class="n">importances</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="c"># Plot pixel importances</span>
+<span class="c1"># Plot pixel importances</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">importances</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">hot</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Pixel importances with forests of trees&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Pixel importances with forests of trees&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.21 seconds
-( 0 minutes  1.21 seconds)</p>
+<p><strong>Total running time of the example:</strong>  2.10 seconds
+( 0 minutes  2.10 seconds)</p>
 </div>
 
 

@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.7. Gaussian Processes &mdash; scikit-learn 0.17 documentation</title>
+    <title>1.7. Gaussian Processes &mdash; scikit-learn 0.17.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.17',
+        VERSION:     '0.17.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
-    <link rel="top" title="scikit-learn 0.17 documentation" href="../index.html" />
+    <link rel="top" title="scikit-learn 0.17.1 documentation" href="../index.html" />
     <link rel="up" title="1. Supervised learning" href="../supervised_learning.html" />
     <link rel="next" title="1.8. Cross decomposition" href="cross_decomposition.html" />
     <link rel="prev" title="1.6. Nearest Neighbors" href="neighbors.html" />
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -78,7 +78,7 @@
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="classes.html">API</a></li>
             <li><a href="../faq.html">FAQ</a></li>
-            <li><a href="../developers.html">Contributing</a></li>
+            <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
                 <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
                 <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
@@ -117,7 +117,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        1.6. Nearest Nei...
+        1.6. Nearest ...
         </span>
             <span class="hiddenrellink">
             1.6. Nearest Neighbors
@@ -134,7 +134,7 @@
         Up
         <br/>
         <span class="smallrellink">
-        1. Supervised le...
+        1. Supervised...
         </span>
             <span class="hiddenrellink">
             1. Supervised learning
@@ -144,7 +144,7 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
 <li><a class="reference internal" href="#">1.7. Gaussian Processes</a><ul>
@@ -179,7 +179,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="gaussian-processes">
 <span id="gaussian-process"></span><h1>1.7. Gaussian Processes<a class="headerlink" href="#gaussian-processes" title="Permalink to this headline">¶</a></h1>
@@ -196,7 +196,7 @@ correlation models).</li>
 empirical confidence intervals and exceedance probabilities that might be
 used to refit (online fitting, adaptive fitting) the prediction in some
 region of interest.</li>
-<li>Versatile: different <a class="reference internal" href="linear_model.html#linear-model"><em>linear regression models</em></a> and <a class="reference internal" href="#correlation-models"><em>correlation models</em></a> can be specified. Common models are provided, but
+<li>Versatile: different <a class="reference internal" href="linear_model.html#linear-model"><span>linear regression models</span></a> and <a class="reference internal" href="#correlation-models"><span>correlation models</span></a> can be specified. Common models are provided, but
 it is also possible to specify custom models provided they are
 stationary.</li>
 </ul>
@@ -230,7 +230,7 @@ parameters or alternatively it uses the given parameters.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gp_regression.html"><img alt="../_images/plot_gp_regression_0011.png" src="../_images/plot_gp_regression_0011.png" /></a>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">gaussian_process</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -253,14 +253,14 @@ parameters or alternatively it uses the given parameters.</p>
 <h3>1.7.1.2. Fitting Noisy Data<a class="headerlink" href="#fitting-noisy-data" title="Permalink to this headline">¶</a></h3>
 <p>When the data to be fit includes noise, the Gaussian process model can be
 used by specifying the variance of the noise for each point.
-<a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcess.html#sklearn.gaussian_process.GaussianProcess" title="sklearn.gaussian_process.GaussianProcess"><tt class="xref py py-class docutils literal"><span class="pre">GaussianProcess</span></tt></a> takes a parameter <tt class="docutils literal"><span class="pre">nugget</span></tt> which
+<a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcess.html#sklearn.gaussian_process.GaussianProcess" title="sklearn.gaussian_process.GaussianProcess"><code class="xref py py-class docutils literal"><span class="pre">GaussianProcess</span></code></a> takes a parameter <code class="docutils literal"><span class="pre">nugget</span></code> which
 is added to the diagonal of the correlation matrix between training points:
 in general this is a type of Tikhonov regularization.  In the special case
 of a squared-exponential correlation function, this normalization is
 equivalent to specifying a fractional variance in the input.  That is</p>
 <div class="math">
 <p><img src="../_images/math/b0997a6b918f5f8fc9a3615f1c8cb2d514a09296.png" alt="\mathrm{nugget}_i = \left[\frac{\sigma_i}{y_i}\right]^2"/></p>
-</div><p>With <tt class="docutils literal"><span class="pre">nugget</span></tt> and <tt class="docutils literal"><span class="pre">corr</span></tt> properly set, Gaussian Processes can be
+</div><p>With <code class="docutils literal"><span class="pre">nugget</span></code> and <code class="docutils literal"><span class="pre">corr</span></code> properly set, Gaussian Processes can be
 used to robustly recover an underlying function from noisy data:</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gp_regression.html"><img alt="../_images/plot_gp_regression_0021.png" src="../_images/plot_gp_regression_0021.png" /></a>
@@ -268,7 +268,7 @@ used to robustly recover an underlying function from noisy data:</p>
 <div class="topic">
 <p class="topic-title first">Other examples</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/gaussian_process/plot_gp_probabilistic_classification_after_regression.html#example-gaussian-process-plot-gp-probabilistic-classification-after-regression-py"><em>Gaussian Processes classification example: exploiting the probabilistic output</em></a></li>
+<li><a class="reference internal" href="../auto_examples/gaussian_process/plot_gp_probabilistic_classification_after_regression.html#example-gaussian-process-plot-gp-probabilistic-classification-after-regression-py"><span>Gaussian Processes classification example: exploiting the probabilistic output</span></a></li>
 </ul>
 </div>
 </div>
@@ -388,7 +388,7 @@ decomposition algorithm.</p>
 <h3>1.7.2.3. The empirical best linear unbiased predictor (EBLUP)<a class="headerlink" href="#the-empirical-best-linear-unbiased-predictor-eblup" title="Permalink to this headline">¶</a></h3>
 <p>Until now, both the autocorrelation and regression models were assumed given.
 In practice however they are never known in advance so that one has to make
-(motivated) empirical choices for these models <a class="reference internal" href="#correlation-models"><em>Correlation Models</em></a>.</p>
+(motivated) empirical choices for these models <a class="reference internal" href="#correlation-models"><span>Correlation Models</span></a>.</p>
 <p>Provided these choices are made, one should estimate the remaining unknown
 parameters involved in the BLUP. To do so, one uses the set of provided
 observations in conjunction with some inference technique. The present

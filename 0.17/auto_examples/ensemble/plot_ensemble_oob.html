@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>OOB Errors for Random Forests &mdash; scikit-learn 0.17 documentation</title>
+    <title>OOB Errors for Random Forests &mdash; scikit-learn 0.17.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.17',
+        VERSION:     '0.17.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -34,9 +34,9 @@
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
-    <link rel="top" title="scikit-learn 0.17 documentation" href="../../index.html" />
+    <link rel="top" title="scikit-learn 0.17.1 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Partial Dependence Plots" href="plot_partial_dependence.html" />
+    <link rel="next" title="Gradient Boosting regression" href="plot_gradient_boosting_regression.html" />
     <link rel="prev" title="Gradient Boosting regularization" href="plot_gradient_boosting_regularization.html" />
   
   
@@ -56,7 +56,7 @@
   </script>
 
   </head>
-  <body>
+  <body role="document">
 
 <div class="header-wrapper">
     <div class="header">
@@ -78,7 +78,7 @@
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
-            <li><a href="../../developers.html">Contributing</a></li>
+            <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
                 <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
                 <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
@@ -117,7 +117,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Gradient Boostin...
+        Gradient Boos...
         </span>
             <span class="hiddenrellink">
             Gradient Boosting regularization
@@ -144,7 +144,7 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.17.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
 <li><a class="reference internal" href="#">OOB Errors for Random Forests</a></li>
@@ -163,19 +163,19 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="oob-errors-for-random-forests">
 <span id="example-ensemble-plot-ensemble-oob-py"></span><h1>OOB Errors for Random Forests<a class="headerlink" href="#oob-errors-for-random-forests" title="Permalink to this headline">¶</a></h1>
-<p>The <tt class="docutils literal"><span class="pre">RandomForestClassifier</span></tt> is trained using <em>bootstrap aggregation</em>, where
+<p>The <code class="docutils literal"><span class="pre">RandomForestClassifier</span></code> is trained using <em>bootstrap aggregation</em>, where
 each new tree is fit from a bootstrap sample of the training observations
 <img class="math" src="../../_images/math/b5c431d1ae18b076ecc008f3084eb2b02591b5e9.png" alt="z_i = (x_i, y_i)"/>. The <em>out-of-bag</em> (OOB) error is the average error for
 each <img class="math" src="../../_images/math/0c9b8c78a7a049eca8f2168d0691afc6a65a9dad.png" alt="z_i"/> calculated using predictions from the trees that do not
 contain <img class="math" src="../../_images/math/0c9b8c78a7a049eca8f2168d0691afc6a65a9dad.png" alt="z_i"/> in their respective bootstrap sample. This allows the
-<tt class="docutils literal"><span class="pre">RandomForestClassifier</span></tt> to be fit and validated whilst being trained [1].</p>
+<code class="docutils literal"><span class="pre">RandomForestClassifier</span></code> to be fit and validated whilst being trained [1].</p>
 <p>The example below demonstrates how the OOB error can be measured at the
 addition of each new tree during training. The resulting plot allows a
-practitioner to approximate a suitable value of <tt class="docutils literal"><span class="pre">n_estimators</span></tt> at which the
+practitioner to approximate a suitable value of <code class="docutils literal"><span class="pre">n_estimators</span></code> at which the
 error stabilizes.</p>
 <table class="docutils footnote" frame="void" id="id1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -185,50 +185,50 @@ Learning Ed. 2&#8221;, p592-593, Springer, 2009.</td></tr>
 </tbody>
 </table>
 <img alt="../../_images/plot_ensemble_oob_001.png" class="align-center" src="../../_images/plot_ensemble_oob_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ensemble_oob.py"><tt class="xref download docutils literal"><span class="pre">plot_ensemble_oob.py</span></tt></a></p>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ensemble_oob.py"><code class="xref download docutils literal"><span class="pre">plot_ensemble_oob.py</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">,</span> <span class="n">ExtraTreesClassifier</span>
 
-<span class="c"># Author: Kian Ho &lt;hui.kian.ho@gmail.com&gt;</span>
-<span class="c">#         Gilles Louppe &lt;g.louppe@gmail.com&gt;</span>
-<span class="c">#         Andreas Mueller &lt;amueller@ais.uni-bonn.de&gt;</span>
-<span class="c">#</span>
-<span class="c"># License: BSD 3 Clause</span>
+<span class="c1"># Author: Kian Ho &lt;hui.kian.ho@gmail.com&gt;</span>
+<span class="c1">#         Gilles Louppe &lt;g.louppe@gmail.com&gt;</span>
+<span class="c1">#         Andreas Mueller &lt;amueller@ais.uni-bonn.de&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># License: BSD 3 Clause</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="n">RANDOM_STATE</span> <span class="o">=</span> <span class="mi">123</span>
 
-<span class="c"># Generate a binary classification dataset.</span>
+<span class="c1"># Generate a binary classification dataset.</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
                            <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
                            <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">)</span>
 
-<span class="c"># NOTE: Setting the `warm_start` construction parameter to `True` disables</span>
-<span class="c"># support for paralellised ensembles but is necessary for tracking the OOB</span>
-<span class="c"># error trajectory during training.</span>
+<span class="c1"># NOTE: Setting the `warm_start` construction parameter to `True` disables</span>
+<span class="c1"># support for paralellised ensembles but is necessary for tracking the OOB</span>
+<span class="c1"># error trajectory during training.</span>
 <span class="n">ensemble_clfs</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s">&quot;RandomForestClassifier, max_features=&#39;sqrt&#39;&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">&quot;RandomForestClassifier, max_features=&#39;sqrt&#39;&quot;</span><span class="p">,</span>
         <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">oob_score</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                               <span class="n">max_features</span><span class="o">=</span><span class="s">&quot;sqrt&quot;</span><span class="p">,</span>
+                               <span class="n">max_features</span><span class="o">=</span><span class="s2">&quot;sqrt&quot;</span><span class="p">,</span>
                                <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s">&quot;RandomForestClassifier, max_features=&#39;log2&#39;&quot;</span><span class="p">,</span>
-        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="s">&#39;log2&#39;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">&quot;RandomForestClassifier, max_features=&#39;log2&#39;&quot;</span><span class="p">,</span>
+        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="s1">&#39;log2&#39;</span><span class="p">,</span>
                                <span class="n">oob_score</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s">&quot;RandomForestClassifier, max_features=None&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">&quot;RandomForestClassifier, max_features=None&quot;</span><span class="p">,</span>
         <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                                <span class="n">oob_score</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">))</span>
 <span class="p">]</span>
 
-<span class="c"># Map a classifier name to a list of (&lt;n_estimators&gt;, &lt;error rate&gt;) pairs.</span>
+<span class="c1"># Map a classifier name to a list of (&lt;n_estimators&gt;, &lt;error rate&gt;) pairs.</span>
 <span class="n">error_rate</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="p">[])</span> <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">ensemble_clfs</span><span class="p">)</span>
 
-<span class="c"># Range of `n_estimators` values to explore.</span>
+<span class="c1"># Range of `n_estimators` values to explore.</span>
 <span class="n">min_estimators</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="n">max_estimators</span> <span class="o">=</span> <span class="mi">175</span>
 
@@ -237,24 +237,24 @@ Learning Ed. 2&#8221;, p592-593, Springer, 2009.</td></tr>
         <span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
         <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-        <span class="c"># Record the OOB error for each `n_estimators=i` setting.</span>
+        <span class="c1"># Record the OOB error for each `n_estimators=i` setting.</span>
         <span class="n">oob_error</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">clf</span><span class="o">.</span><span class="n">oob_score_</span>
         <span class="n">error_rate</span><span class="p">[</span><span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">oob_error</span><span class="p">))</span>
 
-<span class="c"># Generate the &quot;OOB error rate&quot; vs. &quot;n_estimators&quot; plot.</span>
+<span class="c1"># Generate the &quot;OOB error rate&quot; vs. &quot;n_estimators&quot; plot.</span>
 <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">clf_err</span> <span class="ow">in</span> <span class="n">error_rate</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">clf_err</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="n">min_estimators</span><span class="p">,</span> <span class="n">max_estimators</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s">&quot;n_estimators&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s">&quot;OOB error rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&quot;upper right&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;OOB error rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  6.39 seconds
-( 0 minutes  6.39 seconds)</p>
+<p><strong>Total running time of the example:</strong>  9.48 seconds
+( 0 minutes  9.48 seconds)</p>
 </div>
 
 

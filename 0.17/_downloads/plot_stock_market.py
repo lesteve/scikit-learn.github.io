@@ -255,3 +255,5 @@ plt.xlim(embedding[0].min() - .15 * embedding[0].ptp(),
          embedding[0].max() + .10 * embedding[0].ptp(),)
 plt.ylim(embedding[1].min() - .03 * embedding[1].ptp(),
          embedding[1].max() + .03 * embedding[1].ptp())
+
+plt.show()
