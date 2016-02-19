@@ -17,5 +17,5 @@ The content of this repo is exposed as:
     the latest release
   
   - http://scikit-learn.org/dev/  for the documentation of the current
-    master branch using a Rackspace hosted service configured by:
-    https://github.com/scikit-learn/sklearn-docbuilder
+    master branch which is built by circle.com as configured in the
+    circle.yml file in the main scikit-learn repo.
