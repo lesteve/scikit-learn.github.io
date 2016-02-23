@@ -267,7 +267,7 @@ max, to be checked depending on the hardware) for the sparse input
 representation to be faster than the dense input representation on a machine
 with many CPUs and an optimized BLAS implementation.</p>
 <p>Here is sample code to test the sparsity of your input:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">sparsity_ratio</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sparsity_ratio</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;input sparsity ratio:&quot;</span><span class="p">,</span> <span class="n">sparsity_ratio</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
 </pre></div>
@@ -373,7 +373,7 @@ BLAS implementation and lead to orders of magnitude speedup over a
 non-optimized BLAS.</p>
 <p>You can display the BLAS / LAPACK implementation used by your NumPy / SciPy /
 scikit-learn install with the following commands:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy.distutils.system_info</span> <span class="kn">import</span> <span class="n">get_info</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.distutils.system_info</span> <span class="kn">import</span> <span class="n">get_info</span>
 <span class="k">print</span><span class="p">(</span><span class="n">get_info</span><span class="p">(</span><span class="s1">&#39;blas_opt&#39;</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">get_info</span><span class="p">(</span><span class="s1">&#39;lapack_opt&#39;</span><span class="p">))</span>
 </pre></div>
@@ -417,7 +417,7 @@ In this context it means that we want to control the model sparsity (i.e. the
 number of non-zero coordinates in the model vectors). It is generally a good
 idea to combine model sparsity with sparse input data representation.</p>
 <p>Here is sample code that illustrates the use of the <code class="docutils literal"><span class="pre">sparsify()</span></code> method:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">sparsify</span><span class="p">()</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>

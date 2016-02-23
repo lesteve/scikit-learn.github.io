@@ -176,7 +176,7 @@
 <h2>4.8.1. Label binarization<a class="headerlink" href="#label-binarization" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="generated/sklearn.preprocessing.LabelBinarizer.html#sklearn.preprocessing.LabelBinarizer" title="sklearn.preprocessing.LabelBinarizer"><code class="xref py py-class docutils literal"><span class="pre">LabelBinarizer</span></code></a> is a utility class to help create a label indicator
 matrix from a list of multi-class labels:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelBinarizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="go">LabelBinarizer(neg_label=0, pos_label=1, sparse_output=False)</span>
@@ -188,7 +188,7 @@ matrix from a list of multi-class labels:</p>
 </pre></div>
 </div>
 <p>For multiple labels per instance, use <a class="reference internal" href="generated/sklearn.preprocessing.MultiLabelBinarizer.html#sklearn.preprocessing.MultiLabelBinarizer" title="sklearn.preprocessing.MultiLabelBinarizer"><code class="xref py py-class docutils literal"><span class="pre">MultiLabelBinarizer</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MultiLabelBinarizer</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MultiLabelBinarizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)])</span>
 <span class="go">array([[1, 1, 0],</span>
 <span class="go">       [0, 0, 1]])</span>
@@ -203,7 +203,7 @@ matrix from a list of multi-class labels:</p>
 they contain only values between 0 and n_classes-1. This is sometimes useful
 for writing efficient Cython routines. <a class="reference internal" href="generated/sklearn.preprocessing.LabelEncoder.html#sklearn.preprocessing.LabelEncoder" title="sklearn.preprocessing.LabelEncoder"><code class="xref py py-class docutils literal"><span class="pre">LabelEncoder</span></code></a> can be used as
 follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">le</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 <span class="go">LabelEncoder()</span>
@@ -217,7 +217,7 @@ follows:</p>
 </div>
 <p>It can also be used to transform non-numerical labels (as long as they are
 hashable and comparable) to numerical labels:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">le</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;paris&quot;</span><span class="p">,</span> <span class="s2">&quot;paris&quot;</span><span class="p">,</span> <span class="s2">&quot;tokyo&quot;</span><span class="p">,</span> <span class="s2">&quot;amsterdam&quot;</span><span class="p">])</span>
 <span class="go">LabelEncoder()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>

@@ -262,7 +262,7 @@ replacement for <code class="docutils literal"><span class="pre">np.dot</span></
 In all other cases, it dispatches to <code class="docutils literal"><span class="pre">np.dot</span></code> and when the NumPy version is
 new enough, it is in fact an alias for that function, making it a drop-in
 replacement. Example usage of <code class="docutils literal"><span class="pre">fast_dot</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils.extmath</span> <span class="kn">import</span> <span class="n">fast_dot</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">fast_dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
@@ -275,7 +275,7 @@ requirements aren&#8217;t met or the BLAS package is not available, the call is
 silently dispatched to <code class="docutils literal"><span class="pre">numpy.dot</span></code>. If you want to be sure when the original
 <code class="docutils literal"><span class="pre">numpy.dot</span></code> has been invoked in a situation where it is suboptimal, you can
 activate the related warning:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.exceptions</span> <span class="kn">import</span> <span class="n">NonBLASDotWarning</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="n">NonBLASDotWarning</span><span class="p">)</span> 
 </pre></div>
@@ -289,7 +289,7 @@ for interactively exploring the relevant part for the code.</p>
 <p>Suppose we want to profile the Non Negative Matrix Factorization module
 of the scikit. Let us setup a new IPython session and load the digits
 dataset and as in the <a class="reference internal" href="../auto_examples/classification/plot_digits_classification.html#example-classification-plot-digits-classification-py"><span>Recognizing hand-written digits</span></a> example:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1]: from sklearn.decomposition import NMF
+<div class="highlight-python"><div class="highlight"><pre><span></span>In [1]: from sklearn.decomposition import NMF
 
 In [2]: from sklearn.datasets import load_digits
 
@@ -300,13 +300,13 @@ In [3]: X = load_digits().data
 optimization iterations, it is important to measure the total execution
 time of the function we want to optimize without any kind of profiler
 overhead and save it somewhere for later reference:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [4]: %timeit NMF(n_components=16, tol=1e-2).fit(X)
+<div class="highlight-python"><div class="highlight"><pre><span></span>In [4]: %timeit NMF(n_components=16, tol=1e-2).fit(X)
 1 loops, best of 3: 1.7 s per loop
 </pre></div>
 </div>
 <p>To have have a look at the overall performance profile using the <code class="docutils literal"><span class="pre">%prun</span></code>
 magic command:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [5]: %prun -l nmf.py NMF(n_components=16, tol=1e-2).fit(X)
+<div class="highlight-python"><div class="highlight"><pre><span></span>In [5]: %prun -l nmf.py NMF(n_components=16, tol=1e-2).fit(X)
          14496 function calls in 1.682 CPU seconds
 
    Ordered by: internal time
@@ -333,7 +333,7 @@ contains the &#8220;nmf.py&#8221; string. This is useful to have a quick look at
 of the nmf Python module it-self ignoring anything else.</p>
 <p>Here is the beginning of the output of the same command without the <code class="docutils literal"><span class="pre">-l</span> <span class="pre">nmf.py</span></code>
 filter:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [5] %prun NMF(n_components=16, tol=1e-2).fit(X)
+<div class="highlight-python"><div class="highlight"><pre><span></span>In [5] %prun NMF(n_components=16, tol=1e-2).fit(X)
          16159 function calls in 1.840 CPU seconds
 
    Ordered by: internal time
@@ -369,36 +369,36 @@ trying to optimize their implementation).</p>
 Python code: it takes around 100% of the accumulated time of the module. In
 order to better understand the profile of this specific function, let
 us install <code class="docutils literal"><span class="pre">line-prof</span></code> and wire it to IPython:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pip install line-profiler
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install line-profiler
 </pre></div>
 </div>
 <ul>
 <li><p class="first"><strong>Under IPython &lt;= 0.10</strong>, edit <code class="docutils literal"><span class="pre">~/.ipython/ipy_user_conf.py</span></code> and
 ensure the following lines are present:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
 <span class="n">ip</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">ipapi</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Towards the end of the file, define the <code class="docutils literal"><span class="pre">%lprun</span></code> magic:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">line_profiler</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">line_profiler</span>
 <span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;lprun&#39;</span><span class="p">,</span> <span class="n">line_profiler</span><span class="o">.</span><span class="n">magic_lprun</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first"><strong>Under IPython 0.11+</strong>, first create a configuration profile:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ ipython profile create
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ ipython profile create
 </pre></div>
 </div>
 <p>Then create a file named <code class="docutils literal"><span class="pre">~/.ipython/extensions/line_profiler_ext.py</span></code> with
 the following content:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">line_profiler</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">line_profiler</span>
 
 <span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
     <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;lprun&#39;</span><span class="p">,</span> <span class="n">line_profiler</span><span class="o">.</span><span class="n">magic_lprun</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then register it in <code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;line_profiler_ext&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
@@ -411,7 +411,7 @@ application and the other frontends such as qtconsole and notebook.</p>
 </li>
 </ul>
 <p>Now restart IPython and let us use this new toy:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1]: from sklearn.datasets import load_digits
+<div class="highlight-python"><div class="highlight"><pre><span></span>In [1]: from sklearn.datasets import load_digits
 
 In [2]: from sklearn.decomposition.nmf import _nls_subproblem, NMF
 
@@ -464,31 +464,31 @@ pin-point the most expensive expressions that would deserve additional care.</p>
 <p>You can analyze in detail the memory usage of any Python code with the help of
 <a class="reference external" href="http://pypi.python.org/pypi/memory_profiler">memory_profiler</a>. First,
 install the latest version:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pip install -U memory_profiler
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install -U memory_profiler
 </pre></div>
 </div>
 <p>Then, setup the magics in a manner similar to <code class="docutils literal"><span class="pre">line_profiler</span></code>.</p>
 <ul>
 <li><p class="first"><strong>Under IPython &lt;= 0.10</strong>, edit <code class="docutils literal"><span class="pre">~/.ipython/ipy_user_conf.py</span></code> and
 ensure the following lines are present:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
 <span class="n">ip</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">ipapi</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Towards the end of the file, define the <code class="docutils literal"><span class="pre">%memit</span></code> and <code class="docutils literal"><span class="pre">%mprun</span></code> magics:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">memory_profiler</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">memory_profiler</span>
 <span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;memit&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_memit</span><span class="p">)</span>
 <span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;mprun&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_mprun</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first"><strong>Under IPython 0.11+</strong>, first create a configuration profile:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ ipython profile create
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ ipython profile create
 </pre></div>
 </div>
 <p>Then create a file named <code class="docutils literal"><span class="pre">~/.ipython/extensions/memory_profiler_ext.py</span></code>
 with the following content:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">memory_profiler</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">memory_profiler</span>
 
 <span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
     <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;memit&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_memit</span><span class="p">)</span>
@@ -496,7 +496,7 @@ with the following content:</p>
 </pre></div>
 </div>
 <p>Then register it in <code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;memory_profiler_ext&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
@@ -513,7 +513,7 @@ notebook.</p>
 functions in your program. It is very similar to <code class="docutils literal"><span class="pre">%lprun</span></code>, discussed in the
 previous section. For example, from the <code class="docutils literal"><span class="pre">memory_profiler</span></code> <code class="docutils literal"><span class="pre">examples</span></code>
 directory:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1] from example import my_func
+<div class="highlight-python"><div class="highlight"><pre><span></span>In [1] from example import my_func
 
 In [2] %mprun -f my_func my_func()
 Filename: example.py
@@ -530,7 +530,7 @@ Line #    Mem usage  Increment   Line Contents
 </div>
 <p>Another useful magic that <code class="docutils literal"><span class="pre">memory_profiler</span></code> defines is <code class="docutils literal"><span class="pre">%memit</span></code>, which is
 analogous to <code class="docutils literal"><span class="pre">%timeit</span></code>. It can be used as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1]: import numpy as np
+<div class="highlight-python"><div class="highlight"><pre><span></span>In [1]: import numpy as np
 
 In [2]: %memit np.zeros(1e7)
 maximum of 3: 76.402344 MB per loop

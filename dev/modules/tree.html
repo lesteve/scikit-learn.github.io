@@ -251,7 +251,7 @@ classification on a dataset.</p>
 an array X, sparse or dense, of size <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code>  holding the
 training samples, and an array Y of integer values, size <code class="docutils literal"><span class="pre">[n_samples]</span></code>,
 holding the class labels for the training samples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
@@ -259,13 +259,13 @@ holding the class labels for the training samples:</p>
 </pre></div>
 </div>
 <p>After being fitted, the model can then be used to predict the class of samples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
 <span class="go">array([1])</span>
 </pre></div>
 </div>
 <p>Alternatively, the probability of each class can be predicted, which is the
 fraction of training samples of the same class in a leaf:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
 <span class="go">array([[ 0.,  1.]])</span>
 </pre></div>
 </div>
@@ -273,7 +273,7 @@ fraction of training samples of the same class in a leaf:</p>
 labels are [-1, 1]) classification and multiclass (where the labels are
 [0, ..., K-1]) classification.</p>
 <p>Using the Iris dataset, we can construct a tree as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
@@ -283,20 +283,20 @@ labels are [-1, 1]) classification and multiclass (where the labels are
 <p>Once trained, we can export the tree in <a class="reference external" href="http://www.graphviz.org/">Graphviz</a> format using the <a class="reference internal" href="generated/sklearn.tree.export_graphviz.html#sklearn.tree.export_graphviz" title="sklearn.tree.export_graphviz"><code class="xref py py-func docutils literal"><span class="pre">export_graphviz</span></code></a>
 exporter. Below is an example export of a tree trained on the entire
 iris dataset:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;iris.dot&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">f</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then we can use Graphviz&#8217;s <code class="docutils literal"><span class="pre">dot</span></code> tool to create a PDF file (or any other
 supported file type): <code class="docutils literal"><span class="pre">dot</span> <span class="pre">-Tpdf</span> <span class="pre">iris.dot</span> <span class="pre">-o</span> <span class="pre">iris.pdf</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;iris.dot&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, if we have Python module <code class="docutils literal"><span class="pre">pydot</span></code> installed, we can generate
 a PDF file (or any other supported file type) directly in Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>  
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pydot</span> 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">)</span> 
@@ -308,7 +308,7 @@ a PDF file (or any other supported file type) directly in Python:</p>
 options, including coloring nodes by their class (or value for regression) and
 using explicit variable and class names if desired. IPython notebooks can also
 render these plots inline using the <cite>Image()</cite> function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>  
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">,</span>  
 <span class="go">                         feature_names=iris.feature_names,  </span>
@@ -322,13 +322,13 @@ render these plots inline using the <cite>Image()</cite> function:</p>
 <div class="figure align-center">
 <img src="../_images/iris.svg" /></div>
 <p>After being fitted, the model can then be used to predict the class of samples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
 <span class="go">array([0])</span>
 </pre></div>
 </div>
 <p>Alternatively, the probability of each class can be predicted, which is the
 fraction of training samples of the same class in a leaf:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
 <span class="go">array([[ 1.,  0.,  0.]])</span>
 </pre></div>
 </div>
@@ -352,7 +352,7 @@ fraction of training samples of the same class in a leaf:</p>
 <p>As in the classification setting, the fit method will take as argument arrays X
 and y, only that in this case y is expected to have floating point values
 instead of integer values:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>

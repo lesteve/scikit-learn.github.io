@@ -173,19 +173,19 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.lasso_path<a class="headerlink" href="#sklearn-linear-model-lasso-path" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.linear_model.lasso_path">
-<code class="descclassname">sklearn.linear_model.</code><code class="descname">lasso_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>eps=0.001</em>, <em>n_alphas=100</em>, <em>alphas=None</em>, <em>precompute='auto'</em>, <em>Xy=None</em>, <em>copy_X=True</em>, <em>coef_init=None</em>, <em>verbose=False</em>, <em>return_n_iter=False</em>, <em>positive=False</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c9d66db/sklearn/linear_model/coordinate_descent.py#L123"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.lasso_path" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.linear_model.</code><code class="descname">lasso_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>eps=0.001</em>, <em>n_alphas=100</em>, <em>alphas=None</em>, <em>precompute='auto'</em>, <em>Xy=None</em>, <em>copy_X=True</em>, <em>coef_init=None</em>, <em>verbose=False</em>, <em>return_n_iter=False</em>, <em>positive=False</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e631f2c/sklearn/linear_model/coordinate_descent.py#L123"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.lasso_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Lasso path with coordinate descent</p>
 <p>The Lasso optimization function varies for mono and multi-outputs.</p>
 <p>For mono-output tasks it is:</p>
-<div class="highlight-python"><div class="highlight"><pre>(1 / (2 * n_samples)) * ||y - Xw||^2_2 + alpha * ||w||_1
+<div class="highlight-python"><div class="highlight"><pre><span></span>(1 / (2 * n_samples)) * ||y - Xw||^2_2 + alpha * ||w||_1
 </pre></div>
 </div>
 <p>For multi-output tasks it is:</p>
-<div class="highlight-python"><div class="highlight"><pre>(1 / (2 * n_samples)) * ||Y - XW||^2_Fro + alpha * ||W||_21
+<div class="highlight-python"><div class="highlight"><pre><span></span>(1 / (2 * n_samples)) * ||Y - XW||^2_Fro + alpha * ||W||_21
 </pre></div>
 </div>
 <p>Where:</p>
-<div class="highlight-python"><div class="highlight"><pre>||W||_21 = \sum_i \sqrt{\sum_j w_{ij}^2}
+<div class="highlight-python"><div class="highlight"><pre><span></span>||W||_21 = \sum_i \sqrt{\sum_j w_{ij}^2}
 </pre></div>
 </div>
 <p>i.e. the sum of norm of each row.</p>
@@ -291,7 +291,7 @@ interpolation can be used to retrieve model coefficients between the
 values output by lars_path</p>
 <p class="rubric">Examples</p>
 <p>Comparing lasso_path and lars_path with interpolation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use lasso_path to compute a coefficient path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="p">,</span> <span class="n">coef_path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">lasso_path</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">])</span>
@@ -300,7 +300,7 @@ values output by lars_path</p>
 <span class="go"> [ 0.2159048   0.4425765   0.23689075]]</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now use lars_path and 1D linear interpolation to compute the</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now use lars_path and 1D linear interpolation to compute the</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># same path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">lars_path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">alphas</span><span class="p">,</span> <span class="n">active</span><span class="p">,</span> <span class="n">coef_path_lars</span> <span class="o">=</span> <span class="n">lars_path</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;lasso&#39;</span><span class="p">)</span>
