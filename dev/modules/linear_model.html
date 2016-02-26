@@ -194,6 +194,8 @@
 <li><a class="reference internal" href="#theoretical-considerations">1.1.15.3.1. Theoretical considerations</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#huber-regression">1.1.15.4. Huber Regression</a></li>
+<li><a class="reference internal" href="#notes">1.1.15.5. Notes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#polynomial-regression-extending-linear-models-with-basis-functions">1.1.16. Polynomial regression: extending linear models with basis functions</a></li>
@@ -1000,18 +1002,22 @@ in these settings.</p>
 <div class="topic">
 <p class="topic-title first"><strong>Trade-offs: which estimator?</strong></p>
 <blockquote>
-<div><blockquote>
-<div><p>Scikit-learn provides 2 robust regression estimators:
-<a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a> and
-<a class="reference internal" href="#theil-sen-regression"><span>Theil Sen</span></a></p>
+<div><p>Scikit-learn provides 3 robust regression estimators:
+<a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a>,
+<a class="reference internal" href="#theil-sen-regression"><span>Theil Sen</span></a> and
+<a class="reference internal" href="#huber-regression"><span>HuberRegressor</span></a></p>
 <ul class="simple">
-<li><a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a> is faster, and scales much better
-with the number of samples</li>
+<li><a class="reference internal" href="#huber-regression"><span>HuberRegressor</span></a> should be faster than
+<a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a> and <a class="reference internal" href="#theil-sen-regression"><span>Theil Sen</span></a>
+unless the number of samples are very large, i.e <code class="docutils literal"><span class="pre">n_samples</span></code> &gt;&gt; <code class="docutils literal"><span class="pre">n_features</span></code>.
+This is because <a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a> and <a class="reference internal" href="#theil-sen-regression"><span>Theil Sen</span></a>
+fit on smaller subsets of the data. However, both <a class="reference internal" href="#theil-sen-regression"><span>Theil Sen</span></a>
+and <a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a> are unlikely to be as robust as
+<a class="reference internal" href="#huber-regression"><span>HuberRegressor</span></a> for the default parameters.</li>
+<li><a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a> is faster than <a class="reference internal" href="#theil-sen-regression"><span>Theil Sen</span></a>
+and scales much better with the number of samples</li>
 <li><a class="reference internal" href="#ransac-regression"><span>RANSAC</span></a> will deal better with large
 outliers in the y direction (most common situation)</li>
-</ul>
-</div></blockquote>
-<ul class="simple">
 <li><a class="reference internal" href="#theil-sen-regression"><span>Theil Sen</span></a> will cope better with
 medium-size outliers in the X direction, but this property will
 disappear in large dimensional settings.</li>
@@ -1116,7 +1122,7 @@ corrupted data of up to 29.3%.</p>
 <a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../_images/plot_theilsen_0011.png" src="../_images/plot_theilsen_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
 </div>
 <p>The implementation of <a class="reference internal" href="generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor" title="sklearn.linear_model.TheilSenRegressor"><code class="xref py py-class docutils literal"><span class="pre">TheilSenRegressor</span></code></a> in scikit-learn follows a
-generalization to a multivariate linear regression model <a class="footnote-reference" href="#f1" id="id21">[5]</a> using the
+generalization to a multivariate linear regression model <a href="#id26"><span class="problematic" id="id27"><span id="id21"></span>[#f1]_</span></a> using the
 spatial median which is a generalization of the median to multiple
 dimensions <a class="footnote-reference" href="#f2" id="id22">[6]</a>.</p>
 <p>In terms of time and space complexity, Theil-Sen scales according to</p>
@@ -1137,7 +1143,7 @@ considering only a random subset of all possible combinations.</p>
 <table class="docutils footnote" frame="void" id="f1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id21">[5]</a></td><td>Xin Dang, Hanxiang Peng, Xueqin Wang and Heping Zhang: <a class="reference external" href="http://www.math.iupui.edu/~hpeng/MTSE_0908.pdf">Theil-Sen Estimators in a Multiple Linear Regression Model.</a></td></tr>
+<tr><td class="label">[5]</td><td>Xin Dang, Hanxiang Peng, Xueqin Wang and Heping Zhang: <a class="reference external" href="http://www.math.iupui.edu/~hpeng/MTSE_0908.pdf">Theil-Sen Estimators in a Multiple Linear Regression Model.</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f2" rules="none">
@@ -1151,6 +1157,61 @@ considering only a random subset of all possible combinations.</p>
 </table>
 </div>
 </div>
+</div>
+<div class="section" id="huber-regression">
+<span id="id23"></span><h3>1.1.15.4. Huber Regression<a class="headerlink" href="#huber-regression" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor" title="sklearn.linear_model.HuberRegressor"><code class="xref py py-class docutils literal"><span class="pre">HuberRegressor</span></code></a> is different to <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code></a> because it applies a
+linear loss to samples that are classified as outliers.
+A sample is classified as an inlier if the absolute error of that sample is
+lesser than a certain threshold. It differs from <a class="reference internal" href="generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor" title="sklearn.linear_model.TheilSenRegressor"><code class="xref py py-class docutils literal"><span class="pre">TheilSenRegressor</span></code></a>
+and <a class="reference internal" href="generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor" title="sklearn.linear_model.RANSACRegressor"><code class="xref py py-class docutils literal"><span class="pre">RANSACRegressor</span></code></a> because it does not ignore the effect of the outliers
+but gives a lesser weight to them.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_huber_vs_ridge.html"><img alt="../_images/plot_huber_vs_ridge_0011.png" src="../_images/plot_huber_vs_ridge_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p>The loss function that <a class="reference internal" href="generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor" title="sklearn.linear_model.HuberRegressor"><code class="xref py py-class docutils literal"><span class="pre">HuberRegressor</span></code></a> minimizes is given by</p>
+<div class="math">
+<p><img src="../_images/math/f715b48e5f7b877420780a965d7b07a8e464d277.png" alt="\underset{w, \sigma}{min\,} {\sum_{i=1}^n\left(\sigma + H_m\left(\frac{X_{i}w - y_{i}}{\sigma}\right)\sigma\right) + \alpha {||w||_2}^2}"/></p>
+</div><p>where</p>
+<div class="math">
+<p><img src="../_images/math/7ca864fdb48a8abd7fdd15fe085539b6a5872448.png" alt="H_m(z) = \begin{cases}
+       z^2, &amp; \text {if } |z| &lt; \epsilon, \\
+       2\epsilon|z| - \epsilon^2, &amp; \text{otherwise}
+\end{cases}"/></p>
+</div><p>It is advised to set the parameter <code class="docutils literal"><span class="pre">epsilon</span></code> to 1.35 to achieve 95% statistical efficiency.</p>
+</div>
+<div class="section" id="notes">
+<h3>1.1.15.5. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor" title="sklearn.linear_model.HuberRegressor"><code class="xref py py-class docutils literal"><span class="pre">HuberRegressor</span></code></a> differs from using <a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> with loss set to <cite>huber</cite>
+in the following ways.</p>
+<ul class="simple">
+<li><a class="reference internal" href="generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor" title="sklearn.linear_model.HuberRegressor"><code class="xref py py-class docutils literal"><span class="pre">HuberRegressor</span></code></a> is scaling invariant. Once <code class="docutils literal"><span class="pre">epsilon</span></code> is set, scaling <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">y</span></code>
+down or up by different values would produce the same robustness to outliers as before.
+as compared to <a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> where <code class="docutils literal"><span class="pre">epsilon</span></code> has to be set again when <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">y</span></code> are
+scaled.</li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor" title="sklearn.linear_model.HuberRegressor"><code class="xref py py-class docutils literal"><span class="pre">HuberRegressor</span></code></a> should be more efficient to use on data with small number of
+samples while <a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> needs a number of passes on the training data to
+produce the same robustness.</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_huber_vs_ridge.html#example-linear-model-plot-huber-vs-ridge-py"><span>HuberRegressor vs Ridge on dataset with strong outliers</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils footnote" frame="void" id="id24" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[7]</td><td>Peter J. Huber, Elvezio M. Ronchetti: Robust Statistics, Concomitant scale estimates, pg 172</td></tr>
+</tbody>
+</table>
+</div>
+<p>Also, this estimator is different from the R implementation of Robust Regression
+(<a class="reference external" href="http://www.ats.ucla.edu/stat/r/dae/rreg.htm">http://www.ats.ucla.edu/stat/r/dae/rreg.htm</a>) because the R implementation does a weighted least
+squares implementation with weights given to each sample on the basis of how much the residual is
+greater than a certain threshold.</p>
 </div>
 </div>
 <div class="section" id="polynomial-regression-extending-linear-models-with-basis-functions">

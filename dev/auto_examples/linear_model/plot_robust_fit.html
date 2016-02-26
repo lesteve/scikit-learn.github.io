@@ -36,8 +36,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="L1 Penalty and Sparsity in Logistic Regression" href="plot_logistic_l1_l2_sparsity.html" />
-    <link rel="prev" title="Bayesian Ridge Regression" href="plot_bayesian_ridge.html" />
+    <link rel="next" title="Plot multi-class SGD on the iris dataset" href="plot_sgd_iris.html" />
+    <link rel="prev" title="Automatic Relevance Determination Regression (ARD)" href="plot_ard.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -114,14 +114,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_bayesian_ridge.html"
+        <a href="plot_ard.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Bayesian Ridg...
+        Automatic Rel...
         </span>
             <span class="hiddenrellink">
-            Bayesian Ridge Regression
+            Automatic Relevance Determination Regression (ARD)
             </span>
         </a>
         </div>
@@ -183,7 +183,10 @@ the quality of the prediction.</p>
 <ul class="simple">
 <li>RANSAC is good for strong outliers in the y direction</li>
 <li>TheilSen is good for small outliers, both in direction X and y, but has
-a break point above which it performs worst than OLS.</li>
+a break point above which it performs worse than OLS.</li>
+<li>The scores of HuberRegressor may not be compared directly to both TheilSen
+and RANSAC because it does not attempt to completely filter the outliers
+but lessen their effect.</li>
 </ul>
 <ul class="horizontal">
 <li><a class="first reference internal image-reference" href="../../_images/plot_robust_fit_001.png"><img alt="../../_images/plot_robust_fit_001.png" src="../../_images/plot_robust_fit_001.png" style="width: 235.0px; height: 188.0px;" /></a>
@@ -202,7 +205,9 @@ a break point above which it performs worst than OLS.</li>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="p">(</span>
+    <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor"><span class="n">TheilSenRegressor</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor"><span class="n">RANSACRegressor</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor"><span class="n">HuberRegressor</span></a><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures"><span class="n">PolynomialFeatures</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.pipeline.make_pipeline.html#sklearn.pipeline.make_pipeline"><span class="n">make_pipeline</span></a>
 
@@ -229,12 +234,14 @@ a break point above which it performs worst than OLS.</li>
 <span class="n">X_errors_large</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">X_errors_large</span><span class="p">[::</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;OLS&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span></a><span class="p">()),</span>
-              <span class="p">(</span><span class="s1">&#39;Theil-Sen&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor"><span class="n">linear_model</span><span class="o">.</span><span class="n">TheilSenRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
-              <span class="p">(</span><span class="s1">&#39;RANSAC&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor"><span class="n">linear_model</span><span class="o">.</span><span class="n">RANSACRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span> <span class="p">]</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OLS&#39;</span><span class="p">:</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;Theil-Sen&#39;</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="s1">&#39;RANSAC&#39;</span><span class="p">:</span> <span class="s1">&#39;lightgreen&#39;</span><span class="p">}</span>
-<span class="n">linestyle</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OLS&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;Theil-Sen&#39;</span><span class="p">:</span> <span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="s1">&#39;RANSAC&#39;</span><span class="p">:</span> <span class="s1">&#39;--&#39;</span><span class="p">}</span>
+<span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;OLS&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">()),</span>
+              <span class="p">(</span><span class="s1">&#39;Theil-Sen&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor"><span class="n">TheilSenRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
+              <span class="p">(</span><span class="s1">&#39;RANSAC&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor"><span class="n">RANSACRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
+              <span class="p">(</span><span class="s1">&#39;HuberRegressor&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor"><span class="n">HuberRegressor</span></a><span class="p">())]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OLS&#39;</span><span class="p">:</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;Theil-Sen&#39;</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="s1">&#39;RANSAC&#39;</span><span class="p">:</span> <span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="s1">&#39;HuberRegressor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="n">linestyle</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OLS&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;Theil-Sen&#39;</span><span class="p">:</span> <span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="s1">&#39;RANSAC&#39;</span><span class="p">:</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;HuberRegressor&#39;</span><span class="p">:</span> <span class="s1">&#39;--&#39;</span><span class="p">}</span>
 <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span>
+
 <span class="n">x_plot</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">this_X</span><span class="p">,</span> <span class="n">this_y</span> <span class="ow">in</span> <span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;Modeling Errors Only&#39;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
@@ -248,7 +255,7 @@ a break point above which it performs worst than OLS.</li>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">estimator</span> <span class="ow">in</span> <span class="n">estimators</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.pipeline.make_pipeline.html#sklearn.pipeline.make_pipeline"><span class="n">make_pipeline</span></a><span class="p">(</span><a href="../../modules/generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures"><span class="n">PolynomialFeatures</span></a><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">estimator</span><span class="p">)</span>
         <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">this_X</span><span class="p">,</span> <span class="n">this_y</span><span class="p">)</span>
-        <span class="n">mse</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error"><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span></a><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="n">mse</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
         <span class="n">y_plot</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_plot</span><span class="p">[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/arrays.indexing.html#numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">])</span>
         <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyle</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
                  <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: error = </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mse</span><span class="p">))</span>
@@ -262,8 +269,8 @@ a break point above which it performs worst than OLS.</li>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  7.30 seconds
-( 0 minutes  7.30 seconds)</p>
+<p><strong>Total running time of the example:</strong>  7.80 seconds
+( 0 minutes  7.80 seconds)</p>
 </div>
 
 
@@ -281,7 +288,7 @@ a break point above which it performs worst than OLS.</li>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_bayesian_ridge.html">Previous
+      <a href="plot_ard.html">Previous
       </a>
     </div>
     
