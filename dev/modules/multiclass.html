@@ -163,6 +163,7 @@
 <li><a class="reference internal" href="#id4">1.12.4.1. Multiclass learning</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#multioutput-regression">1.12.5. Multioutput regression</a></li>
 </ul>
 </li>
 </ul>
@@ -192,7 +193,8 @@ unless you want to experiment with different multiclass strategies.</p>
 </div>
 <p>The <a class="reference internal" href="classes.html#module-sklearn.multiclass" title="sklearn.multiclass"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.multiclass</span></code></a> module implements <em>meta-estimators</em> to solve
 <code class="docutils literal"><span class="pre">multiclass</span></code> and <code class="docutils literal"><span class="pre">multilabel</span></code> classification problems
-by decomposing such problems into binary classification problems.</p>
+by decomposing such problems into binary classification problems. Multitarget
+regression is also supported.</p>
 <blockquote>
 <div><ul>
 <li><p class="first"><strong>Multiclass classification</strong> means a classification task with more than
@@ -206,6 +208,11 @@ labels. This can be thought as predicting properties of a data-point
 that are not mutually exclusive, such as topics that are relevant for a
 document. A text might be about any of religion, politics, finance or
 education at the same time or none of these.</p>
+</li>
+<li><p class="first"><strong>Multioutput regression</strong> assigns each sample a set of target
+values.  This can be thought of as predicting several properties
+for each data-point, such as wind direction and magnitude at a
+certain location.</p>
 </li>
 <li><p class="first"><strong>Multioutput-multiclass classification</strong> and <strong>multi-task classification</strong>
 means that a single estimator has to handle
@@ -450,6 +457,34 @@ Hastie T., Tibshirani R., Friedman J., page 606 (second-edition)
 </tbody>
 </table>
 </div>
+</div>
+</div>
+<div class="section" id="multioutput-regression">
+<h2>1.12.5. Multioutput regression<a class="headerlink" href="#multioutput-regression" title="Permalink to this headline">¶</a></h2>
+<p>Multioutput regression support can be added to any regressor with
+<code class="xref py py-class docutils literal"><span class="pre">MultiOutputRegressor</span></code>.  This strategy consists of fitting one
+regressor per target. Since each target is represented by exactly one
+regressor it is possible to gain knowledge about the target by
+inspecting its corresponding regressor. As
+<code class="xref py py-class docutils literal"><span class="pre">MultiOutputRegressor</span></code> fits one regressor per target it can not
+take advantage of correlations between targets.</p>
+<p>Below is an example of multioutput regression:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.multioutput</span> <span class="kn">import</span> <span class="n">MultiOutputRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_targets</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MultiOutputRegressor</span><span class="p">(</span><span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[-154.75474165, -147.03498585,  -50.03812219],</span>
+<span class="go">       [   7.12165031,    5.12914884,  -81.46081961],</span>
+<span class="go">       [-187.8948621 , -100.44373091,   13.88978285],</span>
+<span class="go">       [-141.62745778,   95.02891072, -191.48204257],</span>
+<span class="go">       [  97.03260883,  165.34867495,  139.52003279],</span>
+<span class="go">       [ 123.92529176,   21.25719016,   -7.84253   ],</span>
+<span class="go">       [-122.25193977,  -85.16443186, -107.12274212],</span>
+<span class="go">       [ -30.170388  ,  -94.80956739,   12.16979946],</span>
+<span class="go">       [ 140.72667194,  176.50941682,  -17.50447799],</span>
+<span class="go">       [ 149.37967282,  -81.15699552,   -5.72850319]])</span>
+</pre></div>
 </div>
 </div>
 </div>

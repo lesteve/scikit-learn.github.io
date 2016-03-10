@@ -205,11 +205,12 @@ is an estimator object:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;svm&#39;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> 
-<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, n_components=None,</span>
-<span class="go">    whiten=False)), (&#39;svm&#39;, SVC(C=1.0, cache_size=200, class_weight=None,</span>
-<span class="go">    coef0=0.0, decision_function_shape=None, degree=3, gamma=&#39;auto&#39;,</span>
-<span class="go">    kernel=&#39;rbf&#39;, max_iter=-1, probability=False, random_state=None,</span>
-<span class="go">    shrinking=True, tol=0.001, verbose=False))])</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4,</span>
+<span class="go">n_components=None, random_state=None, svd_solver=&#39;auto&#39;, tol=0.0,</span>
+<span class="go">whiten=False)), (&#39;svm&#39;, SVC(C=1.0, cache_size=200, class_weight=None,</span>
+<span class="go">coef0=0.0, decision_function_shape=None, degree=3, gamma=&#39;auto&#39;,</span>
+<span class="go">kernel=&#39;rbf&#39;, max_iter=-1, probability=False, random_state=None,</span>
+<span class="go">shrinking=True, tol=0.001, verbose=False))])</span>
 </pre></div>
 </div>
 <p>The utility function <a class="reference internal" href="generated/sklearn.pipeline.make_pipeline.html#sklearn.pipeline.make_pipeline" title="sklearn.pipeline.make_pipeline"><code class="xref py py-func docutils literal"><span class="pre">make_pipeline</span></code></a> is a shorthand
@@ -228,18 +229,21 @@ filling in the names automatically:</p>
 </div>
 <p>The estimators of a pipeline are stored as a list in the <code class="docutils literal"><span class="pre">steps</span></code> attribute:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">(&#39;reduce_dim&#39;, PCA(copy=True, n_components=None, whiten=False))</span>
+<span class="go">(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False))</span>
 </pre></div>
 </div>
 <p>and as a <code class="docutils literal"><span class="pre">dict</span></code> in <code class="docutils literal"><span class="pre">named_steps</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
-<span class="go">PCA(copy=True, n_components=None, whiten=False)</span>
+<span class="go">PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)</span>
 </pre></div>
 </div>
 <p>Parameters of the estimators in the pipeline can be accessed using the
 <code class="docutils literal"><span class="pre">&lt;estimator&gt;__&lt;parameter&gt;</span></code> syntax:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">svm__C</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, n_components=None,</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4,</span>
+<span class="go">    n_components=None, random_state=None, svd_solver=&#39;auto&#39;, tol=0.0,</span>
 <span class="go">    whiten=False)), (&#39;svm&#39;, SVC(C=10, cache_size=200, class_weight=None,</span>
 <span class="go">    coef0=0.0, decision_function_shape=None, degree=3, gamma=&#39;auto&#39;,</span>
 <span class="go">    kernel=&#39;rbf&#39;, max_iter=-1, probability=False, random_state=None,</span>
@@ -308,11 +312,13 @@ and <code class="docutils literal"><span class="pre">value</span></code> is an e
 <span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;linear_pca&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;kernel_pca&#39;</span><span class="p">,</span> <span class="n">KernelPCA</span><span class="p">())]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span> <span class="o">=</span> <span class="n">FeatureUnion</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span> 
-<span class="go">FeatureUnion(n_jobs=1, transformer_list=[(&#39;linear_pca&#39;, PCA(copy=True,</span>
-<span class="go">    n_components=None, whiten=False)), (&#39;kernel_pca&#39;, KernelPCA(alpha=1.0,</span>
-<span class="go">    coef0=1, degree=3, eigen_solver=&#39;auto&#39;, fit_inverse_transform=False,</span>
-<span class="go">    gamma=None, kernel=&#39;linear&#39;, kernel_params=None, max_iter=None,</span>
-<span class="go">    n_components=None, n_jobs=1, random_state=None, remove_zero_eig=False, tol=0))],</span>
+<span class="go">FeatureUnion(n_jobs=1, transformer_list=[(&#39;linear_pca&#39;,  PCA(copy=True,</span>
+<span class="go">    iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">    svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)), (&#39;kernel_pca&#39;,</span>
+<span class="go">    KernelPCA(alpha=1.0, coef0=1, degree=3, eigen_solver=&#39;auto&#39;,</span>
+<span class="go">    fit_inverse_transform=False, gamma=None, kernel=&#39;linear&#39;,</span>
+<span class="go">    kernel_params=None, max_iter=None, n_components=None, n_jobs=1,</span>
+<span class="go">    random_state=None, remove_zero_eig=False, tol=0))],</span>
 <span class="go">    transformer_weights=None)</span>
 </pre></div>
 </div>
