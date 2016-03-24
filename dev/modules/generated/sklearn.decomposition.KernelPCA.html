@@ -173,7 +173,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.KernelPCA<a class="headerlink" href="#sklearn-decomposition-kernelpca" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.decomposition.KernelPCA">
-<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">KernelPCA</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>kernel='linear'</em>, <em>gamma=None</em>, <em>degree=3</em>, <em>coef0=1</em>, <em>kernel_params=None</em>, <em>alpha=1.0</em>, <em>fit_inverse_transform=False</em>, <em>eigen_solver='auto'</em>, <em>tol=0</em>, <em>max_iter=None</em>, <em>remove_zero_eig=False</em>, <em>random_state=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/decomposition/kernel_pca.py#L18"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">KernelPCA</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>kernel='linear'</em>, <em>gamma=None</em>, <em>degree=3</em>, <em>coef0=1</em>, <em>kernel_params=None</em>, <em>alpha=1.0</em>, <em>fit_inverse_transform=False</em>, <em>eigen_solver='auto'</em>, <em>tol=0</em>, <em>max_iter=None</em>, <em>remove_zero_eig=False</em>, <em>random_state=None</em>, <em>copy_X=True</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/decomposition/kernel_pca.py#L18"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kernel Principal component analysis (KPCA)</p>
 <p>Non-linear dimensionality reduction through the use of kernels (see
 <a class="reference internal" href="../metrics.html#metrics"><span>Pairwise metrics, Affinities and Kernels</span></a>).</p>
@@ -182,14 +182,13 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components: int or None</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int, default=None</p>
 <blockquote>
 <div><p>Number of components. If None, all non-zero components are kept.</p>
 </div></blockquote>
-<p><strong>kernel: &#8220;linear&#8221; | &#8220;poly&#8221; | &#8220;rbf&#8221; | &#8220;sigmoid&#8221; | &#8220;cosine&#8221; | &#8220;precomputed&#8221;</strong> :</p>
+<p><strong>kernel</strong> : &#8220;linear&#8221; | &#8220;poly&#8221; | &#8220;rbf&#8221; | &#8220;sigmoid&#8221; | &#8220;cosine&#8221; | &#8220;precomputed&#8221;</p>
 <blockquote>
-<div><p>Kernel.
-Default: &#8220;linear&#8221;</p>
+<div><p>Kernel. Default=&#8221;linear&#8221;.</p>
 </div></blockquote>
 <p><strong>degree</strong> : int, default=3</p>
 <blockquote>
@@ -210,33 +209,31 @@ Ignored by other kernels.</p>
 <div><p>Parameters (keyword arguments) and values for kernel passed as
 callable object. Ignored by other kernels.</p>
 </div></blockquote>
-<p><strong>alpha: int</strong> :</p>
+<p><strong>alpha</strong> : int, default=1.0</p>
 <blockquote>
 <div><p>Hyperparameter of the ridge regression that learns the
-inverse transform (when fit_inverse_transform=True).
-Default: 1.0</p>
+inverse transform (when fit_inverse_transform=True).</p>
 </div></blockquote>
-<p><strong>fit_inverse_transform: bool</strong> :</p>
+<p><strong>fit_inverse_transform</strong> : bool, default=False</p>
 <blockquote>
 <div><p>Learn the inverse transform for non-precomputed kernels.
-(i.e. learn to find the pre-image of a point)
-Default: False</p>
+(i.e. learn to find the pre-image of a point)</p>
 </div></blockquote>
-<p><strong>eigen_solver: string [&#8216;auto&#8217;|&#8217;dense&#8217;|&#8217;arpack&#8217;]</strong> :</p>
+<p><strong>eigen_solver</strong> : string [&#8216;auto&#8217;|&#8217;dense&#8217;|&#8217;arpack&#8217;]</p>
 <blockquote>
-<div><p>Select eigensolver to use.  If n_components is much less than
+<div><p>Select eigensolver to use. If n_components is much less than
 the number of training samples, arpack may be more efficient
 than the dense eigensolver.</p>
 </div></blockquote>
-<p><strong>tol: float</strong> :</p>
+<p><strong>tol</strong> : float, default=0</p>
 <blockquote>
-<div><p>convergence tolerance for arpack.
-Default: 0 (optimal value will be chosen by arpack)</p>
+<div><p>Convergence tolerance for arpack. If zero, optimal value will be
+chosen by arpack.</p>
 </div></blockquote>
-<p><strong>max_iter</strong> : int</p>
+<p><strong>max_iter</strong> : int, default=None</p>
 <blockquote>
-<div><p>maximum number of iterations for arpack
-Default: None (optimal value will be chosen by arpack)</p>
+<div><p>Maximum number of iterations for arpack. If None, optimal value will
+be chosen by arpack.</p>
 </div></blockquote>
 <p><strong>remove_zero_eig</strong> : boolean, default=False</p>
 <blockquote>
@@ -246,33 +243,48 @@ that the number of components in the output may be &lt; n_components
 When n_components is None, this parameter is ignored and components
 with zero eigenvalues are removed regardless.</p>
 </div></blockquote>
-<p><strong>random_state</strong> : int seed, RandomState instance, or None, default</p>
+<p><strong>random_state</strong> : int seed, RandomState instance, or None, default=None</p>
 <blockquote>
 <div><p>A pseudo random number generator used for the initialization of the
 residuals when eigen_solver == &#8216;arpack&#8217;.</p>
 </div></blockquote>
-<p><strong>n_jobs</strong> : int, optional (default = 1)</p>
+<p><strong>n_jobs</strong> : int, default=1</p>
 <blockquote>
 <div><p>The number of parallel jobs to run.
-If <code class="docutils literal"><span class="pre">-1</span></code>, then the number of jobs is set to the number of CPU cores.</p>
+If <cite>-1</cite>, then the number of jobs is set to the number of CPU cores.</p>
+</div></blockquote>
+<p><strong>copy_X</strong> : boolean, default=True</p>
+<blockquote>
+<div><p>If True, input X is copied and stored by the model in the <cite>X_fit_</cite>
+attribute. If no further changes will be done to X, setting
+<cite>copy_X=False</cite> saves memory by storing a reference.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>lambdas_ :</strong> :</p>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>lambdas_</strong> : array, (n_components,)</p>
 <blockquote>
-<div><p>Eigenvalues of the centered kernel matrix</p>
+<div><p>Eigenvalues of the centered kernel matrix in decreasing order.
+If <cite>n_components</cite> and <cite>remove_zero_eig</cite> are not set,
+then all values are stored.</p>
 </div></blockquote>
-<p><strong>alphas_ :</strong> :</p>
+<p><strong>alphas_</strong> : array, (n_samples, n_components)</p>
 <blockquote>
-<div><p>Eigenvectors of the centered kernel matrix</p>
+<div><p>Eigenvectors of the centered kernel matrix. If <cite>n_components</cite> and
+<cite>remove_zero_eig</cite> are not set, then all components are stored.</p>
 </div></blockquote>
-<p><strong>dual_coef_ :</strong> :</p>
+<p><strong>dual_coef_</strong> : array, (n_samples, n_features)</p>
 <blockquote>
-<div><p>Inverse transform matrix</p>
+<div><p>Inverse transform matrix. If <cite>fit_inverse_transform=False</cite>,
+<a href="#id2"><span class="problematic" id="id3">dual_coef_</span></a> is not present.</p>
 </div></blockquote>
-<p><strong>X_transformed_fit_ :</strong> :</p>
+<p><strong>X_transformed_fit_</strong> : array, (n_samples, n_components)</p>
+<blockquote>
+<div><p>Projection of the fitted data on the kernel principal components.</p>
+</div></blockquote>
+<p><strong>X_fit_</strong> : (n_samples, n_features)</p>
 <blockquote class="last">
-<div><p>Projection of the fitted data on the kernel principal components</p>
+<div><p>The data used to fit the model. If <cite>copy_X=False</cite>, then <cite>X_fit_</cite> is
+a reference.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -315,12 +327,12 @@ MIT Press, Cambridge, MA, USA 327-352.</dd>
 </table>
 <dl class="method">
 <dt id="sklearn.decomposition.KernelPCA.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>kernel='linear'</em>, <em>gamma=None</em>, <em>degree=3</em>, <em>coef0=1</em>, <em>kernel_params=None</em>, <em>alpha=1.0</em>, <em>fit_inverse_transform=False</em>, <em>eigen_solver='auto'</em>, <em>tol=0</em>, <em>max_iter=None</em>, <em>remove_zero_eig=False</em>, <em>random_state=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/decomposition/kernel_pca.py#L112"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>kernel='linear'</em>, <em>gamma=None</em>, <em>degree=3</em>, <em>coef0=1</em>, <em>kernel_params=None</em>, <em>alpha=1.0</em>, <em>fit_inverse_transform=False</em>, <em>eigen_solver='auto'</em>, <em>tol=0</em>, <em>max_iter=None</em>, <em>remove_zero_eig=False</em>, <em>random_state=None</em>, <em>copy_X=True</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/decomposition/kernel_pca.py#L121"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.decomposition.KernelPCA.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/decomposition/kernel_pca.py#L206"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/decomposition/kernel_pca.py#L216"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model from data in X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -345,7 +357,7 @@ and n_features is the number of features.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.KernelPCA.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/decomposition/kernel_pca.py#L231"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/decomposition/kernel_pca.py#L242"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model from data in X and transform X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -367,7 +379,7 @@ and n_features is the number of features.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.KernelPCA.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/base.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/base.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -392,7 +404,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.KernelPCA.inverse_transform">
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/decomposition/kernel_pca.py#L269"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/decomposition/kernel_pca.py#L280"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform X back to original space.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -410,7 +422,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.KernelPCA.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/base.py#L241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/base.py#L241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The former have parameters of the form
@@ -428,7 +440,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.KernelPCA.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/afc058f/sklearn/decomposition/kernel_pca.py#L253"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e5c366f/sklearn/decomposition/kernel_pca.py#L264"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.KernelPCA.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
