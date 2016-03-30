@@ -181,29 +181,29 @@
 <span id="introduction"></span><h1>An introduction to machine learning with scikit-learn<a class="headerlink" href="#an-introduction-to-machine-learning-with-scikit-learn" title="Permalink to this headline">¶</a></h1>
 <div class="topic">
 <p class="topic-title first">Section contents</p>
-<p>In this section, we introduce the <a class="reference external" href="http://en.wikipedia.org/wiki/Machine_learning">machine learning</a>
+<p>In this section, we introduce the <a class="reference external" href="https://en.wikipedia.org/wiki/Machine_learning">machine learning</a>
 vocabulary that we use throughout scikit-learn and give a
 simple learning example.</p>
 </div>
 <div class="section" id="machine-learning-the-problem-setting">
 <h2>Machine learning: the problem setting<a class="headerlink" href="#machine-learning-the-problem-setting" title="Permalink to this headline">¶</a></h2>
 <p>In general, a learning problem considers a set of n
-<a class="reference external" href="http://en.wikipedia.org/wiki/Sample_(statistics)">samples</a> of
+<a class="reference external" href="https://en.wikipedia.org/wiki/Sample_(statistics)">samples</a> of
 data and then tries to predict properties of unknown data. If each sample is
 more than a single number and, for instance, a multi-dimensional entry
-(aka <a class="reference external" href="http://en.wikipedia.org/wiki/Multivariate_random_variable">multivariate</a>
+(aka <a class="reference external" href="https://en.wikipedia.org/wiki/Multivariate_random_variable">multivariate</a>
 data), it is said to have several attributes or <strong>features</strong>.</p>
 <p>We can separate learning problems in a few large categories:</p>
 <blockquote>
 <div><ul>
-<li><p class="first"><a class="reference external" href="http://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a>,
+<li><p class="first"><a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a>,
 in which the data comes with additional attributes that we want to predict
 (<a class="reference internal" href="../../supervised_learning.html#supervised-learning"><span>Click here</span></a>
 to go to the scikit-learn supervised learning page).This problem
 can be either:</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="http://en.wikipedia.org/wiki/Classification_in_machine_learning">classification</a>:
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Classification_in_machine_learning">classification</a>:
 samples belong to two or more classes and we
 want to learn from already labeled data how to predict the class
 of unlabeled data. An example of classification problem would
@@ -213,7 +213,7 @@ categories.  Another way to think of classification is as a discrete
 (as opposed to continuous) form of supervised learning where one has a
 limited number of categories and for each of the n samples provided,
 one is to try to label them with the correct category or class.</li>
-<li><a class="reference external" href="http://en.wikipedia.org/wiki/Regression_analysis">regression</a>:
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>:
 if the desired output consists of one or more
 continuous variables, then the task is called <em>regression</em>. An
 example of a regression problem would be the prediction of the
@@ -221,13 +221,13 @@ length of a salmon as a function of its age and weight.</li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><a class="reference external" href="http://en.wikipedia.org/wiki/Unsupervised_learning">unsupervised learning</a>,
+<li><p class="first"><a class="reference external" href="https://en.wikipedia.org/wiki/Unsupervised_learning">unsupervised learning</a>,
 in which the training data consists of a set of input vectors x
 without any corresponding target values. The goal in such problems
 may be to discover groups of similar examples within the data, where
-it is called <a class="reference external" href="http://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>,
+it is called <a class="reference external" href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>,
 or to determine the distribution of data within the input space, known as
-<a class="reference external" href="http://en.wikipedia.org/wiki/Density_estimation">density estimation</a>, or
+<a class="reference external" href="https://en.wikipedia.org/wiki/Density_estimation">density estimation</a>, or
 to project the data from a high-dimensional space down to two or three
 dimensions for the purpose of <em>visualization</em>
 (<a class="reference internal" href="../../unsupervised_learning.html#unsupervised-learning"><span>Click here</span></a>
@@ -248,7 +248,7 @@ on which we test these properties.</p>
 <div class="section" id="loading-an-example-dataset">
 <span id="loading-example-dataset"></span><h2>Loading an example dataset<a class="headerlink" href="#loading-an-example-dataset" title="Permalink to this headline">¶</a></h2>
 <p><cite>scikit-learn</cite> comes with a few standard datasets, for instance the
-<a class="reference external" href="http://en.wikipedia.org/wiki/Iris_flower_data_set">iris</a> and <a class="reference external" href="http://archive.ics.uci.edu/ml/datasets/Pen-Based+Recognition+of+Handwritten+Digits">digits</a>
+<a class="reference external" href="https://en.wikipedia.org/wiki/Iris_flower_data_set">iris</a> and <a class="reference external" href="http://archive.ics.uci.edu/ml/datasets/Pen-Based+Recognition+of+Handwritten+Digits">digits</a>
 datasets for classification and the <a class="reference external" href="http://archive.ics.uci.edu/ml/datasets/Housing">boston house prices dataset</a> for regression.</p>
 <p>In the following, we start a Python interpreter from our shell and then
 load the <code class="docutils literal"><span class="pre">iris</span></code> and <code class="docutils literal"><span class="pre">digits</span></code> datasets.  Our notational convention is that
@@ -312,12 +312,12 @@ scikit-learn.</p>
 <p>In the case of the digits dataset, the task is to predict, given an image,
 which digit it represents. We are given samples of each of the 10
 possible classes (the digits zero through nine) on which we <em>fit</em> an
-<a class="reference external" href="http://en.wikipedia.org/wiki/Estimator">estimator</a> to be able to <em>predict</em>
+<a class="reference external" href="https://en.wikipedia.org/wiki/Estimator">estimator</a> to be able to <em>predict</em>
 the classes to which unseen samples belong.</p>
 <p>In scikit-learn, an estimator for classification is a Python object that
 implements the methods <code class="docutils literal"><span class="pre">fit(X,</span> <span class="pre">y)</span></code> and <code class="docutils literal"><span class="pre">predict(T)</span></code>.</p>
 <p>An example of an estimator is the class <code class="docutils literal"><span class="pre">sklearn.svm.SVC</span></code> that
-implements <a class="reference external" href="http://en.wikipedia.org/wiki/Support_vector_machine">support vector classification</a>. The
+implements <a class="reference external" href="https://en.wikipedia.org/wiki/Support_vector_machine">support vector classification</a>. The
 constructor of an estimator takes as arguments the parameters of the
 model, but for the time being, we will consider the estimator as a black
 box:</p>
@@ -363,7 +363,7 @@ example that you can run and study:
 <div class="section" id="model-persistence">
 <h2>Model persistence<a class="headerlink" href="#model-persistence" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to save a model in the scikit by using Python&#8217;s built-in
-persistence model, namely <a class="reference external" href="http://docs.python.org/library/pickle.html">pickle</a>:</p>
+persistence model, namely <a class="reference external" href="https://docs.python.org/2/library/pickle.html">pickle</a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
