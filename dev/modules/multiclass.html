@@ -164,6 +164,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#multioutput-regression">1.12.5. Multioutput regression</a></li>
+<li><a class="reference internal" href="#multioutput-classification">1.12.6. Multioutput classification</a></li>
 </ul>
 </li>
 </ul>
@@ -484,6 +485,44 @@ take advantage of correlations between targets.</p>
 <span class="go">       [ -30.170388  ,  -94.80956739,   12.16979946],</span>
 <span class="go">       [ 140.72667194,  176.50941682,  -17.50447799],</span>
 <span class="go">       [ 149.37967282,  -81.15699552,   -5.72850319]])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multioutput-classification">
+<h2>1.12.6. Multioutput classification<a class="headerlink" href="#multioutput-classification" title="Permalink to this headline">¶</a></h2>
+<p>Multioutput classification support can be added to any classifier with
+<code class="xref py py-class docutils literal"><span class="pre">MultiOutputClassifier</span></code>. This strategy consists of fitting one
+classifier per target.  This allows multiple target variable
+classifications. The purpose of this class is to extend estimators
+to be able to estimate a series of target functions (f1,f2,f3...,fn)
+that are trained on a single X predictor matrix to predict a series
+of reponses (y1,y2,y3...,yn).</p>
+<p>Below is an example of multioutput classification:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.multioutput</span> <span class="kn">import</span> <span class="n">MultiOutputClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y2</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y3</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span> <span class="c1"># 10,100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_outputs</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_classes</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">forest</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multi_target_forest</span> <span class="o">=</span> <span class="n">MultiOutputClassifier</span><span class="p">(</span><span class="n">forest</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multi_target_forest</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[2, 2, 0],</span>
+<span class="go">       [1, 2, 1],</span>
+<span class="go">       [2, 1, 0],</span>
+<span class="go">       [0, 0, 2],</span>
+<span class="go">       [0, 2, 1],</span>
+<span class="go">       [0, 0, 2],</span>
+<span class="go">       [1, 1, 0],</span>
+<span class="go">       [1, 1, 1],</span>
+<span class="go">       [0, 0, 2],</span>
+<span class="go">       [2, 0, 0]])</span>
 </pre></div>
 </div>
 </div>
