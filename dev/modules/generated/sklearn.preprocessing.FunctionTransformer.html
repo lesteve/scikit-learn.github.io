@@ -173,7 +173,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.FunctionTransformer<a class="headerlink" href="#sklearn-preprocessing-functiontransformer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.preprocessing.FunctionTransformer">
-<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">FunctionTransformer</code><span class="sig-paren">(</span><em>func=None</em>, <em>validate=True</em>, <em>accept_sparse=False</em>, <em>pass_y=False</em>, <em>kw_args=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/45ff64b/sklearn/preprocessing/_function_transformer.py#L11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">FunctionTransformer</code><span class="sig-paren">(</span><em>func=None</em>, <em>inverse_func=None</em>, <em>validate=True</em>, <em>accept_sparse=False</em>, <em>pass_y=False</em>, <em>kw_args=None</em>, <em>inv_kw_args=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/1d487fb/sklearn/preprocessing/_function_transformer.py#L11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a transformer from an arbitrary callable.</p>
 <p>A FunctionTransformer forwards its X (and optionally y) arguments to a
 user-defined function or function object and returns the result of this
@@ -195,6 +195,13 @@ transformer will not be pickleable.</p>
 the same arguments as transform, with args and kwargs forwarded.
 If func is None, then func will be the identity function.</p>
 </div></blockquote>
+<p><strong>inverse_func</strong> : callable, optional default=None</p>
+<blockquote>
+<div><p>The callable to use for the inverse transformation. This will be
+passed the same arguments as inverse transform, with args and
+kwargs forwarded. If inverse_func is None, then inverse_func
+will be the identity function.</p>
+</div></blockquote>
 <p><strong>validate</strong> : bool, optional default=True</p>
 <blockquote>
 <div><p>Indicate that the input X array should be checked before calling
@@ -215,8 +222,12 @@ sparse matrix inputs will cause an exception to be raised.</p>
 inner callable.</p>
 </div></blockquote>
 <p><strong>kw_args</strong> : dict, optional</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Dictionary of additional keyword arguments to pass to func.</p>
+</div></blockquote>
+<p><strong>inv_kw_args</strong> : dict, optional</p>
+<blockquote class="last">
+<div><p>Dictionary of additional keyword arguments to pass to inverse_func.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -238,22 +249,25 @@ inner callable.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#sklearn.preprocessing.FunctionTransformer.get_params" title="sklearn.preprocessing.FunctionTransformer.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
 <td>Get parameters for this estimator.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#sklearn.preprocessing.FunctionTransformer.set_params" title="sklearn.preprocessing.FunctionTransformer.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(**params)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">inverse_transform</span></code>(X[,&nbsp;y])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.preprocessing.FunctionTransformer.set_params" title="sklearn.preprocessing.FunctionTransformer.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(**params)</td>
 <td>Set the parameters of this estimator.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code>(X[,&nbsp;y])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code>(X[,&nbsp;y])</td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="sklearn.preprocessing.FunctionTransformer.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>func=None</em>, <em>validate=True</em>, <em>accept_sparse=False</em>, <em>pass_y=False</em>, <em>kw_args=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/45ff64b/sklearn/preprocessing/_function_transformer.py#L53"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>func=None</em>, <em>inverse_func=None</em>, <em>validate=True</em>, <em>accept_sparse=False</em>, <em>pass_y=False</em>, <em>kw_args=None</em>, <em>inv_kw_args=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/1d487fb/sklearn/preprocessing/_function_transformer.py#L62"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.FunctionTransformer.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/45ff64b/sklearn/base.py#L436"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/1d487fb/sklearn/base.py#L436"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit to data, then transform it.</p>
 <p>Fits transformer to X and y with optional parameters fit_params
 and returns a transformed version of X.</p>
@@ -283,7 +297,7 @@ and returns a transformed version of X.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.FunctionTransformer.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/45ff64b/sklearn/base.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/1d487fb/sklearn/base.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -308,7 +322,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.FunctionTransformer.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/45ff64b/sklearn/base.py#L241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/1d487fb/sklearn/base.py#L241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.FunctionTransformer.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The former have parameters of the form
