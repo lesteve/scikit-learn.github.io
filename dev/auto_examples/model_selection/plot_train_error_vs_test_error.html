@@ -176,17 +176,17 @@ The example with an Elastic-Net regression model and the performance is
 measured using the explained variance a.k.a. R^2.</p>
 <img alt="../../_images/plot_train_error_vs_test_error_001.png" class="align-center" src="../../_images/plot_train_error_vs_test_error_001.png" />
 <p><strong>Script output</strong>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Optimal regularization parameter : 0.000335292414925
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Optimal</span> <span class="n">regularization</span> <span class="n">parameter</span> <span class="p">:</span> <span class="mf">0.000335292414925</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_train_error_vs_test_error.py"><code class="xref download docutils literal"><span class="pre">plot_train_error_vs_test_error.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_train_error_vs_test_error.py" download=""><code class="xref download docutils literal"><span class="pre">plot_train_error_vs_test_error.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
 
 <span class="c1">###############################################################################</span>
 <span class="c1"># Generate sample data</span>
@@ -215,7 +215,7 @@ measured using the explained variance a.k.a. R^2.</p>
 
 <span class="n">i_alpha_optim</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.argmax.html#numpy.argmax"><span class="n">np</span><span class="o">.</span><span class="n">argmax</span></a><span class="p">(</span><span class="n">test_errors</span><span class="p">)</span>
 <span class="n">alpha_optim</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">[</span><span class="n">i_alpha_optim</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Optimal regularization parameter : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">alpha_optim</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimal regularization parameter : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">alpha_optim</span><span class="p">)</span>
 
 <span class="c1"># Estimate the coef_ on full data with optimal regularization parameter</span>
 <span class="n">enet</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha_optim</span><span class="p">)</span>
@@ -224,7 +224,7 @@ measured using the explained variance a.k.a. R^2.</p>
 <span class="c1">###############################################################################</span>
 <span class="c1"># Plot results functions</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.semilogx"><span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span></a><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">train_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.semilogx"><span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span></a><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">test_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
@@ -244,8 +244,8 @@ measured using the explained variance a.k.a. R^2.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  2.67 seconds
-( 0 minutes  2.67 seconds)</p>
+<p><strong>Total running time of the example:</strong>  2.71 seconds
+( 0 minutes  2.71 seconds)</p>
 </div>
 
 

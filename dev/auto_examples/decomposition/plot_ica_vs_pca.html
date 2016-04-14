@@ -170,7 +170,7 @@
 <span id="example-decomposition-plot-ica-vs-pca-py"></span><h1>FastICA on 2D point clouds<a class="headerlink" href="#fastica-on-2d-point-clouds" title="Permalink to this headline">¶</a></h1>
 <p>This example illustrates visually in the feature space a comparison by
 results using two different component analysis techniques.</p>
-<p><a class="reference internal" href="../../modules/decomposition.html#ica"><span>Independent component analysis (ICA)</span></a> vs <a class="reference internal" href="../../modules/decomposition.html#pca"><span>Principal component analysis (PCA)</span></a>.</p>
+<p><a class="reference internal" href="../../modules/decomposition.html#ica"><span class="std std-ref">Independent component analysis (ICA)</span></a> vs <a class="reference internal" href="../../modules/decomposition.html#pca"><span class="std std-ref">Principal component analysis (PCA)</span></a>.</p>
 <p>Representing ICA in the feature space gives the view of &#8216;geometric ICA&#8217;:
 ICA is an algorithm that finds directions in the feature space
 corresponding to projections with high non-Gaussianity. These directions
@@ -188,16 +188,16 @@ after whitening by the variance corresponding to the PCA vectors (lower
 left). Running ICA corresponds to finding a rotation in this space to
 identify the directions of largest non-Gaussianity (lower right).</p>
 <img alt="../../_images/plot_ica_vs_pca_001.png" class="align-center" src="../../_images/plot_ica_vs_pca_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ica_vs_pca.py"><code class="xref download docutils literal"><span class="pre">plot_ica_vs_pca.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ica_vs_pca.py" download=""><code class="xref download docutils literal"><span class="pre">plot_ica_vs_pca.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Authors: Alexandre Gramfort, Gael Varoquaux</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA"><span class="n">FastICA</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA"><span class="n">FastICA</span></a>
 
 <span class="c1">###############################################################################</span>
 <span class="c1"># Generate sample data</span>
@@ -222,10 +222,10 @@ identify the directions of largest non-Gaussianity (lower right).</p>
 <span class="c1">###############################################################################</span>
 <span class="c1"># Plot results</span>
 
-<span class="k">def</span> <span class="nf">plot_samples</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_samples</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">S</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">axis_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">axis_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">axis</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">axis_list</span><span class="p">):</span>
             <span class="n">axis</span> <span class="o">/=</span> <span class="n">axis</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
@@ -267,8 +267,8 @@ identify the directions of largest non-Gaussianity (lower right).</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.66 seconds
-( 0 minutes  0.66 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.63 seconds
+( 0 minutes  0.63 seconds)</p>
 </div>
 
 

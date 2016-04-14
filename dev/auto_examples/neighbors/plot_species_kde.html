@@ -179,7 +179,7 @@ If available, the example uses
 <a class="reference external" href="http://matplotlib.org/basemap">basemap</a>
 to plot the coast lines and national boundaries of South America.</p>
 <p>This example does not perform any learning over the data
-(see <a class="reference internal" href="../applications/plot_species_distribution_modeling.html#example-applications-plot-species-distribution-modeling-py"><span>Species distribution modeling</span></a> for
+(see <a class="reference internal" href="../applications/plot_species_distribution_modeling.html#example-applications-plot-species-distribution-modeling-py"><span class="std std-ref">Species distribution modeling</span></a> for
 an example of classification based on the attributes in this dataset).  It
 simply shows the kernel density estimate of observed data points in
 geospatial coordinates.</p>
@@ -204,30 +204,30 @@ S. J. Phillips, R. P. Anderson, R. E. Schapire - Ecological Modelling,
 </div></blockquote>
 <img alt="../../_images/plot_species_kde_001.png" class="align-center" src="../../_images/plot_species_kde_001.png" />
 <p><strong>Script output</strong>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>- computing KDE in spherical coordinates
- - plot coastlines from coverage
- - computing KDE in spherical coordinates
- - plot coastlines from coverage
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">computing</span> <span class="n">KDE</span> <span class="ow">in</span> <span class="n">spherical</span> <span class="n">coordinates</span>
+ <span class="o">-</span> <span class="n">plot</span> <span class="n">coastlines</span> <span class="kn">from</span> <span class="nn">coverage</span>
+ <span class="o">-</span> <span class="n">computing</span> <span class="n">KDE</span> <span class="ow">in</span> <span class="n">spherical</span> <span class="n">coordinates</span>
+ <span class="o">-</span> <span class="n">plot</span> <span class="n">coastlines</span> <span class="kn">from</span> <span class="nn">coverage</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_species_kde.py"><code class="xref download docutils literal"><span class="pre">plot_species_kde.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Author: Jake Vanderplas &lt;jakevdp@cs.washington.edu&gt;</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_species_kde.py" download=""><code class="xref download docutils literal"><span class="pre">plot_species_kde.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Author: Jake Vanderplas &lt;jakevdp@cs.washington.edu&gt;</span>
 <span class="c1">#</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_species_distributions</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets.species_distributions</span> <span class="kn">import</span> <span class="n">construct_grids</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity"><span class="n">KernelDensity</span></a>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">fetch_species_distributions</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets.species_distributions</span> <span class="k">import</span> <span class="n">construct_grids</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity"><span class="n">KernelDensity</span></a>
 
 <span class="c1"># if basemap is available, we&#39;ll use it.</span>
 <span class="c1"># otherwise, we&#39;ll improvise later...</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">mpl_toolkits.basemap</span> <span class="kn">import</span> <span class="n">Basemap</span>
-    <span class="n">basemap</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="kn">from</span> <span class="nn">mpl_toolkits.basemap</span> <span class="k">import</span> <span class="n">Basemap</span>
+    <span class="n">basemap</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="n">basemap</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">basemap</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># Get matrices/arrays of species IDs and locations</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">fetch_species_distributions</span><span class="p">()</span>
@@ -257,7 +257,7 @@ S. J. Phillips, R. P. Anderson, R. E. Schapire - Ecological Modelling,
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># construct a kernel density estimate of the distribution</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; - computing KDE in spherical coordinates&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; - computing KDE in spherical coordinates&quot;</span><span class="p">)</span>
     <span class="n">kde</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity"><span class="n">KernelDensity</span></a><span class="p">(</span><span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;haversine&#39;</span><span class="p">,</span>
                         <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;ball_tree&#39;</span><span class="p">)</span>
     <span class="n">kde</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">[</span><span class="n">ytrain</span> <span class="o">==</span> <span class="n">i</span><span class="p">])</span>
@@ -272,14 +272,14 @@ S. J. Phillips, R. P. Anderson, R. E. Schapire - Ecological Modelling,
     <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">basemap</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; - plot coastlines using basemap&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; - plot coastlines using basemap&quot;</span><span class="p">)</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;cyl&#39;</span><span class="p">,</span> <span class="n">llcrnrlat</span><span class="o">=</span><span class="n">Y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
                     <span class="n">urcrnrlat</span><span class="o">=</span><span class="n">Y</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">llcrnrlon</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
                     <span class="n">urcrnrlon</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
         <span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">()</span>
         <span class="n">m</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; - plot coastlines from coverage&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; - plot coastlines from coverage&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">land_reference</span><span class="p">,</span>
                     <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">9999</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
                     <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">)</span>
@@ -291,8 +291,8 @@ S. J. Phillips, R. P. Anderson, R. E. Schapire - Ecological Modelling,
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  9.98 seconds
-( 0 minutes  9.98 seconds)</p>
+<p><strong>Total running time of the example:</strong>  9.89 seconds
+( 0 minutes  9.89 seconds)</p>
 </div>
 </div>
 

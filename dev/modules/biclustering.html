@@ -186,7 +186,7 @@ columns are known as biclusters. Each determines a submatrix of the
 original data matrix with some desired properties.</p>
 <p>For instance, given a matrix of shape <code class="docutils literal"><span class="pre">(10,</span> <span class="pre">10)</span></code>, one possible bicluster
 with three rows and two columns induces a submatrix of shape <code class="docutils literal"><span class="pre">(3,</span> <span class="pre">2)</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">columns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
@@ -270,7 +270,7 @@ possible to work directly with <img class="math" src="../_images/math/0acafa5291
 efficient.</p>
 <p>The input matrix <img class="math" src="../_images/math/0acafa529182e79b4f56165ec677554fba7fcf98.png" alt="A"/> is preprocessed as follows:</p>
 <div class="math">
-<p><img src="../_images/math/691f9bcf2834afe76dac2bd0c1170cd70ca13c54.png" alt="A_n = R^{-1/2} A C^{-1/2}"/></p>
+<p><img src="../_images/math/8658066c31926f8234e0b25655ce7f8740e367b8.png" alt="A_n = R^{-1/2} A C^{-1/2}"/></p>
 </div><p>Where <img class="math" src="../_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R"/> is the diagonal matrix with entry <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> equal to
 <img class="math" src="../_images/math/7c732f51f0f10cd327f9dcaa7d3432173d8964f0.png" alt="\sum_{j} A_{ij}"/> and <img class="math" src="../_images/math/2bcc65482aa8e15cd4c9e9f2542451fb4e971a91.png" alt="C"/> is the diagonal matrix with
 entry <img class="math" src="../_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/> equal to <img class="math" src="../_images/math/aa3d3ca3b6fb90c3c1e09992631c35e7f17c92e8.png" alt="\sum_{i} A_{ij}"/>.</p>
@@ -282,20 +282,20 @@ of the right singular vectors gives the column partitions.</p>
 from the second, provide the desired partitioning information. They
 are used to form the matrix <img class="math" src="../_images/math/c4563e7ecec2336a3934447a6c10ef8519b0b452.png" alt="Z"/>:</p>
 <div class="math">
-<p><img src="../_images/math/5f5a8c7bf3426ebee66a481436596ef99a070177.png" alt="Z = \begin{bmatrix} R^{-1/2} U \\\\
+<p><img src="../_images/math/9bf64c17f1a6ef600d2e86c4c2aa709101840d08.png" alt="Z = \begin{bmatrix} R^{-1/2} U \\\\
                     C^{-1/2} V
       \end{bmatrix}"/></p>
 </div><p>where the columns of <img class="math" src="../_images/math/73f5e249c88b2b3068263480f576b051cb5c4f6e.png" alt="U"/> are <img class="math" src="../_images/math/f92ab7ae092a16eac5c7423d7c5446623447d724.png" alt="u_2, \dots, u_{\ell +
 1}"/>, and similarly for <img class="math" src="../_images/math/c99df7a209495334da442b1ec998abaabfa320d8.png" alt="V"/>.</p>
-<p>Then the rows of <img class="math" src="../_images/math/c4563e7ecec2336a3934447a6c10ef8519b0b452.png" alt="Z"/> are clustered using <a class="reference internal" href="clustering.html#k-means"><span>k-means</span></a>. The first <code class="docutils literal"><span class="pre">n_rows</span></code> labels provide the row partitioning,
+<p>Then the rows of <img class="math" src="../_images/math/c4563e7ecec2336a3934447a6c10ef8519b0b452.png" alt="Z"/> are clustered using <a class="reference internal" href="clustering.html#k-means"><span class="std std-ref">k-means</span></a>. The first <code class="docutils literal"><span class="pre">n_rows</span></code> labels provide the row partitioning,
 and the remaining <code class="docutils literal"><span class="pre">n_columns</span></code> labels provide the column partitioning.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/bicluster/plot_spectral_coclustering.html#example-bicluster-plot-spectral-coclustering-py"><span>A demo of the Spectral Co-Clustering algorithm</span></a>: A simple example
+<li><a class="reference internal" href="../auto_examples/bicluster/plot_spectral_coclustering.html#example-bicluster-plot-spectral-coclustering-py"><span class="std std-ref">A demo of the Spectral Co-Clustering algorithm</span></a>: A simple example
 showing how to generate a data matrix with biclusters and apply
 this method to it.</li>
-<li><a class="reference internal" href="../auto_examples/bicluster/bicluster_newsgroups.html#example-bicluster-bicluster-newsgroups-py"><span>Biclustering documents with the Spectral Co-clustering algorithm</span></a>: An example of finding
+<li><a class="reference internal" href="../auto_examples/bicluster/bicluster_newsgroups.html#example-bicluster-bicluster-newsgroups-py"><span class="std std-ref">Biclustering documents with the Spectral Co-clustering algorithm</span></a>: An example of finding
 biclusters in the twenty newsgroup dataset.</li>
 </ul>
 </div>
@@ -338,7 +338,7 @@ same constant.</li>
 according to the formula</li>
 </ol>
 <div class="math">
-<p><img src="../_images/math/c570ab13e7a6725e1772f64ad76d96a957adc07d.png" alt="K_{ij} = L_{ij} - \overline{L_{i \cdot}} - \overline{L_{\cdot
+<p><img src="../_images/math/bc937b960fd1c9e5ec6b49daf7509f37cabb7c51.png" alt="K_{ij} = L_{ij} - \overline{L_{i \cdot}} - \overline{L_{\cdot
 j}} + \overline{L_{\cdot \cdot}}"/></p>
 </div><p>After normalizing, the first few singular vectors are computed, just
 as in the Spectral Co-Clustering algorithm.</p>
@@ -366,7 +366,7 @@ clustering this <img class="math" src="../_images/math/90669be6326baab71b695e16b
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/bicluster/plot_spectral_biclustering.html#example-bicluster-plot-spectral-biclustering-py"><span>A demo of the Spectral Biclustering algorithm</span></a>: a simple example
+<li><a class="reference internal" href="../auto_examples/bicluster/plot_spectral_biclustering.html#example-bicluster-plot-spectral-biclustering-py"><span class="std std-ref">A demo of the Spectral Biclustering algorithm</span></a>: a simple example
 showing how to generate a checkerboard matrix and bicluster it.</li>
 </ul>
 </div>
@@ -396,7 +396,7 @@ similarities into an overall score.</p>
 <p>To compare individual biclusters, several measures have been used. For
 now, only the Jaccard index is implemented:</p>
 <div class="math">
-<p><img src="../_images/math/a30d171210b238748decce5260c2d9d980b14003.png" alt="J(A, B) = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}"/></p>
+<p><img src="../_images/math/2a49486c8ad42a989b1fdf6b560a999870b69a11.png" alt="J(A, B) = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}"/></p>
 </div><p>where <img class="math" src="../_images/math/0acafa529182e79b4f56165ec677554fba7fcf98.png" alt="A"/> and <img class="math" src="../_images/math/83956e92fcc80dee17fce864543216939a3c9da7.png" alt="B"/> are biclusters, <img class="math" src="../_images/math/8bd057dc66d00020cd35b77da7f8c9d7809c6eeb.png" alt="|A \cap B|"/> is
 the number of elements in their intersection. The Jaccard index
 achieves its minimum of 0 when the biclusters to not overlap at all

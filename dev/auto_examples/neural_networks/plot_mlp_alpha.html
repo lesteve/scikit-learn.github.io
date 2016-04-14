@@ -179,22 +179,22 @@ Similarly, decreasing alpha may fix high bias (a sign of underfitting) by
 encouraging larger weights, potentially resulting in a more complicated
 decision boundary.</p>
 <img alt="../../_images/plot_mlp_alpha_001.png" class="align-center" src="../../_images/plot_mlp_alpha_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mlp_alpha.py"><code class="xref download docutils literal"><span class="pre">plot_mlp_alpha.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mlp_alpha.py" download=""><code class="xref download docutils literal"><span class="pre">plot_mlp_alpha.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 
 <span class="c1"># Author: Issam H. Laradji</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <a href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.ListedColormap"><span class="n">ListedColormap</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_moons.html#sklearn.datasets.make_moons"><span class="n">make_moons</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="k">import</span> <a href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.ListedColormap"><span class="n">ListedColormap</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_moons.html#sklearn.datasets.make_moons"><span class="n">make_moons</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a>
 
-<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mo">02</span>  <span class="c1"># step size in the mesh</span>
+<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>  <span class="c1"># step size in the mesh</span>
 
 <span class="n">alphas</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
@@ -274,12 +274,12 @@ decision boundary.</p>
                 <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">figure</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=.</span><span class="mo">02</span><span class="p">,</span> <span class="n">right</span><span class="o">=.</span><span class="mi">98</span><span class="p">)</span>
+<span class="n">figure</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=.</span><span class="mi">02</span><span class="p">,</span> <span class="n">right</span><span class="o">=.</span><span class="mi">98</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  4.93 seconds
-( 0 minutes  4.93 seconds)</p>
+<p><strong>Total running time of the example:</strong>  5.03 seconds
+( 0 minutes  5.03 seconds)</p>
 </div>
 
 

@@ -173,7 +173,7 @@ K-means in terms of runtime and quality of the results.</p>
 <p>As the ground truth is known here, we also apply different cluster
 quality metrics to judge the goodness of fit of the cluster labels to the
 ground truth.</p>
-<p>Cluster quality metrics evaluated (see <a class="reference internal" href="../../modules/clustering.html#clustering-evaluation"><span>Clustering performance evaluation</span></a> for
+<p>Cluster quality metrics evaluated (see <a class="reference internal" href="../../modules/clustering.html#clustering-evaluation"><span class="std std-ref">Clustering performance evaluation</span></a> for
 definitions and discussions of the metrics):</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -208,27 +208,27 @@ definitions and discussions of the metrics):</p>
 </table>
 <img alt="../../_images/plot_kmeans_digits_001.png" class="align-center" src="../../_images/plot_kmeans_digits_001.png" />
 <p><strong>Script output</strong>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>n_digits: 10,    n_samples 1797,         n_features 64
-_______________________________________________________________________________
-init    time  inertia    homo   compl  v-meas     ARI AMI  silhouette
-k-means++   0.31s    69432   0.602   0.650   0.625   0.465   0.598    0.146
-   random   0.29s    69694   0.669   0.710   0.689   0.553   0.666    0.147
-PCA-based   0.05s    70804   0.671   0.698   0.684   0.561   0.668    0.118
-_______________________________________________________________________________
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">n_digits</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>    <span class="n">n_samples</span> <span class="mi">1797</span><span class="p">,</span>         <span class="n">n_features</span> <span class="mi">64</span>
+<span class="n">_______________________________________________________________________________</span>
+<span class="n">init</span>    <span class="n">time</span>  <span class="n">inertia</span>    <span class="n">homo</span>   <span class="n">compl</span>  <span class="n">v</span><span class="o">-</span><span class="n">meas</span>     <span class="n">ARI</span> <span class="n">AMI</span>  <span class="n">silhouette</span>
+<span class="n">k</span><span class="o">-</span><span class="n">means</span><span class="o">++</span>   <span class="mf">0.32</span><span class="n">s</span>    <span class="mi">69432</span>   <span class="mf">0.602</span>   <span class="mf">0.650</span>   <span class="mf">0.625</span>   <span class="mf">0.465</span>   <span class="mf">0.598</span>    <span class="mf">0.146</span>
+   <span class="n">random</span>   <span class="mf">0.29</span><span class="n">s</span>    <span class="mi">69694</span>   <span class="mf">0.669</span>   <span class="mf">0.710</span>   <span class="mf">0.689</span>   <span class="mf">0.553</span>   <span class="mf">0.666</span>    <span class="mf">0.147</span>
+<a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="o">-</span><span class="n">based</span>   <span class="mf">0.05</span><span class="n">s</span>    <span class="mi">70804</span>   <span class="mf">0.671</span>   <span class="mf">0.698</span>   <span class="mf">0.684</span>   <span class="mf">0.561</span>   <span class="mf">0.668</span>    <span class="mf">0.118</span>
+<span class="n">_______________________________________________________________________________</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_kmeans_digits.py"><code class="xref download docutils literal"><span class="pre">plot_kmeans_digits.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_kmeans_digits.py" download=""><code class="xref download docutils literal"><span class="pre">plot_kmeans_digits.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans"><span class="n">KMeans</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale"><span class="n">scale</span></a>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans"><span class="n">KMeans</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale"><span class="n">scale</span></a>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 
@@ -241,19 +241,19 @@ _______________________________________________________________________________
 
 <span class="n">sample_size</span> <span class="o">=</span> <span class="mi">300</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;n_digits: </span><span class="si">%d</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> n_samples </span><span class="si">%d</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> n_features </span><span class="si">%d</span><span class="s2">&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n_digits: </span><span class="si">%d</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> n_samples </span><span class="si">%d</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> n_features </span><span class="si">%d</span><span class="s2">&quot;</span>
       <span class="o">%</span> <span class="p">(</span><span class="n">n_digits</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
 
 
-<span class="k">print</span><span class="p">(</span><span class="mi">79</span> <span class="o">*</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% 9s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;init&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">79</span> <span class="o">*</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% 9s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;init&#39;</span>
       <span class="s1">&#39;    time  inertia    homo   compl  v-meas     ARI AMI  silhouette&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">bench_k_means</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% 9s</span><span class="s1">   </span><span class="si">%.2f</span><span class="s1">s    </span><span class="si">%i</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">    </span><span class="si">%.3f</span><span class="s1">&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% 9s</span><span class="s1">   </span><span class="si">%.2f</span><span class="s1">s    </span><span class="si">%i</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">   </span><span class="si">%.3f</span><span class="s1">    </span><span class="si">%.3f</span><span class="s1">&#39;</span>
           <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="n">estimator</span><span class="o">.</span><span class="n">inertia_</span><span class="p">,</span>
              <a href="../../modules/generated/sklearn.metrics.homogeneity_score.html#sklearn.metrics.homogeneity_score"><span class="n">metrics</span><span class="o">.</span><span class="n">homogeneity_score</span></a><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">estimator</span><span class="o">.</span><span class="n">labels_</span><span class="p">),</span>
              <a href="../../modules/generated/sklearn.metrics.completeness_score.html#sklearn.metrics.completeness_score"><span class="n">metrics</span><span class="o">.</span><span class="n">completeness_score</span></a><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">estimator</span><span class="o">.</span><span class="n">labels_</span><span class="p">),</span>
@@ -276,7 +276,7 @@ _______________________________________________________________________________
 <span class="n">bench_k_means</span><span class="p">(</span><a href="../../modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans"><span class="n">KMeans</span></a><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">n_digits</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
               <span class="n">name</span><span class="o">=</span><span class="s2">&quot;PCA-based&quot;</span><span class="p">,</span>
               <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="mi">79</span> <span class="o">*</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">79</span> <span class="o">*</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
 
 <span class="c1">###############################################################################</span>
 <span class="c1"># Visualize the results on PCA-reduced data</span>
@@ -286,7 +286,7 @@ _______________________________________________________________________________
 <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
 
 <span class="c1"># Step size of the mesh. Decrease to increase the quality of the VQ.</span>
-<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mo">02</span>     <span class="c1"># point in the mesh [x_min, m_max]x[y_min, y_max].</span>
+<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>     <span class="c1"># point in the mesh [x_min, m_max]x[y_min, y_max].</span>
 
 <span class="c1"># Plot the decision boundary. For that, we will assign a color to each</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
@@ -320,8 +320,8 @@ _______________________________________________________________________________
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.24 seconds
-( 0 minutes  1.24 seconds)</p>
+<p><strong>Total running time of the example:</strong>  1.28 seconds
+( 0 minutes  1.28 seconds)</p>
 </div>
 
 

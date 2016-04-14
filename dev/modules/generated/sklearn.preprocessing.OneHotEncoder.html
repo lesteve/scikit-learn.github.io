@@ -173,7 +173,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.OneHotEncoder<a class="headerlink" href="#sklearn-preprocessing-onehotencoder" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.preprocessing.OneHotEncoder">
-<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">OneHotEncoder</code><span class="sig-paren">(</span><em>n_values='auto'</em>, <em>categorical_features='all'</em>, <em>dtype=&lt;type 'numpy.float64'&gt;</em>, <em>sparse=True</em>, <em>handle_unknown='error'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b2002dc/sklearn/preprocessing/data.py#L1685"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">OneHotEncoder</code><span class="sig-paren">(</span><em>n_values='auto'</em>, <em>categorical_features='all'</em>, <em>dtype=&lt;type 'numpy.float64'&gt;</em>, <em>sparse=True</em>, <em>handle_unknown='error'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/14175c7/sklearn/preprocessing/data.py#L1685"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode categorical integer features using a one-hot aka one-of-K scheme.</p>
 <p>The input to this transformer should be a matrix of integers, denoting
 the values taken on by categorical (discrete) features. The output will be
@@ -182,7 +182,7 @@ feature. It is assumed that input features take on values in the range
 [0, n_values).</p>
 <p>This encoding is needed for feeding categorical data to many scikit-learn
 estimators, notably linear models and SVMs with the standard kernels.</p>
-<p>Read more in the <a class="reference internal" href="../preprocessing.html#preprocessing-categorical-features"><span>User Guide</span></a>.</p>
+<p>Read more in the <a class="reference internal" href="../preprocessing.html#preprocessing-categorical-features"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -194,14 +194,14 @@ estimators, notably linear models and SVMs with the standard kernels.</p>
 <li><p class="first">&#8216;auto&#8217; : determine value range from training data.</p>
 </li>
 <li><dl class="first docutils">
-<dt>int <span class="classifier-delimiter">:</span> <span class="classifier">number of categorical values per feature.</span></dt>
-<dd><p class="first last">Each feature value should be in <code class="docutils literal"><span class="pre">range(n_values)</span></code></p>
+<dt>int</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">number of categorical values per feature.</span><dd><p class="first last">Each feature value should be in <code class="docutils literal"><span class="pre">range(n_values)</span></code></p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>array <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal"><span class="pre">n_values[i]</span></code> is the number of categorical values in</span></dt>
-<dd><p class="first last"><code class="docutils literal"><span class="pre">X[:,</span> <span class="pre">i]</span></code>. Each feature value should be in <code class="docutils literal"><span class="pre">range(n_values[i])</span></code></p>
+<dt>array</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal"><span class="pre">n_values[i]</span></code> is the number of categorical values in</span><dd><p class="first last"><code class="docutils literal"><span class="pre">X[:,</span> <span class="pre">i]</span></code>. Each feature value should be in <code class="docutils literal"><span class="pre">range(n_values[i])</span></code></p>
 </dd>
 </dl>
 </li>
@@ -265,7 +265,7 @@ from <code class="docutils literal"><span class="pre">feature_indices_[i]</span>
 <p>Given a dataset with three features and two samples, we let the encoder
 find the maximum value per feature and transform the data to a binary
 one-hot encoding.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">OneHotEncoder</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>  
 <span class="go">OneHotEncoder(categorical_features=&#39;all&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
@@ -304,12 +304,12 @@ one-hot encoding.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.preprocessing.OneHotEncoder.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_values='auto'</em>, <em>categorical_features='all'</em>, <em>dtype=&lt;type 'numpy.float64'&gt;</em>, <em>sparse=True</em>, <em>handle_unknown='error'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b2002dc/sklearn/preprocessing/data.py#L1770"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_values='auto'</em>, <em>categorical_features='all'</em>, <em>dtype=&lt;type 'numpy.float64'&gt;</em>, <em>sparse=True</em>, <em>handle_unknown='error'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/14175c7/sklearn/preprocessing/data.py#L1770"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.OneHotEncoder.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b2002dc/sklearn/preprocessing/data.py#L1778"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/14175c7/sklearn/preprocessing/data.py#L1778"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit OneHotEncoder to X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -330,7 +330,7 @@ one-hot encoding.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.OneHotEncoder.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b2002dc/sklearn/preprocessing/data.py#L1841"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/14175c7/sklearn/preprocessing/data.py#L1841"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit OneHotEncoder to X, then transform X.</p>
 <p>Equivalent to self.fit(X).transform(X), but more convenient and more
 efficient. See fit for the parameters, transform for the return value.</p>
@@ -338,7 +338,7 @@ efficient. See fit for the parameters, transform for the return value.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.OneHotEncoder.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b2002dc/sklearn/base.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/14175c7/sklearn/base.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -363,7 +363,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.OneHotEncoder.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b2002dc/sklearn/base.py#L241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/14175c7/sklearn/base.py#L241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The former have parameters of the form
@@ -381,7 +381,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.OneHotEncoder.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b2002dc/sklearn/preprocessing/data.py#L1890"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/14175c7/sklearn/preprocessing/data.py#L1890"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.OneHotEncoder.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform X using one-hot encoding.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -409,7 +409,7 @@ component of a nested object.</p>
 <h2>Examples using <code class="docutils literal"><span class="pre">sklearn.preprocessing.OneHotEncoder</span></code><a class="headerlink" href="#examples-using-sklearn-preprocessing-onehotencoder" title="Permalink to this headline">¶</a></h2>
 <div class="thumbnailContainer" tooltip="Transform your features into a higher dimensional, sparse space. Then train a linear model on t..."><div class="figure" id="id1">
 <a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_feature_transformation.html"><img alt="../../_images/plot_feature_transformation1.png" src="../../_images/plot_feature_transformation1.png" /></a>
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py"><span>Feature transformations with ensembles of trees</span></a></span></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py"><span class="std std-ref">Feature transformations with ensembles of trees</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>

@@ -168,7 +168,7 @@
             
   <div class="section" id="manifold-learning-methods-on-a-severed-sphere">
 <span id="example-manifold-plot-manifold-sphere-py"></span><h1>Manifold Learning methods on a severed sphere<a class="headerlink" href="#manifold-learning-methods-on-a-severed-sphere" title="Permalink to this headline">¶</a></h1>
-<p>An application of the different <a class="reference internal" href="../../modules/manifold.html#manifold"><span>Manifold learning</span></a> techniques
+<p>An application of the different <a class="reference internal" href="../../modules/manifold.html#manifold"><span class="std std-ref">Manifold learning</span></a> techniques
 on a spherical data-set. Here one can see the use of
 dimensionality reduction in order to gain some intuition
 regarding the manifold learning methods. Regarding the dataset,
@@ -176,8 +176,8 @@ the poles are cut from the sphere, as well as a thin slice down its
 side. This enables the manifold learning techniques to
 &#8216;spread it open&#8217; whilst projecting it onto two dimensions.</p>
 <p>For a similar example, where the methods are applied to the
-S-curve dataset, see <a class="reference internal" href="plot_compare_methods.html#example-manifold-plot-compare-methods-py"><span>Comparison of Manifold Learning methods</span></a></p>
-<p>Note that the purpose of the <a class="reference internal" href="../../modules/manifold.html#multidimensional-scaling"><span>MDS</span></a> is
+S-curve dataset, see <a class="reference internal" href="plot_compare_methods.html#example-manifold-plot-compare-methods-py"><span class="std std-ref">Comparison of Manifold Learning methods</span></a></p>
+<p>Note that the purpose of the <a class="reference internal" href="../../modules/manifold.html#multidimensional-scaling"><span class="std std-ref">MDS</span></a> is
 to find a low-dimensional representation of the data (here 2D) in
 which the distances respect well the distances in the original
 high-dimensional space, unlike other manifold-learning algorithms,
@@ -187,32 +187,32 @@ that of representing a flat map of the Earth, as with
 <a class="reference external" href="https://en.wikipedia.org/wiki/Map_projection">map projection</a></p>
 <img alt="../../_images/plot_manifold_sphere_001.png" class="align-center" src="../../_images/plot_manifold_sphere_001.png" />
 <p><strong>Script output</strong>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>standard: 0.12 sec
-ltsa: 0.29 sec
-hessian: 0.39 sec
-modified: 0.3 sec
-ISO: 0.28 sec
-MDS: 1.2 sec
-Spectral Embedding: 0.23 sec
-t-SNE: 2.5 sec
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">standard</span><span class="p">:</span> <span class="mf">0.12</span> <span class="n">sec</span>
+<span class="n">ltsa</span><span class="p">:</span> <span class="mf">0.27</span> <span class="n">sec</span>
+<span class="n">hessian</span><span class="p">:</span> <span class="mf">0.36</span> <span class="n">sec</span>
+<span class="n">modified</span><span class="p">:</span> <span class="mf">0.33</span> <span class="n">sec</span>
+<span class="n">ISO</span><span class="p">:</span> <span class="mf">0.3</span> <span class="n">sec</span>
+<span class="n">MDS</span><span class="p">:</span> <span class="mf">1.2</span> <span class="n">sec</span>
+<span class="n">Spectral</span> <span class="n">Embedding</span><span class="p">:</span> <span class="mf">0.23</span> <span class="n">sec</span>
+<span class="n">t</span><span class="o">-</span><span class="n">SNE</span><span class="p">:</span> <span class="mf">2.5</span> <span class="n">sec</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_manifold_sphere.py"><code class="xref download docutils literal"><span class="pre">plot_manifold_sphere.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_manifold_sphere.py" download=""><code class="xref download docutils literal"><span class="pre">plot_manifold_sphere.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>
 <span class="c1"># Author: Jaques Grobler &lt;jaques.grobler@inria.fr&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
-<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <a href="http://matplotlib.org/api/ticker_api.html#matplotlib.ticker.NullFormatter"><span class="n">NullFormatter</span></a>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="k">import</span> <a href="http://matplotlib.org/api/ticker_api.html#matplotlib.ticker.NullFormatter"><span class="n">NullFormatter</span></a>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">manifold</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state"><span class="n">check_random_state</span></a>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">manifold</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state"><span class="n">check_random_state</span></a>
 
 <span class="c1"># Next line to silence pyflakes.</span>
 <span class="n">Axes3D</span>
@@ -258,7 +258,7 @@ t-SNE: 2.5 sec
         <span class="o">.</span><span class="n">LocallyLinearEmbedding</span><span class="p">(</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
                                 <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sphere_data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
     <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">methods</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">methods</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
     <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">252</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">trans_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trans_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
@@ -272,7 +272,7 @@ t-SNE: 2.5 sec
 <span class="n">trans_data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap"><span class="n">manifold</span><span class="o">.</span><span class="n">Isomap</span></a><span class="p">(</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>\
     <span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sphere_data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;ISO&#39;</span><span class="p">,</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;ISO&#39;</span><span class="p">,</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">257</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">trans_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trans_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
@@ -286,7 +286,7 @@ t-SNE: 2.5 sec
 <span class="n">mds</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.manifold.MDS.html#sklearn.manifold.MDS"><span class="n">manifold</span><span class="o">.</span><span class="n">MDS</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">trans_data</span> <span class="o">=</span> <span class="n">mds</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sphere_data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;MDS: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MDS: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">258</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">trans_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trans_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
@@ -301,7 +301,7 @@ t-SNE: 2.5 sec
                                 <span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">)</span>
 <span class="n">trans_data</span> <span class="o">=</span> <span class="n">se</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sphere_data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Spectral Embedding: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Spectral Embedding: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">259</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">trans_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trans_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
@@ -315,7 +315,7 @@ t-SNE: 2.5 sec
 <span class="n">tsne</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.manifold.TSNE.html#sklearn.manifold.TSNE"><span class="n">manifold</span><span class="o">.</span><span class="n">TSNE</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">trans_data</span> <span class="o">=</span> <span class="n">tsne</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sphere_data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;t-SNE: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t-SNE: </span><span class="si">%.2g</span><span class="s2"> sec&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">trans_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trans_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
@@ -327,8 +327,8 @@ t-SNE: 2.5 sec
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  5.99 seconds
-( 0 minutes  5.99 seconds)</p>
+<p><strong>Total running time of the example:</strong>  6.13 seconds
+( 0 minutes  6.13 seconds)</p>
 </div>
 
 

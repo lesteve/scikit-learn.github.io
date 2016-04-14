@@ -221,7 +221,7 @@ kernels).</li>
 empirical confidence intervals and decide based on those if one should
 refit (online fitting, adaptive fitting) the prediction in some
 region of interest.</li>
-<li>Versatile: different <a class="reference internal" href="#gp-kernels"><span>kernels</span></a> can be specified. Common kernels are provided, but
+<li>Versatile: different <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernels</span></a> can be specified. Common kernels are provided, but
 it is also possible to specify custom kernels.</li>
 </ul>
 </div></blockquote>
@@ -240,7 +240,7 @@ of features exceeds a few dozens.</li>
 regression purposes. For this, the prior of the GP needs to be specified. The
 prior mean is assumed to be constant and zero (for <code class="docutils literal"><span class="pre">normalize_y=False</span></code>) or the
 training data&#8217;s mean (for <code class="docutils literal"><span class="pre">normalize_y=True</span></code>). The prior&#8217;s
-covariance is specified by a passing a <a class="reference internal" href="#gp-kernels"><span>kernel</span></a> object. The
+covariance is specified by a passing a <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a> object. The
 hyperparameters of the kernel are optimized during fitting of
 GaussianProcessRegressor by maximizing the log-marginal-likelihood (LML) based
 on the passed <code class="docutils literal"><span class="pre">optimizer</span></code>. As the LML may have multiple local optima, the
@@ -375,7 +375,7 @@ and the RBF&#8217;s length scale are further free parameters.</li>
 </ul>
 <p>Maximizing the log-marginal-likelihood after subtracting the target&#8217;s mean
 yields the following kernel with an LML of -83.214:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mf">34.4</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">41.8</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">34.4</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">41.8</span><span class="p">)</span>
 <span class="o">+</span> <span class="mf">3.27</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <span class="n">ExpSineSquared</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.44</span><span class="p">,</span>
                                                    <span class="n">periodicity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="o">+</span> <span class="mf">0.446</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RationalQuadratic</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">17.7</span><span class="p">,</span> <span class="n">length_scale</span><span class="o">=</span><span class="mf">0.957</span><span class="p">)</span>
@@ -417,7 +417,7 @@ GaussianProcessClassifier approximates the non-Gaussian posterior with a
 Gaussian based on the Laplace approximation. More details can be found in
 Chapter 3 of [RW2006].</p>
 <p>The GP prior mean is assumed to be zero. The prior&#8217;s
-covariance is specified by a passing a <a class="reference internal" href="#gp-kernels"><span>kernel</span></a> object. The
+covariance is specified by a passing a <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a> object. The
 hyperparameters of the kernel are optimized during fitting of
 GaussianProcessRegressor by maximizing the log-marginal-likelihood (LML) based
 on the passed <code class="docutils literal"><span class="pre">optimizer</span></code>. As the LML may have multiple local optima, the
@@ -434,7 +434,7 @@ fitted for each class, which is trained to separate this class from the rest.
 In &#8220;one_vs_one&#8221;, one binary Gaussian process classifier is fitted for each pair
 of classes, which is trained to separate these two classes. The predictions of
 these binary predictors are combined into multi-class predictions. See the
-section on <a class="reference internal" href="multiclass.html#multiclass"><span>multi-class classification</span></a> for more details.</p>
+section on <a class="reference internal" href="multiclass.html#multiclass"><span class="std std-ref">multi-class classification</span></a> for more details.</p>
 <p>In the case of Gaussian process classification, &#8220;one_vs_one&#8221; might be
 computationally  cheaper since it has to solve many problems involving only a
 subset of the whole training set rather than fewer problems on the whole
@@ -548,14 +548,14 @@ binary kernel operator, parameters of the left operand are prefixed with <code c
 and parameters of the right operand with <code class="docutils literal"><span class="pre">k2__</span></code>. An additional convenience
 method is <code class="docutils literal"><span class="pre">clone_with_theta(theta)</span></code>, which returns a cloned version of the
 kernel but with the hyperparameters set to <code class="docutils literal"><span class="pre">theta</span></code>. An illustrative example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">ConstantKernel</span><span class="p">,</span> <span class="n">RBF</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="k">import</span> <span class="n">ConstantKernel</span><span class="p">,</span> <span class="n">RBF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">ConstantKernel</span><span class="p">(</span><span class="n">constant_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">constant_value_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">length_scale_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span> <span class="o">+</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">length_scale_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">hyperparameter</span> <span class="ow">in</span> <span class="n">kernel</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">hyperparameter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">hyperparameter</span> <span class="ow">in</span> <span class="n">kernel</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hyperparameter</span><span class="p">)</span>
 <span class="go">Hyperparameter(name=&#39;k1__k1__constant_value&#39;, value_type=&#39;numeric&#39;, bounds=array([[  0.,  10.]]), n_elements=1, fixed=False)</span>
 <span class="go">Hyperparameter(name=&#39;k1__k2__length_scale&#39;, value_type=&#39;numeric&#39;, bounds=array([[  0.,  10.]]), n_elements=1, fixed=False)</span>
 <span class="go">Hyperparameter(name=&#39;k2__length_scale&#39;, value_type=&#39;numeric&#39;, bounds=array([[  0.,  10.]]), n_elements=1, fixed=False)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="p">):</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 <span class="go">k1 : 1**2 * RBF(length_scale=0.5)</span>
 <span class="go">k1__k1 : 1**2</span>
 <span class="go">k1__k1__constant_value : 1.0</span>
@@ -566,9 +566,9 @@ kernel but with the hyperparameters set to <code class="docutils literal"><span 
 <span class="go">k2 : RBF(length_scale=2)</span>
 <span class="go">k2__length_scale : 2.0</span>
 <span class="go">k2__length_scale_bounds : (0.0, 10.0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>  <span class="c1"># Note: log-transformed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>  <span class="c1"># Note: log-transformed</span>
 <span class="go">[ 0.         -0.69314718  0.69314718]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>  <span class="c1"># Note: log-transformed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>  <span class="c1"># Note: log-transformed</span>
 <span class="go">[[       -inf  2.30258509]</span>
 <span class="go"> [       -inf  2.30258509]</span>
 <span class="go"> [       -inf  2.30258509]]</span>
@@ -591,13 +591,13 @@ kernel where it scales the magnitude of the other factor (kernel) or as part
 of a <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Sum.html#sklearn.gaussian_process.kernels.Sum" title="sklearn.gaussian_process.kernels.Sum"><code class="xref py py-class docutils literal"><span class="pre">Sum</span></code></a> kernel, where it modifies the mean of the Gaussian process.
 It depends on a parameter <img class="math" src="../_images/math/720d1d8ecfaf8e0ba940fa59fee90f409901bf39.png" alt="constant\_value"/>. It is defined as:</p>
 <div class="math">
-<p><img src="../_images/math/b503999d791c948536d9c068720d6a8fbd9fecd4.png" alt="k(x_i, x_j) = constant\_value \;\forall\; x_1, x_2"/></p>
+<p><img src="../_images/math/1bf8e1c819be3675812ef621aa4b2489b97cace4.png" alt="k(x_i, x_j) = constant\_value \;\forall\; x_1, x_2"/></p>
 </div><p>The main use-case of the <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel" title="sklearn.gaussian_process.kernels.WhiteKernel"><code class="xref py py-class docutils literal"><span class="pre">WhiteKernel</span></code></a> kernel is as part of a
 sum-kernel where it explains the noise-component of the signal. Tuning its
 parameter <img class="math" src="../_images/math/ea15e804561ee09c1f8691bbde0f0f8f6a1c894c.png" alt="noise\_level"/> corresponds to estimating the noise-level.
 It is defined as:e</p>
 <div class="math">
-<p><img src="../_images/math/d17ab532eb683327e7e8f51d4cbd2db9d8123aea.png" alt="k(x_i, x_j) = noise\_level \text{ if } x_i == x_j \text{ else } 0"/></p>
+<p><img src="../_images/math/f0f4dc48e6eb0f6fcbd544f73cecc72cd74ff9ab.png" alt="k(x_i, x_j) = noise\_level \text{ if } x_i == x_j \text{ else } 0"/></p>
 </div></div>
 <div class="section" id="kernel-operators">
 <h3>1.7.5.3. Kernel operators<a class="headerlink" href="#kernel-operators" title="Permalink to this headline">¶</a></h3>
@@ -618,7 +618,7 @@ can either be a scalar (isotropic variant of the kernel) or a vector with the sa
 number of dimensions as the inputs <img class="math" src="../_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/> (anisotropic variant of the kernel).
 The kernel is given by:</p>
 <div class="math">
-<p><img src="../_images/math/a9c7c2fbbbda69efc8be1d385368e933c879da97.png" alt="k(x_i, x_j) = \text{exp}\left(-\frac{1}{2} d(x_i / l, x_j / l)^2\right)"/></p>
+<p><img src="../_images/math/964aa1630403a35b45e349ee6c5723e3338f0d51.png" alt="k(x_i, x_j) = \text{exp}\left(-\frac{1}{2} d(x_i / l, x_j / l)^2\right)"/></p>
 </div><p>This kernel is infinitely differentiable, which implies that GPs with this
 kernel as covariance function have mean square derivatives of all orders, and are thus
 very smooth. The prior and posterior of a GP resulting from an RBF kernel are shown in
@@ -633,18 +633,18 @@ the following figure:</p>
 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal"><span class="pre">RBF</span></code></a> kernel. It has an additional parameter <img class="math" src="../_images/math/d67fb61cfffca2cc069e083d76cb6220b4ca14c8.png" alt="\nu"/> which controls
 the smoothness of the resulting function. It is parameterized by a length-scale parameter <img class="math" src="../_images/math/ab0f99102a03162601624aad8c65d645e2d0e039.png" alt="l&gt;0"/>, which can either be a scalar (isotropic variant of the kernel) or a vector with the same number of dimensions as the inputs <img class="math" src="../_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/> (anisotropic variant of the kernel). The kernel is given by:</p>
 <div class="math">
-<p><img src="../_images/math/44400a9a323baee039672c04eb81a032c4a1c36f.png" alt="k(x_i, x_j) = \sigma^2\frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\gamma\sqrt{2\nu} d(x_i / l, x_j / l)\Bigg)^\nu K_\nu\Bigg(\gamma\sqrt{2\nu} d(x_i / l, x_j / l)\Bigg),"/></p>
+<p><img src="../_images/math/5cd95dc7b9adeb1c05c7756515ff732add278bda.png" alt="k(x_i, x_j) = \sigma^2\frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\gamma\sqrt{2\nu} d(x_i / l, x_j / l)\Bigg)^\nu K_\nu\Bigg(\gamma\sqrt{2\nu} d(x_i / l, x_j / l)\Bigg),"/></p>
 </div><p>As <img class="math" src="../_images/math/11043269a7ca08b4b35ee1336860ebb270d63935.png" alt="\nu\rightarrow\infty"/>, the Matérn kernel converges to the RBF kernel.
 When <img class="math" src="../_images/math/9a1d6636b59ea2018d263ead28f8f5775276a137.png" alt="\nu = 1/2"/>, the Matérn kernel becomes identical to the absolute
 exponential kernel, i.e.,</p>
 <div class="math">
-<p><img src="../_images/math/56d4e152f3d4d46b0fd64d54b4e08d1846335d59.png" alt="k(x_i, x_j) = \sigma^2 \exp \Bigg(-\gamma d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{1}{2}"/></p>
+<p><img src="../_images/math/927f19060cd4718834f67df6f744399dfb08a09f.png" alt="k(x_i, x_j) = \sigma^2 \exp \Bigg(-\gamma d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{1}{2}"/></p>
 </div><p>In particular, <img class="math" src="../_images/math/2233216d6a0d34d3337037715418882c19a6ee6b.png" alt="\nu = 3/2"/>:</p>
 <div class="math">
-<p><img src="../_images/math/85d75f464d408a813d70a47da951a4f588f91d8d.png" alt="k(x_i, x_j) = \sigma^2 \Bigg(1 + \gamma \sqrt{3} d(x_i / l, x_j / l)\Bigg) \exp \Bigg(-\gamma \sqrt{3}d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{3}{2}"/></p>
+<p><img src="../_images/math/63567618cca97ce5114006397990de5ac8a8853c.png" alt="k(x_i, x_j) = \sigma^2 \Bigg(1 + \gamma \sqrt{3} d(x_i / l, x_j / l)\Bigg) \exp \Bigg(-\gamma \sqrt{3}d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{3}{2}"/></p>
 </div><p>and <img class="math" src="../_images/math/dfcf1bba866007a44397980d99d5c69fbf9cf70e.png" alt="\nu = 5/2"/>:</p>
 <div class="math">
-<p><img src="../_images/math/68b50a84396f6b59dfcb49ff51fdbeb01060ede8.png" alt="k(x_i, x_j) = \sigma^2 \Bigg(1 + \gamma \sqrt{5}d(x_i / l, x_j / l) +\frac{5}{3} \gamma^2d(x_i / l, x_j / l)^2 \Bigg) \exp \Bigg(-\gamma \sqrt{5}d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{5}{2}"/></p>
+<p><img src="../_images/math/a326cd59881fa3729f50ceeaf22208343bff2e6b.png" alt="k(x_i, x_j) = \sigma^2 \Bigg(1 + \gamma \sqrt{5}d(x_i / l, x_j / l) +\frac{5}{3} \gamma^2d(x_i / l, x_j / l)^2 \Bigg) \exp \Bigg(-\gamma \sqrt{5}d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{5}{2}"/></p>
 </div><p>are popular choices for learning functions that are not infinitely
 differentiable (as assumed by the RBF kernel) but at least once (<img class="math" src="../_images/math/3299683839afbdb8b6b6e3244ed7f363d02af8f1.png" alt="\nu =
 3/2"/>) or twice differentiable (<img class="math" src="../_images/math/dfcf1bba866007a44397980d99d5c69fbf9cf70e.png" alt="\nu = 5/2"/>).</p>
@@ -666,7 +666,7 @@ by a length-scale parameter <img class="math" src="../_images/math/ab0f99102a031
 Only the isotropic variant where <img class="math" src="../_images/math/d99efde75c84ef402a92cd4497530d2366fb112f.png" alt="l"/> is a scalar is supported at the moment.
 The kernel is given by:</p>
 <div class="math">
-<p><img src="../_images/math/cd1327994d846dfa5483fddbbbe8ea29d5773a97.png" alt="k(x_i, x_j) = \left(1 + \frac{d(x_i, x_j)^2}{2\alpha l^2}\right)^\alpha"/></p>
+<p><img src="../_images/math/8e0be95c99441c7c9c03d1e267d1fb0505d4c5d4.png" alt="k(x_i, x_j) = \left(1 + \frac{d(x_i, x_j)^2}{2\alpha l^2}\right)^\alpha"/></p>
 </div><p>The prior and posterior of a GP resulting from an RBF kernel are shown in
 the following figure:</p>
 <div class="figure align-center">
@@ -680,7 +680,7 @@ It is parameterized by a length-scale parameter <img class="math" src="../_image
 <img class="math" src="../_images/math/a97dff1380b32bc5b33a8fd1b6d8aa9ed0c70107.png" alt="p&gt;0"/>. Only the isotropic variant where <img class="math" src="../_images/math/d99efde75c84ef402a92cd4497530d2366fb112f.png" alt="l"/> is a scalar is supported at the moment.
 The kernel is given by:</p>
 <div class="math">
-<p><img src="../_images/math/c67a75864c8c050630ce3cfd4d9ba10a5cff1f64.png" alt="k(x_i, x_j) = \text{exp}\left(-2 \text{sin}(\pi / p * d(x_i, x_j)) / l\right)^2"/></p>
+<p><img src="../_images/math/501c8be507c3fae0fd5744eb327d17a5c96edcaf.png" alt="k(x_i, x_j) = \text{exp}\left(-2 \text{sin}(\pi / p * d(x_i, x_j)) / l\right)^2"/></p>
 </div><p>The prior and posterior of a GP resulting from an ExpSineSquared kernel are shown in
 the following figure:</p>
 <div class="figure align-center">
@@ -696,7 +696,7 @@ of the coordinates about the origin, but not translations.
 It is parameterized by a parameter <img class="math" src="../_images/math/a06743a9e5b048b2ed5f7a0133d6abee8b3e7525.png" alt="\sigma_0^2"/>. For <img class="math" src="../_images/math/d8bc415655217e958e8713a6089a80450443b6c1.png" alt="\sigma_0^2 = 0"/>, the kernel
 is called the homogeneous linear kernel, otherwise it is inhomogeneous. The kernel is given by</p>
 <div class="math">
-<p><img src="../_images/math/e61899e6a74a4729c8a33c90ff172f9798610807.png" alt="k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j"/></p>
+<p><img src="../_images/math/8b38bb9991d00c9d482f52d016330e4f672e2356.png" alt="k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j"/></p>
 </div><p>The <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct" title="sklearn.gaussian_process.kernels.DotProduct"><code class="xref py py-class docutils literal"><span class="pre">DotProduct</span></code></a> kernel is commonly combined with exponentiation. An example with exponent 2 is
 shown in the following figure:</p>
 <div class="figure align-center">
@@ -730,14 +730,14 @@ specified using additional kwargs, and ask for the model to be fitted to the
 data. Depending on the number of parameters provided at instantiation, the
 fitting procedure may recourse to maximum likelihood estimation for the
 parameters or alternatively it uses the given parameters.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">gaussian_process</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">gaussian_process</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">theta0</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">thetaL</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">thetaU</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">theta0</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">thetaL</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">thetaU</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
 <span class="go">GaussianProcess(beta0=None, corr=&lt;function squared_exponential at 0x...&gt;,</span>
 <span class="go">        normalize=True, nugget=array(2.22...-15),</span>
@@ -745,7 +745,7 @@ parameters or alternatively it uses the given parameters.</p>
 <span class="go">        regr=&lt;function constant at 0x...&gt;, storage_mode=&#39;full&#39;,</span>
 <span class="go">        theta0=array([[ 0.01]]), thetaL=array([[ 0.0001]]),</span>
 <span class="go">        thetaU=array([[ 0.1]]), verbose=False)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span><span class="p">,</span> <span class="n">sigma2_pred</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span><span class="p">,</span> <span class="n">sigma2_pred</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -759,7 +759,7 @@ in general this is a type of Tikhonov regularization.  In the special case
 of a squared-exponential correlation function, this normalization is
 equivalent to specifying a fractional variance in the input.  That is</p>
 <div class="math">
-<p><img src="../_images/math/b0997a6b918f5f8fc9a3615f1c8cb2d514a09296.png" alt="\mathrm{nugget}_i = \left[\frac{\sigma_i}{y_i}\right]^2"/></p>
+<p><img src="../_images/math/4235fce3c77fb419ce72ab42b26c4a839522bc98.png" alt="\mathrm{nugget}_i = \left[\frac{\sigma_i}{y_i}\right]^2"/></p>
 </div><p>With <code class="docutils literal"><span class="pre">nugget</span></code> and <code class="docutils literal"><span class="pre">corr</span></code> properly set, Gaussian Processes can be
 used to robustly recover an underlying function from noisy data.</p>
 </div>
@@ -770,24 +770,24 @@ used to robustly recover an underlying function from noisy data.</p>
 <p>Suppose one wants to model the output of a computer experiment, say a
 mathematical function:</p>
 <div class="math">
-<p><img src="../_images/math/7393ae52f899dd6a031b20cac4e675cd42489021.png" alt="g: &amp; \mathbb{R}^{n_{\rm features}} \rightarrow \mathbb{R} \\
+<p><img src="../_images/math/32a0a1db5bdb7c66a1dc3139a5d74844a77b4696.png" alt="g: &amp; \mathbb{R}^{n_{\rm features}} \rightarrow \mathbb{R} \\
    &amp; X \mapsto y = g(X)"/></p>
 </div><p>GPML starts with the assumption that this function is <em>a</em> conditional sample
 path of <em>a</em> Gaussian process <img class="math" src="../_images/math/b92c09a649305a0aef3239729d93cdf941e0e5cf.png" alt="G"/> which is additionally assumed to read as
 follows:</p>
 <div class="math">
-<p><img src="../_images/math/9a43491764462185f82bac570ab9980a5a7ca43d.png" alt="G(X) = f(X)^T \beta + Z(X)"/></p>
+<p><img src="../_images/math/cfae55eb9eb5cd329e1d075028d5a40a8a08356c.png" alt="G(X) = f(X)^T \beta + Z(X)"/></p>
 </div><p>where <img class="math" src="../_images/math/df2224db0152d27d3a57574c262924c05d06da0f.png" alt="f(X)^T \beta"/> is a linear regression model and <img class="math" src="../_images/math/b8b7b5e99e95c584ec8d88d0bcf69748bfe4554a.png" alt="Z(X)"/> is a
 zero-mean Gaussian process with a fully stationary covariance function:</p>
 <div class="math">
-<p><img src="../_images/math/890afd90975e17be820ce96af42fb3eb2a466d0c.png" alt="C(X, X') = \sigma^2 R(|X - X'|)"/></p>
+<p><img src="../_images/math/cce07810b6e631e6cc3a6f17e071e7ef60d5f06b.png" alt="C(X, X') = \sigma^2 R(|X - X'|)"/></p>
 </div><p><img class="math" src="../_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/> being its variance and <img class="math" src="../_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R"/> being the correlation
 function which solely depends on the absolute relative distance between each
 sample, possibly featurewise (this is the stationarity assumption).</p>
 <p>From this basic formulation, note that GPML is nothing but an extension of a
 basic least squares linear regression problem:</p>
 <div class="math">
-<p><img src="../_images/math/ef45beaabfa8af02547f3cc68b4cb6c812bbb73b.png" alt="g(X) \approx f(X)^T \beta"/></p>
+<p><img src="../_images/math/e8e6437f0e0161d84d6fe530e060eead44935cc1.png" alt="g(X) \approx f(X)^T \beta"/></p>
 </div><p>Except we additionally assume some spatial coherence (correlation) between the
 samples dictated by the correlation function. Indeed, ordinary least squares
 assumes the correlation model <img class="math" src="../_images/math/9f6c60055c315ac425554bb304f775812a0710b9.png" alt="R(|X - X'|)"/> is one when <img class="math" src="../_images/math/71faab2506ab54143f7deda2b7b00c75a836b5b8.png" alt="X = X'"/>
@@ -799,29 +799,29 @@ and zero otherwise : a <em>dirac</em> correlation model &#8211; sometimes referr
 <p>We now derive the <em>best linear unbiased prediction</em> of the sample path
 <img class="math" src="../_images/math/67f4714f065d485540ad40829e0717bf75e9dd85.png" alt="g"/> conditioned on the observations:</p>
 <div class="math">
-<p><img src="../_images/math/d18ddf7dd7ca825898bbc0e7249228526f6bddea.png" alt="\hat{G}(X) = G(X | y_1 = g(X_1), ...,
+<p><img src="../_images/math/ff6e1fb363801997b18ccad41266f28a55451496.png" alt="\hat{G}(X) = G(X | y_1 = g(X_1), ...,
                             y_{n_{\rm samples}} = g(X_{n_{\rm samples}}))"/></p>
 </div><p>It is derived from its <em>given properties</em>:</p>
 <ul class="simple">
 <li>It is linear (a linear combination of the observations)</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/261e8d3b761ecfa15d0e95734bc90afd76b1b29c.png" alt="\hat{G}(X) \equiv a(X)^T y"/></p>
+<p><img src="../_images/math/f10e614509fd065a13a8b621b6ade4ac13b170f4.png" alt="\hat{G}(X) \equiv a(X)^T y"/></p>
 </div><ul class="simple">
 <li>It is unbiased</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/64538044ea7c00385abadbb99a5a97a9a18a94cc.png" alt="\mathbb{E}[G(X) - \hat{G}(X)] = 0"/></p>
+<p><img src="../_images/math/4d6fa13e2361e76d06ef0e87888bdccc17dec301.png" alt="\mathbb{E}[G(X) - \hat{G}(X)] = 0"/></p>
 </div><ul class="simple">
 <li>It is the best (in the Mean Squared Error sense)</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/d976ecc77265e689f9fbe475c7464b285ede0acc.png" alt="\hat{G}(X)^* = \arg \min\limits_{\hat{G}(X)} \;
+<p><img src="../_images/math/59c4143fff1407dc590233eef1151d3466a0d661.png" alt="\hat{G}(X)^* = \arg \min\limits_{\hat{G}(X)} \;
                                         \mathbb{E}[(G(X) - \hat{G}(X))^2]"/></p>
 </div><p>So that the optimal weight vector <img class="math" src="../_images/math/5e857aeb235a55d0250954f6f71aef2c356db1ed.png" alt="a(X)"/> is solution of the following
 equality constrained optimization problem:</p>
 <div class="math">
-<p><img src="../_images/math/dd45b04e42790a1f53f220a2e6c8d716578c922e.png" alt="a(X)^* = \arg \min\limits_{a(X)} &amp; \; \mathbb{E}[(G(X) - a(X)^T y)^2] \\
+<p><img src="../_images/math/52c683edee74811bbf2a91378b953262648f8645.png" alt="a(X)^* = \arg \min\limits_{a(X)} &amp; \; \mathbb{E}[(G(X) - a(X)^T y)^2] \\
                    {\rm s. t.} &amp; \; \mathbb{E}[G(X) - a(X)^T y] = 0"/></p>
 </div><p>Rewriting this constrained optimization problem in the form of a Lagrangian and
 looking further for the first order optimality conditions to be satisfied, one
@@ -829,10 +829,10 @@ ends up with a closed form expression for the sought predictor &#8211; see
 references for the complete proof.</p>
 <p>In the end, the BLUP is shown to be a Gaussian random variate with mean:</p>
 <div class="math">
-<p><img src="../_images/math/aa59228cc55fc5e2d52dc1909bfa1054b4d0d9f7.png" alt="\mu_{\hat{Y}}(X) = f(X)^T\,\hat{\beta} + r(X)^T\,\gamma"/></p>
+<p><img src="../_images/math/f0585accb4906ee7c3aedd41274623e31930dfac.png" alt="\mu_{\hat{Y}}(X) = f(X)^T\,\hat{\beta} + r(X)^T\,\gamma"/></p>
 </div><p>and variance:</p>
 <div class="math">
-<p><img src="../_images/math/60dd23f78766f18d8e638f45e2d4f6643b2f31df.png" alt="\sigma_{\hat{Y}}^2(X) = \sigma_{Y}^2\,
+<p><img src="../_images/math/4279f991ef8b5859a26a1764e677577ed180af25.png" alt="\sigma_{\hat{Y}}^2(X) = \sigma_{Y}^2\,
 ( 1
 - r(X)^T\,R^{-1}\,r(X)
 + u(X)^T\,(F^T\,R^{-1}\,F)^{-1}\,u(X)
@@ -843,29 +843,29 @@ references for the complete proof.</p>
 function and its built-in parameters <img class="math" src="../_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png" alt="\theta"/>:</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/6cfceacfbcb485240500ae7ec7c12a7a0c45a2ee.png" alt="R_{i\,j} = R(|X_i - X_j|, \theta), \; i,\,j = 1, ..., m"/></p>
+<p><img src="../_images/math/74c9a5671526cf0d39f294f7dabbb5e10208ccd0.png" alt="R_{i\,j} = R(|X_i - X_j|, \theta), \; i,\,j = 1, ..., m"/></p>
 </div><ul class="simple">
 <li>the vector of cross-correlations between the point where the prediction is
 made and the points in the DOE:</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/20f6d07c95bbe8ddd59f1ed7bcdc3fbfd21b5559.png" alt="r_i = R(|X - X_i|, \theta), \; i = 1, ..., m"/></p>
+<p><img src="../_images/math/6c97d2fc8177230d6d2cf88ea71c56821b22223e.png" alt="r_i = R(|X - X_i|, \theta), \; i = 1, ..., m"/></p>
 </div><ul class="simple">
 <li>the regression matrix (eg the Vandermonde matrix if <img class="math" src="../_images/math/0001d02b63ede2fe3219e05a7cd09c82ae6298b6.png" alt="f"/> is a polynomial
 basis):</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/30d44ed6819278c2c798e35370b8aef1dac18924.png" alt="F_{i\,j} = f_i(X_j), \; i = 1, ..., p, \, j = 1, ..., m"/></p>
+<p><img src="../_images/math/a94a79119fdb579eb0889160bd274b33690eaea8.png" alt="F_{i\,j} = f_i(X_j), \; i = 1, ..., p, \, j = 1, ..., m"/></p>
 </div><ul class="simple">
 <li>the generalized least square regression weights:</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/25bd194db6e1178144d20df4f8c42c1d4293c021.png" alt="\hat{\beta} =(F^T\,R^{-1}\,F)^{-1}\,F^T\,R^{-1}\,Y"/></p>
+<p><img src="../_images/math/2f32319937e080b1b8d03cfec50454f53966c4fc.png" alt="\hat{\beta} =(F^T\,R^{-1}\,F)^{-1}\,F^T\,R^{-1}\,Y"/></p>
 </div><ul class="simple">
 <li>and the vectors:</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/f69de20a51ef33260d6ce693d077cfb3a1c68f1c.png" alt="\gamma &amp; = R^{-1}(Y - F\,\hat{\beta}) \\
+<p><img src="../_images/math/72199861a0391616c5832435c440c413611ce42b.png" alt="\gamma &amp; = R^{-1}(Y - F\,\hat{\beta}) \\
 u(X) &amp; = F^T\,R^{-1}\,r(X) - f(X)"/></p>
 </div><p>It is important to notice that the probabilistic response of a Gaussian Process
 predictor is fully analytic and mostly relies on basic linear algebra
@@ -878,7 +878,7 @@ decomposition algorithm.</p>
 <h4>1.7.6.3.3. The empirical best linear unbiased predictor (EBLUP)<a class="headerlink" href="#the-empirical-best-linear-unbiased-predictor-eblup" title="Permalink to this headline">¶</a></h4>
 <p>Until now, both the autocorrelation and regression models were assumed given.
 In practice however they are never known in advance so that one has to make
-(motivated) empirical choices for these models <a class="reference internal" href="#correlation-models"><span>Correlation Models</span></a>.</p>
+(motivated) empirical choices for these models <a class="reference internal" href="#correlation-models"><span class="std std-ref">Correlation Models</span></a>.</p>
 <p>Provided these choices are made, one should estimate the remaining unknown
 parameters involved in the BLUP. To do so, one uses the set of provided
 observations in conjunction with some inference technique. The present

@@ -177,21 +177,21 @@ against outliers.</p>
 is a large outlier.</p>
 <img alt="../../_images/plot_robust_scaling_001.png" class="align-center" src="../../_images/plot_robust_scaling_001.png" />
 <p><strong>Script output</strong>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Testset accuracy using standard scaler: 0.545
-Testset accuracy using robust scaler:   0.705
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Testset</span> <span class="n">accuracy</span> <span class="n">using</span> <span class="n">standard</span> <span class="n">scaler</span><span class="p">:</span> <span class="mf">0.545</span>
+<span class="n">Testset</span> <span class="n">accuracy</span> <span class="n">using</span> <span class="n">robust</span> <span class="n">scaler</span><span class="p">:</span>   <span class="mf">0.705</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_robust_scaling.py"><code class="xref download docutils literal"><span class="pre">plot_robust_scaling.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_robust_scaling.py" download=""><code class="xref download docutils literal"><span class="pre">plot_robust_scaling.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 
 <span class="c1"># Code source: Thomas Unterthiner</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.preprocessing.RobustScaler.html#sklearn.preprocessing.RobustScaler"><span class="n">RobustScaler</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.preprocessing.RobustScaler.html#sklearn.preprocessing.RobustScaler"><span class="n">RobustScaler</span></a>
 
 <span class="c1"># Create training and test data</span>
 <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -240,19 +240,19 @@ Testset accuracy using robust scaler:   0.705
 
 
 <span class="c1"># Classify using k-NN</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier"><span class="n">KNeighborsClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier"><span class="n">KNeighborsClassifier</span></a>
 
 <span class="n">knn</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier"><span class="n">KNeighborsClassifier</span></a><span class="p">()</span>
 <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr_s</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
 <span class="n">acc_s</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xte_s</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Testset accuracy using standard scaler: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">acc_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testset accuracy using standard scaler: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">acc_s</span><span class="p">)</span>
 <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr_r</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
 <span class="n">acc_r</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xte_r</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Testset accuracy using robust scaler:   </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">acc_r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testset accuracy using robust scaler:   </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">acc_r</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.28 seconds
-( 0 minutes  0.28 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.27 seconds
+( 0 minutes  0.27 seconds)</p>
 </div>
 
 

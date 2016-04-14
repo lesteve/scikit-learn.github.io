@@ -177,20 +177,20 @@ value using the <code class="docutils literal"><span class="pre">strategy</span>
 The median is a more robust estimator for data with high magnitude variables
 which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 <p>Script output:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Score with the entire dataset = 0.56
-Score without the samples containing missing values = 0.48
-Score after imputation of the missing values = 0.55
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Score</span> <span class="k">with</span> <span class="n">the</span> <span class="n">entire</span> <span class="n">dataset</span> <span class="o">=</span> <span class="mf">0.56</span>
+<span class="n">Score</span> <span class="n">without</span> <span class="n">the</span> <span class="n">samples</span> <span class="n">containing</span> <span class="n">missing</span> <span class="n">values</span> <span class="o">=</span> <span class="mf">0.48</span>
+<span class="n">Score</span> <span class="n">after</span> <span class="n">imputation</span> <span class="n">of</span> <span class="n">the</span> <span class="n">missing</span> <span class="n">values</span> <span class="o">=</span> <span class="mf">0.55</span>
 </pre></div>
 </div>
 <p>In this case, imputing helps the classifier get close to the original score.</p>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/missing_values.py"><code class="xref download docutils literal"><span class="pre">missing_values.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/missing_values.py" download=""><code class="xref download docutils literal"><span class="pre">missing_values.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer"><span class="n">Imputer</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <a href="../modules/generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer"><span class="n">Imputer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
@@ -202,7 +202,7 @@ Score after imputation of the missing values = 0.55
 <span class="c1"># Estimate the score on the entire dataset, with no missing values</span>
 <span class="n">estimator</span> <span class="o">=</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_full</span><span class="p">,</span> <span class="n">y_full</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score with the entire dataset = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score with the entire dataset = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 
 <span class="c1"># Add missing values in 75% of the lines</span>
 <span class="n">missing_rate</span> <span class="o">=</span> <span class="mf">0.75</span>
@@ -219,7 +219,7 @@ Score after imputation of the missing values = 0.55
 <span class="n">y_filtered</span> <span class="o">=</span> <span class="n">y_full</span><span class="p">[</span><span class="o">~</span><span class="n">missing_samples</span><span class="p">]</span>
 <span class="n">estimator</span> <span class="o">=</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_filtered</span><span class="p">,</span> <span class="n">y_filtered</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score without the samples containing missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score without the samples containing missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 
 <span class="c1"># Estimate the score after imputation of the missing values</span>
 <span class="n">X_missing</span> <span class="o">=</span> <span class="n">X_full</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -231,7 +231,7 @@ Score after imputation of the missing values = 0.55
                       <span class="p">(</span><span class="s2">&quot;forest&quot;</span><span class="p">,</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                                        <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">))])</span>
 <span class="n">score</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_missing</span><span class="p">,</span> <span class="n">y_missing</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score after imputation of the missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score after imputation of the missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

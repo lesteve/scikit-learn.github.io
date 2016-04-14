@@ -231,7 +231,7 @@ always faster, and for some of them by 1 to 2 orders of magnitude:</p>
 <strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="atomic_prediction_latency" src="../_images/plot_prediction_latency_0011.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p class="centered">
 <strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="bulk_prediction_latency" src="../_images/plot_prediction_latency_0021.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>To benchmark different estimators for your case you can simply change the
 <code class="docutils literal"><span class="pre">n_features</span></code> parameter in this example:
-<a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span>Prediction Latency</span></a>. This should give
+<a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a>. This should give
 you an estimate of the order of magnitude of the prediction latency.</p>
 </div>
 <div class="section" id="influence-of-the-number-of-features">
@@ -267,9 +267,9 @@ max, to be checked depending on the hardware) for the sparse input
 representation to be faster than the dense input representation on a machine
 with many CPUs and an optimized BLAS implementation.</p>
 <p>Here is sample code to test the sparsity of your input:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sparsity_ratio</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sparsity_ratio</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;input sparsity ratio:&quot;</span><span class="p">,</span> <span class="n">sparsity_ratio</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input sparsity ratio:&quot;</span><span class="p">,</span> <span class="n">sparsity_ratio</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>As a rule of thumb you can consider that if the sparsity ratio is greater
@@ -345,7 +345,7 @@ your overall latency is too slow for your application.</p>
 <p>Another important metric to care about when sizing production systems is the
 throughput i.e. the number of predictions you can make in a given amount of
 time. Here is a benchmark from the
-<a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span>Prediction Latency</span></a> example that measures
+<a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a> example that measures
 this quantity for a number of estimators on synthetic data:</p>
 <p class="centered">
 <strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="throughput_benchmark" src="../_images/plot_prediction_latency_0041.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>These throughputs are achieved on a single process. An obvious way to
@@ -373,9 +373,9 @@ BLAS implementation and lead to orders of magnitude speedup over a
 non-optimized BLAS.</p>
 <p>You can display the BLAS / LAPACK implementation used by your NumPy / SciPy /
 scikit-learn install with the following commands:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.distutils.system_info</span> <span class="kn">import</span> <span class="n">get_info</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_info</span><span class="p">(</span><span class="s1">&#39;blas_opt&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_info</span><span class="p">(</span><span class="s1">&#39;lapack_opt&#39;</span><span class="p">))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.distutils.system_info</span> <span class="k">import</span> <span class="n">get_info</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_info</span><span class="p">(</span><span class="s1">&#39;blas_opt&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_info</span><span class="p">(</span><span class="s1">&#39;lapack_opt&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -417,7 +417,7 @@ In this context it means that we want to control the model sparsity (i.e. the
 number of non-zero coordinates in the model vectors). It is generally a good
 idea to combine model sparsity with sparse input data representation.</p>
 <p>Here is sample code that illustrates the use of the <code class="docutils literal"><span class="pre">sparsify()</span></code> method:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">sparsify</span><span class="p">()</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>

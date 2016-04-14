@@ -197,8 +197,8 @@
   <div class="section" id="support-vector-machines">
 <span id="svm"></span><h1>1.4. Support Vector Machines<a class="headerlink" href="#support-vector-machines" title="Permalink to this headline">¶</a></h1>
 <p><strong>Support vector machines (SVMs)</strong> are a set of supervised learning
-methods used for <a class="reference internal" href="#svm-classification"><span>classification</span></a>,
-<a class="reference internal" href="#svm-regression"><span>regression</span></a> and <a class="reference internal" href="#svm-outlier-detection"><span>outliers detection</span></a>.</p>
+methods used for <a class="reference internal" href="#svm-classification"><span class="std std-ref">classification</span></a>,
+<a class="reference internal" href="#svm-regression"><span class="std std-ref">regression</span></a> and <a class="reference internal" href="#svm-outlier-detection"><span class="std std-ref">outliers detection</span></a>.</p>
 <p>The advantages of support vector machines are:</p>
 <blockquote>
 <div><ul class="simple">
@@ -207,7 +207,7 @@ methods used for <a class="reference internal" href="#svm-classification"><span>
 than the number of samples.</li>
 <li>Uses a subset of training points in the decision function (called
 support vectors), so it is also memory efficient.</li>
-<li>Versatile: different <a class="reference internal" href="#svm-kernels"><span>Kernel functions</span></a> can be
+<li>Versatile: different <a class="reference internal" href="#svm-kernels"><span class="std std-ref">Kernel functions</span></a> can be
 specified for the decision function. Common kernels are
 provided, but it is also possible to specify custom kernels.</li>
 </ul>
@@ -219,7 +219,7 @@ provided, but it is also possible to specify custom kernels.</li>
 samples, the method is likely to give poor performances.</li>
 <li>SVMs do not directly provide probability estimates, these are
 calculated using an expensive five-fold cross-validation
-(see <a class="reference internal" href="#scores-probabilities"><span>Scores and probabilities</span></a>, below).</li>
+(see <a class="reference internal" href="#scores-probabilities"><span class="std std-ref">Scores and probabilities</span></a>, below).</li>
 </ul>
 </div></blockquote>
 <p>The support vector machines in scikit-learn support both dense
@@ -237,7 +237,7 @@ capable of performing multi-class classification on a dataset.</p>
 </div>
 <p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> and <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a> are similar methods, but accept
 slightly different sets of parameters and have different mathematical
-formulations (see section <a class="reference internal" href="#svm-mathematical-formulation"><span>Mathematical formulation</span></a>). On the
+formulations (see section <a class="reference internal" href="#svm-mathematical-formulation"><span class="std std-ref">Mathematical formulation</span></a>). On the
 other hand, <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> is another implementation of Support
 Vector Classification for the case of a linear kernel. Note that
 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> does not accept keyword <code class="docutils literal"><span class="pre">kernel</span></code>, as this is
@@ -247,7 +247,7 @@ assumed to be linear. It also lacks some of the members of
 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> take as input two arrays: an array X of size <code class="docutils literal"><span class="pre">[n_samples,</span>
 <span class="pre">n_features]</span></code> holding the training samples, and an array y of class labels
 (strings or integers), size <code class="docutils literal"><span class="pre">[n_samples]</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
@@ -259,7 +259,7 @@ assumed to be linear. It also lacks some of the members of
 </pre></div>
 </div>
 <p>After being fitted, the model can then be used to predict new values:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
 <span class="go">array([1])</span>
 </pre></div>
 </div>
@@ -267,7 +267,7 @@ assumed to be linear. It also lacks some of the members of
 called the support vectors. Some properties of these support vectors
 can be found in members <code class="docutils literal"><span class="pre">support_vectors_</span></code>, <code class="docutils literal"><span class="pre">support_</span></code> and
 <code class="docutils literal"><span class="pre">n_support</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># get support vectors</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># get support vectors</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">support_vectors_</span>
 <span class="go">array([[ 0.,  0.],</span>
 <span class="go">       [ 1.,  1.]])</span>
@@ -289,7 +289,7 @@ To provide a consistent interface with other classifiers, the
 <code class="docutils literal"><span class="pre">decision_function_shape</span></code> option allows to aggregate the results of the
 &#8220;one-against-one&#8221; classifiers to a decision function of shape <code class="docutils literal"><span class="pre">(n_samples,</span>
 <span class="pre">n_classes)</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">decision_function_shape</span><span class="o">=</span><span class="s1">&#39;ovo&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> 
@@ -309,7 +309,7 @@ To provide a consistent interface with other classifiers, the
 <p>On the other hand, <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> implements &#8220;one-vs-the-rest&#8221;
 multi-class strategy, thus training n_class models. If there are only
 two classes, only one model is trained:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> 
 <span class="go">LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,</span>
 <span class="go">     intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,</span>
@@ -320,7 +320,7 @@ two classes, only one model is trained:</p>
 <span class="go">4</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="#svm-mathematical-formulation"><span>Mathematical formulation</span></a> for a complete description of
+<p>See <a class="reference internal" href="#svm-mathematical-formulation"><span class="std std-ref">Mathematical formulation</span></a> for a complete description of
 the decision function.</p>
 <p>Note that the <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> also implements an alternative multi-class
 strategy, the so-called multi-class SVM formulated by Crammer and Singer, by
@@ -447,12 +447,12 @@ set the parameter <code class="docutils literal"><span class="pre">C</span></cod
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/svm/plot_iris.html#example-svm-plot-iris-py"><span>Plot different SVM classifiers in the iris dataset</span></a>,</li>
-<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane.html#example-svm-plot-separating-hyperplane-py"><span>SVM: Maximum margin separating hyperplane</span></a>,</li>
-<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#example-svm-plot-separating-hyperplane-unbalanced-py"><span>SVM: Separating hyperplane for unbalanced classes</span></a></li>
-<li><a class="reference internal" href="../auto_examples/svm/plot_svm_anova.html#example-svm-plot-svm-anova-py"><span>SVM-Anova: SVM with univariate feature selection</span></a>,</li>
-<li><a class="reference internal" href="../auto_examples/svm/plot_svm_nonlinear.html#example-svm-plot-svm-nonlinear-py"><span>Non-linear SVM</span></a></li>
-<li><a class="reference internal" href="../auto_examples/svm/plot_weighted_samples.html#example-svm-plot-weighted-samples-py"><span>SVM: Weighted samples</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_iris.html#example-svm-plot-iris-py"><span class="std std-ref">Plot different SVM classifiers in the iris dataset</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane.html#example-svm-plot-separating-hyperplane-py"><span class="std std-ref">SVM: Maximum margin separating hyperplane</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#example-svm-plot-separating-hyperplane-unbalanced-py"><span class="std std-ref">SVM: Separating hyperplane for unbalanced classes</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_svm_anova.html#example-svm-plot-svm-anova-py"><span class="std std-ref">SVM-Anova: SVM with univariate feature selection</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_svm_nonlinear.html#example-svm-plot-svm-nonlinear-py"><span class="std std-ref">Non-linear SVM</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_weighted_samples.html#example-svm-plot-weighted-samples-py"><span class="std std-ref">SVM: Weighted samples</span></a>,</li>
 </ul>
 </div>
 </div>
@@ -473,11 +473,11 @@ data close to the model prediction.</p>
 provides a faster implementation than <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal"><span class="pre">SVR</span></code></a> but only considers
 linear kernels, while <a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal"><span class="pre">NuSVR</span></code></a> implements a slightly different
 formulation than <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal"><span class="pre">SVR</span></code></a> and <a class="reference internal" href="generated/sklearn.svm.LinearSVR.html#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-class docutils literal"><span class="pre">LinearSVR</span></code></a>. See
-<a class="reference internal" href="#svm-implementation-details"><span>Implementation details</span></a> for further details.</p>
+<a class="reference internal" href="#svm-implementation-details"><span class="std std-ref">Implementation details</span></a> for further details.</p>
 <p>As with classification classes, the fit method will take as
 argument vectors X, y, only that in this case y is expected to have
 floating point values instead of integer values:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVR</span><span class="p">()</span>
@@ -491,7 +491,7 @@ floating point values instead of integer values:</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/svm/plot_svm_regression.html#example-svm-plot-svm-regression-py"><span>Support Vector Regression (SVR) using linear and non-linear kernels</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_svm_regression.html#example-svm-plot-svm-regression-py"><span class="std std-ref">Support Vector Regression (SVR) using linear and non-linear kernels</span></a></li>
 </ul>
 </div>
 </div>
@@ -503,15 +503,15 @@ classify new points as belonging to that set or not. The class that
 implements this is called <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">OneClassSVM</span></code></a>.</p>
 <p>In this case, as it is a type of unsupervised learning, the fit method
 will only take as input an array X, as there are no class labels.</p>
-<p>See, section <a class="reference internal" href="outlier_detection.html#outlier-detection"><span>Novelty and Outlier Detection</span></a> for more details on this usage.</p>
+<p>See, section <a class="reference internal" href="outlier_detection.html#outlier-detection"><span class="std std-ref">Novelty and Outlier Detection</span></a> for more details on this usage.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/svm/plot_oneclass.html"><img alt="../_images/plot_oneclass_0011.png" src="../_images/plot_oneclass_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/svm/plot_oneclass.html#example-svm-plot-oneclass-py"><span>One-class SVM with non-linear kernel (RBF)</span></a></li>
-<li><a class="reference internal" href="../auto_examples/applications/plot_species_distribution_modeling.html#example-applications-plot-species-distribution-modeling-py"><span>Species distribution modeling</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_oneclass.html#example-svm-plot-oneclass-py"><span class="std std-ref">One-class SVM with non-linear kernel (RBF)</span></a></li>
+<li><a class="reference internal" href="../auto_examples/applications/plot_species_distribution_modeling.html#example-applications-plot-species-distribution-modeling-py"><span class="std std-ref">Species distribution modeling</span></a></li>
 </ul>
 </div>
 </div>
@@ -565,7 +565,7 @@ is highly recommended to scale your data</strong>. For example, scale each
 attribute on the input vector X to [0,1] or [-1,+1], or standardize it
 to have mean 0 and variance 1. Note that the <em>same</em> scaling must be
 applied to the test vector to obtain meaningful results. See section
-<a class="reference internal" href="preprocessing.html#preprocessing"><span>Preprocessing data</span></a> for more details on scaling and normalization.</p>
+<a class="reference internal" href="preprocessing.html#preprocessing"><span class="std std-ref">Preprocessing data</span></a> for more details on scaling and normalization.</p>
 </li>
 <li><p class="first">Parameter <code class="docutils literal"><span class="pre">nu</span></code> in <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a>/<a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">OneClassSVM</span></code></a>/<a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal"><span class="pre">NuSVR</span></code></a>
 approximates the fraction of training errors and support vectors.</p>
@@ -604,7 +604,7 @@ where <img class="math" src="../_images/math/2ede365ad144ab396916ec60458da038608
 </ul>
 </div></blockquote>
 <p>Different kernels are specified by keyword kernel at initialization:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">linear_svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">linear_svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">linear_svc</span><span class="o">.</span><span class="n">kernel</span>
 <span class="go">&#39;linear&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbf_svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
@@ -636,8 +636,8 @@ keyword <code class="docutils literal"><span class="pre">kernel</span></code> in
 and return a kernel matrix of shape <code class="docutils literal"><span class="pre">(n_samples_1,</span> <span class="pre">n_samples_2)</span></code>.</p>
 <p>The following code defines a linear kernel and creates a classifier
 instance that will use that kernel:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_kernel</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -647,7 +647,7 @@ instance that will use that kernel:</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/svm/plot_custom_kernel.html#example-svm-plot-custom-kernel-py"><span>SVM with custom kernel</span></a>.</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_custom_kernel.html#example-svm-plot-custom-kernel-py"><span class="std std-ref">SVM with custom kernel</span></a>.</li>
 </ul>
 </div>
 </div>
@@ -656,8 +656,8 @@ instance that will use that kernel:</p>
 <p>Set <code class="docutils literal"><span class="pre">kernel='precomputed'</span></code> and pass the Gram matrix instead of X in the fit
 method. At the moment, the kernel values between <em>all</em> training vectors and the
 test vectors must be provided.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">)</span>
@@ -689,7 +689,7 @@ is advised to use <a class="reference internal" href="generated/sklearn.model_se
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/svm/plot_rbf_parameters.html#example-svm-plot-rbf-parameters-py"><span>RBF SVM parameters</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_rbf_parameters.html#example-svm-plot-rbf-parameters-py"><span class="std std-ref">RBF SVM parameters</span></a></li>
 </ul>
 </div>
 </div>
@@ -712,7 +712,7 @@ generalization error of the classifier.</p>
 <p>Given training vectors <img class="math" src="../_images/math/2c1db07a28fbde7396015ec811dcaf9d577f6679.png" alt="x_i \in \mathbb{R}^p"/>, i=1,..., n, in two classes, and a
 vector <img class="math" src="../_images/math/c6d6323bc6376953afef6b5b8a6689a5440357c4.png" alt="y \in \{1, -1\}^n"/>, SVC solves the following primal problem:</p>
 <div class="math">
-<p><img src="../_images/math/396704acdf11cc18d2d02b32275c0ee42d76b95e.png" alt="\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i
+<p><img src="../_images/math/50df0e6ab887e3d14b728e22e9265eb66571fda8.png" alt="\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i
 
 
 
@@ -720,7 +720,7 @@ vector <img class="math" src="../_images/math/c6d6323bc6376953afef6b5b8a6689a544
 &amp; \zeta_i \geq 0, i=1, ..., n"/></p>
 </div><p>Its dual is</p>
 <div class="math">
-<p><img src="../_images/math/2133ba457cf081dbcc03536c61648e52417fc80c.png" alt="\min_{\alpha} \frac{1}{2} \alpha^T Q \alpha - e^T \alpha
+<p><img src="../_images/math/136129ab1d23169048be785b14a588c2ca32cde8.png" alt="\min_{\alpha} \frac{1}{2} \alpha^T Q \alpha - e^T \alpha
 
 
 \textrm {subject to } &amp; y^T \alpha = 0\\
@@ -732,7 +732,7 @@ is the kernel. Here training vectors are implicitly mapped into a higher
 (maybe infinite) dimensional space by the function <img class="math" src="../_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/>.</p>
 <p>The decision function is:</p>
 <div class="math">
-<p><img src="../_images/math/765b4bda0ec7e64d4baa34e4f0e8cc01ca151e1a.png" alt="\operatorname{sgn}(\sum_{i=1}^n y_i \alpha_i K(x_i, x) + \rho)"/></p>
+<p><img src="../_images/math/400103a0d08b964c3cdbb12a402b72d73d885e8a.png" alt="\operatorname{sgn}(\sum_{i=1}^n y_i \alpha_i K(x_i, x) + \rho)"/></p>
 </div><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">While SVM models derived from <a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> and <a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">liblinear</a> use <code class="docutils literal"><span class="pre">C</span></code> as
@@ -768,7 +768,7 @@ of the <img class="math" src="../_images/math/2bcc65482aa8e15cd4c9e9f2542451fb4e
 <p>Given training vectors <img class="math" src="../_images/math/2c1db07a28fbde7396015ec811dcaf9d577f6679.png" alt="x_i \in \mathbb{R}^p"/>, i=1,..., n, and a
 vector <img class="math" src="../_images/math/5c83c0acadd3ac75ed5baf206310b9b1a2b03f3a.png" alt="y \in \mathbb{R}^n"/> <img class="math" src="../_images/math/f348c73e654151e416e3c525b2ff7803590754ce.png" alt="\varepsilon"/>-SVR solves the following primal problem:</p>
 <div class="math">
-<p><img src="../_images/math/a4564c53a065f88d31b097b1b15a2db01e72bfd5.png" alt="\min_ {w, b, \zeta, \zeta^*} \frac{1}{2} w^T w + C \sum_{i=1}^{n} (\zeta_i + \zeta_i^*)
+<p><img src="../_images/math/96eea0eefd047bff3e3940b6d9b171e8e921ea17.png" alt="\min_ {w, b, \zeta, \zeta^*} \frac{1}{2} w^T w + C \sum_{i=1}^{n} (\zeta_i + \zeta_i^*)
 
 
 
@@ -777,7 +777,7 @@ vector <img class="math" src="../_images/math/5c83c0acadd3ac75ed5baf206310b9b1a2
                       &amp; \zeta_i, \zeta_i^* \geq 0, i=1, ..., n"/></p>
 </div><p>Its dual is</p>
 <div class="math">
-<p><img src="../_images/math/08c0a64f82c8a1bcf792aa6ffc9fda4281353e77.png" alt="\min_{\alpha, \alpha^*} \frac{1}{2} (\alpha - \alpha^*)^T Q (\alpha - \alpha^*) + \varepsilon e^T (\alpha + \alpha^*) - y^T (\alpha - \alpha^*)
+<p><img src="../_images/math/0e2921350f678ca0e2a85be9664b5252caff5360.png" alt="\min_{\alpha, \alpha^*} \frac{1}{2} (\alpha - \alpha^*)^T Q (\alpha - \alpha^*) + \varepsilon e^T (\alpha + \alpha^*) - y^T (\alpha - \alpha^*)
 
 
 \textrm {subject to } &amp; e^T (\alpha - \alpha^*) = 0\\
@@ -789,7 +789,7 @@ is the kernel. Here training vectors are implicitly mapped into a higher
 (maybe infinite) dimensional space by the function <img class="math" src="../_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/>.</p>
 <p>The decision function is:</p>
 <div class="math">
-<p><img src="../_images/math/9e6226cf29fbc353fca744defafbe44fee8db62b.png" alt="\sum_{i=1}^n (\alpha_i - \alpha_i^*) K(x_i, x) + \rho"/></p>
+<p><img src="../_images/math/dc401aef8f194453d1616a06b8c367a6cdf13553.png" alt="\sum_{i=1}^n (\alpha_i - \alpha_i^*) K(x_i, x) + \rho"/></p>
 </div><p>These parameters can be accessed through the members <code class="docutils literal"><span class="pre">dual_coef_</span></code>
 which holds the difference <img class="math" src="../_images/math/45566259f5632df57a1a4e87893103d00a4b5608.png" alt="\alpha_i - \alpha_i^*"/>, <code class="docutils literal"><span class="pre">support_vectors_</span></code> which
 holds the support vectors, and <code class="docutils literal"><span class="pre">intercept_</span></code> which holds the independent

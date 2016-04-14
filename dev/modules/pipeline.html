@@ -188,7 +188,7 @@ and classification. <a class="reference internal" href="generated/sklearn.pipeli
 <blockquote>
 <div><p><strong>Convenience</strong>: You only have to call <code class="docutils literal"><span class="pre">fit</span></code> and <code class="docutils literal"><span class="pre">predict</span></code> once on your
 data to fit a whole sequence of estimators.</p>
-<p><strong>Joint parameter selection</strong>: You can <a class="reference internal" href="grid_search.html#grid-search"><span>grid search</span></a>
+<p><strong>Joint parameter selection</strong>: You can <a class="reference internal" href="grid_search.html#grid-search"><span class="std std-ref">grid search</span></a>
 over parameters of all estimators in the pipeline at once.</p>
 </div></blockquote>
 <p>All estimators in a pipeline, except the last one, must be transformers
@@ -199,9 +199,9 @@ The last estimator may be any type (transformer, classifier, etc.).</p>
 <p>The <a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">Pipeline</span></code></a> is build using a list of <code class="docutils literal"><span class="pre">(key,</span> <span class="pre">value)</span></code> pairs, where
 the <code class="docutils literal"><span class="pre">key</span></code> a string containing the name you want to give this step and <code class="docutils literal"><span class="pre">value</span></code>
 is an estimator object:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;svm&#39;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> 
@@ -217,9 +217,9 @@ is an estimator object:</p>
 for constructing pipelines;
 it takes a variable number of estimators and returns a pipeline,
 filling in the names automatically:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">Binarizer</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <span class="n">MultinomialNB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">Binarizer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">make_pipeline</span><span class="p">(</span><span class="n">Binarizer</span><span class="p">(),</span> <span class="n">MultinomialNB</span><span class="p">())</span> 
 <span class="go">Pipeline(steps=[(&#39;binarizer&#39;, Binarizer(copy=True, threshold=0.0)),</span>
 <span class="go">                (&#39;multinomialnb&#39;, MultinomialNB(alpha=1.0,</span>
@@ -228,20 +228,20 @@ filling in the names automatically:</p>
 </pre></div>
 </div>
 <p>The estimators of a pipeline are stored as a list in the <code class="docutils literal"><span class="pre">steps</span></code> attribute:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
 <span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False))</span>
 </pre></div>
 </div>
 <p>and as a <code class="docutils literal"><span class="pre">dict</span></code> in <code class="docutils literal"><span class="pre">named_steps</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
 <span class="go">PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
 <span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)</span>
 </pre></div>
 </div>
 <p>Parameters of the estimators in the pipeline can be accessed using the
 <code class="docutils literal"><span class="pre">&lt;estimator&gt;__&lt;parameter&gt;</span></code> syntax:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">svm__C</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">svm__C</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
 <span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4,</span>
 <span class="go">    n_components=None, random_state=None, svd_solver=&#39;auto&#39;, tol=0.0,</span>
 <span class="go">    whiten=False)), (&#39;svm&#39;, SVC(C=10, cache_size=200, class_weight=None,</span>
@@ -251,7 +251,7 @@ filling in the names automatically:</p>
 </pre></div>
 </div>
 <p>This is particularly important for doing grid searches:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">reduce_dim__n_components</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
 <span class="gp">... </span>              <span class="n">svm__C</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
@@ -260,17 +260,17 @@ filling in the names automatically:</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/feature_selection/feature_selection_pipeline.html#example-feature-selection-feature-selection-pipeline-py"><span>Pipeline Anova SVM</span></a></li>
-<li><a class="reference internal" href="../auto_examples/model_selection/grid_search_text_feature_extraction.html#example-model-selection-grid-search-text-feature-extraction-py"><span>Sample pipeline for text feature extraction and evaluation</span></a></li>
-<li><a class="reference internal" href="../auto_examples/plot_digits_pipe.html#example-plot-digits-pipe-py"><span>Pipelining: chaining a PCA and a logistic regression</span></a></li>
-<li><a class="reference internal" href="../auto_examples/plot_kernel_approximation.html#example-plot-kernel-approximation-py"><span>Explicit feature map approximation for RBF kernels</span></a></li>
-<li><a class="reference internal" href="../auto_examples/svm/plot_svm_anova.html#example-svm-plot-svm-anova-py"><span>SVM-Anova: SVM with univariate feature selection</span></a></li>
+<li><a class="reference internal" href="../auto_examples/feature_selection/feature_selection_pipeline.html#example-feature-selection-feature-selection-pipeline-py"><span class="std std-ref">Pipeline Anova SVM</span></a></li>
+<li><a class="reference internal" href="../auto_examples/model_selection/grid_search_text_feature_extraction.html#example-model-selection-grid-search-text-feature-extraction-py"><span class="std std-ref">Sample pipeline for text feature extraction and evaluation</span></a></li>
+<li><a class="reference internal" href="../auto_examples/plot_digits_pipe.html#example-plot-digits-pipe-py"><span class="std std-ref">Pipelining: chaining a PCA and a logistic regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/plot_kernel_approximation.html#example-plot-kernel-approximation-py"><span class="std std-ref">Explicit feature map approximation for RBF kernels</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_svm_anova.html#example-svm-plot-svm-anova-py"><span class="std std-ref">SVM-Anova: SVM with univariate feature selection</span></a></li>
 </ul>
 </div>
 <div class="topic">
 <p class="topic-title first">See also:</p>
 <ul class="simple">
-<li><a class="reference internal" href="grid_search.html#grid-search"><span>Tuning the hyper-parameters of an estimator</span></a></li>
+<li><a class="reference internal" href="grid_search.html#grid-search"><span class="std std-ref">Tuning the hyper-parameters of an estimator</span></a></li>
 </ul>
 </div>
 </div>
@@ -306,9 +306,9 @@ responsibility.)</p>
 where the <code class="docutils literal"><span class="pre">key</span></code> is the name you want to give to a given transformation
 (an arbitrary string; it only serves as an identifier)
 and <code class="docutils literal"><span class="pre">value</span></code> is an estimator object:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">FeatureUnion</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">KernelPCA</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">FeatureUnion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">KernelPCA</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;linear_pca&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;kernel_pca&#39;</span><span class="p">,</span> <span class="n">KernelPCA</span><span class="p">())]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span> <span class="o">=</span> <span class="n">FeatureUnion</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span> 
@@ -327,8 +327,8 @@ and <code class="docutils literal"><span class="pre">value</span></code> is an e
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/feature_stacker.html#example-feature-stacker-py"><span>Concatenating multiple feature extraction methods</span></a></li>
-<li><a class="reference internal" href="../auto_examples/hetero_feature_union.html#example-hetero-feature-union-py"><span>Feature Union with Heterogeneous Data Sources</span></a></li>
+<li><a class="reference internal" href="../auto_examples/feature_stacker.html#example-feature-stacker-py"><span class="std std-ref">Concatenating multiple feature extraction methods</span></a></li>
+<li><a class="reference internal" href="../auto_examples/hetero_feature_union.html#example-hetero-feature-union-py"><span class="std std-ref">Feature Union with Heterogeneous Data Sources</span></a></li>
 </ul>
 </div>
 </div>

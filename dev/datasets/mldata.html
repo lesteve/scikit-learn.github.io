@@ -174,13 +174,13 @@ data, supported by the <a class="reference external" href="http://www.pascal-net
 sets from the repository using the function
 <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata" title="sklearn.datasets.fetch_mldata"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code></a>.</p>
 <p>For example, to download the MNIST digit recognition database:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_mldata</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">fetch_mldata</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mnist</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;MNIST original&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The MNIST database contains a total of 70000 examples of handwritten digits
 of size 28x28 pixels, labeled from 0 to 9:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mnist</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mnist</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(70000, 784)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mnist</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(70000,)</span>
@@ -191,7 +191,7 @@ of size 28x28 pixels, labeled from 0 to 9:</p>
 <p>After the first download, the dataset is cached locally in the path
 specified by the <code class="docutils literal"><span class="pre">data_home</span></code> keyword argument, which defaults to
 <code class="docutils literal"><span class="pre">~/scikit_learn_data/</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_data_home</span><span class="p">,</span> <span class="s1">&#39;mldata&#39;</span><span class="p">))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_data_home</span><span class="p">,</span> <span class="s1">&#39;mldata&#39;</span><span class="p">))</span>
 <span class="go">[&#39;mnist-original.mat&#39;]</span>
 </pre></div>
 </div>
@@ -205,10 +205,10 @@ shaped as <code class="docutils literal"><span class="pre">(n_features,</span> <
 <code class="docutils literal"><span class="pre">scikit-learn</span></code> convention, so <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata" title="sklearn.datasets.fetch_mldata"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code></a>
 transposes the matrix by default. The <code class="docutils literal"><span class="pre">transpose_data</span></code> keyword controls
 this behavior:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(150, 4)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="n">transpose_data</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="n">transpose_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(4, 150)</span>
@@ -223,7 +223,7 @@ and <code class="docutils literal"><span class="pre">data</span></code>. This is
 the <code class="docutils literal"><span class="pre">target_name</span></code> and <code class="docutils literal"><span class="pre">data_name</span></code> keywords, setting them to a specific
 name or index number (the name and order of the columns in the datasets
 can be found at its <a class="reference external" href="http://mldata.org">mldata.org</a> under the tab &#8220;Data&#8221;:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris2</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris2</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="gp">... </span>                     <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris3</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                     <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;double0&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>

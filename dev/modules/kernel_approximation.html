@@ -177,7 +177,7 @@
 <span id="id1"></span><h1>4.6. Kernel Approximation<a class="headerlink" href="#kernel-approximation" title="Permalink to this headline">¶</a></h1>
 <p>This submodule contains functions that approximate the feature mappings that
 correspond to certain kernels, as they are used for example in support vector
-machines (see <a class="reference internal" href="svm.html#svm"><span>Support Vector Machines</span></a>).
+machines (see <a class="reference internal" href="svm.html#svm"><span class="std std-ref">Support Vector Machines</span></a>).
 The following feature functions perform non-linear transformations of the
 input, which can serve as a basis for linear classification or other
 algorithms.</p>
@@ -194,7 +194,7 @@ In particular, the combination of kernel map approximations with
 is advisable to compare results against exact kernel methods when possible.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="linear_model.html#polynomial-regression"><span>Polynomial regression: extending linear models with basis functions</span></a> for an exact polynomial transformation.</p>
+<p class="last"><a class="reference internal" href="linear_model.html#polynomial-regression"><span class="std std-ref">Polynomial regression: extending linear models with basis functions</span></a> for an exact polynomial transformation.</p>
 </div>
 <div class="section" id="nystroem-method-for-kernel-approximation">
 <span id="nystroem-kernel-approx"></span><h2>4.6.1. Nystroem Method for Kernel Approximation<a class="headerlink" href="#nystroem-method-for-kernel-approximation" title="Permalink to this headline">¶</a></h2>
@@ -212,8 +212,8 @@ is given by the parameter <code class="docutils literal"><span class="pre">n_com
 function kernel, also known as <em>Random Kitchen Sinks</em> <a class="reference internal" href="#rr2007" id="id2">[RR2007]</a>. This
 transformation can be used to explicitly model a kernel map, prior to applying
 a linear algorithm, for example a linear SVM:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.kernel_approximation</span> <span class="kn">import</span> <span class="n">RBFSampler</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.kernel_approximation</span> <span class="k">import</span> <span class="n">RBFSampler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">SGDClassifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbf_feature</span> <span class="o">=</span> <span class="n">RBFSampler</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -252,7 +252,7 @@ use of larger feature spaces more efficient.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/plot_kernel_approximation.html#example-plot-kernel-approximation-py"><span>Explicit feature map approximation for RBF kernels</span></a></li>
+<li><a class="reference internal" href="../auto_examples/plot_kernel_approximation.html#example-plot-kernel-approximation-py"><span class="std std-ref">Explicit feature map approximation for RBF kernels</span></a></li>
 </ul>
 </div>
 </div>
@@ -261,7 +261,7 @@ use of larger feature spaces more efficient.</p>
 <p>The additive chi squared kernel is a kernel on histograms, often used in computer vision.</p>
 <p>The additive chi squared kernel as used here is given by</p>
 <div class="math">
-<p><img src="../_images/math/cc80c6a15728d06a1349a06d1f4d6ba38de9a97c.png" alt="k(x, y) = \sum_i \frac{2x_iy_i}{x_i+y_i}"/></p>
+<p><img src="../_images/math/8af975f8fc4e9a39998067aa10ac174be2efa97a.png" alt="k(x, y) = \sum_i \frac{2x_iy_i}{x_i+y_i}"/></p>
 </div><p>This is not exactly the same as <code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.additive_chi2_kernel</span></code>.
 The authors of <a class="reference internal" href="#vz2010" id="id4">[VZ2010]</a> prefer the version above as it is always positive
 definite.
@@ -284,7 +284,7 @@ See the <a class="reference internal" href="#vz2010" id="id5">[VZ2010]</a> for d
 <span id="skewed-chi-kernel-approx"></span><h2>4.6.4. Skewed Chi Squared Kernel<a class="headerlink" href="#skewed-chi-squared-kernel" title="Permalink to this headline">¶</a></h2>
 <p>The skewed chi squared kernel is given by:</p>
 <div class="math">
-<p><img src="../_images/math/0ddb6f5c7faa5f769117e3268fae9f895b095b34.png" alt="k(x,y) = \prod_i \frac{2\sqrt{x_i+c}\sqrt{y_i+c}}{x_i + y_i + 2c}"/></p>
+<p><img src="../_images/math/fb6b59ff330a224777308133e129d220ceb0c29a.png" alt="k(x,y) = \prod_i \frac{2\sqrt{x_i+c}\sqrt{y_i+c}}{x_i + y_i + 2c}"/></p>
 </div><p>It has properties that are similar to the exponentiated chi squared kernel
 often used in computer vision, but allows for a simple Monte Carlo
 approximation of the feature map.</p>
@@ -301,7 +301,7 @@ For any positive definite kernel function <img class="math" src="../_images/math
 it is guaranteed that there exists a mapping <img class="math" src="../_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/>
 into a Hilbert space <img class="math" src="../_images/math/91269b5e38d627b1f586d3210c0fb20e902b06e5.png" alt="\mathcal{H}"/>, such that</p>
 <div class="math">
-<p><img src="../_images/math/b456cfa6720d47f9429abe61ef7d0e4e91620b14.png" alt="k(x,y) = \langle \phi(x), \phi(y) \rangle"/></p>
+<p><img src="../_images/math/233aefef5c67638106b9b7b00c528cdd3f5ece85.png" alt="k(x,y) = \langle \phi(x), \phi(y) \rangle"/></p>
 </div><p>Where <img class="math" src="../_images/math/0723f27d3533f4a89b5383cf6055db6fa3f1d91a.png" alt="\langle \cdot, \cdot \rangle"/> denotes the inner product in the
 Hilbert space.</p>
 <p>If an algorithm, such as a linear support vector machine or PCA,

@@ -177,38 +177,38 @@ solutions.</p>
 The visualization shows coefficients of the models for varying C.</p>
 <img alt="../../_images/plot_logistic_l1_l2_sparsity_001.png" class="align-center" src="../../_images/plot_logistic_l1_l2_sparsity_001.png" />
 <p><strong>Script output</strong>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>C=100.00
-Sparsity with L1 penalty: 6.25%
-score with L1 penalty: 0.9104
-Sparsity with L2 penalty: 4.69%
-score with L2 penalty: 0.9098
-C=1.00
-Sparsity with L1 penalty: 10.94%
-score with L1 penalty: 0.9098
-Sparsity with L2 penalty: 4.69%
-score with L2 penalty: 0.9093
-C=0.01
-Sparsity with L1 penalty: 85.94%
-score with L1 penalty: 0.8614
-Sparsity with L2 penalty: 4.69%
-score with L2 penalty: 0.8915
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="o">=</span><span class="mf">100.00</span>
+<span class="n">Sparsity</span> <span class="k">with</span> <span class="n">L1</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">6.25</span><span class="o">%</span>
+<span class="n">score</span> <span class="k">with</span> <span class="n">L1</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">0.9104</span>
+<span class="n">Sparsity</span> <span class="k">with</span> <span class="n">L2</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">4.69</span><span class="o">%</span>
+<span class="n">score</span> <span class="k">with</span> <span class="n">L2</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">0.9098</span>
+<span class="n">C</span><span class="o">=</span><span class="mf">1.00</span>
+<span class="n">Sparsity</span> <span class="k">with</span> <span class="n">L1</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">10.94</span><span class="o">%</span>
+<span class="n">score</span> <span class="k">with</span> <span class="n">L1</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">0.9098</span>
+<span class="n">Sparsity</span> <span class="k">with</span> <span class="n">L2</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">4.69</span><span class="o">%</span>
+<span class="n">score</span> <span class="k">with</span> <span class="n">L2</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">0.9093</span>
+<span class="n">C</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="n">Sparsity</span> <span class="k">with</span> <span class="n">L1</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">85.94</span><span class="o">%</span>
+<span class="n">score</span> <span class="k">with</span> <span class="n">L1</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">0.8614</span>
+<span class="n">Sparsity</span> <span class="k">with</span> <span class="n">L2</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">4.69</span><span class="o">%</span>
+<span class="n">score</span> <span class="k">with</span> <span class="n">L2</span> <span class="n">penalty</span><span class="p">:</span> <span class="mf">0.8915</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_logistic_l1_l2_sparsity.py"><code class="xref download docutils literal"><span class="pre">plot_logistic_l1_l2_sparsity.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>
-<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_logistic_l1_l2_sparsity.py" download=""><code class="xref download docutils literal"><span class="pre">plot_logistic_l1_l2_sparsity.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Authors: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
 <span class="c1">#          Mathieu Blondel &lt;mathieu@mblondel.org&gt;</span>
 <span class="c1">#          Andreas Mueller &lt;amueller@ais.uni-bonn.de&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression"><span class="n">LogisticRegression</span></a>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression"><span class="n">LogisticRegression</span></a>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a>
 
 <span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
 
@@ -236,11 +236,11 @@ score with L2 penalty: 0.8915
     <span class="n">sparsity_l1_LR</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">coef_l1_LR</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
     <span class="n">sparsity_l2_LR</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">coef_l2_LR</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;C=</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">C</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Sparsity with L1 penalty: </span><span class="si">%.2f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sparsity_l1_LR</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;score with L1 penalty: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">clf_l1_LR</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Sparsity with L2 penalty: </span><span class="si">%.2f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sparsity_l2_LR</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;score with L2 penalty: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">clf_l2_LR</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C=</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">C</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sparsity with L1 penalty: </span><span class="si">%.2f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sparsity_l1_LR</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;score with L1 penalty: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">clf_l1_LR</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sparsity with L2 penalty: </span><span class="si">%.2f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sparsity_l2_LR</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;score with L2 penalty: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">clf_l2_LR</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 
     <span class="n">l1_plot</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">l2_plot</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
@@ -262,8 +262,8 @@ score with L2 penalty: 0.8915
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.64 seconds
-( 0 minutes  0.64 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.71 seconds
+( 0 minutes  0.71 seconds)</p>
 </div>
 
 

@@ -188,9 +188,9 @@ neighbors.</p>
 <li><a class="first reference internal image-reference" href="../../_images/plot_approximate_nearest_neighbors_hyperparameters_002.png"><img alt="../../_images/plot_approximate_nearest_neighbors_hyperparameters_002.png" src="../../_images/plot_approximate_nearest_neighbors_hyperparameters_002.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 </ul>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_approximate_nearest_neighbors_hyperparameters.py"><code class="xref download docutils literal"><span class="pre">plot_approximate_nearest_neighbors_hyperparameters.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_approximate_nearest_neighbors_hyperparameters.py" download=""><code class="xref download docutils literal"><span class="pre">plot_approximate_nearest_neighbors_hyperparameters.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Maheshakya Wijewardena &lt;maheshakya.10@cse.mrt.ac.lk&gt;</span>
 <span class="c1">#</span>
@@ -198,11 +198,11 @@ neighbors.</p>
 
 
 <span class="c1">###############################################################################</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs"><span class="n">make_blobs</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.neighbors.LSHForest.html#sklearn.neighbors.LSHForest"><span class="n">LSHForest</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors"><span class="n">NearestNeighbors</span></a>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs"><span class="n">make_blobs</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neighbors.LSHForest.html#sklearn.neighbors.LSHForest"><span class="n">LSHForest</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors"><span class="n">NearestNeighbors</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
 <span class="c1"># Initialize size of the database, iterations and required neighbors.</span>
@@ -220,7 +220,7 @@ neighbors.</p>
 <span class="c1"># Get exact neighbors</span>
 <span class="n">nbrs</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors"><span class="n">NearestNeighbors</span></a><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">,</span>
                         <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_index</span><span class="p">)</span>
-<span class="n">neighbors_exact</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_query</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">neighbors_exact</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_query</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Set `n_candidate` values</span>
 <span class="n">n_candidates_values</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
@@ -246,7 +246,7 @@ neighbors.</p>
             <span class="n">lshf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_index</span><span class="p">)</span>
             <span class="c1"># Get neighbors</span>
             <span class="n">neighbors_approx</span> <span class="o">=</span> <span class="n">lshf</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_query</span><span class="p">,</span>
-                                               <span class="n">return_distance</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                                               <span class="n">return_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">accuracy_c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.equal.html#numpy.equal"><span class="n">np</span><span class="o">.</span><span class="n">equal</span></a><span class="p">(</span><span class="n">neighbors_approx</span><span class="p">,</span>
                                               <span class="n">neighbors_exact</span><span class="p">))</span> <span class="o">/</span>
                               <span class="n">n_queries</span><span class="p">)</span>
@@ -264,7 +264,7 @@ neighbors.</p>
     <span class="c1"># Build the LSH Forest index</span>
     <span class="n">lshf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_index</span><span class="p">)</span>
     <span class="c1"># Get neighbors</span>
-    <span class="n">neighbors_approx</span> <span class="o">=</span> <span class="n">lshf</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_query</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">neighbors_approx</span> <span class="o">=</span> <span class="n">lshf</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_query</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">accuracies_trees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.equal.html#numpy.equal"><span class="n">np</span><span class="o">.</span><span class="n">equal</span></a><span class="p">(</span><span class="n">neighbors_approx</span><span class="p">,</span>
                                           <span class="n">neighbors_exact</span><span class="p">))</span><span class="o">/</span><span class="n">n_queries</span>
 
@@ -301,8 +301,8 @@ neighbors.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  20.17 seconds
-( 0 minutes  20.17 seconds)</p>
+<p><strong>Total running time of the example:</strong>  20.01 seconds
+( 0 minutes  20.01 seconds)</p>
 </div>
 
 

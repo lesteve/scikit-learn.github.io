@@ -191,11 +191,11 @@ In scikit-learn they are passed as arguments to the constructor of the
 estimator classes. Typical examples include <code class="docutils literal"><span class="pre">C</span></code>, <code class="docutils literal"><span class="pre">kernel</span></code> and <code class="docutils literal"><span class="pre">gamma</span></code>
 for Support Vector Classifier, <code class="docutils literal"><span class="pre">alpha</span></code> for Lasso, etc.</p>
 <p>It is possible and recommended to search the hyper-parameter space for the
-best <a class="reference internal" href="cross_validation.html#cross-validation"><span>Cross-validation: evaluating estimator performance</span></a> score.</p>
+best <a class="reference internal" href="cross_validation.html#cross-validation"><span class="std std-ref">Cross-validation: evaluating estimator performance</span></a> score.</p>
 <p>Any parameter provided when constructing an estimator may be optimized in this
 manner. Specifically, to find the names and current values for all parameters
 for a given estimator, use:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">estimator</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">estimator</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>A search consists of:</p>
@@ -204,16 +204,16 @@ for a given estimator, use:</p>
 <li>a parameter space;</li>
 <li>a method for searching or sampling candidates;</li>
 <li>a cross-validation scheme; and</li>
-<li>a <a class="reference internal" href="#gridsearch-scoring"><span>score function</span></a>.</li>
+<li>a <a class="reference internal" href="#gridsearch-scoring"><span class="std std-ref">score function</span></a>.</li>
 </ul>
 <p>Some models allow for specialized, efficient parameter search strategies,
-<a class="reference internal" href="#alternative-cv"><span>outlined below</span></a>.
+<a class="reference internal" href="#alternative-cv"><span class="std std-ref">outlined below</span></a>.
 Two generic approaches to sampling search candidates are provided in
 scikit-learn: for given values, <a class="reference internal" href="generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> exhaustively considers
 all parameter combinations, while <a class="reference internal" href="generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">RandomizedSearchCV</span></code></a> can sample a
 given number of candidates from a parameter space with a specified
 distribution. After describing these tools we detail
-<a class="reference internal" href="#grid-search-tips"><span>best practice</span></a> applicable to both approaches.</p>
+<a class="reference internal" href="#grid-search-tips"><span class="std std-ref">best practice</span></a> applicable to both approaches.</p>
 <p>Note that it is common that a small subset of those parameters can have a large
 impact on the predictive or computation performance of the model while others
 can be left to their default values. It is recommend to read the docstring of
@@ -224,7 +224,7 @@ possibly by reading the enclosed reference to the literature.</p>
 <p>The grid search provided by <a class="reference internal" href="generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> exhaustively generates
 candidates from a grid of parameter values specified with the <code class="docutils literal"><span class="pre">param_grid</span></code>
 parameter. For instance, the following <code class="docutils literal"><span class="pre">param_grid</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]},</span>
   <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">]},</span>
  <span class="p">]</span>
@@ -240,9 +240,9 @@ evaluated and the best combination is retained.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li>See <a class="reference internal" href="../auto_examples/model_selection/grid_search_digits.html#example-model-selection-grid-search-digits-py"><span>Parameter estimation using grid search with cross-validation</span></a> for an example of
+<li>See <a class="reference internal" href="../auto_examples/model_selection/grid_search_digits.html#example-model-selection-grid-search-digits-py"><span class="std std-ref">Parameter estimation using grid search with cross-validation</span></a> for an example of
 Grid Search computation on the digits dataset.</li>
-<li>See <a class="reference internal" href="../auto_examples/model_selection/grid_search_text_feature_extraction.html#example-model-selection-grid-search-text-feature-extraction-py"><span>Sample pipeline for text feature extraction and evaluation</span></a> for an example
+<li>See <a class="reference internal" href="../auto_examples/model_selection/grid_search_text_feature_extraction.html#example-model-selection-grid-search-text-feature-extraction-py"><span class="std std-ref">Sample pipeline for text feature extraction and evaluation</span></a> for an example
 of Grid Search coupling parameters from a text documents feature
 extractor (n-gram count vectorizer and TF-IDF transformer) with a
 classifier (here a linear SVM trained with SGD with either elastic
@@ -268,8 +268,8 @@ a computation budget, being the number of sampled candidates or sampling
 iterations, is specified using the <code class="docutils literal"><span class="pre">n_iter</span></code> parameter.
 For each parameter, either a distribution over possible values or a list of
 discrete choices (which will be sampled uniformly) can be specified:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=.</span><span class="mi">1</span><span class="p">),</span>
-  <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> <span class="s1">&#39;class_weight&#39;</span><span class="p">:[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">]}]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=.</span><span class="mi">1</span><span class="p">),</span>
+  <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> <span class="s1">&#39;class_weight&#39;</span><span class="p">:[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]}]</span>
 </pre></div>
 </div>
 <p>This example uses the <code class="docutils literal"><span class="pre">scipy.stats</span></code> module, which contains many useful
@@ -293,7 +293,7 @@ increasing <code class="docutils literal"><span class="pre">n_iter</span></code>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/model_selection/randomized_search.html#example-model-selection-randomized-search-py"><span>Comparing randomized search and grid search for hyperparameter estimation</span></a> compares the usage and efficiency
+<li><a class="reference internal" href="../auto_examples/model_selection/randomized_search.html#example-model-selection-randomized-search-py"><span class="std std-ref">Comparing randomized search and grid search for hyperparameter estimation</span></a> compares the usage and efficiency
 of randomized search and grid search.</li>
 </ul>
 </div>
@@ -319,11 +319,11 @@ classification, the accuracy score is often uninformative). An alternative
 scoring function can be specified via the <code class="docutils literal"><span class="pre">scoring</span></code> parameter to
 <a class="reference internal" href="generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a>, <a class="reference internal" href="generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">RandomizedSearchCV</span></code></a> and many of the
 specialized cross-validation tools described below.
-See <a class="reference internal" href="model_evaluation.html#scoring-parameter"><span>The scoring parameter: defining model evaluation rules</span></a> for more details.</p>
+See <a class="reference internal" href="model_evaluation.html#scoring-parameter"><span class="std std-ref">The scoring parameter: defining model evaluation rules</span></a> for more details.</p>
 </div>
 <div class="section" id="composite-estimators-and-parameter-spaces">
 <h3>3.2.3.2. Composite estimators and parameter spaces<a class="headerlink" href="#composite-estimators-and-parameter-spaces" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="pipeline.html#pipeline"><span>Pipeline: chaining estimators</span></a> describes building composite estimators whose
+<p><a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline: chaining estimators</span></a> describes building composite estimators whose
 parameter space can be searched with these tools.</p>
 </div>
 <div class="section" id="model-selection-development-and-evaluation">

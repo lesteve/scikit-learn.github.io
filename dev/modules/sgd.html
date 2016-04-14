@@ -224,7 +224,7 @@ penalties for classification.</p>
 of size [n_samples, n_features] holding the training samples, and an
 array Y of size [n_samples] holding the target values (class labels)
 for the training samples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">SGDClassifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;hinge&quot;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span><span class="p">)</span>
@@ -237,25 +237,25 @@ for the training samples:</p>
 </pre></div>
 </div>
 <p>After being fitted, the model can then be used to predict new values:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
 <span class="go">array([1])</span>
 </pre></div>
 </div>
 <p>SGD fits a linear model to the training data. The member <code class="docutils literal"><span class="pre">coef_</span></code> holds
 the model parameters:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>                                         
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>                                         
 <span class="go">array([[ 9.9...,  9.9...]])</span>
 </pre></div>
 </div>
 <p>Member <code class="docutils literal"><span class="pre">intercept_</span></code> holds the intercept (aka offset or bias):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span>                                    
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span>                                    
 <span class="go">array([-9.9...])</span>
 </pre></div>
 </div>
 <p>Whether or not the model should use an intercept, i.e. a biased
 hyperplane, is controlled by the parameter <code class="docutils literal"><span class="pre">fit_intercept</span></code>.</p>
 <p>To get the signed distance to the hyperplane use <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier.decision_function" title="sklearn.linear_model.SGDClassifier.decision_function"><code class="xref py py-meth docutils literal"><span class="pre">SGDClassifier.decision_function</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>                 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>                 
 <span class="go">array([ 29.6...])</span>
 </pre></div>
 </div>
@@ -276,7 +276,7 @@ is used.</p>
 <p>Using <code class="docutils literal"><span class="pre">loss=&quot;log&quot;</span></code> or <code class="docutils literal"><span class="pre">loss=&quot;modified_huber&quot;</span></code> enables the
 <code class="docutils literal"><span class="pre">predict_proba</span></code> method, which gives a vector of probability estimates
 <img class="math" src="../_images/math/25a9728b809a691ce3374eaeab6255410cbff5d9.png" alt="P(y|x)"/> per sample <img class="math" src="../_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>                      
 <span class="go">array([[ 0.00...,  0.99...]])</span>
 </pre></div>
@@ -323,11 +323,11 @@ further information.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_separating_hyperplane.html#example-linear-model-plot-sgd-separating-hyperplane-py"><span>SGD: Maximum margin separating hyperplane</span></a>,</li>
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_iris.html#example-linear-model-plot-sgd-iris-py"><span>Plot multi-class SGD on the iris dataset</span></a></li>
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_weighted_samples.html#example-linear-model-plot-sgd-weighted-samples-py"><span>SGD: Weighted samples</span></a></li>
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_comparison.html#example-linear-model-plot-sgd-comparison-py"><span>Comparing various online solvers</span></a></li>
-<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#example-svm-plot-separating-hyperplane-unbalanced-py"><span>SVM: Separating hyperplane for unbalanced classes</span></a> (See the <cite>Note</cite>)</li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_separating_hyperplane.html#example-linear-model-plot-sgd-separating-hyperplane-py"><span class="std std-ref">SGD: Maximum margin separating hyperplane</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_iris.html#example-linear-model-plot-sgd-iris-py"><span class="std std-ref">Plot multi-class SGD on the iris dataset</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_weighted_samples.html#example-linear-model-plot-sgd-weighted-samples-py"><span class="std std-ref">SGD: Weighted samples</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_comparison.html#example-linear-model-plot-sgd-comparison-py"><span class="std std-ref">Comparing various online solvers</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#example-svm-plot-separating-hyperplane-unbalanced-py"><span class="std std-ref">SVM: Separating hyperplane for unbalanced classes</span></a> (See the <cite>Note</cite>)</li>
 </ul>
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> supports averaged SGD (ASGD). Averaging can be enabled
@@ -380,7 +380,7 @@ matrix format as defined in <a class="reference external" href="http://docs.scip
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py"><span>Classification of text documents using sparse features</span></a></li>
+<li><a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></li>
 </ul>
 </div>
 </div>
@@ -404,7 +404,7 @@ attribute on the input vector X to [0,1] or [-1,+1], or standardize
 it to have mean 0 and variance 1. Note that the <em>same</em> scaling
 must be applied to the test vector to obtain meaningful
 results. This can be easily done using <code class="xref py py-class docutils literal"><span class="pre">StandardScaler</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>  <span class="c1"># Don&#39;t cheat - fit only on training data</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
@@ -451,7 +451,7 @@ to make predictions, we simply look at the sign of <img class="math" src="../_im
 A common choice to find the model parameters is by minimizing the regularized
 training error given by</p>
 <div class="math">
-<p><img src="../_images/math/4782697c94f74995ee99624f00633bba53f5245f.png" alt="E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)"/></p>
+<p><img src="../_images/math/638b90b4e593d5aa4b489614c5ea4541bb583773.png" alt="E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)"/></p>
 </div><p>where <img class="math" src="../_images/math/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L"/> is a loss function that measures model (mis)fit and
 <img class="math" src="../_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R"/> is a regularization term (aka penalty) that penalizes model
 complexity; <img class="math" src="../_images/math/7f2c98bf462cba6083cf18483ba9510e3c2fd3d3.png" alt="\alpha &gt; 0"/> is a non-negative hyperparameter.</p>
@@ -493,7 +493,7 @@ single training example at a time.</p>
 routine.  The algorithm iterates over the training examples and for each
 example updates the model parameters according to the update rule given by</p>
 <div class="math">
-<p><img src="../_images/math/98cdc3aed40cb93594dbaaf045ea3e1abbd8edcb.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
+<p><img src="../_images/math/069ca053962a3cd6b2689f7881657a12d4cfadd2.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
 + \frac{\partial L(w^T x_i + b, y_i)}{\partial w})"/></p>
 </div><p>where <img class="math" src="../_images/math/9172efc523d7488d4c3ed299d0be813de01503b8.png" alt="\eta"/> is the learning rate which controls the step-size in
 the parameter space.  The intercept <img class="math" src="../_images/math/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b"/> is updated similarly but
@@ -502,7 +502,7 @@ without regularization.</p>
 classification, the default learning rate schedule (<code class="docutils literal"><span class="pre">learning_rate='optimal'</span></code>)
 is given by</p>
 <div class="math">
-<p><img src="../_images/math/f12f7e91b0d9d96b5e417194a1a348c718b981b1.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}"/></p>
+<p><img src="../_images/math/344389e97db2eb61411560237e790ec8ff42c69f.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}"/></p>
 </div><p>where <img class="math" src="../_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> is the time step (there are a total of <cite>n_samples * n_iter</cite>
 time steps), <img class="math" src="../_images/math/fb761c2e199ad45ccf14767f48b88169479d840f.png" alt="t_0"/> is determined based on a heuristic proposed by Léon Bottou
 such that the expected initial updates are comparable with the expected
@@ -511,7 +511,7 @@ approx. 1). The exact definition can be found in <code class="docutils literal">
 <p>For regression the default learning rate schedule is inverse scaling
 (<code class="docutils literal"><span class="pre">learning_rate='invscaling'</span></code>), given by</p>
 <div class="math">
-<p><img src="../_images/math/1e8904a391eec39276c9794f76d1b3a247e5fdf0.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}"/></p>
+<p><img src="../_images/math/e02f2a8bd13638c78ed8150da77c1bd84adfb540.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}"/></p>
 </div><p>where <img class="math" src="../_images/math/17ed5419fbfe317f160a2be3da9c6f0ce53b5b86.png" alt="eta_0"/> and <img class="math" src="../_images/math/138a8dd99b6da12de6f02b76afeda6e5885a7f7c.png" alt="power\_t"/> are hyperparameters chosen by the
 user via <code class="docutils literal"><span class="pre">eta0</span></code> and <code class="docutils literal"><span class="pre">power_t</span></code>, resp.</p>
 <p>For a constant learning rate use <code class="docutils literal"><span class="pre">learning_rate='constant'</span></code> and use <code class="docutils literal"><span class="pre">eta0</span></code>

@@ -182,7 +182,7 @@
   <div class="section" id="decision-trees">
 <span id="tree"></span><h1>1.10. Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h1>
 <p><strong>Decision Trees (DTs)</strong> are a non-parametric supervised learning method used
-for <a class="reference internal" href="#tree-classification"><span>classification</span></a> and <a class="reference internal" href="#tree-regression"><span>regression</span></a>. The goal is to create a model that predicts the value of a
+for <a class="reference internal" href="#tree-classification"><span class="std std-ref">classification</span></a> and <a class="reference internal" href="#tree-regression"><span class="std std-ref">regression</span></a>. The goal is to create a model that predicts the value of a
 target variable by learning simple decision rules inferred from the data
 features.</p>
 <p>For instance, in the example below, decision trees learn from data to
@@ -203,7 +203,7 @@ values.</li>
 number of data points used to train the tree.</li>
 <li>Able to handle both numerical and categorical data. Other techniques
 are usually specialised in analysing datasets that have only one type
-of variable. See <a class="reference internal" href="#tree-algorithms"><span>algorithms</span></a> for more
+of variable. See <a class="reference internal" href="#tree-algorithms"><span class="std std-ref">algorithms</span></a> for more
 information.</li>
 <li>Able to handle multi-output problems.</li>
 <li>Uses a white box model. If a given situation is observable in a model,
@@ -251,7 +251,7 @@ classification on a dataset.</p>
 an array X, sparse or dense, of size <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code>  holding the
 training samples, and an array Y of integer values, size <code class="docutils literal"><span class="pre">[n_samples]</span></code>,
 holding the class labels for the training samples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
@@ -259,13 +259,13 @@ holding the class labels for the training samples:</p>
 </pre></div>
 </div>
 <p>After being fitted, the model can then be used to predict the class of samples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
 <span class="go">array([1])</span>
 </pre></div>
 </div>
 <p>Alternatively, the probability of each class can be predicted, which is the
 fraction of training samples of the same class in a leaf:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
 <span class="go">array([[ 0.,  1.]])</span>
 </pre></div>
 </div>
@@ -273,8 +273,8 @@ fraction of training samples of the same class in a leaf:</p>
 labels are [-1, 1]) classification and multiclass (where the labels are
 [0, ..., K-1]) classification.</p>
 <p>Using the Iris dataset, we can construct a tree as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
@@ -283,20 +283,20 @@ labels are [-1, 1]) classification and multiclass (where the labels are
 <p>Once trained, we can export the tree in <a class="reference external" href="http://www.graphviz.org/">Graphviz</a> format using the <a class="reference internal" href="generated/sklearn.tree.export_graphviz.html#sklearn.tree.export_graphviz" title="sklearn.tree.export_graphviz"><code class="xref py py-func docutils literal"><span class="pre">export_graphviz</span></code></a>
 exporter. Below is an example export of a tree trained on the entire
 iris dataset:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="k">import</span> <span class="n">StringIO</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;iris.dot&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">f</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then we can use Graphviz&#8217;s <code class="docutils literal"><span class="pre">dot</span></code> tool to create a PDF file (or any other
 supported file type): <code class="docutils literal"><span class="pre">dot</span> <span class="pre">-Tpdf</span> <span class="pre">iris.dot</span> <span class="pre">-o</span> <span class="pre">iris.pdf</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;iris.dot&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, if we have Python module <code class="docutils literal"><span class="pre">pydot</span></code> installed, we can generate
 a PDF file (or any other supported file type) directly in Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>  
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="k">import</span> <span class="n">StringIO</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pydot</span> 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">)</span> 
@@ -308,7 +308,7 @@ a PDF file (or any other supported file type) directly in Python:</p>
 options, including coloring nodes by their class (or value for regression) and
 using explicit variable and class names if desired. IPython notebooks can also
 render these plots inline using the <cite>Image()</cite> function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>  
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">,</span>  
 <span class="go">                         feature_names=iris.feature_names,  </span>
@@ -322,13 +322,13 @@ render these plots inline using the <cite>Image()</cite> function:</p>
 <div class="figure align-center">
 <img src="../_images/iris.svg" /></div>
 <p>After being fitted, the model can then be used to predict the class of samples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
 <span class="go">array([0])</span>
 </pre></div>
 </div>
 <p>Alternatively, the probability of each class can be predicted, which is the
 fraction of training samples of the same class in a leaf:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
 <span class="go">array([[ 1.,  0.,  0.]])</span>
 </pre></div>
 </div>
@@ -338,7 +338,7 @@ fraction of training samples of the same class in a leaf:</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/tree/plot_iris.html#example-tree-plot-iris-py"><span>Plot the decision surface of a decision tree on the iris dataset</span></a></li>
+<li><a class="reference internal" href="../auto_examples/tree/plot_iris.html#example-tree-plot-iris-py"><span class="std std-ref">Plot the decision surface of a decision tree on the iris dataset</span></a></li>
 </ul>
 </div>
 </div>
@@ -352,7 +352,7 @@ fraction of training samples of the same class in a leaf:</p>
 <p>As in the classification setting, the fit method will take as argument arrays X
 and y, only that in this case y is expected to have floating point values
 instead of integer values:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>
@@ -364,7 +364,7 @@ instead of integer values:</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression.html#example-tree-plot-tree-regression-py"><span>Decision Tree Regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression.html#example-tree-plot-tree-regression-py"><span class="std std-ref">Decision Tree Regression</span></a></li>
 </ul>
 </div>
 </div>
@@ -401,13 +401,13 @@ of size <code class="docutils literal"><span class="pre">[n_samples,</span> <spa
 </ul>
 </div></blockquote>
 <p>The use of multi-output trees for regression is demonstrated in
-<a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#example-tree-plot-tree-regression-multioutput-py"><span>Multi-output Decision Tree Regression</span></a>. In this example, the input
+<a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#example-tree-plot-tree-regression-multioutput-py"><span class="std std-ref">Multi-output Decision Tree Regression</span></a>. In this example, the input
 X is a single real value and the outputs Y are the sine and cosine of X.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression_multioutput.html"><img alt="../_images/plot_tree_regression_multioutput_0011.png" src="../_images/plot_tree_regression_multioutput_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
 </div>
 <p>The use of multi-output trees for classification is demonstrated in
-<a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span>Face completion with a multi-output estimators</span></a>. In this example, the inputs
+<a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span class="std std-ref">Face completion with a multi-output estimators</span></a>. In this example, the inputs
 X are the pixels of the upper half of faces and the outputs Y are the pixels of
 the lower half of those faces.</p>
 <div class="figure align-center">
@@ -416,8 +416,8 @@ the lower half of those faces.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#example-tree-plot-tree-regression-multioutput-py"><span>Multi-output Decision Tree Regression</span></a></li>
-<li><a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span>Face completion with a multi-output estimators</span></a></li>
+<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#example-tree-plot-tree-regression-multioutput-py"><span class="std std-ref">Multi-output Decision Tree Regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span class="std std-ref">Face completion with a multi-output estimators</span></a></li>
 </ul>
 </div>
 <div class="topic">
@@ -459,8 +459,8 @@ it tends to slow down training when training deep trees.</p>
 <li>Decision trees tend to overfit on data with a large number of features.
 Getting the right ratio of samples to number of features is important, since
 a tree with few samples in high dimensional space is very likely to overfit.</li>
-<li>Consider performing  dimensionality reduction (<a class="reference internal" href="decomposition.html#pca"><span>PCA</span></a>,
-<a class="reference internal" href="decomposition.html#ica"><span>ICA</span></a>, or <a class="reference internal" href="feature_selection.html#feature-selection"><span>Feature selection</span></a>) beforehand to
+<li>Consider performing  dimensionality reduction (<a class="reference internal" href="decomposition.html#pca"><span class="std std-ref">PCA</span></a>,
+<a class="reference internal" href="decomposition.html#ica"><span class="std std-ref">ICA</span></a>, or <a class="reference internal" href="feature_selection.html#feature-selection"><span class="std std-ref">Feature selection</span></a>) beforehand to
 give your tree a better chance of finding features that are discriminative.</li>
 <li>Visualise your tree as you are training by using the <code class="docutils literal"><span class="pre">export</span></code>
 function.  Use <code class="docutils literal"><span class="pre">max_depth=3</span></code> as an initial tree depth to get a feel for
@@ -536,18 +536,18 @@ each candidate split <img class="math" src="../_images/math/9d759be8e66ed0a164c0
 feature <img class="math" src="../_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/> and threshold <img class="math" src="../_images/math/168b41d971e0e2e6d9bf8b198eccfe76a5d71030.png" alt="t_m"/>, partition the data into
 <img class="math" src="../_images/math/e68adc400e8570b0f58d78c16290ba9bf84f0298.png" alt="Q_{left}(\theta)"/> and <img class="math" src="../_images/math/77e715cd935ec58a6793c7282b25172264dde14b.png" alt="Q_{right}(\theta)"/> subsets</p>
 <div class="math">
-<p><img src="../_images/math/1376e8e59ba3b59ff5f4f9e7dd475684017ea210.png" alt="Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m}
+<p><img src="../_images/math/c1ccf6d4ee396d4dfcbf1918a3aaff1fe8680a54.png" alt="Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m}
 
 Q_{right}(\theta) = Q \setminus Q_{left}(\theta)"/></p>
 </div><p>The impurity at <img class="math" src="../_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> is computed using an impurity function
 <img class="math" src="../_images/math/7d6e812752f434e91c490703e9983f319610933c.png" alt="H()"/>, the choice of which depends on the task being solved
 (classification or regression)</p>
 <div class="math">
-<p><img src="../_images/math/7aaed5ba95d79fa52da0d2596f76ebdc25e8893f.png" alt="G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))
+<p><img src="../_images/math/7eae12145043fe9ac92ad90f2282632c9f4a31fd.png" alt="G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))
 + \frac{n_{right}}{N_m} H(Q_{right}(\theta))"/></p>
 </div><p>Select the parameters that minimises the impurity</p>
 <div class="math">
-<p><img src="../_images/math/5d5c5d759bbce0758c8ad4e6a6d27fb6539b597e.png" alt="\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)"/></p>
+<p><img src="../_images/math/82d2a18cda2e67aec69010c5bc6fb83fd8240cce.png" alt="\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)"/></p>
 </div><p>Recurse for subsets <img class="math" src="../_images/math/d93300e24558ddc7c23e5c2633c7f13605a41203.png" alt="Q_{left}(\theta^*)"/> and
 <img class="math" src="../_images/math/66a9bcb2fb38a49967dec10ad4d7cdded003ee7d.png" alt="Q_{right}(\theta^*)"/> until the maximum allowable depth is reached,
 <img class="math" src="../_images/math/dcf8a6d5a34c9ad0b9b22f7abf78053e907e0729.png" alt="N_m &lt; \min_{samples}"/> or <img class="math" src="../_images/math/a31baaf9fe13c9b90c5a8091bcd00e981cd8a49f.png" alt="N_m = 1"/>.</p>
@@ -557,17 +557,17 @@ Q_{right}(\theta) = Q \setminus Q_{left}(\theta)"/></p>
 for node <img class="math" src="../_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/>, representing a region <img class="math" src="../_images/math/23fee98757d811d8b5ade0fd876948f60f7806d9.png" alt="R_m"/> with <img class="math" src="../_images/math/c4a8a2957d6d5970fef35cce3e86d31427eaa216.png" alt="N_m"/>
 observations, let</p>
 <div class="math">
-<p><img src="../_images/math/ebb2cff7b67f3b8c4e06405d8385983efac9659c.png" alt="p_{mk} = 1/ N_m \sum_{x_i \in R_m} I(y_i = k)"/></p>
+<p><img src="../_images/math/398a09acd9e5f940dbf8556c65fab925dc4aa837.png" alt="p_{mk} = 1/ N_m \sum_{x_i \in R_m} I(y_i = k)"/></p>
 </div><p>be the proportion of class k observations in node <img class="math" src="../_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/></p>
 <p>Common measures of impurity are Gini</p>
 <div class="math">
-<p><img src="../_images/math/6227164813ffb600135aa9f69b90000ace19ba1d.png" alt="H(X_m) = \sum_k p_{mk} (1 - p_{mk})"/></p>
+<p><img src="../_images/math/448f91e4dd78cd932c552cca8b5cb2c12f1f061e.png" alt="H(X_m) = \sum_k p_{mk} (1 - p_{mk})"/></p>
 </div><p>Cross-Entropy</p>
 <div class="math">
-<p><img src="../_images/math/f87532cfb621c0b1934429a5c0987a259ba01364.png" alt="H(X_m) = - \sum_k p_{mk} \log(p_{mk})"/></p>
+<p><img src="../_images/math/609c3de5046cc4e0fe30c15c1449d5ee2aa194a0.png" alt="H(X_m) = - \sum_k p_{mk} \log(p_{mk})"/></p>
 </div><p>and Misclassification</p>
 <div class="math">
-<p><img src="../_images/math/73565e0e02602c9b442a103dc229e5024e37ad67.png" alt="H(X_m) = 1 - \max(p_{mk})"/></p>
+<p><img src="../_images/math/ec7d50cf113d1812c7806b4cd4936a803778c14f.png" alt="H(X_m) = 1 - \max(p_{mk})"/></p>
 </div></div>
 <div class="section" id="regression-criteria">
 <h3>1.10.7.2. Regression criteria<a class="headerlink" href="#regression-criteria" title="Permalink to this headline">¶</a></h3>
@@ -575,7 +575,7 @@ observations, let</p>
 representing a region <img class="math" src="../_images/math/23fee98757d811d8b5ade0fd876948f60f7806d9.png" alt="R_m"/> with <img class="math" src="../_images/math/c4a8a2957d6d5970fef35cce3e86d31427eaa216.png" alt="N_m"/> observations, a common
 criterion to minimise is the Mean Squared Error</p>
 <div class="math">
-<p><img src="../_images/math/216499b7b74994c090829dbb0e24bfd8b8d177fc.png" alt="c_m = \frac{1}{N_m} \sum_{i \in N_m} y_i
+<p><img src="../_images/math/0ff60ef60987712a3b7c4fc4025005d48b1cf03e.png" alt="c_m = \frac{1}{N_m} \sum_{i \in N_m} y_i
 
 H(X_m) = \frac{1}{N_m} \sum_{i \in N_m} (y_i - c_m)^2"/></p>
 </div><div class="topic">

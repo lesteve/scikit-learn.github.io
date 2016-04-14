@@ -178,13 +178,13 @@ therefore motivates learning the dictionary to best fit your type of signals.</p
 <p>The richer dictionary on the right is not larger in size, heavier subsampling
 is performed in order to stay on the same order of magnitude.</p>
 <img alt="../../_images/plot_sparse_coding_001.png" class="align-center" src="../../_images/plot_sparse_coding_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_sparse_coding.py"><code class="xref download docutils literal"><span class="pre">plot_sparse_coding.py</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_sparse_coding.py" download=""><code class="xref download docutils literal"><span class="pre">plot_sparse_coding.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.SparseCoder.html#sklearn.decomposition.SparseCoder"><span class="n">SparseCoder</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.SparseCoder.html#sklearn.decomposition.SparseCoder"><span class="n">SparseCoder</span></a>
 
 
 <span class="k">def</span> <span class="nf">ricker_function</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
@@ -226,8 +226,8 @@ is performed in order to stay on the same order of magnitude.</p>
 
 <span class="c1"># List the different sparse coding methods in the following format:</span>
 <span class="c1"># (title, transform_algorithm, transform_alpha, transform_n_nozero_coefs)</span>
-<span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;OMP&#39;</span><span class="p">,</span> <span class="s1">&#39;omp&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;navy&#39;</span><span class="p">),</span>
-              <span class="p">(</span><span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;lasso_cd&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">),</span> <span class="p">]</span>
+<span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;OMP&#39;</span><span class="p">,</span> <span class="s1">&#39;omp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;navy&#39;</span><span class="p">),</span>
+              <span class="p">(</span><span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;lasso_cd&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">),</span> <span class="p">]</span>
 <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
 
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -260,13 +260,13 @@ is performed in order to stay on the same order of magnitude.</p>
              <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Thresholding w/ debiasing:</span><span class="se">\n</span><span class="si">%d</span><span class="s1"> nonzero coefs, </span><span class="si">%.2f</span><span class="s1"> error&#39;</span>
              <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="n">squared_error</span><span class="p">))</span>
     <a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-    <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">shadow</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="o">.</span><span class="mo">04</span><span class="p">,</span> <span class="o">.</span><span class="mo">07</span><span class="p">,</span> <span class="o">.</span><span class="mi">97</span><span class="p">,</span> <span class="o">.</span><span class="mi">90</span><span class="p">,</span> <span class="o">.</span><span class="mi">09</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">shadow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="o">.</span><span class="mi">04</span><span class="p">,</span> <span class="o">.</span><span class="mi">07</span><span class="p">,</span> <span class="o">.</span><span class="mi">97</span><span class="p">,</span> <span class="o">.</span><span class="mi">90</span><span class="p">,</span> <span class="o">.</span><span class="mi">09</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.37 seconds
-( 0 minutes  0.37 seconds)</p>
+<p><strong>Total running time of the example:</strong>  0.36 seconds
+( 0 minutes  0.36 seconds)</p>
 </div>
 
 
