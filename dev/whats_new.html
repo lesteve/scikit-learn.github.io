@@ -421,6 +421,8 @@ data matrix of original shape. By <a class="reference external" href="https://gi
 through the parameter <code class="docutils literal"><span class="pre">priors</span></code>. By <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</li>
 <li>Add option to show <code class="docutils literal"><span class="pre">indicator</span> <span class="pre">features</span></code> in the output of Imputer.
 By <a class="reference external" href="https://github.com/maniteja123">Mani Teja</a>.</li>
+<li>Reduce the memory usage for 32-bit float input arrays of <code class="xref py py-func docutils literal"><span class="pre">utils.mean_variance_axis</span></code> and
+<code class="xref py py-func docutils literal"><span class="pre">utils.incr_mean_variance_axis</span></code> by supporting cython fused types. By <a href="#id91"><span class="problematic" id="id92">`YenChen Lin`_</span></a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -766,7 +768,7 @@ be recomputed in <a class="reference internal" href="modules/generated/sklearn.l
 <li>Fixed inconsistent memory layout in the coordinate descent solver
 that affected <code class="xref py py-class docutils literal"><span class="pre">linear_model.DictionaryLearning</span></code> and
 <a class="reference internal" href="modules/generated/sklearn.covariance.GraphLasso.html#sklearn.covariance.GraphLasso" title="sklearn.covariance.GraphLasso"><code class="xref py py-class docutils literal"><span class="pre">covariance.GraphLasso</span></code></a>. (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/5337">#5337</a>)
-By <a href="#id91"><span class="problematic" id="id92">`Oliver Grisel`_</span></a>.</li>
+By <a href="#id93"><span class="problematic" id="id94">`Oliver Grisel`_</span></a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="sklearn.manifold.LocallyLinearEmbedding"><code class="xref py py-class docutils literal"><span class="pre">manifold.LocallyLinearEmbedding</span></code></a> no longer ignores the <code class="docutils literal"><span class="pre">reg</span></code>
 parameter.</li>
 <li>Nearest Neighbor estimators with custom distance metrics can now be pickled.
