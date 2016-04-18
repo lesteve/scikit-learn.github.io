@@ -153,6 +153,8 @@
 <li><a class="reference internal" href="#retrieving-the-latest-code">Retrieving the latest code</a></li>
 <li><a class="reference internal" href="#contributing-code">Contributing code</a><ul>
 <li><a class="reference internal" href="#how-to-contribute">How to contribute</a></li>
+<li><a class="reference internal" href="#contributing-pull-requests">Contributing pull requests</a></li>
+<li><a class="reference internal" href="#filing-bugs">Filing Bugs</a></li>
 <li><a class="reference internal" href="#easy-issues">Easy Issues</a></li>
 <li><a class="reference internal" href="#documentation">Documentation</a></li>
 <li><a class="reference internal" href="#testing-and-improving-test-coverage">Testing and improving test coverage</a></li>
@@ -326,18 +328,35 @@ command will be:</p>
 </div>
 <p>(If any of the above seems like magic to you, then look up the
 <a class="reference external" href="http://git-scm.com/documentation">Git documentation</a> on the web.)</p>
+</div>
+<div class="section" id="contributing-pull-requests">
+<h3>Contributing pull requests<a class="headerlink" href="#contributing-pull-requests" title="Permalink to this headline">¶</a></h3>
 <p>It is recommended to check that your contribution complies with the following
 rules before submitting a pull request:</p>
 <blockquote>
 <div><ul>
 <li><p class="first">Follow the <a class="reference internal" href="#coding-guidelines">coding-guidelines</a> (see below).</p>
 </li>
-<li><p class="first">When applicable, use the Validation tools and other code in the
+<li><p class="first">When applicable, use the validation tools and other code in the
 <code class="docutils literal"><span class="pre">sklearn.utils</span></code> submodule.  A list of utility routines available
 for developers can be found in the <a class="reference internal" href="utilities.html#developers-utils"><span class="std std-ref">Utilities for Developers</span></a> page.</p>
 </li>
+<li><p class="first">If your pull request addresses an issue, please use the title to describe
+the issue and mention the issue number in the pull request description to
+ensure a link is created to the original issue.</p>
+</li>
 <li><p class="first">All public methods should have informative docstrings with sample
 usage presented as doctests when appropriate.</p>
+</li>
+<li><p class="first">Please prefix the title of your pull request with <code class="docutils literal"><span class="pre">[MRG]</span></code> if the
+contribution is complete and should be subjected to a detailed review.
+Incomplete contributions should be prefixed <code class="docutils literal"><span class="pre">[WIP]</span></code> to indicate a work
+in progress (and changed to <code class="docutils literal"><span class="pre">[MRG]</span></code> when it matures). WIPs may be useful
+to: indicate you are working on something to avoid duplicated work,
+request broad review of functionality or API, or seek collaborators.
+WIPs often benefit from the inclusion of a
+<a class="reference external" href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">task list</a>
+in the PR description.</p>
 </li>
 <li><p class="first">All other tests pass when everything is rebuilt from scratch. On
 Unix-like systems, check with (from the toplevel source folder):</p>
@@ -350,6 +369,9 @@ in the <code class="docutils literal"><span class="pre">examples/</span></code> 
 Examples should demonstrate why the new functionality is useful in
 practice and, if possible, compare it to other methods available in
 scikit-learn.</p>
+</li>
+<li><p class="first">Documentation and high-coverage tests are necessary for enhancements
+to be accepted.</p>
 </li>
 <li><p class="first">At least one paragraph of narrative documentation with links to
 references in the literature (with PDF links when possible) and
@@ -409,8 +431,46 @@ and the <a class="reference external" href="http://astropy.readthedocs.org/en/la
 sections.</p>
 </div>
 </div>
+<div class="section" id="filing-bugs">
+<span id="id2"></span><h3>Filing Bugs<a class="headerlink" href="#filing-bugs" title="Permalink to this headline">¶</a></h3>
+<p>We use Github issues to track all bugs and feature requests; feel free to
+open an issue if you have found a bug or wish to see a feature implemented.</p>
+<p>It is recommended to check that your issue complies with the
+following rules before submitting:</p>
+<ul>
+<li><p class="first">Verify that your issue is not being currently addressed by other
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues?q=">issues</a>
+or <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pulls?q=">pull requests</a>.</p>
+</li>
+<li><p class="first">If you are submitting an algorithm or feature request, please verify that
+the algorithm fulfills our
+<a class="reference external" href="http://scikit-learn.org/stable/faq.html#can-i-add-this-new-algorithm-that-i-or-someone-else-just-published">new algorithm requirements</a>.</p>
+</li>
+<li><p class="first">Please ensure all code snippets and error messages are formatted in
+appropriate code blocks.
+See <a class="reference external" href="https://help.github.com/articles/creating-and-highlighting-code-blocks">Creating and highlighting code blocks</a>.</p>
+</li>
+<li><p class="first">Please include your operating system type and version number, as well
+as your Python, scikit-learn, numpy, and scipy versions. This information
+can be found by runnning the following code snippet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">())</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scipy</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SciPy&quot;</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">sklearn</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scikit-Learn&quot;</span><span class="p">,</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Please be specific about what estimators and/or functions are involved
+and the shape of the data, as appropriate; please include a
+<a class="reference external" href="http://stackoverflow.com/help/mcve">reproducible</a> code snippet
+or link to a <a class="reference external" href="https://gist.github.com">gist</a>. If an exception is raised,
+please provide the traceback.</p>
+</li>
+</ul>
+</div>
 <div class="section" id="easy-issues">
-<span id="id2"></span><h3>Easy Issues<a class="headerlink" href="#easy-issues" title="Permalink to this headline">¶</a></h3>
+<span id="id3"></span><h3>Easy Issues<a class="headerlink" href="#easy-issues" title="Permalink to this headline">¶</a></h3>
 <p>A great way to start contributing to scikit-learn is to pick an item from the
 list of <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues?q=is%3Aopen+label%3AEasy+is%3Aissue">Easy issues</a>
 in the issue tracker. Resolving these issues allow you to start contributing
@@ -564,7 +624,7 @@ documentation can be found under the doc/ directory.</p>
 and articles, link to it from your website, or simply say &#8220;I use it&#8221;:</p>
 <script type="text/javascript" src="http://www.ohloh.net/p/480792/widgets/project_users.js?style=rainbow"></script></div>
 <div class="section" id="coding-guidelines">
-<span id="id4"></span><h2>Coding guidelines<a class="headerlink" href="#coding-guidelines" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>Coding guidelines<a class="headerlink" href="#coding-guidelines" title="Permalink to this headline">¶</a></h2>
 <p>The following are some guidelines on how new code should be written. Of
 course, there are special cases and there will be exceptions to these
 rules. However, following these rules when submitting new code makes
@@ -1021,7 +1081,7 @@ fit have a trailing <code class="docutils literal"><span class="pre">_</span></c
 trailing <code class="docutils literal"><span class="pre">_</span></code> is used to check if the estimator has been fitted.</p>
 </div>
 <div class="section" id="cloning">
-<span id="id5"></span><h3>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h3>
+<span id="id6"></span><h3>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h3>
 <p>For use with the <code class="xref py py-mod docutils literal"><span class="pre">model_selection</span></code> module,
 an estimator must support the <code class="docutils literal"><span class="pre">base.clone</span></code> function to replicate an estimator.
 This can be done by providing a <code class="docutils literal"><span class="pre">get_params</span></code> method.
