@@ -149,8 +149,8 @@
     <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
 <li><a class="reference internal" href="#">2.1. Gaussian mixture models</a><ul>
-<li><a class="reference internal" href="#gaussian-mixture-model">2.1.1. Gaussian Mixture Model</a><ul>
-<li><a class="reference internal" href="#pros-and-cons-of-class-gmm-expectation-maximization-inference">2.1.1.1. Pros and cons of class <code class="docutils literal"><span class="pre">GMM</span></code>: expectation-maximization inference</a><ul>
+<li><a class="reference internal" href="#gaussian-mixture">2.1.1. Gaussian Mixture</a><ul>
+<li><a class="reference internal" href="#pros-and-cons-of-class-gaussianmixture">2.1.1.1. Pros and cons of class <code class="docutils literal"><span class="pre">GaussianMixture</span></code></a><ul>
 <li><a class="reference internal" href="#pros">2.1.1.1.1. Pros</a></li>
 <li><a class="reference internal" href="#cons">2.1.1.1.2. Cons</a></li>
 </ul>
@@ -219,18 +219,18 @@ centers of the latent Gaussians.</p>
 <p>Scikit-learn implements different classes to estimate Gaussian
 mixture models, that correspond to different estimation strategies,
 detailed below.</p>
-<div class="section" id="gaussian-mixture-model">
-<h2>2.1.1. Gaussian Mixture Model<a class="headerlink" href="#gaussian-mixture-model" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> object implements the
+<div class="section" id="gaussian-mixture">
+<h2>2.1.1. Gaussian Mixture<a class="headerlink" href="#gaussian-mixture" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code> object implements the
 <a class="reference internal" href="#expectation-maximization"><span class="std std-ref">expectation-maximization</span></a> (EM)
 algorithm for fitting mixture-of-Gaussian models. It can also draw
 confidence ellipsoids for multivariate models, and compute the
 Bayesian Information Criterion to assess the number of clusters in the
-data. A <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM.fit" title="sklearn.mixture.GMM.fit"><code class="xref py py-meth docutils literal"><span class="pre">GMM.fit</span></code></a> method is provided that learns a Gaussian
+data. A <code class="xref py py-meth docutils literal"><span class="pre">GaussianMixture.fit</span></code> method is provided that learns a Gaussian
 Mixture Model from train data. Given test data, it can assign to each
 sample the Gaussian it mostly probably belong to using
-the <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM.predict" title="sklearn.mixture.GMM.predict"><code class="xref py py-meth docutils literal"><span class="pre">GMM.predict</span></code></a> method.</p>
-<p>The <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> comes with different options to constrain the covariance
+the <code class="xref py py-meth docutils literal"><span class="pre">GaussianMixture.predict</span></code> method.</p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code> comes with different options to constrain the covariance
 of the difference classes estimated: spherical, diagonal, tied or full
 covariance.</p>
 <div class="figure align-center">
@@ -240,22 +240,22 @@ covariance.</p>
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
 <li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm_covariances.html#example-mixture-plot-gmm-covariances-py"><span class="std std-ref">GMM covariances</span></a> for an example of
-using a GMM for clustering on the iris dataset.</li>
-<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm_pdf.html#example-mixture-plot-gmm-pdf-py"><span class="std std-ref">Density Estimation for a mixture of Gaussians</span></a> for an example on plotting the
+using the Gaussian mixture as clustering on the iris dataset.</li>
+<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm_pdf.html#example-mixture-plot-gmm-pdf-py"><span class="std std-ref">Density Estimation for a Gaussian mixture</span></a> for an example on plotting the
 density estimation.</li>
 </ul>
 </div>
-<div class="section" id="pros-and-cons-of-class-gmm-expectation-maximization-inference">
-<h3>2.1.1.1. Pros and cons of class <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>: expectation-maximization inference<a class="headerlink" href="#pros-and-cons-of-class-gmm-expectation-maximization-inference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pros-and-cons-of-class-gaussianmixture">
+<h3>2.1.1.1. Pros and cons of class <code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code><a class="headerlink" href="#pros-and-cons-of-class-gaussianmixture" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="pros">
 <h4>2.1.1.1.1. Pros<a class="headerlink" href="#pros" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Speed:</th><td class="field-body">it is the fastest algorithm for learning mixture models</td>
+<tr class="field-odd field"><th class="field-name">Speed:</th><td class="field-body">It is the fastest algorithm for learning mixture models</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Agnostic:</th><td class="field-body">as this algorithm maximizes only the likelihood, it
+<tr class="field-even field"><th class="field-name">Agnostic:</th><td class="field-body">As this algorithm maximizes only the likelihood, it
 will not bias the means towards zero, or bias the cluster sizes to
 have specific structures that might or might not apply.</td>
 </tr>
@@ -268,13 +268,13 @@ have specific structures that might or might not apply.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Singularities:</th><td class="field-body">when one has insufficiently many points per
+<tr class="field-odd field"><th class="field-name">Singularities:</th><td class="field-body">When one has insufficiently many points per
 mixture, estimating the covariance matrices becomes difficult,
 and the algorithm is known to diverge and find solutions with
 infinite likelihood unless one regularizes the covariances artificially.</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Number of components:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">this algorithm will always use all the
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">This algorithm will always use all the
 components it has access to, needing held-out data
 or information theoretical criteria to decide how many components to use
 in the absence of external cues.</td>
@@ -297,7 +297,7 @@ number of components for a Gaussian mixture model.</p>
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
 <li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm_selection.html#example-mixture-plot-gmm-selection-py"><span class="std std-ref">Gaussian Mixture Model Selection</span></a> for an example
-of model selection performed with classical GMM.</li>
+of model selection performed with classical Gaussian mixture.</li>
 </ul>
 </div>
 </div>
@@ -322,10 +322,7 @@ to a local optimum.</p>
 <div class="section" id="vbgmm-variational-gaussian-mixtures">
 <span id="vbgmm"></span><h2>2.1.2. VBGMM: variational Gaussian mixtures<a class="headerlink" href="#vbgmm-variational-gaussian-mixtures" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="generated/sklearn.mixture.VBGMM.html#sklearn.mixture.VBGMM" title="sklearn.mixture.VBGMM"><code class="xref py py-class docutils literal"><span class="pre">VBGMM</span></code></a> object implements a variant of the Gaussian mixture
-model with <a class="reference internal" href="#variational-inference"><span class="std std-ref">variational inference</span></a> algorithms. The API is identical to
-<a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>. It is essentially a middle-ground between <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>
-and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>, as it has some of the properties of the Dirichlet
-process.</p>
+model with <a class="reference internal" href="#variational-inference"><span class="std std-ref">variational inference</span></a> algorithms.</p>
 <div class="section" id="pros-and-cons-of-class-vbgmm-variational-inference">
 <h3>2.1.2.1. Pros and cons of class <a class="reference internal" href="generated/sklearn.mixture.VBGMM.html#sklearn.mixture.VBGMM" title="sklearn.mixture.VBGMM"><code class="xref py py-class docutils literal"><span class="pre">VBGMM</span></code></a>: variational inference<a class="headerlink" href="#pros-and-cons-of-class-vbgmm-variational-inference" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id2">
@@ -394,7 +391,7 @@ points.</p>
 <span id="dpgmm"></span><h2>2.1.3. DPGMM: Infinite Gaussian mixtures<a class="headerlink" href="#dpgmm-infinite-gaussian-mixtures" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a> object implements a variant of the Gaussian mixture
 model with a variable (but bounded) number of components using the
-Dirichlet Process. The API is identical to <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>.
+Dirichlet Process.
 This class doesn&#8217;t require the user to choose the number of
 components, and at the expense of extra computational time the user
 only needs to specify a loose upper bound on this number and a
@@ -406,16 +403,17 @@ components on a dataset composed of 2 clusters. We can see that the DPGMM is
 able to limit itself to only 2 components whereas the GMM fits the data fit too
 many components. Note that with very little observations, the DPGMM can take a
 conservative stand, and fit only one component. <strong>On the right</strong> we are fitting
-a dataset not well-depicted by a mixture of Gaussian. Adjusting the <cite>alpha</cite>
+a dataset not well-depicted by a Gaussian mixture. Adjusting the <cite>alpha</cite>
 parameter of the DPGMM controls the number of components used to fit this
 data.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
 <li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm.html#example-mixture-plot-gmm-py"><span class="std std-ref">Gaussian Mixture Model Ellipsoids</span></a> for an example on plotting the
-confidence ellipsoids for both <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>.</li>
-<li><a class="reference internal" href="../auto_examples/mixture/plot_gmm_sin.html#example-mixture-plot-gmm-sin-py"><span class="std std-ref">Gaussian Mixture Model Sine Curve</span></a> shows using <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> and
-<a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a> to fit a sine wave</li>
+confidence ellipsoids for both <code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code>
+and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>.</li>
+<li><a class="reference internal" href="../auto_examples/mixture/plot_gmm_sin.html#example-mixture-plot-gmm-sin-py"><span class="std std-ref">Gaussian Mixture Model Sine Curve</span></a> shows using
+<code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code> and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a> to fit a sine wave</li>
 </ul>
 </div>
 <div class="section" id="pros-and-cons-of-class-dpgmm-dirichlet-process-mixture-model">
