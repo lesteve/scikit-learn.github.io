@@ -170,7 +170,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster</span></code></a>.k_means<a class="headerlink" href="#sklearn-cluster-k-means" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.cluster.k_means">
-<code class="descclassname">sklearn.cluster.</code><code class="descname">k_means</code><span class="sig-paren">(</span><em>X</em>, <em>n_clusters</em>, <em>init='k-means++'</em>, <em>precompute_distances='auto'</em>, <em>n_init=10</em>, <em>max_iter=300</em>, <em>verbose=False</em>, <em>tol=0.0001</em>, <em>random_state=None</em>, <em>copy_x=True</em>, <em>n_jobs=1</em>, <em>return_n_iter=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/78a6748/sklearn/cluster/k_means_.py#L166"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.k_means" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.cluster.</code><code class="descname">k_means</code><span class="sig-paren">(</span><em>X</em>, <em>n_clusters</em>, <em>init='k-means++'</em>, <em>precompute_distances='auto'</em>, <em>n_init=10</em>, <em>max_iter=300</em>, <em>verbose=False</em>, <em>tol=0.0001</em>, <em>random_state=None</em>, <em>copy_x=True</em>, <em>n_jobs=1</em>, <em>algorithm='auto'</em>, <em>return_n_iter=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/6d7dfdb/sklearn/cluster/k_means_.py#L167"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.k_means" title="Permalink to this definition">¶</a></dt>
 <dd><p>K-means clustering algorithm.</p>
 <p>Read more in the <a class="reference internal" href="../clustering.html#k-means"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -208,6 +208,13 @@ variance estimated from the data.</p>
 and gives the initial centers.</p>
 <p>If a callable is passed, it should take arguments X, k and
 and a random state and return an initialization.</p>
+</div></blockquote>
+<p><strong>algorithm</strong> : &#8220;auto&#8221;, &#8220;full&#8221; or &#8220;elkan&#8221;, default=&#8221;auto&#8221;</p>
+<blockquote>
+<div><p>K-means algorithm to use. The classical EM-style algorithm is &#8220;full&#8221;.
+The &#8220;elkan&#8221; variation is more efficient by using the triangle
+inequality, but currently doesn&#8217;t support sparse data. &#8220;auto&#8221; chooses
+&#8220;elkan&#8221; for dense data and &#8220;full&#8221; for sparse data.</p>
 </div></blockquote>
 <p><strong>precompute_distances</strong> : {&#8216;auto&#8217;, True, False}</p>
 <blockquote>
