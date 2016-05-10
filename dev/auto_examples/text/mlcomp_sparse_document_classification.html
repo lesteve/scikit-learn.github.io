@@ -206,7 +206,7 @@ the root folder holding the uncompressed archive:</p>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
-<span class="kn">import</span> <span class="nn">pylab</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.load_mlcomp.html#sklearn.datasets.load_mlcomp"><span class="n">load_mlcomp</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a>
@@ -236,7 +236,7 @@ the root folder holding the uncompressed archive:</p>
                                     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">news_train</span><span class="o">.</span><span class="n">filenames</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n_samples: </span><span class="si">%d</span><span class="s2">, n_features: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">sp</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="k">assert</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.issparse.html#scipy.sparse.issparse"><span class="n">sp</span><span class="o">.</span><span class="n">issparse</span></a><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">news_train</span><span class="o">.</span><span class="n">target</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading 20 newsgroups test set... &quot;</span><span class="p">)</span>
@@ -283,9 +283,9 @@ the root folder holding the uncompressed archive:</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
 
     <span class="c1"># Show confusion matrix</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confusion matrix of the </span><span class="si">%s</span><span class="s1"> classifier&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Confusion matrix of the </span><span class="si">%s</span><span class="s1"> classifier&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testbenching a linear classifier...&quot;</span><span class="p">)</span>
@@ -304,7 +304,7 @@ the root folder holding the uncompressed archive:</p>
 
 <span class="n">benchmark</span><span class="p">(</span><a href="../../modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB"><span class="n">MultinomialNB</span></a><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="s1">&#39;MultinomialNB&#39;</span><span class="p">)</span>
 
-<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
 </div>
