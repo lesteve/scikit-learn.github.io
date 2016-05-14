@@ -339,7 +339,7 @@ By <a class="reference external" href="https://github.com/AndreaBravi">Andrea Br
 and it is available calling with parameter <code class="docutils literal"><span class="pre">svd_solver='randomized'</span></code>.
 The default number of <code class="docutils literal"><span class="pre">n_iter</span></code> for <code class="docutils literal"><span class="pre">'randomized'</span></code> has changed to 4. The old
 behavior of PCA is recovered by <code class="docutils literal"><span class="pre">svd_solver='full'</span></code>. An additional solver
-calls <cite>arpack</cite> and performs truncated (non-randomized) SVD. By default,
+calls <code class="docutils literal"><span class="pre">arpack</span></code> and performs truncated (non-randomized) SVD. By default,
 the best solver is selected depending on the size of the input and the
 number of components requested.
 (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/5299">#5299</a>) by <a class="reference external" href="https://github.com/giorgiop">Giorgio Patrini</a>.</li>
@@ -472,12 +472,14 @@ by <a class="reference external" href="http://sebastianraschka.com">Sebastian Ra
 where train and test sample could overlap in some edge cases,
 see <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6121">#6121</a> for
 more details. By <a class="reference external" href="https://github.com/lesteve">Loic Esteve</a>.</li>
-<li>Attribute <cite>explained_variance_ratio_</cite> calculated with the SVD solver of
+<li>Attribute <code class="docutils literal"><span class="pre">explained_variance_ratio_</span></code> calculated with the SVD solver of
 <a href="#id15"><span class="problematic" id="id16">:clas:`discriminant_analysis.LinearDiscriminantAnalysis`</span></a> now returns
 correct results. By <a class="reference external" href="https://github.com/JPFrancoia">JPFrancoia</a></li>
-<li>Fixed incorrect gradient computation for <cite>loss=&#8217;squared_epsilon_insensitive&#8217;</cite> in
+<li>Fixed incorrect gradient computation for <code class="docutils literal"><span class="pre">loss='squared_epsilon_insensitive'</span></code> in
 <a class="reference internal" href="modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDClassifier</span></code></a> and <a class="reference internal" href="modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDRegressor</span></code></a>
 (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/6764">#6764</a>). By <a class="reference external" href="https://github.com/geekoala">Wenhua Yang</a>.</li>
+<li>Fix bug where expected and adjusted mutual information were incorrect if
+cluster contingency cells exceeded <code class="docutils literal"><span class="pre">2**16</span></code>. By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
 </ul>
 </div></blockquote>
 </div>
