@@ -173,6 +173,7 @@
 <li><a class="reference internal" href="#matthews-correlation-coefficient">3.3.2.11. Matthews correlation coefficient</a></li>
 <li><a class="reference internal" href="#receiver-operating-characteristic-roc">3.3.2.12. Receiver operating characteristic (ROC)</a></li>
 <li><a class="reference internal" href="#zero-one-loss">3.3.2.13. Zero one loss</a></li>
+<li><a class="reference internal" href="#brier-score-loss">3.3.2.14. Brier score loss</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multilabel-ranking-metrics">3.3.3. Multilabel ranking metrics</a><ul>
@@ -1264,14 +1265,68 @@ elimination with cross-validation.</li>
 </ul>
 </div>
 </div>
+<div class="section" id="brier-score-loss">
+<span id="id13"></span><h3>3.3.2.14. Brier score loss<a class="headerlink" href="#brier-score-loss" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="generated/sklearn.metrics.brier_score_loss.html#sklearn.metrics.brier_score_loss" title="sklearn.metrics.brier_score_loss"><code class="xref py py-func docutils literal"><span class="pre">brier_score_loss</span></code></a> function computes the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Brier_score">Brier score</a>
+for binary classes. Quoting Wikipedia:</p>
+<blockquote>
+<div>&#8220;The Brier score is a proper score function that measures the accuracy of
+probabilistic predictions. It is applicable to tasks in which predictions
+must assign probabilities to a set of mutually exclusive discrete outcomes.&#8221;</div></blockquote>
+<p>This function returns a score of the mean square difference between the actual
+outcome and the predicted probability of the possible outcome. The actual
+outcome has to be 1 or 0 (true or false), while the predicted probability of
+the actual outcome can be a value between 0 and 1.</p>
+<p>The brier score loss is also between 0 to 1 and the lower the score (the mean
+square difference is smaller), the more accurate the prediction is. It can be
+thought of as a measure of the &#8220;calibration&#8221; of a set of probabilistic
+predictions.</p>
+<div class="math">
+<p><img src="../_images/math/53856db484e2431d1ae89394bbc0fe4153de8bd9.png" alt="BS = \frac{1}{N} \sum_{t=1}^{N}(f_t - o_t)^2"/></p>
+</div><p>where : <img class="math" src="../_images/math/75e27f04188974063be3230dca208cd495b77ce1.png" alt="N"/> is the total number of predictions, <img class="math" src="../_images/math/20d1c1977235793ab400eba6b6e71fb8b0020df3.png" alt="f_t"/> is the
+predicted probablity of the actual outcome <img class="math" src="../_images/math/3f9b4067ecaf7b3de46e5a2e464e4a028729b9b2.png" alt="o_t"/>.</p>
+<p>Here is a small example of usage of this function::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">brier_score_loss</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_true_categorical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;spam&quot;</span><span class="p">,</span> <span class="s2">&quot;ham&quot;</span><span class="p">,</span> <span class="s2">&quot;ham&quot;</span><span class="p">,</span> <span class="s2">&quot;spam&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+<span class="go">0.055</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">y_prob</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0.055</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_true_categorical</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s2">&quot;ham&quot;</span><span class="p">)</span>
+<span class="go">0.055</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">Example:</p>
+<ul class="simple">
+<li>See <a class="reference internal" href="../auto_examples/calibration/plot_calibration.html#example-calibration-plot-calibration-py"><span class="std std-ref">Probability calibration of classifiers</span></a>
+for an example of Brier score loss usage to perform probability
+calibration of classifiers.</li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>G. Brier, <a class="reference external" href="http://docs.lib.noaa.gov/rescue/mwr/078/mwr-078-01-0001.pdf">Verification of forecasts expressed in terms of probability</a>,
+Monthly weather review 78.1 (1950)</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="section" id="multilabel-ranking-metrics">
-<span id="id13"></span><h2>3.3.3. Multilabel ranking metrics<a class="headerlink" href="#multilabel-ranking-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="id14"></span><h2>3.3.3. Multilabel ranking metrics<a class="headerlink" href="#multilabel-ranking-metrics" title="Permalink to this headline">¶</a></h2>
 <p>In multilabel learning, each sample can have any number of ground truth labels
 associated with it. The goal is to give high scores and better rank to
 the ground truth labels.</p>
 <div class="section" id="coverage-error">
-<span id="id14"></span><h3>3.3.3.1. Coverage error<a class="headerlink" href="#coverage-error" title="Permalink to this headline">¶</a></h3>
+<span id="id15"></span><h3>3.3.3.1. Coverage error<a class="headerlink" href="#coverage-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.coverage_error.html#sklearn.metrics.coverage_error" title="sklearn.metrics.coverage_error"><code class="xref py py-func docutils literal"><span class="pre">coverage_error</span></code></a> function computes the average number of labels that
 have to be included in the final prediction such that all true labels
 are predicted. This is useful if you want to know how many top-scored-labels
@@ -1299,7 +1354,7 @@ maximal rank that would have been assigned to all tied values.</p>
 </div>
 </div>
 <div class="section" id="label-ranking-average-precision">
-<span id="id15"></span><h3>3.3.3.2. Label ranking average precision<a class="headerlink" href="#label-ranking-average-precision" title="Permalink to this headline">¶</a></h3>
+<span id="id16"></span><h3>3.3.3.2. Label ranking average precision<a class="headerlink" href="#label-ranking-average-precision" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.label_ranking_average_precision_score.html#sklearn.metrics.label_ranking_average_precision_score" title="sklearn.metrics.label_ranking_average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">label_ranking_average_precision_score</span></code></a> function
 implements label ranking average precision (LRAP). This metric is linked to
 the <a class="reference internal" href="generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="sklearn.metrics.average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">average_precision_score</span></code></a> function, but is based on the notion of
@@ -1366,7 +1421,7 @@ the ranking loss is defined as</p>
 </div>
 </div>
 <div class="section" id="regression-metrics">
-<span id="id16"></span><h2>3.3.4. Regression metrics<a class="headerlink" href="#regression-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="id17"></span><h2>3.3.4. Regression metrics<a class="headerlink" href="#regression-metrics" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a> module implements several loss, score, and utility
 functions to measure regression performance. Some of those have been enhanced
 to handle the multioutput case: <a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">mean_squared_error</span></code></a>,
@@ -1390,7 +1445,7 @@ score puts more importance on well explaining the higher variance variables.
 for backward compatibility. This will be changed to <code class="docutils literal"><span class="pre">uniform_average</span></code> in the
 future.</p>
 <div class="section" id="explained-variance-score">
-<span id="id17"></span><h3>3.3.4.1. Explained variance score<a class="headerlink" href="#explained-variance-score" title="Permalink to this headline">¶</a></h3>
+<span id="id18"></span><h3>3.3.4.1. Explained variance score<a class="headerlink" href="#explained-variance-score" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.explained_variance_score.html#sklearn.metrics.explained_variance_score" title="sklearn.metrics.explained_variance_score"><code class="xref py py-func docutils literal"><span class="pre">explained_variance_score</span></code></a> computes the <a class="reference external" href="https://en.wikipedia.org/wiki/Explained_variation">explained variance
 regression score</a>.</p>
 <p>If <img class="math" src="../_images/math/4edbd88750539c2610a7bbfcf79c33cf1ae7a36c.png" alt="\hat{y}"/> is the estimated target output, <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/> the corresponding
@@ -1418,7 +1473,7 @@ function:</p>
 </div>
 </div>
 <div class="section" id="mean-absolute-error">
-<span id="id18"></span><h3>3.3.4.2. Mean absolute error<a class="headerlink" href="#mean-absolute-error" title="Permalink to this headline">¶</a></h3>
+<span id="id19"></span><h3>3.3.4.2. Mean absolute error<a class="headerlink" href="#mean-absolute-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.mean_absolute_error.html#sklearn.metrics.mean_absolute_error" title="sklearn.metrics.mean_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">mean_absolute_error</span></code></a> function computes <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_absolute_error">mean absolute
 error</a>, a risk
 metric corresponding to the expected value of the absolute error loss or
@@ -1447,7 +1502,7 @@ and <img class="math" src="../_images/math/410a65f64e2a609a2a7f544ed72f0982b7198
 </div>
 </div>
 <div class="section" id="mean-squared-error">
-<span id="id20"></span><h3>3.3.4.3. Mean squared error<a class="headerlink" href="#mean-squared-error" title="Permalink to this headline">¶</a></h3>
+<span id="id21"></span><h3>3.3.4.3. Mean squared error<a class="headerlink" href="#mean-squared-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">mean_squared_error</span></code></a> function computes <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">mean square
 error</a>, a risk
 metric corresponding to the expected value of the squared (quadratic) error loss or
@@ -1480,7 +1535,7 @@ evaluate gradient boosting regression.</li>
 </div>
 </div>
 <div class="section" id="median-absolute-error">
-<span id="id21"></span><h3>3.3.4.4. Median absolute error<a class="headerlink" href="#median-absolute-error" title="Permalink to this headline">¶</a></h3>
+<span id="id22"></span><h3>3.3.4.4. Median absolute error<a class="headerlink" href="#median-absolute-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.median_absolute_error.html#sklearn.metrics.median_absolute_error" title="sklearn.metrics.median_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">median_absolute_error</span></code></a> is particularly interesting because it is
 robust to outliers. The loss is calculated by taking the median of all absolute
 differences between the target and the prediction.</p>
@@ -1550,14 +1605,14 @@ evaluate Lasso and Elastic Net on sparse signals.</li>
 </div>
 </div>
 <div class="section" id="clustering-metrics">
-<span id="id22"></span><h2>3.3.5. Clustering metrics<a class="headerlink" href="#clustering-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="id23"></span><h2>3.3.5. Clustering metrics<a class="headerlink" href="#clustering-metrics" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a> module implements several loss, score, and utility
 functions. For more information see the <a class="reference internal" href="clustering.html#clustering-evaluation"><span class="std std-ref">Clustering performance evaluation</span></a>
 section for instance clustering, and <a class="reference internal" href="biclustering.html#biclustering-evaluation"><span class="std std-ref">Biclustering evaluation</span></a> for
 biclustering.</p>
 </div>
 <div class="section" id="dummy-estimators">
-<span id="id23"></span><h2>3.3.6. Dummy estimators<a class="headerlink" href="#dummy-estimators" title="Permalink to this headline">¶</a></h2>
+<span id="id24"></span><h2>3.3.6. Dummy estimators<a class="headerlink" href="#dummy-estimators" title="Permalink to this headline">¶</a></h2>
 <p>When doing supervised learning, a simple sanity check consists of comparing
 one&#8217;s estimator against simple rules of thumb. <a class="reference internal" href="generated/sklearn.dummy.DummyClassifier.html#sklearn.dummy.DummyClassifier" title="sklearn.dummy.DummyClassifier"><code class="xref py py-class docutils literal"><span class="pre">DummyClassifier</span></code></a>
 implements several such simple strategies for classification:</p>

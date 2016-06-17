@@ -187,9 +187,19 @@
 <li><a class="reference internal" href="#id15">2.3.9.3.3. Mathematical formulation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#silhouette-coefficient">2.3.9.4. Silhouette Coefficient</a><ul>
+<li><a class="reference internal" href="#fowlkes-mallows-scores">2.3.9.4. Fowlkes-Mallows scores</a><ul>
 <li><a class="reference internal" href="#id17">2.3.9.4.1. Advantages</a></li>
 <li><a class="reference internal" href="#id18">2.3.9.4.2. Drawbacks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#silhouette-coefficient">2.3.9.5. Silhouette Coefficient</a><ul>
+<li><a class="reference internal" href="#id20">2.3.9.5.1. Advantages</a></li>
+<li><a class="reference internal" href="#id21">2.3.9.5.2. Drawbacks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#calinski-harabaz-index">2.3.9.6. Calinski-Harabaz Index</a><ul>
+<li><a class="reference internal" href="#id23">2.3.9.6.1. Advantages</a></li>
+<li><a class="reference internal" href="#id24">2.3.9.6.2. Drawbacks</a></li>
 </ul>
 </li>
 </ul>
@@ -235,7 +245,7 @@ in the <a class="reference internal" href="classes.html#module-sklearn.metrics.p
 </div>
 <div class="section" id="overview-of-clustering-methods">
 <h2>2.3.1. Overview of clustering methods<a class="headerlink" href="#overview-of-clustering-methods" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center" id="id19">
+<div class="figure align-center" id="id25">
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_cluster_comparison.html"><img alt="../_images/plot_cluster_comparison_0011.png" src="../_images/plot_cluster_comparison_0011.png" style="width: 950.0px; height: 475.0px;" /></a>
 <p class="caption"><span class="caption-text">A comparison of the clustering algorithms in scikit-learn</span></p>
 </div>
@@ -1371,8 +1381,91 @@ Becker, PhD Thesis.</td></tr>
 </div>
 </div>
 </div>
+<div class="section" id="fowlkes-mallows-scores">
+<span id="id16"></span><h3>2.3.9.4. Fowlkes-Mallows scores<a class="headerlink" href="#fowlkes-mallows-scores" title="Permalink to this headline">¶</a></h3>
+<p>The Fowlkes-Mallows index (<a class="reference internal" href="generated/sklearn.metrics.fowlkes_mallows_score.html#sklearn.metrics.fowlkes_mallows_score" title="sklearn.metrics.fowlkes_mallows_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.fowlkes_mallows_score</span></code></a>) can be
+used when the ground truth class assignments of the samples is known. The
+Fowlkes-Mallows score FMI is defined as the geometric mean of the
+pairwise precision and recall:</p>
+<div class="math">
+<p><img src="../_images/math/ddda9a8ef2ca28caddf5ca70da0b6f841c6479e1.png" alt="\text{FMI} = \frac{\text{TP}}{\sqrt{(\text{TP} + \text{FP}) (\text{TP} + \text{FN})}}"/></p>
+</div><p>Where <code class="docutils literal"><span class="pre">TP</span></code> is the number of <strong>True Positive</strong> (i.e. the number of pair
+of points that belong to the same clusters in both the true labels and the
+predicted labels), <code class="docutils literal"><span class="pre">FP</span></code> is the number of <strong>False Positive</strong> (i.e. the number
+of pair of points that belong to the same clusters in the true labels and not
+in the predicted labels) and <code class="docutils literal"><span class="pre">FN</span></code> is the number of <strong>False Negative</strong> (i.e the
+number of pair of points that belongs in the same clusters in the predicted
+labels and not in the true labels).</p>
+<p>The score ranges from 0 to 1. A high value indicates a good similarity
+between two clusters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">fowlkes_mallows_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
+<span class="go">0.47140...</span>
+</pre></div>
+</div>
+<p>One can permute 0 and 1 in the predicted labels, rename 2 to 3 and get
+the same score:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">fowlkes_mallows_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
+<span class="go">0.47140...</span>
+</pre></div>
+</div>
+<p>Perfect labeling is scored 1.0:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="n">labels_true</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">fowlkes_mallows_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Bad (e.g. independent labelings) have zero scores:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">fowlkes_mallows_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<div class="section" id="id17">
+<h4>2.3.9.4.1. Advantages<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Random (uniform) label assignments have a FMI score close to 0.0</strong>
+for any value of <code class="docutils literal"><span class="pre">n_clusters</span></code> and <code class="docutils literal"><span class="pre">n_samples</span></code> (which is not the
+case for raw Mutual Information or the V-measure for instance).</li>
+<li><strong>Bounded range [0, 1]</strong>:  Values close to zero indicate two label
+assignments that are largely independent, while values close to one
+indicate significant agreement. Further, values of exactly 0 indicate
+<strong>purely</strong> independent label assignments and a AMI of exactly 1 indicates
+that the two label assignments are equal (with or without permutation).</li>
+<li><strong>No assumption is made on the cluster structure</strong>: can be used
+to compare clustering algorithms such as k-means which assumes isotropic
+blob shapes with results of spectral clustering algorithms which can
+find cluster with &#8220;folded&#8221; shapes.</li>
+</ul>
+</div>
+<div class="section" id="id18">
+<h4>2.3.9.4.2. Drawbacks<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Contrary to inertia, <strong>FMI-based measures require the knowledge
+of the ground truth classes</strong> while almost never available in practice or
+requires manual assignment by human annotators (as in the supervised learning
+setting).</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">References</p>
+<ul class="simple">
+<li>E. B. Fowkles and C. L. Mallows, 1983. &#8220;A method for comparing two
+hierarchical clusterings&#8221;. Journal of the American Statistical Association.
+<a class="reference external" href="http://wildfire.stat.ucla.edu/pdflibrary/fowlkes.pdf">http://wildfire.stat.ucla.edu/pdflibrary/fowlkes.pdf</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Fowlkes-Mallows_index">Wikipedia entry for the Fowlkes-Mallows Index</a></li>
+</ul>
+</div>
+</div>
+</div>
 <div class="section" id="silhouette-coefficient">
-<span id="id16"></span><h3>2.3.9.4. Silhouette Coefficient<a class="headerlink" href="#silhouette-coefficient" title="Permalink to this headline">¶</a></h3>
+<span id="id19"></span><h3>2.3.9.5. Silhouette Coefficient<a class="headerlink" href="#silhouette-coefficient" title="Permalink to this headline">¶</a></h3>
 <p>If the ground truth labels are not known, evaluation must be performed using
 the model itself. The Silhouette Coefficient
 (<a class="reference internal" href="generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="sklearn.metrics.silhouette_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.silhouette_score</span></code></a>)
@@ -1419,8 +1512,8 @@ and Applied Mathematics 20: 53–65.
 <a class="reference external" href="http://dx.doi.org/10.1016/0377-0427(87)90125-7">doi:10.1016/0377-0427(87)90125-7</a>.</li>
 </ul>
 </div>
-<div class="section" id="id17">
-<h4>2.3.9.4.1. Advantages<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id20">
+<h4>2.3.9.5.1. Advantages<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The score is bounded between -1 for incorrect clustering and +1 for highly
 dense clustering. Scores around zero indicate overlapping clusters.</li>
@@ -1428,8 +1521,8 @@ dense clustering. Scores around zero indicate overlapping clusters.</li>
 to a standard concept of a cluster.</li>
 </ul>
 </div>
-<div class="section" id="id18">
-<h4>2.3.9.4.2. Drawbacks<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id21">
+<h4>2.3.9.5.2. Drawbacks<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The Silhouette Coefficient is generally higher for convex clusters than other
 concepts of clusters, such as density based clusters like those obtained
@@ -1440,6 +1533,70 @@ through DBSCAN.</li>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/cluster/plot_kmeans_silhouette_analysis.html#example-cluster-plot-kmeans-silhouette-analysis-py"><span class="std std-ref">Selecting the number of clusters with silhouette analysis on KMeans clustering</span></a> : In this example
 the silhouette analysis is used to choose an optimal value for n_clusters.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="calinski-harabaz-index">
+<span id="id22"></span><h3>2.3.9.6. Calinski-Harabaz Index<a class="headerlink" href="#calinski-harabaz-index" title="Permalink to this headline">¶</a></h3>
+<p>If the ground truth labels are not known, the Calinski-Harabaz index
+(<a class="reference internal" href="generated/sklearn.metrics.calinski_harabaz_score.html#sklearn.metrics.calinski_harabaz_score" title="sklearn.metrics.calinski_harabaz_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.calinski_harabaz_score</span></code></a>) can be used to evaluate the
+model, where a higher Calinski-Harabaz score relates to a model with better
+defined clusters.</p>
+<p>For <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> clusters, the Calinski-Harabaz score <img class="math" src="../_images/math/6859317dd1b439cef34131bcd4bafee8393444e0.png" alt="s"/> is given as the
+ratio of the between-clusters dispersion mean and the within-cluster
+dispersion:</p>
+<div class="math">
+<p><img src="../_images/math/5321ea7fa31b13aaf639a685bc03b820c4f9d27b.png" alt="s(k) = \frac{\mathrm{Tr}(B_k)}{\mathrm{Tr}(W_k)} \times \frac{N - k}{k - 1}"/></p>
+</div><p>where <img class="math" src="../_images/math/70c7b1da072bf2496663300eafa2923bc21d6afc.png" alt="B_K"/> is the between group dispersion matrix and <img class="math" src="../_images/math/9ca2b8375b6f6499a8faee421f519b70a5ed469c.png" alt="W_K"/>
+is the within-cluster dispersion matrix defined by:</p>
+<div class="math">
+<p><img src="../_images/math/69eafba55a4a6e104443e9e0a3f6b230e822f265.png" alt="W_k = \sum_{q=1}^k \sum_{x \in C_q} (x - c_q) (x - c_q)^T"/></p>
+</div><div class="math">
+<p><img src="../_images/math/abcb77994e7d34bae2375af362e95dbd977c1cc3.png" alt="B_k = \sum_q n_q (c_q - c) (c_q - c)^T"/></p>
+</div><p>with <img class="math" src="../_images/math/75e27f04188974063be3230dca208cd495b77ce1.png" alt="N"/> be the number of points in our data, <img class="math" src="../_images/math/857fe384e999acf88a762eecf025870d237d20e6.png" alt="C_q"/> be the set of
+points in cluster <img class="math" src="../_images/math/23f1b45408e5b4130c0f940fcbfcec54492cbdcd.png" alt="q"/>, <img class="math" src="../_images/math/43b2675cd17ec1e60d51fe11740a4dc4774c6a05.png" alt="c_q"/> be the center of cluster
+<img class="math" src="../_images/math/23f1b45408e5b4130c0f940fcbfcec54492cbdcd.png" alt="q"/>, <img class="math" src="../_images/math/65868d23a5bfe5b3b2d819386b19c14fa36af134.png" alt="c"/> be the center of <img class="math" src="../_images/math/cfd13a0f26eb7ef0093319a7669da7dd3771dbac.png" alt="E"/>, <img class="math" src="../_images/math/1e72550b9fe7e32c56feb29198481eba1f590ce4.png" alt="n_q"/> be the number of
+points in cluster <img class="math" src="../_images/math/23f1b45408e5b4130c0f940fcbfcec54492cbdcd.png" alt="q"/>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">pairwise_distances</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+<p>In normal usage, the Calinski-Harabaz index is applied to the results of a
+cluster analysis.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">kmeans_model</span><span class="o">.</span><span class="n">labels_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">calinski_harabaz_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>  
+<span class="go">560.39...</span>
+</pre></div>
+</div>
+<div class="section" id="id23">
+<h4>2.3.9.6.1. Advantages<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>The score is higher when clusters are dense and well separated, which relates
+to a standard concept of a cluster.</li>
+<li>The score is fast to compute</li>
+</ul>
+</div>
+<div class="section" id="id24">
+<h4>2.3.9.6.2. Drawbacks<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>The Calinski-Harabaz index is generally higher for convex clusters than other
+concepts of clusters, such as density based clusters like those obtained
+through DBSCAN.</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">References</p>
+<ul class="simple">
+<li>Caliński, T., &amp; Harabasz, J. (1974). &#8220;A dendrite method for cluster
+analysis&#8221;. Communications in Statistics-theory and Methods 3: 1-27.
+<a class="reference external" href="http://dx.doi.org/10.1080/03610926.2011.560741">doi:10.1080/03610926.2011.560741</a>.</li>
 </ul>
 </div>
 </div>

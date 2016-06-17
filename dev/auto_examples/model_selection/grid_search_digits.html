@@ -36,8 +36,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
     <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Train error vs Test error" href="plot_train_error_vs_test_error.html" />
-    <link rel="prev" title="Confusion matrix" href="plot_confusion_matrix.html" />
+    <link rel="next" title="Receiver Operating Characteristic (ROC) with cross validation" href="plot_roc_crossval.html" />
+    <link rel="prev" title="Train error vs Test error" href="plot_train_error_vs_test_error.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -114,14 +114,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_confusion_matrix.html"
+        <a href="plot_train_error_vs_test_error.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Confusion matrix
+        Train error v...
         </span>
             <span class="hiddenrellink">
-            Confusion matrix
+            Train error vs Test error
             </span>
         </a>
         </div>
@@ -222,9 +222,11 @@ sections on <a class="reference internal" href="../../modules/cross_validation.h
     <span class="nb">print</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grid scores on development set:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">params</span><span class="p">,</span> <span class="n">mean_score</span><span class="p">,</span> <span class="n">scores</span> <span class="ow">in</span> <span class="n">clf</span><span class="o">.</span><span class="n">grid_scores_</span><span class="p">:</span>
+    <span class="n">means</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">results_</span><span class="p">[</span><span class="s1">&#39;test_mean_score&#39;</span><span class="p">]</span>
+    <span class="n">stds</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">results_</span><span class="p">[</span><span class="s1">&#39;test_std_score&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">results_</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%0.3f</span><span class="s2"> (+/-</span><span class="si">%0.03f</span><span class="s2">) for </span><span class="si">%r</span><span class="s2">&quot;</span>
-              <span class="o">%</span> <span class="p">(</span><span class="n">mean_score</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">params</span><span class="p">))</span>
+              <span class="o">%</span> <span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">stds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">results_</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
     <span class="nb">print</span><span class="p">()</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Detailed classification report:&quot;</span><span class="p">)</span>
@@ -257,7 +259,7 @@ sections on <a class="reference internal" href="../../modules/cross_validation.h
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_confusion_matrix.html">Previous
+      <a href="plot_train_error_vs_test_error.html">Previous
       </a>
     </div>
     
