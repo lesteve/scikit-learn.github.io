@@ -348,7 +348,7 @@ word <code class="docutils literal"><span class="pre">w</span></code> and store 
 </div></blockquote>
 <p>The bags of words representation implies that <code class="docutils literal"><span class="pre">n_features</span></code> is
 the number of distinct words in the corpus: this number is typically
-larger that 100,000.</p>
+larger than 100,000.</p>
 <p>If <code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">==</span> <span class="pre">10000</span></code>, storing <code class="docutils literal"><span class="pre">X</span></code> as a numpy array of type
 float32 would require 10000 x 100000 x 4 bytes = <strong>4GB in RAM</strong> which
 is barely manageable on today&#8217;s computers.</p>
@@ -560,13 +560,13 @@ to speed up the computation:</p>
 </div>
 <p>The result of calling <code class="docutils literal"><span class="pre">fit</span></code> on a <code class="docutils literal"><span class="pre">GridSearchCV</span></code> object is a classifier
 that we can use to <code class="docutils literal"><span class="pre">predict</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">gs_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;God is love&#39;</span><span class="p">])]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">gs_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;God is love&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]]</span>
 <span class="go">&#39;soc.religion.christian&#39;</span>
 </pre></div>
 </div>
 <p>The object&#8217;s <code class="docutils literal"><span class="pre">best_score_</span></code> and <code class="docutils literal"><span class="pre">best_params_</span></code> attributes store the best
 mean score and the parameters setting corresponding to that score:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gs_clf</span><span class="o">.</span><span class="n">best_score_</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gs_clf</span><span class="o">.</span><span class="n">best_score_</span>                                  
 <span class="go">0.900...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="n">gs_clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="n">param_name</span><span class="p">]))</span>
