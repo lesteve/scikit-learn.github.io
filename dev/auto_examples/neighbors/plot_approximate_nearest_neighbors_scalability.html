@@ -53,6 +53,14 @@
            $(this).css('background-color', '#A7D6E2');
        }
     );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
   </script>
 
   </head>
@@ -63,7 +71,7 @@
         <p class="logo"><a href="../../index.html">
             <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
         </a>
-        </p><div class="navbar">
+        </p><div class="navbar" id="scikit-navbar">
             <ul>
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../../install.html">Installation</a></li>
@@ -89,7 +97,13 @@
         </li>
             <li><a href="../index.html">Examples</a></li>
             </ul>
-
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
             <div class="search_form">
                 <div id="cse" style="width: 100%;"></div>
             </div>
@@ -195,12 +209,12 @@ the dimensionality of the data.</p>
 </li>
 </ul>
 <p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.002</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.025</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
-<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">2511</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.004</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.031</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
-<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">6309</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.010</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.025</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
-<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">15848</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.029</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.027</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
-<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">39810</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.077</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.033</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">2.4</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
-<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.211</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.042</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">5.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.94</span> <span class="o">+/-</span><span class="mf">0.08</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.001</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.017</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">2511</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.003</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.019</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">6309</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.007</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.017</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">15848</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.018</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.018</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">39810</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.044</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.020</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.129</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.027</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.94</span> <span class="o">+/-</span><span class="mf">0.08</span>
 </pre></div>
 </div>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_approximate_nearest_neighbors_scalability.py" download=""><code class="xref download docutils literal"><span class="pre">plot_approximate_nearest_neighbors_scalability.py</span></code></a></p>
@@ -333,8 +347,8 @@ the dimensionality of the data.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  9.45 seconds
-( 0 minutes  9.45 seconds)</p>
+<p><strong>Total running time of the example:</strong>  5.91 seconds
+( 0 minutes  5.91 seconds)</p>
 </div>
 
 

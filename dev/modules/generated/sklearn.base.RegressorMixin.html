@@ -53,6 +53,14 @@
            $(this).css('background-color', '#A7D6E2');
        }
     );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
   </script>
 
   </head>
@@ -63,7 +71,7 @@
         <p class="logo"><a href="../../index.html">
             <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
         </a>
-        </p><div class="navbar">
+        </p><div class="navbar" id="scikit-navbar">
             <ul>
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../../install.html">Installation</a></li>
@@ -89,7 +97,13 @@
         </li>
             <li><a href="../../auto_examples/index.html">Examples</a></li>
             </ul>
-
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
             <div class="search_form">
                 <div id="cse" style="width: 100%;"></div>
             </div>
@@ -170,7 +184,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.base" title="sklearn.base"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.base</span></code></a>.RegressorMixin<a class="headerlink" href="#sklearn-base-regressormixin" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.base.RegressorMixin">
-<em class="property">class </em><code class="descclassname">sklearn.base.</code><code class="descname">RegressorMixin</code><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7161755/sklearn/base.py#L330"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.RegressorMixin" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.base.</code><code class="descname">RegressorMixin</code><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/331964e/sklearn/base.py#L330"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.RegressorMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mixin class for all regression estimators in scikit-learn.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -192,7 +206,7 @@
 
 <dl class="method">
 <dt id="sklearn.base.RegressorMixin.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7161755/sklearn/base.py#L334"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.RegressorMixin.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/331964e/sklearn/base.py#L334"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.RegressorMixin.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
 <p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
 sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual

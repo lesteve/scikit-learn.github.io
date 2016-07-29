@@ -53,6 +53,14 @@
            $(this).css('background-color', '#A7D6E2');
        }
     );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
   </script>
 
   </head>
@@ -63,7 +71,7 @@
         <p class="logo"><a href="../../index.html">
             <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
         </a>
-        </p><div class="navbar">
+        </p><div class="navbar" id="scikit-navbar">
             <ul>
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../../install.html">Installation</a></li>
@@ -89,7 +97,13 @@
         </li>
             <li><a href="../../auto_examples/index.html">Examples</a></li>
             </ul>
-
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
             <div class="search_form">
                 <div id="cse" style="width: 100%;"></div>
             </div>
@@ -173,7 +187,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.base" title="sklearn.base"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.base</span></code></a>.TransformerMixin<a class="headerlink" href="#sklearn-base-transformermixin" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.base.TransformerMixin">
-<em class="property">class </em><code class="descclassname">sklearn.base.</code><code class="descname">TransformerMixin</code><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7161755/sklearn/base.py#L444"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.TransformerMixin" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.base.</code><code class="descname">TransformerMixin</code><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/331964e/sklearn/base.py#L444"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.TransformerMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mixin class for all transformers in scikit-learn.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -195,7 +209,7 @@
 
 <dl class="method">
 <dt id="sklearn.base.TransformerMixin.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7161755/sklearn/base.py#L447"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.TransformerMixin.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/331964e/sklearn/base.py#L447"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.base.TransformerMixin.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit to data, then transform it.</p>
 <p>Fits transformer to X and y with optional parameters fit_params
 and returns a transformed version of X.</p>

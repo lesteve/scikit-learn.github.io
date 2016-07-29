@@ -53,6 +53,14 @@
            $(this).css('background-color', '#A7D6E2');
        }
     );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
   </script>
 
   </head>
@@ -63,7 +71,7 @@
         <p class="logo"><a href="../../index.html">
             <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
         </a>
-        </p><div class="navbar">
+        </p><div class="navbar" id="scikit-navbar">
             <ul>
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../../install.html">Installation</a></li>
@@ -89,7 +97,13 @@
         </li>
             <li><a href="../../auto_examples/index.html">Examples</a></li>
             </ul>
-
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
             <div class="search_form">
                 <div id="cse" style="width: 100%;"></div>
             </div>
@@ -170,7 +184,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.make_scorer<a class="headerlink" href="#sklearn-metrics-make-scorer" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.make_scorer">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">make_scorer</code><span class="sig-paren">(</span><em>score_func</em>, <em>greater_is_better=True</em>, <em>needs_proba=False</em>, <em>needs_threshold=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7161755/sklearn/metrics/scorer.py#L248"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.make_scorer" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">make_scorer</code><span class="sig-paren">(</span><em>score_func</em>, <em>greater_is_better=True</em>, <em>needs_proba=False</em>, <em>needs_threshold=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/331964e/sklearn/metrics/scorer.py#L248"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.make_scorer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a scorer from a performance metric or loss function.</p>
 <p>This factory function wraps scoring functions for use in GridSearchCV
 and cross_val_score. It takes a score function, such as <code class="docutils literal"><span class="pre">accuracy_score</span></code>,

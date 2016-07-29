@@ -53,6 +53,14 @@
            $(this).css('background-color', '#A7D6E2');
        }
     );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
   </script>
 
   </head>
@@ -63,7 +71,7 @@
         <p class="logo"><a href="../../index.html">
             <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
         </a>
-        </p><div class="navbar">
+        </p><div class="navbar" id="scikit-navbar">
             <ul>
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../../install.html">Installation</a></li>
@@ -89,7 +97,13 @@
         </li>
             <li><a href="../../auto_examples/index.html">Examples</a></li>
             </ul>
-
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
             <div class="search_form">
                 <div id="cse" style="width: 100%;"></div>
             </div>
@@ -173,7 +187,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.auc<a class="headerlink" href="#sklearn-metrics-auc" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.auc">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">auc</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>reorder=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7161755/sklearn/metrics/ranking.py#L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.auc" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">auc</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>reorder=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/331964e/sklearn/metrics/ranking.py#L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.auc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Area Under the Curve (AUC) using the trapezoidal rule</p>
 <p>This is a general function, given points on a curve.  For computing the
 area under the ROC-curve, see <a class="reference internal" href="sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-func docutils literal"><span class="pre">roc_auc_score</span></code></a>.</p>

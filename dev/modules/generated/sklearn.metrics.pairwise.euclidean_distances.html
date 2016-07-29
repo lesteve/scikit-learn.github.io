@@ -53,6 +53,14 @@
            $(this).css('background-color', '#A7D6E2');
        }
     );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
   </script>
 
   </head>
@@ -63,7 +71,7 @@
         <p class="logo"><a href="../../index.html">
             <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
         </a>
-        </p><div class="navbar">
+        </p><div class="navbar" id="scikit-navbar">
             <ul>
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../../install.html">Installation</a></li>
@@ -89,7 +97,13 @@
         </li>
             <li><a href="../../auto_examples/index.html">Examples</a></li>
             </ul>
-
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
             <div class="search_form">
                 <div id="cse" style="width: 100%;"></div>
             </div>
@@ -170,7 +184,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics.pairwise</span></code></a>.euclidean_distances<a class="headerlink" href="#sklearn-metrics-pairwise-euclidean-distances" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.pairwise.euclidean_distances">
-<code class="descclassname">sklearn.metrics.pairwise.</code><code class="descname">euclidean_distances</code><span class="sig-paren">(</span><em>X</em>, <em>Y=None</em>, <em>Y_norm_squared=None</em>, <em>squared=False</em>, <em>X_norm_squared=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7161755/sklearn/metrics/pairwise.py#L162"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.pairwise.euclidean_distances" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.pairwise.</code><code class="descname">euclidean_distances</code><span class="sig-paren">(</span><em>X</em>, <em>Y=None</em>, <em>Y_norm_squared=None</em>, <em>squared=False</em>, <em>X_norm_squared=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/331964e/sklearn/metrics/pairwise.py#L162"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.pairwise.euclidean_distances" title="Permalink to this definition">¶</a></dt>
 <dd><p>Considering the rows of X (and Y=X) as vectors, compute the
 distance matrix between each pair of vectors.</p>
 <p>For efficiency reasons, the euclidean distance between a pair of row
