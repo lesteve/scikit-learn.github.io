@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Probabilistic predictions with Gaussian process classification (GPC)" href="plot_gpc.html" />
-    <link rel="prev" title="Gaussian process regression (GPR) on Mauna Loa CO2 data." href="plot_gpr_co2.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Gaussian process regression (GPR) on Mauna Loa CO2 data." href="plot_gpr_co2.html" />
+    <link rel="prev" title="Gaussian process classification (GPC) on iris dataset" href="plot_gpc_iris.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_gpr_co2.html"
+        <a href="plot_gpc_iris.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         Gaussian proc...
         </span>
             <span class="hiddenrellink">
-            Gaussian process regression (GPR) on Mauna Loa CO2 data.
+            Gaussian process classification (GPC) on iris dataset
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="comparison-of-kernel-ridge-and-gaussian-process-regression">
-<span id="example-gaussian-process-plot-compare-gpr-krr-py"></span><h1>Comparison of kernel ridge and Gaussian process regression<a class="headerlink" href="#comparison-of-kernel-ridge-and-gaussian-process-regression" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-gaussian-process-plot-compare-gpr-krr-py"></span><h1>Comparison of kernel ridge and Gaussian process regression<a class="headerlink" href="#comparison-of-kernel-ridge-and-gaussian-process-regression" title="Permalink to this headline">¶</a></h1>
 <p>Both kernel ridge regression (KRR) and Gaussian process regression (GPR) learn
 a target function by employing internally the &#8220;kernel trick&#8221;. KRR learns a
 linear function in the space induced by the respective kernel which corresponds
@@ -219,17 +220,19 @@ scaling and is thus considerable faster on this example with 3-dimensional
 hyperparameter space. The time for predicting is similar; however, generating
 the variance of the predictive distribution of GPR takes considerable longer
 than just predicting the mean.</p>
-<img alt="../../_images/plot_compare_gpr_krr_001.png" class="align-center" src="../../_images/plot_compare_gpr_krr_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Time</span> <span class="k">for</span> <span class="n">KRR</span> <span class="n">fitting</span><span class="p">:</span> <span class="mf">5.823</span>
-<span class="n">Time</span> <span class="k">for</span> <span class="n">GPR</span> <span class="n">fitting</span><span class="p">:</span> <span class="mf">0.197</span>
-<span class="n">Time</span> <span class="k">for</span> <span class="n">KRR</span> <span class="n">prediction</span><span class="p">:</span> <span class="mf">0.080</span>
-<span class="n">Time</span> <span class="k">for</span> <span class="n">GPR</span> <span class="n">prediction</span><span class="p">:</span> <span class="mf">0.091</span>
-<span class="n">Time</span> <span class="k">for</span> <span class="n">GPR</span> <span class="n">prediction</span> <span class="k">with</span> <span class="n">standard</span><span class="o">-</span><span class="n">deviation</span><span class="p">:</span> <span class="mf">0.418</span>
+<img alt="../../_images/sphx_glr_plot_compare_gpr_krr_001.png" class="align-center" src="../../_images/sphx_glr_plot_compare_gpr_krr_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Time</span> <span class="k">for</span> <span class="n">KRR</span> <span class="n">fitting</span><span class="p">:</span> <span class="mf">6.304</span>
+<span class="n">Time</span> <span class="k">for</span> <span class="n">GPR</span> <span class="n">fitting</span><span class="p">:</span> <span class="mf">0.213</span>
+<span class="n">Time</span> <span class="k">for</span> <span class="n">KRR</span> <span class="n">prediction</span><span class="p">:</span> <span class="mf">0.091</span>
+<span class="n">Time</span> <span class="k">for</span> <span class="n">GPR</span> <span class="n">prediction</span><span class="p">:</span> <span class="mf">0.100</span>
+<span class="n">Time</span> <span class="k">for</span> <span class="n">GPR</span> <span class="n">prediction</span> <span class="k">with</span> <span class="n">standard</span><span class="o">-</span><span class="n">deviation</span><span class="p">:</span> <span class="mf">0.445</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_compare_gpr_krr.py" download=""><code class="xref download docutils literal"><span class="pre">plot_compare_gpr_krr.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Authors: Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
@@ -237,14 +240,14 @@ than just predicting the mean.</p>
 
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.kernel_ridge</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor"><span class="n">GaussianProcessRegressor</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel"><span class="n">WhiteKernel</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared"><span class="n">ExpSineSquared</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.kernel_ridge</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor"><span class="n">GaussianProcessRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel"><span class="n">WhiteKernel</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared"><span class="n">ExpSineSquared</span></a>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
@@ -254,36 +257,36 @@ than just predicting the mean.</p>
 <span class="n">y</span> <span class="o">+=</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># add noise</span>
 
 <span class="c1"># Fit KernelRidge with parameter selection based on 5-fold cross validation</span>
-<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">e0</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e0</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">],</span>
               <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="p">[</span><a href="../../modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared"><span class="n">ExpSineSquared</span></a><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
                          <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
                          <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]}</span>
 <span class="n">kr</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><a href="../../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a><span class="p">(),</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">)</span>
 <span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">kr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time for KRR fitting: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time for KRR fitting: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
 
-<span class="n">gp_kernel</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared"><span class="n">ExpSineSquared</span></a><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">periodicity_bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="n">e1</span><span class="p">))</span> \
-    <span class="o">+</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel"><span class="n">WhiteKernel</span></a><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gp_kernel</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared"><span class="n">ExpSineSquared</span></a><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">periodicity_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e1</span><span class="p">))</span> \
+    <span class="o">+</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel"><span class="n">WhiteKernel</span></a><span class="p">(</span><span class="mf">1e-1</span><span class="p">)</span>
 <span class="n">gpr</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor"><span class="n">GaussianProcessRegressor</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">gp_kernel</span><span class="p">)</span>
 <span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">gpr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time for GPR fitting: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time for GPR fitting: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
 
 <span class="c1"># Predict using kernel ridge</span>
-<span class="n">X_plot</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">X_plot</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)[:,</span> <span class="bp">None</span><span class="p">]</span>
 <span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">y_kr</span> <span class="o">=</span> <span class="n">kr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time for KRR prediction: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time for KRR prediction: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
 
 <span class="c1"># Predict using kernel ridge</span>
 <span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">y_gpr</span> <span class="o">=</span> <span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time for GPR prediction: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
+<span class="n">y_gpr</span> <span class="o">=</span> <span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time for GPR prediction: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
 
 <span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">y_gpr</span><span class="p">,</span> <span class="n">y_std</span> <span class="o">=</span> <span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time for GPR prediction with standard-deviation: </span><span class="si">%.3f</span><span class="s2">&quot;</span>
+<span class="n">y_gpr</span><span class="p">,</span> <span class="n">y_std</span> <span class="o">=</span> <span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time for GPR prediction with standard-deviation: </span><span class="si">%.3f</span><span class="s2">&quot;</span>
       <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">))</span>
 
 <span class="c1"># Plot results</span>
@@ -306,8 +309,12 @@ than just predicting the mean.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  6.68 seconds
-( 0 minutes  6.68 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 7.237 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_compare_gpr_krr.py" download=""><code class="xref download docutils literal"><span class="pre">plot_compare_gpr_krr.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_compare_gpr_krr.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_compare_gpr_krr.ipynb</span></code></a></div>
 </div>
 
 
@@ -325,7 +332,7 @@ than just predicting the mean.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_gpr_co2.html">Previous
+      <a href="plot_gpc_iris.html">Previous
       </a>
     </div>
     

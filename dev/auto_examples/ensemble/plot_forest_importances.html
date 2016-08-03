@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="IsolationForest example" href="plot_isolation_forest.html" />
-    <link rel="prev" title="Decision Tree Regression with AdaBoost" href="plot_adaboost_regression.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Plot the decision boundaries of a VotingClassifier" href="plot_voting_decision_regions.html" />
+    <link rel="prev" title="IsolationForest example" href="plot_isolation_forest.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_adaboost_regression.html"
+        <a href="plot_isolation_forest.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Decision Tree...
+        IsolationFore...
         </span>
             <span class="hiddenrellink">
-            Decision Tree Regression with AdaBoost
+            IsolationForest example
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,15 +182,15 @@
           <div class="body" role="main">
             
   <div class="section" id="feature-importances-with-forests-of-trees">
-<span id="example-ensemble-plot-forest-importances-py"></span><h1>Feature importances with forests of trees<a class="headerlink" href="#feature-importances-with-forests-of-trees" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-forest-importances-py"></span><h1>Feature importances with forests of trees<a class="headerlink" href="#feature-importances-with-forests-of-trees" title="Permalink to this headline">¶</a></h1>
 <p>This examples shows the use of forests of trees to evaluate the importance of
 features on an artificial classification task. The red bars are the feature
 importances of the forest, along with their inter-trees variability.</p>
 <p>As expected, the plot suggests that 3 features are informative, while the
 remaining are not.</p>
-<img alt="../../_images/plot_forest_importances_001.png" class="align-center" src="../../_images/plot_forest_importances_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Feature</span> <span class="n">ranking</span><span class="p">:</span>
+<img alt="../../_images/sphx_glr_plot_forest_importances_001.png" class="align-center" src="../../_images/sphx_glr_plot_forest_importances_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Feature</span> <span class="n">ranking</span><span class="p">:</span>
 <span class="mf">1.</span> <span class="n">feature</span> <span class="mi">0</span> <span class="p">(</span><span class="mf">0.250402</span><span class="p">)</span>
 <span class="mf">2.</span> <span class="n">feature</span> <span class="mi">1</span> <span class="p">(</span><span class="mf">0.231094</span><span class="p">)</span>
 <span class="mf">3.</span> <span class="n">feature</span> <span class="mi">2</span> <span class="p">(</span><span class="mf">0.148057</span><span class="p">)</span>
@@ -202,14 +203,16 @@ remaining are not.</p>
 <span class="mf">10.</span> <span class="n">feature</span> <span class="mi">4</span> <span class="p">(</span><span class="mf">0.050934</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances.py" download=""><code class="xref download docutils literal"><span class="pre">plot_forest_importances.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
 
 <span class="c1"># Build a classification task using 3 informative features</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
@@ -219,7 +222,7 @@ remaining are not.</p>
                            <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                            <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                            <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                           <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                           <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <span class="c1"># Build a forest and compute the feature importances</span>
 <span class="n">forest</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
@@ -232,10 +235,10 @@ remaining are not.</p>
 <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># Print the feature ranking</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Feature ranking:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Feature ranking:&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">. feature </span><span class="si">%d</span><span class="s2"> (</span><span class="si">%f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">f</span><span class="p">],</span> <span class="n">importances</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">f</span><span class="p">]]))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">. feature </span><span class="si">%d</span><span class="s2"> (</span><span class="si">%f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">f</span><span class="p">],</span> <span class="n">importances</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">f</span><span class="p">]]))</span>
 
 <span class="c1"># Plot the feature importances of the forest</span>
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
@@ -247,8 +250,12 @@ remaining are not.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.04 seconds
-( 0 minutes  1.04 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 1.191 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances.py" download=""><code class="xref download docutils literal"><span class="pre">plot_forest_importances.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_forest_importances.ipynb</span></code></a></div>
 </div>
 
 
@@ -266,7 +273,7 @@ remaining are not.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_adaboost_regression.html">Previous
+      <a href="plot_isolation_forest.html">Previous
       </a>
     </div>
     

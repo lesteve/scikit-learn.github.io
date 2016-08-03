@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Faces dataset decompositions" href="plot_faces_decomposition.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Sparse coding with a precomputed dictionary" href="plot_sparse_coding.html" />
     <link rel="prev" title="Principal components analysis (PCA)" href="plot_pca_3d.html" />
   
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="model-selection-with-probabilistic-pca-and-factor-analysis-fa">
-<span id="example-decomposition-plot-pca-vs-fa-model-selection-py"></span><h1>Model selection with Probabilistic PCA and Factor Analysis (FA)<a class="headerlink" href="#model-selection-with-probabilistic-pca-and-factor-analysis-fa" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-decomposition-plot-pca-vs-fa-model-selection-py"></span><h1>Model selection with Probabilistic PCA and Factor Analysis (FA)<a class="headerlink" href="#model-selection-with-probabilistic-pca-and-factor-analysis-fa" title="Permalink to this headline">¶</a></h1>
 <p>Probabilistic PCA and Factor Analysis are probabilistic models.
 The consequence is that the likelihood of new data can be used
 for model selection and covariance estimation.
@@ -198,42 +199,24 @@ circumstances the low rank models are more likely than shrinkage models.</p>
 <p>The automatic estimation from
 Automatic Choice of Dimensionality for PCA. NIPS 2000: 598-604
 by Thomas P. Minka is also compared.</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/plot_pca_vs_fa_model_selection_001.png"><img alt="../../_images/plot_pca_vs_fa_model_selection_001.png" src="../../_images/plot_pca_vs_fa_model_selection_001.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/plot_pca_vs_fa_model_selection_002.png"><img alt="../../_images/plot_pca_vs_fa_model_selection_002.png" src="../../_images/plot_pca_vs_fa_model_selection_002.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-</ul>
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">38</span>
-</pre></div>
-</div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_pca_vs_fa_model_selection.py" download=""><code class="xref download docutils literal"><span class="pre">plot_pca_vs_fa_model_selection.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
-<span class="c1"># Authors: Alexandre Gramfort</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Authors: Alexandre Gramfort</span>
 <span class="c1">#          Denis A. Engemann</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">linalg</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.covariance.ShrunkCovariance.html#sklearn.covariance.ShrunkCovariance"><span class="n">ShrunkCovariance</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.covariance.ShrunkCovariance.html#sklearn.covariance.ShrunkCovariance"><span class="n">ShrunkCovariance</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Create the data</span>
-
-<span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Create the data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">U</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.svd.html#scipy.linalg.svd"><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span></a><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
@@ -245,11 +228,10 @@ by Thomas P. Minka is also compared.</p>
 <span class="c1"># Adding heteroscedastic noise</span>
 <span class="n">sigmas</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_features</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">/</span> <span class="mf">2.</span>
 <span class="n">X_hetero</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigmas</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Fit the models</span>
-
-<span class="n">n_components</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># options for n_components</span>
+</pre></div>
+</div>
+<p>Fit the models</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># options for n_components</span>
 
 
 <span class="k">def</span> <span class="nf">compute_scores</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -286,9 +268,9 @@ by Thomas P. Minka is also compared.</p>
     <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">n_components_pca_mle</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">n_components_</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;best n_components by PCA CV = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_components_pca</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;best n_components by FactorAnalysis CV = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_components_fa</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;best n_components by PCA MLE = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_components_pca_mle</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;best n_components by PCA CV = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_components_pca</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;best n_components by FactorAnalysis CV = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_components_fa</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;best n_components by PCA MLE = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_components_pca_mle</span><span class="p">)</span>
 
     <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">pca_scores</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PCA scores&#39;</span><span class="p">)</span>
@@ -316,8 +298,27 @@ by Thomas P. Minka is also compared.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  12.21 seconds
-( 0 minutes  12.21 seconds)</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png"><img alt="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png" src="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png"><img alt="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" src="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">38</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 13.300 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_pca_vs_fa_model_selection.py" download=""><code class="xref download docutils literal"><span class="pre">plot_pca_vs_fa_model_selection.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_pca_vs_fa_model_selection.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_pca_vs_fa_model_selection.ipynb</span></code></a></div>
 </div>
 
 

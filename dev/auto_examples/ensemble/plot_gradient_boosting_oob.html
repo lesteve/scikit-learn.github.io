@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Plot the decision surfaces of ensembles of trees on the iris dataset" href="plot_forest_iris.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Single estimator versus bagging: bias-variance decomposition" href="plot_bias_variance.html" />
     <link rel="prev" title="Feature transformations with ensembles of trees" href="plot_feature_transformation.html" />
   
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="gradient-boosting-out-of-bag-estimates">
-<span id="example-ensemble-plot-gradient-boosting-oob-py"></span><h1>Gradient Boosting Out-of-Bag estimates<a class="headerlink" href="#gradient-boosting-out-of-bag-estimates" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-gradient-boosting-oob-py"></span><h1>Gradient Boosting Out-of-Bag estimates<a class="headerlink" href="#gradient-boosting-out-of-bag-estimates" title="Permalink to this headline">¶</a></h1>
 <p>Out-of-bag (OOB) estimates can be a useful heuristic to estimate
 the &#8220;optimal&#8221; number of boosting iterations.
 OOB estimates are almost identical to cross-validation estimates but
@@ -200,24 +201,26 @@ pessimistic way.
 The figure also shows the performance of 3-fold cross validation which
 usually gives a better estimate of the test loss
 but is computationally more demanding.</p>
-<img alt="../../_images/plot_gradient_boosting_oob_001.png" class="align-center" src="../../_images/plot_gradient_boosting_oob_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.6840</span>
+<img alt="../../_images/sphx_glr_plot_gradient_boosting_oob_001.png" class="align-center" src="../../_images/sphx_glr_plot_gradient_boosting_oob_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.6840</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gradient_boosting_oob.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gradient_boosting_oob.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Peter Prettenhofer &lt;peter.prettenhofer@gmail.com&gt;</span>
 <span class="c1">#</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">ensemble</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold"><span class="n">KFold</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">ensemble</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold"><span class="n">KFold</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
 
 
 <span class="c1"># Generate data (adapted from G. Ridgeway&#39;s gbm example)</span>
@@ -243,7 +246,7 @@ but is computationally more demanding.</p>
 
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">acc</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">acc</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: {:.4f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">acc</span><span class="p">))</span>
 
 <span class="n">n_estimators</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">]</span>
 <span class="n">x</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
@@ -319,8 +322,12 @@ but is computationally more demanding.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  4.09 seconds
-( 0 minutes  4.09 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 4.526 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gradient_boosting_oob.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gradient_boosting_oob.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_gradient_boosting_oob.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_gradient_boosting_oob.ipynb</span></code></a></div>
 </div>
 
 

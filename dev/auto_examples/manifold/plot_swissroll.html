@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,7 +36,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Multi-dimensional scaling" href="plot_mds.html" />
     <link rel="prev" title="Sparse recovery: feature selection for sparse linear models" href="../linear_model/plot_sparse_recovery.html" />
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,38 +182,39 @@
           <div class="body" role="main">
             
   <div class="section" id="swiss-roll-reduction-with-lle">
-<span id="example-manifold-plot-swissroll-py"></span><h1>Swiss Roll reduction with LLE<a class="headerlink" href="#swiss-roll-reduction-with-lle" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-manifold-plot-swissroll-py"></span><h1>Swiss Roll reduction with LLE<a class="headerlink" href="#swiss-roll-reduction-with-lle" title="Permalink to this headline">¶</a></h1>
 <p>An illustration of Swiss Roll reduction
 with locally linear embedding</p>
-<img alt="../../_images/plot_swissroll_001.png" class="align-center" src="../../_images/plot_swissroll_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Computing</span> <span class="n">LLE</span> <span class="n">embedding</span>
-<span class="n">Done</span><span class="o">.</span> <span class="n">Reconstruction</span> <span class="n">error</span><span class="p">:</span> <span class="mf">1.28164e-07</span>
+<img alt="../../_images/sphx_glr_plot_swissroll_001.png" class="align-center" src="../../_images/sphx_glr_plot_swissroll_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Computing</span> <span class="n">LLE</span> <span class="n">embedding</span>
+<span class="n">Done</span><span class="o">.</span> <span class="n">Reconstruction</span> <span class="n">error</span><span class="p">:</span> <span class="mf">9.45487e-08</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_swissroll.py" download=""><code class="xref download docutils literal"><span class="pre">plot_swissroll.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
-<span class="c1"># Author: Fabian Pedregosa -- &lt;fabian.pedregosa@inria.fr&gt;</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Author: Fabian Pedregosa -- &lt;fabian.pedregosa@inria.fr&gt;</span>
 <span class="c1"># License: BSD 3 clause (C) INRIA 2011</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="c1"># This import is needed to modify the way figure behaves</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 <span class="n">Axes3D</span>
 
 <span class="c1">#----------------------------------------------------------------------</span>
 <span class="c1"># Locally linear embedding of the swiss roll</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">manifold</span><span class="p">,</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">manifold</span><span class="p">,</span> <span class="n">datasets</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">samples_generator</span><span class="o">.</span><span class="n">make_swiss_roll</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computing LLE embedding&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Computing LLE embedding&quot;</span><span class="p">)</span>
 <span class="n">X_r</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.manifold.locally_linear_embedding.html#sklearn.manifold.locally_linear_embedding"><span class="n">manifold</span><span class="o">.</span><span class="n">locally_linear_embedding</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
                                              <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done. Reconstruction error: </span><span class="si">%g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">err</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Done. Reconstruction error: </span><span class="si">%g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">err</span><span class="p">)</span>
 
 <span class="c1">#----------------------------------------------------------------------</span>
 <span class="c1"># Plot result</span>
@@ -235,8 +237,12 @@ with locally linear embedding</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.42 seconds
-( 0 minutes  0.42 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.435 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_swissroll.py" download=""><code class="xref download docutils literal"><span class="pre">plot_swissroll.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_swissroll.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_swissroll.ipynb</span></code></a></div>
 </div>
 
 

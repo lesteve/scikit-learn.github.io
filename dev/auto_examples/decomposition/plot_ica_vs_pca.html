@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Sparse coding with a precomputed dictionary" href="plot_sparse_coding.html" />
-    <link rel="prev" title="Kernel PCA" href="plot_kernel_pca.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Kernel PCA" href="plot_kernel_pca.html" />
+    <link rel="prev" title="Blind source separation using FastICA" href="plot_ica_blind_source_separation.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_kernel_pca.html"
+        <a href="plot_ica_blind_source_separation.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Kernel PCA
+        Blind source ...
         </span>
             <span class="hiddenrellink">
-            Kernel PCA
+            Blind source separation using FastICA
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="fastica-on-2d-point-clouds">
-<span id="example-decomposition-plot-ica-vs-pca-py"></span><h1>FastICA on 2D point clouds<a class="headerlink" href="#fastica-on-2d-point-clouds" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-decomposition-plot-ica-vs-pca-py"></span><h1>FastICA on 2D point clouds<a class="headerlink" href="#fastica-on-2d-point-clouds" title="Permalink to this headline">¶</a></h1>
 <p>This example illustrates visually in the feature space a comparison by
 results using two different component analysis techniques.</p>
 <p><a class="reference internal" href="../../modules/decomposition.html#ica"><span class="std std-ref">Independent component analysis (ICA)</span></a> vs <a class="reference internal" href="../../modules/decomposition.html#pca"><span class="std std-ref">Principal component analysis (PCA)</span></a>.</p>
@@ -201,21 +202,19 @@ represented by orange vectors. We represent the signal in the PCA space,
 after whitening by the variance corresponding to the PCA vectors (lower
 left). Running ICA corresponds to finding a rotation in this space to
 identify the directions of largest non-Gaussianity (lower right).</p>
-<img alt="../../_images/plot_ica_vs_pca_001.png" class="align-center" src="../../_images/plot_ica_vs_pca_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ica_vs_pca.py" download=""><code class="xref download docutils literal"><span class="pre">plot_ica_vs_pca.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Authors: Alexandre Gramfort, Gael Varoquaux</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA"><span class="n">FastICA</span></a>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Generate sample data</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA"><span class="n">FastICA</span></a>
+</pre></div>
+</div>
+<p>Generate sample data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">S</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_t</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="n">S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">2.</span>
 
@@ -231,15 +230,13 @@ identify the directions of largest non-Gaussianity (lower right).</p>
 <span class="n">S_ica_</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Estimate the sources</span>
 
 <span class="n">S_ica_</span> <span class="o">/=</span> <span class="n">S_ica_</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Plot results</span>
-
-<span class="k">def</span> <span class="nf">plot_samples</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Plot results</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_samples</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">S</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">axis_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">axis_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">axis</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">axis_list</span><span class="p">):</span>
             <span class="n">axis</span> <span class="o">/=</span> <span class="n">axis</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
@@ -281,8 +278,13 @@ identify the directions of largest non-Gaussianity (lower right).</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.67 seconds
-( 0 minutes  0.67 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_ica_vs_pca_001.png" class="align-center" src="../../_images/sphx_glr_plot_ica_vs_pca_001.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.576 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ica_vs_pca.py" download=""><code class="xref download docutils literal"><span class="pre">plot_ica_vs_pca.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_ica_vs_pca.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_ica_vs_pca.ipynb</span></code></a></div>
 </div>
 
 
@@ -300,7 +302,7 @@ identify the directions of largest non-Gaussianity (lower right).</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_kernel_pca.html">Previous
+      <a href="plot_ica_blind_source_separation.html">Previous
       </a>
     </div>
     

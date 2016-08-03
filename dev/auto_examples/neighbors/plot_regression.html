@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Nearest Neighbors Classification" href="plot_classification.html" />
-    <link rel="prev" title="Receiver Operating Characteristic (ROC)" href="../model_selection/plot_roc.html" />
+    <link rel="prev" title="Plotting Learning Curves" href="../model_selection/plot_learning_curve.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="../model_selection/plot_roc.html"
+        <a href="../model_selection/plot_learning_curve.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Receiver Oper...
+        Plotting Lear...
         </span>
             <span class="hiddenrellink">
-            Receiver Operating Characteristic (ROC)
+            Plotting Learning Curves
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,25 +182,22 @@
           <div class="body" role="main">
             
   <div class="section" id="nearest-neighbors-regression">
-<span id="example-neighbors-plot-regression-py"></span><h1>Nearest Neighbors regression<a class="headerlink" href="#nearest-neighbors-regression" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-neighbors-plot-regression-py"></span><h1>Nearest Neighbors regression<a class="headerlink" href="#nearest-neighbors-regression" title="Permalink to this headline">¶</a></h1>
 <p>Demonstrate the resolution of a regression problem
 using a k-Nearest Neighbor and the interpolation of the
 target using both barycenter and constant weights.</p>
-<img alt="../../_images/plot_regression_001.png" class="align-center" src="../../_images/plot_regression_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_regression.py" download=""><code class="xref download docutils literal"><span class="pre">plot_regression.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
 <span class="c1">#         Fabian Pedregosa &lt;fabian.pedregosa@inria.fr&gt;</span>
 <span class="c1">#</span>
 <span class="c1"># License: BSD 3 clause (C) INRIA</span>
-
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Generate sample data</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">neighbors</span>
+</pre></div>
+</div>
+<p>Generate sample data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">neighbors</span>
 
 <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sort.html#numpy.sort"><span class="n">np</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -208,10 +206,10 @@ target using both barycenter and constant weights.</p>
 
 <span class="c1"># Add noise to targets</span>
 <span class="n">y</span><span class="p">[::</span><span class="mi">5</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Fit regression model</span>
-<span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Fit regression model</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">5</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">weights</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">]):</span>
     <span class="n">knn</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neighbors.KNeighborsRegressor.html#sklearn.neighbors.KNeighborsRegressor"><span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsRegressor</span></a><span class="p">(</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
@@ -228,8 +226,13 @@ target using both barycenter and constant weights.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.13 seconds
-( 0 minutes  0.13 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_regression_001.png" class="align-center" src="../../_images/sphx_glr_plot_regression_001.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.130 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_regression.py" download=""><code class="xref download docutils literal"><span class="pre">plot_regression.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_regression.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_regression.ipynb</span></code></a></div>
 </div>
 
 
@@ -247,7 +250,7 @@ target using both barycenter and constant weights.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="../model_selection/plot_roc.html">Previous
+      <a href="../model_selection/plot_learning_curve.html">Previous
       </a>
     </div>
     

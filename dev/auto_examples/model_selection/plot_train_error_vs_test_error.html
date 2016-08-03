@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Parameter estimation using grid search with cross-validation" href="grid_search_digits.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Receiver Operating Characteristic (ROC) with cross validation" href="plot_roc_crossval.html" />
     <link rel="prev" title="Underfitting vs. Overfitting" href="plot_underfitting_overfitting.html" />
   
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,30 +182,24 @@
           <div class="body" role="main">
             
   <div class="section" id="train-error-vs-test-error">
-<span id="example-model-selection-plot-train-error-vs-test-error-py"></span><h1>Train error vs Test error<a class="headerlink" href="#train-error-vs-test-error" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-model-selection-plot-train-error-vs-test-error-py"></span><h1>Train error vs Test error<a class="headerlink" href="#train-error-vs-test-error" title="Permalink to this headline">¶</a></h1>
 <p>Illustration of how the performance of an estimator on unseen data (test data)
 is not the same as the performance on training data. As the regularization
 increases the performance on train decreases while the performance on test
 is optimal within a range of values of the regularization parameter.
 The example with an Elastic-Net regression model and the performance is
 measured using the explained variance a.k.a. R^2.</p>
-<img alt="../../_images/plot_train_error_vs_test_error_001.png" class="align-center" src="../../_images/plot_train_error_vs_test_error_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Optimal</span> <span class="n">regularization</span> <span class="n">parameter</span> <span class="p">:</span> <span class="mf">0.000335292414925</span>
-</pre></div>
-</div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_train_error_vs_test_error.py" download=""><code class="xref download docutils literal"><span class="pre">plot_train_error_vs_test_error.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Generate sample data</span>
-<span class="n">n_samples_train</span><span class="p">,</span> <span class="n">n_samples_test</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">500</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+</pre></div>
+</div>
+<p>Generate sample data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_samples_train</span><span class="p">,</span> <span class="n">n_samples_test</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">500</span>
 <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">coef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_features</span><span class="p">)</span>
 <span class="n">coef</span><span class="p">[</span><span class="mi">50</span><span class="p">:]</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># only the top 10 features are impacting the model</span>
@@ -214,10 +209,10 @@ measured using the explained variance a.k.a. R^2.</p>
 <span class="c1"># Split train and test data</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">n_samples_train</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">n_samples_train</span><span class="p">:]</span>
 <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">n_samples_train</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n_samples_train</span><span class="p">:]</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Compute train and test errors</span>
-<span class="n">alphas</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Compute train and test errors</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alphas</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
 <span class="n">enet</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet"><span class="n">linear_model</span><span class="o">.</span><span class="n">ElasticNet</span></a><span class="p">(</span><span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 <span class="n">train_errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 <span class="n">test_errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -229,16 +224,19 @@ measured using the explained variance a.k.a. R^2.</p>
 
 <span class="n">i_alpha_optim</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.argmax.html#numpy.argmax"><span class="n">np</span><span class="o">.</span><span class="n">argmax</span></a><span class="p">(</span><span class="n">test_errors</span><span class="p">)</span>
 <span class="n">alpha_optim</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">[</span><span class="n">i_alpha_optim</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimal regularization parameter : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">alpha_optim</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Optimal regularization parameter : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">alpha_optim</span><span class="p">)</span>
 
 <span class="c1"># Estimate the coef_ on full data with optimal regularization parameter</span>
 <span class="n">enet</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha_optim</span><span class="p">)</span>
 <span class="n">coef_</span> <span class="o">=</span> <span class="n">enet</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">coef_</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Plot results functions</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Optimal</span> <span class="n">regularization</span> <span class="n">parameter</span> <span class="p">:</span> <span class="mf">0.000335292414925</span>
+</pre></div>
+</div>
+<p>Plot results functions</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.semilogx"><span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span></a><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">train_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.semilogx"><span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span></a><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">test_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
@@ -258,8 +256,13 @@ measured using the explained variance a.k.a. R^2.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  2.61 seconds
-( 0 minutes  2.61 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_train_error_vs_test_error_001.png" class="align-center" src="../../_images/sphx_glr_plot_train_error_vs_test_error_001.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 2.773 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_train_error_vs_test_error.py" download=""><code class="xref download docutils literal"><span class="pre">plot_train_error_vs_test_error.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_train_error_vs_test_error.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_train_error_vs_test_error.ipynb</span></code></a></div>
 </div>
 
 

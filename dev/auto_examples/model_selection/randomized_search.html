@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Confusion matrix" href="plot_confusion_matrix.html" />
-    <link rel="prev" title="Receiver Operating Characteristic (ROC) with cross validation" href="plot_roc_crossval.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Sample pipeline for text feature extraction and evaluation" href="grid_search_text_feature_extraction.html" />
+    <link rel="prev" title="Confusion matrix" href="plot_confusion_matrix.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_roc_crossval.html"
+        <a href="plot_confusion_matrix.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Receiver Oper...
+        Confusion matrix
         </span>
             <span class="hiddenrellink">
-            Receiver Operating Characteristic (ROC) with cross validation
+            Confusion matrix
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="comparing-randomized-search-and-grid-search-for-hyperparameter-estimation">
-<span id="example-model-selection-randomized-search-py"></span><h1>Comparing randomized search and grid search for hyperparameter estimation<a class="headerlink" href="#comparing-randomized-search-and-grid-search-for-hyperparameter-estimation" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-model-selection-randomized-search-py"></span><h1>Comparing randomized search and grid search for hyperparameter estimation<a class="headerlink" href="#comparing-randomized-search-and-grid-search-for-hyperparameter-estimation" title="Permalink to this headline">¶</a></h1>
 <p>Compare randomized search and grid search for optimizing hyperparameters of a
 random forest.
 All parameters that influence the learning are searched simultaneously
@@ -193,18 +194,17 @@ time for randomized search is drastically lower.</p>
 is most likely a noise effect and would not carry over to a held-out test set.</p>
 <p>Note that in practice, one would not search over this many different parameters
 simultaneously using grid search, but pick only the ones deemed most important.</p>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/randomized_search.py" download=""><code class="xref download docutils literal"><span class="pre">randomized_search.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">randint</span> <span class="k">as</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">randint</span> <span class="k">as</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a>
 
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV"><span class="n">RandomizedSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV"><span class="n">RandomizedSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a>
 
 <span class="c1"># get some data</span>
 <span class="n">digits</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a><span class="p">()</span>
@@ -219,20 +219,20 @@ simultaneously using grid search, but pick only the ones deemed most important.<
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;test_rank_score&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model with rank: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean validation score: </span><span class="si">{0:.3f}</span><span class="s2"> (std: </span><span class="si">{1:.3f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Model with rank: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean validation score: {0:.3f} (std: {1:.3f})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                   <span class="n">results</span><span class="p">[</span><span class="s1">&#39;test_mean_score&#39;</span><span class="p">][</span><span class="n">candidate</span><span class="p">],</span>
                   <span class="n">results</span><span class="p">[</span><span class="s1">&#39;test_std_score&#39;</span><span class="p">][</span><span class="n">candidate</span><span class="p">]))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parameters: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="n">candidate</span><span class="p">]))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Parameters: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="n">candidate</span><span class="p">]))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># specify parameters and distributions to sample from</span>
-<span class="n">param_dist</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+<span class="n">param_dist</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
               <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
               <span class="s2">&quot;min_samples_split&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
               <span class="s2">&quot;min_samples_leaf&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
-              <span class="s2">&quot;bootstrap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+              <span class="s2">&quot;bootstrap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
               <span class="s2">&quot;criterion&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">]}</span>
 
 <span class="c1"># run randomized search</span>
@@ -242,16 +242,16 @@ simultaneously using grid search, but pick only the ones deemed most important.<
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RandomizedSearchCV took </span><span class="si">%.2f</span><span class="s2"> seconds for </span><span class="si">%d</span><span class="s2"> candidates&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;RandomizedSearchCV took </span><span class="si">%.2f</span><span class="s2"> seconds for </span><span class="si">%d</span><span class="s2"> candidates&quot;</span>
       <span class="s2">&quot; parameter settings.&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span> <span class="n">n_iter_search</span><span class="p">))</span>
 <span class="n">report</span><span class="p">(</span><span class="n">random_search</span><span class="o">.</span><span class="n">results_</span><span class="p">)</span>
 
 <span class="c1"># use a full grid over all parameters</span>
-<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
               <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
               <span class="s2">&quot;min_samples_split&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
               <span class="s2">&quot;min_samples_leaf&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
-              <span class="s2">&quot;bootstrap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+              <span class="s2">&quot;bootstrap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
               <span class="s2">&quot;criterion&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">]}</span>
 
 <span class="c1"># run grid search</span>
@@ -259,11 +259,17 @@ simultaneously using grid search, but pick only the ones deemed most important.<
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GridSearchCV took </span><span class="si">%.2f</span><span class="s2"> seconds for </span><span class="si">%d</span><span class="s2"> candidate parameter settings.&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;GridSearchCV took </span><span class="si">%.2f</span><span class="s2"> seconds for </span><span class="si">%d</span><span class="s2"> candidate parameter settings.&quot;</span>
       <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">results_</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])))</span>
 <span class="n">report</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">results_</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.000 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/randomized_search.py" download=""><code class="xref download docutils literal"><span class="pre">randomized_search.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/randomized_search.ipynb" download=""><code class="xref download docutils literal"><span class="pre">randomized_search.ipynb</span></code></a></div>
 </div>
 
 
@@ -281,7 +287,7 @@ simultaneously using grid search, but pick only the ones deemed most important.<
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_roc_crossval.html">Previous
+      <a href="plot_confusion_matrix.html">Previous
       </a>
     </div>
     

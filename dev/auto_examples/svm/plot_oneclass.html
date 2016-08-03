@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Plot different SVM classifiers in the iris dataset" href="plot_iris.html" />
-    <link rel="prev" title="SVM-Anova: SVM with univariate feature selection" href="plot_svm_anova.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Scaling the regularization parameter for SVCs" href="plot_svm_scale_c.html" />
+    <link rel="prev" title="Plot different SVM classifiers in the iris dataset" href="plot_iris.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_svm_anova.html"
+        <a href="plot_iris.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        SVM-Anova: SV...
+        Plot differen...
         </span>
             <span class="hiddenrellink">
-            SVM-Anova: SVM with univariate feature selection
+            Plot different SVM classifiers in the iris dataset
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,19 +182,18 @@
           <div class="body" role="main">
             
   <div class="section" id="one-class-svm-with-non-linear-kernel-rbf">
-<span id="example-svm-plot-oneclass-py"></span><h1>One-class SVM with non-linear kernel (RBF)<a class="headerlink" href="#one-class-svm-with-non-linear-kernel-rbf" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-svm-plot-oneclass-py"></span><h1>One-class SVM with non-linear kernel (RBF)<a class="headerlink" href="#one-class-svm-with-non-linear-kernel-rbf" title="Permalink to this headline">¶</a></h1>
 <p>An example using a one-class SVM for novelty detection.</p>
 <p><a class="reference internal" href="../../modules/svm.html#svm-outlier-detection"><span class="std std-ref">One-class SVM</span></a> is an unsupervised
 algorithm that learns a decision function for novelty detection:
 classifying new data as similar or different to the training set.</p>
-<img alt="../../_images/plot_oneclass_001.png" class="align-center" src="../../_images/plot_oneclass_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_oneclass.py" download=""><code class="xref download docutils literal"><span class="pre">plot_oneclass.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_oneclass_001.png" class="align-center" src="../../_images/sphx_glr_plot_oneclass_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.font_manager</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 
 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.meshgrid.html#numpy.meshgrid"><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
 <span class="c1"># Generate train data</span>
@@ -243,8 +243,12 @@ classifying new data as similar or different to the training set.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.29 seconds
-( 0 minutes  0.29 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.318 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_oneclass.py" download=""><code class="xref download docutils literal"><span class="pre">plot_oneclass.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_oneclass.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_oneclass.ipynb</span></code></a></div>
 </div>
 
 
@@ -262,7 +266,7 @@ classifying new data as similar or different to the training set.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_svm_anova.html">Previous
+      <a href="plot_iris.html">Previous
       </a>
     </div>
     

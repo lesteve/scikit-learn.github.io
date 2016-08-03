@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Lasso and Elastic Net" href="plot_lasso_coordinate_descent_path.html" />
-    <link rel="prev" title="Orthogonal Matching Pursuit" href="plot_omp.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="L1 Penalty and Sparsity in Logistic Regression" href="plot_logistic_l1_l2_sparsity.html" />
+    <link rel="prev" title="Plot multi-class SGD on the iris dataset" href="plot_sgd_iris.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_omp.html"
+        <a href="plot_sgd_iris.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Orthogonal Ma...
+        Plot multi-cl...
         </span>
             <span class="hiddenrellink">
-            Orthogonal Matching Pursuit
+            Plot multi-class SGD on the iris dataset
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="theil-sen-regression">
-<span id="example-linear-model-plot-theilsen-py"></span><h1>Theil-Sen Regression<a class="headerlink" href="#theil-sen-regression" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-linear-model-plot-theilsen-py"></span><h1>Theil-Sen Regression<a class="headerlink" href="#theil-sen-regression" title="Permalink to this headline">¶</a></h1>
 <p>Computes a Theil-Sen Regression on a synthetic dataset.</p>
 <p>See <a class="reference internal" href="../../modules/linear_model.html#theil-sen-regression"><span class="std std-ref">Theil-Sen estimator: generalized-median-based estimator</span></a> for more information on the regressor.</p>
 <p>Compared to the OLS (ordinary least squares) estimator, the Theil-Sen
@@ -206,35 +207,26 @@ possible combinations of p subsample points to a randomly chosen subset and
 therefore also limits the runtime. Therefore, Theil-Sen is applicable to larger
 problems with the drawback of losing some of its mathematical properties since
 it then works on a random subset.</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/plot_theilsen_001.png"><img alt="../../_images/plot_theilsen_001.png" src="../../_images/plot_theilsen_001.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/plot_theilsen_002.png"><img alt="../../_images/plot_theilsen_002.png" src="../../_images/plot_theilsen_002.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-</ul>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_theilsen.py" download=""><code class="xref download docutils literal"><span class="pre">plot_theilsen.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
-<span class="c1"># Author: Florian Wilhelm -- &lt;florian.wilhelm@gmail.com&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Author: Florian Wilhelm -- &lt;florian.wilhelm@gmail.com&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor"><span class="n">TheilSenRegressor</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor"><span class="n">RANSACRegressor</span></a>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor"><span class="n">TheilSenRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor"><span class="n">RANSACRegressor</span></a>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;OLS&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">()),</span>
               <span class="p">(</span><span class="s1">&#39;Theil-Sen&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor"><span class="n">TheilSenRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
               <span class="p">(</span><span class="s1">&#39;RANSAC&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor"><span class="n">RANSACRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span> <span class="p">]</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OLS&#39;</span><span class="p">:</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;Theil-Sen&#39;</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="s1">&#39;RANSAC&#39;</span><span class="p">:</span> <span class="s1">&#39;lightgreen&#39;</span><span class="p">}</span>
 <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># Outliers only in the y direction</span>
-
-<a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Outliers only in the y direction</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="c1"># Linear model y = 3*x + N(2, 0.1**2)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
@@ -259,11 +251,11 @@ it then works on a random subset.</p>
 <a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Corrupt y&quot;</span><span class="p">)</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># Outliers in the X direction</span>
-
-<a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_plot_theilsen_001.png" class="align-center" src="../../_images/sphx_glr_plot_theilsen_001.png" />
+<p>Outliers in the X direction</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># Linear model y = 3*x + N(2, 0.1**2)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="n">noise</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
@@ -291,8 +283,13 @@ it then works on a random subset.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.84 seconds
-( 0 minutes  1.84 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_theilsen_002.png" class="align-center" src="../../_images/sphx_glr_plot_theilsen_002.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 1.873 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_theilsen.py" download=""><code class="xref download docutils literal"><span class="pre">plot_theilsen.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_theilsen.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_theilsen.ipynb</span></code></a></div>
 </div>
 
 
@@ -310,7 +307,7 @@ it then works on a random subset.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_omp.html">Previous
+      <a href="plot_sgd_iris.html">Previous
       </a>
     </div>
     

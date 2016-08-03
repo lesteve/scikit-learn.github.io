@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Two-class AdaBoost" href="plot_adaboost_twoclass.html" />
-    <link rel="prev" title="Prediction Intervals for Gradient Boosting Regression" href="plot_gradient_boosting_quantile.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Partial Dependence Plots" href="plot_partial_dependence.html" />
+    <link rel="prev" title="Two-class AdaBoost" href="plot_adaboost_twoclass.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_gradient_boosting_quantile.html"
+        <a href="plot_adaboost_twoclass.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Prediction In...
+        Two-class Ada...
         </span>
             <span class="hiddenrellink">
-            Prediction Intervals for Gradient Boosting Regression
+            Two-class AdaBoost
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="hashing-feature-transformation-using-totally-random-trees">
-<span id="example-ensemble-plot-random-forest-embedding-py"></span><h1>Hashing feature transformation using Totally Random Trees<a class="headerlink" href="#hashing-feature-transformation-using-totally-random-trees" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-random-forest-embedding-py"></span><h1>Hashing feature transformation using Totally Random Trees<a class="headerlink" href="#hashing-feature-transformation-using-totally-random-trees" title="Permalink to this headline">¶</a></h1>
 <p>RandomTreesEmbedding provides a way to map data to a
 very high-dimensional, sparse representation, which might
 be beneficial for classification.
@@ -199,15 +200,14 @@ is particularly well-suited. The bottom row compares the
 decision boundary obtained by BernoulliNB in the transformed
 space with an ExtraTreesClassifier forests learned on the
 original data.</p>
-<img alt="../../_images/plot_random_forest_embedding_001.png" class="align-center" src="../../_images/plot_random_forest_embedding_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_random_forest_embedding.py" download=""><code class="xref download docutils literal"><span class="pre">plot_random_forest_embedding.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<img alt="../../_images/sphx_glr_plot_random_forest_embedding_001.png" class="align-center" src="../../_images/sphx_glr_plot_random_forest_embedding_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomTreesEmbedding.html#sklearn.ensemble.RandomTreesEmbedding"><span class="n">RandomTreesEmbedding</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD"><span class="n">TruncatedSVD</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB"><span class="n">BernoulliNB</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomTreesEmbedding.html#sklearn.ensemble.RandomTreesEmbedding"><span class="n">RandomTreesEmbedding</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD"><span class="n">TruncatedSVD</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB"><span class="n">BernoulliNB</span></a>
 
 <span class="c1"># make a synthetic dataset</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a><span class="p">(</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
@@ -248,7 +248,7 @@ original data.</p>
 
 <span class="c1"># Plot the decision in original space. For that, we will assign a color to each</span>
 <span class="c1"># point in the mesh [x_min, x_max]x[y_min, y_max].</span>
-<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">01</span>
+<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mo">01</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span>
 <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span>
 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.meshgrid.html#numpy.meshgrid"><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
@@ -282,8 +282,12 @@ original data.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.74 seconds
-( 0 minutes  0.74 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.810 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_random_forest_embedding.py" download=""><code class="xref download docutils literal"><span class="pre">plot_random_forest_embedding.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_random_forest_embedding.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_random_forest_embedding.ipynb</span></code></a></div>
 </div>
 
 
@@ -301,7 +305,7 @@ original data.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_gradient_boosting_quantile.html">Previous
+      <a href="plot_adaboost_twoclass.html">Previous
       </a>
     </div>
     

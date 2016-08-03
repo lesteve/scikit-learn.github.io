@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,7 +36,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Sparse recovery: feature selection for sparse linear models" href="plot_sparse_recovery.html" />
     <link rel="prev" title="Lasso and Elastic Net" href="plot_lasso_coordinate_descent_path.html" />
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="lasso-model-selection-cross-validation-aic-bic">
-<span id="example-linear-model-plot-lasso-model-selection-py"></span><h1>Lasso model selection: Cross-Validation / AIC / BIC<a class="headerlink" href="#lasso-model-selection-cross-validation-aic-bic" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-linear-model-plot-lasso-model-selection-py"></span><h1>Lasso model selection: Cross-Validation / AIC / BIC<a class="headerlink" href="#lasso-model-selection-cross-validation-aic-bic" title="Permalink to this headline">¶</a></h1>
 <p>Use the Akaike information criterion (AIC), the Bayes Information
 criterion (BIC) and cross-validation to select an optimal value
 of the regularization parameter alpha of the <a class="reference internal" href="../../modules/linear_model.html#lasso"><span class="std std-ref">Lasso</span></a> estimator.</p>
@@ -214,32 +215,18 @@ illustrates why nested-cross validation is necessary when trying to
 evaluate the performance of a method for which a parameter is chosen by
 cross-validation: this choice of parameter may not be optimal for unseen
 data.</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/plot_lasso_model_selection_001.png"><img alt="../../_images/plot_lasso_model_selection_001.png" src="../../_images/plot_lasso_model_selection_001.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/plot_lasso_model_selection_002.png"><img alt="../../_images/plot_lasso_model_selection_002.png" src="../../_images/plot_lasso_model_selection_002.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/plot_lasso_model_selection_003.png"><img alt="../../_images/plot_lasso_model_selection_003.png" src="../../_images/plot_lasso_model_selection_003.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-</ul>
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Computing</span> <span class="n">regularization</span> <span class="n">path</span> <span class="n">using</span> <span class="n">the</span> <span class="n">coordinate</span> <span class="n">descent</span> <span class="n">lasso</span><span class="o">...</span>
-<span class="n">Computing</span> <span class="n">regularization</span> <span class="n">path</span> <span class="n">using</span> <span class="n">the</span> <span class="n">Lars</span> <span class="n">lasso</span><span class="o">...</span>
-</pre></div>
-</div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_lasso_model_selection.py" download=""><code class="xref download docutils literal"><span class="pre">plot_lasso_model_selection.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Olivier Grisel, Gael Varoquaux, Alexandre Gramfort</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV"><span class="n">LassoCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV"><span class="n">LassoLarsCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC"><span class="n">LassoLarsIC</span></a>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV"><span class="n">LassoCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV"><span class="n">LassoLarsCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC"><span class="n">LassoLarsIC</span></a>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
 <span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span>
@@ -250,11 +237,10 @@ data.</p>
 
 <span class="c1"># normalize data as done by Lars to allow for comparison</span>
 <span class="n">X</span> <span class="o">/=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">X</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># LassoLarsIC: least angle regression with BIC/AIC criterion</span>
-
-<span class="n">model_bic</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC"><span class="n">LassoLarsIC</span></a><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;bic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>LassoLarsIC: least angle regression with BIC/AIC criterion</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">model_bic</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC"><span class="n">LassoLarsIC</span></a><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;bic&#39;</span><span class="p">)</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">model_bic</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">t_bic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span>
@@ -282,12 +268,12 @@ data.</p>
 <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Information-criterion for model selection (training time </span><span class="si">%.3f</span><span class="s1">s)&#39;</span>
           <span class="o">%</span> <span class="n">t_bic</span><span class="p">)</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># LassoCV: coordinate descent</span>
-
-<span class="c1"># Compute paths</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computing regularization path using the coordinate descent lasso...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_plot_lasso_model_selection_001.png" class="align-center" src="../../_images/sphx_glr_plot_lasso_model_selection_001.png" />
+<p>LassoCV: coordinate descent</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Compute paths</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Computing regularization path using the coordinate descent lasso...&quot;</span><span class="p">)</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV"><span class="n">LassoCV</span></a><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">t_lasso_cv</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span>
@@ -311,12 +297,16 @@ data.</p>
           <span class="s1">&#39;(train time: </span><span class="si">%.2f</span><span class="s1">s)&#39;</span> <span class="o">%</span> <span class="n">t_lasso_cv</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># LassoLarsCV: least angle regression</span>
-
-<span class="c1"># Compute paths</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computing regularization path using the Lars lasso...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_plot_lasso_model_selection_002.png" class="align-center" src="../../_images/sphx_glr_plot_lasso_model_selection_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Computing</span> <span class="n">regularization</span> <span class="n">path</span> <span class="n">using</span> <span class="n">the</span> <span class="n">coordinate</span> <span class="n">descent</span> <span class="n">lasso</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>LassoLarsCV: least angle regression</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Compute paths</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Computing regularization path using the Lars lasso...&quot;</span><span class="p">)</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV"><span class="n">LassoLarsCV</span></a><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">t_lasso_lars_cv</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span>
@@ -342,8 +332,17 @@ data.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.17 seconds
-( 0 minutes  1.17 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_lasso_model_selection_003.png" class="align-center" src="../../_images/sphx_glr_plot_lasso_model_selection_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Computing</span> <span class="n">regularization</span> <span class="n">path</span> <span class="n">using</span> <span class="n">the</span> <span class="n">Lars</span> <span class="n">lasso</span><span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 1.172 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_lasso_model_selection.py" download=""><code class="xref download docutils literal"><span class="pre">plot_lasso_model_selection.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_lasso_model_selection.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_lasso_model_selection.ipynb</span></code></a></div>
 </div>
 
 

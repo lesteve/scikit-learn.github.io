@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Test with permutations the significance of a classification score" href="plot_permutation_test_for_classification.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Univariate Feature Selection" href="plot_feature_selection.html" />
     <link rel="prev" title="Recursive feature elimination with cross-validation" href="plot_rfe_with_cross_validation.html" />
   
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,22 +182,21 @@
           <div class="body" role="main">
             
   <div class="section" id="feature-selection-using-selectfrommodel-and-lassocv">
-<span id="example-feature-selection-plot-select-from-model-boston-py"></span><h1>Feature selection using SelectFromModel and LassoCV<a class="headerlink" href="#feature-selection-using-selectfrommodel-and-lassocv" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-feature-selection-plot-select-from-model-boston-py"></span><h1>Feature selection using SelectFromModel and LassoCV<a class="headerlink" href="#feature-selection-using-selectfrommodel-and-lassocv" title="Permalink to this headline">¶</a></h1>
 <p>Use SelectFromModel meta-transformer along with Lasso to select the best
 couple of features from the Boston dataset.</p>
-<img alt="../../_images/plot_select_from_model_boston_001.png" class="align-center" src="../../_images/plot_select_from_model_boston_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_select_from_model_boston.py" download=""><code class="xref download docutils literal"><span class="pre">plot_select_from_model_boston.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Author: Manoj Kumar &lt;mks542@nyu.edu&gt;</span>
+<img alt="../../_images/sphx_glr_plot_select_from_model_boston_001.png" class="align-center" src="../../_images/sphx_glr_plot_select_from_model_boston_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Author: Manoj Kumar &lt;mks542@nyu.edu&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel"><span class="n">SelectFromModel</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV"><span class="n">LassoCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel"><span class="n">SelectFromModel</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV"><span class="n">LassoCV</span></a>
 
 <span class="c1"># Load the boston dataset.</span>
 <span class="n">boston</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a><span class="p">()</span>
@@ -223,7 +223,7 @@ couple of features from the Boston dataset.</p>
     <span class="s2">&quot;Features selected from Boston using SelectFromModel with &quot;</span>
     <span class="s2">&quot;threshold </span><span class="si">%0.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">sfm</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span>
 <span class="n">feature1</span> <span class="o">=</span> <span class="n">X_transform</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">feature2</span> <span class="o">=</span> <span class="n">X_transform</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> 
+<span class="n">feature2</span> <span class="o">=</span> <span class="n">X_transform</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">feature1</span><span class="p">,</span> <span class="n">feature2</span><span class="p">,</span> <span class="s1">&#39;r.&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Feature number 1&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Feature number 2&quot;</span><span class="p">)</span>
@@ -231,8 +231,12 @@ couple of features from the Boston dataset.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.10 seconds
-( 0 minutes  0.10 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.157 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_select_from_model_boston.py" download=""><code class="xref download docutils literal"><span class="pre">plot_select_from_model_boston.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_select_from_model_boston.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_select_from_model_boston.ipynb</span></code></a></div>
 </div>
 
 

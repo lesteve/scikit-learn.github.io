@@ -1,6 +1,6 @@
 
 
-.. _example_tree_plot_tree_regression.py:
+.. _sphx_glr_auto_examples_tree_plot_tree_regression.py:
 
 
 ===================================================================
@@ -19,17 +19,60 @@ details of the training data and learn from the noise, i.e. they overfit.
 
 
 
-.. image:: images/plot_tree_regression_001.png
+.. image:: /auto_examples/tree/images/sphx_glr_plot_tree_regression_001.png
     :align: center
 
 
 
 
-**Python source code:** :download:`plot_tree_regression.py <plot_tree_regression.py>`
 
-.. literalinclude:: plot_tree_regression.py
-    :lines: 16-
+.. code-block:: python
 
-**Total running time of the example:**  0.07 seconds
-( 0 minutes  0.07 seconds)
-    
+    print(__doc__)
+
+    # Import the necessary modules and libraries
+    import numpy as np
+    from sklearn.tree import DecisionTreeRegressor
+    import matplotlib.pyplot as plt
+
+    # Create a random dataset
+    rng = np.random.RandomState(1)
+    X = np.sort(5 * rng.rand(80, 1), axis=0)
+    y = np.sin(X).ravel()
+    y[::5] += 3 * (0.5 - rng.rand(16))
+
+    # Fit regression model
+    regr_1 = DecisionTreeRegressor(max_depth=2)
+    regr_2 = DecisionTreeRegressor(max_depth=5)
+    regr_1.fit(X, y)
+    regr_2.fit(X, y)
+
+    # Predict
+    X_test = np.arange(0.0, 5.0, 0.01)[:, np.newaxis]
+    y_1 = regr_1.predict(X_test)
+    y_2 = regr_2.predict(X_test)
+
+    # Plot the results
+    plt.figure()
+    plt.scatter(X, y, c="darkorange", label="data")
+    plt.plot(X_test, y_1, color="cornflowerblue", label="max_depth=2", linewidth=2)
+    plt.plot(X_test, y_2, color="yellowgreen", label="max_depth=5", linewidth=2)
+    plt.xlabel("data")
+    plt.ylabel("target")
+    plt.title("Decision Tree Regression")
+    plt.legend()
+    plt.show()
+
+**Total running time of the script:**
+(0 minutes 0.065 seconds)
+
+
+
+.. container:: sphx-glr-download
+
+    **Download Python source code:** :download:`plot_tree_regression.py <plot_tree_regression.py>`
+
+
+.. container:: sphx-glr-download
+
+    **Download IPython notebook:** :download:`plot_tree_regression.ipynb <plot_tree_regression.ipynb>`

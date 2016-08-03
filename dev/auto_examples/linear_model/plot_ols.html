@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Ordinary Least Squares and Ridge Regression Variance" href="plot_ols_ridge_variance.html" />
-    <link rel="prev" title="Path with L1- Logistic Regression" href="plot_logistic_path.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Logistic Regression 3-class Classifier" href="plot_iris_logistic.html" />
+    <link rel="prev" title="Polynomial interpolation" href="plot_polynomial_interpolation.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_logistic_path.html"
+        <a href="plot_polynomial_interpolation.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Path with L1-...
+        Polynomial in...
         </span>
             <span class="hiddenrellink">
-            Path with L1- Logistic Regression
+            Polynomial interpolation
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="linear-regression-example">
-<span id="example-linear-model-plot-ols-py"></span><h1>Linear Regression Example<a class="headerlink" href="#linear-regression-example" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-linear-model-plot-ols-py"></span><h1>Linear Regression Example<a class="headerlink" href="#linear-regression-example" title="Permalink to this headline">¶</a></h1>
 <p>This example uses the only the first feature of the <cite>diabetes</cite> dataset, in
 order to illustrate a two-dimensional plot of this regression technique. The
 straight line can be seen in the plot, showing how linear regression attempts
@@ -190,25 +191,27 @@ between the observed responses in the dataset, and the responses predicted by
 the linear approximation.</p>
 <p>The coefficients, the residual sum of squares and the variance score are also
 calculated.</p>
-<img alt="../../_images/plot_ols_001.png" class="align-center" src="../../_images/plot_ols_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Coefficients</span><span class="p">:</span>
+<img alt="../../_images/sphx_glr_plot_ols_001.png" class="align-center" src="../../_images/sphx_glr_plot_ols_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Coefficients</span><span class="p">:</span>
  <span class="p">[</span> <span class="mf">938.23786125</span><span class="p">]</span>
 <span class="n">Mean</span> <span class="n">squared</span> <span class="n">error</span><span class="p">:</span> <span class="mf">2548.07</span>
 <span class="n">Variance</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.47</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ols.py" download=""><code class="xref download docutils literal"><span class="pre">plot_ols.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 
 <span class="c1"># Code source: Jaques Grobler</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
 
 <span class="c1"># Load the diabetes dataset</span>
 <span class="n">diabetes</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_diabetes.html#sklearn.datasets.load_diabetes"><span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span></a><span class="p">()</span>
@@ -232,12 +235,12 @@ calculated.</p>
 <span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">diabetes_X_train</span><span class="p">,</span> <span class="n">diabetes_y_train</span><span class="p">)</span>
 
 <span class="c1"># The coefficients</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Coefficients: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 <span class="c1"># The mean squared error</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean squared error: </span><span class="si">%.2f</span><span class="s2">&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean squared error: </span><span class="si">%.2f</span><span class="s2">&quot;</span>
       <span class="o">%</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">((</span><span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">)</span> <span class="o">-</span> <span class="n">diabetes_y_test</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
 <span class="c1"># Explained variance score: 1 is perfect prediction</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance score: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">regr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_test</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Variance score: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">regr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_test</span><span class="p">))</span>
 
 <span class="c1"># Plot outputs</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
@@ -250,8 +253,12 @@ calculated.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.14 seconds
-( 0 minutes  0.14 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.102 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ols.py" download=""><code class="xref download docutils literal"><span class="pre">plot_ols.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_ols.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_ols.ipynb</span></code></a></div>
 </div>
 
 
@@ -269,7 +276,7 @@ calculated.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_logistic_path.html">Previous
+      <a href="plot_polynomial_interpolation.html">Previous
       </a>
     </div>
     

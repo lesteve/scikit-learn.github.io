@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Digits Classification Exercise" href="../exercises/digits_classification_exercise.html" />
-    <link rel="prev" title="Plot the decision surfaces of ensembles of trees on the iris dataset" href="plot_forest_iris.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Plot the decision surfaces of ensembles of trees on the iris dataset" href="plot_forest_iris.html" />
+    <link rel="prev" title="Gradient Boosting Out-of-Bag estimates" href="plot_gradient_boosting_oob.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_forest_iris.html"
+        <a href="plot_gradient_boosting_oob.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Plot the deci...
+        Gradient Boos...
         </span>
             <span class="hiddenrellink">
-            Plot the decision surfaces of ensembles of trees on the iris dataset
+            Gradient Boosting Out-of-Bag estimates
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -184,7 +185,7 @@
           <div class="body" role="main">
             
   <div class="section" id="single-estimator-versus-bagging-bias-variance-decomposition">
-<span id="example-ensemble-plot-bias-variance-py"></span><h1>Single estimator versus bagging: bias-variance decomposition<a class="headerlink" href="#single-estimator-versus-bagging-bias-variance-decomposition" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-bias-variance-py"></span><h1>Single estimator versus bagging: bias-variance decomposition<a class="headerlink" href="#single-estimator-versus-bagging-bias-variance-decomposition" title="Permalink to this headline">¶</a></h1>
 <p>This example illustrates and compares the bias-variance decomposition of the
 expected mean squared error of a single estimator against a bagging ensemble.</p>
 <p>In regression, the expected mean squared error of an estimator can be
@@ -239,23 +240,25 @@ reduced variance.</p>
 &#8220;Elements of Statistical Learning&#8221;, Springer, 2009.</td></tr>
 </tbody>
 </table>
-<img alt="../../_images/plot_bias_variance_001.png" class="align-center" src="../../_images/plot_bias_variance_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Tree</span><span class="p">:</span> <span class="mf">0.0255</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0003</span> <span class="p">(</span><span class="n">bias</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>  <span class="o">+</span> <span class="mf">0.0152</span> <span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.0098</span> <span class="p">(</span><span class="n">noise</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_bias_variance_001.png" class="align-center" src="../../_images/sphx_glr_plot_bias_variance_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Tree</span><span class="p">:</span> <span class="mf">0.0255</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0003</span> <span class="p">(</span><span class="n">bias</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>  <span class="o">+</span> <span class="mf">0.0152</span> <span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.0098</span> <span class="p">(</span><span class="n">noise</span><span class="p">)</span>
 <span class="n">Bagging</span><span class="p">(</span><span class="n">Tree</span><span class="p">):</span> <span class="mf">0.0196</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0004</span> <span class="p">(</span><span class="n">bias</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>  <span class="o">+</span> <span class="mf">0.0092</span> <span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.0098</span> <span class="p">(</span><span class="n">noise</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_bias_variance.py" download=""><code class="xref download docutils literal"><span class="pre">plot_bias_variance.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Gilles Louppe &lt;g.louppe@gmail.com&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.BaggingRegressor.html#sklearn.ensemble.BaggingRegressor"><span class="n">BaggingRegressor</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor"><span class="n">DecisionTreeRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.BaggingRegressor.html#sklearn.ensemble.BaggingRegressor"><span class="n">BaggingRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor"><span class="n">DecisionTreeRegressor</span></a>
 
 <span class="c1"># Settings</span>
 <span class="n">n_repeat</span> <span class="o">=</span> <span class="mi">50</span>       <span class="c1"># Number of iterations for computing expectations</span>
@@ -327,8 +330,8 @@ reduced variance.</p>
     <span class="n">y_bias</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="o">-</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">y_predict</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="n">y_var</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.var.html#numpy.var"><span class="n">np</span><span class="o">.</span><span class="n">var</span></a><span class="p">(</span><span class="n">y_predict</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">: </span><span class="si">{1:.4f}</span><span class="s2"> (error) = </span><span class="si">{2:.4f}</span><span class="s2"> (bias^2) &quot;</span>
-          <span class="s2">&quot; + </span><span class="si">{3:.4f}</span><span class="s2"> (var) + </span><span class="si">{4:.4f}</span><span class="s2"> (noise)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{0}: {1:.4f} (error) = {2:.4f} (bias^2) &quot;</span>
+          <span class="s2">&quot; + {3:.4f} (var) + {4:.4f} (noise)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
                                                       <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">y_error</span><span class="p">),</span>
                                                       <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">y_bias</span><span class="p">),</span>
                                                       <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">y_var</span><span class="p">),</span>
@@ -346,7 +349,7 @@ reduced variance.</p>
             <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_predict</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">y_predict</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span>
-             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\mathbb</span><span class="si">{E}</span><span class="s2">_</span><span class="si">{LS}</span><span class="s2"> \^y(x)$&quot;</span><span class="p">)</span>
+             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\mathbb{E}_{LS} \^y(x)$&quot;</span><span class="p">)</span>
 
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -369,8 +372,12 @@ reduced variance.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.46 seconds
-( 0 minutes  1.46 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 1.635 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_bias_variance.py" download=""><code class="xref download docutils literal"><span class="pre">plot_bias_variance.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_bias_variance.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_bias_variance.ipynb</span></code></a></div>
 </div>
 </div>
 
@@ -389,7 +396,7 @@ reduced variance.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_forest_iris.html">Previous
+      <a href="plot_gradient_boosting_oob.html">Previous
       </a>
     </div>
     

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="FastICA on 2D point clouds" href="plot_ica_vs_pca.html" />
-    <link rel="prev" title="Blind source separation using FastICA" href="plot_ica_blind_source_separation.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Principal components analysis (PCA)" href="plot_pca_3d.html" />
+    <link rel="prev" title="FastICA on 2D point clouds" href="plot_ica_vs_pca.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_ica_blind_source_separation.html"
+        <a href="plot_ica_vs_pca.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Blind source ...
+        FastICA on 2D...
         </span>
             <span class="hiddenrellink">
-            Blind source separation using FastICA
+            FastICA on 2D point clouds
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,28 +182,27 @@
           <div class="body" role="main">
             
   <div class="section" id="kernel-pca">
-<span id="example-decomposition-plot-kernel-pca-py"></span><h1>Kernel PCA<a class="headerlink" href="#kernel-pca" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-decomposition-plot-kernel-pca-py"></span><h1>Kernel PCA<a class="headerlink" href="#kernel-pca" title="Permalink to this headline">¶</a></h1>
 <p>This example shows that Kernel PCA is able to find a projection of the data
 that makes data linearly separable.</p>
-<img alt="../../_images/plot_kernel_pca_001.png" class="align-center" src="../../_images/plot_kernel_pca_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_kernel_pca.py" download=""><code class="xref download docutils literal"><span class="pre">plot_kernel_pca.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_kernel_pca_001.png" class="align-center" src="../../_images/sphx_glr_plot_kernel_pca_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Authors: Mathieu Blondel</span>
 <span class="c1">#          Andreas Mueller</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA"><span class="n">KernelPCA</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA"><span class="n">KernelPCA</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">factor</span><span class="o">=.</span><span class="mi">3</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mi">05</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><span class="n">make_circles</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">factor</span><span class="o">=.</span><span class="mi">3</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mo">05</span><span class="p">)</span>
 
-<span class="n">kpca</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA"><span class="n">KernelPCA</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">fit_inverse_transform</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">kpca</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA"><span class="n">KernelPCA</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">fit_inverse_transform</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">X_kpca</span> <span class="o">=</span> <span class="n">kpca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">X_back</span> <span class="o">=</span> <span class="n">kpca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_kpca</span><span class="p">)</span>
 <span class="n">pca</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">()</span>
@@ -253,8 +253,12 @@ that makes data linearly separable.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.49 seconds
-( 0 minutes  0.49 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.527 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_kernel_pca.py" download=""><code class="xref download docutils literal"><span class="pre">plot_kernel_pca.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_kernel_pca.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_kernel_pca.ipynb</span></code></a></div>
 </div>
 
 
@@ -272,7 +276,7 @@ that makes data linearly separable.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_ica_blind_source_separation.html">Previous
+      <a href="plot_ica_vs_pca.html">Previous
       </a>
     </div>
     

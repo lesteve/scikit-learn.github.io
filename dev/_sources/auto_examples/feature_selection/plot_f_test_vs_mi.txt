@@ -1,6 +1,6 @@
 
 
-.. _example_feature_selection_plot_f_test_vs_mi.py:
+.. _sphx_glr_auto_examples_feature_selection_plot_f_test_vs_mi.py:
 
 
 ===========================================
@@ -26,17 +26,53 @@ perception for this example. Both methods correctly marks x_3 as irrelevant.
 
 
 
-.. image:: images/plot_f_test_vs_mi_001.png
+.. image:: /auto_examples/feature_selection/images/sphx_glr_plot_f_test_vs_mi_001.png
     :align: center
 
 
 
 
-**Python source code:** :download:`plot_f_test_vs_mi.py <plot_f_test_vs_mi.py>`
 
-.. literalinclude:: plot_f_test_vs_mi.py
-    :lines: 23-
+.. code-block:: python
 
-**Total running time of the example:**  0.27 seconds
-( 0 minutes  0.27 seconds)
-    
+    print(__doc__)
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.feature_selection import f_regression, mutual_info_regression
+
+    np.random.seed(0)
+    X = np.random.rand(1000, 3)
+    y = X[:, 0] + np.sin(6 * np.pi * X[:, 1]) + 0.1 * np.random.randn(1000)
+
+    f_test, _ = f_regression(X, y)
+    f_test /= np.max(f_test)
+
+    mi = mutual_info_regression(X, y)
+    mi /= np.max(mi)
+
+    plt.figure(figsize=(15, 5))
+    for i in range(3):
+        plt.subplot(1, 3, i + 1)
+        plt.scatter(X[:, i], y)
+        plt.xlabel("$x_{}$".format(i + 1), fontsize=14)
+        if i == 0:
+            plt.ylabel("$y$", fontsize=14)
+        plt.title("F-test={:.2f}, MI={:.2f}".format(f_test[i], mi[i]),
+                  fontsize=16)
+    plt.show()
+
+
+**Total running time of the script:**
+(0 minutes 0.234 seconds)
+
+
+
+.. container:: sphx-glr-download
+
+    **Download Python source code:** :download:`plot_f_test_vs_mi.py <plot_f_test_vs_mi.py>`
+
+
+.. container:: sphx-glr-download
+
+    **Download IPython notebook:** :download:`plot_f_test_vs_mi.ipynb <plot_f_test_vs_mi.ipynb>`

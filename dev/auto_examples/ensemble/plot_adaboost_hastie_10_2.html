@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Multi-class AdaBoosted Decision Trees" href="plot_adaboost_multiclass.html" />
-    <link rel="prev" title="Two-class AdaBoost" href="plot_adaboost_twoclass.html" />
+    <link rel="prev" title="Partial Dependence Plots" href="plot_partial_dependence.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_adaboost_twoclass.html"
+        <a href="plot_partial_dependence.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Two-class Ada...
+        Partial Depen...
         </span>
             <span class="hiddenrellink">
-            Two-class AdaBoost
+            Partial Dependence Plots
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="discrete-versus-real-adaboost">
-<span id="example-ensemble-plot-adaboost-hastie-10-2-py"></span><h1>Discrete versus Real AdaBoost<a class="headerlink" href="#discrete-versus-real-adaboost" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-adaboost-hastie-10-2-py"></span><h1>Discrete versus Real AdaBoost<a class="headerlink" href="#discrete-versus-real-adaboost" title="Permalink to this headline">¶</a></h1>
 <p>This example is based on Figure 10.2 from Hastie et al 2009 [1] and illustrates
 the difference in performance between the discrete SAMME [2] boosting
 algorithm and real SAMME.R boosting algorithm. Both algorithms are evaluated
@@ -205,22 +206,21 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 </td></tr>
 </tbody>
 </table>
-<img alt="../../_images/plot_adaboost_hastie_10_2_001.png" class="align-center" src="../../_images/plot_adaboost_hastie_10_2_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_hastie_10_2.py" download=""><code class="xref download docutils literal"><span class="pre">plot_adaboost_hastie_10_2.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_adaboost_hastie_10_2_001.png" class="align-center" src="../../_images/sphx_glr_plot_adaboost_hastie_10_2_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Peter Prettenhofer &lt;peter.prettenhofer@gmail.com&gt;,</span>
 <span class="c1">#         Noel Dawe &lt;noel.dawe@gmail.com&gt;</span>
 <span class="c1">#</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a>
 
 
 <span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">400</span>
@@ -295,14 +295,18 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;error rate&#39;</span><span class="p">)</span>
 
-<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">leg</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  6.01 seconds
-( 0 minutes  6.01 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 6.571 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_hastie_10_2.py" download=""><code class="xref download docutils literal"><span class="pre">plot_adaboost_hastie_10_2.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_hastie_10_2.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_adaboost_hastie_10_2.ipynb</span></code></a></div>
 </div>
 
 
@@ -320,7 +324,7 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_adaboost_twoclass.html">Previous
+      <a href="plot_partial_dependence.html">Previous
       </a>
     </div>
     

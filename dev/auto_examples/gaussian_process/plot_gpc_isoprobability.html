@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Gaussian Processes regression: basic introductory example" href="plot_gpr_noisy_targets.html" />
-    <link rel="prev" title="Gaussian process regression (GPR) with noise-level estimation" href="plot_gpr_noisy.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Probabilistic predictions with Gaussian process classification (GPC)" href="plot_gpc.html" />
+    <link rel="prev" title="Illustration of prior and posterior Gaussian process for different kernels" href="plot_gpr_prior_posterior.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_gpr_noisy.html"
+        <a href="plot_gpr_prior_posterior.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Gaussian proc...
+        Illustration ...
         </span>
             <span class="hiddenrellink">
-            Gaussian process regression (GPR) with noise-level estimation
+            Illustration of prior and posterior Gaussian process for different kernels
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,29 +182,31 @@
           <div class="body" role="main">
             
   <div class="section" id="iso-probability-lines-for-gaussian-processes-classification-gpc">
-<span id="example-gaussian-process-plot-gpc-isoprobability-py"></span><h1>Iso-probability lines for Gaussian Processes classification (GPC)<a class="headerlink" href="#iso-probability-lines-for-gaussian-processes-classification-gpc" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-gaussian-process-plot-gpc-isoprobability-py"></span><h1>Iso-probability lines for Gaussian Processes classification (GPC)<a class="headerlink" href="#iso-probability-lines-for-gaussian-processes-classification-gpc" title="Permalink to this headline">¶</a></h1>
 <p>A two-dimensional classification example showing iso-probability lines for
 the predicted probabilities.</p>
-<img alt="../../_images/plot_gpc_isoprobability_001.png" class="align-center" src="../../_images/plot_gpc_isoprobability_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Learned</span> <span class="n">kernel</span><span class="p">:</span> <span class="mf">0.0256</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct"><span class="n">DotProduct</span></a><span class="p">(</span><span class="n">sigma_0</span><span class="o">=</span><span class="mf">5.72</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<img alt="../../_images/sphx_glr_plot_gpc_isoprobability_001.png" class="align-center" src="../../_images/sphx_glr_plot_gpc_isoprobability_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Learned</span> <span class="n">kernel</span><span class="p">:</span> <span class="mf">0.0256</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct"><span class="n">DotProduct</span></a><span class="p">(</span><span class="n">sigma_0</span><span class="o">=</span><span class="mf">5.72</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gpc_isoprobability.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gpc_isoprobability.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Vincent Dubourg &lt;vincent.dubourg@gmail.com&gt;</span>
 <span class="c1"># Adapted to GaussianProcessClassifier:</span>
 <span class="c1">#         Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">cm</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier"><span class="n">GaussianProcessClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct"><span class="n">DotProduct</span></a><span class="p">,</span> <span class="n">ConstantKernel</span> <span class="k">as</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ConstantKernel.html#sklearn.gaussian_process.kernels.ConstantKernel"><span class="n">C</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier"><span class="n">GaussianProcessClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct"><span class="n">DotProduct</span></a><span class="p">,</span> <span class="n">ConstantKernel</span> <span class="k">as</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ConstantKernel.html#sklearn.gaussian_process.kernels.ConstantKernel"><span class="n">C</span></a>
 
 <span class="c1"># A few constants</span>
 <span class="n">lim</span> <span class="o">=</span> <span class="mi">8</span>
@@ -228,10 +231,10 @@ the predicted probabilities.</p>
 <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
 <span class="c1"># Instanciate and fit Gaussian Process Model</span>
-<span class="n">kernel</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ConstantKernel.html#sklearn.gaussian_process.kernels.ConstantKernel"><span class="n">C</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct"><span class="n">DotProduct</span></a><span class="p">(</span><span class="n">sigma_0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">kernel</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ConstantKernel.html#sklearn.gaussian_process.kernels.ConstantKernel"><span class="n">C</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct"><span class="n">DotProduct</span></a><span class="p">(</span><span class="n">sigma_0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="n">gp</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier"><span class="n">GaussianProcessClassifier</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">)</span>
 <span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Learned kernel: </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">gp</span><span class="o">.</span><span class="n">kernel_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Learned kernel: </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">gp</span><span class="o">.</span><span class="n">kernel_</span><span class="p">)</span>
 
 <span class="c1"># Evaluate real function and the predicted probability</span>
 <span class="n">res</span> <span class="o">=</span> <span class="mi">50</span>
@@ -259,7 +262,7 @@ the predicted probabilities.</p>
                  <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">lim</span><span class="p">,</span> <span class="n">lim</span><span class="p">,</span> <span class="o">-</span><span class="n">lim</span><span class="p">,</span> <span class="n">lim</span><span class="p">))</span>
 <span class="n">norm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
-<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;${</span><span class="se">\\</span><span class="s1">rm \mathbb</span><span class="si">{P}</span><span class="s1">}\left[\widehat</span><span class="si">{G}</span><span class="s1">(\mathbf</span><span class="si">{x}</span><span class="s1">) \leq 0</span><span class="se">\\</span><span class="s1">right]$&#39;</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;${</span><span class="se">\\</span><span class="s1">rm \mathbb{P}}\left[\widehat{G}(\mathbf{x}) \leq 0</span><span class="se">\\</span><span class="s1">right]$&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clim"><span class="n">plt</span><span class="o">.</span><span class="n">clim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
@@ -283,8 +286,12 @@ the predicted probabilities.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.32 seconds
-( 0 minutes  0.32 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.340 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gpc_isoprobability.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gpc_isoprobability.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_gpc_isoprobability.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_gpc_isoprobability.ipynb</span></code></a></div>
 </div>
 
 
@@ -302,7 +309,7 @@ the predicted probabilities.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_gpr_noisy.html">Previous
+      <a href="plot_gpr_prior_posterior.html">Previous
       </a>
     </div>
     

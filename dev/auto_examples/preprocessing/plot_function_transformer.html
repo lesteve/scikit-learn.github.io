@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Robust Scaling on Toy Data" href="plot_robust_scaling.html" />
-    <link rel="prev" title="Restricted Boltzmann Machine features for digit classification" href="../neural_networks/plot_rbm_logistic_classification.html" />
+    <link rel="prev" title="Varying regularization in Multi-layer Perceptron" href="../neural_networks/plot_mlp_alpha.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="../neural_networks/plot_rbm_logistic_classification.html"
+        <a href="../neural_networks/plot_mlp_alpha.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Restricted Bo...
+        Varying regul...
         </span>
             <span class="hiddenrellink">
-            Restricted Boltzmann Machine features for digit classification
+            Varying regularization in Multi-layer Perceptron
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,19 +182,24 @@
           <div class="body" role="main">
             
   <div class="section" id="using-functiontransformer-to-select-columns">
-<span id="example-preprocessing-plot-function-transformer-py"></span><h1>Using FunctionTransformer to select columns<a class="headerlink" href="#using-functiontransformer-to-select-columns" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-preprocessing-plot-function-transformer-py"></span><h1>Using FunctionTransformer to select columns<a class="headerlink" href="#using-functiontransformer-to-select-columns" title="Permalink to this headline">¶</a></h1>
 <p>Shows how to use a function transformer in a pipeline. If you know your
 dataset&#8217;s first principle component is irrelevant for a classification task,
 you can use the FunctionTransformer to select all but the first column of the
 PCA transformed data.</p>
-<p class="horizontal"><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_function_transformer.py" download=""><code class="xref download docutils literal"><span class="pre">plot_function_transformer.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_function_transformer_001.png"><img alt="../../_images/sphx_glr_plot_function_transformer_001.png" src="../../_images/sphx_glr_plot_function_transformer_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_function_transformer_002.png"><img alt="../../_images/sphx_glr_plot_function_transformer_002.png" src="../../_images/sphx_glr_plot_function_transformer_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.pipeline.make_pipeline.html#sklearn.pipeline.make_pipeline"><span class="n">make_pipeline</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer"><span class="n">FunctionTransformer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.pipeline.make_pipeline.html#sklearn.pipeline.make_pipeline"><span class="n">make_pipeline</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer"><span class="n">FunctionTransformer</span></a>
 
 
 <span class="k">def</span> <span class="nf">_generate_vector</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
@@ -251,8 +257,12 @@ PCA transformed data.</p>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.00 seconds
-( 0 minutes  0.00 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.147 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_function_transformer.py" download=""><code class="xref download docutils literal"><span class="pre">plot_function_transformer.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_function_transformer.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_function_transformer.ipynb</span></code></a></div>
 </div>
 
 
@@ -270,7 +280,7 @@ PCA transformed data.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="../neural_networks/plot_rbm_logistic_classification.html">Previous
+      <a href="../neural_networks/plot_mlp_alpha.html">Previous
       </a>
     </div>
     

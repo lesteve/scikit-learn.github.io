@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,7 +36,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Probability calibration of classifiers" href="plot_calibration.html" />
     <link rel="prev" title="Comparison of Calibration of Classifiers" href="plot_compare_calibration.html" />
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="probability-calibration-curves">
-<span id="example-calibration-plot-calibration-curve-py"></span><h1>Probability Calibration curves<a class="headerlink" href="#probability-calibration-curves" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-calibration-plot-calibration-curve-py"></span><h1>Probability Calibration curves<a class="headerlink" href="#probability-calibration-curves" title="Permalink to this headline">¶</a></h1>
 <p>When performing classification one often wants to predict not only the class
 label, but also the associated probability. This probability gives some
 kind of confidence on the prediction. This example demonstrates how to display
@@ -215,14 +216,14 @@ that are close to the decision boundary (the support vectors).</p>
 results. This shows that sigmoid calibration can deal with situations where
 the calibration curve of the base classifier is sigmoid (e.g., for LinearSVC)
 but not where it is transposed-sigmoid (e.g., Gaussian naive Bayes).</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/plot_calibration_curve_001.png"><img alt="../../_images/plot_calibration_curve_001.png" src="../../_images/plot_calibration_curve_001.png" style="width: 470.0px; height: 470.0px;" /></a>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_calibration_curve_001.png"><img alt="../../_images/sphx_glr_plot_calibration_curve_001.png" src="../../_images/sphx_glr_plot_calibration_curve_001.png" style="width: 470.0px; height: 470.0px;" /></a>
 </li>
-<li><a class="first reference internal image-reference" href="../../_images/plot_calibration_curve_002.png"><img alt="../../_images/plot_calibration_curve_002.png" src="../../_images/plot_calibration_curve_002.png" style="width: 470.0px; height: 470.0px;" /></a>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_calibration_curve_002.png"><img alt="../../_images/sphx_glr_plot_calibration_curve_002.png" src="../../_images/sphx_glr_plot_calibration_curve_002.png" style="width: 470.0px; height: 470.0px;" /></a>
 </li>
 </ul>
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Logistic</span><span class="p">:</span>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Logistic</span><span class="p">:</span>
         <span class="n">Brier</span><span class="p">:</span> <span class="mf">0.099</span>
         <span class="n">Precision</span><span class="p">:</span> <span class="mf">0.872</span>
         <span class="n">Recall</span><span class="p">:</span> <span class="mf">0.851</span>
@@ -271,23 +272,25 @@ but not where it is transposed-sigmoid (e.g., Gaussian naive Bayes).</p>
         <span class="n">F1</span><span class="p">:</span> <span class="mf">0.861</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_calibration_curve.py" download=""><code class="xref download docutils literal"><span class="pre">plot_calibration_curve.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Alexandre Gramfort &lt;alexandre.gramfort@telecom-paristech.fr&gt;</span>
 <span class="c1">#         Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;</span>
 <span class="c1"># License: BSD Style.</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB"><span class="n">GaussianNB</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC"><span class="n">LinearSVC</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression"><span class="n">LogisticRegression</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="p">(</span><a href="../../modules/generated/sklearn.metrics.brier_score_loss.html#sklearn.metrics.brier_score_loss"><span class="n">brier_score_loss</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score"><span class="n">precision_score</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score"><span class="n">recall_score</span></a><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB"><span class="n">GaussianNB</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC"><span class="n">LinearSVC</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression"><span class="n">LogisticRegression</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span><a href="../../modules/generated/sklearn.metrics.brier_score_loss.html#sklearn.metrics.brier_score_loss"><span class="n">brier_score_loss</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score"><span class="n">precision_score</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score"><span class="n">recall_score</span></a><span class="p">,</span>
                              <a href="../../modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score"><span class="n">f1_score</span></a><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV"><span class="n">CalibratedClassifierCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.calibration.calibration_curve.html#sklearn.calibration.calibration_curve"><span class="n">calibration_curve</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV"><span class="n">CalibratedClassifierCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.calibration.calibration_curve.html#sklearn.calibration.calibration_curve"><span class="n">calibration_curve</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
 
 
 <span class="c1"># Create dataset of classification task with many redundant and few</span>
@@ -330,11 +333,11 @@ but not where it is transposed-sigmoid (e.g., Gaussian naive Bayes).</p>
                 <span class="p">(</span><span class="n">prob_pos</span> <span class="o">-</span> <span class="n">prob_pos</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">prob_pos</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">prob_pos</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
 
         <span class="n">clf_score</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.brier_score_loss.html#sklearn.metrics.brier_score_loss"><span class="n">brier_score_loss</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_pos</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Brier: </span><span class="si">%1.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">clf_score</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Precision: </span><span class="si">%1.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score"><span class="n">precision_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Recall: </span><span class="si">%1.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score"><span class="n">recall_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">F1: </span><span class="si">%1.3f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score"><span class="n">f1_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Brier: </span><span class="si">%1.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">clf_score</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Precision: </span><span class="si">%1.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score"><span class="n">precision_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Recall: </span><span class="si">%1.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score"><span class="n">recall_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">F1: </span><span class="si">%1.3f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score"><span class="n">f1_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 
         <span class="n">fraction_of_positives</span><span class="p">,</span> <span class="n">mean_predicted_value</span> <span class="o">=</span> \
             <a href="../../modules/generated/sklearn.calibration.calibration_curve.html#sklearn.calibration.calibration_curve"><span class="n">calibration_curve</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_pos</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -365,8 +368,12 @@ but not where it is transposed-sigmoid (e.g., Gaussian naive Bayes).</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  2.18 seconds
-( 0 minutes  2.18 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 2.415 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_calibration_curve.py" download=""><code class="xref download docutils literal"><span class="pre">plot_calibration_curve.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_calibration_curve.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_calibration_curve.ipynb</span></code></a></div>
 </div>
 
 

@@ -1,6 +1,6 @@
 
 
-.. _example_model_selection_plot_underfitting_overfitting.py:
+.. _sphx_glr_auto_examples_model_selection_plot_underfitting_overfitting.py:
 
 
 ============================
@@ -25,17 +25,73 @@ training data.
 
 
 
-.. image:: images/plot_underfitting_overfitting_001.png
+.. image:: /auto_examples/model_selection/images/sphx_glr_plot_underfitting_overfitting_001.png
     :align: center
 
 
 
 
-**Python source code:** :download:`plot_underfitting_overfitting.py <plot_underfitting_overfitting.py>`
 
-.. literalinclude:: plot_underfitting_overfitting.py
-    :lines: 22-
+.. code-block:: python
 
-**Total running time of the example:**  0.30 seconds
-( 0 minutes  0.30 seconds)
-    
+
+    print(__doc__)
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import PolynomialFeatures
+    from sklearn.linear_model import LinearRegression
+    from sklearn.model_selection import cross_val_score
+
+    np.random.seed(0)
+
+    n_samples = 30
+    degrees = [1, 4, 15]
+
+    true_fun = lambda X: np.cos(1.5 * np.pi * X)
+    X = np.sort(np.random.rand(n_samples))
+    y = true_fun(X) + np.random.randn(n_samples) * 0.1
+
+    plt.figure(figsize=(14, 5))
+    for i in range(len(degrees)):
+        ax = plt.subplot(1, len(degrees), i + 1)
+        plt.setp(ax, xticks=(), yticks=())
+
+        polynomial_features = PolynomialFeatures(degree=degrees[i],
+                                                 include_bias=False)
+        linear_regression = LinearRegression()
+        pipeline = Pipeline([("polynomial_features", polynomial_features),
+                             ("linear_regression", linear_regression)])
+        pipeline.fit(X[:, np.newaxis], y)
+
+        # Evaluate the models using crossvalidation
+        scores = cross_val_score(pipeline, X[:, np.newaxis], y,
+                                 scoring="mean_squared_error", cv=10)
+
+        X_test = np.linspace(0, 1, 100)
+        plt.plot(X_test, pipeline.predict(X_test[:, np.newaxis]), label="Model")
+        plt.plot(X_test, true_fun(X_test), label="True function")
+        plt.scatter(X, y, label="Samples")
+        plt.xlabel("x")
+        plt.ylabel("y")
+        plt.xlim((0, 1))
+        plt.ylim((-2, 2))
+        plt.legend(loc="best")
+        plt.title("Degree {}\nMSE = {:.2e}(+/- {:.2e})".format(
+            degrees[i], -scores.mean(), scores.std()))
+    plt.show()
+
+**Total running time of the script:**
+(0 minutes 0.324 seconds)
+
+
+
+.. container:: sphx-glr-download
+
+    **Download Python source code:** :download:`plot_underfitting_overfitting.py <plot_underfitting_overfitting.py>`
+
+
+.. container:: sphx-glr-download
+
+    **Download IPython notebook:** :download:`plot_underfitting_overfitting.ipynb <plot_underfitting_overfitting.ipynb>`

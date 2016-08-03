@@ -1,6 +1,6 @@
 
 
-.. _example_linear_model_plot_ridge_path.py:
+.. _sphx_glr_auto_examples_linear_model_plot_ridge_path.py:
 
 
 ===========================================================
@@ -30,18 +30,85 @@ exhibit big oscillations. In practise it is necessary to tune alpha
 in such a way that a balance is maintained between both.
 
 
+.. code-block:: python
 
-.. image:: images/plot_ridge_path_001.png
+
+    # Author: Fabian Pedregosa -- <fabian.pedregosa@inria.fr>
+    # License: BSD 3 clause
+
+    print(__doc__)
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn import linear_model
+
+    # X is the 10x10 Hilbert matrix
+    X = 1. / (np.arange(1, 11) + np.arange(0, 10)[:, np.newaxis])
+    y = np.ones(10)
+
+
+
+
+
+
+
+Compute paths
+
+
+.. code-block:: python
+
+
+    n_alphas = 200
+    alphas = np.logspace(-10, -2, n_alphas)
+    clf = linear_model.Ridge(fit_intercept=False)
+
+    coefs = []
+    for a in alphas:
+        clf.set_params(alpha=a)
+        clf.fit(X, y)
+        coefs.append(clf.coef_)
+
+
+
+
+
+
+
+Display results
+
+
+.. code-block:: python
+
+
+    ax = plt.gca()
+
+    ax.plot(alphas, coefs)
+    ax.set_xscale('log')
+    ax.set_xlim(ax.get_xlim()[::-1])  # reverse axis
+    plt.xlabel('alpha')
+    plt.ylabel('weights')
+    plt.title('Ridge coefficients as a function of the regularization')
+    plt.axis('tight')
+    plt.show()
+
+
+
+.. image:: /auto_examples/linear_model/images/sphx_glr_plot_ridge_path_001.png
     :align: center
 
 
 
 
-**Python source code:** :download:`plot_ridge_path.py <plot_ridge_path.py>`
+**Total running time of the script:**
+(0 minutes 0.225 seconds)
 
-.. literalinclude:: plot_ridge_path.py
-    :lines: 28-
 
-**Total running time of the example:**  0.22 seconds
-( 0 minutes  0.22 seconds)
-    
+
+.. container:: sphx-glr-download
+
+    **Download Python source code:** :download:`plot_ridge_path.py <plot_ridge_path.py>`
+
+
+.. container:: sphx-glr-download
+
+    **Download IPython notebook:** :download:`plot_ridge_path.ipynb <plot_ridge_path.ipynb>`

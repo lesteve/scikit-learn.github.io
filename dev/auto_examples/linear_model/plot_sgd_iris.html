@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Orthogonal Matching Pursuit" href="plot_omp.html" />
-    <link rel="prev" title="Robust linear estimator fitting" href="plot_robust_fit.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Theil-Sen Regression" href="plot_theilsen.html" />
+    <link rel="prev" title="Orthogonal Matching Pursuit" href="plot_omp.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_robust_fit.html"
+        <a href="plot_omp.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Robust linear...
+        Orthogonal Ma...
         </span>
             <span class="hiddenrellink">
-            Robust linear estimator fitting
+            Orthogonal Matching Pursuit
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,18 +182,17 @@
           <div class="body" role="main">
             
   <div class="section" id="plot-multi-class-sgd-on-the-iris-dataset">
-<span id="example-linear-model-plot-sgd-iris-py"></span><h1>Plot multi-class SGD on the iris dataset<a class="headerlink" href="#plot-multi-class-sgd-on-the-iris-dataset" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-linear-model-plot-sgd-iris-py"></span><h1>Plot multi-class SGD on the iris dataset<a class="headerlink" href="#plot-multi-class-sgd-on-the-iris-dataset" title="Permalink to this headline">¶</a></h1>
 <p>Plot decision surface of multi-class SGD on iris dataset.
 The hyperplanes corresponding to the three one-versus-all (OVA) classifiers
 are represented by the dashed lines.</p>
-<img alt="../../_images/plot_sgd_iris_001.png" class="align-center" src="../../_images/plot_sgd_iris_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_sgd_iris.py" download=""><code class="xref download docutils literal"><span class="pre">plot_sgd_iris.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_sgd_iris_001.png" class="align-center" src="../../_images/sphx_glr_plot_sgd_iris_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
 
 <span class="c1"># import some data to play with</span>
 <span class="n">iris</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris"><span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span></a><span class="p">()</span>
@@ -213,7 +213,7 @@ are represented by the dashed lines.</p>
 <span class="n">std</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span>
 
-<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>  <span class="c1"># step size in the mesh</span>
+<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mo">02</span>  <span class="c1"># step size in the mesh</span>
 
 <span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
@@ -259,8 +259,12 @@ are represented by the dashed lines.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.13 seconds
-( 0 minutes  0.13 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.146 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_sgd_iris.py" download=""><code class="xref download docutils literal"><span class="pre">plot_sgd_iris.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_sgd_iris.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_sgd_iris.ipynb</span></code></a></div>
 </div>
 
 
@@ -278,7 +282,7 @@ are represented by the dashed lines.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_robust_fit.html">Previous
+      <a href="plot_omp.html">Previous
       </a>
     </div>
     

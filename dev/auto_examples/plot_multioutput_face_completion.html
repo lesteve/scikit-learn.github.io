@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../index.html" />
-    <link rel="up" title="Examples" href="index.html" />
-    <link rel="next" title="The Johnson-Lindenstrauss bound for embedding with random projections" href="plot_johnson_lindenstrauss_bound.html" />
-    <link rel="prev" title="Multilabel classification" href="plot_multilabel.html" />
+    <link rel="up" title="General examples" href="index.html" />
+    <link rel="next" title="Imputing missing values before building an estimator" href="missing_values.html" />
+    <link rel="prev" title="Pipelining: chaining a PCA and a logistic regression" href="plot_digits_pipe.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_multilabel.html"
+        <a href="plot_digits_pipe.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Multilabel cl...
+        Pipelining: c...
         </span>
             <span class="hiddenrellink">
-            Multilabel classification
+            Pipelining: chaining a PCA and a logistic regression
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,26 +182,25 @@
           <div class="body" role="main">
             
   <div class="section" id="face-completion-with-a-multi-output-estimators">
-<span id="example-plot-multioutput-face-completion-py"></span><h1>Face completion with a multi-output estimators<a class="headerlink" href="#face-completion-with-a-multi-output-estimators" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-plot-multioutput-face-completion-py"></span><h1>Face completion with a multi-output estimators<a class="headerlink" href="#face-completion-with-a-multi-output-estimators" title="Permalink to this headline">¶</a></h1>
 <p>This example shows the use of multi-output estimator to complete images.
 The goal is to predict the lower half of a face given its upper half.</p>
 <p>The first column of images shows true faces. The next columns illustrate
 how extremely randomized trees, k nearest neighbors, linear
 regression and ridge regression complete the lower half of those faces.</p>
-<img alt="../_images/plot_multioutput_face_completion_001.png" class="align-center" src="../_images/plot_multioutput_face_completion_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_multioutput_face_completion.py" download=""><code class="xref download docutils literal"><span class="pre">plot_multioutput_face_completion.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../_images/sphx_glr_plot_multioutput_face_completion_001.png" class="align-center" src="../_images/sphx_glr_plot_multioutput_face_completion_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="k">import</span> <a href="../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state"><span class="n">check_random_state</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state"><span class="n">check_random_state</span></a>
 
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../modules/generated/sklearn.ensemble.ExtraTreesRegressor.html#sklearn.ensemble.ExtraTreesRegressor"><span class="n">ExtraTreesRegressor</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <a href="../modules/generated/sklearn.neighbors.KNeighborsRegressor.html#sklearn.neighbors.KNeighborsRegressor"><span class="n">KNeighborsRegressor</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../modules/generated/sklearn.linear_model.RidgeCV.html#sklearn.linear_model.RidgeCV"><span class="n">RidgeCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.ensemble.ExtraTreesRegressor.html#sklearn.ensemble.ExtraTreesRegressor"><span class="n">ExtraTreesRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.neighbors.KNeighborsRegressor.html#sklearn.neighbors.KNeighborsRegressor"><span class="n">KNeighborsRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.linear_model.RidgeCV.html#sklearn.linear_model.RidgeCV"><span class="n">RidgeCV</span></a>
 
 <span class="c1"># Load the faces datasets</span>
 <span class="n">data</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a><span class="p">()</span>
@@ -276,8 +276,12 @@ regression and ridge regression complete the lower half of those faces.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  4.77 seconds
-( 0 minutes  4.77 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 4.168 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_multioutput_face_completion.py" download=""><code class="xref download docutils literal"><span class="pre">plot_multioutput_face_completion.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../_downloads/plot_multioutput_face_completion.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_multioutput_face_completion.ipynb</span></code></a></div>
 </div>
 
 
@@ -295,7 +299,7 @@ regression and ridge regression complete the lower half of those faces.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_multilabel.html">Previous
+      <a href="plot_digits_pipe.html">Previous
       </a>
     </div>
     

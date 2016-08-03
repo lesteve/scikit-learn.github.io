@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Compare Stochastic learning strategies for MLPClassifier" href="plot_mlp_training_curves.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Restricted Boltzmann Machine features for digit classification" href="plot_rbm_logistic_classification.html" />
     <link rel="prev" title="Scalability of Approximate Nearest Neighbors" href="../neighbors/plot_approximate_nearest_neighbors_scalability.html" />
   
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="visualization-of-mlp-weights-on-mnist">
-<span id="example-neural-networks-plot-mnist-filters-py"></span><h1>Visualization of MLP weights on MNIST<a class="headerlink" href="#visualization-of-mlp-weights-on-mnist" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-neural-networks-plot-mnist-filters-py"></span><h1>Visualization of MLP weights on MNIST<a class="headerlink" href="#visualization-of-mlp-weights-on-mnist" title="Permalink to this headline">¶</a></h1>
 <p>Sometimes looking at the learned coefficients of a neural network can provide
 insight into the learning behavior. For example if weights look unstructured,
 maybe some were not used at all, or if very large coefficients exist, maybe
@@ -195,9 +196,9 @@ the weight matrix as a 28x28 pixel image.</p>
 <p>To make the example run faster, we use very few hidden units, and train only
 for a very short time. Training longer would result in weights with a much
 smoother spatial appearance.</p>
-<img alt="../../_images/plot_mnist_filters_001.png" class="align-center" src="../../_images/plot_mnist_filters_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Iteration</span> <span class="mi">1</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.31951021</span>
+<img alt="../../_images/sphx_glr_plot_mnist_filters_001.png" class="align-center" src="../../_images/sphx_glr_plot_mnist_filters_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Iteration</span> <span class="mi">1</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.31951021</span>
 <span class="n">Iteration</span> <span class="mi">2</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.15102797</span>
 <span class="n">Iteration</span> <span class="mi">3</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.11172119</span>
 <span class="n">Iteration</span> <span class="mi">4</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.09282186</span>
@@ -211,12 +212,14 @@ smoother spatial appearance.</p>
 <span class="n">Test</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.971800</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mnist_filters.py" download=""><code class="xref download docutils literal"><span class="pre">plot_mnist_filters.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata"><span class="n">fetch_mldata</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata"><span class="n">fetch_mldata</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a>
 
 <span class="n">mnist</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata"><span class="n">fetch_mldata</span></a><span class="p">(</span><span class="s2">&quot;MNIST original&quot;</span><span class="p">)</span>
 <span class="c1"># rescale the data, use the traditional train/test split</span>
@@ -226,13 +229,13 @@ smoother spatial appearance.</p>
 
 <span class="c1"># mlp = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=400, alpha=1e-4,</span>
 <span class="c1">#                     algorithm=&#39;sgd&#39;, verbose=10, tol=1e-4, random_state=1)</span>
-<span class="n">mlp</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span>
-                    <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="n">mlp</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier"><span class="n">MLPClassifier</span></a><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+                    <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                     <span class="n">learning_rate_init</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training set score: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test set score: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Training set score: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Test set score: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mlp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="c1"># use global min / max to ensure all weights are shown on the same scale</span>
@@ -246,8 +249,12 @@ smoother spatial appearance.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  13.10 seconds
-( 0 minutes  13.10 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 13.956 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mnist_filters.py" download=""><code class="xref download docutils literal"><span class="pre">plot_mnist_filters.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_mnist_filters.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_mnist_filters.ipynb</span></code></a></div>
 </div>
 
 

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Outlier detection with several methods." href="plot_outlier_detection.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Sparse inverse covariance estimation" href="plot_sparse_cov.html" />
     <link rel="prev" title="Selecting the number of clusters with silhouette analysis on KMeans clustering" href="../cluster/plot_kmeans_silhouette_analysis.html" />
   
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="ledoit-wolf-vs-oas-estimation">
-<span id="example-covariance-plot-lw-vs-oas-py"></span><h1>Ledoit-Wolf vs OAS estimation<a class="headerlink" href="#ledoit-wolf-vs-oas-estimation" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-covariance-plot-lw-vs-oas-py"></span><h1>Ledoit-Wolf vs OAS estimation<a class="headerlink" href="#ledoit-wolf-vs-oas-estimation" title="Permalink to this headline">¶</a></h1>
 <p>The usual covariance maximum likelihood estimate can be regularized
 using shrinkage. Ledoit and Wolf proposed a close formula to compute
 the asymptotically optimal shrinkage parameter (minimizing a MSE
@@ -194,19 +195,18 @@ of the estimated MSE of the LW and OAS methods, using Gaussian
 distributed data.</p>
 <p>[1] &#8220;Shrinkage Algorithms for MMSE Covariance Estimation&#8221;
 Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
-<img alt="../../_images/plot_lw_vs_oas_001.png" class="align-center" src="../../_images/plot_lw_vs_oas_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_lw_vs_oas.py" download=""><code class="xref download docutils literal"><span class="pre">plot_lw_vs_oas.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.toeplitz.html#scipy.linalg.toeplitz"><span class="n">toeplitz</span></a><span class="p">,</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.cholesky.html#scipy.linalg.cholesky"><span class="n">cholesky</span></a>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.toeplitz.html#scipy.linalg.toeplitz"><span class="n">toeplitz</span></a><span class="p">,</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.cholesky.html#scipy.linalg.cholesky"><span class="n">cholesky</span></a>
 
-<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS"><span class="n">OAS</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS"><span class="n">OAS</span></a>
 
 <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.seed.html#numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="c1">###############################################################################</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_features</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="c1"># simulation covariance matrix (AR(1) process)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">real_cov</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.toeplitz.html#scipy.linalg.toeplitz"><span class="n">toeplitz</span></a><span class="p">(</span><span class="n">r</span> <span class="o">**</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_features</span><span class="p">))</span>
@@ -223,14 +223,14 @@ Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
         <span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.dot.html#numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)),</span> <span class="n">coloring_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
-        <span class="n">lw</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a><span class="p">(</span><span class="n">store_precision</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">assume_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">lw</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a><span class="p">(</span><span class="n">store_precision</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">assume_centered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">lw</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="n">lw_mse</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lw</span><span class="o">.</span><span class="n">error_norm</span><span class="p">(</span><span class="n">real_cov</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">lw_mse</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lw</span><span class="o">.</span><span class="n">error_norm</span><span class="p">(</span><span class="n">real_cov</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">lw_shrinkage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lw</span><span class="o">.</span><span class="n">shrinkage_</span>
 
-        <span class="n">oa</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS"><span class="n">OAS</span></a><span class="p">(</span><span class="n">store_precision</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">assume_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">oa</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS"><span class="n">OAS</span></a><span class="p">(</span><span class="n">store_precision</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">assume_centered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">oa</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="n">oa_mse</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">oa</span><span class="o">.</span><span class="n">error_norm</span><span class="p">(</span><span class="n">real_cov</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">oa_mse</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">oa</span><span class="o">.</span><span class="n">error_norm</span><span class="p">(</span><span class="n">real_cov</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">oa_shrinkage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">oa</span><span class="o">.</span><span class="n">shrinkage_</span>
 
 <span class="c1"># plot MSE</span>
@@ -259,8 +259,13 @@ Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  3.27 seconds
-( 0 minutes  3.27 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_lw_vs_oas_001.png" class="align-center" src="../../_images/sphx_glr_plot_lw_vs_oas_001.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 3.632 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_lw_vs_oas.py" download=""><code class="xref download docutils literal"><span class="pre">plot_lw_vs_oas.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_lw_vs_oas.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_lw_vs_oas.ipynb</span></code></a></div>
 </div>
 
 

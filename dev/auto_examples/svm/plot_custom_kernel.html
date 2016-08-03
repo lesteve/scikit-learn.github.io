@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="SVM: Weighted samples" href="plot_weighted_samples.html" />
-    <link rel="prev" title="SVM: Separating hyperplane for unbalanced classes" href="plot_separating_hyperplane_unbalanced.html" />
+    <link rel="prev" title="SVM-Anova: SVM with univariate feature selection" href="plot_svm_anova.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_separating_hyperplane_unbalanced.html"
+        <a href="plot_svm_anova.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        SVM: Separati...
+        SVM-Anova: SV...
         </span>
             <span class="hiddenrellink">
-            SVM: Separating hyperplane for unbalanced classes
+            SVM-Anova: SVM with univariate feature selection
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,16 +182,15 @@
           <div class="body" role="main">
             
   <div class="section" id="svm-with-custom-kernel">
-<span id="example-svm-plot-custom-kernel-py"></span><h1>SVM with custom kernel<a class="headerlink" href="#svm-with-custom-kernel" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-svm-plot-custom-kernel-py"></span><h1>SVM with custom kernel<a class="headerlink" href="#svm-with-custom-kernel" title="Permalink to this headline">¶</a></h1>
 <p>Simple usage of Support Vector Machines to classify a sample. It will
 plot the decision surface and the support vectors.</p>
-<img alt="../../_images/plot_custom_kernel_001.png" class="align-center" src="../../_images/plot_custom_kernel_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_custom_kernel.py" download=""><code class="xref download docutils literal"><span class="pre">plot_custom_kernel.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_custom_kernel_001.png" class="align-center" src="../../_images/sphx_glr_plot_custom_kernel_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">datasets</span>
 
 <span class="c1"># import some data to play with</span>
 <span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
@@ -211,7 +211,7 @@ plot the decision surface and the support vectors.</p>
     <span class="k">return</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.dot.html#numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.dot.html#numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
 
-<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>  <span class="c1"># step size in the mesh</span>
+<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mo">02</span>  <span class="c1"># step size in the mesh</span>
 
 <span class="c1"># we create an instance of SVM and fit out data.</span>
 <span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">my_kernel</span><span class="p">)</span>
@@ -236,8 +236,12 @@ plot the decision surface and the support vectors.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.18 seconds
-( 0 minutes  0.18 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.190 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_custom_kernel.py" download=""><code class="xref download docutils literal"><span class="pre">plot_custom_kernel.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_custom_kernel.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_custom_kernel.ipynb</span></code></a></div>
 </div>
 
 
@@ -255,7 +259,7 @@ plot the decision surface and the support vectors.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_separating_hyperplane_unbalanced.html">Previous
+      <a href="plot_svm_anova.html">Previous
       </a>
     </div>
     

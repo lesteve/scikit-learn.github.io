@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Path with L1- Logistic Regression" href="plot_logistic_path.html" />
-    <link rel="prev" title="SGD: Weighted samples" href="plot_sgd_weighted_samples.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="SGD: Weighted samples" href="plot_sgd_weighted_samples.html" />
+    <link rel="prev" title="Linear Regression Example" href="plot_ols.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_sgd_weighted_samples.html"
+        <a href="plot_ols.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        SGD: Weighted...
+        Linear Regres...
         </span>
             <span class="hiddenrellink">
-            SGD: Weighted samples
+            Linear Regression Example
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,31 +182,30 @@
           <div class="body" role="main">
             
   <div class="section" id="logistic-regression-3-class-classifier">
-<span id="example-linear-model-plot-iris-logistic-py"></span><h1>Logistic Regression 3-class Classifier<a class="headerlink" href="#logistic-regression-3-class-classifier" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-linear-model-plot-iris-logistic-py"></span><h1>Logistic Regression 3-class Classifier<a class="headerlink" href="#logistic-regression-3-class-classifier" title="Permalink to this headline">¶</a></h1>
 <p>Show below is a logistic-regression classifiers decision boundaries on the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Iris_flower_data_set">iris</a> dataset. The
 datapoints are colored according to their labels.</p>
-<img alt="../../_images/plot_iris_logistic_001.png" class="align-center" src="../../_images/plot_iris_logistic_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_iris_logistic.py" download=""><code class="xref download docutils literal"><span class="pre">plot_iris_logistic.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_iris_logistic_001.png" class="align-center" src="../../_images/sphx_glr_plot_iris_logistic_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 
 <span class="c1"># Code source: Gaël Varoquaux</span>
 <span class="c1"># Modified for documentation by Jaques Grobler</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">datasets</span>
 
 <span class="c1"># import some data to play with</span>
 <span class="n">iris</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris"><span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span></a><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># we only take the first two features.</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 
-<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>  <span class="c1"># step size in the mesh</span>
+<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mo">02</span>  <span class="c1"># step size in the mesh</span>
 
-<span class="n">logreg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="n">e5</span><span class="p">)</span>
+<span class="n">logreg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1e5</span><span class="p">)</span>
 
 <span class="c1"># we create an instance of Neighbours Classifier and fit the data.</span>
 <span class="n">logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
@@ -235,8 +235,12 @@ datapoints are colored according to their labels.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.09 seconds
-( 0 minutes  0.09 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.090 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_iris_logistic.py" download=""><code class="xref download docutils literal"><span class="pre">plot_iris_logistic.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_iris_logistic.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_iris_logistic.ipynb</span></code></a></div>
 </div>
 
 
@@ -254,7 +258,7 @@ datapoints are colored according to their labels.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_sgd_weighted_samples.html">Previous
+      <a href="plot_ols.html">Previous
       </a>
     </div>
     

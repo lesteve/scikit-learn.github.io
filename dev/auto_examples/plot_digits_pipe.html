@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../index.html" />
-    <link rel="up" title="Examples" href="index.html" />
-    <link rel="next" title="Imputing missing values before building an estimator" href="missing_values.html" />
-    <link rel="prev" title="Isotonic Regression" href="plot_isotonic_regression.html" />
+    <link rel="up" title="General examples" href="index.html" />
+    <link rel="next" title="Face completion with a multi-output estimators" href="plot_multioutput_face_completion.html" />
+    <link rel="prev" title="Concatenating multiple feature extraction methods" href="feature_stacker.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_isotonic_regression.html"
+        <a href="feature_stacker.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Isotonic Regr...
+        Concatenating...
         </span>
             <span class="hiddenrellink">
-            Isotonic Regression
+            Concatenating multiple feature extraction methods
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,13 +182,11 @@
           <div class="body" role="main">
             
   <div class="section" id="pipelining-chaining-a-pca-and-a-logistic-regression">
-<span id="example-plot-digits-pipe-py"></span><h1>Pipelining: chaining a PCA and a logistic regression<a class="headerlink" href="#pipelining-chaining-a-pca-and-a-logistic-regression" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-plot-digits-pipe-py"></span><h1>Pipelining: chaining a PCA and a logistic regression<a class="headerlink" href="#pipelining-chaining-a-pca-and-a-logistic-regression" title="Permalink to this headline">¶</a></h1>
 <p>The PCA does an unsupervised dimensionality reduction, while the logistic
 regression does the prediction.</p>
 <p>We use a GridSearchCV to set the dimensionality of the PCA</p>
-<img alt="../_images/plot_digits_pipe_001.png" class="align-center" src="../_images/plot_digits_pipe_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_digits_pipe.py" download=""><code class="xref download docutils literal"><span class="pre">plot_digits_pipe.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 
 <span class="c1"># Code source: Gaël Varoquaux</span>
@@ -195,12 +194,12 @@ regression does the prediction.</p>
 <span class="c1"># License: BSD 3 clause</span>
 
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">decomposition</span><span class="p">,</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">decomposition</span><span class="p">,</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
 
 <span class="n">logistic</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">()</span>
 
@@ -210,10 +209,10 @@ regression does the prediction.</p>
 <span class="n">digits</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span></a><span class="p">()</span>
 <span class="n">X_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span>
 <span class="n">y_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Plot the PCA spectrum</span>
-<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_digits</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plot the PCA spectrum</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_digits</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf"><span class="n">plt</span><span class="o">.</span><span class="n">clf</span></a><span class="p">()</span>
@@ -222,11 +221,11 @@ regression does the prediction.</p>
 <a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;n_components&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;explained_variance_&#39;</span><span class="p">)</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Prediction</span>
-
-<span class="n">n_components</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_digits_pipe_001.png" class="align-center" src="../_images/sphx_glr_plot_digits_pipe_001.png" />
+<p>Prediction</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
 <span class="n">Cs</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="c1">#Parameters of pipelines can be set using ‘__’ separated parameter names:</span>
@@ -242,8 +241,13 @@ regression does the prediction.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  9.27 seconds
-( 0 minutes  9.27 seconds)</p>
+<img alt="../_images/sphx_glr_plot_digits_pipe_002.png" class="align-center" src="../_images/sphx_glr_plot_digits_pipe_002.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 10.181 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_digits_pipe.py" download=""><code class="xref download docutils literal"><span class="pre">plot_digits_pipe.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../_downloads/plot_digits_pipe.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_digits_pipe.ipynb</span></code></a></div>
 </div>
 
 
@@ -261,7 +265,7 @@ regression does the prediction.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_isotonic_regression.html">Previous
+      <a href="feature_stacker.html">Previous
       </a>
     </div>
     

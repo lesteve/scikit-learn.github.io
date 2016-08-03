@@ -1,6 +1,6 @@
 
 
-.. _example_feature_selection_plot_feature_selection.py:
+.. _sphx_glr_auto_examples_feature_selection_plot_feature_selection.py:
 
 
 ===============================
@@ -24,18 +24,132 @@ increases the SVM weight attributed to the significant features, and will
 thus improve classification.
 
 
+.. code-block:: python
 
-.. image:: images/plot_feature_selection_001.png
+    print(__doc__)
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    from sklearn import datasets, svm
+    from sklearn.feature_selection import SelectPercentile, f_classif
+
+
+
+
+
+
+
+import some data to play with
+
+
+.. code-block:: python
+
+
+    # The iris dataset
+    iris = datasets.load_iris()
+
+    # Some noisy data not correlated
+    E = np.random.uniform(0, 0.1, size=(len(iris.data), 20))
+
+    # Add the noisy data to the informative features
+    X = np.hstack((iris.data, E))
+    y = iris.target
+
+
+
+
+
+
+
+
+.. code-block:: python
+
+    plt.figure(1)
+    plt.clf()
+
+    X_indices = np.arange(X.shape[-1])
+
+
+
+
+.. image:: /auto_examples/feature_selection/images/sphx_glr_plot_feature_selection_001.png
     :align: center
 
 
 
 
-**Python source code:** :download:`plot_feature_selection.py <plot_feature_selection.py>`
+Univariate feature selection with F-test for feature scoring
+We use the default selection function: the 10% most significant features
 
-.. literalinclude:: plot_feature_selection.py
-    :lines: 22-
 
-**Total running time of the example:**  0.17 seconds
-( 0 minutes  0.17 seconds)
-    
+.. code-block:: python
+
+    selector = SelectPercentile(f_classif, percentile=10)
+    selector.fit(X, y)
+    scores = -np.log10(selector.pvalues_)
+    scores /= scores.max()
+    plt.bar(X_indices - .45, scores, width=.2,
+            label=r'Univariate score ($-Log(p_{value})$)', color='darkorange')
+
+
+
+
+.. image:: /auto_examples/feature_selection/images/sphx_glr_plot_feature_selection_002.png
+    :align: center
+
+
+
+
+Compare to the weights of an SVM
+
+
+.. code-block:: python
+
+    clf = svm.SVC(kernel='linear')
+    clf.fit(X, y)
+
+    svm_weights = (clf.coef_ ** 2).sum(axis=0)
+    svm_weights /= svm_weights.max()
+
+    plt.bar(X_indices - .25, svm_weights, width=.2, label='SVM weight',
+            color='navy')
+
+    clf_selected = svm.SVC(kernel='linear')
+    clf_selected.fit(selector.transform(X), y)
+
+    svm_weights_selected = (clf_selected.coef_ ** 2).sum(axis=0)
+    svm_weights_selected /= svm_weights_selected.max()
+
+    plt.bar(X_indices[selector.get_support()] - .05, svm_weights_selected,
+            width=.2, label='SVM weights after selection', color='c')
+
+
+    plt.title("Comparing feature selection")
+    plt.xlabel('Feature number')
+    plt.yticks(())
+    plt.axis('tight')
+    plt.legend(loc='upper right')
+    plt.show()
+
+
+
+.. image:: /auto_examples/feature_selection/images/sphx_glr_plot_feature_selection_003.png
+    :align: center
+
+
+
+
+**Total running time of the script:**
+(0 minutes 0.180 seconds)
+
+
+
+.. container:: sphx-glr-download
+
+    **Download Python source code:** :download:`plot_feature_selection.py <plot_feature_selection.py>`
+
+
+.. container:: sphx-glr-download
+
+    **Download IPython notebook:** :download:`plot_feature_selection.ipynb <plot_feature_selection.ipynb>`

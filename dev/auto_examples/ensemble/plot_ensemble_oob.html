@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Gradient Boosting regression" href="plot_gradient_boosting_regression.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Two-class AdaBoost" href="plot_adaboost_twoclass.html" />
     <link rel="prev" title="Gradient Boosting regularization" href="plot_gradient_boosting_regularization.html" />
   
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="oob-errors-for-random-forests">
-<span id="example-ensemble-plot-ensemble-oob-py"></span><h1>OOB Errors for Random Forests<a class="headerlink" href="#oob-errors-for-random-forests" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-ensemble-oob-py"></span><h1>OOB Errors for Random Forests<a class="headerlink" href="#oob-errors-for-random-forests" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal"><span class="pre">RandomForestClassifier</span></code> is trained using <em>bootstrap aggregation</em>, where
 each new tree is fit from a bootstrap sample of the training observations
 <img class="math" src="../../_images/math/b5c431d1ae18b076ecc008f3084eb2b02591b5e9.png" alt="z_i = (x_i, y_i)"/>. The <em>out-of-bag</em> (OOB) error is the average error for
@@ -199,13 +200,12 @@ error stabilizes.</p>
 Learning Ed. 2&#8221;, p592-593, Springer, 2009.</td></tr>
 </tbody>
 </table>
-<img alt="../../_images/plot_ensemble_oob_001.png" class="align-center" src="../../_images/plot_ensemble_oob_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ensemble_oob.py" download=""><code class="xref download docutils literal"><span class="pre">plot_ensemble_oob.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<img alt="../../_images/sphx_glr_plot_ensemble_oob_001.png" class="align-center" src="../../_images/sphx_glr_plot_ensemble_oob_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">,</span> <span class="n">ExtraTreesClassifier</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification"><span class="n">make_classification</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">,</span> <span class="n">ExtraTreesClassifier</span>
 
 <span class="c1"># Author: Kian Ho &lt;hui.kian.ho@gmail.com&gt;</span>
 <span class="c1">#         Gilles Louppe &lt;g.louppe@gmail.com&gt;</span>
@@ -213,7 +213,7 @@ Learning Ed. 2&#8221;, p592-593, Springer, 2009.</td></tr>
 <span class="c1">#</span>
 <span class="c1"># License: BSD 3 Clause</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="n">RANDOM_STATE</span> <span class="o">=</span> <span class="mi">123</span>
 
@@ -227,16 +227,16 @@ Learning Ed. 2&#8221;, p592-593, Springer, 2009.</td></tr>
 <span class="c1"># error trajectory during training.</span>
 <span class="n">ensemble_clfs</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">&quot;RandomForestClassifier, max_features=&#39;sqrt&#39;&quot;</span><span class="p">,</span>
-        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">oob_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">oob_score</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                <span class="n">max_features</span><span class="o">=</span><span class="s2">&quot;sqrt&quot;</span><span class="p">,</span>
                                <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">)),</span>
     <span class="p">(</span><span class="s2">&quot;RandomForestClassifier, max_features=&#39;log2&#39;&quot;</span><span class="p">,</span>
-        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="s1">&#39;log2&#39;</span><span class="p">,</span>
-                               <span class="n">oob_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="s1">&#39;log2&#39;</span><span class="p">,</span>
+                               <span class="n">oob_score</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">)),</span>
     <span class="p">(</span><span class="s2">&quot;RandomForestClassifier, max_features=None&quot;</span><span class="p">,</span>
-        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">oob_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                               <span class="n">oob_score</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">))</span>
 <span class="p">]</span>
 
@@ -268,8 +268,12 @@ Learning Ed. 2&#8221;, p592-593, Springer, 2009.</td></tr>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  10.52 seconds
-( 0 minutes  10.52 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 10.977 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_ensemble_oob.py" download=""><code class="xref download docutils literal"><span class="pre">plot_ensemble_oob.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_ensemble_oob.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_ensemble_oob.ipynb</span></code></a></div>
 </div>
 
 

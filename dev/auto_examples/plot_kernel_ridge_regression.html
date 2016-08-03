@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,7 +36,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../index.html" />
-    <link rel="up" title="Examples" href="index.html" />
+    <link rel="up" title="General examples" href="index.html" />
     <link rel="next" title="Feature Union with Heterogeneous Data Sources" href="hetero_feature_union.html" />
     <link rel="prev" title="The Johnson-Lindenstrauss bound for embedding with random projections" href="plot_johnson_lindenstrauss_bound.html" />
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="comparison-of-kernel-ridge-regression-and-svr">
-<span id="example-plot-kernel-ridge-regression-py"></span><h1>Comparison of kernel ridge regression and SVR<a class="headerlink" href="#comparison-of-kernel-ridge-regression-and-svr" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-plot-kernel-ridge-regression-py"></span><h1>Comparison of kernel ridge regression and SVR<a class="headerlink" href="#comparison-of-kernel-ridge-regression-and-svr" title="Permalink to this headline">¶</a></h1>
 <p>Both kernel ridge regression (KRR) and SVR learn a non-linear function by
 employing the kernel trick, i.e., they learn a linear function in the space
 induced by the respective kernel which corresponds to a non-linear function in
@@ -206,93 +207,82 @@ SVR scales better. With regard to prediction time, SVR is faster than
 KRR for all sizes of the training set because of the learned sparse
 solution. Note that the degree of sparsity and thus the prediction time depends
 on the parameters epsilon and C of the SVR.</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../_images/plot_kernel_ridge_regression_001.png"><img alt="../_images/plot_kernel_ridge_regression_001.png" src="../_images/plot_kernel_ridge_regression_001.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../_images/plot_kernel_ridge_regression_002.png"><img alt="../_images/plot_kernel_ridge_regression_002.png" src="../_images/plot_kernel_ridge_regression_002.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../_images/plot_kernel_ridge_regression_003.png"><img alt="../_images/plot_kernel_ridge_regression_003.png" src="../_images/plot_kernel_ridge_regression_003.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-</ul>
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a> <span class="n">complexity</span> <span class="ow">and</span> <span class="n">bandwidth</span> <span class="n">selected</span> <span class="ow">and</span> <span class="n">model</span> <span class="n">fitted</span> <span class="ow">in</span> <span class="mf">0.757</span> <span class="n">s</span>
-<span class="n">KRR</span> <span class="n">complexity</span> <span class="ow">and</span> <span class="n">bandwidth</span> <span class="n">selected</span> <span class="ow">and</span> <span class="n">model</span> <span class="n">fitted</span> <span class="ow">in</span> <span class="mf">0.416</span> <span class="n">s</span>
-<span class="n">Support</span> <span class="n">vector</span> <span class="n">ratio</span><span class="p">:</span> <span class="mf">0.320</span>
-<a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a> <span class="n">prediction</span> <span class="k">for</span> <span class="mi">100000</span> <span class="n">inputs</span> <span class="ow">in</span> <span class="mf">0.150</span> <span class="n">s</span>
-<span class="n">KRR</span> <span class="n">prediction</span> <span class="k">for</span> <span class="mi">100000</span> <span class="n">inputs</span> <span class="ow">in</span> <span class="mf">0.407</span> <span class="n">s</span>
-</pre></div>
-</div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_kernel_ridge_regression.py" download=""><code class="xref download docutils literal"><span class="pre">plot_kernel_ridge_regression.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
-<span class="c1"># Authors: Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Authors: Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">learning_curve</span>
-<span class="kn">from</span> <span class="nn">sklearn.kernel_ridge</span> <span class="k">import</span> <a href="../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">learning_curve</span>
+<span class="kn">from</span> <span class="nn">sklearn.kernel_ridge</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1">#############################################################################</span>
-<span class="c1"># Generate sample data</span>
-<span class="n">X</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Generate sample data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sin.html#numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
 <span class="c1"># Add noise to targets</span>
 <span class="n">y</span><span class="p">[::</span><span class="mi">5</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="n">X_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
-
-<span class="c1">#############################################################################</span>
-<span class="c1"># Fit regression model</span>
-<span class="n">train_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">X_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)[:,</span> <span class="bp">None</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Fit regression model</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_size</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">svr</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                   <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">e0</span><span class="p">,</span> <span class="mi">1</span><span class="n">e1</span><span class="p">,</span> <span class="mi">1</span><span class="n">e2</span><span class="p">,</span> <span class="mi">1</span><span class="n">e3</span><span class="p">],</span>
+                   <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e0</span><span class="p">,</span> <span class="mf">1e1</span><span class="p">,</span> <span class="mf">1e2</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">],</span>
                                <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)})</span>
 
 <span class="n">kr</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><a href="../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                  <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">e0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span>
+                  <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">],</span>
                               <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)})</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">svr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">train_size</span><span class="p">])</span>
 <span class="n">svr_fit</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SVR complexity and bandwidth selected and model fitted in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;SVR complexity and bandwidth selected and model fitted in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
       <span class="o">%</span> <span class="n">svr_fit</span><span class="p">)</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">kr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">train_size</span><span class="p">])</span>
 <span class="n">kr_fit</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KRR complexity and bandwidth selected and model fitted in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;KRR complexity and bandwidth selected and model fitted in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
       <span class="o">%</span> <span class="n">kr_fit</span><span class="p">)</span>
 
 <span class="n">sv_ratio</span> <span class="o">=</span> <span class="n">svr</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">support_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">train_size</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Support vector ratio: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sv_ratio</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Support vector ratio: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sv_ratio</span><span class="p">)</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">y_svr</span> <span class="o">=</span> <span class="n">svr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
 <span class="n">svr_predict</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SVR prediction for </span><span class="si">%d</span><span class="s2"> inputs in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;SVR prediction for </span><span class="si">%d</span><span class="s2"> inputs in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
       <span class="o">%</span> <span class="p">(</span><span class="n">X_plot</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">svr_predict</span><span class="p">))</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">y_kr</span> <span class="o">=</span> <span class="n">kr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
 <span class="n">kr_predict</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KRR prediction for </span><span class="si">%d</span><span class="s2"> inputs in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;KRR prediction for </span><span class="si">%d</span><span class="s2"> inputs in </span><span class="si">%.3f</span><span class="s2"> s&quot;</span>
       <span class="o">%</span> <span class="p">(</span><span class="n">X_plot</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">kr_predict</span><span class="p">))</span>
-
-
-<span class="c1">#############################################################################</span>
-<span class="c1"># look at the results</span>
-<span class="n">sv_ind</span> <span class="o">=</span> <span class="n">svr</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">support_</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a> <span class="n">complexity</span> <span class="ow">and</span> <span class="n">bandwidth</span> <span class="n">selected</span> <span class="ow">and</span> <span class="n">model</span> <span class="n">fitted</span> <span class="ow">in</span> <span class="mf">0.910</span> <span class="n">s</span>
+<span class="n">KRR</span> <span class="n">complexity</span> <span class="ow">and</span> <span class="n">bandwidth</span> <span class="n">selected</span> <span class="ow">and</span> <span class="n">model</span> <span class="n">fitted</span> <span class="ow">in</span> <span class="mf">0.442</span> <span class="n">s</span>
+<span class="n">Support</span> <span class="n">vector</span> <span class="n">ratio</span><span class="p">:</span> <span class="mf">0.320</span>
+<a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a> <span class="n">prediction</span> <span class="k">for</span> <span class="mi">100000</span> <span class="n">inputs</span> <span class="ow">in</span> <span class="mf">0.161</span> <span class="n">s</span>
+<span class="n">KRR</span> <span class="n">prediction</span> <span class="k">for</span> <span class="mi">100000</span> <span class="n">inputs</span> <span class="ow">in</span> <span class="mf">0.445</span> <span class="n">s</span>
+</pre></div>
+</div>
+<p>look at the results</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sv_ind</span> <span class="o">=</span> <span class="n">svr</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">support_</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">sv_ind</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">sv_ind</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SVR support vectors&#39;</span><span class="p">,</span>
             <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -316,7 +306,7 @@ on the parameters epsilon and C of the SVR.</p>
 <span class="n">sizes</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">estimator</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;KRR&quot;</span><span class="p">:</span> <a href="../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                                            <span class="n">gamma</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
-                        <span class="s2">&quot;SVR&quot;</span><span class="p">:</span> <a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="n">e1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">10</span><span class="p">)}</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="s2">&quot;SVR&quot;</span><span class="p">:</span> <a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1e1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">10</span><span class="p">)}</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">train_time</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">test_time</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">train_test_size</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
@@ -343,7 +333,7 @@ on the parameters epsilon and C of the SVR.</p>
 <span class="c1"># Visualize learning curves</span>
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
 
-<span class="n">svr</span> <span class="o">=</span> <a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="n">e1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">svr</span> <span class="o">=</span> <a href="../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR"><span class="n">SVR</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1e1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">kr</span> <span class="o">=</span> <a href="../modules/generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge"><span class="n">KernelRidge</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores_svr</span><span class="p">,</span> <span class="n">test_scores_svr</span> <span class="o">=</span> \
     <span class="n">learning_curve</span><span class="p">(</span><span class="n">svr</span><span class="p">,</span> <span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">train_sizes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
@@ -364,8 +354,20 @@ on the parameters epsilon and C of the SVR.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  28.76 seconds
-( 0 minutes  28.76 seconds)</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_kernel_ridge_regression_001.png"><img alt="../_images/sphx_glr_plot_kernel_ridge_regression_001.png" src="../_images/sphx_glr_plot_kernel_ridge_regression_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_kernel_ridge_regression_002.png"><img alt="../_images/sphx_glr_plot_kernel_ridge_regression_002.png" src="../_images/sphx_glr_plot_kernel_ridge_regression_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_kernel_ridge_regression_003.png"><img alt="../_images/sphx_glr_plot_kernel_ridge_regression_003.png" src="../_images/sphx_glr_plot_kernel_ridge_regression_003.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 31.200 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_kernel_ridge_regression.py" download=""><code class="xref download docutils literal"><span class="pre">plot_kernel_ridge_regression.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../_downloads/plot_kernel_ridge_regression.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_kernel_ridge_regression.ipynb</span></code></a></div>
 </div>
 
 

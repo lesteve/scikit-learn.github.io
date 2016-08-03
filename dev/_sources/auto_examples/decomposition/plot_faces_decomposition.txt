@@ -1,6 +1,6 @@
 
 
-.. _example_decomposition_plot_faces_decomposition.py:
+.. _sphx_glr_auto_examples_decomposition_plot_faces_decomposition.py:
 
 
 ============================
@@ -14,81 +14,258 @@ matrix decomposition (dimension reduction) methods from the module
 
 
 
+.. code-block:: python
 
-.. rst-class:: horizontal
+    print(__doc__)
+
+    # Authors: Vlad Niculae, Alexandre Gramfort
+    # License: BSD 3 clause
+
+    import logging
+    from time import time
+
+    from numpy.random import RandomState
+    import matplotlib.pyplot as plt
+
+    from sklearn.datasets import fetch_olivetti_faces
+    from sklearn.cluster import MiniBatchKMeans
+    from sklearn import decomposition
+
+    # Display progress logs on stdout
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s %(levelname)s %(message)s')
+    n_row, n_col = 2, 3
+    n_components = n_row * n_col
+    image_shape = (64, 64)
+    rng = RandomState(0)
+
+
+
+
+
+
+
+Load faces data
+
+
+.. code-block:: python
+
+    dataset = fetch_olivetti_faces(shuffle=True, random_state=rng)
+    faces = dataset.data
+
+    n_samples, n_features = faces.shape
+
+    # global centering
+    faces_centered = faces - faces.mean(axis=0)
+
+    # local centering
+    faces_centered -= faces_centered.mean(axis=1).reshape(n_samples, -1)
+
+    print("Dataset consists of %d faces" % n_samples)
+
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+      Dataset consists of 400 faces
+
+
+
+.. code-block:: python
+
+    def plot_gallery(title, images, n_col=n_col, n_row=n_row):
+        plt.figure(figsize=(2. * n_col, 2.26 * n_row))
+        plt.suptitle(title, size=16)
+        for i, comp in enumerate(images):
+            plt.subplot(n_row, n_col, i + 1)
+            vmax = max(comp.max(), -comp.min())
+            plt.imshow(comp.reshape(image_shape), cmap=plt.cm.gray,
+                       interpolation='nearest',
+                       vmin=-vmax, vmax=vmax)
+            plt.xticks(())
+            plt.yticks(())
+        plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.)
+
+
+
+
+
+
+
+List of the different estimators, whether to center and transpose the
+problem, and whether the transformer uses the clustering API.
+
+
+.. code-block:: python
+
+    estimators = [
+        ('Eigenfaces - RandomizedPCA',
+         decomposition.RandomizedPCA(n_components=n_components, whiten=True),
+         True),
+
+        ('Non-negative components - NMF',
+         decomposition.NMF(n_components=n_components, init='nndsvda', tol=5e-3),
+         False),
+
+        ('Independent components - FastICA',
+         decomposition.FastICA(n_components=n_components, whiten=True),
+         True),
+
+        ('Sparse comp. - MiniBatchSparsePCA',
+         decomposition.MiniBatchSparsePCA(n_components=n_components, alpha=0.8,
+                                          n_iter=100, batch_size=3,
+                                          random_state=rng),
+         True),
+
+        ('MiniBatchDictionaryLearning',
+            decomposition.MiniBatchDictionaryLearning(n_components=15, alpha=0.1,
+                                                      n_iter=50, batch_size=3,
+                                                      random_state=rng),
+         True),
+
+        ('Cluster centers - MiniBatchKMeans',
+            MiniBatchKMeans(n_clusters=n_components, tol=1e-3, batch_size=20,
+                            max_iter=50, random_state=rng),
+         True),
+
+        ('Factor Analysis components - FA',
+         decomposition.FactorAnalysis(n_components=n_components, max_iter=2),
+         True),
+    ]
+
+
+
+
+
+
+
+
+Plot a sample of the input data
+
+
+.. code-block:: python
+
+
+    plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
+
+
+
+
+.. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_001.png
+    :align: center
+
+
+
+
+Do the estimation and plot it
+
+
+.. code-block:: python
+
+
+    for name, estimator, center in estimators:
+        print("Extracting the top %d %s..." % (n_components, name))
+        t0 = time()
+        data = faces
+        if center:
+            data = faces_centered
+        estimator.fit(data)
+        train_time = (time() - t0)
+        print("done in %0.3fs" % train_time)
+        if hasattr(estimator, 'cluster_centers_'):
+            components_ = estimator.cluster_centers_
+        else:
+            components_ = estimator.components_
+        if hasattr(estimator, 'noise_variance_'):
+            plot_gallery("Pixelwise variance",
+                         estimator.noise_variance_.reshape(1, -1), n_col=1,
+                         n_row=1)
+        plot_gallery('%s - Train time %.1fs' % (name, train_time),
+                     components_[:n_components])
+
+    plt.show()
+
+
+
+.. rst-class:: sphx-glr-horizontal
 
 
     *
 
-      .. image:: images/plot_faces_decomposition_001.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_002.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_faces_decomposition_002.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_003.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_faces_decomposition_003.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_004.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_faces_decomposition_004.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_005.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_faces_decomposition_005.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_006.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_faces_decomposition_006.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_007.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_faces_decomposition_007.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_008.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_faces_decomposition_008.png
-            :scale: 47
-
-    *
-
-      .. image:: images/plot_faces_decomposition_009.png
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_faces_decomposition_009.png
             :scale: 47
 
 
-**Script output**::
+.. rst-class:: sphx-glr-script-out
 
-  Dataset consists of 400 faces
-  Extracting the top 6 Eigenfaces - RandomizedPCA...
-  done in 0.145s
-  Extracting the top 6 Non-negative components - NMF...
-  done in 0.676s
-  Extracting the top 6 Independent components - FastICA...
-  done in 0.324s
-  Extracting the top 6 Sparse comp. - MiniBatchSparsePCA...
-  done in 1.250s
-  Extracting the top 6 MiniBatchDictionaryLearning...
-  done in 0.992s
-  Extracting the top 6 Cluster centers - MiniBatchKMeans...
-  done in 0.097s
-  Extracting the top 6 Factor Analysis components - FA...
-  done in 0.247s
+ Out::
+
+      Extracting the top 6 Eigenfaces - RandomizedPCA...
+    done in 0.116s
+    Extracting the top 6 Non-negative components - NMF...
+    done in 0.510s
+    Extracting the top 6 Independent components - FastICA...
+    done in 0.258s
+    Extracting the top 6 Sparse comp. - MiniBatchSparsePCA...
+    done in 1.273s
+    Extracting the top 6 MiniBatchDictionaryLearning...
+    done in 1.142s
+    Extracting the top 6 Cluster centers - MiniBatchKMeans...
+    done in 0.107s
+    Extracting the top 6 Factor Analysis components - FA...
+    done in 0.188s
+
+
+**Total running time of the script:**
+(0 minutes 7.235 seconds)
 
 
 
-**Python source code:** :download:`plot_faces_decomposition.py <plot_faces_decomposition.py>`
+.. container:: sphx-glr-download
 
-.. literalinclude:: plot_faces_decomposition.py
-    :lines: 12-
+    **Download Python source code:** :download:`plot_faces_decomposition.py <plot_faces_decomposition.py>`
 
-**Total running time of the example:**  7.05 seconds
-( 0 minutes  7.05 seconds)
-    
+
+.. container:: sphx-glr-download
+
+    **Download IPython notebook:** :download:`plot_faces_decomposition.ipynb <plot_faces_decomposition.ipynb>`

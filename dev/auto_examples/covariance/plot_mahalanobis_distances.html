@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Robust vs Empirical covariance estimate" href="plot_robust_vs_empirical_covariance.html" />
-    <link rel="prev" title="Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood" href="plot_covariance_estimation.html" />
+    <link rel="prev" title="Outlier detection with several methods." href="plot_outlier_detection.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_covariance_estimation.html"
+        <a href="plot_outlier_detection.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Shrinkage cov...
+        Outlier detec...
         </span>
             <span class="hiddenrellink">
-            Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood
+            Outlier detection with several methods.
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="robust-covariance-estimation-and-mahalanobis-distances-relevance">
-<span id="example-covariance-plot-mahalanobis-distances-py"></span><h1>Robust covariance estimation and Mahalanobis distances relevance<a class="headerlink" href="#robust-covariance-estimation-and-mahalanobis-distances-relevance" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-covariance-plot-mahalanobis-distances-py"></span><h1>Robust covariance estimation and Mahalanobis distances relevance<a class="headerlink" href="#robust-covariance-estimation-and-mahalanobis-distances-relevance" title="Permalink to this headline">¶</a></h1>
 <p>An example to show covariance estimation with the Mahalanobis
 distances on Gaussian distributed data.</p>
 <p>For Gaussian distributed data, the distance of an observation
@@ -225,14 +226,12 @@ are represented in the boxplot, as Wilson and Hilferty suggest [2]</p>
 <dd>Proceedings of the National Academy of Sciences of the United States
 of America, 17, 684-688.</dd>
 </dl>
-<img alt="../../_images/plot_mahalanobis_distances_001.png" class="align-center" src="../../_images/plot_mahalanobis_distances_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mahalanobis_distances.py" download=""><code class="xref download docutils literal"><span class="pre">plot_mahalanobis_distances.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance"><span class="n">EmpiricalCovariance</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet"><span class="n">MinCovDet</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance"><span class="n">EmpiricalCovariance</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet"><span class="n">MinCovDet</span></a>
 
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">125</span>
 <span class="n">n_outliers</span> <span class="o">=</span> <span class="mi">25</span>
@@ -252,11 +251,11 @@ of America, 17, 684-688.</dd>
 
 <span class="c1"># compare estimators learnt from the full data set with true parameters</span>
 <span class="n">emp_cov</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance"><span class="n">EmpiricalCovariance</span></a><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="c1">###############################################################################</span>
-<span class="c1"># Display results</span>
-<span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">hspace</span><span class="o">=-.</span><span class="mi">1</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=.</span><span class="mi">4</span><span class="p">,</span> <span class="n">top</span><span class="o">=.</span><span class="mi">95</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=.</span><span class="mi">05</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Display results</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">hspace</span><span class="o">=-.</span><span class="mi">1</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=.</span><span class="mi">4</span><span class="p">,</span> <span class="n">top</span><span class="o">=.</span><span class="mi">95</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=.</span><span class="mo">05</span><span class="p">)</span>
 
 <span class="c1"># Show data set</span>
 <span class="n">subfig1</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -319,8 +318,13 @@ of America, 17, 684-688.</dd>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.35 seconds
-( 0 minutes  0.35 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_mahalanobis_distances_001.png" class="align-center" src="../../_images/sphx_glr_plot_mahalanobis_distances_001.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.417 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mahalanobis_distances.py" download=""><code class="xref download docutils literal"><span class="pre">plot_mahalanobis_distances.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_mahalanobis_distances.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_mahalanobis_distances.ipynb</span></code></a></div>
 </div>
 
 
@@ -338,7 +342,7 @@ of America, 17, 684-688.</dd>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_covariance_estimation.html">Previous
+      <a href="plot_outlier_detection.html">Previous
       </a>
     </div>
     

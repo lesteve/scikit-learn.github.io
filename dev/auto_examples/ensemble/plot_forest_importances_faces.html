@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Decision Tree Regression with AdaBoost" href="plot_adaboost_regression.html" />
-    <link rel="prev" title="Image denoising using dictionary learning" href="../decomposition/plot_image_denoising.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="IsolationForest example" href="plot_isolation_forest.html" />
+    <link rel="prev" title="Decision Tree Regression with AdaBoost" href="plot_adaboost_regression.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="../decomposition/plot_image_denoising.html"
+        <a href="plot_adaboost_regression.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Image denoisi...
+        Decision Tree...
         </span>
             <span class="hiddenrellink">
-            Image denoising using dictionary learning
+            Decision Tree Regression with AdaBoost
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,26 +182,28 @@
           <div class="body" role="main">
             
   <div class="section" id="pixel-importances-with-a-parallel-forest-of-trees">
-<span id="example-ensemble-plot-forest-importances-faces-py"></span><h1>Pixel importances with a parallel forest of trees<a class="headerlink" href="#pixel-importances-with-a-parallel-forest-of-trees" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-forest-importances-faces-py"></span><h1>Pixel importances with a parallel forest of trees<a class="headerlink" href="#pixel-importances-with-a-parallel-forest-of-trees" title="Permalink to this headline">¶</a></h1>
 <p>This example shows the use of forests of trees to evaluate the importance
 of the pixels in an image classification task (faces). The hotter the pixel,
 the more important.</p>
 <p>The code below also illustrates how the construction and the computation
 of the predictions can be parallelized within multiple jobs.</p>
-<img alt="../../_images/plot_forest_importances_faces_001.png" class="align-center" src="../../_images/plot_forest_importances_faces_001.png" />
-<p><strong>Script output</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Fitting</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a> <span class="n">on</span> <span class="n">faces</span> <span class="n">data</span> <span class="k">with</span> <span class="mi">1</span> <span class="n">cores</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">2.878</span><span class="n">s</span>
+<img alt="../../_images/sphx_glr_plot_forest_importances_faces_001.png" class="align-center" src="../../_images/sphx_glr_plot_forest_importances_faces_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">Fitting</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a> <span class="n">on</span> <span class="n">faces</span> <span class="n">data</span> <span class="k">with</span> <span class="mi">1</span> <span class="n">cores</span><span class="o">...</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">3.150</span><span class="n">s</span>
 </pre></div>
 </div>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances_faces.py" download=""><code class="xref download docutils literal"><span class="pre">plot_forest_importances_faces.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
 
 <span class="c1"># Number of cores to use to perform parallel fitting of the forest model</span>
 <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">1</span>
@@ -215,7 +218,7 @@ of the predictions can be parallelized within multiple jobs.</p>
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
 <span class="c1"># Build a forest and compute the pixel importances</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitting ExtraTreesClassifier on faces data with </span><span class="si">%d</span><span class="s2"> cores...&quot;</span> <span class="o">%</span> <span class="n">n_jobs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitting ExtraTreesClassifier on faces data with </span><span class="si">%d</span><span class="s2"> cores...&quot;</span> <span class="o">%</span> <span class="n">n_jobs</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">forest</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
                               <span class="n">max_features</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
@@ -223,7 +226,7 @@ of the predictions can be parallelized within multiple jobs.</p>
                               <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">forest</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%0.3f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%0.3f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 <span class="n">importances</span> <span class="o">=</span> <span class="n">forest</span><span class="o">.</span><span class="n">feature_importances_</span>
 <span class="n">importances</span> <span class="o">=</span> <span class="n">importances</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
@@ -233,8 +236,12 @@ of the predictions can be parallelized within multiple jobs.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  3.56 seconds
-( 0 minutes  3.56 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 3.899 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances_faces.py" download=""><code class="xref download docutils literal"><span class="pre">plot_forest_importances_faces.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_forest_importances_faces.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_forest_importances_faces.ipynb</span></code></a></div>
 </div>
 
 
@@ -252,7 +259,7 @@ of the predictions can be parallelized within multiple jobs.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="../decomposition/plot_image_denoising.html">Previous
+      <a href="plot_adaboost_regression.html">Previous
       </a>
     </div>
     

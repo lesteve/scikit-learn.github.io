@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../index.html" />
-    <link rel="up" title="Examples" href="index.html" />
+    <link rel="up" title="General examples" href="index.html" />
     <link rel="next" title="Multilabel classification" href="plot_multilabel.html" />
-    <link rel="prev" title="Pipelining: chaining a PCA and a logistic regression" href="plot_digits_pipe.html" />
+    <link rel="prev" title="Face completion with a multi-output estimators" href="plot_multioutput_face_completion.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_digits_pipe.html"
+        <a href="plot_multioutput_face_completion.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Pipelining: c...
+        Face completi...
         </span>
             <span class="hiddenrellink">
-            Pipelining: chaining a PCA and a logistic regression
+            Face completion with a multi-output estimators
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="imputing-missing-values-before-building-an-estimator">
-<span id="example-missing-values-py"></span><h1>Imputing missing values before building an estimator<a class="headerlink" href="#imputing-missing-values-before-building-an-estimator" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-missing-values-py"></span><h1>Imputing missing values before building an estimator<a class="headerlink" href="#imputing-missing-values-before-building-an-estimator" title="Permalink to this headline">¶</a></h1>
 <p>This example shows that imputing the missing values can give better results
 than discarding the samples containing any missing value.
 Imputing does not always improve the predictions, so please check via cross-validation.
@@ -202,14 +203,13 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 </pre></div>
 </div>
 <p>In this case, imputing helps the classifier get close to the original score.</p>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/missing_values.py" download=""><code class="xref download docutils literal"><span class="pre">missing_values.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <a href="../modules/generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer"><span class="n">Imputer</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">load_boston</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer"><span class="n">Imputer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
@@ -221,7 +221,7 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 <span class="c1"># Estimate the score on the entire dataset, with no missing values</span>
 <span class="n">estimator</span> <span class="o">=</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_full</span><span class="p">,</span> <span class="n">y_full</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score with the complete dataset = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score with the complete dataset = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 
 <span class="c1"># Add missing values in 75% of the lines</span>
 <span class="n">missing_rate</span> <span class="o">=</span> <span class="mf">0.75</span>
@@ -238,7 +238,7 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 <span class="n">y_filtered</span> <span class="o">=</span> <span class="n">y_full</span><span class="p">[</span><span class="o">~</span><span class="n">missing_samples</span><span class="p">]</span>
 <span class="n">estimator</span> <span class="o">=</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_filtered</span><span class="p">,</span> <span class="n">y_filtered</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score without the samples containing missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score without the samples containing missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 
 <span class="c1"># Estimate the score after imputation of the missing values</span>
 <span class="n">X_missing</span> <span class="o">=</span> <span class="n">X_full</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -250,18 +250,24 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
                       <span class="p">(</span><span class="s2">&quot;forest&quot;</span><span class="p">,</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                                        <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">))])</span>
 <span class="n">score</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_missing</span><span class="p">,</span> <span class="n">y_missing</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score after imputation of the missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score after imputation of the missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 
 <span class="c1"># Estimate score after imputation of the missing values with indicator matrix</span>
 <span class="n">estimator</span> <span class="o">=</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <a href="../modules/generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer"><span class="n">Imputer</span></a><span class="p">(</span><span class="n">missing_values</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                           <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span>
-                                          <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">add_indicator_features</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+                                          <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">add_indicator_features</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
                       <span class="p">(</span><span class="s2">&quot;forest&quot;</span><span class="p">,</span> <a href="../modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor"><span class="n">RandomForestRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                                        <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">))])</span>
 <span class="n">score</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score"><span class="n">cross_val_score</span></a><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_missing</span><span class="p">,</span> <span class="n">y_missing</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score after imputation with indicator features = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score after imputation with indicator features = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.000 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../_downloads/missing_values.py" download=""><code class="xref download docutils literal"><span class="pre">missing_values.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../_downloads/missing_values.ipynb" download=""><code class="xref download docutils literal"><span class="pre">missing_values.ipynb</span></code></a></div>
 </div>
 
 
@@ -279,7 +285,7 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_digits_pipe.html">Previous
+      <a href="plot_multioutput_face_completion.html">Previous
       </a>
     </div>
     

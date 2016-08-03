@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
-    <link rel="next" title="Discrete versus Real AdaBoost" href="plot_adaboost_hastie_10_2.html" />
-    <link rel="prev" title="Hashing feature transformation using Totally Random Trees" href="plot_random_forest_embedding.html" />
+    <link rel="up" title="General examples" href="../index.html" />
+    <link rel="next" title="Hashing feature transformation using Totally Random Trees" href="plot_random_forest_embedding.html" />
+    <link rel="prev" title="OOB Errors for Random Forests" href="plot_ensemble_oob.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_random_forest_embedding.html"
+        <a href="plot_ensemble_oob.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Hashing featu...
+        OOB Errors fo...
         </span>
             <span class="hiddenrellink">
-            Hashing feature transformation using Totally Random Trees
+            OOB Errors for Random Forests
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="two-class-adaboost">
-<span id="example-ensemble-plot-adaboost-twoclass-py"></span><h1>Two-class AdaBoost<a class="headerlink" href="#two-class-adaboost" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-ensemble-plot-adaboost-twoclass-py"></span><h1>Two-class AdaBoost<a class="headerlink" href="#two-class-adaboost" title="Permalink to this headline">¶</a></h1>
 <p>This example fits an AdaBoosted decision stump on a non-linearly separable
 classification dataset composed of two &#8220;Gaussian quantiles&#8221; clusters
 (see <a class="reference internal" href="../../modules/generated/sklearn.datasets.make_gaussian_quantiles.html#sklearn.datasets.make_gaussian_quantiles" title="sklearn.datasets.make_gaussian_quantiles"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.make_gaussian_quantiles</span></code></a>) and plots the decision
@@ -193,20 +194,19 @@ as A. The magnitude of a decision score determines the degree of likeness with
 the predicted class label. Additionally, a new dataset could be constructed
 containing a desired purity of class B, for example, by only selecting samples
 with a decision score above some value.</p>
-<img alt="../../_images/plot_adaboost_twoclass_001.png" class="align-center" src="../../_images/plot_adaboost_twoclass_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_twoclass.py" download=""><code class="xref download docutils literal"><span class="pre">plot_adaboost_twoclass.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_adaboost_twoclass_001.png" class="align-center" src="../../_images/sphx_glr_plot_adaboost_twoclass_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Noel Dawe &lt;noel.dawe@gmail.com&gt;</span>
 <span class="c1">#</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_gaussian_quantiles.html#sklearn.datasets.make_gaussian_quantiles"><span class="n">make_gaussian_quantiles</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_gaussian_quantiles.html#sklearn.datasets.make_gaussian_quantiles"><span class="n">make_gaussian_quantiles</span></a>
 
 
 <span class="c1"># Construct dataset</span>
@@ -280,8 +280,12 @@ with a decision score above some value.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  4.48 seconds
-( 0 minutes  4.48 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 4.852 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_twoclass.py" download=""><code class="xref download docutils literal"><span class="pre">plot_adaboost_twoclass.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_adaboost_twoclass.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_adaboost_twoclass.ipynb</span></code></a></div>
 </div>
 
 
@@ -299,7 +303,7 @@ with a decision score above some value.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_random_forest_embedding.html">Previous
+      <a href="plot_ensemble_oob.html">Previous
       </a>
     </div>
     

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Plot Ridge coefficients as a function of the L2 regularization" href="plot_ridge_coeffs.html" />
-    <link rel="prev" title="Comparing various online solvers" href="plot_sgd_comparison.html" />
+    <link rel="prev" title="SGD: convex loss functions" href="plot_sgd_loss_functions.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_sgd_comparison.html"
+        <a href="plot_sgd_loss_functions.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Comparing var...
+        SGD: convex l...
         </span>
             <span class="hiddenrellink">
-            Comparing various online solvers
+            SGD: convex loss functions
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,22 +182,21 @@
           <div class="body" role="main">
             
   <div class="section" id="logit-function">
-<span id="example-linear-model-plot-logistic-py"></span><h1>Logit function<a class="headerlink" href="#logit-function" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-linear-model-plot-logistic-py"></span><h1>Logit function<a class="headerlink" href="#logit-function" title="Permalink to this headline">¶</a></h1>
 <p>Show in the plot is how the logistic regression would, in this
 synthetic dataset, classify values as either 0 or 1,
 i.e. class one or two, using the logit-curve.</p>
-<img alt="../../_images/plot_logistic_001.png" class="align-center" src="../../_images/plot_logistic_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_logistic.py" download=""><code class="xref download docutils literal"><span class="pre">plot_logistic.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_logistic_001.png" class="align-center" src="../../_images/sphx_glr_plot_logistic_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 
 <span class="c1"># Code source: Gael Varoquaux</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
 
 <span class="c1"># this is our test set, it&#39;s just a straight line with some</span>
 <span class="c1"># Gaussian noise</span>
@@ -210,7 +210,7 @@ i.e. class one or two, using the logit-curve.</p>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/arrays.indexing.html#numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">]</span>
 <span class="c1"># run the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression"><span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span></a><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="n">e5</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression"><span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span></a><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1e5</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># and plot the result</span>
@@ -240,8 +240,12 @@ i.e. class one or two, using the logit-curve.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.07 seconds
-( 0 minutes  0.07 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.066 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_logistic.py" download=""><code class="xref download docutils literal"><span class="pre">plot_logistic.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_logistic.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_logistic.ipynb</span></code></a></div>
 </div>
 
 
@@ -259,7 +263,7 @@ i.e. class one or two, using the logit-curve.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_sgd_comparison.html">Previous
+      <a href="plot_sgd_loss_functions.html">Previous
       </a>
     </div>
     

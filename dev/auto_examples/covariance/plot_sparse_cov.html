@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,9 +36,9 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood" href="plot_covariance_estimation.html" />
-    <link rel="prev" title="Outlier detection with several methods." href="plot_outlier_detection.html" />
+    <link rel="prev" title="Ledoit-Wolf vs OAS estimation" href="plot_lw_vs_oas.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -128,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_outlier_detection.html"
+        <a href="plot_lw_vs_oas.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Outlier detec...
+        Ledoit-Wolf v...
         </span>
             <span class="hiddenrellink">
-            Outlier detection with several methods.
+            Ledoit-Wolf vs OAS estimation
             </span>
         </a>
         </div>
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="sparse-inverse-covariance-estimation">
-<span id="example-covariance-plot-sparse-cov-py"></span><h1>Sparse inverse covariance estimation<a class="headerlink" href="#sparse-inverse-covariance-estimation" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-covariance-plot-sparse-cov-py"></span><h1>Sparse inverse covariance estimation<a class="headerlink" href="#sparse-inverse-covariance-estimation" title="Permalink to this headline">¶</a></h1>
 <p>Using the GraphLasso estimator to learn a covariance and sparse precision
 from a small number of samples.</p>
 <p>To estimate a probabilistic model (e.g. a Gaussian model), estimating the
@@ -219,27 +220,20 @@ empirical precision is not displayed.</p>
 set by internal cross-validation in the GraphLassoCV. As can be
 seen on figure 2, the grid to compute the cross-validation score is
 iteratively refined in the neighborhood of the maximum.</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/plot_sparse_cov_001.png"><img alt="../../_images/plot_sparse_cov_001.png" src="../../_images/plot_sparse_cov_001.png" style="width: 470.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/plot_sparse_cov_002.png"><img alt="../../_images/plot_sparse_cov_002.png" src="../../_images/plot_sparse_cov_002.png" style="width: 188.0px; height: 141.0px;" /></a>
-</li>
-</ul>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_sparse_cov.py" download=""><code class="xref download docutils literal"><span class="pre">plot_sparse_cov.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 <span class="c1"># author: Gael Varoquaux &lt;gael.varoquaux@inria.fr&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 <span class="c1"># Copyright: INRIA</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">linalg</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_sparse_spd_matrix.html#sklearn.datasets.make_sparse_spd_matrix"><span class="n">make_sparse_spd_matrix</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.covariance.GraphLassoCV.html#sklearn.covariance.GraphLassoCV"><span class="n">GraphLassoCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.ledoit_wolf.html#sklearn.covariance.ledoit_wolf"><span class="n">ledoit_wolf</span></a>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># Generate the data</span>
-<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_sparse_spd_matrix.html#sklearn.datasets.make_sparse_spd_matrix"><span class="n">make_sparse_spd_matrix</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.covariance.GraphLassoCV.html#sklearn.covariance.GraphLassoCV"><span class="n">GraphLassoCV</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.ledoit_wolf.html#sklearn.covariance.ledoit_wolf"><span class="n">ledoit_wolf</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>Generate the data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">60</span>
 <span class="n">n_features</span> <span class="o">=</span> <span class="mi">20</span>
 
 <span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -256,10 +250,10 @@ iteratively refined in the neighborhood of the maximum.</p>
 <span class="n">X</span> <span class="o">=</span> <span class="n">prng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">n_features</span><span class="p">),</span> <span class="n">cov</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">-=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">/=</span> <span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># Estimate the covariance</span>
-<span class="n">emp_cov</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.dot.html#numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_samples</span>
+</pre></div>
+</div>
+<p>Estimate the covariance</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">emp_cov</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.dot.html#numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_samples</span>
 
 <span class="n">model</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.GraphLassoCV.html#sklearn.covariance.GraphLassoCV"><span class="n">GraphLassoCV</span></a><span class="p">()</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -268,10 +262,10 @@ iteratively refined in the neighborhood of the maximum.</p>
 
 <span class="n">lw_cov_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.ledoit_wolf.html#sklearn.covariance.ledoit_wolf"><span class="n">ledoit_wolf</span></a><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">lw_prec_</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.inv.html#scipy.linalg.inv"><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span></a><span class="p">(</span><span class="n">lw_cov_</span><span class="p">)</span>
-
-<span class="c1">##############################################################################</span>
-<span class="c1"># Plot the results</span>
-<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Plot the results</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
 
 <span class="c1"># plot the covariances</span>
@@ -313,8 +307,18 @@ iteratively refined in the neighborhood of the maximum.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  1.11 seconds
-( 0 minutes  1.11 seconds)</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_sparse_cov_001.png"><img alt="../../_images/sphx_glr_plot_sparse_cov_001.png" src="../../_images/sphx_glr_plot_sparse_cov_001.png" style="width: 470.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_sparse_cov_002.png"><img alt="../../_images/sphx_glr_plot_sparse_cov_002.png" src="../../_images/sphx_glr_plot_sparse_cov_002.png" style="width: 188.0px; height: 141.0px;" /></a>
+</li>
+</ul>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 1.272 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_sparse_cov.py" download=""><code class="xref download docutils literal"><span class="pre">plot_sparse_cov.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_sparse_cov.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_sparse_cov.ipynb</span></code></a></div>
 </div>
 
 
@@ -332,7 +336,7 @@ iteratively refined in the neighborhood of the maximum.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_outlier_detection.html">Previous
+      <a href="plot_lw_vs_oas.html">Previous
       </a>
     </div>
     

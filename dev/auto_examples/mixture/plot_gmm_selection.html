@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,7 +36,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="GMM covariances" href="plot_gmm_covariances.html" />
     <link rel="prev" title="Gaussian Mixture Model Sine Curve" href="plot_gmm_sin.html" />
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -181,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="gaussian-mixture-model-selection">
-<span id="example-mixture-plot-gmm-selection-py"></span><h1>Gaussian Mixture Model Selection<a class="headerlink" href="#gaussian-mixture-model-selection" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-mixture-plot-gmm-selection-py"></span><h1>Gaussian Mixture Model Selection<a class="headerlink" href="#gaussian-mixture-model-selection" title="Permalink to this headline">¶</a></h1>
 <p>This example shows that model selection can be performed with
 Gaussian Mixture Models using information-theoretic criteria (BIC).
 Model selection concerns both the covariance type
@@ -191,19 +192,17 @@ but BIC is better suited if the problem is to identify the right model.
 Unlike Bayesian procedures, such inferences are prior-free.</p>
 <p>In that case, the model with 2 components and full covariance
 (which corresponds to the true generative model) is selected.</p>
-<img alt="../../_images/plot_gmm_selection_001.png" class="align-center" src="../../_images/plot_gmm_selection_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gmm_selection.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gmm_selection.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<img alt="../../_images/sphx_glr_plot_gmm_selection_001.png" class="align-center" src="../../_images/sphx_glr_plot_gmm_selection_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">linalg</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
 
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">mixture</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">mixture</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Number of samples per component</span>
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">500</span>
@@ -243,11 +242,11 @@ Unlike Bayesian procedures, such inferences are prior-free.</p>
                                   <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_components_range</span><span class="p">)],</span>
                         <span class="n">width</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(</span><span class="n">n_components_range</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="n">bic</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.01</span> <span class="o">-</span> <span class="o">.</span><span class="mi">01</span> <span class="o">*</span> <span class="n">bic</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">bic</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="n">bic</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.01</span> <span class="o">-</span> <span class="o">.</span><span class="mo">01</span> <span class="o">*</span> <span class="n">bic</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">bic</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;BIC score per model&#39;</span><span class="p">)</span>
 <span class="n">xpos</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mod.html#numpy.mod"><span class="n">np</span><span class="o">.</span><span class="n">mod</span></a><span class="p">(</span><span class="n">bic</span><span class="o">.</span><span class="n">argmin</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_components_range</span><span class="p">))</span> <span class="o">+</span> <span class="o">.</span><span class="mi">65</span> <span class="o">+</span>\
     <span class="o">.</span><span class="mi">2</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.floor.html#numpy.floor"><span class="n">np</span><span class="o">.</span><span class="n">floor</span></a><span class="p">(</span><span class="n">bic</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_components_range</span><span class="p">))</span>
-<a href="http://matplotlib.org/api/text_api.html#matplotlib.text"><span class="n">plt</span><span class="o">.</span><span class="n">text</span></a><span class="p">(</span><span class="n">xpos</span><span class="p">,</span> <span class="n">bic</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.97</span> <span class="o">+</span> <span class="o">.</span><span class="mi">03</span> <span class="o">*</span> <span class="n">bic</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/text_api.html#matplotlib.text"><span class="n">plt</span><span class="o">.</span><span class="n">text</span></a><span class="p">(</span><span class="n">xpos</span><span class="p">,</span> <span class="n">bic</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.97</span> <span class="o">+</span> <span class="o">.</span><span class="mo">03</span> <span class="o">*</span> <span class="n">bic</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">spl</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of components&#39;</span><span class="p">)</span>
 <span class="n">spl</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">],</span> <span class="n">cv_types</span><span class="p">)</span>
 
@@ -273,12 +272,16 @@ Unlike Bayesian procedures, such inferences are prior-free.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(())</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.yticks"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span></a><span class="p">(())</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Selected GMM: full model, 2 components&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">hspace</span><span class="o">=.</span><span class="mi">35</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=.</span><span class="mi">02</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">hspace</span><span class="o">=.</span><span class="mi">35</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=.</span><span class="mo">02</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  0.53 seconds
-( 0 minutes  0.53 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.562 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gmm_selection.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gmm_selection.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_gmm_selection.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_gmm_selection.ipynb</span></code></a></div>
 </div>
 
 

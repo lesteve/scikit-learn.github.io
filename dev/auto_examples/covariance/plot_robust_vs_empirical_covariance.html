@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -35,7 +36,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Compare cross decomposition methods" href="../cross_decomposition/plot_compare_cross_decomposition.html" />
     <link rel="prev" title="Robust covariance estimation and Mahalanobis distances relevance" href="plot_mahalanobis_distances.html" />
   
@@ -149,10 +150,10 @@
         Up
         <br/>
         <span class="smallrellink">
-        Examples
+        General examples
         </span>
             <span class="hiddenrellink">
-            Examples
+            General examples
             </span>
             
         </a>
@@ -186,7 +187,7 @@
           <div class="body" role="main">
             
   <div class="section" id="robust-vs-empirical-covariance-estimate">
-<span id="example-covariance-plot-robust-vs-empirical-covariance-py"></span><h1>Robust vs Empirical covariance estimate<a class="headerlink" href="#robust-vs-empirical-covariance-estimate" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-covariance-plot-robust-vs-empirical-covariance-py"></span><h1>Robust vs Empirical covariance estimate<a class="headerlink" href="#robust-vs-empirical-covariance-estimate" title="Permalink to this headline">¶</a></h1>
 <p>The usual covariance maximum likelihood estimate is very sensitive to the
 presence of outliers in the data set. In such a case, it would be better to
 use a robust estimator of covariance to guarantee that the estimation is
@@ -247,15 +248,14 @@ estimation in signal processing: A tutorial-style treatment of
 fundamental concepts. IEEE Signal Processing Magazine 29(4), 61-80.</td></tr>
 </tbody>
 </table>
-<img alt="../../_images/plot_robust_vs_empirical_covariance_001.png" class="align-center" src="../../_images/plot_robust_vs_empirical_covariance_001.png" />
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_robust_vs_empirical_covariance.py" download=""><code class="xref download docutils literal"><span class="pre">plot_robust_vs_empirical_covariance.py</span></code></a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+<img alt="../../_images/sphx_glr_plot_robust_vs_empirical_covariance_001.png" class="align-center" src="../../_images/sphx_glr_plot_robust_vs_empirical_covariance_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.font_manager</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance"><span class="n">EmpiricalCovariance</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet"><span class="n">MinCovDet</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance"><span class="n">EmpiricalCovariance</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet"><span class="n">MinCovDet</span></a>
 
 <span class="c1"># example settings</span>
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">80</span>
@@ -288,7 +288,7 @@ fundamental concepts. IEEE Signal Processing Magazine 29(4), 61-80.</td></tr>
             <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_outliers</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="n">X</span><span class="p">[</span><span class="n">outliers_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">outliers_offset</span>
         <span class="n">inliers_mask</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.ones.html#numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
-        <span class="n">inliers_mask</span><span class="p">[</span><span class="n">outliers_index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">inliers_mask</span><span class="p">[</span><span class="n">outliers_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 
         <span class="c1"># fit a Minimum Covariance Determinant (MCD) robust estimator to data</span>
         <span class="n">mcd</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet"><span class="n">MinCovDet</span></a><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -350,8 +350,12 @@ fundamental concepts. IEEE Signal Processing Magazine 29(4), 61-80.</td></tr>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  3.43 seconds
-( 0 minutes  3.43 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 3.643 seconds)</p>
+<div class="sphx-glr-download container">
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_robust_vs_empirical_covariance.py" download=""><code class="xref download docutils literal"><span class="pre">plot_robust_vs_empirical_covariance.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_robust_vs_empirical_covariance.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_robust_vs_empirical_covariance.ipynb</span></code></a></div>
 </div>
 </div>
 
