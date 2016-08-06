@@ -188,116 +188,8 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.mixture" title="sklearn.mixture"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.mixture</span></code></a>.DPGMM<a class="headerlink" href="#sklearn-mixture-dpgmm" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.mixture.DPGMM">
-<em class="property">class </em><code class="descclassname">sklearn.mixture.</code><code class="descname">DPGMM</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/dpgmm.py#L122"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM" title="Permalink to this definition">¶</a></dt>
-<dd><p>Variational Inference for the Infinite Gaussian Mixture Model.</p>
-<p>DPGMM stands for Dirichlet Process Gaussian Mixture Model, and it
-is an infinite mixture model with the Dirichlet Process as a prior
-distribution on the number of clusters. In practice the
-approximate inference algorithm uses a truncated distribution with
-a fixed maximum number of components, but almost always the number
-of components actually used depends on the data.</p>
-<p>Stick-breaking Representation of a Gaussian mixture model
-probability distribution. This class allows for easy and efficient
-inference of an approximate posterior distribution over the
-parameters of a Gaussian mixture model with a variable number of
-components (smaller than the truncation parameter n_components).</p>
-<p>Initialization is with normally-distributed means and identity
-covariance, for proper convergence.</p>
-<p>Read more in the <a class="reference internal" href="../mixture.html#dpgmm"><span class="std std-ref">User Guide</span></a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components: int, default 1</strong> :</p>
-<blockquote>
-<div><p>Number of mixture components.</p>
-</div></blockquote>
-<p><strong>covariance_type: string, default &#8216;diag&#8217;</strong> :</p>
-<blockquote>
-<div><p>String describing the type of covariance parameters to
-use.  Must be one of &#8216;spherical&#8217;, &#8216;tied&#8217;, &#8216;diag&#8217;, &#8216;full&#8217;.</p>
-</div></blockquote>
-<p><strong>alpha: float, default 1</strong> :</p>
-<blockquote>
-<div><p>Real number representing the concentration parameter of
-the dirichlet process. Intuitively, the Dirichlet Process
-is as likely to start a new cluster for a point as it is
-to add that point to a cluster with alpha elements. A
-higher alpha means more clusters, as the expected number
-of clusters is <code class="docutils literal"><span class="pre">alpha*log(N)</span></code>.</p>
-</div></blockquote>
-<p><strong>tol</strong> : float, default 1e-3</p>
-<blockquote>
-<div><p>Convergence threshold.</p>
-</div></blockquote>
-<p><strong>n_iter</strong> : int, default 10</p>
-<blockquote>
-<div><p>Maximum number of iterations to perform before convergence.</p>
-</div></blockquote>
-<p><strong>params</strong> : string, default &#8216;wmc&#8217;</p>
-<blockquote>
-<div><p>Controls which parameters are updated in the training
-process.  Can contain any combination of &#8216;w&#8217; for weights,
-&#8216;m&#8217; for means, and &#8216;c&#8217; for covars.</p>
-</div></blockquote>
-<p><strong>init_params</strong> : string, default &#8216;wmc&#8217;</p>
-<blockquote>
-<div><p>Controls which parameters are updated in the initialization
-process.  Can contain any combination of &#8216;w&#8217; for weights,
-&#8216;m&#8217; for means, and &#8216;c&#8217; for covars.  Defaults to &#8216;wmc&#8217;.</p>
-</div></blockquote>
-<p><strong>verbose</strong> : int, default 0</p>
-<blockquote>
-<div><p>Controls output verbosity.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>covariance_type</strong> : string</p>
-<blockquote>
-<div><p>String describing the type of covariance parameters used by
-the DP-GMM.  Must be one of &#8216;spherical&#8217;, &#8216;tied&#8217;, &#8216;diag&#8217;, &#8216;full&#8217;.</p>
-</div></blockquote>
-<p><strong>n_components</strong> : int</p>
-<blockquote>
-<div><p>Number of mixture components.</p>
-</div></blockquote>
-<p><strong>weights_</strong> : array, shape (<cite>n_components</cite>,)</p>
-<blockquote>
-<div><p>Mixing weights for each mixture component.</p>
-</div></blockquote>
-<p><strong>means_</strong> : array, shape (<cite>n_components</cite>, <cite>n_features</cite>)</p>
-<blockquote>
-<div><p>Mean parameters for each mixture component.</p>
-</div></blockquote>
-<p><strong>precs_</strong> : array</p>
-<blockquote>
-<div><p>Precision (inverse covariance) parameters for each mixture
-component.  The shape depends on <cite>covariance_type</cite>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>(`n_components`, &#39;n_features&#39;)                if &#39;spherical&#39;,
-(`n_features`, `n_features`)                  if &#39;tied&#39;,
-(`n_components`, `n_features`)                if &#39;diag&#39;,
-(`n_components`, `n_features`, `n_features`)  if &#39;full&#39;
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>converged_</strong> : bool</p>
-<blockquote class="last">
-<div><p>True when convergence was reached in fit(), False otherwise.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><code class="xref py py-obj docutils literal"><span class="pre">GMM</span></code></dt>
-<dd>Finite Gaussian mixture model fit with EM</dd>
-<dt><a class="reference internal" href="sklearn.mixture.VBGMM.html#sklearn.mixture.VBGMM" title="sklearn.mixture.VBGMM"><code class="xref py py-obj docutils literal"><span class="pre">VBGMM</span></code></a></dt>
-<dd>Finite Gaussian mixture model fit with a variational algorithm, better for situations where there might be too little data to get a good estimate of the covariance matrix.</dd>
-</dl>
-</div>
-<p class="rubric">Methods</p>
+<em class="property">class </em><code class="descclassname">sklearn.mixture.</code><code class="descname">DPGMM</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/dpgmm.py#L622"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -344,13 +236,13 @@ component.  The shape depends on <cite>covariance_type</cite>:</p>
 </table>
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/utils/deprecation.py#L51"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/utils/deprecation.py#L51"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>DEPRECATED: The DPGMM class is not working correctly and it&#8217;s better to not use it. DPGMM is deprecated in 0.18 and will be removed in 0.20.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.aic">
-<code class="descname">aic</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L637"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.aic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">aic</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L637"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.aic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Akaike information criterion for the current model fit
 and the proposed data.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -367,7 +259,7 @@ and the proposed data.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.bic">
-<code class="descname">bic</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L622"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.bic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">bic</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L622"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.bic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bayesian information criterion for the current model fit
 and the proposed data.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -384,7 +276,7 @@ and the proposed data.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L568"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L568"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate model parameters with the EM algorithm.</p>
 <p>A initialization step is performed before entering the
 expectation-maximization (EM) algorithm. If you want to avoid
@@ -411,7 +303,7 @@ corresponds to a single data point.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.fit_predict">
-<code class="descname">fit_predict</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L421"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.fit_predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_predict</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L421"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.fit_predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit and then predict labels for data.</p>
 <p>Warning: Due to the final maximization step in the EM algorithm,
 with low iterations the prediction may not be 100%  accurate.</p>
@@ -432,7 +324,7 @@ with low iterations the prediction may not be 100%  accurate.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/base.py#L215"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/base.py#L215"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -457,13 +349,13 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.lower_bound">
-<code class="descname">lower_bound</code><span class="sig-paren">(</span><em>X</em>, <em>z</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/dpgmm.py#L475"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.lower_bound" title="Permalink to this definition">¶</a></dt>
+<code class="descname">lower_bound</code><span class="sig-paren">(</span><em>X</em>, <em>z</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/dpgmm.py#L472"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.lower_bound" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns a lower bound on model evidence based on X and membership</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L348"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L348"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict label for data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -479,7 +371,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L362"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.predict_proba" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L362"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.predict_proba" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict posterior probability of data under each Gaussian
 in the model.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -502,7 +394,7 @@ in the model.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.sample">
-<code class="descname">sample</code><span class="sig-paren">(</span><em>n_samples=1</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L379"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.sample" title="Permalink to this definition">¶</a></dt>
+<code class="descname">sample</code><span class="sig-paren">(</span><em>n_samples=1</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L379"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate random samples from the model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -526,7 +418,7 @@ in the model.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/gmm.py#L331"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/gmm.py#L331"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the log probability under the model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -551,7 +443,7 @@ corresponds to a single data point.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.score_samples">
-<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/mixture/dpgmm.py#L241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.score_samples" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/mixture/dpgmm.py#L238"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.score_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the likelihood of the data under the model.</p>
 <p>Compute the bound on log probability of X under the model
 and return the posterior distribution (responsibilities) of
@@ -586,7 +478,7 @@ observation</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.DPGMM.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bddfdb/sklearn/base.py#L252"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/05dfe6c/sklearn/base.py#L252"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.DPGMM.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
