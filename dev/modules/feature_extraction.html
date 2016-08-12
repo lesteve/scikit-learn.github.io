@@ -550,16 +550,37 @@ the frequencies of rarer yet more interesting terms.</p>
 suitable for usage by a classifier it is very common to use the tf–idf
 transform.</p>
 <p>Tf means <strong>term-frequency</strong> while tf–idf means term-frequency times
-<strong>inverse document-frequency</strong>. This was originally a term weighting
-scheme developed for information retrieval (as a ranking function
-for search engines results), that has also found good use in document
-classification and clustering.</p>
+<strong>inverse document-frequency</strong>:
+<img class="math" src="../_images/math/ced3018f1dc828c4453789719856db2ba8c73ad0.png" alt="\text{tf-idf(t,d)}=\text{tf(t,d)} \times \text{idf(t)}"/>.</p>
+<p>Using the <code class="docutils literal"><span class="pre">TfidfTransformer</span></code>&#8216;s default settings,
+<code class="docutils literal"><span class="pre">TfidfTransformer(norm='l2',</span> <span class="pre">use_idf=True,</span> <span class="pre">smooth_idf=True,</span> <span class="pre">sublinear_tf=False)</span></code>
+the term frequency, the number of times a term occurs in a given document,
+is multiplied with idf component, which is computed as</p>
+<p><img class="math" src="../_images/math/9900c5f2fd75ad90a4bb6aa533fd325adc51a085.png" alt="\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1"/>,</p>
+<p>where <img class="math" src="../_images/math/1a1bf67a033cf1fac2e2cae40771b49186fe75f4.png" alt="n_d"/> is the total number of documents, and <img class="math" src="../_images/math/ac0f5e93c9567c9d0fcf07b0277d74ea9bc44d52.png" alt="\text{df}(d,t)"/>
+is the number of documents that contain term <img class="math" src="../_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. The resulting tf-idf
+vectors are then normalized by the Euclidean norm:</p>
+<p><img class="math" src="../_images/math/fc412d2a005665d40c01db1c7d1864deef7147a9.png" alt="v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
+v{_2}^2 + \dots + v{_n}^2}}"/>.</p>
+<p>This was originally a term weighting scheme developed for information retrieval
+(as a ranking function for search engines results) that has also found good
+use in document classification and clustering.</p>
+<p>The following sections contain further explanations and examples that
+illustrate how the tf-idfs are computed exactly and how the tf-idfs
+computed in scikit-learn&#8217;s <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a>
+and <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal"><span class="pre">TfidfVectorizer</span></code></a> differ slightly from the standard textbook
+notation that defines the idf as</p>
+<p><img class="math" src="../_images/math/f642ecdcaf1bef83a33d83dc78eba290dae75aa2.png" alt="\text{idf}(t) = log{\frac{n_d}{1+\text{df}(d,t)}}."/></p>
+<p>In the <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a> and <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal"><span class="pre">TfidfVectorizer</span></code></a>
+with <code class="docutils literal"><span class="pre">smooth_idf=False</span></code>, the
+&#8220;1&#8221; count is added to the idf instead of the idf&#8217;s denominator:</p>
+<p><img class="math" src="../_images/math/988aebaa56ca86faea6f4a0b7b447e518bb4a70a.png" alt="\text{idf}(t) = log{\frac{n_d}{\text{df}(d,t)}} + 1"/></p>
 <p>This normalization is implemented by the <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a>
 class:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfTransformer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">smooth_idf</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span>   
-<span class="go">TfidfTransformer(norm=...&#39;l2&#39;, smooth_idf=True, sublinear_tf=False,</span>
+<span class="go">TfidfTransformer(norm=...&#39;l2&#39;, smooth_idf=False, sublinear_tf=False,</span>
 <span class="go">                 use_idf=True)</span>
 </pre></div>
 </div>
@@ -581,15 +602,55 @@ content of the documents:</p>
 <span class="go">    with 9 stored elements in Compressed Sparse ... format&gt;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>                        
-<span class="go">array([[ 0.85...,  0.  ...,  0.52...],</span>
-<span class="go">       [ 1.  ...,  0.  ...,  0.  ...],</span>
-<span class="go">       [ 1.  ...,  0.  ...,  0.  ...],</span>
-<span class="go">       [ 1.  ...,  0.  ...,  0.  ...],</span>
-<span class="go">       [ 0.55...,  0.83...,  0.  ...],</span>
-<span class="go">       [ 0.63...,  0.  ...,  0.77...]])</span>
+<span class="go">array([[ 0.81940995,  0.        ,  0.57320793],</span>
+<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [ 0.47330339,  0.88089948,  0.        ],</span>
+<span class="go">       [ 0.58149261,  0.        ,  0.81355169]])</span>
 </pre></div>
 </div>
-<p>Each row is normalized to have unit euclidean norm. The weights of each
+<p>Each row is normalized to have unit Euclidean norm:</p>
+<p><img class="math" src="../_images/math/fc412d2a005665d40c01db1c7d1864deef7147a9.png" alt="v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
+v{_2}^2 + \dots + v{_n}^2}}"/></p>
+<p>For example, we can compute the tf-idf of the first term in the first
+document in the <cite>counts</cite> array as follows:</p>
+<p><img class="math" src="../_images/math/29669a5275e9149090534823a94d768fa273a078.png" alt="n_{d, {\text{term1}}} = 6"/></p>
+<p><img class="math" src="../_images/math/3515ec4ca51deec3ed8e5c14d9f020abc1b4ea60.png" alt="\text{df}(d, t)_{\text{term1}} = 6"/></p>
+<p><img class="math" src="../_images/math/04c8f529c15d7e1ef4816a75fb8eac31dae80ef8.png" alt="\text{idf}(d, t)_{\text{term1}} =
+log \frac{n_d}{\text{df}(d, t)} + 1 = log(1)+1 = 1"/></p>
+<p><img class="math" src="../_images/math/19103899ca3b7005c534e8368b51510bfe3644ae.png" alt="\text{tf-idf}_{\text{term1}} = \text{tf} \times \text{idf} = 3 \times 1 = 3"/></p>
+<p>Now, if we repeat this computation for the remaining 2 terms in the document,
+we get</p>
+<p><img class="math" src="../_images/math/0a89af244f8a0ea4373d3651b242e7cc05c65bae.png" alt="\text{tf-idf}_{\text{term2}} = 0 \times log(6/1)+1 = 0"/></p>
+<p><img class="math" src="../_images/math/b0e0c400df14c40519e1f1f6742531e1aed88663.png" alt="\text{tf-idf}_{\text{term3}} = 1 \times log(6/2)+1 \approx 2.0986"/></p>
+<p>and the vector of raw tf-idfs:</p>
+<p><img class="math" src="../_images/math/3c5aaeb200b418f9a3d67137b24492b701edd52f.png" alt="\text{tf-idf}_raw = [3, 0, 2.0986]."/></p>
+<p>Then, applying the Euclidean (L2) norm, we obtain the following tf-idfs
+for document 1:</p>
+<p><img class="math" src="../_images/math/89aa40b34301fde36886df0fc1d9195abf8b5f3a.png" alt="\frac{[3, 0, 2.0986]}{\sqrt{\big(3^2 + 0^2 + 2.0986^2\big)}}
+= [ 0.819,  0,  0.573]."/></p>
+<p>Furthermore, the default parameter <code class="docutils literal"><span class="pre">smooth_idf=True</span></code> adds &#8220;1&#8221; to the numerator
+and  denominator as if an extra document was seen containing every term in the
+collection exactly once, which prevents zero divisions:</p>
+<p><img class="math" src="../_images/math/9900c5f2fd75ad90a4bb6aa533fd325adc51a085.png" alt="\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1"/></p>
+<p>Using this modification, the tf-idf of the third term in document 1 changes to
+1.8473:</p>
+<p><img class="math" src="../_images/math/8c2364258939f6facd6f76113be4a7f37af35e25.png" alt="\text{tf-idf}_{\text{term3}} = 1 \times log(7/3)+1 \approx 1.8473"/></p>
+<p>And the L2-normalized tf-idf changes to</p>
+<p><img class="math" src="../_images/math/2af3612286f335d923bdf7e959390217dd1ada0c.png" alt="\frac{[3, 0, 1.8473]}{\sqrt{\big(3^2 + 0^2 + 1.8473^2\big)}}
+= [0.8515, 0, 0.5243]"/>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[ 0.85151335,  0.        ,  0.52433293],</span>
+<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [ 0.55422893,  0.83236428,  0.        ],</span>
+<span class="go">       [ 0.63035731,  0.        ,  0.77630514]])</span>
+</pre></div>
+</div>
+<p>The weights of each
 feature computed by the <code class="docutils literal"><span class="pre">fit</span></code> method call are stored in a model
 attribute:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">idf_</span>                       
