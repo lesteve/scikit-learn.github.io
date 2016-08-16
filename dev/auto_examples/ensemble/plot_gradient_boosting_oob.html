@@ -260,14 +260,14 @@ but is computationally more demanding.</p>
     <span class="k">return</span> <span class="n">score</span>
 
 
-<span class="k">def</span> <span class="nf">cv_estimate</span><span class="p">(</span><span class="n">n_folds</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">cv</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold"><span class="n">KFold</span></a><span class="p">(</span><span class="n">n_folds</span><span class="o">=</span><span class="n">n_folds</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cv_estimate</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">cv</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold"><span class="n">KFold</span></a><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_splits</span><span class="p">)</span>
     <span class="n">cv_clf</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
     <span class="n">val_scores</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
         <span class="n">cv_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[</span><span class="n">train</span><span class="p">])</span>
         <span class="n">val_scores</span> <span class="o">+=</span> <span class="n">heldout_score</span><span class="p">(</span><span class="n">cv_clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[</span><span class="n">test</span><span class="p">])</span>
-    <span class="n">val_scores</span> <span class="o">/=</span> <span class="n">n_folds</span>
+    <span class="n">val_scores</span> <span class="o">/=</span> <span class="n">n_splits</span>
     <span class="k">return</span> <span class="n">val_scores</span>
 
 
@@ -323,7 +323,7 @@ but is computationally more demanding.</p>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 4.059 seconds)</p>
+(0 minutes 4.050 seconds)</p>
 <div class="sphx-glr-download container">
 <strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gradient_boosting_oob.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gradient_boosting_oob.py</span></code></a></div>
 <div class="sphx-glr-download container">
