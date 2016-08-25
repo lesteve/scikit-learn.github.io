@@ -188,12 +188,13 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.log_loss<a class="headerlink" href="#sklearn-metrics-log-loss" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.log_loss">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">log_loss</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em>, <em>eps=1e-15</em>, <em>normalize=True</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/084ef97/sklearn/metrics/classification.py#L1547"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.log_loss" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">log_loss</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em>, <em>eps=1e-15</em>, <em>normalize=True</em>, <em>sample_weight=None</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/104e09a/sklearn/metrics/classification.py#L1547"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.log_loss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log loss, aka logistic loss or cross-entropy loss.</p>
 <p>This is the loss function used in (multinomial) logistic regression
 and extensions of it such as neural networks, defined as the negative
 log-likelihood of the true labels given a probabilistic classifier&#8217;s
-predictions. For a single sample with true label yt in {0,1} and
+predictions. The log loss is only defined for two or more labels.
+For a single sample with true label yt in {0,1} and
 estimated probability yp that yt = 1, the log loss is</p>
 <blockquote>
 <div>-log P(yt|yp) = -(yt log(yp) + (1 - yt) log(1 - yp))</div></blockquote>
@@ -206,10 +207,14 @@ estimated probability yp that yt = 1, the log loss is</p>
 <blockquote>
 <div><p>Ground truth (correct) labels for n_samples samples.</p>
 </div></blockquote>
-<p><strong>y_pred</strong> : array-like of float, shape = (n_samples, n_classes)</p>
+<p><strong>y_pred</strong> : array-like of float, shape = (n_samples, n_classes) or (n_samples,)</p>
 <blockquote>
 <div><p>Predicted probabilities, as returned by a classifier&#8217;s
-predict_proba method.</p>
+predict_proba method. If <code class="docutils literal"><span class="pre">y_pred.shape</span> <span class="pre">=</span> <span class="pre">(n_samples,)</span></code>
+the probabilities provided are assumed to be that of the
+positive class. The labels in <code class="docutils literal"><span class="pre">y_pred</span></code> are assumed to be
+ordered alphabetically, as done by
+<code class="xref py py-class docutils literal"><span class="pre">preprocessing.LabelBinarizer</span></code>.</p>
 </div></blockquote>
 <p><strong>eps</strong> : float</p>
 <blockquote>
@@ -224,6 +229,13 @@ Otherwise, return the sum of the per-sample losses.</p>
 <p><strong>sample_weight</strong> : array-like of shape = [n_samples], optional</p>
 <blockquote>
 <div><p>Sample weights.</p>
+</div></blockquote>
+<p><strong>labels</strong> : array-like, optional (default=None)</p>
+<blockquote>
+<div><p>If not provided, labels will be inferred from y_true. If <code class="docutils literal"><span class="pre">labels</span></code>
+is <code class="docutils literal"><span class="pre">None</span></code> and <code class="docutils literal"><span class="pre">y_pred</span></code> has shape (n_samples,) the labels are
+assumed to be binary and are inferred from <code class="docutils literal"><span class="pre">y_true</span></code>.
+.. versionadded:: 0.18</p>
 </div></blockquote>
 </td>
 </tr>
