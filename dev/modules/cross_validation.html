@@ -183,7 +183,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#cross-validation-of-time-series-data">3.1.3. Cross validation of time series data</a><ul>
-<li><a class="reference internal" href="#timeseriescv">3.1.3.1. TimeSeriesCV</a></li>
+<li><a class="reference internal" href="#timeseriessplit">3.1.3.1. TimeSeriesSplit</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#a-note-on-shuffling">3.1.4. A note on shuffling</a></li>
@@ -686,10 +686,10 @@ between training and testing instances (yielding poor estimates of
 generalisation error) on time series data. Therefore, it is very important
 to evaluate our model for time series data on the &#8220;future&#8221; observations
 least like those that are used to train the model. To achieve this, one
-solution is provided by <code class="xref py py-class docutils literal"><span class="pre">TimeSeriesCV</span></code>.</p>
-<div class="section" id="timeseriescv">
-<h3>3.1.3.1. TimeSeriesCV<a class="headerlink" href="#timeseriescv" title="Permalink to this headline">¶</a></h3>
-<p><code class="xref py py-class docutils literal"><span class="pre">TimeSeriesCV</span></code> is a variation of <em>k-fold</em> which
+solution is provided by <a class="reference internal" href="generated/sklearn.model_selection.TimeSeriesSplit.html#sklearn.model_selection.TimeSeriesSplit" title="sklearn.model_selection.TimeSeriesSplit"><code class="xref py py-class docutils literal"><span class="pre">TimeSeriesSplit</span></code></a>.</p>
+<div class="section" id="timeseriessplit">
+<h3>3.1.3.1. TimeSeriesSplit<a class="headerlink" href="#timeseriessplit" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.model_selection.TimeSeriesSplit.html#sklearn.model_selection.TimeSeriesSplit" title="sklearn.model_selection.TimeSeriesSplit"><code class="xref py py-class docutils literal"><span class="pre">TimeSeriesSplit</span></code></a> is a variation of <em>k-fold</em> which
 returns first <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> folds as train set and the <img class="math" src="../_images/math/5482a5a4f7c556df766d25e0062ea2ea9a811dab.png" alt="(k+1)"/> th
 fold as test set. Note that unlike standard cross-validation methods,
 successive training sets are supersets of those that come before them.
@@ -698,13 +698,13 @@ is always used to train the model.</p>
 <p>This class can be used to cross-validate time series data samples
 that are observed at fixed time intervals.</p>
 <p>Example of 3-split time series cross-validation on a dataset with 6 samples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">TimeSeriesCV</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">TimeSeriesSplit</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tscv</span> <span class="o">=</span> <span class="n">TimeSeriesCV</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tscv</span> <span class="o">=</span> <span class="n">TimeSeriesSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tscv</span><span class="p">)</span>  
-<span class="go">TimeSeriesCV(n_splits=3)</span>
+<span class="go">TimeSeriesSplit(n_splits=3)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tscv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
 <span class="go">[0 1 2] [3]</span>
