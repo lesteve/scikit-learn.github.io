@@ -211,7 +211,7 @@ in more than 80% of the samples.
 Boolean features are Bernoulli random variables,
 and the variance of such variables is given by</p>
 <div class="math">
-<p><img src="../_images/math/42d453c5f9cdd996a8f8f1f866c9589b533beba6.png" alt="\mathrm{Var}[X] = p(1 - p)"/></p>
+<p><img src="../_images/math/7db25dbc84b79f3c4eed3a61fe83c0452b527b14.png" alt="\mathrm{Var}[X] = p(1 - p)"/></p>
 </div><p>so we can select using the threshold <code class="docutils literal"><span class="pre">.8</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">.8)</span></code>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">VarianceThreshold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
@@ -226,7 +226,7 @@ and the variance of such variables is given by</p>
 </pre></div>
 </div>
 <p>As expected, <code class="docutils literal"><span class="pre">VarianceThreshold</span></code> has removed the first column,
-which has a probability <img class="math" src="../_images/math/08208315dbc033b6692eab4e29cffaabe301b72c.png" alt="p = 5/6 &gt; .8"/> of containing a zero.</p>
+which has a probability <img class="math" src="../_images/math/e4d3834155b28b8479d7be11cc57a67375095c07.png" alt="p = 5/6 &gt; .8"/> of containing a zero.</p>
 </div>
 <div class="section" id="univariate-feature-selection">
 <span id="id2"></span><h2>1.13.2. Univariate feature selection<a class="headerlink" href="#univariate-feature-selection" title="Permalink to this headline">¶</a></h2>
@@ -236,7 +236,7 @@ to an estimator. Scikit-learn exposes feature selection routines
 as objects that implement the <code class="docutils literal"><span class="pre">transform</span></code> method:</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference internal" href="generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-class docutils literal"><span class="pre">SelectKBest</span></code></a> removes all but the <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> highest scoring features</li>
+<li><a class="reference internal" href="generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-class docutils literal"><span class="pre">SelectKBest</span></code></a> removes all but the <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> highest scoring features</li>
 <li><a class="reference internal" href="generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-class docutils literal"><span class="pre">SelectPercentile</span></code></a> removes all but a user-specified highest scoring
 percentage of features</li>
 <li>using common univariate statistical tests for each feature:
@@ -247,7 +247,7 @@ selection with a configurable strategy. This allows to select the best
 univariate selection strategy with hyper-parameter search estimator.</li>
 </ul>
 </div></blockquote>
-<p>For instance, we can perform a <img class="math" src="../_images/math/8bd0685e3bf9101859d24cf0e851651f182364c9.png" alt="\chi^2"/> test to the samples
+<p>For instance, we can perform a <img class="math" src="../_images/math/b0a677c7b64a9ce46bca897eabaf2af1c84de1a5.png" alt="\chi^2"/> test to the samples
 to retrieve only the two best features as follows:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">SelectKBest</span>
@@ -407,13 +407,13 @@ stability selection, is implemented in the module <a class="reference internal" 
 In the stability selection method, a subsample of the data is fit to a
 L1-penalized model where the penalty of a random subset of coefficients has
 been scaled. Specifically, given a subsample of the data
-<img class="math" src="../_images/math/afbca8847590000b9542d460413b3f19469e82f1.png" alt="(x_i, y_i), i \in I"/>, where <img class="math" src="../_images/math/61246da7ad7210bef176493ef05554226f3e96d6.png" alt="I \subset \{1, 2, \ldots, n\}"/> is a
-random subset of the data of size <img class="math" src="../_images/math/ae0a0bfd16058b9ee33d6d8a71eb5d0a5ec1efd3.png" alt="n_I"/>, the following modified Lasso
+<img class="math" src="../_images/math/9a90667c80b11d2d568fe3065592b13c15f637ee.png" alt="(x_i, y_i), i \in I"/>, where <img class="math" src="../_images/math/0162782742077677bc10695880c89f8aa5849ed9.png" alt="I \subset \{1, 2, \ldots, n\}"/> is a
+random subset of the data of size <img class="math" src="../_images/math/9b1880e80dfcb7523851dcaca38d12d406a1f132.png" alt="n_I"/>, the following modified Lasso
 fit is obtained:</p>
 <div class="math">
-<p><img src="../_images/math/ee5fcf6ad1352d2c8bde5210946bb397438c0769.png" alt="\hat{w_I} = \mathrm{arg}\min_{w} \frac{1}{2n_I} \sum_{i \in I} (y_i - x_i^T w)^2 + \alpha \sum_{j=1}^p \frac{ \vert w_j \vert}{s_j},"/></p>
-</div><p>where <img class="math" src="../_images/math/43605bcd94c059ae4d784fb1dfba44c1658df7ee.png" alt="s_j \in \{s, 1\}"/> are independent trials of a fair Bernoulli
-random variable, and <img class="math" src="../_images/math/33978871bc0e7bca9ec15d0c9c0feac46015cc6e.png" alt="0&lt;s&lt;1"/> is the scaling factor. By repeating this
+<p><img src="../_images/math/ed4110314e4006741174bacfc0f949318a731939.png" alt="\hat{w_I} = \mathrm{arg}\min_{w} \frac{1}{2n_I} \sum_{i \in I} (y_i - x_i^T w)^2 + \alpha \sum_{j=1}^p \frac{ \vert w_j \vert}{s_j},"/></p>
+</div><p>where <img class="math" src="../_images/math/bf86601e781b576beed93089c6f2f80932a8b8d9.png" alt="s_j \in \{s, 1\}"/> are independent trials of a fair Bernoulli
+random variable, and <img class="math" src="../_images/math/88d039035672a3d21ee95abb710aa8fc7b05dc93.png" alt="0&lt;s&lt;1"/> is the scaling factor. By repeating this
 procedure across different random subsamples and Bernoulli trials, one can
 count the fraction of times the randomized procedure selected each feature,
 and used these fractions as scores for feature selection.</p>

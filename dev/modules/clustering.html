@@ -356,16 +356,16 @@ in n groups of equal variance, minimizing a criterion known as the
 This algorithm requires the number of clusters to be specified.
 It scales well to large number of samples and has been used
 across a large range of application areas in many different fields.</p>
-<p>The k-means algorithm divides a set of <img class="math" src="../_images/math/75e27f04188974063be3230dca208cd495b77ce1.png" alt="N"/> samples <img class="math" src="../_images/math/f026aecf11ec7f6141ab863f260d395f94b10f51.png" alt="X"/>
-into <img class="math" src="../_images/math/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K"/> disjoint clusters <img class="math" src="../_images/math/2bcc65482aa8e15cd4c9e9f2542451fb4e971a91.png" alt="C"/>,
-each described by the mean <img class="math" src="../_images/math/3d0458c0468168486719c7cb3ce00ec1e847b089.png" alt="\mu_j"/> of the samples in the cluster.
+<p>The k-means algorithm divides a set of <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> samples <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>
+into <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> disjoint clusters <img class="math" src="../_images/math/afce44aa7c55836ca9345404c22fc7b599d2ed84.png" alt="C"/>,
+each described by the mean <img class="math" src="../_images/math/169afc05a24e52e428b94e0041ab0577a2d580ee.png" alt="\mu_j"/> of the samples in the cluster.
 The means are commonly called the cluster &#8220;centroids&#8221;;
-note that they are not, in general, points from <img class="math" src="../_images/math/f026aecf11ec7f6141ab863f260d395f94b10f51.png" alt="X"/>,
+note that they are not, in general, points from <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>,
 although they live in the same space.
 The K-means algorithm aims to choose centroids
 that minimise the <em>inertia</em>, or within-cluster sum of squared criterion:</p>
 <div class="math">
-<p><img src="../_images/math/f0d4e88e65214b43a27cc1c99acbf2f4058fea6f.png" alt="\sum_{i=0}^{n}\min_{\mu_j \in C}(||x_j - \mu_i||^2)"/></p>
+<p><img src="../_images/math/6f9b414fca909e61aa567bc8230051c031299151.png" alt="\sum_{i=0}^{n}\min_{\mu_j \in C}(||x_j - \mu_i||^2)"/></p>
 </div><p>Inertia, or the within-cluster sum of squares criterion,
 can be recognized as a measure of how internally coherent clusters are.
 It suffers from various drawbacks:</p>
@@ -384,8 +384,8 @@ and speed up the computations.</li>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_kmeans_assumptions.html"><img alt="../_images/sphx_glr_plot_kmeans_assumptions_0011.png" class="align-center" src="../_images/sphx_glr_plot_kmeans_assumptions_0011.png" style="width: 600.0px; height: 600.0px;" /></a>
 <p>K-means is often referred to as Lloyd&#8217;s algorithm. In basic terms, the
 algorithm has three steps. The first step chooses the initial centroids, with
-the most basic method being to choose <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> samples from the dataset
-<img class="math" src="../_images/math/f026aecf11ec7f6141ab863f260d395f94b10f51.png" alt="X"/>. After initialization, K-means consists of looping between the
+the most basic method being to choose <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> samples from the dataset
+<img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>. After initialization, K-means consists of looping between the
 two other steps. The first step assigns each sample to its nearest centroid.
 The second step creates new centroids by taking the mean value of all of the
 samples assigned to each previous centroid. The difference between the old
@@ -454,7 +454,7 @@ solution. In contrast to other algorithms that reduce the convergence time of
 k-means, mini-batch k-means produces results that are generally only slightly
 worse than the standard algorithm.</p>
 <p>The algorithm iterates between two major steps, similar to vanilla k-means.
-In the first step, <img class="math" src="../_images/math/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b"/> samples are drawn randomly from the dataset, to form
+In the first step, <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/> samples are drawn randomly from the dataset, to form
 a mini-batch. These are then assigned to the nearest centroid. In the second
 step, the centroids are updated. In contrast to k-means, this is done on a
 per-sample basis. For each sample in the mini-batch, the assigned centroid
@@ -506,10 +506,10 @@ clusters based on the data provided. For this purpose, the two important
 parameters are the <em>preference</em>, which controls how many exemplars are
 used, and the <em>damping factor</em>.</p>
 <p>The main drawback of Affinity Propagation is its complexity. The
-algorithm has a time complexity of the order <img class="math" src="../_images/math/cd59d146b51002c0025892bdc83aea45c6e577e8.png" alt="O(N^2 T)"/>, where <img class="math" src="../_images/math/75e27f04188974063be3230dca208cd495b77ce1.png" alt="N"/>
-is the number of samples and <img class="math" src="../_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/> is the number of iterations until
+algorithm has a time complexity of the order <img class="math" src="../_images/math/17245ed0c52b27603fc90accab918af090e79b39.png" alt="O(N^2 T)"/>, where <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/>
+is the number of samples and <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/> is the number of iterations until
 convergence. Further, the memory complexity is of the order
-<img class="math" src="../_images/math/8912be2deda42f022bc42bf2ab30cb3c7c6f5d55.png" alt="O(N^2)"/> if a dense similarity matrix is used, but reducible if a
+<img class="math" src="../_images/math/f931697f3e36486c3b380c8e5faa4ad1fe8536d8.png" alt="O(N^2)"/> if a dense similarity matrix is used, but reducible if a
 sparse similarity matrix is used. This makes Affinity Propagation most
 appropriate for small to medium sized datasets.</p>
 <div class="topic">
@@ -523,26 +523,26 @@ Financial time series to find groups of companies</li>
 </div>
 <p><strong>Algorithm description:</strong>
 The messages sent between points belong to one of two categories. The first is
-the responsibility <img class="math" src="../_images/math/28c15c22a81b617c9a6e08e915236fa6ff9d7752.png" alt="r(i, k)"/>,
-which is the accumulated evidence that sample <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>
-should be the exemplar for sample <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>.
-The second is the availability <img class="math" src="../_images/math/a2a14027d15c1d9800a6f2dca234ee5a8c758c54.png" alt="a(i, k)"/>
-which is the accumulated evidence that sample <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>
-should choose sample <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> to be its exemplar,
-and considers the values for all other samples that <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> should
+the responsibility <img class="math" src="../_images/math/096ac3dbab1fd906329dd9179a2328cf7e1bc702.png" alt="r(i, k)"/>,
+which is the accumulated evidence that sample <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>
+should be the exemplar for sample <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>.
+The second is the availability <img class="math" src="../_images/math/d457377199e4598caea3edd6836865f4c3dd409e.png" alt="a(i, k)"/>
+which is the accumulated evidence that sample <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>
+should choose sample <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> to be its exemplar,
+and considers the values for all other samples that <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> should
 be an exemplar. In this way, exemplars are chosen by samples if they are (1)
 similar enough to many samples and (2) chosen by many samples to be
 representative of themselves.</p>
-<p>More formally, the responsibility of a sample <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>
-to be the exemplar of sample <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> is given by:</p>
+<p>More formally, the responsibility of a sample <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>
+to be the exemplar of sample <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> is given by:</p>
 <div class="math">
-<p><img src="../_images/math/85bb259b95ad305507b56239bbf4b0e842f4ba97.png" alt="r(i, k) \leftarrow s(i, k) - max [ a(i, \acute{k}) + s(i, \acute{k}) \forall \acute{k} \neq k ]"/></p>
-</div><p>Where <img class="math" src="../_images/math/b926c4c22838402b5d2fb45a6b4acc024adf44ee.png" alt="s(i, k)"/> is the similarity between samples <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>.
-The availability of sample <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>
-to be the exemplar of sample <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> is given by:</p>
+<p><img src="../_images/math/4d09490a1530144314a691cf22ecac1defa86a0e.png" alt="r(i, k) \leftarrow s(i, k) - max [ a(i, \acute{k}) + s(i, \acute{k}) \forall \acute{k} \neq k ]"/></p>
+</div><p>Where <img class="math" src="../_images/math/41f0cafe8618e44e80191564dc11d6365b618ade.png" alt="s(i, k)"/> is the similarity between samples <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>.
+The availability of sample <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>
+to be the exemplar of sample <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> is given by:</p>
 <div class="math">
-<p><img src="../_images/math/06518c4ff5d7e15bf8e676c91ff16a7b39ee88cb.png" alt="a(i, k) \leftarrow min [0, r(k, k) + \sum_{\acute{i}~s.t.~\acute{i} \notin \{i, k\}}{r(\acute{i}, k)}]"/></p>
-</div><p>To begin with, all values for <img class="math" src="../_images/math/2ede365ad144ab396916ec60458da03860803078.png" alt="r"/> and <img class="math" src="../_images/math/7dd2a5ea01fbd72ad2a58dd1f3d6ecbfde6208a1.png" alt="a"/> are set to zero,
+<p><img src="../_images/math/7d0b2fd39ce441faa465eae7905da3cb838e0a4f.png" alt="a(i, k) \leftarrow min [0, r(k, k) + \sum_{\acute{i}~s.t.~\acute{i} \notin \{i, k\}}{r(\acute{i}, k)}]"/></p>
+</div><p>To begin with, all values for <img class="math" src="../_images/math/eaa6ad49a7f78fe5a13b486690163bf2dc7e3e60.png" alt="r"/> and <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> are set to zero,
 and the calculation of each iterates until convergence.</p>
 </div>
 <div class="section" id="mean-shift">
@@ -552,17 +552,17 @@ samples. It is a centroid based algorithm, which works by updating candidates
 for centroids to be the mean of the points within a given region. These
 candidates are then filtered in a post-processing stage to eliminate
 near-duplicates to form the final set of centroids.</p>
-<p>Given a candidate centroid <img class="math" src="../_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> for iteration <img class="math" src="../_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>, the candidate
+<p>Given a candidate centroid <img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/> for iteration <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/>, the candidate
 is updated according to the following equation:</p>
 <div class="math">
-<p><img src="../_images/math/5edc6669b608863773f5820bbc34d2c7f4ad31e1.png" alt="x_i^{t+1} = x_i^t + m(x_i^t)"/></p>
-</div><p>Where <img class="math" src="../_images/math/252437cd6d39a0f5b9e6dc511c0dc6ce8b4a1617.png" alt="N(x_i)"/> is the neighborhood of samples within a given distance
-around <img class="math" src="../_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> and <img class="math" src="../_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> is the <em>mean shift</em> vector that is computed for each
+<p><img src="../_images/math/2a2db480a8ea39d543c31439300b1b93bce0979e.png" alt="x_i^{t+1} = x_i^t + m(x_i^t)"/></p>
+</div><p>Where <img class="math" src="../_images/math/8a4fb6733cef4f61dc7068488842e4ed7e454816.png" alt="N(x_i)"/> is the neighborhood of samples within a given distance
+around <img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/> and <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> is the <em>mean shift</em> vector that is computed for each
 centroid that points towards a region of the maximum increase in the density of points.
 This is computed using the following equation, effectively updating a centroid
 to be the mean of the samples within its neighborhood:</p>
 <div class="math">
-<p><img src="../_images/math/2ec275a59d413de58b00ab27c43ac7a7fc81263b.png" alt="m(x_i) = \frac{\sum_{x_j \in N(x_i)}K(x_j - x_i)x_j}{\sum_{x_j \in N(x_i)}K(x_j - x_i)}"/></p>
+<p><img src="../_images/math/44248fd487fe70ad3c6b3856f85ddc918944753e.png" alt="m(x_i) = \frac{\sum_{x_j \in N(x_i)}K(x_j - x_i)x_j}{\sum_{x_j \in N(x_i)}K(x_j - x_i)}"/></p>
 </div><p>The algorithm automatically sets the number of clusters, instead of relying on a
 parameter <code class="docutils literal"><span class="pre">bandwidth</span></code>, which dictates the size of the region to search through.
 This parameter can be set manually, but can be estimated using the provided
@@ -1065,25 +1065,25 @@ for random assignments.</li>
 <div class="section" id="mathematical-formulation">
 <h4>2.3.9.1.3. Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h4>
 <p>If C is a ground truth class assignment and K the clustering, let us
-define <img class="math" src="../_images/math/7dd2a5ea01fbd72ad2a58dd1f3d6ecbfde6208a1.png" alt="a"/> and <img class="math" src="../_images/math/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b"/> as:</p>
+define <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> and <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/> as:</p>
 <ul class="simple">
-<li><img class="math" src="../_images/math/7dd2a5ea01fbd72ad2a58dd1f3d6ecbfde6208a1.png" alt="a"/>, the number of pairs of elements that are in the same set
+<li><img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/>, the number of pairs of elements that are in the same set
 in C and in the same set in K</li>
-<li><img class="math" src="../_images/math/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b"/>, the number of pairs of elements that are in different sets
+<li><img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/>, the number of pairs of elements that are in different sets
 in C and in different sets in K</li>
 </ul>
 <p>The raw (unadjusted) Rand index is then given by:</p>
 <div class="math">
-<p><img src="../_images/math/88997fd4cc25c62b143c0627bb845c5bc3faca16.png" alt="\text{RI} = \frac{a + b}{C_2^{n_{samples}}}"/></p>
-</div><p>Where <img class="math" src="../_images/math/655f884f1023466952f6bf7e40e67b655f24393b.png" alt="C_2^{n_{samples}}"/> is the total number of possible pairs
+<p><img src="../_images/math/bd82ab7a8902ec391cf64fa3a0787cfb4d0967e6.png" alt="\text{RI} = \frac{a + b}{C_2^{n_{samples}}}"/></p>
+</div><p>Where <img class="math" src="../_images/math/33619d8b145aaea780de8097bf6dd4f43e611a02.png" alt="C_2^{n_{samples}}"/> is the total number of possible pairs
 in the dataset (without ordering).</p>
 <p>However the RI score does not guarantee that random label assignments
 will get a value close to zero (esp. if the number of clusters is in
 the same order of magnitude as the number of samples).</p>
-<p>To counter this effect we can discount the expected RI <img class="math" src="../_images/math/8752e98be9592f710cab29b07f225b6830f7d565.png" alt="E[\text{RI}]"/> of
+<p>To counter this effect we can discount the expected RI <img class="math" src="../_images/math/727d5ef6af39e327a816393232243bff21c00a3e.png" alt="E[\text{RI}]"/> of
 random labelings by defining the adjusted Rand index as follows:</p>
 <div class="math">
-<p><img src="../_images/math/0e675c2343db1530d1f0477862749b52869d9991.png" alt="\text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}"/></p>
+<p><img src="../_images/math/011df66ee06096649f6863d7a09c293207d0713a.png" alt="\text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}"/></p>
 </div><div class="topic">
 <p class="topic-title first">References</p>
 <ul class="simple">
@@ -1189,40 +1189,40 @@ Index.</li>
 </div>
 <div class="section" id="id11">
 <h4>2.3.9.2.3. Mathematical formulation<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
-<p>Assume two label assignments (of the same N objects), <img class="math" src="../_images/math/73f5e249c88b2b3068263480f576b051cb5c4f6e.png" alt="U"/> and <img class="math" src="../_images/math/c99df7a209495334da442b1ec998abaabfa320d8.png" alt="V"/>.
+<p>Assume two label assignments (of the same N objects), <img class="math" src="../_images/math/169c982b5e649cd1bd6445df5583affe427ea269.png" alt="U"/> and <img class="math" src="../_images/math/fae0e7a73748991e5540d874416000583f64f58e.png" alt="V"/>.
 Their entropy is the amount of uncertainty for a partition set, defined by:</p>
 <div class="math">
-<p><img src="../_images/math/bcb06d235a1f0a96ba7b46956e9ca74696355f28.png" alt="H(U) = \sum_{i=1}^{|U|}P(i)\log(P(i))"/></p>
-</div><p>where <img class="math" src="../_images/math/5d9bdf0a568cdb9b3b32d17823bd05f5931647b1.png" alt="P(i) = |U_i| / N"/> is the probability that an object picked at
-random from <img class="math" src="../_images/math/73f5e249c88b2b3068263480f576b051cb5c4f6e.png" alt="U"/> falls into class <img class="math" src="../_images/math/efa692abc46aba225adbe774bd88586d30d62ab6.png" alt="U_i"/>. Likewise for <img class="math" src="../_images/math/c99df7a209495334da442b1ec998abaabfa320d8.png" alt="V"/>:</p>
+<p><img src="../_images/math/e4355d6c5fc35ab435495b188faaac9afd0469c1.png" alt="H(U) = \sum_{i=1}^{|U|}P(i)\log(P(i))"/></p>
+</div><p>where <img class="math" src="../_images/math/c159e7b7f8d3423af34caa0dac707cc650fd821f.png" alt="P(i) = |U_i| / N"/> is the probability that an object picked at
+random from <img class="math" src="../_images/math/169c982b5e649cd1bd6445df5583affe427ea269.png" alt="U"/> falls into class <img class="math" src="../_images/math/328603961e007eb764a788ef42417a8c57a287f7.png" alt="U_i"/>. Likewise for <img class="math" src="../_images/math/fae0e7a73748991e5540d874416000583f64f58e.png" alt="V"/>:</p>
 <div class="math">
-<p><img src="../_images/math/7b51cf1e1980afa6c3375049fe4e23e50e2fef4d.png" alt="H(V) = \sum_{j=1}^{|V|}P'(j)\log(P'(j))"/></p>
-</div><p>With <img class="math" src="../_images/math/9b0e255aaa25225287790f9c15eec0446653aae5.png" alt="P'(j) = |V_j| / N"/>. The mutual information (MI) between <img class="math" src="../_images/math/73f5e249c88b2b3068263480f576b051cb5c4f6e.png" alt="U"/>
-and <img class="math" src="../_images/math/c99df7a209495334da442b1ec998abaabfa320d8.png" alt="V"/> is calculated by:</p>
+<p><img src="../_images/math/7a0c2ae58c2618b7a9f3f0a23eee7ef866e68fe9.png" alt="H(V) = \sum_{j=1}^{|V|}P'(j)\log(P'(j))"/></p>
+</div><p>With <img class="math" src="../_images/math/41e69936b7ad98cf62cc2357b3b37a95af547ce6.png" alt="P'(j) = |V_j| / N"/>. The mutual information (MI) between <img class="math" src="../_images/math/169c982b5e649cd1bd6445df5583affe427ea269.png" alt="U"/>
+and <img class="math" src="../_images/math/fae0e7a73748991e5540d874416000583f64f58e.png" alt="V"/> is calculated by:</p>
 <div class="math">
-<p><img src="../_images/math/007f8c9821f5c0a17feac4c00012e31aace833b5.png" alt="\text{MI}(U, V) = \sum_{i=1}^{|U|}\sum_{j=1}^{|V|}P(i, j)\log\left(\frac{P(i,j)}{P(i)P'(j)}\right)"/></p>
-</div><p>where <img class="math" src="../_images/math/7c6369ba0b343e526d5123d7f4253109cddd4c08.png" alt="P(i, j) = |U_i \cap V_j| / N"/> is the probability that an object
-picked at random falls into both classes <img class="math" src="../_images/math/efa692abc46aba225adbe774bd88586d30d62ab6.png" alt="U_i"/> and <img class="math" src="../_images/math/770bbb31758ede291297b7bd4e7b21c2163831ec.png" alt="V_j"/>.</p>
+<p><img src="../_images/math/d81c155fe5aca6574ed858a1f05fe259b0927a56.png" alt="\text{MI}(U, V) = \sum_{i=1}^{|U|}\sum_{j=1}^{|V|}P(i, j)\log\left(\frac{P(i,j)}{P(i)P'(j)}\right)"/></p>
+</div><p>where <img class="math" src="../_images/math/d6b4beff49273a2872b5a28cc372ef24f32c3d68.png" alt="P(i, j) = |U_i \cap V_j| / N"/> is the probability that an object
+picked at random falls into both classes <img class="math" src="../_images/math/328603961e007eb764a788ef42417a8c57a287f7.png" alt="U_i"/> and <img class="math" src="../_images/math/a99452676e000d41bc4d0ed2e924700ae3f51824.png" alt="V_j"/>.</p>
 <p>The normalized mutual information is defined as</p>
 <div class="math">
-<p><img src="../_images/math/bb43744a4cae862996a6702f4fcfb3690b7a11d6.png" alt="\text{NMI}(U, V) = \frac{\text{MI}(U, V)}{\sqrt{H(U)H(V)}}"/></p>
+<p><img src="../_images/math/a5437754912e2e03ff9ebbc241b32d0d2b53a8e3.png" alt="\text{NMI}(U, V) = \frac{\text{MI}(U, V)}{\sqrt{H(U)H(V)}}"/></p>
 </div><p>This value of the mutual information and also the normalized variant is not
 adjusted for chance and will tend to increase as the number of different labels
 (clusters) increases, regardless of the actual amount of &#8220;mutual information&#8221;
 between the label assignments.</p>
 <p>The expected value for the mutual information can be calculated using the
 following equation, from Vinh, Epps, and Bailey, (2009). In this equation,
-<img class="math" src="../_images/math/67de4ad7482bd9184f6b03641a563858ef06ce8d.png" alt="a_i = |U_i|"/> (the number of elements in <img class="math" src="../_images/math/efa692abc46aba225adbe774bd88586d30d62ab6.png" alt="U_i"/>) and
-<img class="math" src="../_images/math/d05b42f030bcd48d49e0d98cd4a2d376fc4d45b2.png" alt="b_j = |V_j|"/> (the number of elements in <img class="math" src="../_images/math/770bbb31758ede291297b7bd4e7b21c2163831ec.png" alt="V_j"/>).</p>
+<img class="math" src="../_images/math/c575c319007e566186da06fa1c7d6cd345fd38ec.png" alt="a_i = |U_i|"/> (the number of elements in <img class="math" src="../_images/math/328603961e007eb764a788ef42417a8c57a287f7.png" alt="U_i"/>) and
+<img class="math" src="../_images/math/58644320789197200418afa31abcae8cf1ca6204.png" alt="b_j = |V_j|"/> (the number of elements in <img class="math" src="../_images/math/a99452676e000d41bc4d0ed2e924700ae3f51824.png" alt="V_j"/>).</p>
 <div class="math">
-<p><img src="../_images/math/9b629138e534fbabadc67670410af4043bd22c45.png" alt="E[\text{MI}(U,V)]=\sum_{i=1}^|U| \sum_{j=1}^|V| \sum_{n_{ij}=(a_i+b_j-N)^+
+<p><img src="../_images/math/4bb5ddc9a4fa00320e8277b8427ceddeb8ba48be.png" alt="E[\text{MI}(U,V)]=\sum_{i=1}^|U| \sum_{j=1}^|V| \sum_{n_{ij}=(a_i+b_j-N)^+
 }^{\min(a_i, b_j)} \frac{n_{ij}}{N}\log \left( \frac{ N.n_{ij}}{a_i b_j}\right)
 \frac{a_i!b_j!(N-a_i)!(N-b_j)!}{N!n_{ij}!(a_i-n_{ij})!(b_j-n_{ij})!
 (N-a_i-b_j+n_{ij})!}"/></p>
 </div><p>Using the expected value, the adjusted mutual information can then be
 calculated using a similar form to that of the adjusted Rand index:</p>
 <div class="math">
-<p><img src="../_images/math/f6e9b2c168c3f80e8b985a26da5c492e74998a90.png" alt="\text{AMI} = \frac{\text{MI} - E[\text{MI}]}{\max(H(U), H(V)) - E[\text{MI}]}"/></p>
+<p><img src="../_images/math/4a9bb2c00ce0a734119e0201d5c3fc00b12301ae.png" alt="\text{AMI} = \frac{\text{MI} - E[\text{MI}]}{\max(H(U), H(V)) - E[\text{MI}]}"/></p>
 </div><div class="topic">
 <p class="topic-title first">References</p>
 <ul class="simple">
@@ -1353,27 +1353,27 @@ for random assignments.</li>
 <h4>2.3.9.3.3. Mathematical formulation<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
 <p>Homogeneity and completeness scores are formally given by:</p>
 <div class="math">
-<p><img src="../_images/math/dcd3b3d5c95c847e63ca01b76793f6978481e453.png" alt="h = 1 - \frac{H(C|K)}{H(C)}"/></p>
+<p><img src="../_images/math/a28c392dac6e5587849cd294a4065e9222b70c12.png" alt="h = 1 - \frac{H(C|K)}{H(C)}"/></p>
 </div><div class="math">
-<p><img src="../_images/math/b7cd242e80c1c107e6f2352309bf6238e1cf0e1c.png" alt="c = 1 - \frac{H(K|C)}{H(K)}"/></p>
-</div><p>where <img class="math" src="../_images/math/2c6729133de75b78dc94a410683071987e7f4c2c.png" alt="H(C|K)"/> is the <strong>conditional entropy of the classes given
+<p><img src="../_images/math/900588232edf33004ef540da7b4c2bddcd626ada.png" alt="c = 1 - \frac{H(K|C)}{H(K)}"/></p>
+</div><p>where <img class="math" src="../_images/math/aaf61b1fd6d31f036edf11968b0eaad522e34055.png" alt="H(C|K)"/> is the <strong>conditional entropy of the classes given
 the cluster assignments</strong> and is given by:</p>
 <div class="math">
-<p><img src="../_images/math/13b09d14d638a4087cf15d44d34e07de024b19dc.png" alt="H(C|K) = - \sum_{c=1}^{|C|} \sum_{k=1}^{|K|} \frac{n_{c,k}}{n}
+<p><img src="../_images/math/46ae5543a7e72a2ada4a8b5a355329252cef58e0.png" alt="H(C|K) = - \sum_{c=1}^{|C|} \sum_{k=1}^{|K|} \frac{n_{c,k}}{n}
 \cdot \log\left(\frac{n_{c,k}}{n_k}\right)"/></p>
-</div><p>and <img class="math" src="../_images/math/7ae6f6c99ed26cb15a6543a5b56660d3137c1b31.png" alt="H(C)"/> is the <strong>entropy of the classes</strong> and is given by:</p>
+</div><p>and <img class="math" src="../_images/math/a8595a5df5bd836f3ee3ebe47ccc794962333c40.png" alt="H(C)"/> is the <strong>entropy of the classes</strong> and is given by:</p>
 <div class="math">
-<p><img src="../_images/math/d5036fe698d2af994b28293249e3499497549e79.png" alt="H(C) = - \sum_{c=1}^{|C|} \frac{n_c}{n} \cdot \log\left(\frac{n_c}{n}\right)"/></p>
-</div><p>with <img class="math" src="../_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/> the total number of samples, <img class="math" src="../_images/math/45296bf2159ba43c7e918fcf344b65490ff38b17.png" alt="n_c"/> and <img class="math" src="../_images/math/e99e14a0688fa0dfa34968afad0841ac5c801721.png" alt="n_k"/>
-the number of samples respectively belonging to class <img class="math" src="../_images/math/65868d23a5bfe5b3b2d819386b19c14fa36af134.png" alt="c"/> and
-cluster <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>, and finally <img class="math" src="../_images/math/900fb906739ae7262be75551c20a7da6940e953d.png" alt="n_{c,k}"/> the number of samples
-from class <img class="math" src="../_images/math/65868d23a5bfe5b3b2d819386b19c14fa36af134.png" alt="c"/> assigned to cluster <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>.</p>
-<p>The <strong>conditional entropy of clusters given class</strong> <img class="math" src="../_images/math/a332e4cd622b193f2bc6e6e3edcecd7c3ddb749a.png" alt="H(K|C)"/> and the
-<strong>entropy of clusters</strong> <img class="math" src="../_images/math/1baf28db6f115a17039f3676a3bc2a9f71705480.png" alt="H(K)"/> are defined in a symmetric manner.</p>
+<p><img src="../_images/math/6bd419085bd3a9dcb9366a5e96026cd45f91d37a.png" alt="H(C) = - \sum_{c=1}^{|C|} \frac{n_c}{n} \cdot \log\left(\frac{n_c}{n}\right)"/></p>
+</div><p>with <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> the total number of samples, <img class="math" src="../_images/math/051b9dee87be783a0c3611714711273d1aeabe76.png" alt="n_c"/> and <img class="math" src="../_images/math/05a186404e8b4418ad56e3bbefdd24eed1d3b7b9.png" alt="n_k"/>
+the number of samples respectively belonging to class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/> and
+cluster <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>, and finally <img class="math" src="../_images/math/37cec6cd5049118b6dbcbc3bfa653ebb8b5642cc.png" alt="n_{c,k}"/> the number of samples
+from class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/> assigned to cluster <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>.</p>
+<p>The <strong>conditional entropy of clusters given class</strong> <img class="math" src="../_images/math/85eddde697732d00687c0ad12c6a497619e7ef1a.png" alt="H(K|C)"/> and the
+<strong>entropy of clusters</strong> <img class="math" src="../_images/math/536e2430593684928dfdf19f1c9c6fd5527627ed.png" alt="H(K)"/> are defined in a symmetric manner.</p>
 <p>Rosenberg and Hirschberg further define <strong>V-measure</strong> as the <strong>harmonic
 mean of homogeneity and completeness</strong>:</p>
 <div class="math">
-<p><img src="../_images/math/297748588d6c844ec7b08e795f51706a7b73073e.png" alt="v = 2 \cdot \frac{h \cdot c}{h + c}"/></p>
+<p><img src="../_images/math/97b45272aa4dd78d52abc1b2c1ba0aee249ff645.png" alt="v = 2 \cdot \frac{h \cdot c}{h + c}"/></p>
 </div><div class="topic">
 <p class="topic-title first">References</p>
 <table class="docutils citation" frame="void" id="rh2007" rules="none">
@@ -1401,7 +1401,7 @@ used when the ground truth class assignments of the samples is known. The
 Fowlkes-Mallows score FMI is defined as the geometric mean of the
 pairwise precision and recall:</p>
 <div class="math">
-<p><img src="../_images/math/ddda9a8ef2ca28caddf5ca70da0b6f841c6479e1.png" alt="\text{FMI} = \frac{\text{TP}}{\sqrt{(\text{TP} + \text{FP}) (\text{TP} + \text{FN})}}"/></p>
+<p><img src="../_images/math/175101482204177340eb57d7e693675abfc547de.png" alt="\text{FMI} = \frac{\text{TP}}{\sqrt{(\text{TP} + \text{FP}) (\text{TP} + \text{FN})}}"/></p>
 </div><p>Where <code class="docutils literal"><span class="pre">TP</span></code> is the number of <strong>True Positive</strong> (i.e. the number of pair
 of points that belong to the same clusters in both the true labels and the
 predicted labels), <code class="docutils literal"><span class="pre">FP</span></code> is the number of <strong>False Positive</strong> (i.e. the number
@@ -1494,7 +1494,7 @@ nearest cluster</em>.</li>
 </ul>
 <p>The Silhouette Coefficient <em>s</em> for a single sample is then given as:</p>
 <div class="math">
-<p><img src="../_images/math/7fee96df5e018df524726ffccb4d4429377244d8.png" alt="s = \frac{b - a}{max(a, b)}"/></p>
+<p><img src="../_images/math/0a8c956154f8ed390b04f77b946dd2b1da540be7.png" alt="s = \frac{b - a}{max(a, b)}"/></p>
 </div><p>The Silhouette Coefficient for a set of samples is given as the mean of the
 Silhouette Coefficient for each sample.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
@@ -1556,21 +1556,21 @@ the silhouette analysis is used to choose an optimal value for n_clusters.</li>
 (<a class="reference internal" href="generated/sklearn.metrics.calinski_harabaz_score.html#sklearn.metrics.calinski_harabaz_score" title="sklearn.metrics.calinski_harabaz_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.calinski_harabaz_score</span></code></a>) can be used to evaluate the
 model, where a higher Calinski-Harabaz score relates to a model with better
 defined clusters.</p>
-<p>For <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> clusters, the Calinski-Harabaz score <img class="math" src="../_images/math/6859317dd1b439cef34131bcd4bafee8393444e0.png" alt="s"/> is given as the
+<p>For <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> clusters, the Calinski-Harabaz score <img class="math" src="../_images/math/63751cb2e98ba393b0f22e45ca127c3cebb61487.png" alt="s"/> is given as the
 ratio of the between-clusters dispersion mean and the within-cluster
 dispersion:</p>
 <div class="math">
-<p><img src="../_images/math/5321ea7fa31b13aaf639a685bc03b820c4f9d27b.png" alt="s(k) = \frac{\mathrm{Tr}(B_k)}{\mathrm{Tr}(W_k)} \times \frac{N - k}{k - 1}"/></p>
-</div><p>where <img class="math" src="../_images/math/70c7b1da072bf2496663300eafa2923bc21d6afc.png" alt="B_K"/> is the between group dispersion matrix and <img class="math" src="../_images/math/9ca2b8375b6f6499a8faee421f519b70a5ed469c.png" alt="W_K"/>
+<p><img src="../_images/math/186dbc584d9cec2094d95af27b9a94a06070a298.png" alt="s(k) = \frac{\mathrm{Tr}(B_k)}{\mathrm{Tr}(W_k)} \times \frac{N - k}{k - 1}"/></p>
+</div><p>where <img class="math" src="../_images/math/b0cd669148609abb7c9af6fa3e706b7b79577b5c.png" alt="B_K"/> is the between group dispersion matrix and <img class="math" src="../_images/math/e7d8801b1f41dc013f994d181b7826d2a0fc4f88.png" alt="W_K"/>
 is the within-cluster dispersion matrix defined by:</p>
 <div class="math">
-<p><img src="../_images/math/69eafba55a4a6e104443e9e0a3f6b230e822f265.png" alt="W_k = \sum_{q=1}^k \sum_{x \in C_q} (x - c_q) (x - c_q)^T"/></p>
+<p><img src="../_images/math/706a76d47c1cf38846ad9db7837d30da47832e27.png" alt="W_k = \sum_{q=1}^k \sum_{x \in C_q} (x - c_q) (x - c_q)^T"/></p>
 </div><div class="math">
-<p><img src="../_images/math/abcb77994e7d34bae2375af362e95dbd977c1cc3.png" alt="B_k = \sum_q n_q (c_q - c) (c_q - c)^T"/></p>
-</div><p>with <img class="math" src="../_images/math/75e27f04188974063be3230dca208cd495b77ce1.png" alt="N"/> be the number of points in our data, <img class="math" src="../_images/math/857fe384e999acf88a762eecf025870d237d20e6.png" alt="C_q"/> be the set of
-points in cluster <img class="math" src="../_images/math/23f1b45408e5b4130c0f940fcbfcec54492cbdcd.png" alt="q"/>, <img class="math" src="../_images/math/43b2675cd17ec1e60d51fe11740a4dc4774c6a05.png" alt="c_q"/> be the center of cluster
-<img class="math" src="../_images/math/23f1b45408e5b4130c0f940fcbfcec54492cbdcd.png" alt="q"/>, <img class="math" src="../_images/math/65868d23a5bfe5b3b2d819386b19c14fa36af134.png" alt="c"/> be the center of <img class="math" src="../_images/math/cfd13a0f26eb7ef0093319a7669da7dd3771dbac.png" alt="E"/>, <img class="math" src="../_images/math/1e72550b9fe7e32c56feb29198481eba1f590ce4.png" alt="n_q"/> be the number of
-points in cluster <img class="math" src="../_images/math/23f1b45408e5b4130c0f940fcbfcec54492cbdcd.png" alt="q"/>.</p>
+<p><img src="../_images/math/86088709ecdb1e78e515746ae67717c2f9f4a31a.png" alt="B_k = \sum_q n_q (c_q - c) (c_q - c)^T"/></p>
+</div><p>with <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> be the number of points in our data, <img class="math" src="../_images/math/98a0fb38d49709c39a35007dd817dff8b7b3e68a.png" alt="C_q"/> be the set of
+points in cluster <img class="math" src="../_images/math/620a3ce6403ec82f1347af9985bc03f7a9382f4a.png" alt="q"/>, <img class="math" src="../_images/math/70819c4bdcf3aecea24eac192c0365fa0ccab488.png" alt="c_q"/> be the center of cluster
+<img class="math" src="../_images/math/620a3ce6403ec82f1347af9985bc03f7a9382f4a.png" alt="q"/>, <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/> be the center of <img class="math" src="../_images/math/4b6222b865b812d2a59368cd1629eed6b54454d5.png" alt="E"/>, <img class="math" src="../_images/math/435c528d448d9b4bdaf384010cede06da9c69c32.png" alt="n_q"/> be the number of
+points in cluster <img class="math" src="../_images/math/620a3ce6403ec82f1347af9985bc03f7a9382f4a.png" alt="q"/>.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">pairwise_distances</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>

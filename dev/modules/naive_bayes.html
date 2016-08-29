@@ -191,33 +191,33 @@
 <span id="id1"></span><h1>1.9. Naive Bayes<a class="headerlink" href="#naive-bayes" title="Permalink to this headline">¶</a></h1>
 <p>Naive Bayes methods are a set of supervised learning algorithms
 based on applying Bayes&#8217; theorem with the &#8220;naive&#8221; assumption of independence
-between every pair of features. Given a class variable <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/> and a
-dependent feature vector <img class="math" src="../_images/math/b31b1ea8e4fe3f618dedfb0e2d8c69a3df7a391d.png" alt="x_1"/> through <img class="math" src="../_images/math/a8211bc2dab4ab052a0ebe1ef9065fadcdedee1c.png" alt="x_n"/>,
+between every pair of features. Given a class variable <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> and a
+dependent feature vector <img class="math" src="../_images/math/fdf6501bec5987984965f15d09235c645fe06ccb.png" alt="x_1"/> through <img class="math" src="../_images/math/7bc36d4aa726c4ace87722a5c6f2aeca24fa4714.png" alt="x_n"/>,
 Bayes&#8217; theorem states the following relationship:</p>
 <div class="math">
-<p><img src="../_images/math/000cdb395adaee21bd6fb9228c44a9cf5821f6f5.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) P(x_1, \dots x_n \mid y)}
+<p><img src="../_images/math/984913b76fc929345f67febf38f0ace59976dbfe.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) P(x_1, \dots x_n \mid y)}
                                  {P(x_1, \dots, x_n)}"/></p>
 </div><p>Using the naive independence assumption that</p>
 <div class="math">
-<p><img src="../_images/math/c98a2b13a7069f3681286da27919b40bd8e9c362.png" alt="P(x_i | y, x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n) = P(x_i | y),"/></p>
-</div><p>for all <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>, this relationship is simplified to</p>
+<p><img src="../_images/math/efa9fcad260e876d87e65be18b0920910bac4adc.png" alt="P(x_i | y, x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n) = P(x_i | y),"/></p>
+</div><p>for all <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>, this relationship is simplified to</p>
 <div class="math">
-<p><img src="../_images/math/e5f5d2487072cb62134e82c28e0bfa92aa76ffc1.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) \prod_{i=1}^{n} P(x_i \mid y)}
+<p><img src="../_images/math/c6c4010d50cab94cdb8cfe269fbe4e06f56a82c8.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) \prod_{i=1}^{n} P(x_i \mid y)}
                                  {P(x_1, \dots, x_n)}"/></p>
-</div><p>Since <img class="math" src="../_images/math/c03af9de0e9abcf81b8a4a530020c46f4db8174b.png" alt="P(x_1, \dots, x_n)"/> is constant given the input,
+</div><p>Since <img class="math" src="../_images/math/af3b28009d4db6e1a2cab1d99f8558d8a7f3445b.png" alt="P(x_1, \dots, x_n)"/> is constant given the input,
 we can use the following classification rule:</p>
 <div class="math">
-<p><img src="../_images/math/8b4ba04838cefe9ce4765a04187cb6add398f506.png" alt="P(y \mid x_1, \dots, x_n) \propto P(y) \prod_{i=1}^{n} P(x_i \mid y)
+<p><img src="../_images/math/3a2ba83e6cff52c986df7139d8ff31595cad3837.png" alt="P(y \mid x_1, \dots, x_n) \propto P(y) \prod_{i=1}^{n} P(x_i \mid y)
 
 \Downarrow
 
 \hat{y} = \arg\max_y P(y) \prod_{i=1}^{n} P(x_i \mid y),"/></p>
 </div><p>and we can use Maximum A Posteriori (MAP) estimation to estimate
-<img class="math" src="../_images/math/6d48612122b8ba03b4f704429e4e7488197f328f.png" alt="P(y)"/> and <img class="math" src="../_images/math/dd27ab59b712f5f48b6cd30c93b6a39511643b62.png" alt="P(x_i \mid y)"/>;
-the former is then the relative frequency of class <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/>
+<img class="math" src="../_images/math/8ef23b6eecb1513100126493078d961d16fcd89a.png" alt="P(y)"/> and <img class="math" src="../_images/math/24f4076f72fb489364af050901a6546815bcb453.png" alt="P(x_i \mid y)"/>;
+the former is then the relative frequency of class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>
 in the training set.</p>
 <p>The different naive Bayes classifiers differ mainly by the assumptions they
-make regarding the distribution of <img class="math" src="../_images/math/dd27ab59b712f5f48b6cd30c93b6a39511643b62.png" alt="P(x_i \mid y)"/>.</p>
+make regarding the distribution of <img class="math" src="../_images/math/24f4076f72fb489364af050901a6546815bcb453.png" alt="P(x_i \mid y)"/>.</p>
 <p>In spite of their apparently over-simplified assumptions, naive Bayes
 classifiers have worked quite well in many real-world situations, famously
 document classification and spam filtering. They require a small amount
@@ -245,8 +245,8 @@ Proc. FLAIRS.</li>
 <p><a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">GaussianNB</span></code></a> implements the Gaussian Naive Bayes algorithm for
 classification. The likelihood of the features is assumed to be Gaussian:</p>
 <div class="math">
-<p><img src="../_images/math/3c53b7c7b9586623faa03c7f32c257ffc361f347.png" alt="P(x_i \mid y) &amp;= \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)"/></p>
-</div><p>The parameters <img class="math" src="../_images/math/eafb759b3682cc78f395f0f31b2d1c453c61b662.png" alt="\sigma_y"/> and <img class="math" src="../_images/math/e85e9172fdbaf56c03dced3ea4be9eb4787d0514.png" alt="\mu_y"/>
+<p><img src="../_images/math/a52bf440ad10c4ebc3b9540573e2d4e03dfd39ce.png" alt="P(x_i \mid y) &amp;= \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)"/></p>
+</div><p>The parameters <img class="math" src="../_images/math/0b30a2d48c2805095245dba3b4be2dfd2e2fba2e.png" alt="\sigma_y"/> and <img class="math" src="../_images/math/1d179ee3ab9ccc290192219dc80ee72cff12acb2.png" alt="\mu_y"/>
 are estimated using maximum likelihood.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
@@ -266,25 +266,25 @@ distributed data, and is one of the two classic naive Bayes variants used in
 text classification (where the data are typically represented as word vector
 counts, although tf-idf vectors are also known to work well in practice).
 The distribution is parametrized by vectors
-<img class="math" src="../_images/math/6eedd22a03d5c334159634dbc99dff67fe4e0d4a.png" alt="\theta_y = (\theta_{y1},\ldots,\theta_{yn})"/>
-for each class <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/>, where <img class="math" src="../_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/> is the number of features
+<img class="math" src="../_images/math/a4c43fcd90dc5213c44ff54822b08fb7f6d3538a.png" alt="\theta_y = (\theta_{y1},\ldots,\theta_{yn})"/>
+for each class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>, where <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> is the number of features
 (in text classification, the size of the vocabulary)
-and <img class="math" src="../_images/math/da203f970e5bbff0c0652f37b320fba12937ca36.png" alt="\theta_{yi}"/> is the probability <img class="math" src="../_images/math/dd27ab59b712f5f48b6cd30c93b6a39511643b62.png" alt="P(x_i \mid y)"/>
-of feature <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> appearing in a sample belonging to class <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/>.</p>
-<p>The parameters <img class="math" src="../_images/math/8264a126c36284f782d9bc3a1b2f761cda0c2ea8.png" alt="\theta_y"/> is estimated by a smoothed
+and <img class="math" src="../_images/math/f2408aa649259623f7be391c5f5d689ad3174b5a.png" alt="\theta_{yi}"/> is the probability <img class="math" src="../_images/math/24f4076f72fb489364af050901a6546815bcb453.png" alt="P(x_i \mid y)"/>
+of feature <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> appearing in a sample belonging to class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>.</p>
+<p>The parameters <img class="math" src="../_images/math/fa63fe7665119a0bbb2468099d0048af771b5a1c.png" alt="\theta_y"/> is estimated by a smoothed
 version of maximum likelihood, i.e. relative frequency counting:</p>
 <div class="math">
-<p><img src="../_images/math/0c51e7ec7ff378581aa83bb4931ba1416167651c.png" alt="\hat{\theta}_{yi} = \frac{ N_{yi} + \alpha}{N_y + \alpha n}"/></p>
-</div><p>where <img class="math" src="../_images/math/d95f1d719cb6b6e373cb6fc65fdcf66ca50ec589.png" alt="N_{yi} = \sum_{x \in T} x_i"/> is
-the number of times feature <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> appears in a sample of class <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/>
-in the training set <img class="math" src="../_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/>,
-and <img class="math" src="../_images/math/39d979d28ea13da6cd6fe64c3a8ee5005e5cabce.png" alt="N_{y} = \sum_{i=1}^{|T|} N_{yi}"/> is the total count of
-all features for class <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/>.</p>
-<p>The smoothing priors <img class="math" src="../_images/math/268201c9ebe3275932cf0c0287de32f65d316a99.png" alt="\alpha \ge 0"/> accounts for
+<p><img src="../_images/math/34b467eeec75b1fed816276c387d3f3b82ec5e9f.png" alt="\hat{\theta}_{yi} = \frac{ N_{yi} + \alpha}{N_y + \alpha n}"/></p>
+</div><p>where <img class="math" src="../_images/math/54f18d12bb04079aeccdee4418942d30073acc14.png" alt="N_{yi} = \sum_{x \in T} x_i"/> is
+the number of times feature <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> appears in a sample of class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>
+in the training set <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/>,
+and <img class="math" src="../_images/math/125143ac10e186061d40627dae00010cb4eeb04f.png" alt="N_{y} = \sum_{i=1}^{|T|} N_{yi}"/> is the total count of
+all features for class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>.</p>
+<p>The smoothing priors <img class="math" src="../_images/math/9d068518ed0efc64b3e2587f29137ab2f56a6ec2.png" alt="\alpha \ge 0"/> accounts for
 features not present in the learning samples and prevents zero probabilities
 in further computations.
-Setting <img class="math" src="../_images/math/7eab7af9a483d7c6e4e628ba496fb65c5c56faac.png" alt="\alpha = 1"/> is called Laplace smoothing,
-while <img class="math" src="../_images/math/f053df68f37ffa28944fe80c99adea2c99593e38.png" alt="\alpha &lt; 1"/> is called Lidstone smoothing.</p>
+Setting <img class="math" src="../_images/math/42839bc86a7e883dcb0a636add188e5c920bb513.png" alt="\alpha = 1"/> is called Laplace smoothing,
+while <img class="math" src="../_images/math/f7c5135a83ac112fff6f442a31cda3a7944b7549.png" alt="\alpha &lt; 1"/> is called Lidstone smoothing.</p>
 </div>
 <div class="section" id="bernoulli-naive-bayes">
 <span id="id4"></span><h2>1.9.3. Bernoulli Naive Bayes<a class="headerlink" href="#bernoulli-naive-bayes" title="Permalink to this headline">¶</a></h2>
@@ -297,10 +297,10 @@ feature vectors; if handed any other kind of data, a <code class="docutils liter
 may binarize its input (depending on the <code class="docutils literal"><span class="pre">binarize</span></code> parameter).</p>
 <p>The decision rule for Bernoulli naive Bayes is based on</p>
 <div class="math">
-<p><img src="../_images/math/c0b60816d67b1f6110c30ee60fb8e335b44d6f8d.png" alt="P(x_i \mid y) = P(i \mid y) x_i + (1 - P(i \mid y)) (1 - x_i)"/></p>
+<p><img src="../_images/math/868c10c5a5bc88085affec3541d922a04f0198d9.png" alt="P(x_i \mid y) = P(i \mid y) x_i + (1 - P(i \mid y)) (1 - x_i)"/></p>
 </div><p>which differs from multinomial NB&#8217;s rule
-in that it explicitly penalizes the non-occurrence of a feature <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>
-that is an indicator for class <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/>,
+in that it explicitly penalizes the non-occurrence of a feature <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>
+that is an indicator for class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>,
 where the multinomial variant would simply ignore a non-occurring feature.</p>
 <p>In the case of text classification, word occurrence vectors (rather than word
 count vectors) may be used to train and use this classifier. <code class="docutils literal"><span class="pre">BernoulliNB</span></code>

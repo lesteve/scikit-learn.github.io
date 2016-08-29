@@ -290,7 +290,7 @@ training very efficient and may result in sparser models, even when L2 penalty
 is used.</p>
 <p>Using <code class="docutils literal"><span class="pre">loss=&quot;log&quot;</span></code> or <code class="docutils literal"><span class="pre">loss=&quot;modified_huber&quot;</span></code> enables the
 <code class="docutils literal"><span class="pre">predict_proba</span></code> method, which gives a vector of probability estimates
-<img class="math" src="../_images/math/25a9728b809a691ce3374eaeab6255410cbff5d9.png" alt="P(y|x)"/> per sample <img class="math" src="../_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/>:</p>
+<img class="math" src="../_images/math/f1618e77c8e15b4a154134e2816452a588992532.png" alt="P(y|x)"/> per sample <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>                      
 <span class="go">array([[ 0.00...,  0.99...]])</span>
@@ -313,8 +313,8 @@ attributes. The parameter <code class="docutils literal"><span class="pre">l1_ra
 of L1 and L2 penalty.</p>
 <p><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> supports multi-class classification by combining
 multiple binary classifiers in a &#8220;one versus all&#8221; (OVA) scheme. For each
-of the <img class="math" src="../_images/math/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K"/> classes, a binary classifier is learned that discriminates
-between that and all other <img class="math" src="../_images/math/da6935a2384c32204e1462bc2b64c3b0c02aaee0.png" alt="K-1"/> classes. At testing time, we compute the
+of the <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> classes, a binary classifier is learned that discriminates
+between that and all other <img class="math" src="../_images/math/d1fb41a058b1d3126362bd00674f573b11212607.png" alt="K-1"/> classes. At testing time, we compute the
 confidence score (i.e. the signed distances to the hyperplane) for each
 classifier and choose the class with the highest confidence. The Figure
 below illustrates the OVA approach on the iris dataset.  The dashed
@@ -403,8 +403,8 @@ matrix format as defined in <a class="reference external" href="http://docs.scip
 <h2>1.5.4. Complexity<a class="headerlink" href="#complexity" title="Permalink to this headline">¶</a></h2>
 <p>The major advantage of SGD is its efficiency, which is basically
 linear in the number of training examples. If X is a matrix of size (n, p)
-training has a cost of <img class="math" src="../_images/math/93aa7f61c5ca120b643faa21a01cf5c504851f8c.png" alt="O(k n \bar p)"/>, where k is the number
-of iterations (epochs) and <img class="math" src="../_images/math/2c5d2ee447e5be49d4e3b1e7d40c49c76329e686.png" alt="\bar p"/> is the average number of
+training has a cost of <img class="math" src="../_images/math/d6d26b34a5b03fbea63cfb88418b145be4afa16e.png" alt="O(k n \bar p)"/>, where k is the number
+of iterations (epochs) and <img class="math" src="../_images/math/fe649a4b036454a15ebd0b3725425a7755eb6dc2.png" alt="\bar p"/> is the average number of
 non-zero attributes per sample.</p>
 <p>Recent theoretical results, however, show that the runtime to get some
 desired optimization accuracy does not increase as the training set size increases.</p>
@@ -429,7 +429,7 @@ results. This can be easily done using <code class="xref py py-class docutils li
 <p>If your attributes have an intrinsic scale (e.g. word frequencies or
 indicator features) scaling is not needed.</p>
 </li>
-<li><p class="first">Finding a reasonable regularization term <img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> is
+<li><p class="first">Finding a reasonable regularization term <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> is
 best done using <code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code>, usually in the
 range <code class="docutils literal"><span class="pre">10.0**-np.arange(1,7)</span></code>.</p>
 </li>
@@ -458,19 +458,19 @@ of the Trade 1998.</li>
 </div>
 <div class="section" id="mathematical-formulation">
 <span id="sgd-mathematical-formulation"></span><h2>1.5.6. Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h2>
-<p>Given a set of training examples <img class="math" src="../_images/math/4af6492b1bf93d4be0e1f0c75f85f65170ed94c0.png" alt="(x_1, y_1), \ldots, (x_n, y_n)"/> where
-<img class="math" src="../_images/math/ed7238746ec0fb27be38187ff0576c83ecc0df8f.png" alt="x_i \in \mathbf{R}^n"/> and <img class="math" src="../_images/math/bb280b0cec96f69df3ad1c8befd46a0a95e843ac.png" alt="y_i \in \{-1,1\}"/>, our goal is to
-learn a linear scoring function <img class="math" src="../_images/math/3bd8e83af63059e1332f577c656fdff3e8158e74.png" alt="f(x) = w^T x + b"/> with model parameters
-<img class="math" src="../_images/math/e0f293430b347291b63495a02f47d30e35fa7229.png" alt="w \in \mathbf{R}^m"/> and intercept <img class="math" src="../_images/math/8b75b89abc229b96382c47277d6f475f634940d9.png" alt="b \in \mathbf{R}"/>. In order
-to make predictions, we simply look at the sign of <img class="math" src="../_images/math/14546c27a7b929642f7840acca5f851c503ea109.png" alt="f(x)"/>.
+<p>Given a set of training examples <img class="math" src="../_images/math/b6b95353bc4a876c1d99214e8bab93f5cf9076a0.png" alt="(x_1, y_1), \ldots, (x_n, y_n)"/> where
+<img class="math" src="../_images/math/bed637067e6e774b87cc8e3c059b2f97ce7be531.png" alt="x_i \in \mathbf{R}^n"/> and <img class="math" src="../_images/math/72cc647a6fea5baa575125773c28b6e5be5133d7.png" alt="y_i \in \{-1,1\}"/>, our goal is to
+learn a linear scoring function <img class="math" src="../_images/math/485c5d017bb28ce9151f2d301eb4fc45269b276c.png" alt="f(x) = w^T x + b"/> with model parameters
+<img class="math" src="../_images/math/858a736d009336cd95d17ba520bffcd11c6b0c28.png" alt="w \in \mathbf{R}^m"/> and intercept <img class="math" src="../_images/math/5c3f945125220355508d71c6f63549c669edb675.png" alt="b \in \mathbf{R}"/>. In order
+to make predictions, we simply look at the sign of <img class="math" src="../_images/math/eda52292f6952f7e27fef52e7ce8393981770d2c.png" alt="f(x)"/>.
 A common choice to find the model parameters is by minimizing the regularized
 training error given by</p>
 <div class="math">
-<p><img src="../_images/math/638b90b4e593d5aa4b489614c5ea4541bb583773.png" alt="E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)"/></p>
-</div><p>where <img class="math" src="../_images/math/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L"/> is a loss function that measures model (mis)fit and
-<img class="math" src="../_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R"/> is a regularization term (aka penalty) that penalizes model
-complexity; <img class="math" src="../_images/math/7f2c98bf462cba6083cf18483ba9510e3c2fd3d3.png" alt="\alpha &gt; 0"/> is a non-negative hyperparameter.</p>
-<p>Different choices for <img class="math" src="../_images/math/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L"/> entail different classifiers such as</p>
+<p><img src="../_images/math/eb2c4ed68719d304d990deb3ba8aed116cb5a3b1.png" alt="E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)"/></p>
+</div><p>where <img class="math" src="../_images/math/ae2b750f71e1fc0daaa3de9a85d42794d7cd1326.png" alt="L"/> is a loss function that measures model (mis)fit and
+<img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> is a regularization term (aka penalty) that penalizes model
+complexity; <img class="math" src="../_images/math/969cb5f6781dc1ccd2500d69e55fdb01ae91b31a.png" alt="\alpha &gt; 0"/> is a non-negative hyperparameter.</p>
+<p>Different choices for <img class="math" src="../_images/math/ae2b750f71e1fc0daaa3de9a85d42794d7cd1326.png" alt="L"/> entail different classifiers such as</p>
 <blockquote>
 <div><ul class="simple">
 <li>Hinge: (soft-margin) Support Vector Machines.</li>
@@ -484,17 +484,17 @@ misclassification error (Zero-one loss) as shown in the Figure below.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_loss_functions.html"><img alt="../_images/sphx_glr_plot_sgd_loss_functions_0011.png" src="../_images/sphx_glr_plot_sgd_loss_functions_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
 </div>
-<p>Popular choices for the regularization term <img class="math" src="../_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R"/> include:</p>
+<p>Popular choices for the regularization term <img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> include:</p>
 <blockquote>
 <div><ul class="simple">
-<li>L2 norm: <img class="math" src="../_images/math/a16847a5124181d9b7752831345def32c7688718.png" alt="R(w) := \frac{1}{2} \sum_{i=1}^{n} w_i^2"/>,</li>
-<li>L1 norm: <img class="math" src="../_images/math/9dcd00d73a520a96fcccfa317471aab11d8b1ce7.png" alt="R(w) := \sum_{i=1}^{n} |w_i|"/>, which leads to sparse
+<li>L2 norm: <img class="math" src="../_images/math/4fa07873ede84da7b6e2c3b6fe47b6fca2af4a55.png" alt="R(w) := \frac{1}{2} \sum_{i=1}^{n} w_i^2"/>,</li>
+<li>L1 norm: <img class="math" src="../_images/math/fadb54be33141d99ef411fba024ea3c7ec2de22a.png" alt="R(w) := \sum_{i=1}^{n} |w_i|"/>, which leads to sparse
 solutions.</li>
-<li>Elastic Net: <img class="math" src="../_images/math/6d786bc0d556134fd2cd2ff743dd4b1a711bb541.png" alt="R(w) := \frac{\rho}{2} \sum_{i=1}^{n} w_i^2 + (1-\rho) \sum_{i=1}^{n} |w_i|"/>, a convex combination of L2 and L1, where <img class="math" src="../_images/math/f574498915fa9e02eeb5141c24835d077eba3e75.png" alt="\rho"/> is given by <code class="docutils literal"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">l1_ratio</span></code>.</li>
+<li>Elastic Net: <img class="math" src="../_images/math/885050c5d01823261cfba1f447fd02b5b6fc20db.png" alt="R(w) := \frac{\rho}{2} \sum_{i=1}^{n} w_i^2 + (1-\rho) \sum_{i=1}^{n} |w_i|"/>, a convex combination of L2 and L1, where <img class="math" src="../_images/math/9a51ab9a0b521705e1e8762fac6bdd6f11771758.png" alt="\rho"/> is given by <code class="docutils literal"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">l1_ratio</span></code>.</li>
 </ul>
 </div></blockquote>
 <p>The Figure below shows the contours of the different regularization terms
-in the parameter space when <img class="math" src="../_images/math/c12181d671649ed5892696252202bba516d28d3a.png" alt="R(w) = 1"/>.</p>
+in the parameter space when <img class="math" src="../_images/math/9d8d44da8ab5aa213680932767fcd1fc38f8b2cb.png" alt="R(w) = 1"/>.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_penalties.html"><img alt="../_images/sphx_glr_plot_sgd_penalties_0011.png" src="../_images/sphx_glr_plot_sgd_penalties_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
 </div>
@@ -502,32 +502,32 @@ in the parameter space when <img class="math" src="../_images/math/c12181d671649
 <h3>1.5.6.1. SGD<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Stochastic gradient descent is an optimization method for unconstrained
 optimization problems. In contrast to (batch) gradient descent, SGD
-approximates the true gradient of <img class="math" src="../_images/math/d5d48823181b7f7a9e96c9cbd3bb70d04abdbd9d.png" alt="E(w,b)"/> by considering a
+approximates the true gradient of <img class="math" src="../_images/math/1ec33d1cabcca22f7b60252e7e40179bee3b102e.png" alt="E(w,b)"/> by considering a
 single training example at a time.</p>
 <p>The class <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> implements a first-order SGD learning
 routine.  The algorithm iterates over the training examples and for each
 example updates the model parameters according to the update rule given by</p>
 <div class="math">
-<p><img src="../_images/math/069ca053962a3cd6b2689f7881657a12d4cfadd2.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
+<p><img src="../_images/math/cac40bbfc14a719b542485b8095d448df7bb3c3b.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
 + \frac{\partial L(w^T x_i + b, y_i)}{\partial w})"/></p>
-</div><p>where <img class="math" src="../_images/math/9172efc523d7488d4c3ed299d0be813de01503b8.png" alt="\eta"/> is the learning rate which controls the step-size in
-the parameter space.  The intercept <img class="math" src="../_images/math/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b"/> is updated similarly but
+</div><p>where <img class="math" src="../_images/math/5635a7c34414599c2452d72430811e816b460335.png" alt="\eta"/> is the learning rate which controls the step-size in
+the parameter space.  The intercept <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/> is updated similarly but
 without regularization.</p>
-<p>The learning rate <img class="math" src="../_images/math/9172efc523d7488d4c3ed299d0be813de01503b8.png" alt="\eta"/> can be either constant or gradually decaying. For
+<p>The learning rate <img class="math" src="../_images/math/5635a7c34414599c2452d72430811e816b460335.png" alt="\eta"/> can be either constant or gradually decaying. For
 classification, the default learning rate schedule (<code class="docutils literal"><span class="pre">learning_rate='optimal'</span></code>)
 is given by</p>
 <div class="math">
-<p><img src="../_images/math/344389e97db2eb61411560237e790ec8ff42c69f.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}"/></p>
-</div><p>where <img class="math" src="../_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> is the time step (there are a total of <cite>n_samples * n_iter</cite>
-time steps), <img class="math" src="../_images/math/fb761c2e199ad45ccf14767f48b88169479d840f.png" alt="t_0"/> is determined based on a heuristic proposed by Léon Bottou
+<p><img src="../_images/math/fc6e8bf82df39614f382d65f15c15187712b2af0.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}"/></p>
+</div><p>where <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> is the time step (there are a total of <cite>n_samples * n_iter</cite>
+time steps), <img class="math" src="../_images/math/1410bd3aa3d34373bc7de52c132b4fd6f154019a.png" alt="t_0"/> is determined based on a heuristic proposed by Léon Bottou
 such that the expected initial updates are comparable with the expected
 size of the weights (this assuming that the norm of the training samples is
 approx. 1). The exact definition can be found in <code class="docutils literal"><span class="pre">_init_t</span></code> in <code class="xref py py-class docutils literal"><span class="pre">BaseSGD</span></code>.</p>
 <p>For regression the default learning rate schedule is inverse scaling
 (<code class="docutils literal"><span class="pre">learning_rate='invscaling'</span></code>), given by</p>
 <div class="math">
-<p><img src="../_images/math/e02f2a8bd13638c78ed8150da77c1bd84adfb540.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}"/></p>
-</div><p>where <img class="math" src="../_images/math/17ed5419fbfe317f160a2be3da9c6f0ce53b5b86.png" alt="eta_0"/> and <img class="math" src="../_images/math/138a8dd99b6da12de6f02b76afeda6e5885a7f7c.png" alt="power\_t"/> are hyperparameters chosen by the
+<p><img src="../_images/math/b451ab9792bca5d14be74664d8963771aa96d772.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}"/></p>
+</div><p>where <img class="math" src="../_images/math/64dc796cf3af805cbab2f810ad7ee70d880bfd49.png" alt="eta_0"/> and <img class="math" src="../_images/math/b6e8ac1dcea3e0265093fae39c534076991c3af2.png" alt="power\_t"/> are hyperparameters chosen by the
 user via <code class="docutils literal"><span class="pre">eta0</span></code> and <code class="docutils literal"><span class="pre">power_t</span></code>, resp.</p>
 <p>For a constant learning rate use <code class="docutils literal"><span class="pre">learning_rate='constant'</span></code> and use <code class="docutils literal"><span class="pre">eta0</span></code>
 to specify the learning rate.</p>
@@ -535,8 +535,8 @@ to specify the learning rate.</p>
 <code class="docutils literal"><span class="pre">intercept_</span></code>:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Member <code class="docutils literal"><span class="pre">coef_</span></code> holds the weights <img class="math" src="../_images/math/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w"/></li>
-<li>Member <code class="docutils literal"><span class="pre">intercept_</span></code> holds <img class="math" src="../_images/math/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b"/></li>
+<li>Member <code class="docutils literal"><span class="pre">coef_</span></code> holds the weights <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/></li>
+<li>Member <code class="docutils literal"><span class="pre">intercept_</span></code> holds <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/></li>
 </ul>
 </div></blockquote>
 <div class="topic">
