@@ -217,12 +217,12 @@ is an estimator object:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;svm&#39;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> 
 <span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4,</span>
 <span class="go">n_components=None, random_state=None, svd_solver=&#39;auto&#39;, tol=0.0,</span>
-<span class="go">whiten=False)), (&#39;svm&#39;, SVC(C=1.0, cache_size=200, class_weight=None,</span>
+<span class="go">whiten=False)), (&#39;clf&#39;, SVC(C=1.0, cache_size=200, class_weight=None,</span>
 <span class="go">coef0=0.0, decision_function_shape=None, degree=3, gamma=&#39;auto&#39;,</span>
 <span class="go">kernel=&#39;rbf&#39;, max_iter=-1, probability=False, random_state=None,</span>
 <span class="go">shrinking=True, tol=0.001, verbose=False))])</span>
@@ -243,23 +243,23 @@ filling in the names automatically:</p>
 </pre></div>
 </div>
 <p>The estimators of a pipeline are stored as a list in the <code class="docutils literal"><span class="pre">steps</span></code> attribute:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
 <span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False))</span>
 </pre></div>
 </div>
 <p>and as a <code class="docutils literal"><span class="pre">dict</span></code> in <code class="docutils literal"><span class="pre">named_steps</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
 <span class="go">PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
 <span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)</span>
 </pre></div>
 </div>
 <p>Parameters of the estimators in the pipeline can be accessed using the
 <code class="docutils literal"><span class="pre">&lt;estimator&gt;__&lt;parameter&gt;</span></code> syntax:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">svm__C</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">clf__C</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
 <span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4,</span>
 <span class="go">    n_components=None, random_state=None, svd_solver=&#39;auto&#39;, tol=0.0,</span>
-<span class="go">    whiten=False)), (&#39;svm&#39;, SVC(C=10, cache_size=200, class_weight=None,</span>
+<span class="go">    whiten=False)), (&#39;clf&#39;, SVC(C=10, cache_size=200, class_weight=None,</span>
 <span class="go">    coef0=0.0, decision_function_shape=None, degree=3, gamma=&#39;auto&#39;,</span>
 <span class="go">    kernel=&#39;rbf&#39;, max_iter=-1, probability=False, random_state=None,</span>
 <span class="go">    shrinking=True, tol=0.001, verbose=False))])</span>
@@ -268,8 +268,17 @@ filling in the names automatically:</p>
 <p>This is particularly important for doing grid searches:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">reduce_dim__n_components</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
-<span class="gp">... </span>              <span class="n">svm__C</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+<span class="gp">... </span>              <span class="n">clf__C</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Individual steps may also be replaced as parameters, and non-final steps may be
+ignored by setting them to <code class="docutils literal"><span class="pre">None</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">reduce_dim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">PCA</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">PCA</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span>              <span class="n">clf</span><span class="o">=</span><span class="p">[</span><span class="n">SVC</span><span class="p">(),</span> <span class="n">LogisticRegression</span><span class="p">()],</span>
+<span class="gp">... </span>              <span class="n">clf__C</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="topic">
@@ -339,6 +348,15 @@ and <code class="docutils literal"><span class="pre">value</span></code> is an e
 </div>
 <p>Like pipelines, feature unions have a shorthand constructor called
 <a class="reference internal" href="generated/sklearn.pipeline.make_union.html#sklearn.pipeline.make_union" title="sklearn.pipeline.make_union"><code class="xref py py-func docutils literal"><span class="pre">make_union</span></code></a> that does not require explicit naming of the components.</p>
+<p>Like <code class="docutils literal"><span class="pre">Pipeline</span></code>, individual steps may be replaced using <code class="docutils literal"><span class="pre">set_params</span></code>,
+and ignored by setting to <code class="docutils literal"><span class="pre">None</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">kernel_pca</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> 
+<span class="go">FeatureUnion(n_jobs=1, transformer_list=[(&#39;linear_pca&#39;, PCA(copy=True,</span>
+<span class="go">      iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">      svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)), (&#39;kernel_pca&#39;, None)],</span>
+<span class="go">    transformer_weights=None)</span>
+</pre></div>
+</div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
