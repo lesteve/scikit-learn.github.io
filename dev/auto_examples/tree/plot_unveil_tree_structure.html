@@ -43,7 +43,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
-  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/tree/unveil_tree_structure.html" />
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure.html" />
 
   <script type="text/javascript">
     $("div.buttonNext, div.buttonPrevious").hover(
@@ -182,7 +182,7 @@
           <div class="body" role="main">
             
   <div class="section" id="understanding-the-decision-tree-structure">
-<span id="sphx-glr-auto-examples-tree-unveil-tree-structure-py"></span><h1>Understanding the decision tree structure<a class="headerlink" href="#understanding-the-decision-tree-structure" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-tree-plot-unveil-tree-structure-py"></span><h1>Understanding the decision tree structure<a class="headerlink" href="#understanding-the-decision-tree-structure" title="Permalink to this headline">¶</a></h1>
 <p>The decision tree structure can be analysed to gain further insight on the
 relation between the features and the target to predict. In this example, we
 show how to retrieve:</p>
@@ -194,6 +194,24 @@ show how to retrieve:</p>
 <li>the rules that were used to predict a sample;</li>
 <li>the decision path shared by a group of samples.</li>
 </ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">The</span> <span class="n">binary</span> <span class="n">tree</span> <span class="n">structure</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">nodes</span> <span class="ow">and</span> <span class="n">has</span> <span class="n">the</span> <span class="n">following</span> <span class="n">tree</span> <span class="n">structure</span><span class="p">:</span>
+<span class="n">node</span><span class="o">=</span><span class="mi">0</span> <span class="n">test</span> <span class="n">node</span><span class="p">:</span> <span class="n">go</span> <span class="n">to</span> <span class="n">node</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.800000011921</span><span class="n">s</span> <span class="k">else</span> <span class="n">to</span> <span class="n">node</span> <span class="mf">2.</span>
+        <span class="n">node</span><span class="o">=</span><span class="mi">1</span> <span class="n">leaf</span> <span class="n">node</span><span class="o">.</span>
+        <span class="n">node</span><span class="o">=</span><span class="mi">2</span> <span class="n">test</span> <span class="n">node</span><span class="p">:</span> <span class="n">go</span> <span class="n">to</span> <span class="n">node</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">4.94999980927</span><span class="n">s</span> <span class="k">else</span> <span class="n">to</span> <span class="n">node</span> <span class="mf">4.</span>
+                <span class="n">node</span><span class="o">=</span><span class="mi">3</span> <span class="n">leaf</span> <span class="n">node</span><span class="o">.</span>
+                <span class="n">node</span><span class="o">=</span><span class="mi">4</span> <span class="n">leaf</span> <span class="n">node</span><span class="o">.</span>
+
+<span class="n">Rules</span> <span class="n">used</span> <span class="n">to</span> <span class="n">predict</span> <span class="n">sample</span> <span class="mi">0</span><span class="p">:</span>
+<span class="n">decision</span> <span class="nb">id</span> <span class="n">node</span> <span class="mi">4</span> <span class="p">:</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="p">(</span><span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="n">The</span> <span class="n">following</span> <span class="n">samples</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="n">share</span> <span class="n">the</span> <span class="n">node</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">tree</span>
+<span class="n">It</span> <span class="ow">is</span> <span class="mf">40.0</span> <span class="o">%</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">nodes</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
@@ -314,11 +332,11 @@ show how to retrieve:</p>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 0.000 seconds)</p>
+(0 minutes 0.004 seconds)</p>
 <div class="sphx-glr-download container">
-<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/unveil_tree_structure.py" download=""><code class="xref download docutils literal"><span class="pre">unveil_tree_structure.py</span></code></a></div>
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_unveil_tree_structure.py" download=""><code class="xref download docutils literal"><span class="pre">plot_unveil_tree_structure.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/unveil_tree_structure.ipynb" download=""><code class="xref download docutils literal"><span class="pre">unveil_tree_structure.ipynb</span></code></a></div>
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_unveil_tree_structure.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_unveil_tree_structure.ipynb</span></code></a></div>
 </div>
 
 
@@ -331,7 +349,7 @@ show how to retrieve:</p>
 
     <div class="footer">
         &copy; 2010 - 2016, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/tree/unveil_tree_structure.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/tree/plot_unveil_tree_structure.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
