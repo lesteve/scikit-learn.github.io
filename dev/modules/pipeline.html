@@ -220,7 +220,7 @@ is an estimator object:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> 
-<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4,</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;,</span>
 <span class="go">n_components=None, random_state=None, svd_solver=&#39;auto&#39;, tol=0.0,</span>
 <span class="go">whiten=False)), (&#39;clf&#39;, SVC(C=1.0, cache_size=200, class_weight=None,</span>
 <span class="go">coef0=0.0, decision_function_shape=None, degree=3, gamma=&#39;auto&#39;,</span>
@@ -244,20 +244,20 @@ filling in the names automatically:</p>
 </div>
 <p>The estimators of a pipeline are stored as a list in the <code class="docutils literal"><span class="pre">steps</span></code> attribute:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;, n_components=None, random_state=None,</span>
 <span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False))</span>
 </pre></div>
 </div>
 <p>and as a <code class="docutils literal"><span class="pre">dict</span></code> in <code class="docutils literal"><span class="pre">named_steps</span></code>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
-<span class="go">PCA(copy=True, iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">PCA(copy=True, iterated_power=&#39;auto&#39;, n_components=None, random_state=None,</span>
 <span class="go">  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)</span>
 </pre></div>
 </div>
 <p>Parameters of the estimators in the pipeline can be accessed using the
 <code class="docutils literal"><span class="pre">&lt;estimator&gt;__&lt;parameter&gt;</span></code> syntax:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">clf__C</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=4,</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;,</span>
 <span class="go">    n_components=None, random_state=None, svd_solver=&#39;auto&#39;, tol=0.0,</span>
 <span class="go">    whiten=False)), (&#39;clf&#39;, SVC(C=10, cache_size=200, class_weight=None,</span>
 <span class="go">    coef0=0.0, decision_function_shape=None, degree=3, gamma=&#39;auto&#39;,</span>
@@ -337,7 +337,7 @@ and <code class="docutils literal"><span class="pre">value</span></code> is an e
 <span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span> <span class="o">=</span> <span class="n">FeatureUnion</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span> 
 <span class="go">FeatureUnion(n_jobs=1, transformer_list=[(&#39;linear_pca&#39;, PCA(copy=True,</span>
-<span class="go">    iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">    iterated_power=&#39;auto&#39;, n_components=None, random_state=None,</span>
 <span class="go">    svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)), (&#39;kernel_pca&#39;,</span>
 <span class="go">    KernelPCA(alpha=1.0, coef0=1, copy_X=True, degree=3,</span>
 <span class="go">    eigen_solver=&#39;auto&#39;, fit_inverse_transform=False, gamma=None,</span>
@@ -352,7 +352,7 @@ and <code class="docutils literal"><span class="pre">value</span></code> is an e
 and ignored by setting to <code class="docutils literal"><span class="pre">None</span></code>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">kernel_pca</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> 
 <span class="go">FeatureUnion(n_jobs=1, transformer_list=[(&#39;linear_pca&#39;, PCA(copy=True,</span>
-<span class="go">      iterated_power=4, n_components=None, random_state=None,</span>
+<span class="go">      iterated_power=&#39;auto&#39;, n_components=None, random_state=None,</span>
 <span class="go">      svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)), (&#39;kernel_pca&#39;, None)],</span>
 <span class="go">    transformer_weights=None)</span>
 </pre></div>
