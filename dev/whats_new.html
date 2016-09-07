@@ -363,22 +363,22 @@ perform nested cross-validation, facilitated by
 <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a> and
 <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a> utilities.</p>
 </li>
-<li><p class="first"><strong>The enhanced `results_` attribute</strong></p>
-<p>The new <code class="docutils literal"><span class="pre">results_</span></code> attribute (of <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>
+<li><p class="first"><strong>The enhanced ``cv_results_`` attribute</strong></p>
+<p>The new <code class="docutils literal"><span class="pre">cv_results_</span></code> attribute (of <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>
 and <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a>) introduced in lieu of the
 <code class="docutils literal"><span class="pre">grid_scores_</span></code> attribute is a dict of 1D arrays with elements in each
 array corresponding to the parameter settings (i.e. search candidates).</p>
-<p>The <code class="docutils literal"><span class="pre">results_</span></code> dict can be easily imported into <code class="docutils literal"><span class="pre">pandas</span></code> as a
+<p>The <code class="docutils literal"><span class="pre">cv_results_</span></code> dict can be easily imported into <code class="docutils literal"><span class="pre">pandas</span></code> as a
 <code class="docutils literal"><span class="pre">DataFrame</span></code> for exploring the search results.</p>
-<p>The <code class="docutils literal"><span class="pre">results_</span></code> arrays include scores for each cross-validation split
-(with keys such as <code class="docutils literal"><span class="pre">test_split0_score</span></code>), as well as their mean
-(<code class="docutils literal"><span class="pre">test_mean_score</span></code>) and standard deviation (<code class="docutils literal"><span class="pre">test_std_score</span></code>).</p>
+<p>The <code class="docutils literal"><span class="pre">cv_results_</span></code> arrays include scores for each cross-validation split
+(with keys such as <code class="docutils literal"><span class="pre">'split0_test_score'</span></code>), as well as their mean
+(<code class="docutils literal"><span class="pre">'mean_test_score'</span></code>) and standard deviation (<code class="docutils literal"><span class="pre">'std_test_score'</span></code>).</p>
 <p>The ranks for the search candidates (based on their mean
-cross-validation score) is available at <code class="docutils literal"><span class="pre">results_['test_rank_score']</span></code>.</p>
+cross-validation score) is available at <code class="docutils literal"><span class="pre">cv_results_['rank_test_score']</span></code>.</p>
 <p>The parameter values for each parameter is stored separately as numpy
 masked object arrays. The value, for that search candidate, is masked if
 the corresponding parameter is not applicable. Additionally a list of all
-the parameter dicts are stored at <code class="docutils literal"><span class="pre">results_['params']</span></code>.</p>
+the parameter dicts are stored at <code class="docutils literal"><span class="pre">cv_results_['params']</span></code>.</p>
 </li>
 <li><p class="first"><strong>Parameters ``n_folds`` and ``n_iter`` renamed to ``n_splits``</strong></p>
 <p>Some parameter names have changed:
@@ -519,7 +519,7 @@ By <a class="reference external" href="https://github.com/maniteja123">Mani Teja
 <code class="xref py py-func docutils literal"><span class="pre">utils.incr_mean_variance_axis</span></code> by supporting cython fused types. By <a class="reference external" href="https://github.com/yenchenlin">YenChen Lin</a>.</li>
 <li>The :func: <cite>ignore_warnings</cite> now accept a category argument to ignore only
 the warnings of a specified type. By <a class="reference external" href="https://github.com/tguillemot">Thierry Guillemot</a>.</li>
-<li>The new <code class="docutils literal"><span class="pre">results_</span></code> attribute of <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>
+<li>The new <code class="docutils literal"><span class="pre">cv_results_</span></code> attribute of <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>
 (and <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a>) can be easily imported
 into pandas as a <code class="docutils literal"><span class="pre">DataFrame</span></code>. Ref <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">Model Selection Enhancements and API Changes</span></a> for
 more information.
@@ -675,7 +675,7 @@ faster than before and some of computational problems have been solved.
 <a class="reference external" href="https://github.com/xuewei4d">Wei Xue</a> and <a class="reference external" href="https://github.com/tguillemot">Thierry Guillemot</a>.</li>
 <li>The <code class="docutils literal"><span class="pre">grid_scores_</span></code> attribute of <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>
 and <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a> is deprecated in favor of
-the attribute <code class="docutils literal"><span class="pre">results_</span></code>.
+the attribute <code class="docutils literal"><span class="pre">cv_results_</span></code>.
 Ref <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">Model Selection Enhancements and API Changes</span></a> for more information.
 (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/6697">#6697</a>) by
 <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
