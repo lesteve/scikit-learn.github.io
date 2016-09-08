@@ -188,7 +188,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.precision_score<a class="headerlink" href="#sklearn-metrics-precision-score" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.precision_score">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">precision_score</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em>, <em>labels=None</em>, <em>pos_label=1</em>, <em>average='binary'</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/4b2304f/sklearn/metrics/classification.py#L1156"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.precision_score" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">precision_score</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em>, <em>labels=None</em>, <em>pos_label=1</em>, <em>average='binary'</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2bf96df/sklearn/metrics/classification.py#L1139"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.precision_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the precision</p>
 <p>The precision is the ratio <code class="docutils literal"><span class="pre">tp</span> <span class="pre">/</span> <span class="pre">(tp</span> <span class="pre">+</span> <span class="pre">fp)</span></code> where <code class="docutils literal"><span class="pre">tp</span></code> is the number of
 true positives and <code class="docutils literal"><span class="pre">fp</span></code> the number of false positives. The precision is
@@ -223,9 +223,10 @@ labels are column indices. By default, all labels in <code class="docutils liter
 </div></blockquote>
 <p><strong>pos_label</strong> : str or int, 1 by default</p>
 <blockquote>
-<div><p>The class to report if <code class="docutils literal"><span class="pre">average='binary'</span></code>. Until version 0.18 it is
-necessary to set <code class="docutils literal"><span class="pre">pos_label=None</span></code> if seeking to use another averaging
-method over binary targets.</p>
+<div><p>The class to report if <code class="docutils literal"><span class="pre">average='binary'</span></code> and the data is binary.
+If the data are multiclass or multilabel, this will be ignored;
+setting <code class="docutils literal"><span class="pre">labels=[pos_label]</span></code> and <code class="docutils literal"><span class="pre">average</span> <span class="pre">!=</span> <span class="pre">'binary'</span></code> will report
+scores for that label only.</p>
 </div></blockquote>
 <p><strong>average</strong> : string, [None, &#8216;binary&#8217; (default), &#8216;micro&#8217;, &#8216;macro&#8217;, &#8216;samples&#8217;,                        &#8216;weighted&#8217;]</p>
 <blockquote>
@@ -257,9 +258,6 @@ meaningful for multilabel classification where this differs from
 <a class="reference internal" href="sklearn.metrics.accuracy_score.html#sklearn.metrics.accuracy_score" title="sklearn.metrics.accuracy_score"><code class="xref py py-func docutils literal"><span class="pre">accuracy_score</span></code></a>).</p>
 </dd>
 </dl>
-<p>Note that if <code class="docutils literal"><span class="pre">pos_label</span></code> is given in binary classification with
-<cite>average != &#8216;binary&#8217;</cite>, only that positive class is reported. This
-behavior is deprecated and will change in version 0.18.</p>
 </div></blockquote>
 <p><strong>sample_weight</strong> : array-like of shape = [n_samples], optional</p>
 <blockquote>
