@@ -263,112 +263,22 @@ controls what metric they apply to the estimators evaluated.</p>
 <p>For the most common use cases, you can designate a scorer object with the
 <code class="docutils literal"><span class="pre">scoring</span></code> parameter; the table below shows all possible values.
 All scorer objects follow the convention that <strong>higher return values are better
-than lower return values</strong>.  Thus the returns from mean_absolute_error
-and mean_squared_error, which measure the distance between the model
-and the data, are negated.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="25%" />
-<col width="40%" />
-<col width="35%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Scoring</th>
-<th class="head">Function</th>
-<th class="head">Comment</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>Classification</strong></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;accuracy&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.accuracy_score.html#sklearn.metrics.accuracy_score" title="sklearn.metrics.accuracy_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.accuracy_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>&#8216;average_precision&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="sklearn.metrics.average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.average_precision_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;f1&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>for binary targets</td>
-</tr>
-<tr class="row-even"><td>&#8216;f1_micro&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>micro-averaged</td>
-</tr>
-<tr class="row-odd"><td>&#8216;f1_macro&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>macro-averaged</td>
-</tr>
-<tr class="row-even"><td>&#8216;f1_weighted&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>weighted average</td>
-</tr>
-<tr class="row-odd"><td>&#8216;f1_samples&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>by multilabel sample</td>
-</tr>
-<tr class="row-even"><td>&#8216;log_loss&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.log_loss.html#sklearn.metrics.log_loss" title="sklearn.metrics.log_loss"><code class="xref py py-func docutils literal"><span class="pre">metrics.log_loss</span></code></a></td>
-<td>requires <code class="docutils literal"><span class="pre">predict_proba</span></code> support</td>
-</tr>
-<tr class="row-odd"><td>&#8216;precision&#8217; etc.</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score" title="sklearn.metrics.precision_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.precision_score</span></code></a></td>
-<td>suffixes apply as with &#8216;f1&#8217;</td>
-</tr>
-<tr class="row-even"><td>&#8216;recall&#8217; etc.</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score" title="sklearn.metrics.recall_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.recall_score</span></code></a></td>
-<td>suffixes apply as with &#8216;f1&#8217;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;roc_auc&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.roc_auc_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td><strong>Clustering</strong></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;adjusted_rand_score&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score" title="sklearn.metrics.adjusted_rand_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.adjusted_rand_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td><strong>Regression</strong></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;mean_absolute_error&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.mean_absolute_error.html#sklearn.metrics.mean_absolute_error" title="sklearn.metrics.mean_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.mean_absolute_error</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>&#8216;mean_squared_error&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.mean_squared_error</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;median_absolute_error&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.median_absolute_error.html#sklearn.metrics.median_absolute_error" title="sklearn.metrics.median_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.median_absolute_error</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>&#8216;r2&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score" title="sklearn.metrics.r2_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.r2_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
+than lower return values</strong>.  Thus metrics which measure the distance between
+the model and the data, like <a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.mean_squared_error</span></code></a>, are
+available as neg_mean_squared_error which return the negated value
+of the metric.</p>
 <p>Usage examples:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;log_loss&#39;</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_log_loss&#39;</span><span class="p">)</span> 
 <span class="go">array([-0.07..., -0.16..., -0.06...])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;wrong_choice&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
-<span class="gr">ValueError</span>: <span class="n">&#39;wrong_choice&#39; is not a valid scoring value. Valid options are [&#39;accuracy&#39;, &#39;adjusted_rand_score&#39;, &#39;average_precision&#39;, &#39;f1&#39;, &#39;f1_macro&#39;, &#39;f1_micro&#39;, &#39;f1_samples&#39;, &#39;f1_weighted&#39;, &#39;log_loss&#39;, &#39;mean_absolute_error&#39;, &#39;mean_squared_error&#39;, &#39;median_absolute_error&#39;, &#39;precision&#39;, &#39;precision_macro&#39;, &#39;precision_micro&#39;, &#39;precision_samples&#39;, &#39;precision_weighted&#39;, &#39;r2&#39;, &#39;recall&#39;, &#39;recall_macro&#39;, &#39;recall_micro&#39;, &#39;recall_samples&#39;, &#39;recall_weighted&#39;, &#39;roc_auc&#39;]</span>
+<span class="gr">ValueError</span>: <span class="n">&#39;wrong_choice&#39; is not a valid scoring value. Valid options are [&#39;accuracy&#39;, &#39;adjusted_rand_score&#39;, &#39;average_precision&#39;, &#39;f1&#39;, &#39;f1_macro&#39;, &#39;f1_micro&#39;, &#39;f1_samples&#39;, &#39;f1_weighted&#39;, &#39;neg_log_loss&#39;, &#39;neg_mean_absolute_error&#39;, &#39;neg_mean_squared_error&#39;, &#39;neg_median_absolute_error&#39;, &#39;precision&#39;, &#39;precision_macro&#39;, &#39;precision_micro&#39;, &#39;precision_samples&#39;, &#39;precision_weighted&#39;, &#39;r2&#39;, &#39;recall&#39;, &#39;recall_macro&#39;, &#39;recall_micro&#39;, &#39;recall_samples&#39;, &#39;recall_weighted&#39;, &#39;roc_auc&#39;]</span>
 </pre></div>
 </div>
 <div class="admonition note">

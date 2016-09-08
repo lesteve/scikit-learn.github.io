@@ -130,11 +130,11 @@ Fit regression model
 
  Out::
 
-      SVR complexity and bandwidth selected and model fitted in 0.926 s
-    KRR complexity and bandwidth selected and model fitted in 0.419 s
+      SVR complexity and bandwidth selected and model fitted in 0.886 s
+    KRR complexity and bandwidth selected and model fitted in 0.430 s
     Support vector ratio: 0.320
     SVR prediction for 100000 inputs in 0.147 s
-    KRR prediction for 100000 inputs in 0.395 s
+    KRR prediction for 100000 inputs in 0.439 s
 
 
 look at the results
@@ -197,14 +197,14 @@ look at the results
     kr = KernelRidge(kernel='rbf', alpha=0.1, gamma=0.1)
     train_sizes, train_scores_svr, test_scores_svr = \
         learning_curve(svr, X[:100], y[:100], train_sizes=np.linspace(0.1, 1, 10),
-                       scoring="mean_squared_error", cv=10)
+                       scoring="neg_mean_squared_error", cv=10)
     train_sizes_abs, train_scores_kr, test_scores_kr = \
         learning_curve(kr, X[:100], y[:100], train_sizes=np.linspace(0.1, 1, 10),
-                       scoring="mean_squared_error", cv=10)
+                       scoring="neg_mean_squared_error", cv=10)
 
-    plt.plot(train_sizes, test_scores_svr.mean(1), 'o-', color="r",
+    plt.plot(train_sizes, -test_scores_svr.mean(1), 'o-', color="r",
              label="SVR")
-    plt.plot(train_sizes, test_scores_kr.mean(1), 'o-', color="g",
+    plt.plot(train_sizes, -test_scores_kr.mean(1), 'o-', color="g",
              label="KRR")
     plt.xlabel("Train size")
     plt.ylabel("Mean Squared Error")
@@ -237,7 +237,7 @@ look at the results
 
 
 **Total running time of the script:**
-(0 minutes 36.410 seconds)
+(0 minutes 33.473 seconds)
 
 
 
