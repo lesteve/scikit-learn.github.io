@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>2.1.3.2.1. Variational Gaussian Mixture Models &mdash; scikit-learn 0.18.dev0 documentation</title>
+    <title>Variational Gaussian Mixture Models &mdash; scikit-learn 0.18.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -36,9 +36,6 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../index.html" />
-    <link rel="up" title="2.1. Gaussian mixture models" href="mixture.html" />
-    <link rel="next" title="2.2. Manifold learning" href="manifold.html" />
-    <link rel="prev" title="2.1. Gaussian mixture models" href="mixture.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -123,66 +120,29 @@
 <div class="content-wrapper">
     <div class="sphinxsidebar">
     <div class="sphinxsidebarwrapper">
-        <div class="rel">
-    
-
-  <!-- rellinks[1:] is an ugly hack to avoid link to module
-  index -->
-        <div class="rellink">
-        <a href="mixture.html"
-        accesskey="P">Previous
-        <br/>
-        <span class="smallrellink">
-        2.1. Gaussian...
-        </span>
-            <span class="hiddenrellink">
-            2.1. Gaussian mixture models
-            </span>
-        </a>
-        </div>
-
-    <!-- Ad a link to the 'up' page -->
-        <div class="spacer">
-        &nbsp;
-        </div>
-        <div class="rellink">
-        <a href="mixture.html">
-        Up
-        <br/>
-        <span class="smallrellink">
-        2.1. Gaussian...
-        </span>
-            <span class="hiddenrellink">
-            2.1. Gaussian mixture models
-            </span>
-            
-        </a>
-        </div>
-    </div>
-    
       <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.dev0</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
-<li><a class="reference internal" href="#">2.1.3.2.1. Variational Gaussian Mixture Models</a></li>
-<li><a class="reference internal" href="#update-rules-for-vb-inference">2.1.3.2.2. Update rules for VB inference</a><ul>
-<li><a class="reference internal" href="#the-spherical-model">2.1.3.2.2.1. The spherical model</a><ul>
-<li><a class="reference internal" href="#the-bound">2.1.3.2.2.1.1. The bound</a></li>
-<li><a class="reference internal" href="#the-updates">2.1.3.2.2.1.2. The updates</a></li>
+<li><a class="reference internal" href="#">Variational Gaussian Mixture Models</a></li>
+<li><a class="reference internal" href="#update-rules-for-vb-inference">Update rules for VB inference</a><ul>
+<li><a class="reference internal" href="#the-spherical-model">The spherical model</a><ul>
+<li><a class="reference internal" href="#the-bound">The bound</a></li>
+<li><a class="reference internal" href="#the-updates">The updates</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#the-diagonal-model">2.1.3.2.2.2. The diagonal model</a><ul>
-<li><a class="reference internal" href="#the-lower-bound">2.1.3.2.2.2.1. The lower bound</a></li>
-<li><a class="reference internal" href="#id1">2.1.3.2.2.2.2. The updates</a></li>
+<li><a class="reference internal" href="#the-diagonal-model">The diagonal model</a><ul>
+<li><a class="reference internal" href="#the-lower-bound">The lower bound</a></li>
+<li><a class="reference internal" href="#id1">The updates</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#the-tied-model">2.1.3.2.2.3. The tied model</a><ul>
-<li><a class="reference internal" href="#id2">2.1.3.2.2.3.1. The lower bound</a></li>
-<li><a class="reference internal" href="#id3">2.1.3.2.2.3.2. The updates</a></li>
+<li><a class="reference internal" href="#the-tied-model">The tied model</a><ul>
+<li><a class="reference internal" href="#id2">The lower bound</a></li>
+<li><a class="reference internal" href="#id3">The updates</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#the-full-model">2.1.3.2.2.4. The full model</a><ul>
-<li><a class="reference internal" href="#id4">2.1.3.2.2.4.1. The lower bound</a></li>
-<li><a class="reference internal" href="#id5">2.1.3.2.2.4.2. The updates</a></li>
+<li><a class="reference internal" href="#the-full-model">The full model</a><ul>
+<li><a class="reference internal" href="#id4">The lower bound</a></li>
+<li><a class="reference internal" href="#id5">The updates</a></li>
 </ul>
 </li>
 </ul>
@@ -205,7 +165,7 @@
           <div class="body" role="main">
             
   <div class="section" id="variational-gaussian-mixture-models">
-<span id="dpgmm-derivation"></span><h1>2.1.3.2.1. Variational Gaussian Mixture Models<a class="headerlink" href="#variational-gaussian-mixture-models" title="Permalink to this headline">¶</a></h1>
+<span id="dpgmm-derivation"></span><h1>Variational Gaussian Mixture Models<a class="headerlink" href="#variational-gaussian-mixture-models" title="Permalink to this headline">¶</a></h1>
 <p>The API is identical to that of the <code class="xref py py-class docutils literal"><span class="pre">GMM</span></code> class, the main
 difference being that it offers access to precision matrices as well
 as covariance matrices.</p>
@@ -237,7 +197,7 @@ its determinant, hence the cubic term).</p>
 the Gaussian mixture.</p>
 </div>
 <div class="section" id="update-rules-for-vb-inference">
-<h1>2.1.3.2.2. Update rules for VB inference<a class="headerlink" href="#update-rules-for-vb-inference" title="Permalink to this headline">¶</a></h1>
+<h1>Update rules for VB inference<a class="headerlink" href="#update-rules-for-vb-inference" title="Permalink to this headline">¶</a></h1>
 <p>Here the full mathematical derivation of the Variational Bayes update
 rules for Gaussian Mixture Models is given. The main parameters of the
 model, defined for any class <img class="math" src="../_images/math/9cba229e154ce02473b0540fbfd3e565d5e2a055.png" alt="k \in [1..K]"/> are the class
@@ -249,7 +209,7 @@ scale matrix. Depending on the covariance parametrization,
 <img class="math" src="../_images/math/95016e3d6008c2baefb1438beda86c4566e29388.png" alt="B_k"/> can be a positive scalar, a positive vector or a Symmetric
 Positive Definite matrix.</p>
 <div class="section" id="the-spherical-model">
-<h2>2.1.3.2.2.1. The spherical model<a class="headerlink" href="#the-spherical-model" title="Permalink to this headline">¶</a></h2>
+<h2>The spherical model<a class="headerlink" href="#the-spherical-model" title="Permalink to this headline">¶</a></h2>
 <p>The model then is</p>
 <div class="math">
 <p><img src="../_images/math/958d00a50096e144c2bfbad83d075d05b1e015ee.png" alt="\begin{array}{rcl}
@@ -268,7 +228,7 @@ X_t &amp;\sim&amp; Normal(\mu_{z_i}, \frac{1}{\sigma_{z_i}} \mathbf{I})
 z_{i}     &amp;\sim&amp; Discrete(\nu_{z_i}) \\
 \end{array}"/></p>
 </div><div class="section" id="the-bound">
-<h3>2.1.3.2.2.1.1. The bound<a class="headerlink" href="#the-bound" title="Permalink to this headline">¶</a></h3>
+<h3>The bound<a class="headerlink" href="#the-bound" title="Permalink to this headline">¶</a></h3>
 <p>The variational bound is</p>
 <div class="math">
 <p><img src="../_images/math/62237f681450168ad9fce4e0cdfc322797233d59.png" alt="\begin{array}{rcl}
@@ -338,7 +298,7 @@ E_q[\log P(X_i)] &amp;=&amp; \sum_k \nu_{z_k} \left( - \frac{D}{2}\log 2\pi
 </div><p>For simplicity I&#8217;ll later call the term inside the parenthesis <img class="math" src="../_images/math/c0649a6a3aa920dfc51c38dbdc02218e3dec88b9.png" alt="E_q[\log P(X_i|z_i=k)]"/></p>
 </div>
 <div class="section" id="the-updates">
-<h3>2.1.3.2.2.1.2. The updates<a class="headerlink" href="#the-updates" title="Permalink to this headline">¶</a></h3>
+<h3>The updates<a class="headerlink" href="#the-updates" title="Permalink to this headline">¶</a></h3>
 <p><strong>Updating</strong> <img class="math" src="../_images/math/3666981dc77862de77b6ecfcb64aad59b425cbaf.png" alt="\gamma"/></p>
 <div class="math">
 <p><img src="../_images/math/c0435c78c6fa52771d02cc404ddbbfba12bed219.png" alt="\begin{array}{rcl}
@@ -380,7 +340,7 @@ constant and we get two terms: the prior and the probability of
 </div></div>
 </div>
 <div class="section" id="the-diagonal-model">
-<h2>2.1.3.2.2.2. The diagonal model<a class="headerlink" href="#the-diagonal-model" title="Permalink to this headline">¶</a></h2>
+<h2>The diagonal model<a class="headerlink" href="#the-diagonal-model" title="Permalink to this headline">¶</a></h2>
 <p>The model then is</p>
 <div class="math">
 <p><img src="../_images/math/0700dfc797013e03273c0fe553deb1474d62fa85.png" alt="\begin{array}{rcl}
@@ -399,7 +359,7 @@ X_t &amp;\sim&amp; Normal(\mu_{z_i}, \bm{\sigma_{z_i}}^{-1})
 z_{i}     &amp;\sim&amp; Discrete(\nu_{z_i}) \\
 \end{array}"/></p>
 </div><div class="section" id="the-lower-bound">
-<h3>2.1.3.2.2.2.1. The lower bound<a class="headerlink" href="#the-lower-bound" title="Permalink to this headline">¶</a></h3>
+<h3>The lower bound<a class="headerlink" href="#the-lower-bound" title="Permalink to this headline">¶</a></h3>
 <p>The changes in this lower bound from the previous model are in the
 distributions of <img class="math" src="../_images/math/011e5790a6c33043ceadca81d9657dde6c61d769.png" alt="\sigma"/> (as there are a lot more <img class="math" src="../_images/math/011e5790a6c33043ceadca81d9657dde6c61d769.png" alt="\sigma"/> s
 now) and <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>.</p>
@@ -420,7 +380,7 @@ E_q[\log P(X_i)] &amp;=&amp; \sum_k \nu_{z_k} \Big( - \frac{D}{2}\log 2\pi
 \end{array}"/></p>
 </div></div>
 <div class="section" id="id1">
-<h3>2.1.3.2.2.2.2. The updates<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>The updates<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>The updates only chance for <img class="math" src="../_images/math/d79e8a2c7ce54906c2b25549da38bdbe02cf40d6.png" alt="\mu"/> (to weight them with the new
 <img class="math" src="../_images/math/011e5790a6c33043ceadca81d9657dde6c61d769.png" alt="\sigma"/>), <img class="math" src="../_images/math/683f2dd9129a91d21aaf1c04afa6f78b39d4cb0a.png" alt="z"/> (but the change is all folded into the
 <img class="math" src="../_images/math/183d96255098c0ea83c04112a50db1a1b5ce1048.png" alt="E_q[P(X_i|z_i=k)]"/> term), and the <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> and <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/> variables themselves.</p>
@@ -442,7 +402,7 @@ of the bound:</p>
 </div></div>
 </div>
 <div class="section" id="the-tied-model">
-<h2>2.1.3.2.2.3. The tied model<a class="headerlink" href="#the-tied-model" title="Permalink to this headline">¶</a></h2>
+<h2>The tied model<a class="headerlink" href="#the-tied-model" title="Permalink to this headline">¶</a></h2>
 <p>The model then is</p>
 <div class="math">
 <p><img src="../_images/math/d2a7df185ef6ba941294977d703120562a4ca02e.png" alt="\begin{array}{rcl}
@@ -461,7 +421,7 @@ X_t &amp;\sim&amp; Normal(\mu_{z_i},  \Sigma^{-1})
 z_{i}     &amp;\sim&amp; Discrete(\nu_{z_i}) \\
 \end{array}"/></p>
 </div><div class="section" id="id2">
-<h3>2.1.3.2.2.3.1. The lower bound<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>The lower bound<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>There are two changes in the lower-bound: for <img class="math" src="../_images/math/7b887ca4d449002abecf59a472644a272dfcb605.png" alt="\Sigma"/> and for <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>.</p>
 <p><strong>The bound for</strong> <img class="math" src="../_images/math/7b887ca4d449002abecf59a472644a272dfcb605.png" alt="\Sigma"/></p>
 <div class="math">
@@ -483,7 +443,7 @@ E_q[\log P(X_i)] &amp;=&amp; \sum_k \nu_{z_k} \Big( - \frac{D}{2}\log 2\pi
 \end{array}"/></p>
 </div></div>
 <div class="section" id="id3">
-<h3>2.1.3.2.2.3.2. The updates<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>The updates<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>As in the last setting, what changes are the trivial update for <img class="math" src="../_images/math/683f2dd9129a91d21aaf1c04afa6f78b39d4cb0a.png" alt="z"/>,
 the update for <img class="math" src="../_images/math/d79e8a2c7ce54906c2b25549da38bdbe02cf40d6.png" alt="\mu"/> and the update for <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> and <img class="math" src="../_images/math/ad269676f762c78f6fa679588cc7a282a1a00079.png" alt="\mathbf{B}"/>.</p>
 <p><strong>The update for</strong> <img class="math" src="../_images/math/d79e8a2c7ce54906c2b25549da38bdbe02cf40d6.png" alt="\mu"/></p>
@@ -510,7 +470,7 @@ the middle can be expressed as the trace of something) reduces to</p>
 </div></div>
 </div>
 <div class="section" id="the-full-model">
-<h2>2.1.3.2.2.4. The full model<a class="headerlink" href="#the-full-model" title="Permalink to this headline">¶</a></h2>
+<h2>The full model<a class="headerlink" href="#the-full-model" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div>The model then is</div></blockquote>
 <div class="math">
@@ -530,13 +490,13 @@ X_t &amp;\sim&amp; Normal(\mu_{z_i},  \Sigma_{z,i}^{-1})
 z_{i}     &amp;\sim&amp; Discrete(\nu_{z_i}) \\
 \end{array}"/></p>
 </div><div class="section" id="id4">
-<h3>2.1.3.2.2.4.1. The lower bound<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>The lower bound<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>All that changes in this lower bound in comparison to the previous one
 is that there are K priors on different <img class="math" src="../_images/math/7b887ca4d449002abecf59a472644a272dfcb605.png" alt="\Sigma"/> precision matrices
 and there are the correct indices on the bound for X.</p>
 </div>
 <div class="section" id="id5">
-<h3>2.1.3.2.2.4.2. The updates<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>The updates<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>All that changes in the updates is that the update for mu uses only
 the proper sigma and the updates for a and B don&#8217;t have a sum over K, so</p>
 <div class="math">
@@ -563,12 +523,8 @@ the proper sigma and the updates for a and B don&#8217;t have a sum over K, so</
         &copy; 2010 - 2016, scikit-learn developers (BSD License).
       <a href="../_sources/modules/dp-derivation.txt" rel="nofollow">Show this page source</a>
     </div>
-     <div class="rel">
+     <div class="rel rellarge">
     
-    <div class="buttonPrevious">
-      <a href="mixture.html">Previous
-      </a>
-    </div>
     
      </div>
 

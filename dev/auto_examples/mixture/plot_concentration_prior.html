@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Bayesian Gaussian Mixture Concentration Prior Analysis &mdash; scikit-learn 0.18.dev0 documentation</title>
+    <title>Concentration Prior Type Analysis of Variation Bayesian Gaussian Mixture &mdash; scikit-learn 0.18.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -37,13 +37,13 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
     <link rel="up" title="General examples" href="../index.html" />
-    <link rel="next" title="GMM covariances" href="plot_gmm_covariances.html" />
-    <link rel="prev" title="Gaussian Mixture Model Selection" href="plot_gmm_selection.html" />
+    <link rel="next" title="Plotting Validation Curves" href="../model_selection/plot_validation_curve.html" />
+    <link rel="prev" title="Gaussian Mixture Model Sine Curve" href="plot_gmm_sin.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
-  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/mixture/plot_bayesian_gaussian_mixture.html" />
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/mixture/plot_concentration_prior.html" />
 
   <script type="text/javascript">
     $("div.buttonNext, div.buttonPrevious").hover(
@@ -129,14 +129,14 @@
   <!-- rellinks[1:] is an ugly hack to avoid link to module
   index -->
         <div class="rellink">
-        <a href="plot_gmm_selection.html"
+        <a href="plot_gmm_sin.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         Gaussian Mixt...
         </span>
             <span class="hiddenrellink">
-            Gaussian Mixture Model Selection
+            Gaussian Mixture Model Sine Curve
             </span>
         </a>
         </div>
@@ -163,7 +163,7 @@
       <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.dev0</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
     <ul>
-<li><a class="reference internal" href="#">Bayesian Gaussian Mixture Concentration Prior Analysis</a></li>
+<li><a class="reference internal" href="#">Concentration Prior Type Analysis of Variation Bayesian Gaussian Mixture</a></li>
 </ul>
 
     </div>
@@ -181,19 +181,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="bayesian-gaussian-mixture-concentration-prior-analysis">
-<span id="sphx-glr-auto-examples-mixture-plot-bayesian-gaussian-mixture-py"></span><h1>Bayesian Gaussian Mixture Concentration Prior Analysis<a class="headerlink" href="#bayesian-gaussian-mixture-concentration-prior-analysis" title="Permalink to this headline">¶</a></h1>
-<p>Plot the resulting ellipsoids of a mixture of three Gaussians with
-variational Bayesian Gaussian Mixture for three different values on the
-prior the dirichlet concentration.</p>
-<p>For all models, the Variationnal Bayesian Gaussian Mixture adapts its number of
-mixture automatically. The parameter <cite>dirichlet_concentration_prior</cite> has a
-direct link with the resulting number of components. Specifying a high value of
-<cite>dirichlet_concentration_prior</cite> leads more often to uniformly-sized mixture
-components, while specifying small (under 0.1) values will lead to some mixture
-components getting almost all the points while most mixture components will be
-centered on just a few of the remaining points.</p>
-<img alt="../../_images/sphx_glr_plot_bayesian_gaussian_mixture_001.png" class="align-center" src="../../_images/sphx_glr_plot_bayesian_gaussian_mixture_001.png" />
+  <div class="section" id="concentration-prior-type-analysis-of-variation-bayesian-gaussian-mixture">
+<span id="sphx-glr-auto-examples-mixture-plot-concentration-prior-py"></span><h1>Concentration Prior Type Analysis of Variation Bayesian Gaussian Mixture<a class="headerlink" href="#concentration-prior-type-analysis-of-variation-bayesian-gaussian-mixture" title="Permalink to this headline">¶</a></h1>
+<p>This example plots the ellipsoids obtained from a toy dataset (mixture of three
+Gaussians) fitted by the <code class="docutils literal"><span class="pre">BayesianGaussianMixture</span></code> class models with a
+Dirichlet distribution prior
+(<code class="docutils literal"><span class="pre">weight_concentration_prior_type='dirichlet_distribution'</span></code>) and a Dirichlet
+process prior (<code class="docutils literal"><span class="pre">weight_concentration_prior_type='dirichlet_process'</span></code>). On
+each figure, we plot the results for three different values of the weight
+concentration prior.</p>
+<p>The <code class="docutils literal"><span class="pre">BayesianGaussianMixture</span></code> class can adapt its number of mixture
+componentsautomatically. The parameter <code class="docutils literal"><span class="pre">weight_concentration_prior</span></code> has a
+direct link with the resulting number of components with non-zero weights.
+Specifying a low value for the concentration prior will make the model put most
+of the weight on few components set the remaining components weights very close
+to zero. High values of the concentration prior will allow a larger number of
+components to be active in the mixture.</p>
+<p>The Dirichlet process prior allows to define an infinite number of components
+and automatically selects the correct number of components: it activates a
+component only if it is necessary.</p>
+<p>On the contrary the classical finite mixture model with a Dirichlet
+distribution prior will favor more uniformly weighted components and therefore
+tends to divide natural clusters into unnecessary sub-components.</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_concentration_prior_001.png"><img alt="../../_images/sphx_glr_plot_concentration_prior_001.png" src="../../_images/sphx_glr_plot_concentration_prior_001.png" style="width: 662.7px; height: 376.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_concentration_prior_002.png"><img alt="../../_images/sphx_glr_plot_concentration_prior_002.png" src="../../_images/sphx_glr_plot_concentration_prior_002.png" style="width: 662.7px; height: 376.0px;" /></a>
+</li>
+</ul>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Author: Thierry Guillemot &lt;thierry.guillemot.work@gmail.com&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
@@ -209,23 +224,23 @@ centered on just a few of the remaining points.</p>
 
 <span class="k">def</span> <span class="nf">plot_ellipses</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">covars</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">means</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linalg.eigh.html#numpy.linalg.eigh"><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span></a><span class="p">(</span><span class="n">covars</span><span class="p">[</span><span class="n">n</span><span class="p">][:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linalg.norm.html#numpy.linalg.norm"><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">angle</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arctan2.html#numpy.arctan2"><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span></a><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">angle</span> <span class="o">=</span> <span class="mi">180</span> <span class="o">*</span> <span class="n">angle</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># convert to degrees</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="n">ell</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Ellipse</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span> <span class="o">+</span> <span class="n">angle</span><span class="p">)</span>
+        <span class="n">eig_vals</span><span class="p">,</span> <span class="n">eig_vecs</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linalg.eigh.html#numpy.linalg.eigh"><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span></a><span class="p">(</span><span class="n">covars</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+        <span class="n">unit_eig_vec</span> <span class="o">=</span> <span class="n">eig_vecs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linalg.norm.html#numpy.linalg.norm"><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">eig_vecs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">angle</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arctan2.html#numpy.arctan2"><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span></a><span class="p">(</span><span class="n">unit_eig_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">unit_eig_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Ellipse needs degrees</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="mi">180</span> <span class="o">*</span> <span class="n">angle</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="c1"># eigenvector normalization</span>
+        <span class="n">eig_vals</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">eig_vals</span><span class="p">)</span>
+        <span class="n">ell</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Ellipse</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">eig_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">eig_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                  <span class="mi">180</span> <span class="o">+</span> <span class="n">angle</span><span class="p">)</span>
         <span class="n">ell</span><span class="o">.</span><span class="n">set_clip_box</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
         <span class="n">ell</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+        <span class="n">ell</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#56B4E9&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">ell</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">dirichlet_concentration_prior</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-    <span class="n">estimator</span><span class="o">.</span><span class="n">dirichlet_concentration_prior</span> <span class="o">=</span> <span class="n">dirichlet_concentration_prior</span>
-    <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bayesian Gaussian Mixture for &quot;</span>
-                  <span class="s2">r&quot;$dc_0=</span><span class="si">%.1e</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">dirichlet_concentration_prior</span><span class="p">)</span>
-    <span class="c1"># ax1.axis(&#39;equal&#39;)</span>
+<span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
@@ -237,7 +252,7 @@ centered on just a few of the remaining points.</p>
     <span class="n">ax2</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">estimator</span><span class="o">.</span><span class="n">weights_</span><span class="p">):</span>
-        <span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="o">.</span><span class="mi">45</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;royalblue&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="o">.</span><span class="mi">45</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#56B4E9&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="o">+</span> <span class="mf">0.007</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="mf">100.</span><span class="p">),</span>
                  <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-.</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_components</span> <span class="o">-</span> <span class="o">.</span><span class="mi">4</span><span class="p">)</span>
@@ -250,12 +265,10 @@ centered on just a few of the remaining points.</p>
         <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Estimated Mixtures&#39;</span><span class="p">)</span>
         <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Weight of each component&#39;</span><span class="p">)</span>
 
-<span class="c1"># Parameters</span>
-<span class="n">random_state</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span>
-<span class="n">colors</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="s1">&#39;mediumseagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;royalblue&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;orchid&#39;</span><span class="p">,</span> <span class="s1">&#39;indigo&#39;</span><span class="p">,</span> <span class="s1">&#39;darkcyan&#39;</span><span class="p">,</span> <span class="s1">&#39;tomato&#39;</span><span class="p">])</span>
-<span class="n">dirichlet_concentration_prior</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Parameters of the dataset</span>
+<span class="n">random_state</span><span class="p">,</span> <span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">colors</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="s1">&#39;#0072B2&#39;</span><span class="p">,</span> <span class="s1">&#39;#F0E442&#39;</span><span class="p">,</span> <span class="s1">&#39;#D55E00&#39;</span><span class="p">])</span>
+
 <span class="n">covars</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([[[</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="o">.</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">]],</span>
                    <span class="p">[[</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">]],</span>
                    <span class="p">[[</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">]]])</span>
@@ -264,13 +277,20 @@ centered on just a few of the remaining points.</p>
                   <span class="p">[</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">0</span><span class="p">],</span>
                   <span class="p">[</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">70</span><span class="p">]])</span>
 
-
-<span class="c1"># Here we put beta_prior to 0.8 to minimize the influence of the prior for this</span>
-<span class="c1"># dataset</span>
-<span class="n">estimator</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture"><span class="n">BayesianGaussianMixture</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_components</span><span class="p">,</span>
-                                    <span class="n">init_params</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span>
-                                    <span class="n">mean_precision_prior</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span>
-                                    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+<span class="c1"># mean_precision_prior= 0.8 to minimize the influence of the prior</span>
+<span class="n">estimators</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Finite mixture with a Dirichlet distribution</span><span class="se">\n</span><span class="s2">prior and &quot;</span>
+     <span class="s2">r&quot;$\gamma_0=$&quot;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture"><span class="n">BayesianGaussianMixture</span></a><span class="p">(</span>
+        <span class="n">weight_concentration_prior_type</span><span class="o">=</span><span class="s2">&quot;dirichlet_distribution&quot;</span><span class="p">,</span>
+        <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_components</span><span class="p">,</span> <span class="n">reg_covar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span>
+        <span class="n">max_iter</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">mean_precision_prior</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">&quot;Infinite mixture with a Dirichlet process</span><span class="se">\n</span><span class="s2"> prior and&quot;</span> <span class="s2">r&quot;$\gamma_0=$&quot;</span><span class="p">,</span>
+     <a href="../../modules/generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture"><span class="n">BayesianGaussianMixture</span></a><span class="p">(</span>
+        <span class="n">weight_concentration_prior_type</span><span class="o">=</span><span class="s2">&quot;dirichlet_process&quot;</span><span class="p">,</span>
+        <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_components</span><span class="p">,</span> <span class="n">reg_covar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span>
+        <span class="n">max_iter</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">mean_precision_prior</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">])]</span>
 
 <span class="c1"># Generate data</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
@@ -280,25 +300,29 @@ centered on just a few of the remaining points.</p>
 <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.concatenate.html#numpy.concatenate"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span></a><span class="p">([</span><span class="n">j</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.ones.html#numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">)])</span>
 
-<span class="c1"># Plot Results</span>
-<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.7</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">bottom</span><span class="o">=.</span><span class="mo">04</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=.</span><span class="mo">05</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=.</span><span class="mo">05</span><span class="p">,</span>
-                    <span class="n">left</span><span class="o">=.</span><span class="mo">03</span><span class="p">,</span> <span class="n">right</span><span class="o">=.</span><span class="mi">97</span><span class="p">)</span>
+<span class="c1"># Plot results in two different figures</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">concentrations_prior</span><span class="p">)</span> <span class="ow">in</span> <span class="n">estimators</span><span class="p">:</span>
+    <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.7</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">bottom</span><span class="o">=.</span><span class="mo">04</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=.</span><span class="mo">05</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=.</span><span class="mo">05</span><span class="p">,</span>
+                        <span class="n">left</span><span class="o">=.</span><span class="mo">03</span><span class="p">,</span> <span class="n">right</span><span class="o">=.</span><span class="mi">99</span><span class="p">)</span>
 
-<span class="n">gs</span> <span class="o">=</span> <a href="http://matplotlib.org/api/gridspec_api.html#matplotlib.gridspec.GridSpec"><span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dirichlet_concentration_prior</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">dc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dirichlet_concentration_prior</span><span class="p">):</span>
-    <span class="n">plot_results</span><span class="p">(</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="p">]),</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="p">]),</span>
-                 <span class="n">estimator</span><span class="p">,</span> <span class="n">dc</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">gs</span> <span class="o">=</span> <a href="http://matplotlib.org/api/gridspec_api.html#matplotlib.gridspec.GridSpec"><span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">concentrations_prior</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">concentration</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">concentrations_prior</span><span class="p">):</span>
+        <span class="n">estimator</span><span class="o">.</span><span class="n">weight_concentration_prior</span> <span class="o">=</span> <span class="n">concentration</span>
+        <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">plot_results</span><span class="p">(</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="p">]),</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="p">]),</span> <span class="n">estimator</span><span class="p">,</span>
+                     <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">r&quot;</span><span class="si">%s</span><span class="s2">$</span><span class="si">%.1e</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">concentration</span><span class="p">),</span>
+                     <span class="n">plot_title</span><span class="o">=</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 13.835 seconds)</p>
+(0 minutes 17.758 seconds)</p>
 <div class="sphx-glr-download container">
-<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_bayesian_gaussian_mixture.py" download=""><code class="xref download docutils literal"><span class="pre">plot_bayesian_gaussian_mixture.py</span></code></a></div>
+<strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_concentration_prior.py" download=""><code class="xref download docutils literal"><span class="pre">plot_concentration_prior.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_bayesian_gaussian_mixture.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_bayesian_gaussian_mixture.ipynb</span></code></a></div>
+<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../../_downloads/plot_concentration_prior.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_concentration_prior.ipynb</span></code></a></div>
 </div>
 
 
@@ -311,12 +335,12 @@ centered on just a few of the remaining points.</p>
 
     <div class="footer">
         &copy; 2010 - 2016, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/mixture/plot_bayesian_gaussian_mixture.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/mixture/plot_concentration_prior.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_gmm_selection.html">Previous
+      <a href="plot_gmm_sin.html">Previous
       </a>
     </div>
     

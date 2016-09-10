@@ -37,7 +37,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../index.html" />
     <link rel="up" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
-    <link rel="next" title="2.1.3.2.1. Variational Gaussian Mixture Models" href="dp-derivation.html" />
+    <link rel="next" title="2.2. Manifold learning" href="manifold.html" />
     <link rel="prev" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
   
   
@@ -170,26 +170,18 @@
 <li><a class="reference internal" href="#cons">2.1.1.1.2. Cons</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#selecting-the-number-of-components-in-a-classical-gmm">2.1.1.2. Selecting the number of components in a classical GMM</a></li>
+<li><a class="reference internal" href="#selecting-the-number-of-components-in-a-classical-gaussian-mixture-model">2.1.1.2. Selecting the number of components in a classical Gaussian Mixture Model</a></li>
 <li><a class="reference internal" href="#estimation-algorithm-expectation-maximization">2.1.1.3. Estimation algorithm Expectation-maximization</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#bayesian-gaussian-mixture">2.1.2. Bayesian Gaussian Mixture</a><ul>
+<li><a class="reference internal" href="#variational-bayesian-gaussian-mixture">2.1.2. Variational Bayesian Gaussian Mixture</a><ul>
 <li><a class="reference internal" href="#estimation-algorithm-variational-inference">2.1.2.1. Estimation algorithm: variational inference</a></li>
-<li><a class="reference internal" href="#pros-and-cons-of-variational-inference-with-class-bayesiangaussianmixture">2.1.2.2. Pros and cons of variational inference with :class:BayesianGaussianMixture</a><ul>
+<li><a class="reference internal" href="#pros-and-cons-of-variational-inference-with-bayesiangaussianmixture">2.1.2.2. Pros and cons of variational inference with <code class="docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a><ul>
 <li><a class="reference internal" href="#id2">2.1.2.2.1. Pros</a></li>
 <li><a class="reference internal" href="#id3">2.1.2.2.2. Cons</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="reference internal" href="#dpgmm-infinite-gaussian-mixtures">2.1.3. DPGMM: Infinite Gaussian mixtures</a><ul>
-<li><a class="reference internal" href="#pros-and-cons-of-class-dpgmm-dirichlet-process-mixture-model">2.1.3.1. Pros and cons of class <code class="docutils literal"><span class="pre">DPGMM</span></code>: Dirichlet process mixture model</a><ul>
-<li><a class="reference internal" href="#id4">2.1.3.1.1. Pros</a></li>
-<li><a class="reference internal" href="#id5">2.1.3.1.2. Cons</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#the-dirichlet-process">2.1.3.2. The Dirichlet Process</a></li>
+<li><a class="reference internal" href="#the-dirichlet-process">2.1.2.3. The Dirichlet Process</a></li>
 </ul>
 </li>
 </ul>
@@ -213,13 +205,13 @@
             
   <div class="section" id="gaussian-mixture-models">
 <span id="gmm"></span><span id="mixture"></span><h1>2.1. Gaussian mixture models<a class="headerlink" href="#gaussian-mixture-models" title="Permalink to this headline">¶</a></h1>
-<p><cite>sklearn.mixture</cite> is a package which enables one to learn
+<p><code class="docutils literal"><span class="pre">sklearn.mixture</span></code> is a package which enables one to learn
 Gaussian Mixture Models (diagonal, spherical, tied and full covariance
 matrices supported), sample them, and estimate them from
 data. Facilities to help determine the appropriate number of
 components are also provided.</p>
 <blockquote>
-<div><div class="figure align-center" id="id6">
+<div><div class="figure align-center" id="id4">
 <a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_pdf.html"><img alt="../_images/sphx_glr_plot_gmm_pdf_0011.png" src="../_images/sphx_glr_plot_gmm_pdf_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
 <p class="caption"><span class="caption-text"><strong>Two-component Gaussian mixture model:</strong> <em>data points, and equi-probability
 surfaces of the model.</em></span></p>
@@ -298,13 +290,15 @@ in the absence of external cues.</td>
 </table>
 </div>
 </div>
-<div class="section" id="selecting-the-number-of-components-in-a-classical-gmm">
-<h3>2.1.1.2. Selecting the number of components in a classical GMM<a class="headerlink" href="#selecting-the-number-of-components-in-a-classical-gmm" title="Permalink to this headline">¶</a></h3>
-<p>The BIC criterion can be used to select the number of components in a GMM
-in an efficient way. In theory, it recovers the true number of components
-only in the asymptotic regime (i.e. if much data is available).
-Note that using a <a class="reference internal" href="#dpgmm"><span class="std std-ref">DPGMM</span></a> avoids the specification of the
-number of components for a Gaussian mixture model.</p>
+<div class="section" id="selecting-the-number-of-components-in-a-classical-gaussian-mixture-model">
+<h3>2.1.1.2. Selecting the number of components in a classical Gaussian Mixture Model<a class="headerlink" href="#selecting-the-number-of-components-in-a-classical-gaussian-mixture-model" title="Permalink to this headline">¶</a></h3>
+<p>The BIC criterion can be used to select the number of components in a Gaussian
+Mixture in an efficient way. In theory, it recovers the true number of
+components only in the asymptotic regime (i.e. if much data is available and
+assuming that the data was actually generated i.i.d. from a mixture of Gaussian
+distribution). Note that using a <a class="reference internal" href="#bgmm"><span class="std std-ref">Variational Bayesian Gaussian mixture</span></a>
+avoids the specification of the number of components for a Gaussian mixture
+model.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_selection.html"><img alt="../_images/sphx_glr_plot_gmm_selection_0011.png" src="../_images/sphx_glr_plot_gmm_selection_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
 </div>
@@ -334,10 +328,11 @@ assignments. Repeating this process is guaranteed to always converge
 to a local optimum.</p>
 </div>
 </div>
-<div class="section" id="bayesian-gaussian-mixture">
-<span id="bgmm"></span><h2>2.1.2. Bayesian Gaussian Mixture<a class="headerlink" href="#bayesian-gaussian-mixture" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a> object implements a variant of the Gaussian
-mixture model with variational inference algorithms.</p>
+<div class="section" id="variational-bayesian-gaussian-mixture">
+<span id="bgmm"></span><h2>2.1.2. Variational Bayesian Gaussian Mixture<a class="headerlink" href="#variational-bayesian-gaussian-mixture" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a> object implements a variant of the
+Gaussian mixture model with variational inference algorithms. The API is
+similar as the one defined by <a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture" title="sklearn.mixture.GaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code></a>.</p>
 <div class="section" id="estimation-algorithm-variational-inference">
 <span id="variational-inference"></span><h3>2.1.2.1. Estimation algorithm: variational inference<a class="headerlink" href="#estimation-algorithm-variational-inference" title="Permalink to this headline">¶</a></h3>
 <p>Variational inference is an extension of expectation-maximization that
@@ -346,50 +341,104 @@ priors) instead of data likelihood. The principle behind
 variational methods is the same as expectation-maximization (that is
 both are iterative algorithms that alternate between finding the
 probabilities for each point to be generated by each mixture and
-fitting the mixtures to these assigned points), but variational
+fitting the mixture to these assigned points), but variational
 methods add regularization by integrating information from prior
 distributions. This avoids the singularities often found in
 expectation-maximization solutions but introduces some subtle biases
 to the model. Inference is often notably slower, but not usually as
 much so as to render usage unpractical.</p>
-<p>Due to its Bayesian nature, the variational algorithm needs more
-hyper-parameters than expectation-maximization, the most
-important of these being the concentration parameter <code class="docutils literal"><span class="pre">dirichlet_concentration_prior</span></code>. Specifying
-a high value of prior of the dirichlet concentration leads more often to uniformly-sized mixture
-components, while specifying small (between 0 and 1) values will lead
-to some mixture components getting almost all the points while most
-mixture components will be centered on just a few of the remaining
-points.</p>
+<p>Due to its Bayesian nature, the variational algorithm needs more hyper-
+parameters than expectation-maximization, the most important of these being the
+concentration parameter <code class="docutils literal"><span class="pre">weight_concentration_prior</span></code>. Specifying a low value
+for the concentration prior will make the model put most of the weight on few
+components set the remaining components weights very close to zero. High values
+of the concentration prior will allow a larger number of components to be active
+in the mixture.</p>
+<p>The parameters implementation of the <a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a> class
+proposes two types of prior for the weights distribution: a finite mixture model
+with Dirichlet distribution and an infinite mixture model with the Dirichlet
+Process. In practice Dirichlet Process inference algorithm is approximated and
+uses a truncated distribution with a fixed maximum number of components (called
+the Stick-breaking representation). The number of components actually used
+almost always depends on the data.</p>
+<p>The next figure compares the results obtained for the different type of the
+weight concentration prior (parameter <code class="docutils literal"><span class="pre">weight_concentration_prior_type</span></code>)
+for different values of <code class="docutils literal"><span class="pre">weight_concentration_prior</span></code>.
+Here, we can see the the value of the <code class="docutils literal"><span class="pre">weight_concentration_prior</span></code> parameter
+has a strong impact on the effective number of active components obtained. We
+can also notice that large values for the concentration weight prior lead to
+more uniform weights when the type of prior is &#8216;dirichlet_distribution&#8217; while
+this is not necessarily the case for the &#8216;dirichlet_process&#8217; type (used by
+default).</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/mixture/plot_gmm.html"><img alt="plot_bgmm" src="../_images/sphx_glr_plot_concentration_prior_0021.png" style="width: 676.8px; height: 384.0px;" /></a> <a class="reference external" href="../auto_examples/mixture/plot_concentration_prior.html"><img alt="plot_dpgmm" src="../_images/sphx_glr_plot_concentration_prior_0021.png" style="width: 676.8px; height: 384.0px;" /></a></strong></p><p>The examples below compare Gaussian mixture models with a fixed number of
+components, to the variational Gaussian mixture models with a Dirichlet process
+prior. Here, a classical Gaussian mixture is fitted with 5 components on a
+dataset composed of 2 clusters. We can see that the variational Gaussian mixture
+with a Dirichlet process prior is able to limit itself to only 2 components
+whereas the Gaussian mixture fits the data with a fixed number of components
+that has to be set a priori by the user. In this case the user has selected
+<code class="docutils literal"><span class="pre">n_components=5</span></code> which does not match the true generative distribution of this
+toy dataset. Note that with very little observations, the variational Gaussian
+mixture models with a Dirichlet process prior can take a conservative stand, and
+fit only one component.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/mixture/plot_bayesian_gaussian_mixture.html"><img alt="../_images/sphx_glr_plot_bayesian_gaussian_mixture_0011.png" src="../_images/sphx_glr_plot_bayesian_gaussian_mixture_0011.png" style="width: 705.0px; height: 400.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm.html"><img alt="../_images/sphx_glr_plot_gmm_0011.png" src="../_images/sphx_glr_plot_gmm_0011.png" style="width: 560.0px; height: 420.0px;" /></a>
+</div>
+<p>On the following figure we are fitting a dataset not well-depicted by a
+Gaussian mixture. Adjusting the <code class="docutils literal"><span class="pre">weight_concentration_prior</span></code>, parameter of the
+class:<cite>BayesianGaussianMixture</cite> controls the number of components used to fit
+this data. We also present on the last two plots a random sampling generated
+from the two resulting mixtures.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_sin.html"><img alt="../_images/sphx_glr_plot_gmm_sin_0011.png" src="../_images/sphx_glr_plot_gmm_sin_0011.png" style="width: 650.0px; height: 650.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li>See <span class="xref std std-ref">sphx_glr_auto_examples_plot_bayesian_gaussian_mixture.py</span> for a comparaison of
-the results of the <code class="docutils literal"><span class="pre">BayesianGaussianMixture</span></code> for different values
-of the parameter <code class="docutils literal"><span class="pre">dirichlet_concentration_prior</span></code>.</li>
+<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm.html#sphx-glr-auto-examples-mixture-plot-gmm-py"><span class="std std-ref">Gaussian Mixture Model Ellipsoids</span></a> for an example on
+plotting the confidence ellipsoids for both <a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture" title="sklearn.mixture.GaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code></a>
+and <a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a>.</li>
+<li><a class="reference internal" href="../auto_examples/mixture/plot_gmm_sin.html#sphx-glr-auto-examples-mixture-plot-gmm-sin-py"><span class="std std-ref">Gaussian Mixture Model Sine Curve</span></a> shows using
+<a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture" title="sklearn.mixture.GaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code></a> and <a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a> to fit a
+sine wave.</li>
+<li>See <a class="reference internal" href="../auto_examples/mixture/plot_concentration_prior.html#sphx-glr-auto-examples-mixture-plot-concentration-prior-py"><span class="std std-ref">Concentration Prior Type Analysis of Variation Bayesian Gaussian Mixture</span></a>
+for an example plotting the confidence ellipsoids for the
+<a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a> with different
+<code class="docutils literal"><span class="pre">weight_concentration_prior_type</span></code> for different values of the parameter
+<code class="docutils literal"><span class="pre">weight_concentration_prior</span></code>.</li>
 </ul>
 </div>
 </div>
-<div class="section" id="pros-and-cons-of-variational-inference-with-class-bayesiangaussianmixture">
-<h3>2.1.2.2. Pros and cons of variational inference with :class:BayesianGaussianMixture<a class="headerlink" href="#pros-and-cons-of-variational-inference-with-class-bayesiangaussianmixture" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pros-and-cons-of-variational-inference-with-bayesiangaussianmixture">
+<h3>2.1.2.2. Pros and cons of variational inference with <a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">BayesianGaussianMixture</span></code></a><a class="headerlink" href="#pros-and-cons-of-variational-inference-with-bayesiangaussianmixture" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id2">
 <h4>2.1.2.2.1. Pros<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Automatic selection:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">when <code class="docutils literal"><span class="pre">weight_concentration_prior</span></code> is small enough and
+<code class="docutils literal"><span class="pre">n_components</span></code> is larger than what is found necessary by the model, the
+Variational Bayesian mixture model has a natural tendency to set some mixture
+weights values close to zero. This makes it possible to let the model choose
+a suitable number of effective components automatically. Only an upper bound
+of this number needs to be provided. Note however that the &#8220;ideal&#8221; number of
+active components is very application specific and is typically ill-defined
+in a data exploration setting.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Less sensitivity to the number of parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">unlike finite models, which will
+almost always use all components as much as they can, and hence will produce
+wildly different solutions for different numbers of components, the
+variantional inference with a Dirichlet process prior
+(<code class="docutils literal"><span class="pre">weight_concentration_prior_type='dirichlet_process'</span></code>) won&#8217;t change much
+with changes to the parameters, leading to more stability and less tuning.</td>
+</tr>
 <tr class="field-odd field"><th class="field-name">Regularization:</th><td class="field-body">due to the incorporation of prior information,
 variational solutions have less pathological special cases than
 expectation-maximization solutions.</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Automatic selection:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">when <cite>dirichlet_concentration_prior</cite> is small enough and
-<cite>n_components</cite> is larger than what is found necessary by the model, the
-Variational Bayesian mixture model has a natural tendency to set some mixture
-weights values close to zero. This makes it possible to let the model choose a
-suitable number of effective components automatically.</td>
 </tr>
 </tbody>
 </table>
@@ -400,91 +449,16 @@ suitable number of effective components automatically.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Bias:</th><td class="field-body">to regularize a model one has to add biases. The
-variational algorithm will bias all the means towards the origin
-(part of the prior information adds a &#8220;ghost point&#8221; in the origin
-to every mixture component) and it will bias the covariances to
-be more spherical. It will also, depending on the concentration
-parameter, bias the cluster structure either towards uniformity
-or towards a rich-get-richer scenario.</td>
+<tr class="field-odd field"><th class="field-name">Speed:</th><td class="field-body">the extra parametrization necessary for variational inference make
+inference slower, although not by much.</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Hyperparameters:</th></tr>
 <tr class="field-even field"><td>&nbsp;</td><td class="field-body">this algorithm needs an extra hyperparameter
 that might need experimental tuning via cross-validation.</td>
 </tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="section" id="dpgmm-infinite-gaussian-mixtures">
-<span id="dpgmm"></span><h2>2.1.3. DPGMM: Infinite Gaussian mixtures<a class="headerlink" href="#dpgmm-infinite-gaussian-mixtures" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a> object implements a variant of the Gaussian mixture
-model with a variable (but bounded) number of components using the
-Dirichlet Process.
-This class doesn&#8217;t require the user to choose the number of
-components, and at the expense of extra computational time the user
-only needs to specify a loose upper bound on this number and a
-concentration parameter.</p>
-<p class="centered">
-<strong><a class="reference external" href="../auto_examples/mixture/plot_gmm.html"><img alt="plot_gmm" src="../_images/sphx_glr_plot_gmm_0011.png" style="width: 384.0px; height: 288.0px;" /></a> <a class="reference external" href="../auto_examples/mixture/plot_gmm_sin.html"><img alt="plot_gmm_sin" src="../_images/sphx_glr_plot_gmm_sin_0011.png" style="width: 384.0px; height: 288.0px;" /></a></strong></p><p>The examples above compare Gaussian mixture models with fixed number of
-components, to DPGMM models. <strong>On the left</strong> the GMM is fitted with 5
-components on a dataset composed of 2 clusters. We can see that the DPGMM is
-able to limit itself to only 2 components whereas the GMM fits the data fit too
-many components. Note that with very little observations, the DPGMM can take a
-conservative stand, and fit only one component. <strong>On the right</strong> we are fitting
-a dataset not well-depicted by a Gaussian mixture. Adjusting the <cite>alpha</cite>
-parameter of the DPGMM controls the number of components used to fit this
-data.</p>
-<div class="topic">
-<p class="topic-title first">Examples:</p>
-<ul class="simple">
-<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm.html#sphx-glr-auto-examples-mixture-plot-gmm-py"><span class="std std-ref">Gaussian Mixture Model Ellipsoids</span></a> for an example on plotting the
-confidence ellipsoids for both <a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture" title="sklearn.mixture.GaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code></a>
-and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>.</li>
-<li><a class="reference internal" href="../auto_examples/mixture/plot_gmm_sin.html#sphx-glr-auto-examples-mixture-plot-gmm-sin-py"><span class="std std-ref">Gaussian Mixture Model Sine Curve</span></a> shows using
-<a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture" title="sklearn.mixture.GaussianMixture"><code class="xref py py-class docutils literal"><span class="pre">GaussianMixture</span></code></a> and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a> to fit a sine wave</li>
-</ul>
-</div>
-<div class="section" id="pros-and-cons-of-class-dpgmm-dirichlet-process-mixture-model">
-<h3>2.1.3.1. Pros and cons of class <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>: Dirichlet process mixture model<a class="headerlink" href="#pros-and-cons-of-class-dpgmm-dirichlet-process-mixture-model" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id4">
-<h4>2.1.3.1.1. Pros<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Less sensitivity to the number of parameters:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">unlike finite
-models, which will almost always use all components as much as
-they can, and hence will produce wildly different solutions for
-different numbers of components, the Dirichlet process solution
-won&#8217;t change much with changes to the parameters, leading to more
-stability and less tuning.</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">No need to specify the number of components:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">only an upper bound of
-this number needs to be provided. Note however that the DPMM is not
-a formal model selection procedure, and thus provides no guarantee
-on the result.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="id5">
-<h4>2.1.3.1.2. Cons<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Speed:</th><td class="field-body">the extra parametrization necessary for variational
-inference and for the structure of the Dirichlet process can and
-will make inference slower, although not by much.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Bias:</th><td class="field-body">as in variational techniques, but only more so, there are
-many implicit biases in the Dirichlet process and the inference
-algorithms, and whenever there is a mismatch between these biases
-and the data it might be possible to fit better models using a
+<tr class="field-odd field"><th class="field-name">Bias:</th><td class="field-body">there are many implicit biases in the inference algorithms (and also in
+the Dirichlet process if used), and whenever there is a mismatch between
+these biases and the data it might be possible to fit better models using a
 finite mixture.</td>
 </tr>
 </tbody>
@@ -492,34 +466,29 @@ finite mixture.</td>
 </div>
 </div>
 <div class="section" id="the-dirichlet-process">
-<span id="dirichlet-process"></span><h3>2.1.3.2. The Dirichlet Process<a class="headerlink" href="#the-dirichlet-process" title="Permalink to this headline">¶</a></h3>
+<span id="dirichlet-process"></span><h3>2.1.2.3. The Dirichlet Process<a class="headerlink" href="#the-dirichlet-process" title="Permalink to this headline">¶</a></h3>
 <p>Here we describe variational inference algorithms on Dirichlet process
-mixtures. The Dirichlet process is a prior probability distribution on
+mixture. The Dirichlet process is a prior probability distribution on
 <em>clusterings with an infinite, unbounded, number of partitions</em>.
 Variational techniques let us incorporate this prior structure on
 Gaussian mixture models at almost no penalty in inference time, comparing
 with a finite Gaussian mixture model.</p>
-<p>An important question is how can the Dirichlet process use an
-infinite, unbounded number of clusters and still be consistent. While
-a full explanation doesn&#8217;t fit this manual, one can think of its
-<a class="reference external" href="https://en.wikipedia.org/wiki/Chinese_restaurant_process">chinese restaurant process</a>
-analogy to help understanding it. The
-chinese restaurant process is a generative story for the Dirichlet
-process. Imagine a chinese restaurant with an infinite number of
-tables, at first all empty. When the first customer of the day
-arrives, he sits at the first table. Every following customer will
-then either sit on an occupied table with probability proportional to
-the number of customers in that table or sit in an entirely new table
-with probability proportional to the concentration parameter
-<cite>alpha</cite>. After a finite number of customers has sat, it is easy to see
-that only finitely many of the infinite tables will ever be used, and
-the higher the value of alpha the more total tables will be used. So
-the Dirichlet process does clustering with an unbounded number of
-mixture components by assuming a very asymmetrical prior structure
-over the assignments of points to components that is very concentrated
-(this property is known as rich-get-richer, as the full tables in the
-Chinese restaurant process only tend to get fuller as the simulation
-progresses).</p>
+<p>An important question is how can the Dirichlet process use an infinite,
+unbounded number of clusters and still be consistent. While a full explanation
+doesn&#8217;t fit this manual, one can think of its <cite>stick breaking process
+&lt;https://en.wikipedia.org/wiki/Dirichlet_process#The_stick-breaking_process&gt;</cite>
+analogy to help understanding it. The stick breaking process is a generative
+story for the Dirichlet process. We start with a unit-length stick and in each
+step we break off a portion of the remaining stick. Each time, we associate the
+length of the piece of the stick to the proportion of points that falls into a
+group of the mixture. At the end, to represent the infinite mixture, we
+associate the last remaining piece of the stick to the proportion of points
+that don&#8217;t fall into all the other groups. The length of each piece is random
+variable with probability proportional to the concentration parameter. Smaller
+value of the concentration will divide the unit-length into larger pieces of
+the stick (defining more concentrated distribution). Larger concentration
+values will create smaller pieces of the stick (increasing the number of
+components with non zero weights).</p>
 <p>Variational inference techniques for the Dirichlet process still work
 with a finite approximation to this infinite mixture model, but
 instead of having to specify a priori how many components one wants to
@@ -527,15 +496,6 @@ use, one just specifies the concentration parameter and an upper bound
 on the number of mixture components (this upper bound, assuming it is
 higher than the &#8220;true&#8221; number of components, affects only algorithmic
 complexity, not the actual number of components used).</p>
-<div class="topic">
-<p class="topic-title first">Derivation:</p>
-<ul class="simple">
-<li>See <a class="reference external" href="dp-derivation.html">here</a> the full derivation of this
-algorithm.</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-</div>
 </div>
 </div>
 </div>

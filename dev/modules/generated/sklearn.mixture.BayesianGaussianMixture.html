@@ -188,11 +188,21 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.mixture" title="sklearn.mixture"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.mixture</span></code></a>.BayesianGaussianMixture<a class="headerlink" href="#sklearn-mixture-bayesiangaussianmixture" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.mixture.BayesianGaussianMixture">
-<em class="property">class </em><code class="descclassname">sklearn.mixture.</code><code class="descname">BayesianGaussianMixture</code><span class="sig-paren">(</span><em>n_components=1</em>, <em>covariance_type='full'</em>, <em>tol=0.001</em>, <em>reg_covar=1e-06</em>, <em>max_iter=100</em>, <em>n_init=1</em>, <em>init_params='kmeans'</em>, <em>dirichlet_concentration_prior=None</em>, <em>mean_precision_prior=None</em>, <em>mean_prior=None</em>, <em>degrees_of_freedom_prior=None</em>, <em>covariance_prior=None</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>verbose=0</em>, <em>verbose_interval=20</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/mixture/bayesian_mixture.py#L65"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture" title="Permalink to this definition">¶</a></dt>
-<dd><p>Variational estimation of a Gaussian mixture.</p>
+<em class="property">class </em><code class="descclassname">sklearn.mixture.</code><code class="descname">BayesianGaussianMixture</code><span class="sig-paren">(</span><em>n_components=1</em>, <em>covariance_type='full'</em>, <em>tol=0.001</em>, <em>reg_covar=1e-06</em>, <em>max_iter=100</em>, <em>n_init=1</em>, <em>init_params='kmeans'</em>, <em>weight_concentration_prior_type='dirichlet_process'</em>, <em>weight_concentration_prior=None</em>, <em>mean_precision_prior=None</em>, <em>mean_prior=None</em>, <em>degrees_of_freedom_prior=None</em>, <em>covariance_prior=None</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>verbose=0</em>, <em>verbose_interval=10</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/bayesian_mixture.py#L65"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variational Bayesian estimation of a Gaussian mixture.</p>
 <p>This class allows to infer an approximate posterior distribution over the
 parameters of a Gaussian mixture distribution. The effective number of
 components can be inferred from the data.</p>
+<p>This class implements two types of prior for the weights distribution: a
+finite mixture model with Dirichlet distribution and an infinite mixture
+model with the Dirichlet Process. In practice Dirichlet Process inference
+algorithm is approximated and uses a truncated distribution with a fixed
+maximum number of components (called the Stick-breaking representation).
+The number of components actually used almost always depends on the data.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.18.</span></p>
+</div>
+<p><em>BayesianGaussianMixture</em>.</p>
 <p>Read more in the <a class="reference internal" href="../mixture.html#bgmm"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -201,7 +211,7 @@ components can be inferred from the data.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int, defaults to 1.</p>
 <blockquote>
 <div><p>The number of mixture components. Depending on the data and the value
-of the <cite>dirichlet_concentration_prior</cite> the model can decide to not use
+of the <cite>weight_concentration_prior</cite> the model can decide to not use
 all the components by setting some component <cite>weights_</cite> to values very
 close to zero. The number of effective components is therefore smaller
 than n_components.</p>
@@ -210,10 +220,10 @@ than n_components.</p>
 <blockquote>
 <div><p>String describing the type of covariance parameters to use.
 Must be one of::
-&#8216;full&#8217; (each component has its own general covariance matrix).
+&#8216;full&#8217; (each component has its own general covariance matrix),
 &#8216;tied&#8217; (all components share the same general covariance matrix),
 &#8216;diag&#8217; (each component has its own diagonal covariance matrix),
-&#8216;spherical&#8217; (each component has its own single variance),</p>
+&#8216;spherical&#8217; (each component has its own single variance).</p>
 </div></blockquote>
 <p><strong>tol</strong> : float, defaults to 1e-3.</p>
 <blockquote>
@@ -243,7 +253,14 @@ Must be one of::
 &#8216;kmeans&#8217; : responsibilities are initialized using kmeans.
 &#8216;random&#8217; : responsibilities are initialized randomly.</p>
 </div></blockquote>
-<p><strong>dirichlet_concentration_prior</strong> : float | None, optional.</p>
+<p><strong>weight_concentration_prior_type</strong> : str, defaults to &#8216;dirichlet_process&#8217;.</p>
+<blockquote>
+<div><p>String describing the type of the weight concentration prior.
+Must be one of::
+&#8216;dirichlet_process&#8217; (using the Stick-breaking representation),
+&#8216;dirichlet_distribution&#8217; (can favor more uniform weights).</p>
+</div></blockquote>
+<p><strong>weight_concentration_prior</strong> : float | None, optional.</p>
 <blockquote>
 <div><p>The dirichlet concentration of each component on the weight
 distribution (Dirichlet). The higher concentration puts more mass in
@@ -256,7 +273,7 @@ than 0. If it is None, it&#8217;s set to <cite>1. / n_components</cite>.</p>
 <blockquote>
 <div><p>The precision prior on the mean distribution (Gaussian).
 Controls the extend to where means can be placed. Smaller
-values concentrates the means of each clusters around <cite>mean_prior</cite>.
+values concentrate the means of each clusters around <cite>mean_prior</cite>.
 The value of the parameter must be greater than 0.
 If it is None, it&#8217;s set to 1.</p>
 </div></blockquote>
@@ -298,6 +315,10 @@ convergence when fit is called several time on similar problems.</p>
 initialization and each iteration step. If greater than 1 then
 it prints also the log probability and the time needed
 for each step.</p>
+</div></blockquote>
+<p><strong>verbose_interval</strong> : int, default to 10.</p>
+<blockquote>
+<div><p>Number of iteration done before the next print.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -366,15 +387,21 @@ convergence.</p>
 <div><p>Lower bound value on the likelihood (of the training data with
 respect to the model) of the best fit of inference.</p>
 </div></blockquote>
-<p><strong>dirichlet_concentration_prior_</strong> : float</p>
+<p><strong>weight_concentration_prior_</strong> : tuple or float</p>
 <blockquote>
 <div><p>The dirichlet concentration of each component on the weight
-distribution (Dirichlet). The higher concentration puts more mass in
+distribution (Dirichlet). The type depends on
+<cite>weight_concentration_prior_type</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;dirichlet_process&#39;</span> <span class="p">(</span><span class="n">Beta</span> <span class="n">parameters</span><span class="p">),</span>
+<span class="nb">float</span>          <span class="k">if</span> <span class="s1">&#39;dirichlet_distribution&#39;</span> <span class="p">(</span><span class="n">Dirichlet</span> <span class="n">parameters</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The higher concentration puts more mass in
 the center and will lead to more components being active, while a lower
 concentration parameter will lead to more mass at the edge of the
 simplex.</p>
 </div></blockquote>
-<p><strong>dirichlet_concentration_</strong> : array-like, shape (<cite>n_components</cite>, )</p>
+<p><strong>weight_concentration_</strong> : array-like, shape (<cite>n_components</cite>, )</p>
 <blockquote>
 <div><p>The dirichlet concentration of each component on the weight
 distribution (Dirichlet).</p>
@@ -383,7 +410,7 @@ distribution (Dirichlet).</p>
 <blockquote>
 <div><p>The precision prior on the mean distribution (Gaussian).
 Controls the extend to where means can be placed.
-Smaller values concentrates the means of each clusters around
+Smaller values concentrate the means of each clusters around
 <cite>mean_prior</cite>.</p>
 </div></blockquote>
 <p><strong>mean_precision_</strong> : array-like, shape (<cite>n_components</cite>, )</p>
@@ -425,6 +452,30 @@ float                        if &#39;spherical&#39;
 <dd>Finite Gaussian mixture fit with EM.</dd>
 </dl>
 </div>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r231" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[R231]</a></td><td><a class="reference external" href="http://www.springer.com/kr/book/9780387310732">Bishop, Christopher M. (2006). &#8220;Pattern recognition and machine
+learning&#8221;. Vol. 4 No. 4. New York: Springer.</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r232" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[R232]</a></td><td><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.36.2841&amp;rep=rep1&amp;type=pdf">Hagai Attias. (2000). &#8220;A Variational Bayesian Framework for
+Graphical Models&#8221;. In Advances in Neural Information Processing
+Systems 12.</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r233" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[R233]</a></td><td><a href="#id1"><span class="problematic" id="id2">`</span></a>Blei, David M. and Michael I. Jordan. (2006). &#8220;Variational
+inference for Dirichlet process mixtures&#8221;. Bayesian analysis 1.1
+&lt;<a class="reference external" href="http://www.cs.princeton.edu/courses/archive/fall11/cos597C/reading/BleiJordan2005.pdf">http://www.cs.princeton.edu/courses/archive/fall11/cos597C/reading/BleiJordan2005.pdf</a>&gt;</td></tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -444,25 +495,28 @@ float                        if &#39;spherical&#39;
 <tr class="row-even"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.predict_proba" title="sklearn.mixture.BayesianGaussianMixture.predict_proba"><code class="xref py py-obj docutils literal"><span class="pre">predict_proba</span></code></a>(X)</td>
 <td>Predict posterior probability of data per each component.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.score" title="sklearn.mixture.BayesianGaussianMixture.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X[,&nbsp;y])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.sample" title="sklearn.mixture.BayesianGaussianMixture.sample"><code class="xref py py-obj docutils literal"><span class="pre">sample</span></code></a>([n_samples])</td>
+<td>Generate random samples from the fitted Gaussian distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.score" title="sklearn.mixture.BayesianGaussianMixture.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X[,&nbsp;y])</td>
 <td>Compute the per-sample average log-likelihood of the given data X.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.score_samples" title="sklearn.mixture.BayesianGaussianMixture.score_samples"><code class="xref py py-obj docutils literal"><span class="pre">score_samples</span></code></a>(X)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.score_samples" title="sklearn.mixture.BayesianGaussianMixture.score_samples"><code class="xref py py-obj docutils literal"><span class="pre">score_samples</span></code></a>(X)</td>
 <td>Compute the weighted log probabilities for each sample.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.set_params" title="sklearn.mixture.BayesianGaussianMixture.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(**params)</td>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.mixture.BayesianGaussianMixture.set_params" title="sklearn.mixture.BayesianGaussianMixture.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(**params)</td>
 <td>Set the parameters of this estimator.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=1</em>, <em>covariance_type='full'</em>, <em>tol=0.001</em>, <em>reg_covar=1e-06</em>, <em>max_iter=100</em>, <em>n_init=1</em>, <em>init_params='kmeans'</em>, <em>dirichlet_concentration_prior=None</em>, <em>mean_precision_prior=None</em>, <em>mean_prior=None</em>, <em>degrees_of_freedom_prior=None</em>, <em>covariance_prior=None</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>verbose=0</em>, <em>verbose_interval=20</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/mixture/bayesian_mixture.py#L256"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=1</em>, <em>covariance_type='full'</em>, <em>tol=0.001</em>, <em>reg_covar=1e-06</em>, <em>max_iter=100</em>, <em>n_init=1</em>, <em>init_params='kmeans'</em>, <em>weight_concentration_prior_type='dirichlet_process'</em>, <em>weight_concentration_prior=None</em>, <em>mean_precision_prior=None</em>, <em>mean_prior=None</em>, <em>degrees_of_freedom_prior=None</em>, <em>covariance_prior=None</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>verbose=0</em>, <em>verbose_interval=10</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/bayesian_mixture.py#L295"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/mixture/base.py#L169"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/base.py#L171"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate model parameters with the EM algorithm.</p>
 <p>The method fit the model <cite>n_init</cite> times and set the parameters with
 which the model has the largest likelihood or lower bound. Within each
@@ -489,7 +543,7 @@ corresponds to a single data point.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -514,7 +568,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/mixture/base.py#L320"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/base.py#L324"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict the labels for the data samples in X using trained model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -539,7 +593,7 @@ corresponds to a single data point.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/mixture/base.py#L338"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.predict_proba" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/base.py#L342"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.predict_proba" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict posterior probability of data per each component.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -564,8 +618,32 @@ corresponds to a single data point.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sklearn.mixture.BayesianGaussianMixture.sample">
+<code class="descname">sample</code><span class="sig-paren">(</span><em>n_samples=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/base.py#L362"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random samples from the fitted Gaussian distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_samples</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of samples to generate. Defaults to 1.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote class="last">
+<div><p>Randomly generated sample</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/mixture/base.py#L304"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/base.py#L308"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the per-sample average log-likelihood of the given data X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -590,7 +668,7 @@ corresponds to a single data point.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.score_samples">
-<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/mixture/base.py#L285"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.score_samples" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/mixture/base.py#L289"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.score_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the weighted log probabilities for each sample.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -615,7 +693,7 @@ corresponds to a single data point.</p>
 
 <dl class="method">
 <dt id="sklearn.mixture.BayesianGaussianMixture.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/105d033/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a86fd7f/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.mixture.BayesianGaussianMixture.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -635,9 +713,17 @@ component of a nested object.</p>
 
 <div class="section" id="examples-using-sklearn-mixture-bayesiangaussianmixture">
 <h2>Examples using <code class="docutils literal"><span class="pre">sklearn.mixture.BayesianGaussianMixture</span></code><a class="headerlink" href="#examples-using-sklearn-mixture-bayesiangaussianmixture" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="Plot the resulting ellipsoids of a mixture of three Gaussians with variational Bayesian Gaussia..."><div class="figure" id="id1">
-<img alt="../../_images/sphx_glr_plot_bayesian_gaussian_mixture_thumb.png" src="../../_images/sphx_glr_plot_bayesian_gaussian_mixture_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/mixture/plot_bayesian_gaussian_mixture.html#sphx-glr-auto-examples-mixture-plot-bayesian-gaussian-mixture-py"><span class="std std-ref">Bayesian Gaussian Mixture Concentration Prior Analysis</span></a></span></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This example plots the ellipsoids obtained from a toy dataset (mixture of three Gaussians) fitt..."><div class="figure" id="id6">
+<img alt="../../_images/sphx_glr_plot_concentration_prior_thumb.png" src="../../_images/sphx_glr_plot_concentration_prior_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/mixture/plot_concentration_prior.html#sphx-glr-auto-examples-mixture-plot-concentration-prior-py"><span class="std std-ref">Concentration Prior Type Analysis of Variation Bayesian Gaussian Mixture</span></a></span></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Plot the confidence ellipsoids of a mixture of two Gaussians obtained with Expectation Maximisa..."><div class="figure" id="id7">
+<img alt="../../_images/sphx_glr_plot_gmm_thumb.png" src="../../_images/sphx_glr_plot_gmm_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/mixture/plot_gmm.html#sphx-glr-auto-examples-mixture-plot-gmm-py"><span class="std std-ref">Gaussian Mixture Model Ellipsoids</span></a></span></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the behavior of Gaussian mixture models fit on data that was not samp..."><div class="figure" id="id8">
+<img alt="../../_images/sphx_glr_plot_gmm_sin_thumb.png" src="../../_images/sphx_glr_plot_gmm_sin_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/mixture/plot_gmm_sin.html#sphx-glr-auto-examples-mixture-plot-gmm-sin-py"><span class="std std-ref">Gaussian Mixture Model Sine Curve</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>

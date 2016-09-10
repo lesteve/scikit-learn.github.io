@@ -37,7 +37,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="top" title="scikit-learn 0.18.dev0 documentation" href="../../index.html" />
     <link rel="up" title="General examples" href="../index.html" />
-    <link rel="next" title="Gaussian Mixture Model Sine Curve" href="plot_gmm_sin.html" />
+    <link rel="next" title="Gaussian Mixture Model Selection" href="plot_gmm_selection.html" />
     <link rel="prev" title="Density Estimation for a Gaussian mixture" href="plot_gmm_pdf.html" />
   
   
@@ -183,15 +183,17 @@
             
   <div class="section" id="gaussian-mixture-model-ellipsoids">
 <span id="sphx-glr-auto-examples-mixture-plot-gmm-py"></span><h1>Gaussian Mixture Model Ellipsoids<a class="headerlink" href="#gaussian-mixture-model-ellipsoids" title="Permalink to this headline">¶</a></h1>
-<p>Plot the confidence ellipsoids of a mixture of two Gaussians with EM
-and variational Dirichlet process.</p>
-<p>Both models have access to five components with which to fit the
-data. Note that the EM model will necessarily use all five components
-while the DP model will effectively only use as many as are needed for
-a good fit. This is a property of the Dirichlet Process prior. Here we
-can see that the EM model splits some components arbitrarily, because it
-is trying to fit too many components, while the Dirichlet Process model
-adapts it number of state automatically.</p>
+<p>Plot the confidence ellipsoids of a mixture of two Gaussians
+obtained with Expectation Maximisation (<code class="docutils literal"><span class="pre">GaussianMixture</span></code> class) and
+Variational Inference (<code class="docutils literal"><span class="pre">BayesianGaussianMixture</span></code> class models with
+a Dirichlet process prior).</p>
+<p>Both models have access to five components with which to fit the data. Note
+that the Expectation Maximisation model will necessarily use all five
+components while the Variational Inference model will effectively only use as
+many as are needed for a good fit. Here we can see that the Expectation
+Maximisation model splits some components arbitrarily, because it is trying to
+fit too many components, while the Dirichlet Process model adapts it number of
+state automatically.</p>
 <p>This example doesn&#8217;t show it, as we&#8217;re in a low-dimensional space, but
 another advantage of the Dirichlet process model is that it can fit
 full covariance matrices effectively even when there are less examples
@@ -233,7 +235,7 @@ regularization properties of the inference algorithm.</p>
         <span class="n">ell</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
         <span class="n">splot</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">ell</span><span class="p">)</span>
 
-    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="o">-</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="o">-</span><span class="mf">9.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">(</span><span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(())</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.yticks"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span></a><span class="p">(())</span>
@@ -255,15 +257,16 @@ regularization properties of the inference algorithm.</p>
              <span class="s1">&#39;Gaussian Mixture&#39;</span><span class="p">)</span>
 
 <span class="c1"># Fit a Dirichlet process Gaussian mixture using five components</span>
-<span class="n">dpgmm</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM"><span class="n">mixture</span><span class="o">.</span><span class="n">DPGMM</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">plot_results</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dpgmm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">dpgmm</span><span class="o">.</span><span class="n">means_</span><span class="p">,</span> <span class="n">dpgmm</span><span class="o">.</span><span class="n">_get_covars</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span>
-             <span class="s1">&#39;Dirichlet Process GMM&#39;</span><span class="p">)</span>
+<span class="n">dpgmm</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture"><span class="n">mixture</span><span class="o">.</span><span class="n">BayesianGaussianMixture</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                        <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plot_results</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dpgmm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">dpgmm</span><span class="o">.</span><span class="n">means_</span><span class="p">,</span> <span class="n">dpgmm</span><span class="o">.</span><span class="n">covariances_</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s1">&#39;Bayesian Gaussian Mixture with a Dirichlet process prior&#39;</span><span class="p">)</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 0.406 seconds)</p>
+(0 minutes 0.448 seconds)</p>
 <div class="sphx-glr-download container">
 <strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_gmm.py" download=""><code class="xref download docutils literal"><span class="pre">plot_gmm.py</span></code></a></div>
 <div class="sphx-glr-download container">
