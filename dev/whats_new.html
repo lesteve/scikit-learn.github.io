@@ -165,8 +165,7 @@
     <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
 <li><a class="reference internal" href="#version-0-18">Version 0.18</a><ul>
-<li><a class="reference internal" href="#model-selection-enhancements-and-api-changes">Model Selection Enhancements and API Changes</a></li>
-<li><a class="reference internal" href="#changelog">Changelog</a><ul>
+<li><a class="reference internal" href="#model-selection-enhancements-and-api-changes">Model Selection Enhancements and API Changes</a><ul>
 <li><a class="reference internal" href="#new-features">New features</a></li>
 <li><a class="reference internal" href="#enhancements">Enhancements</a></li>
 <li><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
@@ -176,7 +175,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#version-0-17-1">Version 0.17.1</a><ul>
-<li><a class="reference internal" href="#id43">Changelog</a><ul>
+<li><a class="reference internal" href="#changelog">Changelog</a><ul>
 <li><a class="reference internal" href="#id44">Bug fixes</a></li>
 </ul>
 </li>
@@ -382,19 +381,39 @@ the parameter dicts are stored at <code class="docutils literal"><span class="pr
 </li>
 <li><p class="first"><strong>Parameters ``n_folds`` and ``n_iter`` renamed to ``n_splits``</strong></p>
 <p>Some parameter names have changed:
-The <code class="docutils literal"><span class="pre">n_folds</span></code> parameter in <a class="reference internal" href="modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal"><span class="pre">model_selection.KFold</span></code></a>,
-<a class="reference internal" href="modules/generated/sklearn.model_selection.LabelKFold.html#sklearn.model_selection.LabelKFold" title="sklearn.model_selection.LabelKFold"><code class="xref py py-class docutils literal"><span class="pre">model_selection.LabelKFold</span></code></a>, and
-<a class="reference internal" href="modules/generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">model_selection.StratifiedKFold</span></code></a> is now renamed to <code class="docutils literal"><span class="pre">n_splits</span></code>.
-The <code class="docutils literal"><span class="pre">n_iter</span></code> parameter in <a class="reference internal" href="modules/generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit" title="sklearn.model_selection.ShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">model_selection.ShuffleSplit</span></code></a>,
-<a class="reference internal" href="modules/generated/sklearn.model_selection.LabelShuffleSplit.html#sklearn.model_selection.LabelShuffleSplit" title="sklearn.model_selection.LabelShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">model_selection.LabelShuffleSplit</span></code></a>,
-and <a class="reference internal" href="modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html#sklearn.model_selection.StratifiedShuffleSplit" title="sklearn.model_selection.StratifiedShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">model_selection.StratifiedShuffleSplit</span></code></a> is now renamed
-to <code class="docutils literal"><span class="pre">n_splits</span></code>.</p>
+The <code class="docutils literal"><span class="pre">n_folds</span></code> parameter in new <a class="reference internal" href="modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal"><span class="pre">model_selection.KFold</span></code></a>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupKFold</span></code> (see below for the name change),
+and <a class="reference internal" href="modules/generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">model_selection.StratifiedKFold</span></code></a> is now renamed to
+<code class="docutils literal"><span class="pre">n_splits</span></code>. The <code class="docutils literal"><span class="pre">n_iter</span></code> parameter in
+<a class="reference internal" href="modules/generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit" title="sklearn.model_selection.ShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">model_selection.ShuffleSplit</span></code></a>, the new class
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupShuffleSplit</span></code> and
+<a class="reference internal" href="modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html#sklearn.model_selection.StratifiedShuffleSplit" title="sklearn.model_selection.StratifiedShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">model_selection.StratifiedShuffleSplit</span></code></a> is now renamed to
+<code class="docutils literal"><span class="pre">n_splits</span></code>.</p>
+</li>
+<li><p class="first"><strong>Rename of splitter classes which accepts group labels along with data</strong></p>
+<p>The cross-validation splitters <code class="docutils literal"><span class="pre">LabelKFold</span></code>,
+<code class="docutils literal"><span class="pre">LabelShuffleSplit</span></code>, <code class="docutils literal"><span class="pre">LeaveOneLabelOut</span></code> and <code class="docutils literal"><span class="pre">LeavePLabelOut</span></code> have
+been renamed to <code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupKFold</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupShuffleSplit</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeaveOneGroupOut</span></code> and
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code> respectively.</p>
+<p>NOTE the change from singular to plural form in
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code>.</p>
+</li>
+<li><p class="first"><strong>Fit parameter ``labels`` renamed to ``groups``</strong></p>
+<p>The <code class="docutils literal"><span class="pre">labels</span></code> parameter in the <code class="xref py py-func docutils literal"><span class="pre">split</span></code> method of the newly renamed
+splitters <code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupKFold</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeaveOneGroupOut</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupShuffleSplit</span></code> is renamed to <code class="docutils literal"><span class="pre">groups</span></code>
+following the new nomenclature of their class names.</p>
+</li>
+<li><p class="first"><strong>Parameter ``n_labels`` renamed to ``n_groups``</strong></p>
+<p>The parameter <code class="docutils literal"><span class="pre">n_labels</span></code> in the newly renamed
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code> is changed to <code class="docutils literal"><span class="pre">n_groups</span></code>.</p>
 </li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="changelog">
-<h3>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="new-features">
 <h4>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h4>
 <blockquote>
@@ -746,7 +765,21 @@ by <a class="reference external" href="https://github.com/yenchenlin">YenChen Li
 <code class="xref py py-func docutils literal"><span class="pre">metrics.classification.hamming_loss</span></code>.
 (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/7260">#7260</a>) by
 <a class="reference external" href="https://github.com/srvanrell">Sebastián Vanrell</a>.</li>
+<li>The splitter classes <code class="docutils literal"><span class="pre">LabelKFold</span></code>, <code class="docutils literal"><span class="pre">LabelShuffleSplit</span></code>,</li>
 </ul>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">LeaveOneLabelOut</span></code> and <code class="docutils literal"><span class="pre">LeavePLabelsOut</span></code> are renamed to
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupKFold</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.GroupShuffleSplit</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeaveOneGroupOut</span></code>
+and <code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code> respectively.
+Also the parameter <code class="docutils literal"><span class="pre">labels</span></code> in the <code class="xref py py-func docutils literal"><span class="pre">split</span></code> method of the newly
+renamed splitters <code class="xref py py-class docutils literal"><span class="pre">model_selection.LeaveOneGroupOut</span></code> and
+<code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code> is renamed to
+<code class="docutils literal"><span class="pre">groups</span></code>. Additionally in <code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code>,
+the parameter <code class="docutils literal"><span class="pre">n_labels``is</span> <span class="pre">renamed</span> <span class="pre">to</span> <span class="pre">``n_groups</span></code>.
+(<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/6660">#6660</a>)
+by <a href="#id118"><span class="problematic" id="id119">`Raghav RV`_</span></a>.</div></blockquote>
 </div></blockquote>
 </div></blockquote>
 </div>
@@ -754,8 +787,8 @@ by <a class="reference external" href="https://github.com/yenchenlin">YenChen Li
 <div class="section" id="version-0-17-1">
 <span id="changes-0-17-1"></span><h2>Version 0.17.1<a class="headerlink" href="#version-0-17-1" title="Permalink to this headline">¶</a></h2>
 <p><strong>February 18, 2016</strong></p>
-<div class="section" id="id43">
-<h3>Changelog<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="changelog">
+<h3>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id44">
 <h4>Bug fixes<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
 <blockquote>

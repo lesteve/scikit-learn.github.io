@@ -168,26 +168,33 @@
 <li><a class="reference internal" href="#obtaining-predictions-by-cross-validation">3.1.1.1. Obtaining predictions by cross-validation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#cross-validation-iterators">3.1.2. Cross validation iterators</a><ul>
-<li><a class="reference internal" href="#k-fold">3.1.2.1. K-fold</a></li>
-<li><a class="reference internal" href="#stratified-k-fold">3.1.2.2. Stratified k-fold</a></li>
-<li><a class="reference internal" href="#label-k-fold">3.1.2.3. Label k-fold</a></li>
-<li><a class="reference internal" href="#leave-one-out-loo">3.1.2.4. Leave-One-Out - LOO</a></li>
-<li><a class="reference internal" href="#leave-p-out-lpo">3.1.2.5. Leave-P-Out - LPO</a></li>
-<li><a class="reference internal" href="#leave-one-label-out-lolo">3.1.2.6. Leave-One-Label-Out - LOLO</a></li>
-<li><a class="reference internal" href="#leave-p-label-out">3.1.2.7. Leave-P-Label-Out</a></li>
-<li><a class="reference internal" href="#random-permutations-cross-validation-a-k-a-shuffle-split">3.1.2.8. Random permutations cross-validation a.k.a. Shuffle &amp; Split</a></li>
-<li><a class="reference internal" href="#label-shuffle-split">3.1.2.9. Label-Shuffle-Split</a></li>
-<li><a class="reference internal" href="#predefined-fold-splits-validation-sets">3.1.2.10. Predefined Fold-Splits / Validation-Sets</a></li>
-<li><a class="reference internal" href="#see-also">3.1.2.11. See also</a></li>
+<li><a class="reference internal" href="#cross-validation-iterators">3.1.2. Cross validation iterators</a></li>
+<li><a class="reference internal" href="#cross-validation-iterators-for-i-i-d-data">3.1.3. Cross-validation iterators for i.i.d. data</a><ul>
+<li><a class="reference internal" href="#k-fold">3.1.3.1. K-fold</a></li>
+<li><a class="reference internal" href="#leave-one-out-loo">3.1.3.2. Leave One Out (LOO)</a></li>
+<li><a class="reference internal" href="#leave-p-out-lpo">3.1.3.3. Leave P Out (LPO)</a></li>
+<li><a class="reference internal" href="#random-permutations-cross-validation-a-k-a-shuffle-split">3.1.3.4. Random permutations cross-validation a.k.a. Shuffle &amp; Split</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#cross-validation-of-time-series-data">3.1.3. Cross validation of time series data</a><ul>
-<li><a class="reference internal" href="#timeseriessplit">3.1.3.1. TimeSeriesSplit</a></li>
+<li><a class="reference internal" href="#cross-validation-iterators-with-stratification-based-on-class-labels">3.1.4. Cross-validation iterators with stratification based on class labels.</a><ul>
+<li><a class="reference internal" href="#stratified-k-fold">3.1.4.1. Stratified k-fold</a></li>
+<li><a class="reference internal" href="#stratified-shuffle-split">3.1.4.2. Stratified Shuffle Split</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#a-note-on-shuffling">3.1.4. A note on shuffling</a></li>
-<li><a class="reference internal" href="#cross-validation-and-model-selection">3.1.5. Cross validation and model selection</a></li>
+<li><a class="reference internal" href="#cross-validation-iterators-for-grouped-data">3.1.5. Cross-validation iterators for grouped data.</a><ul>
+<li><a class="reference internal" href="#group-k-fold">3.1.5.1. Group k-fold</a></li>
+<li><a class="reference internal" href="#leave-one-group-out">3.1.5.2. Leave One Group Out</a></li>
+<li><a class="reference internal" href="#leave-p-groups-out">3.1.5.3. Leave P Groups Out</a></li>
+<li><a class="reference internal" href="#group-shuffle-split">3.1.5.4. Group Shuffle Split</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#predefined-fold-splits-validation-sets">3.1.6. Predefined Fold-Splits / Validation-Sets</a></li>
+<li><a class="reference internal" href="#cross-validation-of-time-series-data">3.1.7. Cross validation of time series data</a><ul>
+<li><a class="reference internal" href="#time-series-split">3.1.7.1. Time Series Split</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a-note-on-shuffling">3.1.8. A note on shuffling</a></li>
+<li><a class="reference internal" href="#cross-validation-and-model-selection">3.1.9. Cross validation and model selection</a></li>
 </ul>
 </li>
 </ul>
@@ -401,8 +408,24 @@ section.</p>
 <p>The following sections list utilities to generate indices
 that can be used to generate dataset splits according to different cross
 validation strategies.</p>
+</div>
+<div class="section" id="cross-validation-iterators-for-i-i-d-data">
+<h2>3.1.3. Cross-validation iterators for i.i.d. data<a class="headerlink" href="#cross-validation-iterators-for-i-i-d-data" title="Permalink to this headline">¶</a></h2>
+<p>Assuming that some data is Independent Identically Distributed (i.i.d.) is
+making the assumption that all samples stem from the same generative process
+and that the generative process is assumed to have no memory of past generated
+samples.</p>
+<p>The following cross-validators can be used in such cases.</p>
+<p><strong>NOTE</strong></p>
+<p>While i.i.d. data is a common assumption in machine learning theory, it rarely
+holds in practice. If one knows that the samples have been generated using a
+time-dependent process, it&#8217;s safer to
+use a <cite>time-series aware cross-validation scheme &lt;time_series_cv&gt;</cite>
+Similarly if we know that the generative process has a group structure
+(samples from collected from different subjects, experiments, measurement
+devices) it safer to use <cite>group-wise cross-validation &lt;group_cv&gt;</cite>.</p>
 <div class="section" id="k-fold">
-<h3>3.1.2.1. K-fold<a class="headerlink" href="#k-fold" title="Permalink to this headline">¶</a></h3>
+<h3>3.1.3.1. K-fold<a class="headerlink" href="#k-fold" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a> divides all the samples in <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> groups of samples,
 called folds (if <img class="math" src="../_images/math/1fc9e19dd71e5535697f6babb867aeb7562522dd.png" alt="k = n"/>, this is equivalent to the <em>Leave One
 Out</em> strategy), of equal sizes (if possible). The prediction function is
@@ -428,54 +451,8 @@ Thus, one can create the training/test sets using numpy indexing:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="stratified-k-fold">
-<h3>3.1.2.2. Stratified k-fold<a class="headerlink" href="#stratified-k-fold" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a> is a variation of <em>k-fold</em> which returns <em>stratified</em>
-folds: each set contains approximately the same percentage of samples of each
-target class as the complete set.</p>
-<p>Example of stratified 3-fold cross-validation on a dataset with 10 samples from
-two slightly unbalanced classes:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">StratifiedKFold</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
-<span class="go">[2 3 6 7 8 9] [0 1 4 5]</span>
-<span class="go">[0 1 3 4 5 8 9] [2 6 7]</span>
-<span class="go">[0 1 2 4 5 6 7] [3 8 9]</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="label-k-fold">
-<h3>3.1.2.3. Label k-fold<a class="headerlink" href="#label-k-fold" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.model_selection.LabelKFold.html#sklearn.model_selection.LabelKFold" title="sklearn.model_selection.LabelKFold"><code class="xref py py-class docutils literal"><span class="pre">LabelKFold</span></code></a> is a variation of <em>k-fold</em> which ensures that the same
-label is not in both testing and training sets. This is necessary for example
-if you obtained data from different subjects and you want to avoid over-fitting
-(i.e., learning person specific features) by testing and training on different
-subjects.</p>
-<p>Imagine you have three subjects, each with an associated number from 1 to 3:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">LabelKFold</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">,</span> <span class="mf">8.8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lkf</span> <span class="o">=</span> <span class="n">LabelKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">lkf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
-<span class="go">[0 1 2 3 4 5] [6 7 8 9]</span>
-<span class="go">[0 1 2 6 7 8 9] [3 4 5]</span>
-<span class="go">[3 4 5 6 7 8 9] [0 1 2]</span>
-</pre></div>
-</div>
-<p>Each subject is in a different testing fold, and the same subject is never in
-both testing and training. Notice that the folds do not have exactly the same
-size due to the imbalance in the data.</p>
-</div>
 <div class="section" id="leave-one-out-loo">
-<h3>3.1.2.4. Leave-One-Out - LOO<a class="headerlink" href="#leave-one-out-loo" title="Permalink to this headline">¶</a></h3>
+<h3>3.1.3.2. Leave One Out (LOO)<a class="headerlink" href="#leave-one-out-loo" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.model_selection.LeaveOneOut.html#sklearn.model_selection.LeaveOneOut" title="sklearn.model_selection.LeaveOneOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneOut</span></code></a> (or LOO) is a simple cross-validation. Each learning
 set is created by taking all the samples except one, the test set being
 the sample left out. Thus, for <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> samples, we have <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> different
@@ -524,7 +501,7 @@ Statistical Learning</a>, Springer 2013.</li>
 </div>
 </div>
 <div class="section" id="leave-p-out-lpo">
-<h3>3.1.2.5. Leave-P-Out - LPO<a class="headerlink" href="#leave-p-out-lpo" title="Permalink to this headline">¶</a></h3>
+<h3>3.1.3.3. Leave P Out (LPO)<a class="headerlink" href="#leave-p-out-lpo" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.model_selection.LeavePOut.html#sklearn.model_selection.LeavePOut" title="sklearn.model_selection.LeavePOut"><code class="xref py py-class docutils literal"><span class="pre">LeavePOut</span></code></a> is very similar to <a class="reference internal" href="generated/sklearn.model_selection.LeaveOneOut.html#sklearn.model_selection.LeaveOneOut" title="sklearn.model_selection.LeaveOneOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneOut</span></code></a> as it creates all
 the possible training/test sets by removing <img class="math" src="../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/> samples from the complete
 set. For <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> samples, this produces <img class="math" src="../_images/math/db0633044e8b47d65250ffea6683c3aa3dd2a3c6.png" alt="{n \choose p}"/> train-test
@@ -546,65 +523,8 @@ overlap for <img class="math" src="../_images/math/1d718544ce7f48c349cbefc3be3cb
 </pre></div>
 </div>
 </div>
-<div class="section" id="leave-one-label-out-lolo">
-<h3>3.1.2.6. Leave-One-Label-Out - LOLO<a class="headerlink" href="#leave-one-label-out-lolo" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.model_selection.LeaveOneLabelOut.html#sklearn.model_selection.LeaveOneLabelOut" title="sklearn.model_selection.LeaveOneLabelOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneLabelOut</span></code></a> (LOLO) is a cross-validation scheme which holds out
-the samples according to a third-party provided array of integer labels. This
-label information can be used to encode arbitrary domain specific pre-defined
-cross-validation folds.</p>
-<p>Each training set is thus constituted by all the samples except the ones
-related to a specific label.</p>
-<p>For example, in the cases of multiple experiments, LOLO can be used to
-create a cross-validation based on the different experiments: we create
-a training set using the samples of all the experiments except one:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">LeaveOneLabelOut</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lolo</span> <span class="o">=</span> <span class="n">LeaveOneLabelOut</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">lolo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
-<span class="go">[2 3] [0 1]</span>
-<span class="go">[0 1] [2 3]</span>
-</pre></div>
-</div>
-<p>Another common application is to use time information: for instance the
-labels could be the year of collection of the samples and thus allow
-for cross-validation against time-based splits.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Contrary to <a class="reference internal" href="generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a>,
-the <code class="docutils literal"><span class="pre">labels</span></code> of <a class="reference internal" href="generated/sklearn.model_selection.LeaveOneLabelOut.html#sklearn.model_selection.LeaveOneLabelOut" title="sklearn.model_selection.LeaveOneLabelOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneLabelOut</span></code></a> should not encode
-the target class to predict: the goal of <a class="reference internal" href="generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a>
-is to rebalance dataset classes across
-the train / test split to ensure that the train and test folds have
-approximately the same percentage of samples of each class while
-<a class="reference internal" href="generated/sklearn.model_selection.LeaveOneLabelOut.html#sklearn.model_selection.LeaveOneLabelOut" title="sklearn.model_selection.LeaveOneLabelOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneLabelOut</span></code></a> will do the opposite by ensuring that the samples
-of the train and test fold will not share the same label value.</p>
-</div>
-</div>
-<div class="section" id="leave-p-label-out">
-<h3>3.1.2.7. Leave-P-Label-Out<a class="headerlink" href="#leave-p-label-out" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.model_selection.LeavePLabelOut.html#sklearn.model_selection.LeavePLabelOut" title="sklearn.model_selection.LeavePLabelOut"><code class="xref py py-class docutils literal"><span class="pre">LeavePLabelOut</span></code></a> is similar as <em>Leave-One-Label-Out</em>, but removes
-samples related to <img class="math" src="../_images/math/9dcbbef8e0f76051d388013b90a95bec3069e484.png" alt="P"/> labels for each training/test set.</p>
-<p>Example of Leave-2-Label Out:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">LeavePLabelOut</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lplo</span> <span class="o">=</span> <span class="n">LeavePLabelOut</span><span class="p">(</span><span class="n">n_labels</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">lplo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
-<span class="go">[4 5] [0 1 2 3]</span>
-<span class="go">[2 3] [0 1 4 5]</span>
-<span class="go">[0 1] [2 3 4 5]</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="random-permutations-cross-validation-a-k-a-shuffle-split">
-<span id="shufflesplit"></span><h3>3.1.2.8. Random permutations cross-validation a.k.a. Shuffle &amp; Split<a class="headerlink" href="#random-permutations-cross-validation-a-k-a-shuffle-split" title="Permalink to this headline">¶</a></h3>
+<span id="shufflesplit"></span><h3>3.1.3.4. Random permutations cross-validation a.k.a. Shuffle &amp; Split<a class="headerlink" href="#random-permutations-cross-validation-a-k-a-shuffle-split" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit" title="sklearn.model_selection.ShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">ShuffleSplit</span></code></a></p>
 <p>The <a class="reference internal" href="generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit" title="sklearn.model_selection.ShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">ShuffleSplit</span></code></a> iterator will generate a user defined number of
 independent train / test dataset splits. Samples are first shuffled and
@@ -629,21 +549,146 @@ generator.</p>
 validation that allows a finer control on the number of iterations and
 the proportion of samples on each side of the train / test split.</p>
 </div>
-<div class="section" id="label-shuffle-split">
-<h3>3.1.2.9. Label-Shuffle-Split<a class="headerlink" href="#label-shuffle-split" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.model_selection.LabelShuffleSplit.html#sklearn.model_selection.LabelShuffleSplit" title="sklearn.model_selection.LabelShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">LabelShuffleSplit</span></code></a></p>
-<p>The <a class="reference internal" href="generated/sklearn.model_selection.LabelShuffleSplit.html#sklearn.model_selection.LabelShuffleSplit" title="sklearn.model_selection.LabelShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">LabelShuffleSplit</span></code></a> iterator behaves as a combination of
-<a class="reference internal" href="generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit" title="sklearn.model_selection.ShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">ShuffleSplit</span></code></a> and <code class="xref py py-class docutils literal"><span class="pre">LeavePLabelsOut</span></code>, and generates a
-sequence of randomized partitions in which a subset of labels are held
+</div>
+<div class="section" id="cross-validation-iterators-with-stratification-based-on-class-labels">
+<h2>3.1.4. Cross-validation iterators with stratification based on class labels.<a class="headerlink" href="#cross-validation-iterators-with-stratification-based-on-class-labels" title="Permalink to this headline">¶</a></h2>
+<p>Some classification problems can exhibit a large imbalance in the distribution
+of the target classes: for instance there could be several times more negative
+samples than positive samples. In such cases it is recommended to use
+stratified sampling as implemented in <a class="reference internal" href="generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a> and
+<a class="reference internal" href="generated/sklearn.model_selection.StratifiedShuffleSplit.html#sklearn.model_selection.StratifiedShuffleSplit" title="sklearn.model_selection.StratifiedShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">StratifiedShuffleSplit</span></code></a> to ensure that relative class frequencies is
+approximately preserved in each train and validation fold.</p>
+<div class="section" id="stratified-k-fold">
+<h3>3.1.4.1. Stratified k-fold<a class="headerlink" href="#stratified-k-fold" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a> is a variation of <em>k-fold</em> which returns <em>stratified</em>
+folds: each set contains approximately the same percentage of samples of each
+target class as the complete set.</p>
+<p>Example of stratified 3-fold cross-validation on a dataset with 10 samples from
+two slightly unbalanced classes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">StratifiedKFold</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
+<span class="go">[2 3 6 7 8 9] [0 1 4 5]</span>
+<span class="go">[0 1 3 4 5 8 9] [2 6 7]</span>
+<span class="go">[0 1 2 4 5 6 7] [3 8 9]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stratified-shuffle-split">
+<h3>3.1.4.2. Stratified Shuffle Split<a class="headerlink" href="#stratified-shuffle-split" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.model_selection.StratifiedShuffleSplit.html#sklearn.model_selection.StratifiedShuffleSplit" title="sklearn.model_selection.StratifiedShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">StratifiedShuffleSplit</span></code></a> is a variation of <em>ShuffleSplit</em>, which returns
+stratified splits, <em>i.e</em> which creates splits by preserving the same
+percentage for each target class as in the complete set.</p>
+</div>
+</div>
+<div class="section" id="cross-validation-iterators-for-grouped-data">
+<h2>3.1.5. Cross-validation iterators for grouped data.<a class="headerlink" href="#cross-validation-iterators-for-grouped-data" title="Permalink to this headline">¶</a></h2>
+<p>The i.i.d. assumption is broken if the underlying generative process yield
+groups of dependent samples.</p>
+<p>Such a grouping of data is domain specific. An example would be when there is
+medical data collected from multiple patients, with multiple samples taken from
+each patient. And such data is likely to be dependent on the individual group.
+In our example, the patient id for each sample will be its group identifier.</p>
+<p>In this case we would like to know if a model trained on a particular set of
+groups generalizes well to the unseen groups. To measure this, we need to
+ensure that all the samples in the validation fold come from groups that are
+not represented at all in the paired training fold.</p>
+<p>The following cross-validation splitters can be used to do that.
+The grouping identifier for the samples is specified via the <code class="docutils literal"><span class="pre">groups</span></code>
+parameter.</p>
+<div class="section" id="group-k-fold">
+<h3>3.1.5.1. Group k-fold<a class="headerlink" href="#group-k-fold" title="Permalink to this headline">¶</a></h3>
+<p>class:GroupKFold is a variation of k-fold which ensures that the same group is
+not represented in both testing and training sets. For example if the data is
+obtained from different subjects with several samples per-subject and if the
+model is flexible enough to learn from highly person specific features it
+could fail to generalize to new subjects. class:GroupKFold makes it possible
+to detect this kind of overfitting situations.</p>
+<p>Imagine you have three subjects, each with an associated number from 1 to 3:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GroupKFold</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">,</span> <span class="mf">8.8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gkf</span> <span class="o">=</span> <span class="n">GroupKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">gkf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
+<span class="go">[0 1 2 3 4 5] [6 7 8 9]</span>
+<span class="go">[0 1 2 6 7 8 9] [3 4 5]</span>
+<span class="go">[3 4 5 6 7 8 9] [0 1 2]</span>
+</pre></div>
+</div>
+<p>Each subject is in a different testing fold, and the same subject is never in
+both testing and training. Notice that the folds do not have exactly the same
+size due to the imbalance in the data.</p>
+</div>
+<div class="section" id="leave-one-group-out">
+<h3>3.1.5.2. Leave One Group Out<a class="headerlink" href="#leave-one-group-out" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-class docutils literal"><span class="pre">LeaveOneGroupOut</span></code> is a cross-validation scheme which holds out
+the samples according to a third-party provided array of integer groups. This
+group information can be used to encode arbitrary domain specific pre-defined
+cross-validation folds.</p>
+<p>Each training set is thus constituted by all the samples except the ones
+related to a specific group.</p>
+<p>For example, in the cases of multiple experiments, <code class="xref py py-class docutils literal"><span class="pre">LeaveOneGroupOut</span></code>
+can be used to create a cross-validation based on the different experiments:
+we create a training set using the samples of all the experiments except one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">LeaveOneGroupOut</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">logo</span> <span class="o">=</span> <span class="n">LeaveOneGroupOut</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">logo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
+<span class="go">[2 3 4 5 6] [0 1]</span>
+<span class="go">[0 1 4 5 6] [2 3]</span>
+<span class="go">[0 1 2 3] [4 5 6]</span>
+</pre></div>
+</div>
+<p>Another common application is to use time information: for instance the
+groups could be the year of collection of the samples and thus allow
+for cross-validation against time-based splits.</p>
+</div>
+<div class="section" id="leave-p-groups-out">
+<h3>3.1.5.3. Leave P Groups Out<a class="headerlink" href="#leave-p-groups-out" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-class docutils literal"><span class="pre">LeavePGroupsOut</span></code> is similar as <code class="xref py py-class docutils literal"><span class="pre">LeaveOneGroupOut</span></code>, but removes
+samples related to <img class="math" src="../_images/math/9dcbbef8e0f76051d388013b90a95bec3069e484.png" alt="P"/> groups for each training/test set.</p>
+<p>Example of Leave-2-Group Out:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">LeavePGroupsOut</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpgo</span> <span class="o">=</span> <span class="n">LeavePGroupsOut</span><span class="p">(</span><span class="n">n_groups</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">lpgo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
+<span class="go">[4 5] [0 1 2 3]</span>
+<span class="go">[2 3] [0 1 4 5]</span>
+<span class="go">[0 1] [2 3 4 5]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="group-shuffle-split">
+<h3>3.1.5.4. Group Shuffle Split<a class="headerlink" href="#group-shuffle-split" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-class docutils literal"><span class="pre">GroupShuffleSplit</span></code></p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">GroupShuffleSplit</span></code> iterator behaves as a combination of
+<a class="reference internal" href="generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit" title="sklearn.model_selection.ShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">ShuffleSplit</span></code></a> and <code class="xref py py-class docutils literal"><span class="pre">LeavePGroupsOut</span></code>, and generates a
+sequence of randomized partitions in which a subset of groups are held
 out for each split.</p>
 <p>Here is a usage example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">LabelShuffleSplit</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GroupShuffleSplit</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lss</span> <span class="o">=</span> <span class="n">LabelShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">lss</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gss</span> <span class="o">=</span> <span class="n">GroupShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">gss</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
 <span class="gp">...</span>
 <span class="go">[0 1 2 3] [4 5 6 7]</span>
@@ -652,15 +697,16 @@ out for each split.</p>
 <span class="go">[4 5 6 7] [0 1 2 3]</span>
 </pre></div>
 </div>
-<p>This class is useful when the behavior of <code class="xref py py-class docutils literal"><span class="pre">LeavePLabelsOut</span></code> is
-desired, but the number of labels is large enough that generating all
-possible partitions with <img class="math" src="../_images/math/9dcbbef8e0f76051d388013b90a95bec3069e484.png" alt="P"/> labels withheld would be prohibitively
-expensive.  In such a scenario, <a class="reference internal" href="generated/sklearn.model_selection.LabelShuffleSplit.html#sklearn.model_selection.LabelShuffleSplit" title="sklearn.model_selection.LabelShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">LabelShuffleSplit</span></code></a> provides
+<p>This class is useful when the behavior of <code class="xref py py-class docutils literal"><span class="pre">LeavePGroupsOut</span></code> is
+desired, but the number of groups is large enough that generating all
+possible partitions with <img class="math" src="../_images/math/9dcbbef8e0f76051d388013b90a95bec3069e484.png" alt="P"/> groups withheld would be prohibitively
+expensive.  In such a scenario, <code class="xref py py-class docutils literal"><span class="pre">GroupShuffleSplit</span></code> provides
 a random sample (with replacement) of the train / test splits
-generated by <code class="xref py py-class docutils literal"><span class="pre">LeavePLabelsOut</span></code>.</p>
+generated by <code class="xref py py-class docutils literal"><span class="pre">LeavePGroupsOut</span></code>.</p>
+</div>
 </div>
 <div class="section" id="predefined-fold-splits-validation-sets">
-<h3>3.1.2.10. Predefined Fold-Splits / Validation-Sets<a class="headerlink" href="#predefined-fold-splits-validation-sets" title="Permalink to this headline">¶</a></h3>
+<h2>3.1.6. Predefined Fold-Splits / Validation-Sets<a class="headerlink" href="#predefined-fold-splits-validation-sets" title="Permalink to this headline">¶</a></h2>
 <p>For some datasets, a pre-defined split of the data into training- and
 validation fold or into several cross-validation folds already
 exists. Using <a class="reference internal" href="generated/sklearn.model_selection.PredefinedSplit.html#sklearn.model_selection.PredefinedSplit" title="sklearn.model_selection.PredefinedSplit"><code class="xref py py-class docutils literal"><span class="pre">PredefinedSplit</span></code></a> it is possible to use these folds
@@ -668,15 +714,8 @@ e.g. when searching for hyperparameters.</p>
 <p>For example, when using a validation set, set the <code class="docutils literal"><span class="pre">test_fold</span></code> to 0 for all
 samples that are part of the validation set, and to -1 for all other samples.</p>
 </div>
-<div class="section" id="see-also">
-<h3>3.1.2.11. See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.model_selection.StratifiedShuffleSplit.html#sklearn.model_selection.StratifiedShuffleSplit" title="sklearn.model_selection.StratifiedShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">StratifiedShuffleSplit</span></code></a> is a variation of <em>ShuffleSplit</em>, which returns
-stratified splits, <em>i.e</em> which creates splits by preserving the same
-percentage for each target class as in the complete set.</p>
-</div>
-</div>
 <div class="section" id="cross-validation-of-time-series-data">
-<h2>3.1.3. Cross validation of time series data<a class="headerlink" href="#cross-validation-of-time-series-data" title="Permalink to this headline">¶</a></h2>
+<h2>3.1.7. Cross validation of time series data<a class="headerlink" href="#cross-validation-of-time-series-data" title="Permalink to this headline">¶</a></h2>
 <p>Time series data is characterised by the correlation between observations
 that are near in time (<em>autocorrelation</em>). However, classical
 cross-validation techniques such as <a class="reference internal" href="generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a> and
@@ -687,8 +726,8 @@ generalisation error) on time series data. Therefore, it is very important
 to evaluate our model for time series data on the &#8220;future&#8221; observations
 least like those that are used to train the model. To achieve this, one
 solution is provided by <a class="reference internal" href="generated/sklearn.model_selection.TimeSeriesSplit.html#sklearn.model_selection.TimeSeriesSplit" title="sklearn.model_selection.TimeSeriesSplit"><code class="xref py py-class docutils literal"><span class="pre">TimeSeriesSplit</span></code></a>.</p>
-<div class="section" id="timeseriessplit">
-<h3>3.1.3.1. TimeSeriesSplit<a class="headerlink" href="#timeseriessplit" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="time-series-split">
+<h3>3.1.7.1. Time Series Split<a class="headerlink" href="#time-series-split" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.model_selection.TimeSeriesSplit.html#sklearn.model_selection.TimeSeriesSplit" title="sklearn.model_selection.TimeSeriesSplit"><code class="xref py py-class docutils literal"><span class="pre">TimeSeriesSplit</span></code></a> is a variation of <em>k-fold</em> which
 returns first <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> folds as train set and the <img class="math" src="../_images/math/0f16395b0768b43f817540eac6a0c660ef5715f8.png" alt="(k+1)"/> th
 fold as test set. Note that unlike standard cross-validation methods,
@@ -715,9 +754,9 @@ that are observed at fixed time intervals.</p>
 </div>
 </div>
 <div class="section" id="a-note-on-shuffling">
-<h2>3.1.4. A note on shuffling<a class="headerlink" href="#a-note-on-shuffling" title="Permalink to this headline">¶</a></h2>
-<p>If the data ordering is not arbitrary (e.g. samples with the same label are
-contiguous), shuffling it first may be essential to get a meaningful cross-
+<h2>3.1.8. A note on shuffling<a class="headerlink" href="#a-note-on-shuffling" title="Permalink to this headline">¶</a></h2>
+<p>If the data ordering is not arbitrary (e.g. samples with the same class label
+are contiguous), shuffling it first may be essential to get a meaningful cross-
 validation result. However, the opposite may be true if the samples are not
 independently and identically distributed. For example, if samples correspond
 to news articles, and are ordered by their time of publication, then shuffling
@@ -741,7 +780,7 @@ for <code class="docutils literal"><span class="pre">random_state</span></code>.
 </ul>
 </div>
 <div class="section" id="cross-validation-and-model-selection">
-<h2>3.1.5. Cross validation and model selection<a class="headerlink" href="#cross-validation-and-model-selection" title="Permalink to this headline">¶</a></h2>
+<h2>3.1.9. Cross validation and model selection<a class="headerlink" href="#cross-validation-and-model-selection" title="Permalink to this headline">¶</a></h2>
 <p>Cross validation iterators can also be used to directly perform model
 selection using Grid Search for the optimal hyperparameters of the
 model. This is the topic of the next section: <a class="reference internal" href="grid_search.html#grid-search"><span class="std std-ref">Tuning the hyper-parameters of an estimator</span></a>.</p>
