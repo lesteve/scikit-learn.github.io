@@ -179,6 +179,7 @@
 <li><a class="reference internal" href="#why-do-i-sometime-get-a-crash-freeze-with-n-jobs-1-under-osx-or-linux">Why do I sometime get a crash/freeze with n_jobs &gt; 1 under OSX or Linux?</a></li>
 <li><a class="reference internal" href="#why-is-there-no-support-for-deep-or-reinforcement-learning-will-there-be-support-for-deep-or-reinforcement-learning-in-scikit-learn">Why is there no support for deep or reinforcement learning / Will there be support for deep or reinforcement learning in scikit-learn?</a></li>
 <li><a class="reference internal" href="#why-is-my-pull-request-not-getting-any-attention">Why is my pull request not getting any attention?</a></li>
+<li><a class="reference internal" href="#how-do-i-set-a-random-state-for-an-entire-execution">How do I set a <code class="docutils literal"><span class="pre">random_state</span></code> for an entire execution?</a></li>
 </ul>
 </li>
 </ul>
@@ -203,7 +204,8 @@
 <p>Here we try to give some answers to questions that regularly pop up on the mailing list.</p>
 <div class="section" id="what-is-the-project-name-a-lot-of-people-get-it-wrong">
 <h2>What is the project name (a lot of people get it wrong)?<a class="headerlink" href="#what-is-the-project-name-a-lot-of-people-get-it-wrong" title="Permalink to this headline">¶</a></h2>
-<p>scikit-learn, but not scikit or SciKit nor sci-kit learn. Also not scikits.learn or scikits-learn, which where previously used.</p>
+<p>scikit-learn, but not scikit or SciKit nor sci-kit learn.
+Also not scikits.learn or scikits-learn, which were previously used.</p>
 </div>
 <div class="section" id="how-do-you-pronounce-the-project-name">
 <h2>How do you pronounce the project name?<a class="headerlink" href="#how-do-you-pronounce-the-project-name" title="Permalink to this headline">¶</a></h2>
@@ -434,6 +436,25 @@ If a review of your pull request comes slowly, it is likely because the
 reviewers are busy. We ask for your understanding and request that you
 not close your pull request or discontinue your work solely because of
 this reason.</p>
+</div>
+<div class="section" id="how-do-i-set-a-random-state-for-an-entire-execution">
+<h2>How do I set a <code class="docutils literal"><span class="pre">random_state</span></code> for an entire execution?<a class="headerlink" href="#how-do-i-set-a-random-state-for-an-entire-execution" title="Permalink to this headline">¶</a></h2>
+<p>For testing and replicability, it is often important to have the entire execution
+controlled by a single seed for the pseudo-random number generator used in
+algorithms that have a randomized component. Scikit-learn does not use its own
+global random state; whenever a RandomState instance or an integer random seed
+is not provided as an argument, it relies on the numpy global random state,
+which can be set using <code class="xref py py-func docutils literal"><span class="pre">numpy.random.seed</span></code>.
+For example, to set an execution&#8217;s numpy global random state to 42, one could
+execute the following in his or her script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, a global random state is prone to modification by other code during
+execution. Thus, the only way to ensure replicability is to pass <code class="docutils literal"><span class="pre">RandomState</span></code>
+instances everywhere and ensure that both estimators and cross-validation
+splitters have their <code class="docutils literal"><span class="pre">random_state</span></code> parameter set.</p>
 </div>
 </div>
 
