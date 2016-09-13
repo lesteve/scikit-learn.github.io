@@ -188,6 +188,8 @@ learning strategies, including SGD and Adam. Because of time-constraints, we
 use several small datasets, for which L-BFGS might be more suitable. The
 general trend shown in these examples seems to carry over to larger datasets,
 however.</p>
+<p>Note that those results can be highly dependent on the value of
+<code class="docutils literal"><span class="pre">learning_rate_init</span></code>.</p>
 <img alt="../../_images/sphx_glr_plot_mlp_training_curves_001.png" class="align-center" src="../../_images/sphx_glr_plot_mlp_training_curves_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>  <span class="n">learning</span> <span class="n">on</span> <span class="n">dataset</span> <span class="n">iris</span>
@@ -210,8 +212,8 @@ however.</p>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.860000</span>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.504760</span>
 <span class="n">training</span><span class="p">:</span> <span class="n">adam</span>
-<span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.973333</span>
-<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.148707</span>
+<span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.980000</span>
+<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.046248</span>
 
 <span class="n">learning</span> <span class="n">on</span> <span class="n">dataset</span> <span class="n">digits</span>
 <span class="n">training</span><span class="p">:</span> <span class="n">constant</span> <span class="n">learning</span><span class="o">-</span><span class="n">rate</span>
@@ -233,8 +235,8 @@ however.</p>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.909293</span>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.318387</span>
 <span class="n">training</span><span class="p">:</span> <span class="n">adam</span>
-<span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.938230</span>
-<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.418184</span>
+<span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.991653</span>
+<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.045934</span>
 
 <span class="n">learning</span> <span class="n">on</span> <span class="n">dataset</span> <span class="n">circles</span>
 <span class="n">training</span><span class="p">:</span> <span class="n">constant</span> <span class="n">learning</span><span class="o">-</span><span class="n">rate</span>
@@ -256,8 +258,8 @@ however.</p>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.500000</span>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.688593</span>
 <span class="n">training</span><span class="p">:</span> <span class="n">adam</span>
-<span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.900000</span>
-<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.490384</span>
+<span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.930000</span>
+<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.159988</span>
 
 <span class="n">learning</span> <span class="n">on</span> <span class="n">dataset</span> <span class="n">moons</span>
 <span class="n">training</span><span class="p">:</span> <span class="n">constant</span> <span class="n">learning</span><span class="o">-</span><span class="n">rate</span>
@@ -280,7 +282,7 @@ however.</p>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.513034</span>
 <span class="n">training</span><span class="p">:</span> <span class="n">adam</span>
 <span class="n">Training</span> <span class="nb">set</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.850000</span>
-<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.340323</span>
+<span class="n">Training</span> <span class="nb">set</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.334243</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -293,19 +295,19 @@ however.</p>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
 <span class="c1"># different learning rate schedules and momentum parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
            <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+          <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
            <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+          <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
            <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
            <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+          <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
            <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
+          <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;momentum&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span>
            <span class="s1">&#39;nesterovs_momentum&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
-          <span class="p">{</span><span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;adam&#39;</span><span class="p">}]</span>
+          <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="s1">&#39;learning_rate_init&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}]</span>
 
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;constant learning-rate&quot;</span><span class="p">,</span> <span class="s2">&quot;constant with momentum&quot;</span><span class="p">,</span>
           <span class="s2">&quot;constant with Nesterov&#39;s momentum&quot;</span><span class="p">,</span>
@@ -363,7 +365,7 @@ however.</p>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 6.138 seconds)</p>
+(0 minutes 5.525 seconds)</p>
 <div class="sphx-glr-download container">
 <strong>Download Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_mlp_training_curves.py" download=""><code class="xref download docutils literal"><span class="pre">plot_mlp_training_curves.py</span></code></a></div>
 <div class="sphx-glr-download container">

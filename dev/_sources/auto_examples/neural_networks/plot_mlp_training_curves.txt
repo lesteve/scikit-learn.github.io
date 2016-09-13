@@ -13,6 +13,9 @@ use several small datasets, for which L-BFGS might be more suitable. The
 general trend shown in these examples seems to carry over to larger datasets,
 however.
 
+Note that those results can be highly dependent on the value of
+``learning_rate_init``.
+
 
 
 .. image:: /auto_examples/neural_networks/images/sphx_glr_plot_mlp_training_curves_001.png
@@ -43,8 +46,8 @@ however.
     Training set score: 0.860000
     Training set loss: 0.504760
     training: adam
-    Training set score: 0.973333
-    Training set loss: 0.148707
+    Training set score: 0.980000
+    Training set loss: 0.046248
 
     learning on dataset digits
     training: constant learning-rate
@@ -66,8 +69,8 @@ however.
     Training set score: 0.909293
     Training set loss: 0.318387
     training: adam
-    Training set score: 0.938230
-    Training set loss: 0.418184
+    Training set score: 0.991653
+    Training set loss: 0.045934
 
     learning on dataset circles
     training: constant learning-rate
@@ -89,8 +92,8 @@ however.
     Training set score: 0.500000
     Training set loss: 0.688593
     training: adam
-    Training set score: 0.900000
-    Training set loss: 0.490384
+    Training set score: 0.930000
+    Training set loss: 0.159988
 
     learning on dataset moons
     training: constant learning-rate
@@ -113,7 +116,7 @@ however.
     Training set loss: 0.513034
     training: adam
     Training set score: 0.850000
-    Training set loss: 0.340323
+    Training set loss: 0.334243
 
 
 
@@ -131,19 +134,19 @@ however.
     from sklearn import datasets
 
     # different learning rate schedules and momentum parameters
-    params = [{'algorithm': 'sgd', 'learning_rate': 'constant', 'momentum': 0,
+    params = [{'solver': 'sgd', 'learning_rate': 'constant', 'momentum': 0,
                'learning_rate_init': 0.2},
-              {'algorithm': 'sgd', 'learning_rate': 'constant', 'momentum': .9,
+              {'solver': 'sgd', 'learning_rate': 'constant', 'momentum': .9,
                'nesterovs_momentum': False, 'learning_rate_init': 0.2},
-              {'algorithm': 'sgd', 'learning_rate': 'constant', 'momentum': .9,
+              {'solver': 'sgd', 'learning_rate': 'constant', 'momentum': .9,
                'nesterovs_momentum': True, 'learning_rate_init': 0.2},
-              {'algorithm': 'sgd', 'learning_rate': 'invscaling', 'momentum': 0,
+              {'solver': 'sgd', 'learning_rate': 'invscaling', 'momentum': 0,
                'learning_rate_init': 0.2},
-              {'algorithm': 'sgd', 'learning_rate': 'invscaling', 'momentum': .9,
+              {'solver': 'sgd', 'learning_rate': 'invscaling', 'momentum': .9,
                'nesterovs_momentum': True, 'learning_rate_init': 0.2},
-              {'algorithm': 'sgd', 'learning_rate': 'invscaling', 'momentum': .9,
+              {'solver': 'sgd', 'learning_rate': 'invscaling', 'momentum': .9,
                'nesterovs_momentum': False, 'learning_rate_init': 0.2},
-              {'algorithm': 'adam'}]
+              {'solver': 'adam', 'learning_rate_init': 0.01}]
 
     labels = ["constant learning-rate", "constant with momentum",
               "constant with Nesterov's momentum",
@@ -200,7 +203,7 @@ however.
     plt.show()
 
 **Total running time of the script:**
-(0 minutes 6.138 seconds)
+(0 minutes 5.525 seconds)
 
 
 
