@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>2.5. Decomposing signals in components (matrix factorization problems) &mdash; scikit-learn 0.19.dev0 documentation</title>
+    <title>2.5. Decomposing signals in components (matrix factorization problems) &#8212; scikit-learn 0.19.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -381,7 +381,7 @@ problem. The one implemented here is based on <a class="reference internal" href
 problem solved is a PCA problem (dictionary learning) with an
 <img class="math" src="../_images/math/a301afaec3a8e4e639ad1d14140c7c5470a8eef2.png" alt="\ell_1"/> penalty on the components:</p>
 <div class="math">
-<p><img src="../_images/math/c0ebca27c49fb044c3da261a3595a9d1198b6981.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
+<p><img src="../_images/math/335af27459a81a353944c860fb01ae4f19f6a18c.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
              ||X-UV||_2^2+\alpha||V||_1 \\
              \text{subject to\,} &amp; ||U_k||_2 = 1 \text{ for all }
              0 \leq k &lt; n_{components}"/></p>
@@ -446,13 +446,13 @@ for information retrieval purposes.</p>
 <p>Mathematically, truncated SVD applied to training samples <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>
 produces a low-rank approximation <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>:</p>
 <div class="math">
-<p><img src="../_images/math/d89c8bdb511e6fc53062e18879385931719a480a.png" alt="X \approx X_k = U_k \Sigma_k V_k^\top"/></p>
+<p><img src="../_images/math/971743681a20f3ebf86e325069d6777add13e94d.png" alt="X \approx X_k = U_k \Sigma_k V_k^\top"/></p>
 </div><p>After this operation, <img class="math" src="../_images/math/6ea603ff310adc3f2b5b4a4e149832b4020e6f95.png" alt="U_k \Sigma_k^\top"/>
 is the transformed training set with <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> features
 (called <code class="docutils literal"><span class="pre">n_components</span></code> in the API).</p>
 <p>To also transform a test set <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>, we multiply it with <img class="math" src="../_images/math/635157e4f7d2751399e64d631236f6e67a9742a6.png" alt="V_k"/>:</p>
 <div class="math">
-<p><img src="../_images/math/1c43510c100a1bcff4f04a048c4b37baf7b43198.png" alt="X' = X V_k"/></p>
+<p><img src="../_images/math/412863914fb65558d712b7bf8c8d6a90985991c0.png" alt="X' = X V_k"/></p>
 </div><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Most treatments of LSA in the natural language processing (NLP)
@@ -552,7 +552,7 @@ inpainting and denoising, as well as for supervised recognition tasks.</p>
 the sparse code, as a solution to multiple Lasso problems, considering the
 dictionary fixed, and then updating the dictionary to best fit the sparse code.</p>
 <div class="math">
-<p><img src="../_images/math/e98110ba8c03c658a27b43747a18ba500f8df04d.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
+<p><img src="../_images/math/ba959972ad1603c9a1839df9656fae980f9e2bd7.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
              ||X-UV||_2^2+\alpha||U||_1 \\
              \text{subject to\,} &amp; ||V_k||_2 = 1 \text{ for all }
              0 \leq k &lt; n_{atoms}"/></p>
@@ -611,7 +611,7 @@ computationally efficient and implements on-line learning with a
 \}"/>. How can this dataset be described mathematically? A very simple
 <cite>continuous latent variable</cite> model for <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/> is</p>
 <div class="math">
-<p><img src="../_images/math/d7cc2adc6c729addef310e0bf0d36aacd3c85d12.png" alt="x_i = W h_i + \mu + \epsilon"/></p>
+<p><img src="../_images/math/2928a798e1df010dd146706bd3c8af380fecd5bc.png" alt="x_i = W h_i + \mu + \epsilon"/></p>
 </div><p>The vector <img class="math" src="../_images/math/d03a4b38f7e618d6826778cf0a8b906fbbaa935a.png" alt="h_i"/> is called &#8220;latent&#8221; because it is unobserved. <img class="math" src="../_images/math/65d19c66c148d5016c6a89d26486bf6d1966ded1.png" alt="\epsilon"/> is
 considered a noise term distributed according to a Gaussian with mean 0 and
 covariance <img class="math" src="../_images/math/334b0728f25dd84a28e483181038a307ea6e483e.png" alt="\Psi"/> (i.e. <img class="math" src="../_images/math/9d080efe7a0db146b4b749440967386423dce761.png" alt="\epsilon \sim \mathcal{N}(0, \Psi)"/>), <img class="math" src="../_images/math/d79e8a2c7ce54906c2b25549da38bdbe02cf40d6.png" alt="\mu"/> is some
@@ -620,18 +620,18 @@ how <img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a
 a matrix <img class="math" src="../_images/math/c20f7f9210a91b8aeba2e85d2bcb23e29bcab3f4.png" alt="\mathbf{X}"/> and all the <img class="math" src="../_images/math/d03a4b38f7e618d6826778cf0a8b906fbbaa935a.png" alt="h_i"/>&#8216;s as columns of a matrix <img class="math" src="../_images/math/5b376574393838c7d3de2a4f8c01a6f1c41f276e.png" alt="\mathbf{H}"/>
 then we can write (with suitably defined <img class="math" src="../_images/math/6a9403af9e7b26aa7c54b37e1adf8f4c120fe637.png" alt="\mathbf{M}"/> and <img class="math" src="../_images/math/a05518e70679fd7c3be91f014e20981910b20c9a.png" alt="\mathbf{E}"/>):</p>
 <div class="math">
-<p><img src="../_images/math/50ddb346ee1561aaf0fe8102218a7fc814ab5935.png" alt="\mathbf{X} = W \mathbf{H} + \mathbf{M} + \mathbf{E}"/></p>
+<p><img src="../_images/math/6b05de5a49aafaf7214f8d14d3aafaf03e3ffd15.png" alt="\mathbf{X} = W \mathbf{H} + \mathbf{M} + \mathbf{E}"/></p>
 </div><p>In other words, we <em>decomposed</em> matrix <img class="math" src="../_images/math/c20f7f9210a91b8aeba2e85d2bcb23e29bcab3f4.png" alt="\mathbf{X}"/>.</p>
 <p>If <img class="math" src="../_images/math/d03a4b38f7e618d6826778cf0a8b906fbbaa935a.png" alt="h_i"/> is given, the above equation automatically implies the following
 probabilistic interpretation:</p>
 <div class="math">
-<p><img src="../_images/math/8eea65b464646cebcb995bbddc0ab393a8f68a78.png" alt="p(x_i|h_i) = \mathcal{N}(Wh_i + \mu, \Psi)"/></p>
+<p><img src="../_images/math/52f6d87abfac0f47772ac7ee8772526df4d4cba1.png" alt="p(x_i|h_i) = \mathcal{N}(Wh_i + \mu, \Psi)"/></p>
 </div><p>For a complete probabilistic model we also need a prior distribution for the
 latent variable <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/>. The most straightforward assumption (based on the nice
 properties of the Gaussian distribution) is <img class="math" src="../_images/math/dde36e93b2cb0b9e54d8c2f67d446dfc62c3707e.png" alt="h \sim \mathcal{N}(0,
 \mathbf{I})"/>.  This yields a Gaussian as the marginal distribution of <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/>:</p>
 <div class="math">
-<p><img src="../_images/math/e8ada2ba6e5c6d7f46972d754559f5bdf5ab7c0e.png" alt="p(x) = \mathcal{N}(\mu, WW^T + \Psi)"/></p>
+<p><img src="../_images/math/fc114f553a1484ac7a44174b8c750fa5fa8a95ed.png" alt="p(x) = \mathcal{N}(\mu, WW^T + \Psi)"/></p>
 </div><p>Now, without any further assumptions the idea of having a latent variable <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/>
 would be superfluous &#8211; <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> can be completely modelled with a mean
 and a covariance. We need to impose some more specific structure on one
@@ -707,7 +707,7 @@ It finds a decomposition of samples <img class="math" src="../_images/math/7a7bb
 into two matrices <img class="math" src="../_images/math/953bde2ab2fca30897f66185e5b37b73747b8b46.png" alt="W"/> and <img class="math" src="../_images/math/44d4c3f22452acebfb3ac644e23508b67500be90.png" alt="H"/> of non-negative elements,
 by optimizing for the squared Frobenius norm:</p>
 <div class="math">
-<p><img src="../_images/math/e7d2f3fd1eada84b31a2fca57225d69a80e3fee0.png" alt="\arg\min_{W,H} \frac{1}{2} ||X - WH||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {WH}_{ij})^2"/></p>
+<p><img src="../_images/math/56dd37b79327006a201a5b9e450bea913f2b5d65.png" alt="\arg\min_{W,H} \frac{1}{2} ||X - WH||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {WH}_{ij})^2"/></p>
 </div><p>This norm is an obvious extension of the Euclidean norm to matrices. (Other
 optimization objectives have been suggested in the NMF literature, in
 particular Kullback-Leibler divergence, but these are not currently
@@ -742,12 +742,12 @@ combination of L1 and L2 with the <code class="xref py py-attr docutils literal"
 and the intensity of the regularization with the <code class="xref py py-attr docutils literal"><span class="pre">alpha</span></code>
 (<img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/>) parameter. Then the priors terms are:</p>
 <div class="math">
-<p><img src="../_images/math/841a461ac69d711b3be5cf06ec91582ae68b1948.png" alt="\alpha \rho ||W||_1 + \alpha \rho ||H||_1
+<p><img src="../_images/math/064f9ca9ed5d3fa5b659fa2a50176552cd789296.png" alt="\alpha \rho ||W||_1 + \alpha \rho ||H||_1
 + \frac{\alpha(1-\rho)}{2} ||W||_{Fro} ^ 2
 + \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
 </div><p>and the regularized objective function is:</p>
 <div class="math">
-<p><img src="../_images/math/c2e167a860eb159f2c1d145c05b8f9f504515488.png" alt="\frac{1}{2}||X - WH||_{Fro}^2
+<p><img src="../_images/math/438d66f608dddc17c7f483b93c58181886643923.png" alt="\frac{1}{2}||X - WH||_{Fro}^2
 + \alpha \rho ||W||_1 + \alpha \rho ||H||_1
 + \frac{\alpha(1-\rho)}{2} ||W||_{Fro} ^ 2
 + \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
@@ -803,14 +803,14 @@ a corpus with <img class="math" src="../_images/math/3cf5aa5abe312e6fd4996975341
 </div></blockquote>
 <p>For parameter estimation, the posterior distribution is:</p>
 <div class="math">
-<p><img src="../_images/math/4ce078aa281e2e7aba4d02e89f8afbf4b0210909.png" alt="p(z, \theta, \beta |w, \alpha, \eta) =
+<p><img src="../_images/math/404da44d7b41d98a2191fb2cd02c3f4ac1c68b2b.png" alt="p(z, \theta, \beta |w, \alpha, \eta) =
   \frac{p(z, \theta, \beta|\alpha, \eta)}{p(w|\alpha, \eta)}"/></p>
 </div><p>Since the posterior is intractable, variational Bayesian method
 uses a simpler distribution <img class="math" src="../_images/math/0510b5c618c540bbb500c44ee4086a3e17e18696.png" alt="q(z,\theta,\beta | \lambda, \phi, \gamma)"/>
 to approximate it, and those variational parameters <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/>, <img class="math" src="../_images/math/c2f31c22645274c375eff7920cfdfdc18d60341f.png" alt="\phi"/>,
 <img class="math" src="../_images/math/3666981dc77862de77b6ecfcb64aad59b425cbaf.png" alt="\gamma"/> are optimized to maximize the Evidence Lower Bound (ELBO):</p>
 <div class="math">
-<p><img src="../_images/math/adf9ddf523dfb1e03ced65c15fa6695b9480bf90.png" alt="log\: P(w | \alpha, \eta) \geq L(w,\phi,\gamma,\lambda) \overset{\triangle}{=}
+<p><img src="../_images/math/2e5a140010bc061501b1b515b57572f993604c2c.png" alt="log\: P(w | \alpha, \eta) \geq L(w,\phi,\gamma,\lambda) \overset{\triangle}{=}
   E_{q}[log\:p(w,z,\theta,\beta|\alpha,\eta)] - E_{q}[log\:q(z, \theta, \beta)]"/></p>
 </div><p>Maximizing ELBO is equivalent to minimizing the Kullback-Leibler(KL) divergence
 between <img class="math" src="../_images/math/30e44216f8466495285af2e10ecf0677614f10d5.png" alt="q(z,\theta,\beta)"/> and the true posterior

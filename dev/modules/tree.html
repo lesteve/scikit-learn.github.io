@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.10. Decision Trees &mdash; scikit-learn 0.19.dev0 documentation</title>
+    <title>1.10. Decision Trees &#8212; scikit-learn 0.19.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -333,7 +333,7 @@ render these plots inline using the <cite>Image()</cite> function:</p>
 </pre></div>
 </div>
 <div class="figure align-center">
-<img src="../_images/iris.svg" /></div>
+<img alt="../_images/iris.svg" src="../_images/iris.svg" /></div>
 <p>After being fitted, the model can then be used to predict the class of samples:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
 <span class="go">array([0])</span>
@@ -549,18 +549,18 @@ each candidate split <img class="math" src="../_images/math/f8f977aeb99d954e6275
 feature <img class="math" src="../_images/math/6b21e0b0899a0d2879d3b8019087fa630bab4ea2.png" alt="j"/> and threshold <img class="math" src="../_images/math/3215a3aaf0abc8f8b35c2420862f93dffef04d31.png" alt="t_m"/>, partition the data into
 <img class="math" src="../_images/math/ca90df04d4a35af0c1df6758f66952139cd1f9be.png" alt="Q_{left}(\theta)"/> and <img class="math" src="../_images/math/4937651bf5e7c9718cfc13c237bc13951457271f.png" alt="Q_{right}(\theta)"/> subsets</p>
 <div class="math">
-<p><img src="../_images/math/ac14c46764ad5f53ba843a60345dca2deefe7bcf.png" alt="Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m}
+<p><img src="../_images/math/f2442b4b0fb29fec018f580b06b84a3a5a245854.png" alt="Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m}
 
 Q_{right}(\theta) = Q \setminus Q_{left}(\theta)"/></p>
 </div><p>The impurity at <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> is computed using an impurity function
 <img class="math" src="../_images/math/b46105bc7f41b599216aab6f4a4cda7728a95624.png" alt="H()"/>, the choice of which depends on the task being solved
 (classification or regression)</p>
 <div class="math">
-<p><img src="../_images/math/09b8fa643c4b28b2282d0ed9725e8d69671a58bc.png" alt="G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))
+<p><img src="../_images/math/974a1a5a14e5454f95cf8a43feb88e4ca4e77a21.png" alt="G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))
 + \frac{n_{right}}{N_m} H(Q_{right}(\theta))"/></p>
 </div><p>Select the parameters that minimises the impurity</p>
 <div class="math">
-<p><img src="../_images/math/eed9ed1a855c21d7dad7da51e2758a581d9dc8ff.png" alt="\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)"/></p>
+<p><img src="../_images/math/6f2f5aff90e778e32f85bfc100dc3fe87db19ada.png" alt="\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)"/></p>
 </div><p>Recurse for subsets <img class="math" src="../_images/math/77266dcdef123d77a0aa96971d4887c3a8abdc66.png" alt="Q_{left}(\theta^*)"/> and
 <img class="math" src="../_images/math/9dec6651921d251f6f872a68c05ea6af4fca82f1.png" alt="Q_{right}(\theta^*)"/> until the maximum allowable depth is reached,
 <img class="math" src="../_images/math/5619659b25916a27418b281724fac49e6a8cb8c5.png" alt="N_m &lt; \min_{samples}"/> or <img class="math" src="../_images/math/63b4861107dc741950d28d303c58e159aca65a4d.png" alt="N_m = 1"/>.</p>
@@ -570,17 +570,17 @@ Q_{right}(\theta) = Q \setminus Q_{left}(\theta)"/></p>
 for node <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/>, representing a region <img class="math" src="../_images/math/02eada2efb3d986ab718e831b1a6bc8a5ee68f71.png" alt="R_m"/> with <img class="math" src="../_images/math/74f4b22af0f8f9823c68376042f9831dc60b45f4.png" alt="N_m"/>
 observations, let</p>
 <div class="math">
-<p><img src="../_images/math/6596d17eda8c7a2b36b95f7a6421e5692419c068.png" alt="p_{mk} = 1/ N_m \sum_{x_i \in R_m} I(y_i = k)"/></p>
+<p><img src="../_images/math/fe3d02d3c3aca416f0f7e9ee78f2946a8aee206e.png" alt="p_{mk} = 1/ N_m \sum_{x_i \in R_m} I(y_i = k)"/></p>
 </div><p>be the proportion of class k observations in node <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/></p>
 <p>Common measures of impurity are Gini</p>
 <div class="math">
-<p><img src="../_images/math/8a27f9a19d2869e14b811fcfcb71f4b65f8c3081.png" alt="H(X_m) = \sum_k p_{mk} (1 - p_{mk})"/></p>
+<p><img src="../_images/math/34b492dc5edb043b6056076ec7ff64f9edcc3628.png" alt="H(X_m) = \sum_k p_{mk} (1 - p_{mk})"/></p>
 </div><p>Cross-Entropy</p>
 <div class="math">
-<p><img src="../_images/math/6d16bdf976269b15e8a591910eb775d99cbcb6d6.png" alt="H(X_m) = - \sum_k p_{mk} \log(p_{mk})"/></p>
+<p><img src="../_images/math/9d4573b12f15b5c7b80e6b12cd7e38f8de8c0ebd.png" alt="H(X_m) = - \sum_k p_{mk} \log(p_{mk})"/></p>
 </div><p>and Misclassification</p>
 <div class="math">
-<p><img src="../_images/math/2af0bca22ac4717441260cee93ef79647f91ad15.png" alt="H(X_m) = 1 - \max(p_{mk})"/></p>
+<p><img src="../_images/math/24f161cd482f64a016b0b121708657d655972fae.png" alt="H(X_m) = 1 - \max(p_{mk})"/></p>
 </div></div>
 <div class="section" id="regression-criteria">
 <h3>1.10.7.2. Regression criteria<a class="headerlink" href="#regression-criteria" title="Permalink to this headline">¶</a></h3>
@@ -588,7 +588,7 @@ observations, let</p>
 representing a region <img class="math" src="../_images/math/02eada2efb3d986ab718e831b1a6bc8a5ee68f71.png" alt="R_m"/> with <img class="math" src="../_images/math/74f4b22af0f8f9823c68376042f9831dc60b45f4.png" alt="N_m"/> observations, a common
 criterion to minimise is the Mean Squared Error</p>
 <div class="math">
-<p><img src="../_images/math/c8b73dc6cbe26d18774f5724346e3a4e0fdb09ef.png" alt="c_m = \frac{1}{N_m} \sum_{i \in N_m} y_i
+<p><img src="../_images/math/18b1a49e164e731a75bb626f23ecce70fdf0a181.png" alt="c_m = \frac{1}{N_m} \sum_{i \in N_m} y_i
 
 H(X_m) = \frac{1}{N_m} \sum_{i \in N_m} (y_i - c_m)^2"/></p>
 </div><div class="topic">

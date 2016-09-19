@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.9. Naive Bayes &mdash; scikit-learn 0.19.dev0 documentation</title>
+    <title>1.9. Naive Bayes &#8212; scikit-learn 0.19.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -194,19 +194,19 @@ between every pair of features. Given a class variable <img class="math" src="..
 dependent feature vector <img class="math" src="../_images/math/fdf6501bec5987984965f15d09235c645fe06ccb.png" alt="x_1"/> through <img class="math" src="../_images/math/7bc36d4aa726c4ace87722a5c6f2aeca24fa4714.png" alt="x_n"/>,
 Bayes&#8217; theorem states the following relationship:</p>
 <div class="math">
-<p><img src="../_images/math/984913b76fc929345f67febf38f0ace59976dbfe.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) P(x_1, \dots x_n \mid y)}
+<p><img src="../_images/math/47537fc301bbf8971084f2ecbaa76658ad088235.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) P(x_1, \dots x_n \mid y)}
                                  {P(x_1, \dots, x_n)}"/></p>
 </div><p>Using the naive independence assumption that</p>
 <div class="math">
-<p><img src="../_images/math/efa9fcad260e876d87e65be18b0920910bac4adc.png" alt="P(x_i | y, x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n) = P(x_i | y),"/></p>
+<p><img src="../_images/math/4a2f8ee56238deb56e9e970a749bbe26d96465f7.png" alt="P(x_i | y, x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n) = P(x_i | y),"/></p>
 </div><p>for all <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>, this relationship is simplified to</p>
 <div class="math">
-<p><img src="../_images/math/c6c4010d50cab94cdb8cfe269fbe4e06f56a82c8.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) \prod_{i=1}^{n} P(x_i \mid y)}
+<p><img src="../_images/math/7d90ebd2dc0cc2e1136a22625a489c3326d30ec7.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) \prod_{i=1}^{n} P(x_i \mid y)}
                                  {P(x_1, \dots, x_n)}"/></p>
 </div><p>Since <img class="math" src="../_images/math/af3b28009d4db6e1a2cab1d99f8558d8a7f3445b.png" alt="P(x_1, \dots, x_n)"/> is constant given the input,
 we can use the following classification rule:</p>
 <div class="math">
-<p><img src="../_images/math/3a2ba83e6cff52c986df7139d8ff31595cad3837.png" alt="P(y \mid x_1, \dots, x_n) \propto P(y) \prod_{i=1}^{n} P(x_i \mid y)
+<p><img src="../_images/math/201f076a3330f2928c26978c4eac59cc8ba4a440.png" alt="P(y \mid x_1, \dots, x_n) \propto P(y) \prod_{i=1}^{n} P(x_i \mid y)
 
 \Downarrow
 
@@ -244,7 +244,7 @@ Proc. FLAIRS.</li>
 <p><a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">GaussianNB</span></code></a> implements the Gaussian Naive Bayes algorithm for
 classification. The likelihood of the features is assumed to be Gaussian:</p>
 <div class="math">
-<p><img src="../_images/math/a52bf440ad10c4ebc3b9540573e2d4e03dfd39ce.png" alt="P(x_i \mid y) &amp;= \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)"/></p>
+<p><img src="../_images/math/ed0c1181c1696f72e1be266187e4694919047d9e.png" alt="P(x_i \mid y) &amp;= \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)"/></p>
 </div><p>The parameters <img class="math" src="../_images/math/0b30a2d48c2805095245dba3b4be2dfd2e2fba2e.png" alt="\sigma_y"/> and <img class="math" src="../_images/math/1d179ee3ab9ccc290192219dc80ee72cff12acb2.png" alt="\mu_y"/>
 are estimated using maximum likelihood.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -273,7 +273,7 @@ of feature <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001
 <p>The parameters <img class="math" src="../_images/math/fa63fe7665119a0bbb2468099d0048af771b5a1c.png" alt="\theta_y"/> is estimated by a smoothed
 version of maximum likelihood, i.e. relative frequency counting:</p>
 <div class="math">
-<p><img src="../_images/math/34b467eeec75b1fed816276c387d3f3b82ec5e9f.png" alt="\hat{\theta}_{yi} = \frac{ N_{yi} + \alpha}{N_y + \alpha n}"/></p>
+<p><img src="../_images/math/ac8b939d0915826ce833b43ac13efa8a0fef99d9.png" alt="\hat{\theta}_{yi} = \frac{ N_{yi} + \alpha}{N_y + \alpha n}"/></p>
 </div><p>where <img class="math" src="../_images/math/54f18d12bb04079aeccdee4418942d30073acc14.png" alt="N_{yi} = \sum_{x \in T} x_i"/> is
 the number of times feature <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> appears in a sample of class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>
 in the training set <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/>,
@@ -296,7 +296,7 @@ feature vectors; if handed any other kind of data, a <code class="docutils liter
 may binarize its input (depending on the <code class="docutils literal"><span class="pre">binarize</span></code> parameter).</p>
 <p>The decision rule for Bernoulli naive Bayes is based on</p>
 <div class="math">
-<p><img src="../_images/math/868c10c5a5bc88085affec3541d922a04f0198d9.png" alt="P(x_i \mid y) = P(i \mid y) x_i + (1 - P(i \mid y)) (1 - x_i)"/></p>
+<p><img src="../_images/math/f6a27bc34d0c2ab16cb8ba203e5348741b5521e6.png" alt="P(x_i \mid y) = P(i \mid y) x_i + (1 - P(i \mid y)) (1 - x_i)"/></p>
 </div><p>which differs from multinomial NB&#8217;s rule
 in that it explicitly penalizes the non-occurrence of a feature <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>
 that is an indicator for class <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>,
