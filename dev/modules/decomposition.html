@@ -166,7 +166,7 @@
 <li><a class="reference internal" href="#principal-component-analysis-pca">2.5.1. Principal component analysis (PCA)</a><ul>
 <li><a class="reference internal" href="#exact-pca-and-probabilistic-interpretation">2.5.1.1. Exact PCA and probabilistic interpretation</a></li>
 <li><a class="reference internal" href="#incremental-pca">2.5.1.2. Incremental PCA</a></li>
-<li><a class="reference internal" href="#approximate-pca">2.5.1.3. Approximate PCA</a></li>
+<li><a class="reference internal" href="#pca-using-randomized-svd">2.5.1.3. PCA using randomized SVD</a></li>
 <li><a class="reference internal" href="#kernel-pca">2.5.1.4. Kernel PCA</a></li>
 <li><a class="reference internal" href="#sparse-principal-components-analysis-sparsepca-and-minibatchsparsepca">2.5.1.5. Sparse principal components analysis (SparsePCA and MiniBatchSparsePCA)</a></li>
 </ul>
@@ -272,8 +272,8 @@ number of samples to be processed in the dataset.</p>
 </ul>
 </div>
 </div>
-<div class="section" id="approximate-pca">
-<span id="randomizedpca"></span><h3>2.5.1.3. Approximate PCA<a class="headerlink" href="#approximate-pca" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pca-using-randomized-svd">
+<span id="randomizedpca"></span><h3>2.5.1.3. PCA using randomized SVD<a class="headerlink" href="#pca-using-randomized-svd" title="Permalink to this headline">¶</a></h3>
 <p>It is often interesting to project data to a lower-dimensional
 space that preserves most of the variance, by dropping the singular vector
 of components associated with lower singular values.</p>
@@ -287,10 +287,11 @@ The samples lie on a manifold of much lower
 dimension (say around 200 for instance). The PCA algorithm can be used
 to linearly transform the data while both reducing the dimensionality
 and preserve most of the explained variance at the same time.</p>
-<p>The class <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> is very useful in that case: since we
-are going to drop most of the singular vectors it is much more efficient
-to limit the computation to an approximated estimate of the singular
-vectors we will keep to actually perform the transform.</p>
+<p>The class <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> used with the optional parameter
+<code class="docutils literal"><span class="pre">svd_solver='randomized'</span></code> is very useful in that case: since we are going
+to drop most of the singular vectors it is much more efficient to limit the
+computation to an approximated estimate of the singular vectors we will keep
+to actually perform the transform.</p>
 <p>For instance, the following shows 16 sample portraits (centered around
 0.0) from the Olivetti dataset. On the right hand side are the first 16
 singular vectors reshaped as portraits. Since we only require the top
@@ -298,20 +299,20 @@ singular vectors reshaped as portraits. Since we only require the top
 and <img class="math" src="../_images/math/c75475811b373526edf4afe866021d364748ed2a.png" alt="n_{features} = 64 \times 64 = 4096"/>, the computation time is
 less than 1s:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="orig_img" src="../_images/sphx_glr_plot_faces_decomposition_0011.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p><a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> can hence be used as a drop in replacement for
-<a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> with the exception that we need to give it the size of
-the lower-dimensional space <code class="docutils literal"><span class="pre">n_components</span></code> as a mandatory input parameter.</p>
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="orig_img" src="../_images/sphx_glr_plot_faces_decomposition_0011.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p>Note: with the optional parameter <code class="docutils literal"><span class="pre">svd_solver='randomized'</span></code>, we also
+need to give <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> the size of the lower-dimensional space
+<code class="docutils literal"><span class="pre">n_components</span></code> as a mandatory input parameter.</p>
 <p>If we note <img class="math" src="../_images/math/2fbdeee57cb72854b8708cdf0f9788a4dab31768.png" alt="n_{max} = max(n_{samples}, n_{features})"/> and
 <img class="math" src="../_images/math/34f1ebcc1efea032abb8ce46522c9d461c338a1e.png" alt="n_{min} = min(n_{samples}, n_{features})"/>, the time complexity
-of <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> is <img class="math" src="../_images/math/f8be6ae15f6388ff1dbdab5f9ffdfc2a86cdd9c6.png" alt="O(n_{max}^2 \cdot n_{components})"/>
+of the randomized <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> is <img class="math" src="../_images/math/f8be6ae15f6388ff1dbdab5f9ffdfc2a86cdd9c6.png" alt="O(n_{max}^2 \cdot n_{components})"/>
 instead of <img class="math" src="../_images/math/ad8ba59b782070f423ec6d6269cdeabccccf7628.png" alt="O(n_{max}^2 \cdot n_{min})"/> for the exact method
 implemented in <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>.</p>
-<p>The memory footprint of <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> is also proportional to
+<p>The memory footprint of randomized <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> is also proportional to
 <img class="math" src="../_images/math/89fa6f0afae6d5eacbc7806935ab9c4d8cad7f04.png" alt="2 \cdot n_{max} \cdot n_{components}"/> instead of <img class="math" src="../_images/math/ff79a19db41e255ddc85228dc28ffcd21369d9db.png" alt="n_{max}
 \cdot n_{min}"/> for the exact method.</p>
-<p>Note: the implementation of <code class="docutils literal"><span class="pre">inverse_transform</span></code> in <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a>
-is not the exact inverse transform of <code class="docutils literal"><span class="pre">transform</span></code> even when
-<code class="docutils literal"><span class="pre">whiten=False</span></code> (default).</p>
+<p>Note: the implementation of <code class="docutils literal"><span class="pre">inverse_transform</span></code> in <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> with
+<code class="docutils literal"><span class="pre">svd_solver='randomized'</span></code> is not the exact inverse transform of
+<code class="docutils literal"><span class="pre">transform</span></code> even when <code class="docutils literal"><span class="pre">whiten=False</span></code> (default).</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">

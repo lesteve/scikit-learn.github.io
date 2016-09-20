@@ -107,8 +107,9 @@ problem, and whether the transformer uses the clustering API.
 .. code-block:: python
 
     estimators = [
-        ('Eigenfaces - RandomizedPCA',
-         decomposition.RandomizedPCA(n_components=n_components, whiten=True),
+        ('Eigenfaces - PCA using randomized SVD',
+         decomposition.PCA(n_components=n_components, svd_solver='randomized',
+                           whiten=True),
          True),
 
         ('Non-negative components - NMF',
@@ -186,7 +187,14 @@ Do the estimation and plot it
             components_ = estimator.cluster_centers_
         else:
             components_ = estimator.components_
-        if hasattr(estimator, 'noise_variance_'):
+
+        # Plot an image representing the pixelwise variance provided by the
+        # estimator e.g its noise_variance_ attribute. The Eigenfaces estimator,
+        # via the PCA decomposition, also provides a scalar noise_variance_
+        # (the mean of pixelwise variance) that cannot be displayed as an image
+        # so we skip it.
+        if (hasattr(estimator, 'noise_variance_') and
+                estimator.noise_variance_.ndim > 0):  # Skip the Eigenfaces case
             plot_gallery("Pixelwise variance",
                          estimator.noise_variance_.reshape(1, -1), n_col=1,
                          n_row=1)
@@ -245,23 +253,23 @@ Do the estimation and plot it
 
  Out::
 
-    Extracting the top 6 Eigenfaces - RandomizedPCA...
-    done in 0.065s
+    Extracting the top 6 Eigenfaces - PCA using randomized SVD...
+    done in 0.133s
     Extracting the top 6 Non-negative components - NMF...
-    done in 0.672s
+    done in 0.734s
     Extracting the top 6 Independent components - FastICA...
-    done in 0.328s
+    done in 0.236s
     Extracting the top 6 Sparse comp. - MiniBatchSparsePCA...
-    done in 1.589s
+    done in 1.219s
     Extracting the top 6 MiniBatchDictionaryLearning...
     done in 1.008s
     Extracting the top 6 Cluster centers - MiniBatchKMeans...
-    done in 0.102s
+    done in 0.100s
     Extracting the top 6 Factor Analysis components - FA...
-    done in 0.148s
+    done in 0.147s
 
 
-**Total running time of the script:** ( 0 minutes  7.305 seconds)
+**Total running time of the script:** ( 0 minutes  6.979 seconds)
 
 
 

@@ -246,8 +246,9 @@ matrix decomposition (dimension reduction) methods from the module
 <p>List of the different estimators, whether to center and transpose the
 problem, and whether the transformer uses the clustering API.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;Eigenfaces - RandomizedPCA&#39;</span><span class="p">,</span>
-     <a href="../../modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA"><span class="n">decomposition</span><span class="o">.</span><span class="n">RandomizedPCA</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Eigenfaces - PCA using randomized SVD&#39;</span><span class="p">,</span>
+     <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">decomposition</span><span class="o">.</span><span class="n">PCA</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;randomized&#39;</span><span class="p">,</span>
+                       <span class="n">whiten</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
      <span class="bp">True</span><span class="p">),</span>
 
     <span class="p">(</span><span class="s1">&#39;Non-negative components - NMF&#39;</span><span class="p">,</span>
@@ -300,7 +301,14 @@ problem, and whether the transformer uses the clustering API.</p>
         <span class="n">components_</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">cluster_centers_</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">components_</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">components_</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="s1">&#39;noise_variance_&#39;</span><span class="p">):</span>
+
+    <span class="c1"># Plot an image representing the pixelwise variance provided by the</span>
+    <span class="c1"># estimator e.g its noise_variance_ attribute. The Eigenfaces estimator,</span>
+    <span class="c1"># via the PCA decomposition, also provides a scalar noise_variance_</span>
+    <span class="c1"># (the mean of pixelwise variance) that cannot be displayed as an image</span>
+    <span class="c1"># so we skip it.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="s1">&#39;noise_variance_&#39;</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="n">estimator</span><span class="o">.</span><span class="n">noise_variance_</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>  <span class="c1"># Skip the Eigenfaces case</span>
         <span class="n">plot_gallery</span><span class="p">(</span><span class="s2">&quot;Pixelwise variance&quot;</span><span class="p">,</span>
                      <span class="n">estimator</span><span class="o">.</span><span class="n">noise_variance_</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">n_col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                      <span class="n">n_row</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -329,23 +337,23 @@ problem, and whether the transformer uses the clustering API.</p>
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">Eigenfaces</span> <span class="o">-</span> <span class="n">RandomizedPCA</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.065</span><span class="n">s</span>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">Eigenfaces</span> <span class="o">-</span> <span class="n">PCA</span> <span class="n">using</span> <span class="n">randomized</span> <span class="n">SVD</span><span class="o">...</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.133</span><span class="n">s</span>
 <span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">Non</span><span class="o">-</span><span class="n">negative</span> <span class="n">components</span> <span class="o">-</span> <span class="n">NMF</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.672</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.734</span><span class="n">s</span>
 <span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">Independent</span> <span class="n">components</span> <span class="o">-</span> <span class="n">FastICA</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.328</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.236</span><span class="n">s</span>
 <span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">Sparse</span> <span class="n">comp</span><span class="o">.</span> <span class="o">-</span> <span class="n">MiniBatchSparsePCA</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">1.589</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">1.219</span><span class="n">s</span>
 <span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">MiniBatchDictionaryLearning</span><span class="o">...</span>
 <span class="n">done</span> <span class="ow">in</span> <span class="mf">1.008</span><span class="n">s</span>
 <span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">Cluster</span> <span class="n">centers</span> <span class="o">-</span> <a href="../../modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans"><span class="n">MiniBatchKMeans</span></a><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.102</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.100</span><span class="n">s</span>
 <span class="n">Extracting</span> <span class="n">the</span> <span class="n">top</span> <span class="mi">6</span> <span class="n">Factor</span> <span class="n">Analysis</span> <span class="n">components</span> <span class="o">-</span> <span class="n">FA</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.148</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.147</span><span class="n">s</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  7.305 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  6.979 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/plot_faces_decomposition.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_faces_decomposition.py</span></code></a></div>
 <div class="sphx-glr-download container">
