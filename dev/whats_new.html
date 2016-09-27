@@ -351,6 +351,16 @@ following the new nomenclature of their class names.</p>
 <p>The parameter <code class="docutils literal"><span class="pre">n_labels</span></code> in the newly renamed
 <a class="reference internal" href="modules/generated/sklearn.model_selection.LeavePGroupsOut.html#sklearn.model_selection.LeavePGroupsOut" title="sklearn.model_selection.LeavePGroupsOut"><code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code></a> is changed to <code class="docutils literal"><span class="pre">n_groups</span></code>.</p>
 </li>
+<li><p class="first">Training scores and Timing information</p>
+<p><code class="docutils literal"><span class="pre">cv_results_</span></code> also includes the training scores for each
+cross-validation split (with keys such as <code class="docutils literal"><span class="pre">'split0_train_score'</span></code>), as
+well as their mean (<code class="docutils literal"><span class="pre">'mean_train_score'</span></code>) and standard deviation
+(<code class="docutils literal"><span class="pre">'std_train_score'</span></code>). To avoid the cost of evaluating training score,
+set <code class="docutils literal"><span class="pre">return_train_score=False</span></code>.</p>
+<p>Additionally the mean and standard deviation of the times taken to split,
+train and score the model across all the cross-validation splits is
+available at the key <code class="docutils literal"><span class="pre">'mean_time'</span></code> and <code class="docutils literal"><span class="pre">'std_time'</span></code> respectively.</p>
+</li>
 </ul>
 </div></blockquote>
 <div class="section" id="id1">
@@ -549,6 +559,11 @@ By <a class="reference external" href="https://www.ocf.berkeley.edu/~antonyl/">A
 <li><a class="reference internal" href="modules/generated/sklearn.semi_supervised.LabelPropagation.html#sklearn.semi_supervised.LabelPropagation" title="sklearn.semi_supervised.LabelPropagation"><code class="xref py py-class docutils literal"><span class="pre">semi_supervised.LabelPropagation</span></code></a> and <a class="reference internal" href="modules/generated/sklearn.semi_supervised.LabelSpreading.html#sklearn.semi_supervised.LabelSpreading" title="sklearn.semi_supervised.LabelSpreading"><code class="xref py py-class docutils literal"><span class="pre">semi_supervised.LabelSpreading</span></code></a>
 now accept arbitrary kernel functions in addition to strings <code class="docutils literal"><span class="pre">knn</span></code> and <code class="docutils literal"><span class="pre">rbf</span></code>.
 (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/5762">#5762</a>) By <a class="reference external" href="https://github.com/musically-ut">Utkarsh Upadhyay</a>.</li>
+<li>The training scores and time taken for training followed by scoring for
+each search candidate are now available at the <code class="docutils literal"><span class="pre">cv_results_</span></code> dict.
+See <span class="xref std std-ref">model_selection_changes</span> for more information.
+(<cite>#7324 &lt;https://github.com/scikit-learn/scikit-learn/pull/7325&gt;</cite>)
+By <a class="reference external" href="https://github.com/eyc88">Eugene Chen</a> and <a href="#id92"><span class="problematic" id="id93">`Raghav RV`_</span></a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -559,7 +574,7 @@ now accept arbitrary kernel functions in addition to strings <code class="docuti
 <li><code class="xref py py-func docutils literal"><span class="pre">model_selection.tests._search._check_param_grid</span></code> now works correctly with all types
 that extends/implements <cite>Sequence</cite> (except string), including range (Python 3.x) and xrange
 (Python 2.x).
-(<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/7323">#7323</a>) by <a href="#id92"><span class="problematic" id="id93">`Viacheslav Kovalevskyi`_</span></a>.</li>
+(<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/7323">#7323</a>) by <a href="#id94"><span class="problematic" id="id95">`Viacheslav Kovalevskyi`_</span></a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">model_selection.StratifiedKFold</span></code></a> now raises error if all n_labels
 for individual classes is less than n_folds.
 (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/6182">#6182</a>) by <a class="reference external" href="https://github.com/dsquareindia">Devashish Deshpande</a>.</li>
@@ -725,7 +740,7 @@ renamed splitters <a class="reference internal" href="modules/generated/sklearn.
 <code class="docutils literal"><span class="pre">groups</span></code>. Additionally in <a class="reference internal" href="modules/generated/sklearn.model_selection.LeavePGroupsOut.html#sklearn.model_selection.LeavePGroupsOut" title="sklearn.model_selection.LeavePGroupsOut"><code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code></a>,
 the parameter <code class="docutils literal"><span class="pre">n_labels``is</span> <span class="pre">renamed</span> <span class="pre">to</span> <span class="pre">``n_groups</span></code>.
 (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/6660">#6660</a>)
-by <a href="#id94"><span class="problematic" id="id95">`Raghav RV`_</span></a>.</li>
+by <a href="#id96"><span class="problematic" id="id97">`Raghav RV`_</span></a>.</li>
 </ul>
 </div></blockquote>
 </div>
