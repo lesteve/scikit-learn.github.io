@@ -187,72 +187,85 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.manifold" title="sklearn.manifold"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.manifold</span></code></a>.MDS<a class="headerlink" href="#sklearn-manifold-mds" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.manifold.MDS">
-<em class="property">class </em><code class="descclassname">sklearn.manifold.</code><code class="descname">MDS</code><span class="sig-paren">(</span><em>n_components=2</em>, <em>metric=True</em>, <em>n_init=4</em>, <em>max_iter=300</em>, <em>verbose=0</em>, <em>eps=0.001</em>, <em>n_jobs=1</em>, <em>random_state=None</em>, <em>dissimilarity='euclidean'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bb9830/sklearn/manifold/mds.py#L274"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.manifold.</code><code class="descname">MDS</code><span class="sig-paren">(</span><em>n_components=2</em>, <em>metric=True</em>, <em>n_init=4</em>, <em>max_iter=300</em>, <em>verbose=0</em>, <em>eps=0.001</em>, <em>n_jobs=1</em>, <em>random_state=None</em>, <em>dissimilarity='euclidean'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/4773044/sklearn/manifold/mds.py#L279"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multidimensional scaling</p>
 <p>Read more in the <a class="reference internal" href="../manifold.html#multidimensional-scaling"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>metric</strong> : boolean, optional, default: True</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int, optional, default: 2</p>
 <blockquote>
-<div><p>compute metric or nonmetric SMACOF (Scaling by Majorizing a
-Complicated Function) algorithm</p>
+<div><p>Number of dimensions in which to immerse the dissimilarities.</p>
 </div></blockquote>
-<p><strong>n_components</strong> : int, optional, default: 2</p>
+<p><strong>metric</strong> : boolean, optional, default: True</p>
 <blockquote>
-<div><p>number of dimension in which to immerse the similarities
-overridden if initial array is provided.</p>
+<div><p>If <code class="docutils literal"><span class="pre">True</span></code>, perform metric MDS; otherwise, perform nonmetric MDS.</p>
 </div></blockquote>
 <p><strong>n_init</strong> : int, optional, default: 4</p>
 <blockquote>
-<div><p>Number of time the smacof algorithm will be run with different
-initialisation. The final results will be the best output of the
-n_init consecutive runs in terms of stress.</p>
+<div><p>Number of times the SMACOF algorithm will be run with different
+initializations. The final results will be the best output of the runs,
+determined by the run with the smallest final stress.</p>
 </div></blockquote>
 <p><strong>max_iter</strong> : int, optional, default: 300</p>
 <blockquote>
-<div><p>Maximum number of iterations of the SMACOF algorithm for a single run</p>
+<div><p>Maximum number of iterations of the SMACOF algorithm for a single run.</p>
 </div></blockquote>
 <p><strong>verbose</strong> : int, optional, default: 0</p>
 <blockquote>
-<div><p>level of verbosity</p>
+<div><p>Level of verbosity.</p>
 </div></blockquote>
-<p><strong>eps</strong> : float, optional, default: 1e-6</p>
+<p><strong>eps</strong> : float, optional, default: 1e-3</p>
 <blockquote>
-<div><p>relative tolerance w.r.t stress to declare converge</p>
+<div><p>Relative tolerance with respect to stress at which to declare
+convergence.</p>
 </div></blockquote>
 <p><strong>n_jobs</strong> : int, optional, default: 1</p>
 <blockquote>
-<div><p>The number of jobs to use for the computation. This works by breaking
-down the pairwise matrix into n_jobs even slices and computing them in
-parallel.</p>
+<div><p>The number of jobs to use for the computation. If multiple
+initializations are used (<code class="docutils literal"><span class="pre">n_init</span></code>), each run of the algorithm is
+computed in parallel.</p>
 <p>If -1 all CPUs are used. If 1 is given, no parallel computing code is
-used at all, which is useful for debugging. For n_jobs below -1,
-(n_cpus + 1 + n_jobs) are used. Thus for n_jobs = -2, all CPUs but one
-are used.</p>
+used at all, which is useful for debugging. For <code class="docutils literal"><span class="pre">n_jobs</span></code> below -1,
+(<code class="docutils literal"><span class="pre">n_cpus</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">n_jobs</span></code>) are used. Thus for <code class="docutils literal"><span class="pre">n_jobs</span> <span class="pre">=</span> <span class="pre">-2</span></code>, all CPUs
+but one are used.</p>
 </div></blockquote>
-<p><strong>random_state</strong> : integer or numpy.RandomState, optional</p>
+<p><strong>random_state</strong> : integer or numpy.RandomState, optional, default: None</p>
 <blockquote>
-<div><p>The generator used to initialize the centers. If an integer is
-given, it fixes the seed. Defaults to the global numpy random
-number generator.</p>
+<div><p>The generator used to initialize the centers. If an integer is given,
+it fixes the seed. Defaults to the global numpy random number
+generator.</p>
 </div></blockquote>
-<p><strong>dissimilarity</strong> : string</p>
+<p><strong>dissimilarity</strong> : &#8216;euclidean&#8217; | &#8216;precomputed&#8217;, optional, default: &#8216;euclidean&#8217;</p>
 <blockquote>
-<div><p>Which dissimilarity measure to use.
-Supported are &#8216;euclidean&#8217; and &#8216;precomputed&#8217;.</p>
+<div><p>Dissimilarity measure to use:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>&#8216;euclidean&#8217;:</dt>
+<dd><p class="first last">Pairwise Euclidean distances between points in the dataset.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8216;precomputed&#8217;:</dt>
+<dd><p class="first last">Pre-computed dissimilarities are passed directly to <code class="docutils literal"><span class="pre">fit</span></code> and
+<code class="docutils literal"><span class="pre">fit_transform</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>embedding_</strong> : array-like, shape [n_components, n_samples]</p>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>embedding_</strong> : array-like, shape (n_components, n_samples)</p>
 <blockquote>
-<div><p>Stores the position of the dataset in the embedding space</p>
+<div><p>Stores the position of the dataset in the embedding space.</p>
 </div></blockquote>
 <p><strong>stress_</strong> : float</p>
 <blockquote class="last">
 <div><p>The final value of the stress (sum of squared distance of the
-disparities and the distances for all constrained points)</p>
+disparities and the distances for all constrained points).</p>
 </div></blockquote>
 </td>
 </tr>
@@ -288,25 +301,27 @@ hypothesis&#8221; Kruskal, J. Psychometrika, 29, (1964)</p>
 </table>
 <dl class="method">
 <dt id="sklearn.manifold.MDS.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=2</em>, <em>metric=True</em>, <em>n_init=4</em>, <em>max_iter=300</em>, <em>verbose=0</em>, <em>eps=0.001</em>, <em>n_jobs=1</em>, <em>random_state=None</em>, <em>dissimilarity='euclidean'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bb9830/sklearn/manifold/mds.py#L345"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=2</em>, <em>metric=True</em>, <em>n_init=4</em>, <em>max_iter=300</em>, <em>verbose=0</em>, <em>eps=0.001</em>, <em>n_jobs=1</em>, <em>random_state=None</em>, <em>dissimilarity='euclidean'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/4773044/sklearn/manifold/mds.py#L354"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.manifold.MDS.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>init=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bb9830/sklearn/manifold/mds.py#L362"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>init=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/4773044/sklearn/manifold/mds.py#L371"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the position of the points in the embedding space</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape=[n_samples, n_features], or [n_samples, n_samples]                 if dissimilarity=&#8217;precomputed&#8217;</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features) or (n_samples, n_samples)</p>
 <blockquote>
-<div><p>Input data.</p>
+<div><p>Input data. If <code class="docutils literal"><span class="pre">dissimilarity=='precomputed'</span></code>, the input should
+be the dissimilarity matrix.</p>
 </div></blockquote>
-<p><strong>init</strong> : {None or ndarray, shape (n_samples,)}, optional</p>
+<p><strong>init</strong> : ndarray, shape (n_samples,), optional, default: None</p>
 <blockquote class="last">
-<div><p>If None, randomly chooses the initial configuration
-if ndarray, initialize the SMACOF algorithm with this array.</p>
+<div><p>Starting configuration of the embedding to initialize the SMACOF
+algorithm. By default, the algorithm is initialized with a randomly
+chosen array.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -316,20 +331,22 @@ if ndarray, initialize the SMACOF algorithm with this array.</p>
 
 <dl class="method">
 <dt id="sklearn.manifold.MDS.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>init=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bb9830/sklearn/manifold/mds.py#L379"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>init=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/4773044/sklearn/manifold/mds.py#L389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the data from X, and returns the embedded coordinates</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape=[n_samples, n_features], or [n_samples, n_samples]                 if dissimilarity=&#8217;precomputed&#8217;</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features) or (n_samples, n_samples)</p>
 <blockquote>
-<div><p>Input data.</p>
+<div><p>Input data. If <code class="docutils literal"><span class="pre">dissimilarity=='precomputed'</span></code>, the input should
+be the dissimilarity matrix.</p>
 </div></blockquote>
-<p><strong>init</strong> : {None or ndarray, shape (n_samples,)}, optional</p>
+<p><strong>init</strong> : ndarray, shape (n_samples,), optional, default: None</p>
 <blockquote class="last">
-<div><p>If None, randomly chooses the initial configuration
-if ndarray, initialize the SMACOF algorithm with this array.</p>
+<div><p>Starting configuration of the embedding to initialize the SMACOF
+algorithm. By default, the algorithm is initialized with a randomly
+chosen array.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -339,7 +356,7 @@ if ndarray, initialize the SMACOF algorithm with this array.</p>
 
 <dl class="method">
 <dt id="sklearn.manifold.MDS.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bb9830/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/4773044/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -364,7 +381,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.manifold.MDS.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5bb9830/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/4773044/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.MDS.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
