@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.11. Ensemble methods &mdash; scikit-learn 0.18 documentation</title>
+    <title>1.11. Ensemble methods &#8212; scikit-learn 0.18 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -800,7 +800,7 @@ chapter on gradient boosting in <a class="reference internal" href="#f2001" id="
 <p>GBRT considers additive models of the following form:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/76f0cce1edab5588de7b934830cd3cb251741930.png" alt="F(x) = \sum_{m=1}^{M} \gamma_m h_m(x)"/></p>
+<p><img src="../_images/math/958a81a72d1492a36a82531c9820186392bde5c8.png" alt="F(x) = \sum_{m=1}^{M} \gamma_m h_m(x)"/></p>
 </div></div></blockquote>
 <p>where <img class="math" src="../_images/math/bb052ebc51285274e7775f81c0ff94d67f7e3a6c.png" alt="h_m(x)"/> are the basis functions which are usually called
 <em>weak learners</em> in the context of boosting. Gradient Tree Boosting
@@ -812,14 +812,14 @@ and the ability to model complex functions.</p>
 a forward stagewise fashion:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/983d3238d399f91227a9f929e83e43f7941a634f.png" alt="F_m(x) = F_{m-1}(x) + \gamma_m h_m(x)"/></p>
+<p><img src="../_images/math/7b0b481e5f2c318df259c4a1021745d07f19b8d8.png" alt="F_m(x) = F_{m-1}(x) + \gamma_m h_m(x)"/></p>
 </div></div></blockquote>
 <p>At each stage the decision tree <img class="math" src="../_images/math/bb052ebc51285274e7775f81c0ff94d67f7e3a6c.png" alt="h_m(x)"/> is chosen to
 minimize the loss function <img class="math" src="../_images/math/ae2b750f71e1fc0daaa3de9a85d42794d7cd1326.png" alt="L"/> given the current model
 <img class="math" src="../_images/math/ae9df12c10481b6e843e2b8a0e1058dc40d356e5.png" alt="F_{m-1}"/> and its fit <img class="math" src="../_images/math/aaa0095d8e9f1d72aba0a1b5871ae4f4f6d35ccc.png" alt="F_{m-1}(x_i)"/></p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/fbb647cf0fe97c5ed42d460fa672e74734272602.png" alt="F_m(x) = F_{m-1}(x) + \arg\min_{h} \sum_{i=1}^{n} L(y_i,
+<p><img src="../_images/math/9aeabf91d2d9c30ca45c2618f51e8d8c82ba4d77.png" alt="F_m(x) = F_{m-1}(x) + \arg\min_{h} \sum_{i=1}^{n} L(y_i,
 F_{m-1}(x_i) - h(x))"/></p>
 </div></div></blockquote>
 <p>The initial model <img class="math" src="../_images/math/31a04d17cd387e3b19d104a29ba2bd159f42eccb.png" alt="F_{0}"/> is problem specific, for least-squares
@@ -836,13 +836,13 @@ model <img class="math" src="../_images/math/ae9df12c10481b6e843e2b8a0e1058dc40d
 loss function:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/4299ab06277a7ac9c217c2df88d2ce053c841bd0.png" alt="F_m(x) = F_{m-1}(x) + \gamma_m \sum_{i=1}^{n} \nabla_F L(y_i,
+<p><img src="../_images/math/eac4fdf64ca91da58bfcbda90a05067118d52429.png" alt="F_m(x) = F_{m-1}(x) + \gamma_m \sum_{i=1}^{n} \nabla_F L(y_i,
 F_{m-1}(x_i))"/></p>
 </div></div></blockquote>
 <p>Where the step length <img class="math" src="../_images/math/ab2418d0fe06e2097d0d32cece8f0ab21b9227b4.png" alt="\gamma_m"/> is chosen using line search:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/304ba10827b0b2fe43a5b543c722085e44ceaeb5.png" alt="\gamma_m = \arg\min_{\gamma} \sum_{i=1}^{n} L(y_i, F_{m-1}(x_i)
+<p><img src="../_images/math/fe9f5a6b17d269a906e91f358e1118bb4838dcf0.png" alt="\gamma_m = \arg\min_{\gamma} \sum_{i=1}^{n} L(y_i, F_{m-1}(x_i)
 - \gamma \frac{\partial L(y_i, F_{m-1}(x_i))}{\partial F_{m-1}(x_i)})"/></p>
 </div></div></blockquote>
 <p>The algorithms for regression and classification
@@ -899,7 +899,7 @@ classification.</li>
 <p><a class="reference internal" href="#f2001" id="id15">[F2001]</a> proposed a simple regularization strategy that scales
 the contribution of each weak learner by a factor <img class="math" src="../_images/math/ca3b8fa4180eee2dfc3af9d13fae1da451cd2c31.png" alt="\nu"/>:</p>
 <div class="math">
-<p><img src="../_images/math/57b1fafa5a19170a62cc4bd4d2bb8ec205732991.png" alt="F_m(x) = F_{m-1}(x) + \nu \gamma_m h_m(x)"/></p>
+<p><img src="../_images/math/4982f3c33c9ccb4b45557d8332d3e5aa754cb229.png" alt="F_m(x) = F_{m-1}(x) + \nu \gamma_m h_m(x)"/></p>
 </div><p>The parameter <img class="math" src="../_images/math/ca3b8fa4180eee2dfc3af9d13fae1da451cd2c31.png" alt="\nu"/> is also called the <strong>learning rate</strong> because
 it scales the step length the gradient descent procedure; it can
 be set via the <code class="docutils literal"><span class="pre">learning_rate</span></code> parameter.</p>

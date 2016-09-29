@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.5. Stochastic Gradient Descent &mdash; scikit-learn 0.18 documentation</title>
+    <title>1.5. Stochastic Gradient Descent &#8212; scikit-learn 0.18 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -467,7 +467,7 @@ to make predictions, we simply look at the sign of <img class="math" src="../_im
 A common choice to find the model parameters is by minimizing the regularized
 training error given by</p>
 <div class="math">
-<p><img src="../_images/math/eb2c4ed68719d304d990deb3ba8aed116cb5a3b1.png" alt="E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)"/></p>
+<p><img src="../_images/math/62d4b457d5f92d158e0f1f1bf3b73116e34d3931.png" alt="E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)"/></p>
 </div><p>where <img class="math" src="../_images/math/ae2b750f71e1fc0daaa3de9a85d42794d7cd1326.png" alt="L"/> is a loss function that measures model (mis)fit and
 <img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> is a regularization term (aka penalty) that penalizes model
 complexity; <img class="math" src="../_images/math/969cb5f6781dc1ccd2500d69e55fdb01ae91b31a.png" alt="\alpha &gt; 0"/> is a non-negative hyperparameter.</p>
@@ -509,7 +509,7 @@ single training example at a time.</p>
 routine.  The algorithm iterates over the training examples and for each
 example updates the model parameters according to the update rule given by</p>
 <div class="math">
-<p><img src="../_images/math/cac40bbfc14a719b542485b8095d448df7bb3c3b.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
+<p><img src="../_images/math/72cbe4d2bf214f47779e8e308f9cad17b46acb07.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
 + \frac{\partial L(w^T x_i + b, y_i)}{\partial w})"/></p>
 </div><p>where <img class="math" src="../_images/math/5635a7c34414599c2452d72430811e816b460335.png" alt="\eta"/> is the learning rate which controls the step-size in
 the parameter space.  The intercept <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/> is updated similarly but
@@ -518,7 +518,7 @@ without regularization.</p>
 classification, the default learning rate schedule (<code class="docutils literal"><span class="pre">learning_rate='optimal'</span></code>)
 is given by</p>
 <div class="math">
-<p><img src="../_images/math/fc6e8bf82df39614f382d65f15c15187712b2af0.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}"/></p>
+<p><img src="../_images/math/4f5acaa58eefe708361216e63f1108fc8751bd22.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}"/></p>
 </div><p>where <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> is the time step (there are a total of <cite>n_samples * n_iter</cite>
 time steps), <img class="math" src="../_images/math/1410bd3aa3d34373bc7de52c132b4fd6f154019a.png" alt="t_0"/> is determined based on a heuristic proposed by Léon Bottou
 such that the expected initial updates are comparable with the expected
@@ -527,7 +527,7 @@ approx. 1). The exact definition can be found in <code class="docutils literal">
 <p>For regression the default learning rate schedule is inverse scaling
 (<code class="docutils literal"><span class="pre">learning_rate='invscaling'</span></code>), given by</p>
 <div class="math">
-<p><img src="../_images/math/b451ab9792bca5d14be74664d8963771aa96d772.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}"/></p>
+<p><img src="../_images/math/93c34305150894c3956e9f2816c1b9f30f33b200.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}"/></p>
 </div><p>where <img class="math" src="../_images/math/64dc796cf3af805cbab2f810ad7ee70d880bfd49.png" alt="eta_0"/> and <img class="math" src="../_images/math/b6e8ac1dcea3e0265093fae39c534076991c3af2.png" alt="power\_t"/> are hyperparameters chosen by the
 user via <code class="docutils literal"><span class="pre">eta0</span></code> and <code class="docutils literal"><span class="pre">power_t</span></code>, resp.</p>
 <p>For a constant learning rate use <code class="docutils literal"><span class="pre">learning_rate='constant'</span></code> and use <code class="docutils literal"><span class="pre">eta0</span></code>

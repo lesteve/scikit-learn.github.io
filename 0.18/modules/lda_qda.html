@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.2. Linear and Quadratic Discriminant Analysis &mdash; scikit-learn 0.18 documentation</title>
+    <title>1.2. Linear and Quadratic Discriminant Analysis &#8212; scikit-learn 0.18 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -238,13 +238,13 @@ for dimensionality reduction of the Iris dataset</p>
 the class conditional distribution of the data <img class="math" src="../_images/math/9645b6a35da0e999282a01e7eb9c0b987b968155.png" alt="P(X|y=k)"/> for each class
 <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>. Predictions can then be obtained by using Bayes&#8217; rule:</p>
 <div class="math">
-<p><img src="../_images/math/0aa480b0f58d1437481fdf0f2fcf83e86eee446f.png" alt="P(y=k | X) = \frac{P(X | y=k) P(y=k)}{P(X)} = \frac{P(X | y=k) P(y = k)}{ \sum_{l} P(X | y=l) \cdot P(y=l)}"/></p>
+<p><img src="../_images/math/478e4d9a1681e569927f5731a20e736e1eb9094b.png" alt="P(y=k | X) = \frac{P(X | y=k) P(y=k)}{P(X)} = \frac{P(X | y=k) P(y = k)}{ \sum_{l} P(X | y=l) \cdot P(y=l)}"/></p>
 </div><p>and we select the class <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> which maximizes this conditional probability.</p>
 <p>More specifically, for linear and quadratic discriminant analysis,
 <img class="math" src="../_images/math/0caa57fa1ad5e123266bda48e45b51c80b7e559f.png" alt="P(X|y)"/> is modelled as a multivariate Gaussian distribution with
 density:</p>
 <div class="math">
-<p><img src="../_images/math/d72e54d616811b4f3c401b94608051741148c82d.png" alt="p(X | y=k) = \frac{1}{(2\pi)^n |\Sigma_k|^{1/2}}\exp\left(-\frac{1}{2} (X-\mu_k)^t \Sigma_k^{-1} (X-\mu_k)\right)"/></p>
+<p><img src="../_images/math/dfe98a40b3ba6bc216cf7b693e6b8c5fdcd5874c.png" alt="p(X | y=k) = \frac{1}{(2\pi)^n |\Sigma_k|^{1/2}}\exp\left(-\frac{1}{2} (X-\mu_k)^t \Sigma_k^{-1} (X-\mu_k)\right)"/></p>
 </div><p>To use this model as a classifier, we just need to estimate from the training
 data the class priors <img class="math" src="../_images/math/799322e39f8da8e10882b790cad5c8edddb4d464.png" alt="P(y=k)"/> (by the proportion of instances of class
 <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>), the class means <img class="math" src="../_images/math/4c5e9e20a0019ba3e027121ffda9c4ef86e87042.png" alt="\mu_k"/> (by the empirical sample class means)
@@ -255,7 +255,7 @@ covariance matrix: <img class="math" src="../_images/math/69eb9440328a5f3e652acb
 linear decision surfaces between, as can be seen by comparing the
 log-probability ratios <img class="math" src="../_images/math/d143022379c1410e998d48d6d437df2bd4ed0726.png" alt="\log[P(y=k | X) / P(y=l | X)]"/>:</p>
 <div class="math">
-<p><img src="../_images/math/ebb7a680fd1f44037df373d26f22f25915083f7a.png" alt="\log\left(\frac{P(y=k|X)}{P(y=l | X)}\right) = 0 \Leftrightarrow (\mu_k-\mu_l)\Sigma^{-1} X = \frac{1}{2} (\mu_k^t \Sigma^{-1} \mu_k - \mu_l^t \Sigma^{-1} \mu_l)"/></p>
+<p><img src="../_images/math/1d7534f3a07f0bdb9fc348b5f529ced01fe250bc.png" alt="\log\left(\frac{P(y=k|X)}{P(y=l | X)}\right) = 0 \Leftrightarrow (\mu_k-\mu_l)\Sigma^{-1} X = \frac{1}{2} (\mu_k^t \Sigma^{-1} \mu_k - \mu_l^t \Sigma^{-1} \mu_l)"/></p>
 </div><p>In the case of QDA, there are no assumptions on the covariance matrices
 <img class="math" src="../_images/math/9315088e89f6fb2f1229e64228d9462e76a2028b.png" alt="\Sigma_k"/> of the Gaussians, leading to quadratic decision surfaces. See
 <a class="footnote-reference" href="#id4" id="id1">[3]</a> for more details.</p>
@@ -276,7 +276,7 @@ We write <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f741
 assume that all classes have the same estimated covariance <img class="math" src="../_images/math/7b887ca4d449002abecf59a472644a272dfcb605.png" alt="\Sigma"/>, we
 can rescale the data so that this covariance is the identity:</p>
 <div class="math">
-<p><img src="../_images/math/3f7882749d567225ec84f91d488a6454c4cc9342.png" alt="X^* = D^{-1/2}U^t X\text{ with }\Sigma = UDU^t"/></p>
+<p><img src="../_images/math/dde3ad7ccadedbd18f8a2b372c5ab577f0e8bde7.png" alt="X^* = D^{-1/2}U^t X\text{ with }\Sigma = UDU^t"/></p>
 </div><p>Then one can show that to classify a data point after scaling is equivalent to
 finding the estimated class mean <img class="math" src="../_images/math/7e3b8a648d99cac62d0a9d7b9cefd453f4d08e3c.png" alt="\mu^*_k"/> which is closest to the data
 point in the Euclidean distance. But this can be done just as well after
