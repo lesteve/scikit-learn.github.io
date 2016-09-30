@@ -360,12 +360,12 @@
 <h4>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h4>
 <blockquote>
 <div><ul class="simple">
-<li>Edited criterion for leaf nodes in decision tree criterion by declaring a
-node as a leaf if the weighted number of samples at the node is less than
-2 * the minimum weight specified to be at a node. This makes growth more
-efficient, but trees using parameters that modify the weight at each leaf
-will be grown differently. (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/7441">#7441</a>) by <a class="reference external" href="https://github.com/nelson-liu">Nelson
-Liu</a>.</li>
+<li>The <code class="docutils literal"><span class="pre">min_weight_fraction_leaf</span></code> constraint in tree construction is now
+more efficient, taking a fast path to declare a node a leaf if its weight
+is less than 2 * the minimum. Note that the constructed tree will be
+different from previous versions where <code class="docutils literal"><span class="pre">min_weight_fraction_leaf</span></code> is
+used. (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/7441">#7441</a>)
+by <a class="reference external" href="https://github.com/nelson-liu">Nelson Liu</a>.</li>
 </ul>
 </div></blockquote>
 </div>
