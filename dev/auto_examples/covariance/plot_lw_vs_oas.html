@@ -211,7 +211,7 @@ Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.toeplitz.html#scipy.linalg.toeplitz"><span class="n">toeplitz</span></a><span class="p">,</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.cholesky.html#scipy.linalg.cholesky"><span class="n">cholesky</span></a>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">toeplitz</span><span class="p">,</span> <span class="n">cholesky</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf"><span class="n">LedoitWolf</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS"><span class="n">OAS</span></a>
 
@@ -221,8 +221,8 @@ Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_features</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="c1"># simulation covariance matrix (AR(1) process)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">real_cov</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.toeplitz.html#scipy.linalg.toeplitz"><span class="n">toeplitz</span></a><span class="p">(</span><span class="n">r</span> <span class="o">**</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_features</span><span class="p">))</span>
-<span class="n">coloring_matrix</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.cholesky.html#scipy.linalg.cholesky"><span class="n">cholesky</span></a><span class="p">(</span><span class="n">real_cov</span><span class="p">)</span>
+<span class="n">real_cov</span> <span class="o">=</span> <span class="n">toeplitz</span><span class="p">(</span><span class="n">r</span> <span class="o">**</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_features</span><span class="p">))</span>
+<span class="n">coloring_matrix</span> <span class="o">=</span> <span class="n">cholesky</span><span class="p">(</span><span class="n">real_cov</span><span class="p">)</span>
 
 <span class="n">n_samples_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">repeat</span> <span class="o">=</span> <span class="mi">100</span>
@@ -272,7 +272,7 @@ Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_lw_vs_oas_001.png" class="align-center" src="../../_images/sphx_glr_plot_lw_vs_oas_001.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  3.544 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  3.247 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/plot_lw_vs_oas.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_lw_vs_oas.py</span></code></a></div>
 <div class="sphx-glr-download container">
