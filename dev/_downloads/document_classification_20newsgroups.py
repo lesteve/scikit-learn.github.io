@@ -122,8 +122,7 @@ data_test = fetch_20newsgroups(subset='test', categories=categories,
                                remove=remove)
 print('data loaded')
 
-# order of labels in `target_names` can be different from `categories`
-target_names = data_train.target_names
+categories = data_train.target_names    # for case categories == None
 
 
 def size_mb(docs):
@@ -219,15 +218,16 @@ def benchmark(clf):
 
         if opts.print_top10 and feature_names is not None:
             print("top 10 keywords per class:")
-            for i, label in enumerate(target_names):
+            for i, category in enumerate(categories):
                 top10 = np.argsort(clf.coef_[i])[-10:]
-                print(trim("%s: %s" % (label, " ".join(feature_names[top10]))))
+                print(trim("%s: %s"
+                      % (category, " ".join(feature_names[top10]))))
         print()
 
     if opts.print_report:
         print("classification report:")
         print(metrics.classification_report(y_test, pred,
-                                            target_names=target_names))
+                                            target_names=categories))
 
     if opts.print_cm:
         print("confusion matrix:")
