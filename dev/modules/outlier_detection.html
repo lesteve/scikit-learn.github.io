@@ -180,7 +180,8 @@
 <li><a class="reference internal" href="#id1">2.7.2. Outlier Detection</a><ul>
 <li><a class="reference internal" href="#fitting-an-elliptic-envelope">2.7.2.1. Fitting an elliptic envelope</a></li>
 <li><a class="reference internal" href="#isolation-forest">2.7.2.2. Isolation Forest</a></li>
-<li><a class="reference internal" href="#one-class-svm-versus-elliptic-envelope-versus-isolation-forest">2.7.2.3. One-class SVM versus Elliptic Envelope versus Isolation Forest</a></li>
+<li><a class="reference internal" href="#local-outlier-factor">2.7.2.3. Local Outlier Factor</a></li>
+<li><a class="reference internal" href="#one-class-svm-versus-elliptic-envelope-versus-isolation-forest-versus-lof">2.7.2.4. One-class SVM versus Elliptic Envelope versus Isolation Forest versus LOF</a></li>
 </ul>
 </li>
 </ul>
@@ -353,9 +354,10 @@ lengths for particular samples, they are highly likely to be anomalies.</p>
 an illustration of the use of IsolationForest.</li>
 <li>See <a class="reference internal" href="../auto_examples/covariance/plot_outlier_detection.html#sphx-glr-auto-examples-covariance-plot-outlier-detection-py"><span class="std std-ref">Outlier detection with several methods.</span></a> for a
 comparison of <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a> with
+<a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a>,
 <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">svm.OneClassSVM</span></code></a> (tuned to perform like an outlier detection
 method) and a covariance-based outlier detection with
-<a class="reference internal" href="generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet" title="sklearn.covariance.MinCovDet"><code class="xref py py-class docutils literal"><span class="pre">covariance.MinCovDet</span></code></a>.</li>
+<a class="reference internal" href="generated/sklearn.covariance.EllipticEnvelope.html#sklearn.covariance.EllipticEnvelope" title="sklearn.covariance.EllipticEnvelope"><code class="xref py py-class docutils literal"><span class="pre">covariance.EllipticEnvelope</span></code></a>.</li>
 </ul>
 </div>
 <div class="topic">
@@ -369,8 +371,63 @@ Data Mining, 2008. ICDM&#8216;08. Eighth IEEE International Conference on.</td><
 </table>
 </div>
 </div>
-<div class="section" id="one-class-svm-versus-elliptic-envelope-versus-isolation-forest">
-<h3>2.7.2.3. One-class SVM versus Elliptic Envelope versus Isolation Forest<a class="headerlink" href="#one-class-svm-versus-elliptic-envelope-versus-isolation-forest" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="local-outlier-factor">
+<h3>2.7.2.3. Local Outlier Factor<a class="headerlink" href="#local-outlier-factor" title="Permalink to this headline">¶</a></h3>
+<p>Another efficient way to perform outlier detection on moderately high dimensional
+datasets is to use the Local Outlier Factor (LOF) algorithm.</p>
+<p>The <a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a> (LOF) algorithm computes a score
+(called local outlier factor) reflecting the degree of abnormality of the
+observations.
+It measures the local density deviation of a given data point with respect to
+its neighbors. The idea is to detect the samples that have a substantially
+lower density than their neighbors.</p>
+<p>In practice the local density is obtained from the k-nearest neighbors.
+The LOF score of an observation is equal to the ratio of the
+average local density of his k-nearest neighbors, and its own local density:
+a normal instance is expected to have a local density similar to that of its
+neighbors, while abnormal data are expected to have much smaller local density.</p>
+<p>The number k of neighbors considered, (alias parameter n_neighbors) is typically
+chosen 1) greater than the minimum number of objects a cluster has to contain,
+so that other objects can be local outliers relative to this cluster, and 2)
+smaller than the maximum number of close by objects that can potentially be
+local outliers.
+In practice, such informations are generally not available, and taking
+n_neighbors=20 appears to work well in general.
+When the proportion of outliers is high (i.e. greater than 10 %, as in the
+example below), n_neighbors should be greater (n_neighbors=35 in the example
+below).</p>
+<p>The strength of the LOF algorithm is that it takes both local and global
+properties of datasets into consideration: it can perform well even in datasets
+where abnormal samples have different underlying densities.
+The question is not, how isolated the sample is, but how isolated it is
+with respect to the surrounding neighborhood.</p>
+<p>This strategy is illustrated below.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/neighbors/plot_lof.html"><img alt="../_images/sphx_glr_plot_lof_0011.png" src="../_images/sphx_glr_plot_lof_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li>See <span class="xref std std-ref">sphx_glr_auto_example_neighbors_plot_lof.py</span> for
+an illustration of the use of <a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a>.</li>
+<li>See <span class="xref std std-ref">sphx_glr_auto_example_covariance_plot_outlier_detection.py</span> for a
+comparison with other anomaly detection methods.</li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils citation" frame="void" id="bkns2000" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[BKNS2000]</td><td>Breunig, Kriegel, Ng, and Sander (2000)
+<a class="reference external" href="http://www.dbs.ifi.lmu.de/Publikationen/Papers/LOF.pdf">LOF: identifying density-based local outliers.</a>
+Proc. ACM SIGMOD</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="one-class-svm-versus-elliptic-envelope-versus-isolation-forest-versus-lof">
+<h3>2.7.2.4. One-class SVM versus Elliptic Envelope versus Isolation Forest versus LOF<a class="headerlink" href="#one-class-svm-versus-elliptic-envelope-versus-isolation-forest-versus-lof" title="Permalink to this headline">¶</a></h3>
 <p>Strictly-speaking, the One-class SVM is not an outlier-detection method,
 but a novelty-detection method: its training set should not be
 contaminated by outliers as it may fit them. That said, outlier detection
@@ -380,9 +437,10 @@ results in these situations.</p>
 <p>The examples below illustrate how the performance of the
 <a class="reference internal" href="generated/sklearn.covariance.EllipticEnvelope.html#sklearn.covariance.EllipticEnvelope" title="sklearn.covariance.EllipticEnvelope"><code class="xref py py-class docutils literal"><span class="pre">covariance.EllipticEnvelope</span></code></a> degrades as the data is less and
 less unimodal. The <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">svm.OneClassSVM</span></code></a> works better on data with
-multiple modes and <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a> performs well in every cases.</p>
+multiple modes and <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a> and
+<a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a> perform well in every cases.</p>
 <table border="1" class="docutils" id="id3">
-<caption><span class="caption-text"><strong>Comparing One-class SVM approach, and elliptic envelope</strong></span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text"><strong>Comparing One-class SVM, Isolation Forest, LOF, and Elliptic Envelope</strong></span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="40%" />
 <col width="60%" />
@@ -395,24 +453,26 @@ fits a bit the outliers present in the training set. On the
 opposite, the decision rule based on fitting an
 <a class="reference internal" href="generated/sklearn.covariance.EllipticEnvelope.html#sklearn.covariance.EllipticEnvelope" title="sklearn.covariance.EllipticEnvelope"><code class="xref py py-class docutils literal"><span class="pre">covariance.EllipticEnvelope</span></code></a> learns an ellipse, which
 fits well the inlier distribution. The <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a>
-performs as well.</td>
-<td><a class="reference external" href="../auto_examples/covariance/plot_outlier_detection.html"><img alt="outlier1" src="../_images/sphx_glr_plot_outlier_detection_0011.png" style="width: 540.0px; height: 180.0px;" /></a></td>
+and <a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a> perform as well.</td>
+<td><a class="reference external" href="../auto_examples/covariance/plot_outlier_detection.html"><img alt="outlier1" src="../_images/sphx_glr_plot_outlier_detection_0011.png" style="width: 450.0px; height: 350.0px;" /></a></td>
 </tr>
 <tr class="row-even"><td>As the inlier distribution becomes bimodal, the
 <a class="reference internal" href="generated/sklearn.covariance.EllipticEnvelope.html#sklearn.covariance.EllipticEnvelope" title="sklearn.covariance.EllipticEnvelope"><code class="xref py py-class docutils literal"><span class="pre">covariance.EllipticEnvelope</span></code></a> does not fit well the
-inliers. However, we can see that both <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a>
-and <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">svm.OneClassSVM</span></code></a> have difficulties to detect the two modes,
+inliers. However, we can see that <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a>,
+<a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">svm.OneClassSVM</span></code></a> and <a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a>
+have difficulties to detect the two modes,
 and that the <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">svm.OneClassSVM</span></code></a>
-tends to overfit: because it has not model of inliers, it
+tends to overfit: because it has no model of inliers, it
 interprets a region where, by chance some outliers are
 clustered, as inliers.</td>
-<td><a class="reference external" href="../auto_examples/covariance/plot_outlier_detection.html"><img alt="outlier2" src="../_images/sphx_glr_plot_outlier_detection_0021.png" style="width: 540.0px; height: 180.0px;" /></a></td>
+<td><a class="reference external" href="../auto_examples/covariance/plot_outlier_detection.html"><img alt="outlier2" src="../_images/sphx_glr_plot_outlier_detection_0021.png" style="width: 450.0px; height: 350.0px;" /></a></td>
 </tr>
 <tr class="row-odd"><td>If the inlier distribution is strongly non Gaussian, the
 <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">svm.OneClassSVM</span></code></a> is able to recover a reasonable
-approximation as well as <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a>,
+approximation as well as <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a>
+and <a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a>,
 whereas the <a class="reference internal" href="generated/sklearn.covariance.EllipticEnvelope.html#sklearn.covariance.EllipticEnvelope" title="sklearn.covariance.EllipticEnvelope"><code class="xref py py-class docutils literal"><span class="pre">covariance.EllipticEnvelope</span></code></a> completely fails.</td>
-<td><a class="reference external" href="../auto_examples/covariance/plot_outlier_detection.html"><img alt="outlier3" src="../_images/sphx_glr_plot_outlier_detection_0031.png" style="width: 540.0px; height: 180.0px;" /></a></td>
+<td><a class="reference external" href="../auto_examples/covariance/plot_outlier_detection.html"><img alt="outlier3" src="../_images/sphx_glr_plot_outlier_detection_0031.png" style="width: 450.0px; height: 350.0px;" /></a></td>
 </tr>
 </tbody>
 </table>
@@ -421,9 +481,9 @@ whereas the <a class="reference internal" href="generated/sklearn.covariance.Ell
 <ul class="simple">
 <li>See <a class="reference internal" href="../auto_examples/covariance/plot_outlier_detection.html#sphx-glr-auto-examples-covariance-plot-outlier-detection-py"><span class="std std-ref">Outlier detection with several methods.</span></a> for a
 comparison of the <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">svm.OneClassSVM</span></code></a> (tuned to perform like
-an outlier detection method), the <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a>
-and a covariance-based outlier
-detection with <a class="reference internal" href="generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet" title="sklearn.covariance.MinCovDet"><code class="xref py py-class docutils literal"><span class="pre">covariance.MinCovDet</span></code></a>.</li>
+an outlier detection method), the <a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a>,
+the <a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a>
+and a covariance-based outlier detection <a class="reference internal" href="generated/sklearn.covariance.EllipticEnvelope.html#sklearn.covariance.EllipticEnvelope" title="sklearn.covariance.EllipticEnvelope"><code class="xref py py-class docutils literal"><span class="pre">covariance.EllipticEnvelope</span></code></a>.</li>
 </ul>
 </div>
 </div>
