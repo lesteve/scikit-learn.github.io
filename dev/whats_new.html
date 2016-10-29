@@ -444,6 +444,26 @@ By <a class="reference external" href="https://github.com/olologin">Ibraim Ganie
 <div class="section" id="version-0-18-1">
 <span id="changes-0-18-1"></span><h2>Version 0.18.1<a class="headerlink" href="#version-0-18-1" title="Permalink to this headline">¶</a></h2>
 <blockquote>
+<div><ul>
+<li><p class="first">Improved <code class="docutils literal"><span class="pre">sample_without_replacement</span></code> speed by utilizing
+numpy.random.permutation for most cases. As a result,
+samples may differ in this release for a fixed random state.
+Affected estimators:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="modules/generated/sklearn.ensemble.BaggingClassifier.html#sklearn.ensemble.BaggingClassifier" title="sklearn.ensemble.BaggingClassifier"><code class="xref py py-class docutils literal"><span class="pre">ensemble.BaggingClassifier</span></code></a></li>
+<li><a class="reference internal" href="modules/generated/sklearn.ensemble.BaggingRegressor.html#sklearn.ensemble.BaggingRegressor" title="sklearn.ensemble.BaggingRegressor"><code class="xref py py-class docutils literal"><span class="pre">ensemble.BaggingRegressor</span></code></a></li>
+<li><a class="reference internal" href="modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor" title="sklearn.linear_model.RANSACRegressor"><code class="xref py py-class docutils literal"><span class="pre">linear_model.RANSACRegressor</span></code></a></li>
+<li><a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a></li>
+<li><a class="reference internal" href="modules/generated/sklearn.random_projection.SparseRandomProjection.html#sklearn.random_projection.SparseRandomProjection" title="sklearn.random_projection.SparseRandomProjection"><code class="xref py py-class docutils literal"><span class="pre">random_projection.SparseRandomProjection</span></code></a></li>
+</ul>
+</div></blockquote>
+<p>This also affects the <a class="reference internal" href="modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification" title="sklearn.datasets.make_classification"><code class="xref py py-meth docutils literal"><span class="pre">datasets.make_classification</span></code></a>
+method.</p>
+</li>
+</ul>
+</div></blockquote>
+<blockquote>
 <div><ul class="simple">
 <li>Fix issue where <code class="docutils literal"><span class="pre">min_grad_norm</span></code> and <code class="docutils literal"><span class="pre">n_iter_without_progress</span></code>
 parameters were not being utilised by <a class="reference internal" href="modules/generated/sklearn.manifold.TSNE.html#sklearn.manifold.TSNE" title="sklearn.manifold.TSNE"><code class="xref py py-class docutils literal"><span class="pre">manifold.TSNE</span></code></a>.
