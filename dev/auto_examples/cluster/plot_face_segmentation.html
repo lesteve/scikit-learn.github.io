@@ -248,7 +248,7 @@ space to the embedding space.</li>
 <span class="c1"># actual image. For beta=1, the segmentation is close to a voronoi</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-6</span>
-<span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.exp.html#numpy.exp"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="o">-</span><span class="n">beta</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">/</span> <span class="n">graph</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">+</span> <span class="n">eps</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">beta</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">data</span> <span class="o">/</span> <span class="n">graph</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">+</span> <span class="n">eps</span>
 
 <span class="c1"># Apply spectral clustering (this step goes much faster if you have pyamg</span>
 <span class="c1"># installed)</span>
@@ -267,7 +267,7 @@ space to the embedding space.</li>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gray"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span></a><span class="p">)</span>
     <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_REGIONS</span><span class="p">):</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">l</span><span class="p">,</span> <span class="n">contours</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.spectral"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">spectral</span></a><span class="p">(</span><span class="n">l</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N_REGIONS</span><span class="p">))])</span>
+                    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">spectral</span><span class="p">(</span><span class="n">l</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N_REGIONS</span><span class="p">))])</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(())</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.yticks"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span></a><span class="p">(())</span>
     <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Spectral clustering: </span><span class="si">%s</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">assign_labels</span><span class="p">,</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
@@ -283,11 +283,11 @@ space to the embedding space.</li>
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">kmeans</span><span class="p">,</span> <span class="mf">6.31</span><span class="n">s</span>
-<span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">discretize</span><span class="p">,</span> <span class="mf">5.61</span><span class="n">s</span>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">kmeans</span><span class="p">,</span> <span class="mf">6.55</span><span class="n">s</span>
+<span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">discretize</span><span class="p">,</span> <span class="mf">5.60</span><span class="n">s</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  12.984 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  13.238 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/plot_face_segmentation.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_face_segmentation.py</span></code></a></div>
 <div class="sphx-glr-download container">
