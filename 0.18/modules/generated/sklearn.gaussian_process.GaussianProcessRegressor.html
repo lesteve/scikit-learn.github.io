@@ -35,6 +35,7 @@
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="top" title="scikit-learn 0.18 documentation" href="../../index.html" />
     <link rel="up" title="API Reference" href="../classes.html" />
     <link rel="next" title="sklearn.gaussian_process.GaussianProcessClassifier" href="sklearn.gaussian_process.GaussianProcessClassifier.html" />
@@ -126,9 +127,6 @@
     <div class="sphinxsidebarwrapper">
         <div class="rel">
     
-
-  <!-- rellinks[1:] is an ugly hack to avoid link to module
-  index -->
         <div class="rellink">
         <a href="sklearn.feature_selection.mutual_info_regression.html"
         accesskey="P">Previous
@@ -138,6 +136,21 @@
         </span>
             <span class="hiddenrellink">
             sklearn.feature_selection.mutual_info_regression
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="sklearn.gaussian_process.GaussianProcessClassifier.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        sklearn.gauss...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.gaussian_process.GaussianProcessClassifier
             </span>
         </a>
         </div>
@@ -189,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.gaussian_process" title="sklearn.gaussian_process"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.gaussian_process</span></code></a>.GaussianProcessRegressor<a class="headerlink" href="#sklearn-gaussian-process-gaussianprocessregressor" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor">
-<em class="property">class </em><code class="descclassname">sklearn.gaussian_process.</code><code class="descname">GaussianProcessRegressor</code><span class="sig-paren">(</span><em>kernel=None</em>, <em>alpha=1e-10</em>, <em>optimizer='fmin_l_bfgs_b'</em>, <em>n_restarts_optimizer=0</em>, <em>normalize_y=False</em>, <em>copy_X_train=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/gaussian_process/gpr.py#L20"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.gaussian_process.</code><code class="descname">GaussianProcessRegressor</code><span class="sig-paren">(</span><em>kernel=None</em>, <em>alpha=1e-10</em>, <em>optimizer='fmin_l_bfgs_b'</em>, <em>n_restarts_optimizer=0</em>, <em>normalize_y=False</em>, <em>copy_X_train=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/gaussian_process/gpr.py#L20"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gaussian process regression (GPR).</p>
 <p>The implementation is based on Algorithm 2.1 of Gaussian Processes
 for Machine Learning (GPML) by Rasmussen and Williams.</p>
@@ -257,7 +270,7 @@ Available internal optimizers are:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>n_restarts_optimizer: int, optional (default: 0)</strong> :</p>
+<p><strong>n_restarts_optimizer</strong> : int, optional (default: 0)</p>
 <blockquote>
 <div><p>The number of restarts of the optimizer for finding the kernel&#8217;s
 parameters which maximize the log-marginal likelihood. The first run
@@ -267,7 +280,7 @@ from the space of allowed theta-values. If greater than 0, all bounds
 must be finite. Note that n_restarts_optimizer == 0 implies that one
 run is performed.</p>
 </div></blockquote>
-<p><strong>normalize_y: boolean, optional (default: False)</strong> :</p>
+<p><strong>normalize_y</strong> : boolean, optional (default: False)</p>
 <blockquote>
 <div><p>Whether the target values y are normalized, i.e., the mean of the
 observed target values become zero. This parameter should be set to
@@ -295,24 +308,24 @@ number generator.</p>
 <blockquote>
 <div><p>Feature values in training data (also required for prediction)</p>
 </div></blockquote>
-<p><strong>y_train_: array-like, shape = (n_samples, [n_output_dims])</strong> :</p>
+<p><strong>y_train_</strong> : array-like, shape = (n_samples, [n_output_dims])</p>
 <blockquote>
 <div><p>Target values in training data (also required for prediction)</p>
 </div></blockquote>
-<p><strong>kernel_: kernel object</strong> :</p>
+<p><strong>kernel_</strong> : kernel object</p>
 <blockquote>
 <div><p>The kernel used for prediction. The structure of the kernel is the
 same as the one passed as parameter but with optimized hyperparameters</p>
 </div></blockquote>
-<p><strong>L_: array-like, shape = (n_samples, n_samples)</strong> :</p>
+<p><strong>L_</strong> : array-like, shape = (n_samples, n_samples)</p>
 <blockquote>
 <div><p>Lower-triangular Cholesky decomposition of the kernel in <code class="docutils literal"><span class="pre">X_train_</span></code></p>
 </div></blockquote>
-<p><strong>alpha_: array-like, shape = (n_samples,)</strong> :</p>
+<p><strong>alpha_</strong> : array-like, shape = (n_samples,)</p>
 <blockquote>
 <div><p>Dual coefficients of training data points in kernel space</p>
 </div></blockquote>
-<p><strong>log_marginal_likelihood_value_: float</strong> :</p>
+<p><strong>log_marginal_likelihood_value_</strong> : float</p>
 <blockquote class="last">
 <div><p>The log-marginal-likelihood of <code class="docutils literal"><span class="pre">self.kernel_.theta</span></code></p>
 </div></blockquote>
@@ -345,19 +358,19 @@ same as the one passed as parameter but with optimized hyperparameters</p>
 <tr class="row-even"><td><a class="reference internal" href="#sklearn.gaussian_process.GaussianProcessRegressor.score" title="sklearn.gaussian_process.GaussianProcessRegressor.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
 <td>Returns the coefficient of determination R^2 of the prediction.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#sklearn.gaussian_process.GaussianProcessRegressor.set_params" title="sklearn.gaussian_process.GaussianProcessRegressor.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(**params)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.gaussian_process.GaussianProcessRegressor.set_params" title="sklearn.gaussian_process.GaussianProcessRegressor.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
 <td>Set the parameters of this estimator.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>kernel=None</em>, <em>alpha=1e-10</em>, <em>optimizer='fmin_l_bfgs_b'</em>, <em>n_restarts_optimizer=0</em>, <em>normalize_y=False</em>, <em>copy_X_train=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/gaussian_process/gpr.py#L132"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>kernel=None</em>, <em>alpha=1e-10</em>, <em>optimizer='fmin_l_bfgs_b'</em>, <em>n_restarts_optimizer=0</em>, <em>normalize_y=False</em>, <em>copy_X_train=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/gaussian_process/gpr.py#L132"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/gaussian_process/gpr.py#L143"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/gaussian_process/gpr.py#L143"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit Gaussian process regression model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -382,13 +395,13 @@ same as the one passed as parameter but with optimized hyperparameters</p>
 
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep: boolean, optional</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
 <blockquote>
 <div><p>If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</p>
@@ -407,7 +420,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.log_marginal_likelihood">
-<code class="descname">log_marginal_likelihood</code><span class="sig-paren">(</span><em>theta=None</em>, <em>eval_gradient=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/gaussian_process/gpr.py#L348"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.log_marginal_likelihood" title="Permalink to this definition">¶</a></dt>
+<code class="descname">log_marginal_likelihood</code><span class="sig-paren">(</span><em>theta=None</em>, <em>eval_gradient=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/gaussian_process/gpr.py#L348"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.log_marginal_likelihood" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns log-marginal likelihood of theta for training data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -445,7 +458,7 @@ Only returned when eval_gradient is True.</p>
 
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em>, <em>return_std=False</em>, <em>return_cov=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/gaussian_process/gpr.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em>, <em>return_std=False</em>, <em>return_cov=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/gaussian_process/gpr.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict using the Gaussian process regression model</p>
 <p>We can also predict based on an unfitted model by using the GP prior.
 In addition to the mean of the predictive distribution, also its
@@ -493,7 +506,7 @@ Only returned when return_cov is True.</p>
 
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.sample_y">
-<code class="descname">sample_y</code><span class="sig-paren">(</span><em>X</em>, <em>n_samples=1</em>, <em>random_state=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/gaussian_process/gpr.py#L315"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.sample_y" title="Permalink to this definition">¶</a></dt>
+<code class="descname">sample_y</code><span class="sig-paren">(</span><em>X</em>, <em>n_samples=1</em>, <em>random_state=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/gaussian_process/gpr.py#L315"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.sample_y" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw samples from Gaussian process and evaluate at X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -526,7 +539,7 @@ evaluated at query points.</p>
 
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
 <p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
 sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
@@ -565,7 +578,7 @@ would get a R^2 score of 0.0.</p>
 
 <dl class="method">
 <dt id="sklearn.gaussian_process.GaussianProcessRegressor.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/412996f/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/d7cb0b0/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -624,6 +637,10 @@ component of a nested object.</p>
     
     <div class="buttonPrevious">
       <a href="sklearn.feature_selection.mutual_info_regression.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="sklearn.gaussian_process.GaussianProcessClassifier.html">Next
       </a>
     </div>
     

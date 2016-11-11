@@ -35,6 +35,7 @@
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="top" title="scikit-learn 0.18 documentation" href="../../index.html" />
     <link rel="up" title="scikit-learn Tutorials" href="../index.html" />
     <link rel="next" title="A tutorial on statistical-learning for scientific data processing" href="../statistical_inference/index.html" />
@@ -126,9 +127,6 @@
     <div class="sphinxsidebarwrapper">
         <div class="rel">
     
-
-  <!-- rellinks[1:] is an ugly hack to avoid link to module
-  index -->
         <div class="rellink">
         <a href="../index.html"
         accesskey="P">Previous
@@ -138,6 +136,21 @@
         </span>
             <span class="hiddenrellink">
             scikit-learn Tutorials
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="../statistical_inference/index.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        A tutorial on...
+        </span>
+            <span class="hiddenrellink">
+            A tutorial on statistical-learning for scientific data processing
             </span>
         </a>
         </div>
@@ -172,6 +185,7 @@
 <li><a class="reference internal" href="#conventions">Conventions</a><ul>
 <li><a class="reference internal" href="#type-casting">Type casting</a></li>
 <li><a class="reference internal" href="#refitting-and-updating-parameters">Refitting and updating parameters</a></li>
+<li><a class="reference internal" href="#multiclass-vs-multilabel-fitting">Multiclass vs. multilabel fitting</a></li>
 </ul>
 </li>
 </ul>
@@ -321,6 +335,10 @@ accessed using:</p>
 <p>The <a class="reference internal" href="../../auto_examples/classification/plot_digits_classification.html#sphx-glr-auto-examples-classification-plot-digits-classification-py"><span class="std std-ref">simple example on this dataset</span></a> illustrates how starting
 from the original problem one can shape the data for consumption in
 scikit-learn.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Loading from external datasets</p>
+<p>To load from an external dataset, please refer to <a class="reference internal" href="../../datasets/index.html#external-datasets"><span class="std std-ref">loading external datasets</span></a>.</p>
 </div>
 </div>
 <div class="section" id="learning-and-predicting">
@@ -511,6 +529,58 @@ more than once will overwrite what was learned by any previous <code class="docu
 estimator has been constructed via <code class="docutils literal"><span class="pre">SVC()</span></code>, and changed back to <code class="docutils literal"><span class="pre">rbf</span></code> to
 refit the estimator and to make a second prediction.</p>
 </div>
+<div class="section" id="multiclass-vs-multilabel-fitting">
+<h3>Multiclass vs. multilabel fitting<a class="headerlink" href="#multiclass-vs-multilabel-fitting" title="Permalink to this headline">¶</a></h3>
+<p>When using <a class="reference internal" href="../../modules/classes.html#module-sklearn.multiclass" title="sklearn.multiclass"><code class="xref py py-class docutils literal"><span class="pre">multiclass</span> <span class="pre">classifiers</span></code></a>,
+the learning and prediction task that is performed is dependent on the format of
+the target data fit upon:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="k">import</span> <span class="n">OneVsRestClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">LabelBinarizer</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classif</span> <span class="o">=</span> <span class="n">OneVsRestClassifier</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classif</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([0, 0, 1, 1, 2])</span>
+</pre></div>
+</div>
+<p>In the above case, the classifier is fit on a 1d array of multiclass labels and
+the <code class="docutils literal"><span class="pre">predict()</span></code> method therefore provides corresponding multiclass predictions.
+It is also possible to fit upon a 2d array of binary label indicators:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classif</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[1, 0, 0],</span>
+<span class="go">       [1, 0, 0],</span>
+<span class="go">       [0, 1, 0],</span>
+<span class="go">       [0, 0, 0],</span>
+<span class="go">       [0, 0, 0]])</span>
+</pre></div>
+</div>
+<p>Here, the classifier is <code class="docutils literal"><span class="pre">fit()</span></code>  on a 2d binary label representation of <code class="docutils literal"><span class="pre">y</span></code>,
+using the <a class="reference internal" href="../../modules/generated/sklearn.preprocessing.LabelBinarizer.html#sklearn.preprocessing.LabelBinarizer" title="sklearn.preprocessing.LabelBinarizer"><code class="xref py py-class docutils literal"><span class="pre">LabelBinarizer</span></code></a>.
+In this case <code class="docutils literal"><span class="pre">predict()</span></code> returns a 2d array representing the corresponding
+multilabel predictions.</p>
+<p>Note that the fourth and fifth instances returned all zeroes, indicating that
+they matched none of the three labels <code class="docutils literal"><span class="pre">fit</span></code> upon. With multilabel outputs, it
+is similarly possible for an instance to be assigned multiple labels:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MultiLabelBinarizer</span>
+<span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MultiLabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">classif</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>In this case, the classifier is fit upon instances each assigned multiple labels.
+The <a class="reference internal" href="../../modules/generated/sklearn.preprocessing.MultiLabelBinarizer.html#sklearn.preprocessing.MultiLabelBinarizer" title="sklearn.preprocessing.MultiLabelBinarizer"><code class="xref py py-class docutils literal"><span class="pre">MultiLabelBinarizer</span></code></a> is
+used to binarize the 2d array of multilabels to <code class="docutils literal"><span class="pre">fit</span></code> upon. As a result,
+<code class="docutils literal"><span class="pre">predict()</span></code> returns a 2d array with multiple predicted labels for each instance.</p>
+</div>
 </div>
 </div>
 
@@ -530,6 +600,10 @@ refit the estimator and to make a second prediction.</p>
     
     <div class="buttonPrevious">
       <a href="../index.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="../statistical_inference/index.html">Next
       </a>
     </div>
     

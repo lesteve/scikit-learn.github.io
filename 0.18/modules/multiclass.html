@@ -35,6 +35,7 @@
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="scikit-learn 0.18 documentation" href="../index.html" />
     <link rel="up" title="1. Supervised learning" href="../supervised_learning.html" />
     <link rel="next" title="1.13. Feature selection" href="feature_selection.html" />
@@ -126,9 +127,6 @@
     <div class="sphinxsidebarwrapper">
         <div class="rel">
     
-
-  <!-- rellinks[1:] is an ugly hack to avoid link to module
-  index -->
         <div class="rellink">
         <a href="ensemble.html"
         accesskey="P">Previous
@@ -138,6 +136,21 @@
         </span>
             <span class="hiddenrellink">
             1.11. Ensemble methods
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="feature_selection.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        1.13. Feature...
+        </span>
+            <span class="hiddenrellink">
+            1.13. Feature selection
             </span>
         </a>
         </div>
@@ -232,20 +245,19 @@ for each data-point, such as wind direction and magnitude at a
 certain location.</p>
 </li>
 <li><p class="first"><strong>Multioutput-multiclass classification</strong> and <strong>multi-task classification</strong>
-means that a single estimator has to handle
-several joint classification tasks. This is a generalization
-of the multi-label classification task, where the set of classification
-problem is restricted to binary classification, and of the multi-class
-classification task. <em>The output format is a 2d numpy array or sparse
-matrix.</em></p>
+means that a single estimator has to handle several joint classification
+tasks. This is both a generalization of the multi-label classification
+task, which only considers binary classification, as well as a
+generalization of the multi-class classification task.  <em>The output format
+is a 2d numpy array or sparse matrix.</em></p>
 <p>The set of labels can be different for each output variable.
-For instance a sample could be assigned &#8220;pear&#8221; for an output variable that
-takes possible values in a finite set of species such as &#8220;pear&#8221;, &#8220;apple&#8221;,
-&#8220;orange&#8221; and &#8220;green&#8221; for a second output variable that takes possible values
-in a finite set of colors such as &#8220;green&#8221;, &#8220;red&#8221;, &#8220;orange&#8221;, &#8220;yellow&#8221;...</p>
+For instance, a sample could be assigned &#8220;pear&#8221; for an output variable that
+takes possible values in a finite set of species such as &#8220;pear&#8221;, &#8220;apple&#8221;;
+and &#8220;blue&#8221; or &#8220;green&#8221; for a second output variable that takes possible values
+in a finite set of colors such as &#8220;green&#8221;, &#8220;red&#8221;, &#8220;blue&#8221;, &#8220;yellow&#8221;...</p>
 <p>This means that any classifiers handling multi-output
-multiclass or multi-task classification task
-supports the multi-label classification task as a special case.
+multiclass or multi-task classification tasks,
+support the multi-label classification task as a special case.
 Multi-task classification is similar to the multi-output
 classification task with different model formulations. For
 more information, see the relevant estimator documentation.</p>
@@ -259,7 +271,7 @@ because this may have an effect on classifier performance
 (either in terms of generalization error or required computational resources).</p>
 <p>Below is a summary of the classifiers supported by scikit-learn
 grouped by strategy; you don&#8217;t need the meta-estimators in this class
-if you&#8217;re using one of these unless you want custom multiclass behavior:</p>
+if you&#8217;re using one of these, unless you want custom multiclass behavior:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Inherently multiclass: <a class="reference internal" href="naive_bayes.html#naive-bayes"><span class="std std-ref">Naive Bayes</span></a>,
@@ -312,8 +324,8 @@ labels and the indicator format.</p>
 per class. For each classifier, the class is fitted against all the other
 classes. In addition to its computational efficiency (only <cite>n_classes</cite>
 classifiers are needed), one advantage of this approach is its
-interpretability. Since each class is represented by one and one classifier
-only, it is possible to gain knowledge about the class by inspecting its
+interpretability. Since each class is represented by one and only one classifier,
+it is possible to gain knowledge about the class by inspecting its
 corresponding classifier. This is the most commonly used strategy and is a fair
 default choice.</p>
 <div class="section" id="multiclass-learning">
@@ -399,7 +411,7 @@ Christopher M. Bishop, page 183, (First Edition)</td></tr>
 <div class="section" id="error-correcting-output-codes">
 <span id="ecoc"></span><h2>1.12.4. Error-Correcting Output-Codes<a class="headerlink" href="#error-correcting-output-codes" title="Permalink to this headline">¶</a></h2>
 <p>Output-code based strategies are fairly different from one-vs-the-rest and
-one-vs-one. With these strategies, each class is represented in a euclidean
+one-vs-one. With these strategies, each class is represented in a Euclidean
 space, where each dimension can only be 0 or 1. Another way to put it is
 that each class is represented by a binary code (an array of 0 and 1). The
 matrix which keeps track of the location/code of each class is called the
@@ -560,6 +572,10 @@ of reponses (y1,y2,y3...,yn).</p>
     
     <div class="buttonPrevious">
       <a href="ensemble.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="feature_selection.html">Next
       </a>
     </div>
     
