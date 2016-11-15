@@ -450,10 +450,10 @@ by <a class="reference external" href="https://github.com/nelson-liu">Nelson Liu
 attribute in <cite>transform()</cite>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7553">#7553</a> by <a class="reference external" href="https://github.com/kiote">Ekaterina
 Krivich</a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.linear_model.LogisticRegressionCV.html#sklearn.linear_model.LogisticRegressionCV" title="sklearn.linear_model.LogisticRegressionCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegressionCV</span></code></a> now correctly handles
-string labels. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/5874">#5874</a> by <a href="#id67"><span class="problematic" id="id68">`Raghav RV`_</span></a>.</li>
+string labels. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/5874">#5874</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 <li>Fixed a bug where <a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LassoLars</span></code></a> does not give
 the same result as the LassoLars implementation available
-in R (lars library). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7849">#7849</a> by <a href="#id69"><span class="problematic" id="id70">`Jair Montoya Martinez`_</span></a></li>
+in R (lars library). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7849">#7849</a> by <a href="#id67"><span class="problematic" id="id68">`Jair Montoya Martinez`_</span></a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -504,7 +504,7 @@ with SVD and Eigen solver are now of the same length. <a class="reference extern
 by <a class="reference external" href="https://github.com/JPFrancoia">JPFrancoia</a></li>
 <li>Fixes issue in <a class="reference internal" href="modules/feature_selection.html#univariate-feature-selection"><span class="std std-ref">Univariate feature selection</span></a> where score
 functions were not accepting multi-label targets. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7676">#7676</a>
-by <a href="#id71"><span class="problematic" id="id72">`Mohammed Affan`_</span></a></li>
+by <a href="#id69"><span class="problematic" id="id70">`Mohammed Affan`_</span></a></li>
 <li>Fixed setting parameters when calling <code class="docutils literal"><span class="pre">fit</span></code> multiple times on
 <a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectFromModel</span></code></a>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7756">#7756</a> by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a></li>
 <li>Fixes issue in <code class="docutils literal"><span class="pre">partial_fit</span></code> method of
@@ -516,6 +516,20 @@ the sum of probabilities of each class for a data was not 1, and
 <code class="docutils literal"><span class="pre">CalibratedClassifierCV</span></code> now handles the case where the training set
 has less number of classes than the total data. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7799">#7799</a> by
 <a class="reference external" href="https://github.com/srivatsan-ramesh">Srivatsan Ramesh</a></li>
+<li>Fixed a bug where <a class="reference internal" href="modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split" title="sklearn.model_selection.train_test_split"><code class="xref py py-func docutils literal"><span class="pre">sklearn.model_selection.train_test_split</span></code></a> raised
+an error when <code class="docutils literal"><span class="pre">stratify</span></code> is a list of string labels. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7593">#7593</a> by
+<a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
+<li>Fixed a bug where <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.GridSearchCV</span></code></a> and
+<a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.RandomizedSearchCV</span></code></a> were not pickleable
+because of a pickling bug in <code class="docutils literal"><span class="pre">np.ma.MaskedArray</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7594">#7594</a> by
+<a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
+<li>All cross-validation utilities in <a class="reference internal" href="modules/classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a> now
+permit one time cross-validation splitters for the <code class="docutils literal"><span class="pre">cv</span></code> parameter. Also
+non-deterministic cross-validation splitters (where multiple calls to
+<code class="docutils literal"><span class="pre">split</span></code> produce dissimilar splits) can be used as <code class="docutils literal"><span class="pre">cv</span></code> parameter.
+The <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.GridSearchCV</span></code></a> will cross-validate each
+parameter setting on the split produced by the first <code class="docutils literal"><span class="pre">split</span></code> call
+to the cross-validation splitter.  <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7660">#7660</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -692,7 +706,7 @@ By <a class="reference external" href="https://github.com/afouchet">Arnaud Fouch
 <li>The cross-validation iterators are replaced by cross-validation splitters
 available from <a class="reference internal" href="modules/classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>, allowing for nested
 cross-validation. See <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">Model Selection Enhancements and API Changes</span></a> for more information.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/4294">#4294</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/4294">#4294</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -799,7 +813,7 @@ See <span class="xref std std-ref">sphx_glr_plot_compare_reduction.py</span>. By
 <li>The new <code class="docutils literal"><span class="pre">cv_results_</span></code> attribute of <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>
 (and <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a>) can be easily imported
 into pandas as a <code class="docutils literal"><span class="pre">DataFrame</span></code>. Ref <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">Model Selection Enhancements and API Changes</span></a> for
-more information. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6697">#6697</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
+more information. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6697">#6697</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 <li>Generalization of <a class="reference internal" href="modules/generated/sklearn.model_selection.cross_val_predict.html#sklearn.model_selection.cross_val_predict" title="sklearn.model_selection.cross_val_predict"><code class="xref py py-func docutils literal"><span class="pre">model_selection.cross_val_predict</span></code></a>.
 One can pass method names such as <cite>predict_proba</cite> to be used in the cross
 validation framework instead of the default <cite>predict</cite>.
@@ -807,7 +821,7 @@ By <a class="reference external" href="https://github.com/zivori">Ori Ziv</a> an
 <li>The training scores and time taken for training followed by scoring for
 each search candidate are now available at the <code class="docutils literal"><span class="pre">cv_results_</span></code> dict.
 See <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">Model Selection Enhancements and API Changes</span></a> for more information.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7325">#7325</a> by <a class="reference external" href="https://github.com/eyc88">Eugene Chen</a> and <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7325">#7325</a> by <a class="reference external" href="https://github.com/eyc88">Eugene Chen</a> and <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 </ul>
 </div></blockquote>
 <p>Metrics</p>
@@ -822,7 +836,7 @@ the labels when the number of classes in <code class="docutils literal"><span cl
 clusters.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7419">#7419</a> by <a class="reference external" href="https://github.com/stuppie">Gregory Stupp</a> and <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
 <li>Add <code class="docutils literal"><span class="pre">sample_weight</span></code> parameter to <a class="reference internal" href="modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef" title="sklearn.metrics.matthews_corrcoef"><code class="xref py py-func docutils literal"><span class="pre">metrics.matthews_corrcoef</span></code></a>.
-By <a class="reference external" href="https://github.com/jatinshah">Jatin Shah</a> and <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
+By <a class="reference external" href="https://github.com/jatinshah">Jatin Shah</a> and <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 <li>Speed up <a class="reference internal" href="modules/generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="sklearn.metrics.silhouette_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.silhouette_score</span></code></a> by using vectorized operations.
 By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
 <li>Add <code class="docutils literal"><span class="pre">sample_weight</span></code> parameter to <a class="reference internal" href="modules/generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix" title="sklearn.metrics.confusion_matrix"><code class="xref py py-func docutils literal"><span class="pre">metrics.confusion_matrix</span></code></a>.
@@ -1041,12 +1055,12 @@ faster than before and some of computational problems have been solved.
 <code class="xref py py-mod docutils literal"><span class="pre">sklearn.learning_curve</span></code> have been deprecated and the classes and
 functions have been reorganized into the <a class="reference internal" href="modules/classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>
 module. Ref <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">Model Selection Enhancements and API Changes</span></a> for more information.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/4294">#4294</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/4294">#4294</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 <li>The <code class="docutils literal"><span class="pre">grid_scores_</span></code> attribute of <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>
 and <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a> is deprecated in favor of
 the attribute <code class="docutils literal"><span class="pre">cv_results_</span></code>.
 Ref <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">Model Selection Enhancements and API Changes</span></a> for more information.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6697">#6697</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6697">#6697</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 <li>The parameters <code class="docutils literal"><span class="pre">n_iter</span></code> or <code class="docutils literal"><span class="pre">n_folds</span></code> in old CV splitters are replaced
 by the new parameter <code class="docutils literal"><span class="pre">n_splits</span></code> since it can provide a consistent
 and unambiguous interface to represent the number of train-test splits.
@@ -1064,7 +1078,7 @@ renamed splitters <a class="reference internal" href="modules/generated/sklearn.
 <a class="reference internal" href="modules/generated/sklearn.model_selection.LeavePGroupsOut.html#sklearn.model_selection.LeavePGroupsOut" title="sklearn.model_selection.LeavePGroupsOut"><code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code></a> is renamed to
 <code class="docutils literal"><span class="pre">groups</span></code>. Additionally in <a class="reference internal" href="modules/generated/sklearn.model_selection.LeavePGroupsOut.html#sklearn.model_selection.LeavePGroupsOut" title="sklearn.model_selection.LeavePGroupsOut"><code class="xref py py-class docutils literal"><span class="pre">model_selection.LeavePGroupsOut</span></code></a>,
 the parameter <code class="docutils literal"><span class="pre">n_labels</span></code> is renamed to <code class="docutils literal"><span class="pre">n_groups</span></code>.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6660">#6660</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</li>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6660">#6660</a> by <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -1522,7 +1536,7 @@ Mathieu Blondel, Matt Krump, Matti Lyra, Maxim Kolganov, mbillinger, mhg,
 Michael Heilman, Michael Patterson, Miroslav Batchkarov, Nelle Varoquaux,
 Nicolas, Nikolay Mayorov, Olivier Grisel, Omer Katz, Óscar Nájera, Pauli
 Virtanen, Peter Fischer, Peter Prettenhofer, Phil Roth, pianomania, Preston
-Parry, Raghav R V, Rob Zinkov, Robert Layton, Rohan Ramanath, Saket Choudhary,
+Parry, Raghav RV, Rob Zinkov, Robert Layton, Rohan Ramanath, Saket Choudhary,
 Sam Zhang, santi, saurabh.bansod, scls19fr, Sebastian Raschka, Sebastian
 Saeger, Shivan Sornarajah, SimonPL, sinhrks, Skipper Seabold, Sonny Hu, sseg,
 Stephen Hoover, Steven De Gryze, Steven Seguin, Theodore Vasiloudis, Thomas
@@ -1701,7 +1715,7 @@ By <a class="reference external" href="https://twitter.com/ogrisel">Olivier Gris
 <li>Add <code class="docutils literal"><span class="pre">n_iter_</span></code> attribute to estimators that accept a <code class="docutils literal"><span class="pre">max_iter</span></code> attribute
 in their constructor. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
 <li>Added decision function for <a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier" title="sklearn.multiclass.OneVsOneClassifier"><code class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsOneClassifier</span></code></a>
-By <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a> and <a class="reference external" href="https://github.com/kyleabeauchamp">Kyle Beauchamp</a>.</li>
+By <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a> and <a class="reference external" href="https://github.com/kyleabeauchamp">Kyle Beauchamp</a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><code class="xref py py-func docutils literal"><span class="pre">neighbors.kneighbors_graph</span></code></a> and <code class="xref py py-func docutils literal"><span class="pre">radius_neighbors_graph</span></code>
 support non-Euclidean metrics. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a></li>
 <li>Parameter <code class="docutils literal"><span class="pre">connectivity</span></code> in <a class="reference internal" href="modules/generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal"><span class="pre">cluster.AgglomerativeClustering</span></code></a>
@@ -1915,7 +1929,7 @@ been removed. They were deprecated since 0.14</p>
 </li>
 <li><p class="first">From now onwards, all estimators will uniformly raise <code class="docutils literal"><span class="pre">NotFittedError</span></code>
 (<code class="xref py py-class docutils literal"><span class="pre">utils.validation.NotFittedError</span></code>), when any of the <code class="docutils literal"><span class="pre">predict</span></code>
-like methods are called before the model is fit. By <a class="reference external" href="https://github.com/raghavrv">Raghav R V</a>.</p>
+like methods are called before the model is fit. By <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</p>
 </li>
 <li><p class="first">Input data validation was refactored for more consistent input
 validation. The <code class="docutils literal"><span class="pre">check_arrays</span></code> function was replaced by <code class="docutils literal"><span class="pre">check_array</span></code>
