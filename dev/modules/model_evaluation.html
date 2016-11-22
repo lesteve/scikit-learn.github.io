@@ -1379,6 +1379,12 @@ have to be included in the final prediction such that all true labels
 are predicted. This is useful if you want to know how many top-scored-labels
 you have to predict in average without missing any true one. The best value
 of this metrics is thus the average number of true labels.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Our implementation&#8217;s score is 1 greater than the one given in Tsoumakas
+et al., 2010. This extends it to handle the degenerate case in which an
+instance has 0 true labels.</p>
+</div>
 <p>Formally, given a binary indicator matrix of the ground truth labels
 <img class="math" src="../_images/math/4a1c3d72078ae62f723756ca1df1407cb71d9596.png" alt="y \in \left\{0, 1\right\}^{n_\text{samples} \times n_\text{labels}}"/> and the
 score associated with each label
@@ -1464,6 +1470,13 @@ the ranking loss is defined as</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">label_ranking_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">)</span>
 <span class="go">0.0</span>
 </pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Tsoumakas, G., Katakis, I., &amp; Vlahavas, I. (2010). Mining multi-label data. In
+Data mining and knowledge discovery handbook (pp. 667-685). Springer US.</li>
+</ul>
 </div>
 </div>
 </div>
