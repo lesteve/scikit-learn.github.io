@@ -3,12 +3,14 @@
 <!--
 (function() {
   var query = window.location.search.substring(1);
-  if (query.match(/[0-9]+/)) {
-    window.location.href = 'https://' + query + '-843222-gh.circle-artifacts.com/0/home/ubuntu/scikit-learn/doc/_build/html/stable/index.html';
+  var matches = query.match(/^([0-9]+)(\/.*)?$/)
+  if (matches) {
+    var ci_id = matches[1];
+    var path = matches[2] || '';
+    window.location.href = 'https://' + ci_id + '-843222-gh.circle-artifacts.com/0/home/ubuntu/scikit-learn/doc/_build/html/stable' + path;
   } else {
-    var href_sans_query = window.location.href.substring(0, window.location.href.length - window.location.search.length)
-    document.write('<p>Expected numeric query string to redirect to scikit-learn documentation build on CircleCI, e.g. ' + href_sans_query
-+ '?12345.</p>')
+    var href_sans_query = window.location.href.substring(0, window.location.href.length - window.location.search.length);
+    document.write('<p>Expected numeric query string and optional path to redirect to scikit-learn documentation build on CircleCI, e.g. <tt>' + href_sans_query + '?12345/modules/classes.html</tt>.</p>');
   }
 })();
 -->
