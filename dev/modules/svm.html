@@ -763,8 +763,11 @@ is the kernel. Here training vectors are implicitly mapped into a higher
 </div><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">While SVM models derived from <a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> and <a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">liblinear</a> use <code class="docutils literal"><span class="pre">C</span></code> as
-regularization parameter, most other estimators use <code class="docutils literal"><span class="pre">alpha</span></code>. The relation
-between both is <img class="math" src="../_images/math/4a278c3048ebb8a437fd8610921346954fd97cf1.png" alt="C = \frac{n\_samples}{alpha}"/>.</p>
+regularization parameter, most other estimators use <code class="docutils literal"><span class="pre">alpha</span></code>. The exact
+equivalence between the amount of regularization of two models depends on
+the exact objective function optimized by the model. For example, when the
+estimator used is <code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Ridge</span></code> regression,
+the relation between them is given as <img class="math" src="../_images/math/81541f9c9664a1f457515feb3376834cc86e17e6.png" alt="C = \frac{1}{alpha}"/>.</p>
 </div>
 <p>This parameters can be accessed through the members <code class="docutils literal"><span class="pre">dual_coef_</span></code>
 which holds the product <img class="math" src="../_images/math/7d906e5b0e5d3343fc63c9eb1fc2ce43a75b22dd.png" alt="y_i \alpha_i"/>, <code class="docutils literal"><span class="pre">support_vectors_</span></code> which
