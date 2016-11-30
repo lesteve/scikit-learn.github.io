@@ -213,8 +213,9 @@
 <li><a class="reference internal" href="#explained-variance-score">3.3.4.1. Explained variance score</a></li>
 <li><a class="reference internal" href="#mean-absolute-error">3.3.4.2. Mean absolute error</a></li>
 <li><a class="reference internal" href="#mean-squared-error">3.3.4.3. Mean squared error</a></li>
-<li><a class="reference internal" href="#median-absolute-error">3.3.4.4. Median absolute error</a></li>
-<li><a class="reference internal" href="#r2-score-the-coefficient-of-determination">3.3.4.5. R² score, the coefficient of determination</a></li>
+<li><a class="reference internal" href="#mean-squared-logarithmic-error">3.3.4.4. Mean squared logarithmic error</a></li>
+<li><a class="reference internal" href="#median-absolute-error">3.3.4.5. Median absolute error</a></li>
+<li><a class="reference internal" href="#r2-score-the-coefficient-of-determination">3.3.4.6. R² score, the coefficient of determination</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#clustering-metrics">3.3.5. Clustering metrics</a></li>
@@ -279,97 +280,6 @@ than lower return values</strong>.  Thus metrics which measure the distance betw
 the model and the data, like <a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.mean_squared_error</span></code></a>, are
 available as neg_mean_squared_error which return the negated value
 of the metric.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="26%" />
-<col width="40%" />
-<col width="33%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Scoring</th>
-<th class="head">Function</th>
-<th class="head">Comment</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>Classification</strong></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;accuracy&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.accuracy_score.html#sklearn.metrics.accuracy_score" title="sklearn.metrics.accuracy_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.accuracy_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>&#8216;average_precision&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="sklearn.metrics.average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.average_precision_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;f1&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>for binary targets</td>
-</tr>
-<tr class="row-even"><td>&#8216;f1_micro&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>micro-averaged</td>
-</tr>
-<tr class="row-odd"><td>&#8216;f1_macro&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>macro-averaged</td>
-</tr>
-<tr class="row-even"><td>&#8216;f1_weighted&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>weighted average</td>
-</tr>
-<tr class="row-odd"><td>&#8216;f1_samples&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.f1_score</span></code></a></td>
-<td>by multilabel sample</td>
-</tr>
-<tr class="row-even"><td>&#8216;neg_log_loss&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.log_loss.html#sklearn.metrics.log_loss" title="sklearn.metrics.log_loss"><code class="xref py py-func docutils literal"><span class="pre">metrics.log_loss</span></code></a></td>
-<td>requires <code class="docutils literal"><span class="pre">predict_proba</span></code> support</td>
-</tr>
-<tr class="row-odd"><td>&#8216;precision&#8217; etc.</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score" title="sklearn.metrics.precision_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.precision_score</span></code></a></td>
-<td>suffixes apply as with &#8216;f1&#8217;</td>
-</tr>
-<tr class="row-even"><td>&#8216;recall&#8217; etc.</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score" title="sklearn.metrics.recall_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.recall_score</span></code></a></td>
-<td>suffixes apply as with &#8216;f1&#8217;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;roc_auc&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.roc_auc_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td><strong>Clustering</strong></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;adjusted_rand_score&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score" title="sklearn.metrics.adjusted_rand_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.adjusted_rand_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td><strong>Regression</strong></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;neg_mean_absolute_error&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.mean_absolute_error.html#sklearn.metrics.mean_absolute_error" title="sklearn.metrics.mean_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.mean_absolute_error</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>&#8216;neg_mean_squared_error&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.mean_squared_error</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>&#8216;neg_median_absolute_error&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.median_absolute_error.html#sklearn.metrics.median_absolute_error" title="sklearn.metrics.median_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">metrics.median_absolute_error</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>&#8216;r2&#8217;</td>
-<td><a class="reference internal" href="generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score" title="sklearn.metrics.r2_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.r2_score</span></code></a></td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
 <p>Usage examples:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
@@ -381,7 +291,7 @@ of the metric.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;wrong_choice&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
-<span class="gr">ValueError</span>: <span class="n">&#39;wrong_choice&#39; is not a valid scoring value. Valid options are [&#39;accuracy&#39;, &#39;adjusted_rand_score&#39;, &#39;average_precision&#39;, &#39;f1&#39;, &#39;f1_macro&#39;, &#39;f1_micro&#39;, &#39;f1_samples&#39;, &#39;f1_weighted&#39;, &#39;neg_log_loss&#39;, &#39;neg_mean_absolute_error&#39;, &#39;neg_mean_squared_error&#39;, &#39;neg_median_absolute_error&#39;, &#39;precision&#39;, &#39;precision_macro&#39;, &#39;precision_micro&#39;, &#39;precision_samples&#39;, &#39;precision_weighted&#39;, &#39;r2&#39;, &#39;recall&#39;, &#39;recall_macro&#39;, &#39;recall_micro&#39;, &#39;recall_samples&#39;, &#39;recall_weighted&#39;, &#39;roc_auc&#39;]</span>
+<span class="gr">ValueError</span>: <span class="n">&#39;wrong_choice&#39; is not a valid scoring value. Valid options are [&#39;accuracy&#39;, &#39;adjusted_rand_score&#39;, &#39;average_precision&#39;, &#39;f1&#39;, &#39;f1_macro&#39;, &#39;f1_micro&#39;, &#39;f1_samples&#39;, &#39;f1_weighted&#39;, &#39;neg_log_loss&#39;, &#39;neg_mean_absolute_error&#39;, &#39;neg_mean_squared_error&#39;, &#39;neg_mean_squared_log_error&#39;, &#39;neg_median_absolute_error&#39;, &#39;precision&#39;, &#39;precision_macro&#39;, &#39;precision_micro&#39;, &#39;precision_samples&#39;, &#39;precision_weighted&#39;, &#39;r2&#39;, &#39;recall&#39;, &#39;recall_macro&#39;, &#39;recall_micro&#39;, &#39;recall_samples&#39;, &#39;recall_weighted&#39;, &#39;roc_auc&#39;]</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1565,7 +1475,7 @@ and <img class="math" src="../_images/math/07f6018e00c747406442bb3912e0209766fc9
 <span id="id22"></span><h3>3.3.4.3. Mean squared error<a class="headerlink" href="#mean-squared-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">mean_squared_error</span></code></a> function computes <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">mean square
 error</a>, a risk
-metric corresponding to the expected value of the squared (quadratic) error loss or
+metric corresponding to the expected value of the squared (quadratic) error or
 loss.</p>
 <p>If <img class="math" src="../_images/math/112652306646f689de7cf20153b2d70601aec3e1.png" alt="\hat{y}_i"/> is the predicted value of the <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>-th sample,
 and <img class="math" src="../_images/math/07f6018e00c747406442bb3912e0209766fc9090.png" alt="y_i"/> is the corresponding true value, then the mean squared error
@@ -1594,8 +1504,38 @@ evaluate gradient boosting regression.</li>
 </ul>
 </div>
 </div>
+<div class="section" id="mean-squared-logarithmic-error">
+<span id="mean-squared-log-error"></span><h3>3.3.4.4. Mean squared logarithmic error<a class="headerlink" href="#mean-squared-logarithmic-error" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="generated/sklearn.metrics.mean_squared_log_error.html#sklearn.metrics.mean_squared_log_error" title="sklearn.metrics.mean_squared_log_error"><code class="xref py py-func docutils literal"><span class="pre">mean_squared_log_error</span></code></a> function computes a risk metric
+corresponding to the expected value of the squared logarithmic (quadratic)
+error or loss.</p>
+<p>If <img class="math" src="../_images/math/112652306646f689de7cf20153b2d70601aec3e1.png" alt="\hat{y}_i"/> is the predicted value of the <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>-th sample,
+and <img class="math" src="../_images/math/07f6018e00c747406442bb3912e0209766fc9090.png" alt="y_i"/> is the corresponding true value, then the mean squared
+logarithmic error (MSLE) estimated over <img class="math" src="../_images/math/d733c4bbf4bf946394a40154c6a82f0f936b6e58.png" alt="n_{\text{samples}}"/> is
+defined as</p>
+<div class="math">
+<p><img src="../_images/math/7ab9dd9a29d207d773d08e4d1a0fc370f9b1fa35.png" alt="\text{MSLE}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples} - 1} (\log_e (1 + y_i) - \log_e (1 + \hat{y}_i) )^2."/></p>
+</div><p>Where <img class="math" src="../_images/math/1fcc81099ed527f18b557a7522ff49a75107d282.png" alt="\log_e (x)"/> means the natural logarithm of <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/>. This metric
+is best to use when targets having exponential growth, such as population
+counts, average sales of a commodity over a span of years etc. Note that this
+metric penalizes an under-predicted estimate greater than an over-predicted
+estimate.</p>
+<p>Here is a small example of usage of the <a class="reference internal" href="generated/sklearn.metrics.mean_squared_log_error.html#sklearn.metrics.mean_squared_log_error" title="sklearn.metrics.mean_squared_log_error"><code class="xref py py-func docutils literal"><span class="pre">mean_squared_log_error</span></code></a>
+function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_log_error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_squared_log_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>  
+<span class="go">0.039...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_squared_log_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>  
+<span class="go">0.044...</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="median-absolute-error">
-<span id="id23"></span><h3>3.3.4.4. Median absolute error<a class="headerlink" href="#median-absolute-error" title="Permalink to this headline">¶</a></h3>
+<span id="id23"></span><h3>3.3.4.5. Median absolute error<a class="headerlink" href="#median-absolute-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.median_absolute_error.html#sklearn.metrics.median_absolute_error" title="sklearn.metrics.median_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">median_absolute_error</span></code></a> is particularly interesting because it is
 robust to outliers. The loss is calculated by taking the median of all absolute
 differences between the target and the prediction.</p>
@@ -1616,7 +1556,7 @@ function:</p>
 </div>
 </div>
 <div class="section" id="r2-score-the-coefficient-of-determination">
-<span id="r2-score"></span><h3>3.3.4.5. R² score, the coefficient of determination<a class="headerlink" href="#r2-score-the-coefficient-of-determination" title="Permalink to this headline">¶</a></h3>
+<span id="r2-score"></span><h3>3.3.4.6. R² score, the coefficient of determination<a class="headerlink" href="#r2-score-the-coefficient-of-determination" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score" title="sklearn.metrics.r2_score"><code class="xref py py-func docutils literal"><span class="pre">r2_score</span></code></a> function computes R², the <a class="reference external" href="https://en.wikipedia.org/wiki/Coefficient_of_determination">coefficient of
 determination</a>.
 It provides a measure of how well future samples are likely to
