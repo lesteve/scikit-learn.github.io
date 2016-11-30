@@ -207,11 +207,12 @@ and overfit the data. The magnitude of this effect is primarily dependent on
 the size of the dataset and the stability of the model. See Cawley and Talbot
 <a class="footnote-reference" href="#id2" id="id1">[1]</a> for an analysis of these issues.</p>
 <p>To avoid this problem, nested CV effectively uses a series of
-train/validation/test set splits. In the inner loop, the score is approximately
-maximized by fitting a model to each training set, and then directly maximized
-in selecting (hyper)parameters over the validation set. In the outer loop,
-generalization error is estimated by averaging test set scores over several
-dataset splits.</p>
+train/validation/test set splits. In the inner loop (here executed by
+<a class="reference internal" href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a>), the score is
+approximately maximized by fitting a model to each training set, and then
+directly maximized in selecting (hyper)parameters over the validation set. In
+the outer loop (here in <a class="reference internal" href="../../modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score" title="sklearn.model_selection.cross_val_score"><code class="xref py py-func docutils literal"><span class="pre">cross_val_score</span></code></a>), generalization error is estimated
+by averaging test set scores over several dataset splits.</p>
 <p>The example below uses a support vector classifier with a non-linear kernel to
 build a model with optimized hyperparameters by grid search. We compare the
 performance of non-nested and nested CV strategies by taking the difference
@@ -316,7 +317,7 @@ J. Mach. Learn. Res 2010,11, 2079-2107.</a></td></tr>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  14.462 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  14.565 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/plot_nested_cross_validation_iris.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_nested_cross_validation_iris.py</span></code></a></div>
 <div class="sphx-glr-download container">
