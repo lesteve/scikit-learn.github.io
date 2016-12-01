@@ -38,7 +38,7 @@
     <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
     <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Automatic Relevance Determination Regression (ARD)" href="plot_ard.html" />
-    <link rel="prev" title="SGD: Penalties" href="plot_sgd_penalties.html" />
+    <link rel="prev" title="Robust linear estimator fitting" href="plot_robust_fit.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -126,14 +126,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_sgd_penalties.html"
+        <a href="plot_robust_fit.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        SGD: Penalties
+        Robust linear...
         </span>
             <span class="hiddenrellink">
-            SGD: Penalties
+            Robust linear estimator fitting
             </span>
         </a>
         </div>
@@ -203,6 +203,11 @@ weights are slightly shifted toward zeros, which stabilises them.</p>
 estimated weights is Gaussian.</p>
 <p>The estimation of the model is done by iteratively maximizing the
 marginal log-likelihood of the observations.</p>
+<p>We also plot predictions and uncertainties for Bayesian Ridge Regression
+for one dimensional regression using polynomial feature expansion.
+Note the uncertainty starts going up on the right side of the plot.
+This is because these test samples are outside of the range of the training
+samples.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -238,7 +243,8 @@ marginal log-likelihood of the observations.</p>
 <span class="n">ols</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Plot true weights, estimated weights and histogram of the weights</p>
+<p>Plot true weights, estimated weights, histogram of the weights, and
+predictions with standard deviations</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Weights of the model&quot;</span><span class="p">)</span>
@@ -264,6 +270,32 @@ marginal log-likelihood of the observations.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">scores_</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Score&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Iterations&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Plotting some predictions for polynomial regression</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">noise_amount</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sin.html#numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">noise</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.random.normal.html#numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">noise_amount</span> <span class="o">*</span> <span class="n">noise</span>
+
+
+<span class="n">degree</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">noise_amount</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">clf_poly</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.BayesianRidge.html#sklearn.linear_model.BayesianRidge"><span class="n">BayesianRidge</span></a><span class="p">()</span>
+<span class="n">clf_poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.vander.html#numpy.vander"><span class="n">np</span><span class="o">.</span><span class="n">vander</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">degree</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">X_plot</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">y_plot</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">noise_amount</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y_mean</span><span class="p">,</span> <span class="n">y_std</span> <span class="o">=</span> <span class="n">clf_poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.vander.html#numpy.vander"><span class="n">np</span><span class="o">.</span><span class="n">vander</span></a><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">degree</span><span class="p">),</span> <span class="n">return_std</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.errorbar"><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span></a><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">y_std</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Polynomial Bayesian Ridge Regression&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">X_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground Truth&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Output y&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Feature X&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
@@ -274,8 +306,10 @@ marginal log-likelihood of the observations.</p>
 </li>
 <li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_003.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_003.png" src="../../_images/sphx_glr_plot_bayesian_ridge_003.png" style="width: 282.0px; height: 235.0px;" /></a>
 </li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_004.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_004.png" src="../../_images/sphx_glr_plot_bayesian_ridge_004.png" style="width: 282.0px; height: 235.0px;" /></a>
+</li>
 </ul>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.372 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.460 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/plot_bayesian_ridge.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_bayesian_ridge.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -298,7 +332,7 @@ marginal log-likelihood of the observations.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_sgd_penalties.html">Previous
+      <a href="plot_robust_fit.html">Previous
       </a>
     </div>
     <div class="buttonNext">

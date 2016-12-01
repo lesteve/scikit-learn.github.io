@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.ARDRegression<a class="headerlink" href="#sklearn-linear-model-ardregression" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.linear_model.ARDRegression">
-<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">ARDRegression</code><span class="sig-paren">(</span><em>n_iter=300</em>, <em>tol=0.001</em>, <em>alpha_1=1e-06</em>, <em>alpha_2=1e-06</em>, <em>lambda_1=1e-06</em>, <em>lambda_2=1e-06</em>, <em>compute_score=False</em>, <em>threshold_lambda=10000.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/linear_model/bayes.py#L228"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">ARDRegression</code><span class="sig-paren">(</span><em>n_iter=300</em>, <em>tol=0.001</em>, <em>alpha_1=1e-06</em>, <em>alpha_2=1e-06</em>, <em>lambda_1=1e-06</em>, <em>lambda_2=1e-06</em>, <em>compute_score=False</em>, <em>threshold_lambda=10000.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/linear_model/bayes.py#L279"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bayesian ARD regression.</p>
 <p>Fit the weights of a regression model, using an ARD prior. The weights of
 the regression model are assumed to be in Gaussian distributions.
@@ -304,6 +304,16 @@ with <cite>normalize=False</cite>.</p>
 </table>
 <p class="rubric">Notes</p>
 <p>See examples/linear_model/plot_ard.py for an example.</p>
+<p class="rubric">References</p>
+<p>D. J. C. MacKay, Bayesian nonlinear modeling for the prediction
+competition, ASHRAE Transactions, 1994.</p>
+<p>R. Salakhutdinov, Lecture notes on Statistical Machine Learning,
+<a class="reference external" href="http://www.utstat.toronto.edu/~rsalakhu/sta4273/notes/Lecture2.pdf#page=15">http://www.utstat.toronto.edu/~rsalakhu/sta4273/notes/Lecture2.pdf#page=15</a>
+Their beta is our <a href="#id2"><span class="problematic" id="id3">self.alpha_</span></a>
+Their alpha is our <a href="#id4"><span class="problematic" id="id5">self.lambda_</span></a>
+ARD is a little different than the slide: only dimensions/features for
+which <a href="#id6"><span class="problematic" id="id7">self.lambda_</span></a> &lt; self.threshold_lambda are kept and the rest are
+discarded.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">ARDRegression</span><span class="p">()</span>
@@ -333,8 +343,8 @@ with <cite>normalize=False</cite>.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.ARDRegression.get_params" title="sklearn.linear_model.ARDRegression.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
 <td>Get parameters for this estimator.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.ARDRegression.predict" title="sklearn.linear_model.ARDRegression.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
-<td>Predict using the linear model</td>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.ARDRegression.predict" title="sklearn.linear_model.ARDRegression.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X[,&nbsp;return_std])</td>
+<td>Predict using the linear model.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.ARDRegression.score" title="sklearn.linear_model.ARDRegression.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
 <td>Returns the coefficient of determination R^2 of the prediction.</td>
@@ -346,12 +356,12 @@ with <cite>normalize=False</cite>.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.linear_model.ARDRegression.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_iter=300</em>, <em>tol=0.001</em>, <em>alpha_1=1e-06</em>, <em>alpha_2=1e-06</em>, <em>lambda_1=1e-06</em>, <em>lambda_2=1e-06</em>, <em>compute_score=False</em>, <em>threshold_lambda=10000.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/linear_model/bayes.py#L328"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_iter=300</em>, <em>tol=0.001</em>, <em>alpha_1=1e-06</em>, <em>alpha_2=1e-06</em>, <em>lambda_1=1e-06</em>, <em>lambda_2=1e-06</em>, <em>compute_score=False</em>, <em>threshold_lambda=10000.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/linear_model/bayes.py#L392"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.linear_model.ARDRegression.decision_function">
-<code class="descname">decision_function</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/utils/deprecation.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.decision_function" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/utils/deprecation.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.decision_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>DEPRECATED:  and will be removed in 0.19.</p>
 <p>Decision function of the linear model.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -376,7 +386,7 @@ with <cite>normalize=False</cite>.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.ARDRegression.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/linear_model/bayes.py#L345"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/linear_model/bayes.py#L409"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the ARDRegression model according to the given training data
 and parameters.</p>
 <p>Iterative procedure to maximize the evidence</p>
@@ -404,7 +414,7 @@ n_features is the number of features.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.ARDRegression.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -429,8 +439,10 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.ARDRegression.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/linear_model/base.py#L255"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.predict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predict using the linear model</p>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em>, <em>return_std=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/linear_model/bayes.py#L502"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict using the linear model.</p>
+<p>In addition to the mean of the predictive distribution, also its
+standard deviation can be returned.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -439,11 +451,19 @@ contained subobjects that are estimators.</p>
 <blockquote>
 <div><p>Samples.</p>
 </div></blockquote>
+<p><strong>return_std</strong> : boolean, optional</p>
+<blockquote>
+<div><p>Whether to return the standard deviation of posterior prediction.</p>
+</div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape = (n_samples,)</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y_mean</strong> : array, shape = (n_samples,)</p>
+<blockquote>
+<div><p>Mean of predictive distribution of query points.</p>
+</div></blockquote>
+<p><strong>y_std</strong> : array, shape = (n_samples,)</p>
 <blockquote class="last">
-<div><p>Returns predicted values.</p>
+<div><p>Standard deviation of predictive distribution of query points.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -453,7 +473,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.ARDRegression.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
 <p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
 sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
@@ -492,7 +512,7 @@ would get a R^2 score of 0.0.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.ARDRegression.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/c5c3851/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/67a85b8/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.ARDRegression.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
