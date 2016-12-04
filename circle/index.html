@@ -7,6 +7,14 @@
   if (matches) {
     var ci_id = matches[1];
     var path = matches[2] || '';
+    if (query.match(/\/$|[^.]{10}$|^[^.]*$/)) {
+      // path ends with slash or has no . in last 10 chars => append index.html
+      if (path.endsWith('/')) {
+        path += 'index.html';
+      } else {
+        path += '/index.html';
+      }
+    }
     window.location.href = 'https://' + ci_id + '-843222-gh.circle-artifacts.com/0/home/ubuntu/scikit-learn/doc/_build/html/stable' + path;
   } else {
     var href_sans_query = window.location.href.substring(0, window.location.href.length - window.location.search.length);
