@@ -193,7 +193,11 @@
 </li>
 <li><a class="reference internal" href="#factor-analysis">2.5.4. Factor Analysis</a></li>
 <li><a class="reference internal" href="#independent-component-analysis-ica">2.5.5. Independent component analysis (ICA)</a></li>
-<li><a class="reference internal" href="#non-negative-matrix-factorization-nmf-or-nnmf">2.5.6. Non-negative matrix factorization (NMF or NNMF)</a></li>
+<li><a class="reference internal" href="#non-negative-matrix-factorization-nmf-or-nnmf">2.5.6. Non-negative matrix factorization (NMF or NNMF)</a><ul>
+<li><a class="reference internal" href="#nmf-with-the-frobenius-norm">2.5.6.1. NMF with the Frobenius norm</a></li>
+<li><a class="reference internal" href="#nmf-with-a-beta-divergence">2.5.6.2. NMF with a beta-divergence</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#latent-dirichlet-allocation-lda">2.5.7. Latent Dirichlet Allocation (LDA)</a></li>
 </ul>
 </li>
@@ -713,31 +717,30 @@ components with some sparsity:</p>
 </div>
 <div class="section" id="non-negative-matrix-factorization-nmf-or-nnmf">
 <span id="nmf"></span><h2>2.5.6. Non-negative matrix factorization (NMF or NNMF)<a class="headerlink" href="#non-negative-matrix-factorization-nmf-or-nnmf" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> is an alternative approach to decomposition that assumes that the
+<div class="section" id="nmf-with-the-frobenius-norm">
+<h3>2.5.6.1. NMF with the Frobenius norm<a class="headerlink" href="#nmf-with-the-frobenius-norm" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> <a class="footnote-reference" href="#id11" id="id5">[1]</a> is an alternative approach to decomposition that assumes that the
 data and the components are non-negative. <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> can be plugged in
 instead of <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> or its variants, in the cases where the data matrix
-does not contain negative values.
-It finds a decomposition of samples <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>
-into two matrices <img class="math" src="../_images/math/953bde2ab2fca30897f66185e5b37b73747b8b46.png" alt="W"/> and <img class="math" src="../_images/math/44d4c3f22452acebfb3ac644e23508b67500be90.png" alt="H"/> of non-negative elements,
-by optimizing for the squared Frobenius norm:</p>
+does not contain negative values. It finds a decomposition of samples
+<img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/> into two matrices <img class="math" src="../_images/math/953bde2ab2fca30897f66185e5b37b73747b8b46.png" alt="W"/> and <img class="math" src="../_images/math/44d4c3f22452acebfb3ac644e23508b67500be90.png" alt="H"/> of non-negative elements,
+by optimizing the distance <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/> between <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/> and the matrix product
+<img class="math" src="../_images/math/1b4db00cd413d967fa2a37e3e5721438674a6b06.png" alt="WH"/>. The most widely used distance function is the squared Frobenius
+norm, which is an obvious extension of the Euclidean norm to matrices:</p>
 <div class="math">
-<p><img src="../_images/math/56dd37b79327006a201a5b9e450bea913f2b5d65.png" alt="\arg\min_{W,H} \frac{1}{2} ||X - WH||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {WH}_{ij})^2"/></p>
-</div><p>This norm is an obvious extension of the Euclidean norm to matrices. (Other
-optimization objectives have been suggested in the NMF literature, in
-particular Kullback-Leibler divergence, but these are not currently
-implemented.)</p>
-<p>Unlike <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>, the representation of a vector is obtained in an additive
+<p><img src="../_images/math/a6bec04f52fa012b14ca933821077f43153c034b.png" alt="d_{Fro}(X, Y) = \frac{1}{2} ||X - Y||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {Y}_{ij})^2"/></p>
+</div><p>Unlike <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>, the representation of a vector is obtained in an additive
 fashion, by superimposing the components, without subtracting. Such additive
 models are efficient for representing images and text.</p>
-<p>It has been observed in [Hoyer, 04] that, when carefully constrained,
+<p>It has been observed in [Hoyer, 2004] <a class="footnote-reference" href="#id12" id="id6">[2]</a> that, when carefully constrained,
 <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> can produce a parts-based representation of the dataset,
 resulting in interpretable models. The following example displays 16
 sparse components found by <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> from the images in the Olivetti
 faces dataset, in comparison with the PCA eigenfaces.</p>
 <p class="centered">
 <strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img5" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="nmf_img5" src="../_images/sphx_glr_plot_faces_decomposition_0031.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p>The <code class="xref py py-attr docutils literal"><span class="pre">init</span></code> attribute determines the initialization method applied, which
-has a great impact on the performance of the method. <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> implements
-the method Nonnegative Double Singular Value Decomposition. NNDSVD is based on
+has a great impact on the performance of the method. <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> implements the
+method Nonnegative Double Singular Value Decomposition. NNDSVD <a class="footnote-reference" href="#id13" id="id7">[4]</a> is based on
 two SVD processes, one approximating the data matrix, the other approximating
 positive sections of the resulting partial SVD factors utilizing an algebraic
 property of unit rank matrices. The basic NNDSVD algorithm is better fit for
@@ -745,6 +748,10 @@ sparse factorization. Its variants NNDSVDa (in which all zeros are set equal to
 the mean of all elements of the data), and NNDSVDar (in which the zeros are set
 to random perturbations less than the mean of the data divided by 100) are
 recommended in the dense case.</p>
+<p>Note that the Multiplicative Update (&#8216;mu&#8217;) solver cannot update zeros present in
+the initialization, so it leads to poorer results when used jointly with the
+basic NNDSVD algorithm which introduces a lot of zeros; in this case, NNDSVDa or
+NNDSVDar should be preferred.</p>
 <p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> can also be initialized with correctly scaled random non-negative
 matrices by setting <code class="xref py py-attr docutils literal"><span class="pre">init=&quot;random&quot;</span></code>. An integer seed or a
 <code class="docutils literal"><span class="pre">RandomState</span></code> can also be passed to <code class="xref py py-attr docutils literal"><span class="pre">random_state</span></code> to control
@@ -761,36 +768,112 @@ and the intensity of the regularization with the <code class="xref py py-attr do
 + \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
 </div><p>and the regularized objective function is:</p>
 <div class="math">
-<p><img src="../_images/math/438d66f608dddc17c7f483b93c58181886643923.png" alt="\frac{1}{2}||X - WH||_{Fro}^2
+<p><img src="../_images/math/d552e3c675ab67e63b1e89b258d23dd4ea589159.png" alt="d_{Fro}(X, WH)
 + \alpha \rho ||W||_1 + \alpha \rho ||H||_1
 + \frac{\alpha(1-\rho)}{2} ||W||_{Fro} ^ 2
 + \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
 </div><p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> regularizes both W and H. The public function
 <code class="xref py py-func docutils literal"><span class="pre">non_negative_factorization</span></code> allows a finer control through the
 <code class="xref py py-attr docutils literal"><span class="pre">regularization</span></code> attribute, and may regularize only W, only H, or both.</p>
+</div>
+<div class="section" id="nmf-with-a-beta-divergence">
+<h3>2.5.6.2. NMF with a beta-divergence<a class="headerlink" href="#nmf-with-a-beta-divergence" title="Permalink to this headline">¶</a></h3>
+<p>As described previously, the most widely used distance function is the squared
+Frobenius norm, which is an obvious extension of the Euclidean norm to
+matrices:</p>
+<div class="math">
+<p><img src="../_images/math/a6bec04f52fa012b14ca933821077f43153c034b.png" alt="d_{Fro}(X, Y) = \frac{1}{2} ||X - Y||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {Y}_{ij})^2"/></p>
+</div><p>Other distance functions can be used in NMF as, for example, the (generalized)
+Kullback-Leibler (KL) divergence, also referred as I-divergence:</p>
+<div class="math">
+<p><img src="../_images/math/3efb03d9eb627bc3a355ce6b57fa821ec5c89c2b.png" alt="d_{KL}(X, Y) = \sum_{i,j} (X_{ij} log(\frac{X_{ij}}{Y_{ij}}) - X_{ij} + Y_{ij})"/></p>
+</div><p>Or, the Itakura-Saito (IS) divergence:</p>
+<div class="math">
+<p><img src="../_images/math/00bff41415abb3fbc40fd5071a02724d5fe784ad.png" alt="d_{IS}(X, Y) = \sum_{i,j} (\frac{X_{ij}}{Y_{ij}} - log(\frac{X_{ij}}{Y_{ij}}) - 1)"/></p>
+</div><p>These three distances are special cases of the beta-divergence family, with
+<img class="math" src="../_images/math/ad2168a54df2336163a312cceaa0a524c645930e.png" alt="\beta = 2, 1, 0"/> respectively <a class="footnote-reference" href="#id15" id="id8">[6]</a>. The beta-divergence are
+defined by :</p>
+<div class="math">
+<p><img src="../_images/math/067402b7a1cd3286f306a90af9c3619e23d3fc56.png" alt="d_{\beta}(X, Y) = \sum_{i,j} \frac{1}{\beta(\beta - 1)}(X_{ij}^\beta + (\beta-1)Y_{ij}^\beta - \beta X_{ij} Y_{ij}^{\beta - 1})"/></p>
+</div><div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_beta_divergence.html"><img alt="../_images/sphx_glr_plot_beta_divergence_0011.png" src="../_images/sphx_glr_plot_beta_divergence_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>Note that this definition is not valid if <img class="math" src="../_images/math/356b4945a263737f9c34582c0c9bc75c51d7905a.png" alt="\beta \in (0; 1)"/>, yet it can
+be continously extended to the definitions of <img class="math" src="../_images/math/85b7b2d17f3f1bfd9cbac24dddbaf9f13c22dc07.png" alt="d_{KL}"/> and <img class="math" src="../_images/math/0f320c4bf07ed8d3f3f79e63c38fbbfb43941594.png" alt="d_{IS}"/>
+respectively.</p>
+<p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> implements two solvers, using Coordinate Descent (&#8216;cd&#8217;) <a class="footnote-reference" href="#id14" id="id9">[5]</a>, and
+Multiplicative Update (&#8216;mu&#8217;) <a class="footnote-reference" href="#id15" id="id10">[6]</a>. The &#8216;mu&#8217; solver can optimize every
+beta-divergence, including of course the Frobenius norm (<img class="math" src="../_images/math/e5facfe2a9c1fcd63d83b75b18609221e7d11a98.png" alt="\beta=2"/>), the
+(generalized) Kullback-Leibler divergence (<img class="math" src="../_images/math/e1e3123978cac3a86e6e487fcc0def25743222ac.png" alt="\beta=1"/>) and the
+Itakura-Saito divergence (<img class="math" src="../_images/math/7f08c020f0489d1fe7d0b8faacc21b3cae786645.png" alt="\beta=0"/>). Note that for
+<img class="math" src="../_images/math/5f01fc0317d37ae8f52bd63fb722f6a51eabdaab.png" alt="\beta \in (1; 2)"/>, the &#8216;mu&#8217; solver is significantly faster than for other
+values of <img class="math" src="../_images/math/410a9d0df9c135dd73b269cba7ef04dcfd932b1f.png" alt="\beta"/>. Note also that with a negative (or 0, i.e.
+&#8216;itakura-saito&#8217;) <img class="math" src="../_images/math/410a9d0df9c135dd73b269cba7ef04dcfd932b1f.png" alt="\beta"/>, the input matrix cannot contain zero values.</p>
+<p>The &#8216;cd&#8217; solver can only optimize the Frobenius norm. Due to the
+underlying non-convexity of NMF, the different solvers may converge to
+different minima, even when optimizing the same distance function.</p>
+<p>NMF is best used with the <code class="docutils literal"><span class="pre">fit_transform</span></code> method, which returns the matrix W.
+The matrix H is stored into the fitted model in the <code class="docutils literal"><span class="pre">components_</span></code> attribute;
+the method <code class="docutils literal"><span class="pre">transform</span></code> will decompose a new matrix X_new based on these
+stored components:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">NMF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">W</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">components_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">6.1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">W_new</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/decomposition/plot_faces_decomposition.html#sphx-glr-auto-examples-decomposition-plot-faces-decomposition-py"><span class="std std-ref">Faces dataset decompositions</span></a></li>
 <li><a class="reference internal" href="../auto_examples/applications/topics_extraction_with_nmf_lda.html#sphx-glr-auto-examples-applications-topics-extraction-with-nmf-lda-py"><span class="std std-ref">Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation</span></a></li>
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_beta_divergence.html#sphx-glr-auto-examples-decomposition-plot-beta-divergence-py"><span class="std std-ref">Beta-divergence loss functions</span></a></li>
 </ul>
 </div>
 <div class="topic">
 <p class="topic-title first">References:</p>
-<ul class="simple">
-<li><a class="reference external" href="http://www.columbia.edu/~jwp2128/Teaching/W4721/papers/nmf_nature.pdf">&#8220;Learning the parts of objects by non-negative matrix factorization&#8221;</a>
-D. Lee, S. Seung, 1999</li>
-<li><a class="reference external" href="http://www.jmlr.org/papers/volume5/hoyer04a/hoyer04a.pdf">&#8220;Non-negative Matrix Factorization with Sparseness Constraints&#8221;</a>
-P. Hoyer, 2004</li>
-<li><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/nmf/">&#8220;Projected gradient methods for non-negative matrix factorization&#8221;</a>
-C.-J. Lin, 2007</li>
-<li><a class="reference external" href="http://scgroup.hpclab.ceid.upatras.gr/faculty/stratis/Papers/HPCLAB020107.pdf">&#8220;SVD based initialization: A head start for nonnegative
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[1]</a></td><td><a class="reference external" href="http://www.columbia.edu/~jwp2128/Teaching/W4721/papers/nmf_nature.pdf">&#8220;Learning the parts of objects by non-negative matrix factorization&#8221;</a>
+D. Lee, S. Seung, 1999</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[2]</a></td><td><a class="reference external" href="http://www.jmlr.org/papers/volume5/hoyer04a/hoyer04a.pdf">&#8220;Non-negative Matrix Factorization with Sparseness Constraints&#8221;</a>
+P. Hoyer, 2004</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[4]</a></td><td><a class="reference external" href="http://scgroup.hpclab.ceid.upatras.gr/faculty/stratis/Papers/HPCLAB020107.pdf">&#8220;SVD based initialization: A head start for nonnegative
 matrix factorization&#8221;</a>
-C. Boutsidis, E. Gallopoulos, 2008</li>
-<li><a class="reference external" href="http://www.bsp.brain.riken.jp/publications/2009/Cichocki-Phan-IEICE_col.pdf">&#8220;Fast local algorithms for large scale nonnegative matrix and tensor
+C. Boutsidis, E. Gallopoulos, 2008</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td><a class="reference external" href="http://www.bsp.brain.riken.jp/publications/2009/Cichocki-Phan-IEICE_col.pdf">&#8220;Fast local algorithms for large scale nonnegative matrix and tensor
 factorizations.&#8221;</a>
-A. Cichocki, P. Anh-Huy, 2009</li>
-</ul>
+A. Cichocki, P. Anh-Huy, 2009</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id10">2</a>)</em> <a class="reference external" href="http://http://arxiv.org/pdf/1010.1763v3.pdf">&#8220;Algorithms for nonnegative matrix factorization with the beta-divergence&#8221;</a>
+C. Fevotte, J. Idier, 2011</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div class="section" id="latent-dirichlet-allocation-lda">
