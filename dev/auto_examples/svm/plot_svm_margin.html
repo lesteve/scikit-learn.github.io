@@ -37,8 +37,8 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
     <link rel="up" title="General examples" href="../index.html" />
-    <link rel="next" title="Plot different SVM classifiers in the iris dataset" href="plot_iris.html" />
-    <link rel="prev" title="SVM-Kernels" href="plot_svm_kernels.html" />
+    <link rel="next" title="One-class SVM with non-linear kernel (RBF)" href="plot_oneclass.html" />
+    <link rel="prev" title="Plot different SVM classifiers in the iris dataset" href="plot_iris.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -126,14 +126,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_svm_kernels.html"
+        <a href="plot_iris.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        SVM-Kernels
+        Plot differen...
         </span>
             <span class="hiddenrellink">
-            SVM-Kernels
+            Plot different SVM classifiers in the iris dataset
             </span>
         </a>
         </div>
@@ -141,14 +141,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_iris.html"
+        <a href="plot_oneclass.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Plot differen...
+        One-class SVM...
         </span>
             <span class="hiddenrellink">
-            Plot different SVM classifiers in the iris dataset
+            One-class SVM with non-linear kernel (RBF)
             </span>
         </a>
         </div>
@@ -240,10 +240,12 @@ the margins to be calculated using all the data in the area.</p>
     <span class="n">yy</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">xx</span> <span class="o">-</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># plot the parallels to the separating hyperplane that pass through the</span>
-    <span class="c1"># support vectors</span>
+    <span class="c1"># support vectors (margin away from hyperplane in direction</span>
+    <span class="c1"># perpendicular to hyperplane). This is sqrt(1+a^2) away vertically in</span>
+    <span class="c1"># 2-d.</span>
     <span class="n">margin</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">yy_down</span> <span class="o">=</span> <span class="n">yy</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">margin</span>
-    <span class="n">yy_up</span> <span class="o">=</span> <span class="n">yy</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">margin</span>
+    <span class="n">yy_down</span> <span class="o">=</span> <span class="n">yy</span> <span class="o">-</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">a</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">margin</span>
+    <span class="n">yy_up</span> <span class="o">=</span> <span class="n">yy</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">a</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">margin</span>
 
     <span class="c1"># plot the line, the points, and the nearest vectors to the plane</span>
     <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">fignum</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -280,7 +282,7 @@ the margins to be calculated using all the data in the area.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.159 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.160 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/plot_svm_margin.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_svm_margin.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -303,11 +305,11 @@ the margins to be calculated using all the data in the area.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_svm_kernels.html">Previous
+      <a href="plot_iris.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_iris.html">Next
+      <a href="plot_oneclass.html">Next
       </a>
     </div>
     
