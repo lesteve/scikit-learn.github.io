@@ -473,6 +473,10 @@ being subtracted from the centroids. <a class="reference external" href="https:/
 <li>Fix a bug where <a class="reference internal" href="modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier" title="sklearn.ensemble.VotingClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.VotingClassifier</span></code></a> raises an error
 when a numpy array is passed in for weights. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7983">#7983</a> by
 <a class="reference external" href="https://github.com/vincentpham1991">Vincent Pham</a>.</li>
+<li>Fix a bug in <a class="reference internal" href="modules/generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.LatentDirichletAllocation</span></code></a>
+where the <code class="docutils literal"><span class="pre">perplexity</span></code> method was returning incorrect results because
+the <code class="docutils literal"><span class="pre">transform</span></code> method returns normalized document topic distributions
+as of version 0.18. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7954">#7954</a> by <a class="reference external" href="https://github.com/garyForeman">Gary Foreman</a>.</li>
 <li>Fix a bug where <a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingClassifier.html#sklearn.ensemble.GradientBoostingClassifier" title="sklearn.ensemble.GradientBoostingClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.GradientBoostingClassifier</span></code></a> and
 <a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor" title="sklearn.ensemble.GradientBoostingRegressor"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.GradientBoostingRegressor</span></code></a> ignored the
 <code class="docutils literal"><span class="pre">min_impurity_split</span></code> parameter.
@@ -490,6 +494,11 @@ in the constructor but only in the <code class="docutils literal"><span class="p
 ensemble estimators (deriving from <code class="xref py py-class docutils literal"><span class="pre">ensemble.BaseEnsemble</span></code>)
 now only have <code class="docutils literal"><span class="pre">self.estimators_</span></code> available after <code class="docutils literal"><span class="pre">fit</span></code>.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7464">#7464</a> by <a class="reference external" href="https://github.com/larsmans">Lars Buitinck</a> and <a class="reference external" href="https://github.com/lesteve">Loic Esteve</a>.</li>
+<li>Deprecate the <code class="docutils literal"><span class="pre">doc_topic_distr</span></code> argument of the <code class="docutils literal"><span class="pre">perplexity</span></code> method
+in <a class="reference internal" href="modules/generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.LatentDirichletAllocation</span></code></a> because the
+user no longer has access to the unnormalized document topic distribution
+needed for the perplexity calculation. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7954">#7954</a> by
+<a class="reference external" href="https://github.com/garyForeman">Gary Foreman</a>.</li>
 </ul>
 </div></blockquote>
 </div>
