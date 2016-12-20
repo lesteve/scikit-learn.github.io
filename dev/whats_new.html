@@ -172,7 +172,8 @@
         </div>
     </div>
     
-      <p class="doc-version">This documentation is for scikit-learn <b style="font-size: 110%;">version 0.19.dev0</b> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
@@ -451,6 +452,11 @@ norm &#8216;max&#8217; the norms returned will be the same as for dense matrices
 <li>Added ability to set <code class="docutils literal"><span class="pre">n_jobs</span></code> parameter to <a class="reference internal" href="modules/generated/sklearn.pipeline.make_union.html#sklearn.pipeline.make_union" title="sklearn.pipeline.make_union"><code class="xref py py-func docutils literal"><span class="pre">pipeline.make_union</span></code></a>.
 A <code class="docutils literal"><span class="pre">TypeError</span></code> will be raised for any other kwargs. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8028">#8028</a>
 by <a class="reference external" href="https://github.com/alexandercbooth">Alexander Booth</a>.</li>
+<li>Added type checking to the <code class="docutils literal"><span class="pre">accept_sparse</span></code> parameter in
+<code class="xref py py-mod docutils literal"><span class="pre">sklearn.utils.validation</span></code> methods. This parameter now accepts only
+boolean, string, or list/tuple of strings. <code class="docutils literal"><span class="pre">accept_sparse=None</span></code> is deprecated
+and should be replaced by <code class="docutils literal"><span class="pre">accept_sparse=False</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7880">#7880</a> by <a class="reference external" href="https://github.com/jkarno">Josh Karnofsky</a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>, <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a>
 and <a class="reference internal" href="modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score" title="sklearn.model_selection.cross_val_score"><code class="xref py py-func docutils literal"><span class="pre">model_selection.cross_val_score</span></code></a> now allow estimators with callable
 kernels which were previously prohibited. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8005">#8005</a> by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a> .</li>
