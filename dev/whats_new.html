@@ -497,6 +497,11 @@ as of version 0.18. <a class="reference external" href="https://github.com/sciki
 negative errors for negative values of <code class="docutils literal"><span class="pre">ytrue</span> <span class="pre">-</span> <span class="pre">ypred</span></code> leading to
 wrong values when calling <code class="docutils literal"><span class="pre">__call__</span></code>.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8087">#8087</a> by <a class="reference external" href="https://github.com/AlexisMignon">Alexis Mignon</a></li>
+<li>Fix <a class="reference internal" href="modules/generated/sklearn.multioutput.MultiOutputClassifier.html#sklearn.multioutput.MultiOutputClassifier.predict_proba" title="sklearn.multioutput.MultiOutputClassifier.predict_proba"><code class="xref py py-func docutils literal"><span class="pre">sklearn.multioutput.MultiOutputClassifier.predict_proba</span></code></a> to
+return a list of 2d arrays, rather than a 3d array. In the case where
+different target columns had different numbers of classes, a <cite>ValueError</cite>
+would be raised on trying to stack matrices with different dimensions.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8093">#8093</a> by <a class="reference external" href="https://github.com/pjbull">Peter Bull</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -515,6 +520,14 @@ in <a class="reference internal" href="modules/generated/sklearn.decomposition.L
 user no longer has access to the unnormalized document topic distribution
 needed for the perplexity calculation. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7954">#7954</a> by
 <a class="reference external" href="https://github.com/garyForeman">Gary Foreman</a>.</li>
+<li>The <a class="reference internal" href="modules/generated/sklearn.multioutput.MultiOutputClassifier.html#sklearn.multioutput.MultiOutputClassifier.predict_proba" title="sklearn.multioutput.MultiOutputClassifier.predict_proba"><code class="xref py py-func docutils literal"><span class="pre">sklearn.multioutput.MultiOutputClassifier.predict_proba</span></code></a>
+function used to return a 3d array (<code class="docutils literal"><span class="pre">n_samples</span></code>, <code class="docutils literal"><span class="pre">n_classes</span></code>,
+<code class="docutils literal"><span class="pre">n_outputs</span></code>). In the case where different target columns had different
+numbers of classes, a <cite>ValueError</cite> would be raised on trying to stack
+matrices with different dimensions. This function now returns a list of
+arrays where the length of the list is <code class="docutils literal"><span class="pre">n_outputs</span></code>, and each array is
+(<code class="docutils literal"><span class="pre">n_samples</span></code>, <code class="docutils literal"><span class="pre">n_classes</span></code>) for that particular output.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8093">#8093</a> by <a class="reference external" href="https://github.com/pjbull">Peter Bull</a>.</li>
 </ul>
 </div></blockquote>
 </div>
