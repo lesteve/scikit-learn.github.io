@@ -453,6 +453,15 @@ do not set attributes on the estimator.
 will now raise a <code class="docutils literal"><span class="pre">NotImplementedError</span></code> with &#8216;l1&#8217; or &#8216;l2&#8217; norm and with
 norm &#8216;max&#8217; the norms returned will be the same as for dense matrices.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7771">#7771</a> by <a class="reference external" href="https://github.com/luang008">Ang Lu</a>.</li>
+<li><a class="reference internal" href="modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor" title="sklearn.linear_model.RANSACRegressor"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.RANSACRegressor</span></code></a> no longer throws an error
+when calling <code class="docutils literal"><span class="pre">fit</span></code> if no inliers are found in its first iteration.
+Furthermore, causes of skipped iterations are tracked in newly added
+attributes, <code class="docutils literal"><span class="pre">n_skips_*</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7914">#7914</a> by <a class="reference external" href="https://github.com/mthorrell">Michael Horrell</a>.</li>
+<li>Fix a bug where <a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFdr.html#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_selection.SelectFdr</span></code></a> did not
+exactly implement Benjamini-Hochberg procedure. It formerly may have
+selected fewer features than it should.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7490">#7490</a> by <a class="reference external" href="https://github.com/mpjlu">Peng Meng</a>.</li>
 <li>Added ability to set <code class="docutils literal"><span class="pre">n_jobs</span></code> parameter to <a class="reference internal" href="modules/generated/sklearn.pipeline.make_union.html#sklearn.pipeline.make_union" title="sklearn.pipeline.make_union"><code class="xref py py-func docutils literal"><span class="pre">pipeline.make_union</span></code></a>.
 A <code class="docutils literal"><span class="pre">TypeError</span></code> will be raised for any other kwargs. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8028">#8028</a>
 by <a class="reference external" href="https://github.com/alexandercbooth">Alexander Booth</a>.</li>
