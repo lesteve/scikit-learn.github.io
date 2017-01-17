@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../index.html" />
-    <link rel="up" title="General examples" href="index.html" />
     <link rel="next" title="Explicit feature map approximation for RBF kernels" href="plot_kernel_approximation.html" />
     <link rel="prev" title="Comparison of kernel ridge regression and SVR" href="plot_kernel_ridge_regression.html" />
   
@@ -220,20 +219,20 @@ the technique.</p>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.datasets.twenty_newsgroups</span> <span class="kn">import</span> <span class="n">strip_newsgroup_footer</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets.twenty_newsgroups</span> <span class="kn">import</span> <span class="n">strip_newsgroup_quoting</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD"><span class="n">TruncatedSVD</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report"><span class="n">classification_report</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.FeatureUnion.html#sklearn.pipeline.FeatureUnion"><span class="n">FeatureUnion</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"><span class="n">SVC</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.decomposition.TruncatedSVD"><span class="n">TruncatedSVD</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.classification_report"><span class="n">classification_report</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.FeatureUnion.html#sklearn.pipeline.FeatureUnion" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.FeatureUnion"><span class="n">FeatureUnion</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.svm.SVC"><span class="n">SVC</span></a>
 
 
-<span class="k">class</span> <span class="nc">ItemSelector</span><span class="p">(</span><a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ItemSelector</span><span class="p">(</span><a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;For data grouped by feature, select subset of data at a provided key.</span>
 
 <span class="sd">    The data is expected to be stored in a 2D data structure, where the first</span>
@@ -272,7 +271,7 @@ the technique.</p>
         <span class="k">return</span> <span class="n">data_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
 
 
-<span class="k">class</span> <span class="nc">TextStats</span><span class="p">(</span><a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a><span class="p">):</span>
+<span class="k">class</span> <span class="nc">TextStats</span><span class="p">(</span><a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Extract features from each document for DictVectorizer&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -284,7 +283,7 @@ the technique.</p>
                 <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">]</span>
 
 
-<span class="k">class</span> <span class="nc">SubjectBodyExtractor</span><span class="p">(</span><a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a><span class="p">):</span>
+<span class="k">class</span> <span class="nc">SubjectBodyExtractor</span><span class="p">(</span><a href="../modules/generated/sklearn.base.BaseEstimator.html#sklearn.base.BaseEstimator" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.BaseEstimator"><span class="n">BaseEstimator</span></a><span class="p">,</span> <a href="../modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.base.TransformerMixin"><span class="n">TransformerMixin</span></a><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Extract the subject &amp; body from a usenet post in a single pass.</span>
 
 <span class="sd">    Takes a sequence of strings and produces a dict of sequences.  Keys are</span>
@@ -313,32 +312,32 @@ the technique.</p>
         <span class="k">return</span> <span class="n">features</span>
 
 
-<span class="n">pipeline</span> <span class="o">=</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
+<span class="n">pipeline</span> <span class="o">=</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
     <span class="c1"># Extract the subject &amp; body</span>
     <span class="p">(</span><span class="s1">&#39;subjectbody&#39;</span><span class="p">,</span> <span class="n">SubjectBodyExtractor</span><span class="p">()),</span>
 
     <span class="c1"># Use FeatureUnion to combine the features from subject and body</span>
-    <span class="p">(</span><span class="s1">&#39;union&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.FeatureUnion.html#sklearn.pipeline.FeatureUnion"><span class="n">FeatureUnion</span></a><span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;union&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.FeatureUnion.html#sklearn.pipeline.FeatureUnion" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.FeatureUnion"><span class="n">FeatureUnion</span></a><span class="p">(</span>
         <span class="n">transformer_list</span><span class="o">=</span><span class="p">[</span>
 
             <span class="c1"># Pipeline for pulling features from the post&#39;s subject line</span>
-            <span class="p">(</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
                 <span class="p">(</span><span class="s1">&#39;selector&#39;</span><span class="p">,</span> <span class="n">ItemSelector</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;subject&#39;</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">50</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">50</span><span class="p">)),</span>
             <span class="p">])),</span>
 
             <span class="c1"># Pipeline for standard bag-of-words model for body</span>
-            <span class="p">(</span><span class="s1">&#39;body_bow&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;body_bow&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
                 <span class="p">(</span><span class="s1">&#39;selector&#39;</span><span class="p">,</span> <span class="n">ItemSelector</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">()),</span>
-                <span class="p">(</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD"><span class="n">TruncatedSVD</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">50</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">()),</span>
+                <span class="p">(</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.decomposition.TruncatedSVD"><span class="n">TruncatedSVD</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">50</span><span class="p">)),</span>
             <span class="p">])),</span>
 
             <span class="c1"># Pipeline for pulling ad hoc features from post&#39;s body</span>
-            <span class="p">(</span><span class="s1">&#39;body_stats&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;body_stats&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
                 <span class="p">(</span><span class="s1">&#39;selector&#39;</span><span class="p">,</span> <span class="n">ItemSelector</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">)),</span>
                 <span class="p">(</span><span class="s1">&#39;stats&#39;</span><span class="p">,</span> <span class="n">TextStats</span><span class="p">()),</span>  <span class="c1"># returns a list of dicts</span>
-                <span class="p">(</span><span class="s1">&#39;vect&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a><span class="p">()),</span>  <span class="c1"># list of dicts -&gt; feature matrix</span>
+                <span class="p">(</span><span class="s1">&#39;vect&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a><span class="p">()),</span>  <span class="c1"># list of dicts -&gt; feature matrix</span>
             <span class="p">])),</span>
 
         <span class="p">],</span>
@@ -352,30 +351,32 @@ the technique.</p>
     <span class="p">)),</span>
 
     <span class="c1"># Use a SVC classifier on the combined features</span>
-    <span class="p">(</span><span class="s1">&#39;svc&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">&#39;svc&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.svm.SVC"><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)),</span>
 <span class="p">])</span>
 
 <span class="c1"># limit the list of categories to make running this example faster.</span>
 <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;alt.atheism&#39;</span><span class="p">,</span> <span class="s1">&#39;talk.religion.misc&#39;</span><span class="p">]</span>
-<span class="n">train</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="n">train</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                            <span class="n">subset</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span>
                            <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span>
                            <span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="n">test</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                           <span class="n">subset</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>
                           <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span>
                           <span class="p">)</span>
 
 <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><a href="../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report"><span class="n">classification_report</span></a><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">target</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><a href="../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.classification_report"><span class="n">classification_report</span></a><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">target</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/hetero_feature_union.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">hetero_feature_union.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/hetero_feature_union.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">hetero_feature_union.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -389,7 +390,7 @@ the technique.</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../_sources/auto_examples/hetero_feature_union.txt" rel="nofollow">Show this page source</a>
+      <a href="../_sources/auto_examples/hetero_feature_union.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

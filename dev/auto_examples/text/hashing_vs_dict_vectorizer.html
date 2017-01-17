@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Classification of text documents: using a MLComp dataset" href="mlcomp_sparse_document_classification.html" />
     <link rel="prev" title="RBF SVM parameters" href="../svm/plot_rbf_parameters.html" />
   
@@ -130,7 +129,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        RBF SVM param...
+        RBF SVM parameters
         </span>
             <span class="hiddenrellink">
             RBF SVM parameters
@@ -215,8 +214,8 @@ for FeatureHasher is to be expected due to hash collisions.</p>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher"><span class="n">FeatureHasher</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.FeatureHasher"><span class="n">FeatureHasher</span></a>
 
 
 <span class="k">def</span> <span class="nf">n_nonzero_columns</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -268,14 +267,14 @@ for FeatureHasher is to be expected due to hash collisions.</p>
 
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Loading 20 newsgroups training data&quot;</span><span class="p">)</span>
-<span class="n">raw_data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">raw_data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_20newsgroups.html#sklearn.datasets.fetch_20newsgroups" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.fetch_20newsgroups"><span class="n">fetch_20newsgroups</span></a><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
 <span class="n">data_size_mb</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">raw_data</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e6</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> documents - </span><span class="si">%0.3f</span><span class="s2">MB&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">),</span> <span class="n">data_size_mb</span><span class="p">))</span>
 <span class="k">print</span><span class="p">()</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;DictVectorizer&quot;</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a><span class="p">()</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.DictVectorizer"><span class="n">DictVectorizer</span></a><span class="p">()</span>
 <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">token_freqs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">raw_data</span><span class="p">)</span>
 <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%f</span><span class="s2">s at </span><span class="si">%0.3f</span><span class="s2">MB/s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">data_size_mb</span> <span class="o">/</span> <span class="n">duration</span><span class="p">))</span>
@@ -284,7 +283,7 @@ for FeatureHasher is to be expected due to hash collisions.</p>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;FeatureHasher on frequency dicts&quot;</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">hasher</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher"><span class="n">FeatureHasher</span></a><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">)</span>
+<span class="n">hasher</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.FeatureHasher"><span class="n">FeatureHasher</span></a><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">hasher</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">token_freqs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">raw_data</span><span class="p">)</span>
 <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%f</span><span class="s2">s at </span><span class="si">%0.3f</span><span class="s2">MB/s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">data_size_mb</span> <span class="o">/</span> <span class="n">duration</span><span class="p">))</span>
@@ -293,7 +292,7 @@ for FeatureHasher is to be expected due to hash collisions.</p>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;FeatureHasher on raw tokens&quot;</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">hasher</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher"><span class="n">FeatureHasher</span></a><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
+<span class="n">hasher</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.FeatureHasher"><span class="n">FeatureHasher</span></a><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">hasher</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">tokens</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">raw_data</span><span class="p">)</span>
 <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%f</span><span class="s2">s at </span><span class="si">%0.3f</span><span class="s2">MB/s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">data_size_mb</span> <span class="o">/</span> <span class="n">duration</span><span class="p">))</span>
@@ -301,10 +300,12 @@ for FeatureHasher is to be expected due to hash collisions.</p>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/hashing_vs_dict_vectorizer.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">hashing_vs_dict_vectorizer.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/hashing_vs_dict_vectorizer.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">hashing_vs_dict_vectorizer.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -318,7 +319,7 @@ for FeatureHasher is to be expected due to hash collisions.</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/text/hashing_vs_dict_vectorizer.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/text/hashing_vs_dict_vectorizer.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

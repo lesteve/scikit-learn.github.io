@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Clustering text documents using k-means" href="document_clustering.html" />
     <link rel="prev" title="FeatureHasher and DictVectorizer Comparison" href="hashing_vs_dict_vectorizer.html" />
   
@@ -234,12 +233,12 @@ the root folder holding the uncompressed archive:</p>
 <span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="kn">as</span> <span class="nn">sp</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.load_mlcomp.html#sklearn.datasets.load_mlcomp"><span class="n">load_mlcomp</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix"><span class="n">confusion_matrix</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report"><span class="n">classification_report</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB"><span class="n">MultinomialNB</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.load_mlcomp.html#sklearn.datasets.load_mlcomp" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_mlcomp"><span class="n">load_mlcomp</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.confusion_matrix"><span class="n">confusion_matrix</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.classification_report"><span class="n">classification_report</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.naive_bayes.MultinomialNB"><span class="n">MultinomialNB</span></a>
 
 
 <span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
@@ -250,23 +249,23 @@ the root folder holding the uncompressed archive:</p>
 
 <span class="c1"># Load the training set</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Loading 20 newsgroups training set... &quot;</span><span class="p">)</span>
-<span class="n">news_train</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_mlcomp.html#sklearn.datasets.load_mlcomp"><span class="n">load_mlcomp</span></a><span class="p">(</span><span class="s1">&#39;20news-18828&#39;</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">news_train</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_mlcomp.html#sklearn.datasets.load_mlcomp" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_mlcomp"><span class="n">load_mlcomp</span></a><span class="p">(</span><span class="s1">&#39;20news-18828&#39;</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">news_train</span><span class="o">.</span><span class="n">DESCR</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> documents&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">news_train</span><span class="o">.</span><span class="n">filenames</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> categories&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">news_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">))</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Extracting features from the dataset using a sparse vectorizer&quot;</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.TfidfVectorizer"><span class="n">TfidfVectorizer</span></a><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">((</span><span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
                                     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">news_train</span><span class="o">.</span><span class="n">filenames</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;n_samples: </span><span class="si">%d</span><span class="s2">, n_features: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="k">assert</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.issparse.html#scipy.sparse.issparse"><span class="n">sp</span><span class="o">.</span><span class="n">issparse</span></a><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="k">assert</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.issparse.html#scipy.sparse.issparse" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.sparse.issparse"><span class="n">sp</span><span class="o">.</span><span class="n">issparse</span></a><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">news_train</span><span class="o">.</span><span class="n">target</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Loading 20 newsgroups test set... &quot;</span><span class="p">)</span>
-<span class="n">news_test</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_mlcomp.html#sklearn.datasets.load_mlcomp"><span class="n">load_mlcomp</span></a><span class="p">(</span><span class="s1">&#39;20news-18828&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="n">news_test</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_mlcomp.html#sklearn.datasets.load_mlcomp" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_mlcomp"><span class="n">load_mlcomp</span></a><span class="p">(</span><span class="s1">&#39;20news-18828&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
@@ -291,7 +290,7 @@ the root folder holding the uncompressed archive:</p>
 
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s1">&#39;coef_&#39;</span><span class="p">):</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Percentage of non zeros coef: </span><span class="si">%f</span><span class="s2">&quot;</span>
-              <span class="o">%</span> <span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+              <span class="o">%</span> <span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Predicting the outcomes of the testing set&quot;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -300,16 +299,16 @@ the root folder holding the uncompressed archive:</p>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Classification report on test set for classifier:&quot;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
     <span class="k">print</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><a href="../../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report"><span class="n">classification_report</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span>
+    <span class="k">print</span><span class="p">(</span><a href="../../modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.classification_report"><span class="n">classification_report</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span>
                                 <span class="n">target_names</span><span class="o">=</span><span class="n">news_test</span><span class="o">.</span><span class="n">target_names</span><span class="p">))</span>
 
-    <span class="n">cm</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix"><span class="n">confusion_matrix</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+    <span class="n">cm</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.confusion_matrix"><span class="n">confusion_matrix</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Confusion matrix:&quot;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
 
     <span class="c1"># Show confusion matrix</span>
-    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
-    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Confusion matrix of the </span><span class="si">%s</span><span class="s1"> classifier&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Confusion matrix of the </span><span class="si">%s</span><span class="s1"> classifier&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 
 
@@ -322,21 +321,23 @@ the root folder holding the uncompressed archive:</p>
     <span class="s1">&#39;fit_intercept&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">benchmark</span><span class="p">(</span><a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="s1">&#39;SGD&#39;</span><span class="p">)</span>
+<span class="n">benchmark</span><span class="p">(</span><a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="s1">&#39;SGD&#39;</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Testbenching a MultinomialNB classifier...&quot;</span><span class="p">)</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}</span>
 
-<span class="n">benchmark</span><span class="p">(</span><a href="../../modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB"><span class="n">MultinomialNB</span></a><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="s1">&#39;MultinomialNB&#39;</span><span class="p">)</span>
+<span class="n">benchmark</span><span class="p">(</span><a href="../../modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.naive_bayes.MultinomialNB"><span class="n">MultinomialNB</span></a><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="s1">&#39;MultinomialNB&#39;</span><span class="p">)</span>
 
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/mlcomp_sparse_document_classification.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">mlcomp_sparse_document_classification.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/mlcomp_sparse_document_classification.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">mlcomp_sparse_document_classification.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -350,7 +351,7 @@ the root folder holding the uncompressed archive:</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/text/mlcomp_sparse_document_classification.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/text/mlcomp_sparse_document_classification.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

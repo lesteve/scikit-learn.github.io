@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Lasso and Elastic Net for Sparse Signals" href="plot_lasso_and_elasticnet.html" />
     <link rel="prev" title="SGD: Weighted samples" href="plot_sgd_weighted_samples.html" />
   
@@ -130,7 +129,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        SGD: Weighted...
+        SGD: Weighted samples
         </span>
             <span class="hiddenrellink">
             SGD: Weighted samples
@@ -204,19 +203,19 @@ data and that in the case of sparse data the speed is improved.</p>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_regression.html#sklearn.datasets.make_regression"><span class="n">make_regression</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso"><span class="n">Lasso</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_regression.html#sklearn.datasets.make_regression" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.samples_generator.make_regression"><span class="n">make_regression</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a>
 </pre></div>
 </div>
 <p>The two Lasso implementations on Dense data</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;--- Dense matrices&quot;</span><span class="p">)</span>
 
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_regression.html#sklearn.datasets.make_regression"><span class="n">make_regression</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_regression.html#sklearn.datasets.make_regression" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.samples_generator.make_regression"><span class="n">make_regression</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">X_sp</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
 <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">sparse_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">dense_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">sparse_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">dense_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">sparse_lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sp</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -227,7 +226,7 @@ data and that in the case of sparse data the speed is improved.</p>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Dense Lasso done in </span><span class="si">%f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Distance between coefficients : </span><span class="si">%s</span><span class="s2">&quot;</span>
-      <span class="o">%</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm"><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">sparse_lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">-</span> <span class="n">dense_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
+      <span class="o">%</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.linalg.norm"><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">sparse_lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">-</span> <span class="n">dense_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>The two Lasso implementations on Sparse data</p>
@@ -241,8 +240,8 @@ data and that in the case of sparse data the speed is improved.</p>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Matrix density : </span><span class="si">%s</span><span class="s2"> </span><span class="si">%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Xs</span><span class="o">.</span><span class="n">nnz</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
 
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">sparse_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
-<span class="n">dense_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">sparse_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">dense_lasso</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">sparse_lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -253,14 +252,16 @@ data and that in the case of sparse data the speed is improved.</p>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Dense Lasso done in </span><span class="si">%f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Distance between coefficients : </span><span class="si">%s</span><span class="s2">&quot;</span>
-      <span class="o">%</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm"><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">sparse_lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">-</span> <span class="n">dense_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
+      <span class="o">%</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.linalg.norm"><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">sparse_lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">-</span> <span class="n">dense_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/lasso_dense_vs_sparse_data.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">lasso_dense_vs_sparse_data.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/lasso_dense_vs_sparse_data.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">lasso_dense_vs_sparse_data.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -274,7 +275,7 @@ data and that in the case of sparse data the speed is improved.</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/linear_model/lasso_dense_vs_sparse_data.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/linear_model/lasso_dense_vs_sparse_data.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

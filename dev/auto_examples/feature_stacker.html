@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../index.html" />
-    <link rel="up" title="General examples" href="index.html" />
     <link rel="next" title="Pipelining: chaining a PCA and a logistic regression" href="plot_digits_pipe.html" />
     <link rel="prev" title="Isotonic Regression" href="plot_isotonic_regression.html" />
   
@@ -130,7 +129,7 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Isotonic Regr...
+        Isotonic Regression
         </span>
             <span class="hiddenrellink">
             Isotonic Regression
@@ -208,22 +207,22 @@ dataset and is only used to illustrate the usage of FeatureUnion.</p>
 <span class="c1">#</span>
 <span class="c1"># License: BSD 3 clause</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">,</span> <span class="n">FeatureUnion</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"><span class="n">SVC</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris"><span class="n">load_iris</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">,</span> <span class="n">FeatureUnion</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.svm.SVC"><span class="n">SVC</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_iris"><span class="n">load_iris</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a>
 
-<span class="n">iris</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris"><span class="n">load_iris</span></a><span class="p">()</span>
+<span class="n">iris</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_iris"><span class="n">load_iris</span></a><span class="p">()</span>
 
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 
 <span class="c1"># This dataset is way too high-dimensional. Better do PCA:</span>
-<span class="n">pca</span> <span class="o">=</span> <a href="../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pca</span> <span class="o">=</span> <a href="../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Maybe some original features where good, too?</span>
-<span class="n">selection</span> <span class="o">=</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">selection</span> <span class="o">=</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Build estimator from PCA and Univariate selection:</span>
 
@@ -232,26 +231,28 @@ dataset and is only used to illustrate the usage of FeatureUnion.</p>
 <span class="c1"># Use combined features to transform dataset:</span>
 <span class="n">X_features</span> <span class="o">=</span> <span class="n">combined_features</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
-<span class="n">svm</span> <span class="o">=</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+<span class="n">svm</span> <span class="o">=</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.svm.SVC"><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
 
 <span class="c1"># Do grid search over k, n_components and C:</span>
 
-<span class="n">pipeline</span> <span class="o">=</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([(</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">combined_features</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;svm&quot;</span><span class="p">,</span> <span class="n">svm</span><span class="p">)])</span>
+<span class="n">pipeline</span> <span class="o">=</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([(</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">combined_features</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;svm&quot;</span><span class="p">,</span> <span class="n">svm</span><span class="p">)])</span>
 
 <span class="n">param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">features__pca__n_components</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
                   <span class="n">features__univ_select__k</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
                   <span class="n">svm__C</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 
-<span class="n">grid_search</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">grid_search</span> <span class="o">=</span> <a href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/feature_stacker.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">feature_stacker.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/feature_stacker.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">feature_stacker.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -265,7 +266,7 @@ dataset and is only used to illustrate the usage of FeatureUnion.</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../_sources/auto_examples/feature_stacker.txt" rel="nofollow">Show this page source</a>
+      <a href="../_sources/auto_examples/feature_stacker.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="IsolationForest example" href="plot_isolation_forest.html" />
     <link rel="prev" title="Decision Tree Regression with AdaBoost" href="plot_adaboost_regression.html" />
   
@@ -203,8 +202,8 @@ the more important.</p>
 of the predictions can be parallelized within multiple jobs.</p>
 <img alt="../../_images/sphx_glr_plot_forest_importances_faces_001.png" class="align-center" src="../../_images/sphx_glr_plot_forest_importances_faces_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Fitting</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a> <span class="n">on</span> <span class="n">faces</span> <span class="n">data</span> <span class="k">with</span> <span class="mi">1</span> <span class="n">cores</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">3.357</span><span class="n">s</span>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Fitting</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a> <span class="n">on</span> <span class="n">faces</span> <span class="n">data</span> <span class="k">with</span> <span class="mi">1</span> <span class="n">cores</span><span class="o">...</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">3.652</span><span class="n">s</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -215,14 +214,14 @@ of the predictions can be parallelized within multiple jobs.</p>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a>
 
 <span class="c1"># Number of cores to use to perform parallel fitting of the forest model</span>
 <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="c1"># Load the faces dataset</span>
-<span class="n">data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.fetch_olivetti_faces"><span class="n">fetch_olivetti_faces</span></a><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">images</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">target</span>
 
@@ -233,7 +232,7 @@ of the predictions can be parallelized within multiple jobs.</p>
 <span class="c1"># Build a forest and compute the pixel importances</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitting ExtraTreesClassifier on faces data with </span><span class="si">%d</span><span class="s2"> cores...&quot;</span> <span class="o">%</span> <span class="n">n_jobs</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">forest</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+<span class="n">forest</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.ExtraTreesClassifier"><span class="n">ExtraTreesClassifier</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
                               <span class="n">max_features</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
                               <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
                               <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -244,16 +243,18 @@ of the predictions can be parallelized within multiple jobs.</p>
 <span class="n">importances</span> <span class="o">=</span> <span class="n">importances</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="c1"># Plot pixel importances</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">importances</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">hot</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Pixel importances with forests of trees&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.matshow" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.matshow"><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span></a><span class="p">(</span><span class="n">importances</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">hot</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Pixel importances with forests of trees&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  4.084 seconds)</p>
-<div class="sphx-glr-download container">
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.393 seconds)</p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_forest_importances_faces.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_forest_importances_faces.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_forest_importances_faces.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_forest_importances_faces.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -267,7 +268,7 @@ of the predictions can be parallelized within multiple jobs.</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/ensemble/plot_forest_importances_faces.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/ensemble/plot_forest_importances_faces.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

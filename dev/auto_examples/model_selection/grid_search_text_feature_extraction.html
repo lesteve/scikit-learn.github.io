@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Precision-Recall" href="plot_precision_recall.html" />
     <link rel="prev" title="Nested versus non-nested cross-validation" href="plot_nested_cross_validation_iris.html" />
   
@@ -242,11 +241,11 @@ loader or setting them to None to get the 20 of them.</p>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer"><span class="n">CountVectorizer</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer"><span class="n">TfidfTransformer</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.CountVectorizer"><span class="n">CountVectorizer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.TfidfTransformer"><span class="n">TfidfTransformer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a>
 
 <span class="k">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
 
@@ -274,10 +273,10 @@ loader or setting them to None to get the 20 of them.</p>
 </div>
 <p>define a pipeline combining a text feature extractor with a simple
 classifier</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;vect&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer"><span class="n">CountVectorizer</span></a><span class="p">()),</span>
-    <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer"><span class="n">TfidfTransformer</span></a><span class="p">()),</span>
-    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">()),</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;vect&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.CountVectorizer"><span class="n">CountVectorizer</span></a><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.feature_extraction.text.TfidfTransformer"><span class="n">TfidfTransformer</span></a><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">()),</span>
 <span class="p">])</span>
 
 <span class="c1"># uncommenting more parameters will give better exploring power but will</span>
@@ -299,7 +298,7 @@ classifier</p>
 
     <span class="c1"># find the best parameters for both the feature extraction and the</span>
     <span class="c1"># classifier</span>
-    <span class="n">grid_search</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">grid_search</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Performing grid search...&quot;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;pipeline:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">steps</span><span class="p">])</span>
@@ -318,10 +317,12 @@ classifier</p>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/grid_search_text_feature_extraction.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">grid_search_text_feature_extraction.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/grid_search_text_feature_extraction.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">grid_search_text_feature_extraction.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -335,7 +336,7 @@ classifier</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/model_selection/grid_search_text_feature_extraction.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/model_selection/grid_search_text_feature_extraction.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

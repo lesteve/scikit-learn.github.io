@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="index.html" />
-    <link rel="up" title="scikit-learn" href="preface.html" />
     <link rel="next" title="scikit-learn Tutorials" href="tutorial/index.html" />
     <link rel="prev" title="Who is using scikit-learn?" href="testimonials/testimonials.html" />
   
@@ -414,6 +413,9 @@ particularly useful for targets with an exponential trend.
 <h4>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h4>
 <blockquote>
 <div><ul class="simple">
+<li>Update Sphinx-Gallery from 0.1.4 to 0.1.7 for resolving links in
+documentation build with Sphinx&gt;1.5 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8010">#8010</a>, <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7986">#7986</a>
+<a class="reference external" href="https://github.com/Titan-C">Oscar Najera</a></li>
 <li><a class="reference internal" href="modules/generated/sklearn.multioutput.MultiOutputRegressor.html#sklearn.multioutput.MultiOutputRegressor" title="sklearn.multioutput.MultiOutputRegressor"><code class="xref py py-class docutils literal"><span class="pre">multioutput.MultiOutputRegressor</span></code></a> and <a class="reference internal" href="modules/generated/sklearn.multioutput.MultiOutputClassifier.html#sklearn.multioutput.MultiOutputClassifier" title="sklearn.multioutput.MultiOutputClassifier"><code class="xref py py-class docutils literal"><span class="pre">multioutput.MultiOutputClassifier</span></code></a>
 now support online learning using <cite>partial_fit</cite>.
 issue: <cite>8053</cite> by <a class="reference external" href="https://github.com/yupbank">Peng Yu</a>.</li>
@@ -488,6 +490,9 @@ with <code class="docutils literal"><span class="pre">center=True</span></code>.
 <h4>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
 <blockquote>
 <div><ul class="simple">
+<li>Fixed a bug where <a class="reference internal" href="modules/generated/sklearn.datasets.make_moons.html#sklearn.datasets.make_moons" title="sklearn.datasets.make_moons"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.make_moons</span></code></a> gives an
+incorrect result when <code class="docutils literal"><span class="pre">n_samples</span></code> is odd.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8198">#8198</a> by <a class="reference external" href="https://github.com/levy5674">Josh Levy</a>.</li>
 <li>Fixed a bug where <a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LassoLars</span></code></a> does not give
 the same result as the LassoLars implementation available
 in R (lars library). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7849">#7849</a> by <a class="reference external" href="https://github.com/jmontoyam">Jair Montoya Martinez</a></li>
@@ -1999,99 +2004,80 @@ We now use the weighted average of targets (secondary method). By
 <div class="section" id="id24">
 <h3>API changes summary<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><ul>
-<li><p class="first"><a class="reference internal" href="modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> and
+<div><ul class="simple">
+<li><a class="reference internal" href="modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> and
 <a class="reference internal" href="modules/generated/sklearn.cross_validation.cross_val_score.html#sklearn.cross_validation.cross_val_score" title="sklearn.cross_validation.cross_val_score"><code class="xref py py-func docutils literal"><span class="pre">cross_val_score</span></code></a> and other
 meta-estimators don&#8217;t convert pandas DataFrames into arrays any more,
-allowing DataFrame specific operations in custom estimators.</p>
-</li>
-<li><p class="first"><code class="xref py py-func docutils literal"><span class="pre">multiclass.fit_ovr</span></code>, <code class="xref py py-func docutils literal"><span class="pre">multiclass.predict_ovr</span></code>,
+allowing DataFrame specific operations in custom estimators.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">multiclass.fit_ovr</span></code>, <code class="xref py py-func docutils literal"><span class="pre">multiclass.predict_ovr</span></code>,
 <code class="xref py py-func docutils literal"><span class="pre">predict_proba_ovr</span></code>,
 <code class="xref py py-func docutils literal"><span class="pre">multiclass.fit_ovo</span></code>, <code class="xref py py-func docutils literal"><span class="pre">multiclass.predict_ovo</span></code>,
 <code class="xref py py-func docutils literal"><span class="pre">multiclass.fit_ecoc</span></code> and <code class="xref py py-func docutils literal"><span class="pre">multiclass.predict_ecoc</span></code>
-are deprecated. Use the underlying estimators instead.</p>
-</li>
-<li><p class="first">Nearest neighbors estimators used to take arbitrary keyword arguments
+are deprecated. Use the underlying estimators instead.</li>
+<li>Nearest neighbors estimators used to take arbitrary keyword arguments
 and pass these to their distance metric. This will no longer be supported
-in scikit-learn 0.18; use the <code class="docutils literal"><span class="pre">metric_params</span></code> argument instead.</p>
-</li>
+in scikit-learn 0.18; use the <code class="docutils literal"><span class="pre">metric_params</span></code> argument instead.</li>
 <li><dl class="first docutils">
 <dt><cite>n_jobs</cite> parameter of the fit method shifted to the constructor of the</dt>
-<dd><p class="first last">LinearRegression class.</p>
-</dd>
+<dd>LinearRegression class.</dd>
 </dl>
 </li>
-<li><p class="first">The <code class="docutils literal"><span class="pre">predict_proba</span></code> method of <a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="sklearn.multiclass.OneVsRestClassifier"><code class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsRestClassifier</span></code></a>
+<li>The <code class="docutils literal"><span class="pre">predict_proba</span></code> method of <a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="sklearn.multiclass.OneVsRestClassifier"><code class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsRestClassifier</span></code></a>
 now returns two probabilities per sample in the multiclass case; this
 is consistent with other estimators and with the method&#8217;s documentation,
 but previous versions accidentally returned only the positive
-probability. Fixed by Will Lamond and <a class="reference external" href="https://github.com/larsmans">Lars Buitinck</a>.</p>
-</li>
-<li><p class="first">Change default value of precompute in <code class="xref py py-class docutils literal"><span class="pre">ElasticNet</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Lasso</span></code>
+probability. Fixed by Will Lamond and <a class="reference external" href="https://github.com/larsmans">Lars Buitinck</a>.</li>
+<li>Change default value of precompute in <code class="xref py py-class docutils literal"><span class="pre">ElasticNet</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Lasso</span></code>
 to False. Setting precompute to &#8220;auto&#8221; was found to be slower when
 n_samples &gt; n_features since the computation of the Gram matrix is
 computationally expensive and outweighs the benefit of fitting the Gram
 for just one alpha.
 <code class="docutils literal"><span class="pre">precompute=&quot;auto&quot;</span></code> is now deprecated and will be removed in 0.18
-By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</p>
-</li>
-<li><p class="first">Expose <code class="docutils literal"><span class="pre">positive</span></code> option in <code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> and
+By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
+<li>Expose <code class="docutils literal"><span class="pre">positive</span></code> option in <code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> and
 <code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> which constrains coefficients to be
-positive. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</p>
-</li>
-<li><p class="first">Users should now supply an explicit <code class="docutils literal"><span class="pre">average</span></code> parameter to
+positive. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
+<li>Users should now supply an explicit <code class="docutils literal"><span class="pre">average</span></code> parameter to
 <a class="reference internal" href="modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.f1_score</span></code></a>, <a class="reference internal" href="modules/generated/sklearn.metrics.fbeta_score.html#sklearn.metrics.fbeta_score" title="sklearn.metrics.fbeta_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.fbeta_score</span></code></a>,
 <a class="reference internal" href="modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score" title="sklearn.metrics.recall_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.recall_score</span></code></a> and
 <a class="reference internal" href="modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score" title="sklearn.metrics.precision_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.precision_score</span></code></a> when performing multiclass
-or multilabel (i.e. not binary) classification. By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</p>
-</li>
-<li><p class="first"><cite>scoring</cite> parameter for cross validation now accepts <cite>&#8216;f1_micro&#8217;</cite>,
+or multilabel (i.e. not binary) classification. By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
+<li><cite>scoring</cite> parameter for cross validation now accepts <cite>&#8216;f1_micro&#8217;</cite>,
 <cite>&#8216;f1_macro&#8217;</cite> or <cite>&#8216;f1_weighted&#8217;</cite>. <cite>&#8216;f1&#8217;</cite> is now for binary classification
 only. Similar changes apply to <cite>&#8216;precision&#8217;</cite> and <cite>&#8216;recall&#8217;</cite>.
-By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</p>
-</li>
-<li><p class="first">The <code class="docutils literal"><span class="pre">fit_intercept</span></code>, <code class="docutils literal"><span class="pre">normalize</span></code> and <code class="docutils literal"><span class="pre">return_models</span></code> parameters in
+By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
+<li>The <code class="docutils literal"><span class="pre">fit_intercept</span></code>, <code class="docutils literal"><span class="pre">normalize</span></code> and <code class="docutils literal"><span class="pre">return_models</span></code> parameters in
 <code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> and <a class="reference internal" href="modules/generated/sklearn.linear_model.lasso_path.html#sklearn.linear_model.lasso_path" title="sklearn.linear_model.lasso_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.lasso_path</span></code></a> have
-been removed. They were deprecated since 0.14</p>
-</li>
-<li><p class="first">From now onwards, all estimators will uniformly raise <code class="docutils literal"><span class="pre">NotFittedError</span></code>
+been removed. They were deprecated since 0.14</li>
+<li>From now onwards, all estimators will uniformly raise <code class="docutils literal"><span class="pre">NotFittedError</span></code>
 (<code class="xref py py-class docutils literal"><span class="pre">utils.validation.NotFittedError</span></code>), when any of the <code class="docutils literal"><span class="pre">predict</span></code>
-like methods are called before the model is fit. By <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</p>
-</li>
-<li><p class="first">Input data validation was refactored for more consistent input
+like methods are called before the model is fit. By <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
+<li>Input data validation was refactored for more consistent input
 validation. The <code class="docutils literal"><span class="pre">check_arrays</span></code> function was replaced by <code class="docutils literal"><span class="pre">check_array</span></code>
-and <code class="docutils literal"><span class="pre">check_X_y</span></code>. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</p>
-</li>
-<li><p class="first">Allow <code class="docutils literal"><span class="pre">X=None</span></code> in the methods <code class="docutils literal"><span class="pre">radius_neighbors</span></code>, <code class="docutils literal"><span class="pre">kneighbors</span></code>,
+and <code class="docutils literal"><span class="pre">check_X_y</span></code>. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
+<li>Allow <code class="docutils literal"><span class="pre">X=None</span></code> in the methods <code class="docutils literal"><span class="pre">radius_neighbors</span></code>, <code class="docutils literal"><span class="pre">kneighbors</span></code>,
 <code class="docutils literal"><span class="pre">kneighbors_graph</span></code> and <code class="docutils literal"><span class="pre">radius_neighbors_graph</span></code> in
 <a class="reference internal" href="modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors" title="sklearn.neighbors.NearestNeighbors"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.NearestNeighbors</span></code></a> and family. If set to None,
 then for every sample this avoids setting the sample itself as the
-first nearest neighbor. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</p>
-</li>
-<li><p class="first">Add parameter <code class="docutils literal"><span class="pre">include_self</span></code> in <a class="reference internal" href="modules/generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><code class="xref py py-func docutils literal"><span class="pre">neighbors.kneighbors_graph</span></code></a>
+first nearest neighbor. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
+<li>Add parameter <code class="docutils literal"><span class="pre">include_self</span></code> in <a class="reference internal" href="modules/generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><code class="xref py py-func docutils literal"><span class="pre">neighbors.kneighbors_graph</span></code></a>
 and <a class="reference internal" href="modules/generated/sklearn.neighbors.radius_neighbors_graph.html#sklearn.neighbors.radius_neighbors_graph" title="sklearn.neighbors.radius_neighbors_graph"><code class="xref py py-func docutils literal"><span class="pre">neighbors.radius_neighbors_graph</span></code></a> which has to be explicitly
 set by the user. If set to True, then the sample itself is considered
-as the first nearest neighbor.</p>
-</li>
-<li><p class="first"><cite>thresh</cite> parameter is deprecated in favor of new <cite>tol</cite> parameter in
+as the first nearest neighbor.</li>
+<li><cite>thresh</cite> parameter is deprecated in favor of new <cite>tol</cite> parameter in
 <code class="xref py py-class docutils literal"><span class="pre">GMM</span></code>, <code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code> and <code class="xref py py-class docutils literal"><span class="pre">VBGMM</span></code>. See <cite>Enhancements</cite>
-section for details. By <a class="reference external" href="http://herve.niderb.fr/">Hervé Bredin</a>.</p>
-</li>
-<li><p class="first">Estimators will treat input with dtype object as numeric when possible.
-By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a></p>
-</li>
-<li><p class="first">Estimators now raise <cite>ValueError</cite> consistently when fitted on empty
+section for details. By <a class="reference external" href="http://herve.niderb.fr/">Hervé Bredin</a>.</li>
+<li>Estimators will treat input with dtype object as numeric when possible.
+By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a></li>
+<li>Estimators now raise <cite>ValueError</cite> consistently when fitted on empty
 data (less than 1 sample or less than 1 feature for 2D input).
-By <a class="reference external" href="https://twitter.com/ogrisel">Olivier Grisel</a>.</p>
-</li>
-<li><p class="first">The <code class="docutils literal"><span class="pre">shuffle</span></code> option of <a class="reference internal" href="modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDClassifier</span></code></a>,
+By <a class="reference external" href="https://twitter.com/ogrisel">Olivier Grisel</a>.</li>
+<li>The <code class="docutils literal"><span class="pre">shuffle</span></code> option of <a class="reference internal" href="modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDClassifier</span></code></a>,
 <a class="reference internal" href="modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDRegressor</span></code></a>, <a class="reference internal" href="modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron" title="sklearn.linear_model.Perceptron"><code class="xref py py-class docutils literal"><span class="pre">linear_model.Perceptron</span></code></a>,
 <code class="xref py py-class docutils literal"><span class="pre">linear_model.PassiveAgressiveClassifier</span></code> and
-<code class="xref py py-class docutils literal"><span class="pre">linear_model.PassiveAgressiveRegressor</span></code> now defaults to <code class="docutils literal"><span class="pre">True</span></code>.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="sklearn.cluster.DBSCAN"><code class="xref py py-class docutils literal"><span class="pre">cluster.DBSCAN</span></code></a> now uses a deterministic initialization. The
-<cite>random_state</cite> parameter is deprecated. By <a class="reference external" href="https://github.com/kno10">Erich Schubert</a>.</p>
-</li>
+<code class="xref py py-class docutils literal"><span class="pre">linear_model.PassiveAgressiveRegressor</span></code> now defaults to <code class="docutils literal"><span class="pre">True</span></code>.</li>
+<li><a class="reference internal" href="modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="sklearn.cluster.DBSCAN"><code class="xref py py-class docutils literal"><span class="pre">cluster.DBSCAN</span></code></a> now uses a deterministic initialization. The
+<cite>random_state</cite> parameter is deprecated. By <a class="reference external" href="https://github.com/kno10">Erich Schubert</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -4519,7 +4505,7 @@ David Huard, Dave Morrill, Ed Schofield, Travis Oliphant, Pearu Peterson.</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="_sources/whats_new.txt" rel="nofollow">Show this page source</a>
+      <a href="_sources/whats_new.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

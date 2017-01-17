@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Nested versus non-nested cross-validation" href="plot_nested_cross_validation_iris.html" />
     <link rel="prev" title="Confusion matrix" href="plot_confusion_matrix.html" />
   
@@ -212,19 +211,19 @@ simultaneously using grid search, but pick only the ones deemed most important.<
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">randint</span> <span class="k">as</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">randint</span> <span class="k">as</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.stats.randint"><span class="n">sp_randint</span></a>
 
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV"><span class="n">RandomizedSearchCV</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.RandomizedSearchCV"><span class="n">RandomizedSearchCV</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_digits"><span class="n">load_digits</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a>
 
 <span class="c1"># get some data</span>
-<span class="n">digits</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a><span class="p">()</span>
+<span class="n">digits</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_digits"><span class="n">load_digits</span></a><span class="p">()</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
 
 <span class="c1"># build a classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.RandomForestClassifier"><span class="n">RandomForestClassifier</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
 
 <span class="c1"># Utility function to report best scores</span>
@@ -242,15 +241,15 @@ simultaneously using grid search, but pick only the ones deemed most important.<
 
 <span class="c1"># specify parameters and distributions to sample from</span>
 <span class="n">param_dist</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
-              <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
-              <span class="s2">&quot;min_samples_split&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
-              <span class="s2">&quot;min_samples_leaf&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+              <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+              <span class="s2">&quot;min_samples_split&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+              <span class="s2">&quot;min_samples_leaf&quot;</span><span class="p">:</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.stats.randint.html#scipy.stats.randint" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.stats.randint"><span class="n">sp_randint</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
               <span class="s2">&quot;bootstrap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
               <span class="s2">&quot;criterion&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">]}</span>
 
 <span class="c1"># run randomized search</span>
 <span class="n">n_iter_search</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">random_search</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV"><span class="n">RandomizedSearchCV</span></a><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_distributions</span><span class="o">=</span><span class="n">param_dist</span><span class="p">,</span>
+<span class="n">random_search</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.RandomizedSearchCV"><span class="n">RandomizedSearchCV</span></a><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_distributions</span><span class="o">=</span><span class="n">param_dist</span><span class="p">,</span>
                                    <span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter_search</span><span class="p">)</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -268,7 +267,7 @@ simultaneously using grid search, but pick only the ones deemed most important.<
               <span class="s2">&quot;criterion&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">]}</span>
 
 <span class="c1"># run grid search</span>
-<span class="n">grid_search</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">)</span>
+<span class="n">grid_search</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">)</span>
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
@@ -278,10 +277,12 @@ simultaneously using grid search, but pick only the ones deemed most important.<
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/randomized_search.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">randomized_search.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/randomized_search.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">randomized_search.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -295,7 +296,7 @@ simultaneously using grid search, but pick only the ones deemed most important.<
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/model_selection/randomized_search.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/model_selection/randomized_search.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

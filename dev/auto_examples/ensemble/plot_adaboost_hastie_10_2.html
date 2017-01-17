@@ -25,7 +25,8 @@
         VERSION:     '0.19.dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -35,8 +36,6 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="top" title="scikit-learn 0.19.dev0 documentation" href="../../index.html" />
-    <link rel="up" title="General examples" href="../index.html" />
     <link rel="next" title="Multi-class AdaBoosted Decision Trees" href="plot_adaboost_multiclass.html" />
     <link rel="prev" title="Partial Dependence Plots" href="plot_partial_dependence.html" />
   
@@ -231,9 +230,9 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a>
 
 
 <span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">400</span>
@@ -245,29 +244,29 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2000</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2000</span><span class="p">:]</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">2000</span><span class="p">]</span>
 
-<span class="n">dt_stump</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dt_stump</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">dt_stump</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">dt_stump_err</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">dt_stump</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 
-<span class="n">dt</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.tree.DecisionTreeClassifier"><span class="n">DecisionTreeClassifier</span></a><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">dt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">dt_err</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">dt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 
-<span class="n">ada_discrete</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a><span class="p">(</span>
+<span class="n">ada_discrete</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a><span class="p">(</span>
     <span class="n">base_estimator</span><span class="o">=</span><span class="n">dt_stump</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
     <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span>
     <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;SAMME&quot;</span><span class="p">)</span>
 <span class="n">ada_discrete</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">ada_real</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a><span class="p">(</span>
+<span class="n">ada_real</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.ensemble.AdaBoostClassifier"><span class="n">AdaBoostClassifier</span></a><span class="p">(</span>
     <span class="n">base_estimator</span><span class="o">=</span><span class="n">dt_stump</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
     <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span>
     <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;SAMME.R&quot;</span><span class="p">)</span>
 <span class="n">ada_real</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">],</span> <span class="p">[</span><span class="n">dt_stump_err</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span>
@@ -275,32 +274,32 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">],</span> <span class="p">[</span><span class="n">dt_err</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span>
         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Decision Tree Error&#39;</span><span class="p">)</span>
 
-<span class="n">ada_discrete_err</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
+<span class="n">ada_discrete_err</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ada_discrete</span><span class="o">.</span><span class="n">staged_predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)):</span>
-    <span class="n">ada_discrete_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="n">ada_discrete_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 
-<span class="n">ada_discrete_err_train</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
+<span class="n">ada_discrete_err_train</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ada_discrete</span><span class="o">.</span><span class="n">staged_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)):</span>
-    <span class="n">ada_discrete_err_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">ada_discrete_err_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">ada_real_err</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
+<span class="n">ada_real_err</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ada_real</span><span class="o">.</span><span class="n">staged_predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)):</span>
-    <span class="n">ada_real_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="n">ada_real_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 
-<span class="n">ada_real_err_train</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
+<span class="n">ada_real_err_train</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_estimators</span><span class="p">,))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ada_real</span><span class="o">.</span><span class="n">staged_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)):</span>
-    <span class="n">ada_real_err_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">ada_real_err_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.metrics.zero_one_loss"><span class="n">zero_one_loss</span></a><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_discrete_err</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_discrete_err</span><span class="p">,</span>
         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discrete AdaBoost Test Error&#39;</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_discrete_err_train</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_discrete_err_train</span><span class="p">,</span>
         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discrete AdaBoost Train Error&#39;</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_real_err</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_real_err</span><span class="p">,</span>
         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real AdaBoost Test Error&#39;</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_real_err_train</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.arange.html#numpy.arange" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ada_real_err_train</span><span class="p">,</span>
         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real AdaBoost Train Error&#39;</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
 
@@ -311,14 +310,16 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">leg</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span>
 
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  6.342 seconds)</p>
-<div class="sphx-glr-download container">
+<p><strong>Total running time of the script:</strong> ( 0 minutes  6.768 seconds)</p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_adaboost_hastie_10_2.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_adaboost_hastie_10_2.py</span></code></a></div>
-<div class="sphx-glr-download container">
+<div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_adaboost_hastie_10_2.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_adaboost_hastie_10_2.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -332,7 +333,7 @@ Learning Ed. 2&#8221;, Springer, 2009.</td></tr>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/ensemble/plot_adaboost_hastie_10_2.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/ensemble/plot_adaboost_hastie_10_2.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
