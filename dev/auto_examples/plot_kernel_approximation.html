@@ -257,12 +257,14 @@ in <a class="reference internal" href="../modules/kernel_approximation.html#kern
 <span class="n">data</span> <span class="o">-=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># We learn the digits on the first half of the digits</span>
-<span class="n">data_train</span><span class="p">,</span> <span class="n">targets_train</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">n_samples</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="n">n_samples</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">data_train</span><span class="p">,</span> <span class="n">targets_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="n">n_samples</span> <span class="o">//</span> <span class="mi">2</span><span class="p">],</span>
+                             <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="n">n_samples</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span>
 
 
 <span class="c1"># Now predict the value of the digit on the second half:</span>
-<span class="n">data_test</span><span class="p">,</span> <span class="n">targets_test</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">n_samples</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:],</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">n_samples</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:]</span>
-<span class="c1">#data_test = scaler.transform(data_test)</span>
+<span class="n">data_test</span><span class="p">,</span> <span class="n">targets_test</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">n_samples</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:],</span>
+                           <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">n_samples</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:])</span>
+<span class="c1"># data_test = scaler.transform(data_test)</span>
 
 <span class="c1"># Create a classifier: a support vector classifier</span>
 <span class="n">kernel_svm</span> <span class="o">=</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.svm.SVC"><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span></a><span class="p">(</span><span class="n">gamma</span><span class="o">=.</span><span class="mi">2</span><span class="p">)</span>
@@ -399,7 +401,7 @@ in <a class="reference internal" href="../modules/kernel_approximation.html#kern
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  2.564 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  2.548 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/plot_kernel_approximation.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_kernel_approximation.py</span></code></a></div>

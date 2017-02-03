@@ -229,10 +229,12 @@ regression and ridge regression complete the lower half of those faces.</p>
 <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">face_ids</span><span class="p">,</span> <span class="p">:]</span>
 
 <span class="n">n_pixels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[:,</span> <span class="p">:</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.ceil.html#numpy.ceil" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.ceil"><span class="n">np</span><span class="o">.</span><span class="n">ceil</span></a><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">n_pixels</span><span class="p">)]</span>  <span class="c1"># Upper half of the faces</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.floor.html#numpy.floor" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.floor"><span class="n">np</span><span class="o">.</span><span class="n">floor</span></a><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">n_pixels</span><span class="p">):]</span>  <span class="c1"># Lower half of the faces</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[:,</span> <span class="p">:</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.ceil.html#numpy.ceil" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.ceil"><span class="n">np</span><span class="o">.</span><span class="n">ceil</span></a><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">n_pixels</span><span class="p">)]</span>
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.floor.html#numpy.floor" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.floor"><span class="n">np</span><span class="o">.</span><span class="n">floor</span></a><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">n_pixels</span><span class="p">):]</span>
+<span class="c1"># Upper half of the faces</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[:,</span> <span class="p">:(</span><span class="n">n_pixels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c1"># Lower half of the faces</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[:,</span> <span class="n">n_pixels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[:,</span> <span class="p">:(</span><span class="n">n_pixels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[:,</span> <span class="n">n_pixels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:]</span>
 
 <span class="c1"># Fit estimators</span>
 <span class="n">ESTIMATORS</span> <span class="o">=</span> <span class="p">{</span>
@@ -264,7 +266,6 @@ regression and ridge regression complete the lower half of those faces.</p>
         <span class="n">sub</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="n">n_faces</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
                           <span class="n">title</span><span class="o">=</span><span class="s2">&quot;true faces&quot;</span><span class="p">)</span>
 
-
     <span class="n">sub</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">sub</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">true_face</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">image_shape</span><span class="p">),</span>
                <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span>
@@ -288,7 +289,7 @@ regression and ridge regression complete the lower half of those faces.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  4.142 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.119 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/plot_multioutput_face_completion.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_multioutput_face_completion.py</span></code></a></div>
