@@ -490,7 +490,8 @@ like a compound classifier:</p>
 <p>The names <code class="docutils literal"><span class="pre">vect</span></code>, <code class="docutils literal"><span class="pre">tfidf</span></code> and <code class="docutils literal"><span class="pre">clf</span></code> (classifier) are arbitrary.
 We shall see their use in the section on grid search, below.
 We can now train the model with a single command:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text_clf</span> <span class="o">=</span> <span class="n">text_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>  
+<span class="go">Pipeline(...)</span>
 </pre></div>
 </div>
 </div>
@@ -518,7 +519,8 @@ classifier object into our pipeline:</p>
 <span class="gp">... </span>                     <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;hinge&#39;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                                           <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
 <span class="gp">... </span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">text_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>  
+<span class="go">Pipeline(...)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">predicted</span> <span class="o">=</span> <span class="n">text_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">docs_test</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">twenty_test</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>            
 <span class="go">0.912...</span>
