@@ -175,10 +175,7 @@
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.datasets</span></code>.load_mlcomp</a><ul>
-<li><a class="reference internal" href="#examples-using-sklearn-datasets-load-mlcomp">Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.load_mlcomp</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.datasets</span></code>.load_mlcomp</a></li>
 </ul>
 
     </div>
@@ -200,52 +197,51 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.load_mlcomp<a class="headerlink" href="#sklearn-datasets-load-mlcomp" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.load_mlcomp">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">load_mlcomp</code><span class="sig-paren">(</span><em>name_or_id</em>, <em>set_='raw'</em>, <em>mlcomp_root=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/bae38a2/sklearn/datasets/mlcomp.py#L22"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.load_mlcomp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load a datasets as downloaded from <a class="reference external" href="http://mlcomp.org">http://mlcomp.org</a></p>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">load_mlcomp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/542c02b/sklearn/utils/deprecation.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.load_mlcomp" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED: since the <a class="reference external" href="http://mlcomp.org/">http://mlcomp.org/</a> website will shut down in March 2017, the load_mlcomp function was deprecated in version 0.19 and will be removed in 0.21.</p>
+<p>Load a datasets as downloaded from <a class="reference external" href="http://mlcomp.org">http://mlcomp.org</a></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name_or_id</strong> : the integer id or the string name metadata of the MLComp</p>
 <blockquote>
+<div><blockquote>
 <div><p>dataset to load</p>
 </div></blockquote>
-<p><strong>set_</strong> : select the portion to load: &#8216;train&#8217;, &#8216;test&#8217; or &#8216;raw&#8217;</p>
-<p><strong>mlcomp_root</strong> : the filesystem path to the root folder where MLComp datasets</p>
-<blockquote>
-<div><p>are stored, if mlcomp_root is None, the MLCOMP_DATASETS_HOME
+<p><a href="#id3"><span class="problematic" id="id4">set_</span></a> : select the portion to load: &#8216;train&#8217;, &#8216;test&#8217; or &#8216;raw&#8217;</p>
+<dl class="docutils">
+<dt>mlcomp_root</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">the filesystem path to the root folder where MLComp datasets</span><dd><p class="first last">are stored, if mlcomp_root is None, the MLCOMP_DATASETS_HOME
 environment variable is looked up instead.</p>
+</dd>
+</dl>
+<p><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs : domain specific kwargs to be passed to the dataset loader.</p>
+<p>Read more in the <a class="reference internal" href="../../datasets/index.html#datasets"><span class="std std-ref">User Guide</span></a>.</p>
 </div></blockquote>
-<p><strong>**kwargs</strong> : domain specific kwargs to be passed to the dataset loader.</p>
-<p><strong>Read more in the :ref:`User Guide &lt;datasets&gt;`.</strong> :</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : Bunch</p>
-<blockquote>
+<blockquote class="last">
+<div><blockquote>
 <div><p>Dictionary-like object, the interesting attributes are:
 &#8216;filenames&#8217;, the files holding the raw to learn, &#8216;target&#8217;, the
 classification labels (integer index), &#8216;target_names&#8217;,
 the meaning of the labels, and &#8216;DESCR&#8217;, the full description of the
 dataset.</p>
 </div></blockquote>
-<p><strong>Note on the lookup process: depending on the type of name_or_id,</strong> :</p>
-<p><strong>will choose between integer id lookup or metadata name lookup by</strong> :</p>
-<p><strong>looking at the unzipped archives and metadata file.</strong> :</p>
-<p class="last"><strong>TODO: implement zip dataset loading too</strong> :</p>
+<p>Note on the lookup process: depending on the type of name_or_id,
+will choose between integer id lookup or metadata name lookup by
+looking at the unzipped archives and metadata file.</p>
+<p>TODO: implement zip dataset loading too</p>
+</div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<div class="section" id="examples-using-sklearn-datasets-load-mlcomp">
-<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.load_mlcomp</span></code><a class="headerlink" href="#examples-using-sklearn-datasets-load-mlcomp" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This is an example showing how the scikit-learn can be used to classify documents by topics usi..."><div class="figure" id="id1">
-<img alt="../../_images/sphx_glr_mlcomp_sparse_document_classification_thumb.png" src="../../_images/sphx_glr_mlcomp_sparse_document_classification_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/mlcomp_sparse_document_classification.html#sphx-glr-auto-examples-text-mlcomp-sparse-document-classification-py"><span class="std std-ref">Classification of text documents: using a MLComp dataset</span></a></span></p>
-</div>
-</div><div class="clearer"></div></div>
-</div>
+<div class="clearer"></div></div>
 
 
           </div>
