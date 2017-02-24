@@ -1139,15 +1139,38 @@ adheres to the scikit-learn interface and standards by running
 </pre></div>
 </div>
 <p>The main motivation to make a class compatible to the scikit-learn estimator
-interface might be that you want to use it together with model assessment and
-selection tools such as <a class="reference internal" href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>.</p>
-<p>For this to work, you need to implement the following interface.
-If a dependency on scikit-learn is okay for your code,
+interface might be that you want to use it together with model evaluation and
+selection tools such as <a class="reference internal" href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a> and
+<a class="reference internal" href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">pipeline.Pipeline</span></code></a>.</p>
+<p>Before detailing the required interface below, we describe two ways to achieve
+the correct interface more easily.</p>
+<div class="topic">
+<p class="topic-title first">Project template:</p>
+<p>We provide a <a class="reference external" href="https://github.com/scikit-learn-contrib/project-template/">project template</a>
+which helps in the creation of Python packages containing scikit-learn compatible estimators.
+It provides:</p>
+<ul class="simple">
+<li>an initial git repository with Python package directory structure</li>
+<li>a template of a scikit-learn estimator</li>
+<li>an initial test suite including use of <code class="docutils literal"><span class="pre">check_estimator</span></code></li>
+<li>directory structures and scripts to compile documentation and example
+galleries</li>
+<li>scripts to manage continuous integration (testing on Linux and Windows)</li>
+<li>instructions from getting started to publishing on <a class="reference external" href="https://pypi.python.org/pypi">PyPi</a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first"><code class="docutils literal"><span class="pre">BaseEstimator</span></code> and mixins:</p>
+<p>We tend to use use &#8220;duck typing&#8221;, so building an estimator which follows
+the API suffices for compatibility, without needing to inherit from or
+even import any scikit-learn classes.</p>
+<p>However, if a dependency on scikit-learn is acceptable in your code,
 you can prevent a lot of boilerplate code
 by deriving a class from <code class="docutils literal"><span class="pre">BaseEstimator</span></code>
 and optionally the mixin classes in <code class="docutils literal"><span class="pre">sklearn.base</span></code>.
-E.g., below is a custom classifier. For more information on this example, see
-<a class="reference external" href="https://github.com/scikit-learn-contrib/project-template/blob/master/skltemplate/template.py">scikit-learn-contrib</a>:</p>
+For example, below is a custom classifier, with more examples included
+in the scikit-learn-contrib
+<a class="reference external" href="https://github.com/scikit-learn-contrib/project-template/blob/master/skltemplate/template.py">project template</a>.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="k">import</span> <span class="n">check_X_y</span><span class="p">,</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_is_fitted</span>
@@ -1181,6 +1204,7 @@ E.g., below is a custom classifier. For more information on this example, see
 <span class="gp">... </span>        <span class="n">closest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">euclidean_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span><span class="p">[</span><span class="n">closest</span><span class="p">]</span>
 </pre></div>
+</div>
 </div>
 <div class="section" id="get-params-and-set-params">
 <h3>get_params and set_params<a class="headerlink" href="#get-params-and-set-params" title="Permalink to this headline">¶</a></h3>
@@ -1229,7 +1253,7 @@ fit have a trailing <code class="docutils literal"><span class="pre">_</span></c
 trailing <code class="docutils literal"><span class="pre">_</span></code> is used to check if the estimator has been fitted.</p>
 </div>
 <div class="section" id="cloning">
-<span id="id5"></span><h3>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h3>
+<span id="id6"></span><h3>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h3>
 <p>For use with the <code class="xref py py-mod docutils literal"><span class="pre">model_selection</span></code> module,
 an estimator must support the <code class="docutils literal"><span class="pre">base.clone</span></code> function to replicate an estimator.
 This can be done by providing a <code class="docutils literal"><span class="pre">get_params</span></code> method.
