@@ -237,9 +237,9 @@ than 0 for this case, thus moving the average prediction of the bagged
 ensemble away from 0. We observe this effect most strongly with random
 forests because the base-level trees trained with random forests have
 relatively high variance due to feature subseting.&#8221; As a result, the
-calibration curve shows a characteristic sigmoid shape, indicating that the
-classifier could trust its &#8220;intuition&#8221; more and return probabilties closer
-to 0 or 1 typically.</li>
+calibration curve also referred to as the reliability diagram (Wilks 1995[5]) shows a
+characteristic sigmoid shape, indicating that the classifier could trust its
+&#8220;intuition&#8221; more and return probabilties closer to 0 or 1 typically.</li>
 </ul>
 <ul class="simple">
 <li>Linear Support Vector Classification (<a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a>) shows an even more sigmoid curve
@@ -286,13 +286,14 @@ is evaluated with Brier score <a class="reference internal" href="generated/skle
 <a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0021.png" src="../_images/sphx_glr_plot_calibration_curve_0021.png" /></a>
 </div>
 <p>One can observe here that logistic regression is well calibrated as its curve is
-nearly diagonal. Linear SVC&#8217;s calibration curve has a sigmoid curve, which is
-typical for an under-confident classifier. In the case of LinearSVC, this is
-caused by the margin property of the hinge loss, which lets the model focus on
-hard samples that are close to the decision boundary (the support vectors). Both
-kinds of calibration can fix this issue and yield nearly identical results.
-The next figure shows the calibration curve of Gaussian naive Bayes on
-the same data, with both kinds of calibration and also without calibration.</p>
+nearly diagonal. Linear SVC&#8217;s calibration curve or reliability diagram has a
+sigmoid curve, which is typical for an under-confident classifier. In the case of
+LinearSVC, this is caused by the margin property of the hinge loss, which lets
+the model focus on hard samples that are close to the decision boundary
+(the support vectors). Both kinds of calibration can fix this issue and yield
+nearly identical results. The next figure shows the calibration curve of
+Gaussian naive Bayes on the same data, with both kinds of calibration and also
+without calibration.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0011.png" src="../_images/sphx_glr_plot_calibration_curve_0011.png" /></a>
 </div>
@@ -371,6 +372,14 @@ Regularized Likelihood Methods, J. Platt, (1999)</td></tr>
 <tbody valign="top">
 <tr><td class="label">[4]</td><td>Predicting Good Probabilities with Supervised Learning,
 A. Niculescu-Mizil &amp; R. Caruana, ICML 2005</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>On the combination of forecast probabilities for
+consecutive precipitation periods. Wea. Forecasting, 5, 640–
+650., Wilks, D. S., 1990a</td></tr>
 </tbody>
 </table>
 </div>
