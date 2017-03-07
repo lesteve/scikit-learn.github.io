@@ -200,18 +200,19 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.feature_selection" title="sklearn.feature_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_selection</span></code></a>.f_regression<a class="headerlink" href="#sklearn-feature-selection-f-regression" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.feature_selection.f_regression">
-<code class="descclassname">sklearn.feature_selection.</code><code class="descname">f_regression</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>center=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/02c705e/sklearn/feature_selection/univariate_selection.py#L230"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_selection.f_regression" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.feature_selection.</code><code class="descname">f_regression</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>center=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5210f81/sklearn/feature_selection/univariate_selection.py#L230"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_selection.f_regression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Univariate linear regression tests.</p>
-<p>Quick linear model for testing the effect of a single regressor,
-sequentially for many regressors.</p>
+<p>Linear model for testing the individual effect of each of many regressors.
+This is a scoring function to be used in a feature seletion procedure, not
+a free standing feature selection procedure.</p>
 <p>This is done in 2 steps:</p>
 <ol class="arabic simple">
-<li>The cross correlation between each regressor and the target is computed,
+<li>The correlation between each regressor and the target is computed,
 that is, ((X[:, i] - mean(X[:, i])) * (y - mean_y)) / (std(X[:, i]) *
 std(y)).</li>
 <li>It is converted to an F score then to a p-value.</li>
 </ol>
-<p>Read more in the <a class="reference internal" href="../feature_selection.html#univariate-feature-selection"><span class="std std-ref">User Guide</span></a>.</p>
+<p>For more on usage see the <a class="reference internal" href="../feature_selection.html#univariate-feature-selection"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -245,10 +246,22 @@ std(y)).</li>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
+<dt><a class="reference internal" href="sklearn.feature_selection.mutual_info_regression.html#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><code class="xref py py-obj docutils literal"><span class="pre">mutual_info_regression</span></code></a></dt>
+<dd>Mutual information for a continuous target.</dd>
 <dt><a class="reference internal" href="sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal"><span class="pre">f_classif</span></code></a></dt>
 <dd>ANOVA F-value between label/feature for classification tasks.</dd>
 <dt><a class="reference internal" href="sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal"><span class="pre">chi2</span></code></a></dt>
 <dd>Chi-squared stats of non-negative features for classification tasks.</dd>
+<dt><a class="reference internal" href="sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-obj docutils literal"><span class="pre">SelectKBest</span></code></a></dt>
+<dd>Select features based on the k highest scores.</dd>
+<dt><a class="reference internal" href="sklearn.feature_selection.SelectFpr.html#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><code class="xref py py-obj docutils literal"><span class="pre">SelectFpr</span></code></a></dt>
+<dd>Select features based on a false positive rate test.</dd>
+<dt><a class="reference internal" href="sklearn.feature_selection.SelectFdr.html#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-obj docutils literal"><span class="pre">SelectFdr</span></code></a></dt>
+<dd>Select features based on an estimated false discovery rate.</dd>
+<dt><a class="reference internal" href="sklearn.feature_selection.SelectFwe.html#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><code class="xref py py-obj docutils literal"><span class="pre">SelectFwe</span></code></a></dt>
+<dd>Select features based on family-wise error rate.</dd>
+<dt><a class="reference internal" href="sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-obj docutils literal"><span class="pre">SelectPercentile</span></code></a></dt>
+<dd>Select features based on percentile of the highest scores.</dd>
 </dl>
 </div>
 </dd></dl>
