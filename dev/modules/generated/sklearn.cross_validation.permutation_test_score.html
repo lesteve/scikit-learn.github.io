@@ -202,7 +202,7 @@
 </div>
 <dl class="function">
 <dt id="sklearn.cross_validation.permutation_test_score">
-<code class="descclassname">sklearn.cross_validation.</code><code class="descname">permutation_test_score</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y</em>, <em>cv=None</em>, <em>n_permutations=100</em>, <em>n_jobs=1</em>, <em>labels=None</em>, <em>random_state=0</em>, <em>verbose=0</em>, <em>scoring=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e548ea6/sklearn/cross_validation.py#L1837"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cross_validation.permutation_test_score" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.cross_validation.</code><code class="descname">permutation_test_score</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y</em>, <em>cv=None</em>, <em>n_permutations=100</em>, <em>n_jobs=1</em>, <em>labels=None</em>, <em>random_state=0</em>, <em>verbose=0</em>, <em>scoring=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/cd66c5a/sklearn/cross_validation.py#L1837"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cross_validation.permutation_test_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate the significance of a cross-validated score with permutations</p>
 <div class="deprecated">
 <p><span class="versionmodified">Deprecated since version 0.18: </span>This module will be removed in 0.20.
@@ -283,11 +283,11 @@ random permutations generator.</p>
 </div></blockquote>
 <p><strong>pvalue</strong> : float</p>
 <blockquote class="last">
-<div><p>The returned value equals p-value if <cite>scoring</cite> returns bigger
-numbers for better scores (e.g., accuracy_score). If <cite>scoring</cite> is
-rather a loss function (i.e. when lower is better such as with
-<cite>mean_squared_error</cite>) then this is actually the complement of the
-p-value:  1 - p-value.</p>
+<div><p>The p-value, which approximates the probability that the score would
+be obtained by chance. This is calculated as:</p>
+<p><cite>(C + 1) / (n_permutations + 1)</cite></p>
+<p>Where C is the number of permutations whose score &gt;= the true score.</p>
+<p>The best possible p-value is 1/(n_permutations + 1), the worst is 1.0.</p>
 </div></blockquote>
 </td>
 </tr>
