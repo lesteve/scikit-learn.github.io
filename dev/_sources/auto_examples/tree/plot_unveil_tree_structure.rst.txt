@@ -35,7 +35,7 @@ show how to retrieve:
                     node=4 leaf node.
 
     Rules used to predict sample 0: 
-    decision id node 4 : (X[0, -2] (= 1.5) > -2.0)
+    decision id node 4 : (X_test[0, -2] (= 5.1) > -2.0)
 
     The following samples [0, 1] share the node [0 2] in the tree
     It is 40.0 % of all nodes.
@@ -147,11 +147,11 @@ show how to retrieve:
         else:
             threshold_sign = ">"
 
-        print("decision id node %s : (X[%s, %s] (= %s) %s %s)"
+        print("decision id node %s : (X_test[%s, %s] (= %s) %s %s)"
               % (node_id,
                  sample_id,
                  feature[node_id],
-                 X_test[i, feature[node_id]],
+                 X_test[sample_id, feature[node_id]],
                  threshold_sign,
                  threshold[node_id]))
 
@@ -166,7 +166,7 @@ show how to retrieve:
           % (sample_ids, common_node_id))
     print("It is %s %% of all nodes." % (100 * len(common_node_id) / n_nodes,))
 
-**Total running time of the script:** ( 0 minutes  0.004 seconds)
+**Total running time of the script:** ( 0 minutes  0.005 seconds)
 
 
 
