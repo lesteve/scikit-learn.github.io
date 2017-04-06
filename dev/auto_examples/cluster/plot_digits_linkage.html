@@ -215,9 +215,9 @@ that ends up with a couple of singleton clusters.</p>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Computing</span> <span class="n">embedding</span>
 <span class="n">Done</span><span class="o">.</span>
-<span class="n">ward</span> <span class="p">:</span> <span class="mf">0.43</span><span class="n">s</span>
-<span class="n">average</span> <span class="p">:</span> <span class="mf">0.39</span><span class="n">s</span>
-<span class="n">complete</span> <span class="p">:</span> <span class="mf">0.34</span><span class="n">s</span>
+<span class="n">ward</span> <span class="p">:</span> <span class="mf">0.46</span><span class="n">s</span>
+<span class="n">average</span> <span class="p">:</span> <span class="mf">0.45</span><span class="n">s</span>
+<span class="n">complete</span> <span class="p">:</span> <span class="mf">0.36</span><span class="n">s</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -265,18 +265,18 @@ that ends up with a couple of singleton clusters.</p>
     <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">X_red</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">X_red</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">X_red</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_red</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
 
-    <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_red</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <a href="http://matplotlib.org/api/text_api.html#matplotlib.text" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.text"><span class="n">plt</span><span class="o">.</span><span class="n">text</span></a><span class="p">(</span><span class="n">X_red</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_red</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
-                 <span class="n">color</span><span class="o">=</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.spectral" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.cm.spectral"><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">spectral</span></a><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">10.</span><span class="p">),</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">X_red</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_red</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                 <span class="n">color</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">spectral</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">10.</span><span class="p">),</span>
                  <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">})</span>
 
-    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">([])</span>
-    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.yticks" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.yticks"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span></a><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
     <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
-    <a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-    <a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
 <span class="c1">#----------------------------------------------------------------------</span>
 <span class="c1"># 2D embedding of the digits dataset</span>
@@ -295,10 +295,10 @@ that ends up with a couple of singleton clusters.</p>
     <span class="n">plot_clustering</span><span class="p">(</span><span class="n">X_red</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">clustering</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> linkage&quot;</span> <span class="o">%</span> <span class="n">linkage</span><span class="p">)</span>
 
 
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" class="sphx-glr-code-links" tooltip="Link to documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  23.109 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  25.908 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_digits_linkage.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_digits_linkage.py</span></code></a></div>

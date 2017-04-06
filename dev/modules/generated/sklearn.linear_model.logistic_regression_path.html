@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.logistic_regression_path<a class="headerlink" href="#sklearn-linear-model-logistic-regression-path" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.linear_model.logistic_regression_path">
-<code class="descclassname">sklearn.linear_model.</code><code class="descname">logistic_regression_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>pos_class=None</em>, <em>Cs=10</em>, <em>fit_intercept=True</em>, <em>max_iter=100</em>, <em>tol=0.0001</em>, <em>verbose=0</em>, <em>solver='lbfgs'</em>, <em>coef=None</em>, <em>class_weight=None</em>, <em>dual=False</em>, <em>penalty='l2'</em>, <em>intercept_scaling=1.0</em>, <em>multi_class='ovr'</em>, <em>random_state=None</em>, <em>check_input=True</em>, <em>max_squared_sum=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f14c07d/sklearn/linear_model/logistic.py#L447"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.logistic_regression_path" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.linear_model.</code><code class="descname">logistic_regression_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>pos_class=None</em>, <em>Cs=10</em>, <em>fit_intercept=True</em>, <em>max_iter=100</em>, <em>tol=0.0001</em>, <em>verbose=0</em>, <em>solver='lbfgs'</em>, <em>coef=None</em>, <em>class_weight=None</em>, <em>dual=False</em>, <em>penalty='l2'</em>, <em>intercept_scaling=1.0</em>, <em>multi_class='ovr'</em>, <em>random_state=None</em>, <em>check_input=True</em>, <em>max_squared_sum=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e3c9ae2/sklearn/linear_model/logistic.py#L447"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.logistic_regression_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a Logistic Regression model for a list of regularization
 parameters.</p>
 <p>This is an implementation that uses the result of the previous model
@@ -301,10 +301,14 @@ the loss minimised is the multinomial loss fit across
 the entire probability distribution. Works only for the &#8216;lbfgs&#8217; and
 &#8216;newton-cg&#8217; solvers.</p>
 </div></blockquote>
-<p><strong>random_state</strong> : int seed, RandomState instance, or None (default)</p>
+<p><strong>random_state</strong> : int, RandomState instance or None, optional, default None</p>
 <blockquote>
-<div><p>The seed of the pseudo random number generator to use when
-shuffling the data. Used only in solvers &#8216;sag&#8217; and &#8216;liblinear&#8217;.</p>
+<div><p>The seed of the pseudo random number generator to use when shuffling
+the data.  If int, random_state is the seed used by the random number
+generator; If RandomState instance, random_state is the random number
+generator; If None, the random number generator is the RandomState
+instance used by <cite>np.random</cite>. Used when <code class="docutils literal"><span class="pre">solver</span></code> == &#8216;sag&#8217; or
+&#8216;liblinear&#8217;.</p>
 </div></blockquote>
 <p><strong>check_input</strong> : bool, default True</p>
 <blockquote>

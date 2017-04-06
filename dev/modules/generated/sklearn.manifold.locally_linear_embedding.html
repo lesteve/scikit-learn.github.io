@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.manifold" title="sklearn.manifold"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.manifold</span></code></a>.locally_linear_embedding<a class="headerlink" href="#sklearn-manifold-locally-linear-embedding" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.manifold.locally_linear_embedding">
-<code class="descclassname">sklearn.manifold.</code><code class="descname">locally_linear_embedding</code><span class="sig-paren">(</span><em>X</em>, <em>n_neighbors</em>, <em>n_components</em>, <em>reg=0.001</em>, <em>eigen_solver='auto'</em>, <em>tol=1e-06</em>, <em>max_iter=100</em>, <em>method='standard'</em>, <em>hessian_tol=0.0001</em>, <em>modified_tol=1e-12</em>, <em>random_state=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f14c07d/sklearn/manifold/locally_linear.py#L183"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.locally_linear_embedding" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.manifold.</code><code class="descname">locally_linear_embedding</code><span class="sig-paren">(</span><em>X</em>, <em>n_neighbors</em>, <em>n_components</em>, <em>reg=0.001</em>, <em>eigen_solver='auto'</em>, <em>tol=1e-06</em>, <em>max_iter=100</em>, <em>method='standard'</em>, <em>hessian_tol=0.0001</em>, <em>modified_tol=1e-12</em>, <em>random_state=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/e3c9ae2/sklearn/manifold/locally_linear.py#L185"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.locally_linear_embedding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a Locally Linear Embedding analysis on the data.</p>
 <p>Read more in the <a class="reference internal" href="../manifold.html#locally-linear-embedding"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -280,10 +280,12 @@ Only used if method == &#8216;hessian&#8217;</p>
 <div><p>Tolerance for modified LLE method.
 Only used if method == &#8216;modified&#8217;</p>
 </div></blockquote>
-<p><strong>random_state</strong> : numpy.RandomState or int, optional</p>
+<p><strong>random_state</strong> : int, RandomState instance or None, optional (default=None)</p>
 <blockquote>
-<div><p>The generator or seed used to determine the starting vector for arpack
-iterations.  Defaults to numpy.random.</p>
+<div><p>If int, random_state is the seed used by the random number generator;
+If RandomState instance, random_state is the random number generator;
+If None, the random number generator is the RandomState instance used
+by <cite>np.random</cite>. Used when <code class="docutils literal"><span class="pre">solver</span></code> == &#8216;arpack&#8217;.</p>
 </div></blockquote>
 <p><strong>n_jobs</strong> : int, optional (default = 1)</p>
 <blockquote>
