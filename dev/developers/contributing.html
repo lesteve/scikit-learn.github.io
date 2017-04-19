@@ -373,10 +373,20 @@ command will be:</p>
 </div>
 <p>If any of the above seems like magic to you, then look up the <a class="reference external" href="https://git-scm.com/documentation">Git documentation</a> and the <a class="reference external" href="http://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html">Git development workflow</a> on the
 web.</p>
-<p>In particular, if some conflicts arise between your branch and the master
-branch, you will need to <a class="reference external" href="http://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html#rebasing-on-master">rebase your branch on master</a>.
-Please avoid merging master branch into yours. If you did it anyway, you can fix
-it following <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/7111#issuecomment-249175383">this example</a>.</p>
+<p>If some conflicts arise between your branch and the <code class="docutils literal"><span class="pre">master</span></code> branch, you need
+to merge <code class="docutils literal"><span class="pre">master</span></code>. The command will be:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git merge master
+</pre></div>
+</div>
+<p>with <code class="docutils literal"><span class="pre">master</span></code> being synchronized with the <code class="docutils literal"><span class="pre">upstream</span></code>.</p>
+<p>Subsequently, you need to solve the conflicts. You can refer to the <a class="reference external" href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/">Git
+documentation related to resolving merge conflict using the command line</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the past, the policy to resolve conflicts was to rebase your branch on
+<code class="docutils literal"><span class="pre">master</span></code>. GitHub interface deals with merging <code class="docutils literal"><span class="pre">master</span></code> better than in
+the past.</p>
+</div>
 </div>
 <div class="section" id="contributing-pull-requests">
 <h3>Contributing pull requests<a class="headerlink" href="#contributing-pull-requests" title="Permalink to this headline">¶</a></h3>
