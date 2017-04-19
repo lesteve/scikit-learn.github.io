@@ -301,19 +301,19 @@ estimator on <strong>new data</strong>. This is why datasets are often split int
 <span id="curse-of-dimensionality"></span><h3>The curse of dimensionality<a class="headerlink" href="#the-curse-of-dimensionality" title="Permalink to this headline">¶</a></h3>
 <p>For an estimator to be effective, you need the distance between neighboring
 points to be less than some value <img class="math" src="../../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/>, which depends on the problem.
-In one dimension, this requires on average <img class="math" src="../../_images/math/e25a4ee2736c712ae6c330a6a0b68e9d56636927.png" alt="n ~ 1/d"/> points.
+In one dimension, this requires on average <img class="math" src="../../_images/math/9d5003ef060ec7f0fd1382b2121669e8052f84c1.png" alt="n \sim 1/d"/> points.
 In the context of the above <img class="math" src="../../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>-NN example, if the data is described by
 just one feature with values ranging from 0 to 1 and with <img class="math" src="../../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> training
 observations, then new data will be no further away than <img class="math" src="../../_images/math/5fb412b4e8f9665622ddc2263d9925cd9a97207e.png" alt="1/n"/>.
 Therefore, the nearest neighbor decision rule will be efficient as soon as
 <img class="math" src="../../_images/math/5fb412b4e8f9665622ddc2263d9925cd9a97207e.png" alt="1/n"/> is small compared to the scale of between-class feature variations.</p>
-<p>If the number of features is <img class="math" src="../../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/>, you now require <img class="math" src="../../_images/math/64e8553a866042a4c2d862721d8c0a3b1329e5bd.png" alt="n ~ 1/d^p"/>
+<p>If the number of features is <img class="math" src="../../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/>, you now require <img class="math" src="../../_images/math/c305e3ef0f9b8d80cc47f24deed83e2cc97b1550.png" alt="n \sim 1/d^p"/>
 points.  Let&#8217;s say that we require 10 points in one dimension: now <img class="math" src="../../_images/math/f4fe93c0005dc95b73c0d99b732aabe26f362c46.png" alt="10^p"/>
 points are required in <img class="math" src="../../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/> dimensions to pave the <img class="math" src="../../_images/math/02b99e25ae92d555c285768eb92a199abd3cf9e2.png" alt="[0, 1]"/> space.
 As <img class="math" src="../../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/> becomes large, the number of training points required for a good
 estimator grows exponentially.</p>
 <p>For example, if each point is just a single number (8 bytes), then an
-effective <img class="math" src="../../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>-NN estimator in a paltry <img class="math" src="../../_images/math/53d4cb91396adc83ae7a9404b8b9635e2fff9585.png" alt="p~20"/> dimensions would
+effective <img class="math" src="../../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>-NN estimator in a paltry <img class="math" src="../../_images/math/7c387c629c97daf0b6db08d0120b632026a97073.png" alt="p \sim 20"/> dimensions would
 require more training data than the current estimated size of the entire
 internet (±1000 Exabytes or so).</p>
 <p>This is called the
