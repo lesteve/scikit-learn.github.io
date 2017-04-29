@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.RepeatedKFold<a class="headerlink" href="#sklearn-model-selection-repeatedkfold" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.model_selection.RepeatedKFold">
-<em class="property">class </em><code class="descclassname">sklearn.model_selection.</code><code class="descname">RepeatedKFold</code><span class="sig-paren">(</span><em>n_splits=5</em>, <em>n_repeats=10</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2f1c978/sklearn/model_selection/_split.py#L1001"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RepeatedKFold" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.model_selection.</code><code class="descname">RepeatedKFold</code><span class="sig-paren">(</span><em>n_splits=5</em>, <em>n_repeats=10</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b578371/sklearn/model_selection/_split.py#L1028"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RepeatedKFold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Repeated K-Fold cross validator.</p>
 <p>Repeats K-Fold n times with different randomization in each repetition.</p>
 <p>Read more in the <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
@@ -254,19 +254,57 @@ by <cite>np.random</cite>.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#sklearn.model_selection.RepeatedKFold.split" title="sklearn.model_selection.RepeatedKFold.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a>(X[,&nbsp;y,&nbsp;groups])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.model_selection.RepeatedKFold.get_n_splits" title="sklearn.model_selection.RepeatedKFold.get_n_splits"><code class="xref py py-obj docutils literal"><span class="pre">get_n_splits</span></code></a>([X,&nbsp;y,&nbsp;groups])</td>
+<td>Returns the number of splitting iterations in the cross-validator</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.model_selection.RepeatedKFold.split" title="sklearn.model_selection.RepeatedKFold.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a>(X[,&nbsp;y,&nbsp;groups])</td>
 <td>Generates indices to split data into training and test set.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="sklearn.model_selection.RepeatedKFold.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_splits=5</em>, <em>n_repeats=10</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2f1c978/sklearn/model_selection/_split.py#L1043"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RepeatedKFold.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_splits=5</em>, <em>n_repeats=10</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b578371/sklearn/model_selection/_split.py#L1070"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RepeatedKFold.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="sklearn.model_selection.RepeatedKFold.get_n_splits">
+<code class="descname">get_n_splits</code><span class="sig-paren">(</span><em>X=None</em>, <em>y=None</em>, <em>groups=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b578371/sklearn/model_selection/_split.py#L1000"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RepeatedKFold.get_n_splits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of splitting iterations in the cross-validator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : object</p>
+<blockquote>
+<div><p>Always ignored, exists for compatibility.
+<code class="docutils literal"><span class="pre">np.zeros(n_samples)</span></code> may be used as a placeholder.</p>
+</div></blockquote>
+<p><strong>y</strong> : object</p>
+<blockquote>
+<div><p>Always ignored, exists for compatibility.
+<code class="docutils literal"><span class="pre">np.zeros(n_samples)</span></code> may be used as a placeholder.</p>
+</div></blockquote>
+<p><strong>groups</strong> : array-like, with shape (n_samples,), optional</p>
+<blockquote>
+<div><p>Group labels for the samples used while splitting the dataset into
+train/test set.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>n_splits</strong> : int</p>
+<blockquote class="last">
+<div><p>Returns the number of splitting iterations in the cross-validator.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="sklearn.model_selection.RepeatedKFold.split">
-<code class="descname">split</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>groups=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2f1c978/sklearn/model_selection/_split.py#L967"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RepeatedKFold.split" title="Permalink to this definition">¶</a></dt>
+<code class="descname">split</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>groups=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b578371/sklearn/model_selection/_split.py#L967"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RepeatedKFold.split" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates indices to split data into training and test set.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
