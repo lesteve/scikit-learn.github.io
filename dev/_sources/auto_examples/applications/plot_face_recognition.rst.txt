@@ -1,6 +1,6 @@
 
 
-.. _sphx_glr_auto_examples_applications_face_recognition.py:
+.. _sphx_glr_auto_examples_applications_plot_face_recognition.py:
 
 
 ===================================================
@@ -57,6 +57,11 @@ Gerhard Schroeder       0.76      0.76      0.76        25
 
 
 
+
+
+
+
+
 Download the data, if not already on disk and load it as numpy arrays
 
 
@@ -86,6 +91,19 @@ Download the data, if not already on disk and load it as numpy arrays
 
 
 
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Total dataset size:
+    n_samples: 1288
+    n_features: 1850
+    n_classes: 7
+
+
 Split into a training set and a test set using a stratified k fold
 
 
@@ -96,6 +114,11 @@ Split into a training set and a test set using a stratified k fold
     # split into a training and testing set
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.25, random_state=42)
+
+
+
+
+
 
 
 
@@ -125,6 +148,19 @@ dataset): unsupervised feature extraction / dimensionality reduction
 
 
 
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Extracting the top 150 eigenfaces from 966 faces
+    done in 0.438s
+    Projecting the input data on the eigenfaces orthonormal basis
+    done in 0.048s
+
+
 Train a SVM classification model
 
 
@@ -144,6 +180,22 @@ Train a SVM classification model
 
 
 
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Fitting the classifier to the training set
+    done in 24.880s
+    Best estimator found by grid search:
+    SVC(C=1000.0, cache_size=200, class_weight='balanced', coef0=0.0,
+      decision_function_shape='ovr', degree=3, gamma=0.001, kernel='rbf',
+      max_iter=-1, probability=False, random_state=None, shrinking=True,
+      tol=0.001, verbose=False)
+
+
 Quantitative evaluation of the model quality on the test set
 
 
@@ -159,6 +211,36 @@ Quantitative evaluation of the model quality on the test set
     print(classification_report(y_test, y_pred, target_names=target_names))
     print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
 
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Predicting people's names on the test set
+    done in 0.052s
+                       precision    recall  f1-score   support
+
+         Ariel Sharon       0.41      0.54      0.47        13
+         Colin Powell       0.73      0.85      0.78        60
+      Donald Rumsfeld       0.74      0.74      0.74        27
+        George W Bush       0.91      0.87      0.89       146
+    Gerhard Schroeder       0.80      0.80      0.80        25
+          Hugo Chavez       0.73      0.53      0.62        15
+           Tony Blair       0.88      0.78      0.82        36
+
+          avg / total       0.82      0.81      0.81       322
+
+    [[  7   1   3   2   0   0   0]
+     [  2  51   2   4   0   1   0]
+     [  5   0  20   2   0   0   0]
+     [  3  10   0 127   3   1   2]
+     [  0   2   0   1  20   1   1]
+     [  0   3   0   1   2   8   1]
+     [  0   3   2   3   0   0  28]]
 
 
 Qualitative evaluation of the predictions using matplotlib
@@ -199,7 +281,25 @@ Qualitative evaluation of the predictions using matplotlib
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  0.000 seconds)
+
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/applications/images/sphx_glr_plot_face_recognition_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/applications/images/sphx_glr_plot_face_recognition_002.png
+            :scale: 47
+
+
+
+
+**Total running time of the script:** ( 0 minutes  55.063 seconds)
 
 
 
@@ -208,13 +308,13 @@ Qualitative evaluation of the predictions using matplotlib
 
   .. container:: sphx-glr-download
 
-     :download:`Download Python source code: face_recognition.py <face_recognition.py>`
+     :download:`Download Python source code: plot_face_recognition.py <plot_face_recognition.py>`
 
 
 
   .. container:: sphx-glr-download
 
-     :download:`Download Jupyter notebook: face_recognition.ipynb <face_recognition.ipynb>`
+     :download:`Download Jupyter notebook: plot_face_recognition.ipynb <plot_face_recognition.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

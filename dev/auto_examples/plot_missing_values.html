@@ -42,7 +42,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
-  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/missing_values.html" />
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/plot_missing_values.html" />
 
   <script type="text/javascript">
     $("div.buttonNext, div.buttonPrevious").hover(
@@ -194,11 +194,12 @@
           <div class="body" role="main">
             
   <div class="section" id="imputing-missing-values-before-building-an-estimator">
-<span id="sphx-glr-auto-examples-missing-values-py"></span><h1>Imputing missing values before building an estimator<a class="headerlink" href="#imputing-missing-values-before-building-an-estimator" title="Permalink to this headline">¶</a></h1>
-<p>This example shows that imputing the missing values can give better results
-than discarding the samples containing any missing value.
-Imputing does not always improve the predictions, so please check via cross-validation.
-Sometimes dropping rows or using marker values is more effective.</p>
+<span id="sphx-glr-auto-examples-plot-missing-values-py"></span><h1>Imputing missing values before building an estimator<a class="headerlink" href="#imputing-missing-values-before-building-an-estimator" title="Permalink to this headline">¶</a></h1>
+<p>This example shows that imputing the missing values can give better
+results than discarding the samples containing any missing value.
+Imputing does not always improve the predictions, so please check via
+cross-validation.  Sometimes dropping rows or using marker values is
+more effective.</p>
 <p>Missing values can be replaced by the mean, the median or the most frequent
 value using the <code class="docutils literal"><span class="pre">strategy</span></code> hyper-parameter.
 The median is a more robust estimator for data with high magnitude variables
@@ -210,6 +211,15 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 </pre></div>
 </div>
 <p>In this case, imputing helps the classifier get close to the original score.</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Score</span> <span class="k">with</span> <span class="n">the</span> <span class="n">entire</span> <span class="n">dataset</span> <span class="o">=</span> <span class="mf">0.56</span>
+<span class="n">Score</span> <span class="n">without</span> <span class="n">the</span> <span class="n">samples</span> <span class="n">containing</span> <span class="n">missing</span> <span class="n">values</span> <span class="o">=</span> <span class="mf">0.48</span>
+<span class="n">Score</span> <span class="n">after</span> <span class="n">imputation</span> <span class="n">of</span> <span class="n">the</span> <span class="n">missing</span> <span class="n">values</span> <span class="o">=</span> <span class="mf">0.57</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.datasets.load_boston"><span class="n">load_boston</span></a>
@@ -232,7 +242,7 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 
 <span class="c1"># Add missing values in 75% of the lines</span>
 <span class="n">missing_rate</span> <span class="o">=</span> <span class="mf">0.75</span>
-<span class="n">n_missing_samples</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.floor.html#numpy.floor" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.floor"><span class="n">np</span><span class="o">.</span><span class="n">floor</span></a><span class="p">(</span><span class="n">n_samples</span> <span class="o">*</span> <span class="n">missing_rate</span><span class="p">)</span>
+<span class="n">n_missing_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.floor.html#numpy.floor" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.floor"><span class="n">np</span><span class="o">.</span><span class="n">floor</span></a><span class="p">(</span><span class="n">n_samples</span> <span class="o">*</span> <span class="n">missing_rate</span><span class="p">))</span>
 <span class="n">missing_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.zeros.html#numpy.zeros" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">n_samples</span> <span class="o">-</span> <span class="n">n_missing_samples</span><span class="p">,</span>
                                       <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">),</span>
                              <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.ones.html#numpy.ones" class="sphx-glr-code-links" tooltip="Link to documentation for numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="n">n_missing_samples</span><span class="p">,</span>
@@ -260,12 +270,12 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Score after imputation of the missing values = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  2.501 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" href="../_downloads/missing_values.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">missing_values.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_missing_values.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_missing_values.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" href="../_downloads/missing_values.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">missing_values.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_missing_values.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_missing_values.ipynb</span></code></a></div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
@@ -280,7 +290,7 @@ which could dominate results (otherwise known as a &#8216;long tail&#8217;).</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../_sources/auto_examples/missing_values.rst.txt" rel="nofollow">Show this page source</a>
+      <a href="../_sources/auto_examples/plot_missing_values.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     

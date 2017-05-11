@@ -42,7 +42,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
-  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/linear_model/lasso_dense_vs_sparse_data.html" />
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_dense_vs_sparse_data.html" />
 
   <script type="text/javascript">
     $("div.buttonNext, div.buttonPrevious").hover(
@@ -194,7 +194,7 @@
           <div class="body" role="main">
             
   <div class="section" id="lasso-on-dense-and-sparse-data">
-<span id="sphx-glr-auto-examples-linear-model-lasso-dense-vs-sparse-data-py"></span><h1>Lasso on dense and sparse data<a class="headerlink" href="#lasso-on-dense-and-sparse-data" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-auto-examples-linear-model-plot-lasso-dense-vs-sparse-data-py"></span><h1>Lasso on dense and sparse data<a class="headerlink" href="#lasso-on-dense-and-sparse-data" title="Permalink to this headline">¶</a></h1>
 <p>We show that linear_model.Lasso provides the same results for dense and sparse
 data and that in the case of sparse data the speed is improved.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
@@ -229,6 +229,13 @@ data and that in the case of sparse data the speed is improved.</p>
       <span class="o">%</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.linalg.norm"><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">sparse_lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">-</span> <span class="n">dense_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
 </pre></div>
 </div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span> <span class="n">Dense</span> <span class="n">matrices</span>
+<span class="n">Sparse</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a> <span class="n">done</span> <span class="ow">in</span> <span class="mf">0.165146</span><span class="n">s</span>
+<span class="n">Dense</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a> <span class="n">done</span> <span class="ow">in</span> <span class="mf">0.060703</span><span class="n">s</span>
+<span class="n">Distance</span> <span class="n">between</span> <span class="n">coefficients</span> <span class="p">:</span> <span class="mf">1.0054870144020999e-13</span>
+</pre></div>
+</div>
 <p>The two Lasso implementations on Sparse data</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;--- Sparse matrices&quot;</span><span class="p">)</span>
 
@@ -255,12 +262,20 @@ data and that in the case of sparse data the speed is improved.</p>
       <span class="o">%</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" class="sphx-glr-code-links" tooltip="Link to documentation for scipy.linalg.norm"><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">sparse_lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">-</span> <span class="n">dense_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span> <span class="n">Sparse</span> <span class="n">matrices</span>
+<span class="n">Matrix</span> <span class="n">density</span> <span class="p">:</span> <span class="mf">0.6263000000000001</span> <span class="o">%</span>
+<span class="n">Sparse</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a> <span class="n">done</span> <span class="ow">in</span> <span class="mf">0.231039</span><span class="n">s</span>
+<span class="n">Dense</span> <a href="../../modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.linear_model.Lasso"><span class="n">Lasso</span></a> <span class="n">done</span> <span class="ow">in</span> <span class="mf">1.044785</span><span class="n">s</span>
+<span class="n">Distance</span> <span class="n">between</span> <span class="n">coefficients</span> <span class="p">:</span> <span class="mf">1.0424172088134681e-11</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  1.630 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" href="../../_downloads/lasso_dense_vs_sparse_data.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">lasso_dense_vs_sparse_data.py</span></code></a></div>
+<a class="reference download internal" href="../../_downloads/plot_lasso_dense_vs_sparse_data.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_lasso_dense_vs_sparse_data.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" href="../../_downloads/lasso_dense_vs_sparse_data.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">lasso_dense_vs_sparse_data.ipynb</span></code></a></div>
+<a class="reference download internal" href="../../_downloads/plot_lasso_dense_vs_sparse_data.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_lasso_dense_vs_sparse_data.ipynb</span></code></a></div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
@@ -275,7 +290,7 @@ data and that in the case of sparse data the speed is improved.</p>
 
     <div class="footer">
         &copy; 2007 - 2017, scikit-learn developers (BSD License).
-      <a href="../../_sources/auto_examples/linear_model/lasso_dense_vs_sparse_data.rst.txt" rel="nofollow">Show this page source</a>
+      <a href="../../_sources/auto_examples/linear_model/plot_lasso_dense_vs_sparse_data.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
