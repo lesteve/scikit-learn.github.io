@@ -179,6 +179,43 @@ Retrieve the data from Internet
 
 
 
+.. code-block:: pytb
+
+    Traceback (most recent call last):
+      File "/home/ubuntu/scikit-learn/doc/sphinxext/sphinx_gallery/gen_rst.py", line 450, in execute_code_block
+        exec(code_block, example_globals)
+      File "<string>", line 73, in <module>
+      File "<string>", line 73, in <listcomp>
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/site-packages/matplotlib/finance.py", line 413, in quotes_historical_yahoo_ochl
+        ochl=True)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/site-packages/matplotlib/finance.py", line 503, in _quotes_historical_yahoo
+        fh = fetch_historical_yahoo(ticker, date1, date2, cachename)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/site-packages/matplotlib/finance.py", line 362, in fetch_historical_yahoo
+        with contextlib.closing(urlopen(url)) as urlfh:
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 223, in urlopen
+        return opener.open(url, data, timeout)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 532, in open
+        response = meth(req, response)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 642, in http_response
+        'http', request, response, code, msg, hdrs)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 564, in error
+        result = self._call_chain(*args)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 504, in _call_chain
+        result = func(*args)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 756, in http_error_302
+        return self.parent.open(new, timeout=req.timeout)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 532, in open
+        response = meth(req, response)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 642, in http_response
+        'http', request, response, code, msg, hdrs)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 570, in error
+        return self._call_chain(*args)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 504, in _call_chain
+        result = func(*args)
+      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 650, in http_error_default
+        raise HTTPError(req.full_url, code, msg, hdrs, fp)
+    urllib.error.HTTPError: HTTP Error 502: Connection refused
+
 
 
 
@@ -197,11 +234,6 @@ Learn a graphical structure from the correlations
     edge_model.fit(X)
 
 
-
-
-
-
-
 Cluster using affinity propagation
 
 
@@ -214,27 +246,6 @@ Cluster using affinity propagation
 
     for i in range(n_labels + 1):
         print('Cluster %i: %s' % ((i + 1), ', '.join(names[labels == i])))
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Cluster 1: Total, Exxon, Chevron, ConocoPhillips, Valero Energy
-    Cluster 2: Time Warner, Comcast, Cablevision
-    Cluster 3: Yahoo, Amazon, Apple
-    Cluster 4: Toyota, Canon, Mitsubishi, Sony, Honda, Navistar, Unilever, Marriott, Xerox, Caterpillar
-    Cluster 5: Northrop Grumman, Boeing, Lookheed Martin, General Dynamics, Raytheon
-    Cluster 6: Coca Cola, Pepsi, Kellogg
-    Cluster 7: Kraft Foods
-    Cluster 8: Procter Gamble, Colgate-Palmolive, Kimberly-Clark
-    Cluster 9: Ford, Mc Donalds, General Electrics, Wells Fargo, JPMorgan Chase, AIG, American express, Bank of America, Goldman Sachs, Wal-Mart, Home Depot, Pfizer, Ryder, DuPont de Nemours
-    Cluster 10: Microsoft, IBM, Dell, HP, 3M, SAP, Cisco, Texas instruments
-    Cluster 11: Walgreen, CVS
-    Cluster 12: GlaxoSmithKline, Sanofi-Aventis, Novartis
 
 
 Find a low-dimension embedding for visualization: find the best position of
@@ -252,11 +263,6 @@ the nodes (the stocks) on a 2D plane
         n_components=2, eigen_solver='dense', n_neighbors=6)
 
     embedding = node_position_model.fit_transform(X.T).T
-
-
-
-
-
 
 
 Visualization
@@ -332,15 +338,7 @@ Visualization
 
     plt.show()
 
-
-
-.. image:: /auto_examples/applications/images/sphx_glr_plot_stock_market_001.png
-    :align: center
-
-
-
-
-**Total running time of the script:** ( 1 minutes  13.073 seconds)
+**Total running time of the script:** ( 0 minutes  0.002 seconds)
 
 
 

@@ -436,7 +436,14 @@ practice and, if possible, compare it to other methods available in
 scikit-learn.</p>
 </li>
 <li><p class="first">Documentation and high-coverage tests are necessary for enhancements
-to be accepted.</p>
+to be accepted.
+Bug-fixes or new features should be provided with
+[non-regression tests](<a class="reference external" href="https://en.wikipedia.org/wiki/Non-regression_testing">https://en.wikipedia.org/wiki/Non-regression_testing</a>).
+These tests verify the correct behavior of the fix or feature. In this
+manner, further modifications on the code base are granted to be consistent
+with the desired behavior.
+For the Bug-fixes case, at the time of the PR, this tests should fail for
+the code base in master and pass for the PR code.</p>
 </li>
 <li><p class="first">At least one paragraph of narrative documentation with links to
 references in the literature (with PDF links when possible) and
@@ -925,6 +932,14 @@ old behavior will be removed. If the deprecation happened in version
 the removal will be in 0.(x+2). For example, if the deprecation happened
 in version 0.18-dev, the message should say it happened in version 0.18
 and the old behavior will be removed in version 0.20.</p>
+<p>In addition, a deprecation note should be added in the docstring, recalling the
+same information as the deprecation warning as explained above. Use the
+<code class="docutils literal"><span class="pre">..</span> <span class="pre">deprecated::</span></code> directive:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>.. deprecated:: 0.13
+   ``k`` was renamed to ``n_clusters`` in version 0.13 and will be removed
+   in 0.15.
+</pre></div>
+</div>
 </div>
 <div class="section" id="python-versions-supported">
 <h3>Python versions supported<a class="headerlink" href="#python-versions-supported" title="Permalink to this headline">¶</a></h3>

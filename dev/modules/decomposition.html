@@ -319,14 +319,14 @@ less than 1s:</p>
 <strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="orig_img" src="../_images/sphx_glr_plot_faces_decomposition_0011.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>Note: with the optional parameter <code class="docutils literal"><span class="pre">svd_solver='randomized'</span></code>, we also
 need to give <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> the size of the lower-dimensional space
 <code class="docutils literal"><span class="pre">n_components</span></code> as a mandatory input parameter.</p>
-<p>If we note <img class="math" src="../_images/math/2fbdeee57cb72854b8708cdf0f9788a4dab31768.png" alt="n_{max} = max(n_{samples}, n_{features})"/> and
-<img class="math" src="../_images/math/34f1ebcc1efea032abb8ce46522c9d461c338a1e.png" alt="n_{min} = min(n_{samples}, n_{features})"/>, the time complexity
-of the randomized <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> is <img class="math" src="../_images/math/f8be6ae15f6388ff1dbdab5f9ffdfc2a86cdd9c6.png" alt="O(n_{max}^2 \cdot n_{components})"/>
-instead of <img class="math" src="../_images/math/ad8ba59b782070f423ec6d6269cdeabccccf7628.png" alt="O(n_{max}^2 \cdot n_{min})"/> for the exact method
+<p>If we note <img class="math" src="../_images/math/b2311534bc9300f102e06457cc7f98120a6cc1c7.png" alt="n_{\max} = \max(n_{\mathrm{samples}}, n_{\mathrm{features}})"/> and
+<img class="math" src="../_images/math/fe25361f3e87e0176917ccda08d9f51fa96247d2.png" alt="n_{\min} = \min(n_{\mathrm{samples}}, n_{\mathrm{features}})"/>, the time complexity
+of the randomized <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> is <img class="math" src="../_images/math/0f2fc3350d8c8b67047364de60e33c941148628a.png" alt="O(n_{\max}^2 \cdot n_{\mathrm{components}})"/>
+instead of <img class="math" src="../_images/math/db652b900078b2c70ea28508a75b3ac0085a1ed9.png" alt="O(n_{\max}^2 \cdot n_{\min})"/> for the exact method
 implemented in <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>.</p>
 <p>The memory footprint of randomized <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> is also proportional to
-<img class="math" src="../_images/math/89fa6f0afae6d5eacbc7806935ab9c4d8cad7f04.png" alt="2 \cdot n_{max} \cdot n_{components}"/> instead of <img class="math" src="../_images/math/ff79a19db41e255ddc85228dc28ffcd21369d9db.png" alt="n_{max}
-\cdot n_{min}"/> for the exact method.</p>
+<img class="math" src="../_images/math/d683b04e0d560fca88ee6b50ad6eafc0a447d60e.png" alt="2 \cdot n_{\max} \cdot n_{\mathrm{components}}"/> instead of <img class="math" src="../_images/math/ae80db94c7dc77cade36aa7f2ec7e943a51c728c.png" alt="n_{\max}
+\cdot n_{\min}"/> for the exact method.</p>
 <p>Note: the implementation of <code class="docutils literal"><span class="pre">inverse_transform</span></code> in <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> with
 <code class="docutils literal"><span class="pre">svd_solver='randomized'</span></code> is not the exact inverse transform of
 <code class="docutils literal"><span class="pre">transform</span></code> even when <code class="docutils literal"><span class="pre">whiten=False</span></code> (default).</p>
@@ -570,10 +570,10 @@ inpainting and denoising, as well as for supervised recognition tasks.</p>
 the sparse code, as a solution to multiple Lasso problems, considering the
 dictionary fixed, and then updating the dictionary to best fit the sparse code.</p>
 <div class="math">
-<p><img src="../_images/math/ba959972ad1603c9a1839df9656fae980f9e2bd7.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
+<p><img src="../_images/math/dcfdd836e7c1065c97372f03d38ba7f218300803.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
              ||X-UV||_2^2+\alpha||U||_1 \\
              \text{subject to\,} &amp; ||V_k||_2 = 1 \text{ for all }
-             0 \leq k &lt; n_{atoms}"/></p>
+             0 \leq k &lt; n_{\mathrm{atoms}}"/></p>
 </div><p class="centered">
 <strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img2" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="dict_img2" src="../_images/sphx_glr_plot_faces_decomposition_0061.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>After using such a procedure to fit the dictionary, the transform is simply a
 sparse coding step that shares the same implementation with all dictionary
@@ -658,7 +658,7 @@ structure of the error covariance <img class="math" src="../_images/math/334b072
 <ul class="simple">
 <li><img class="math" src="../_images/math/da4420e600a84ae2cb75938f0b0928084b3b8cd9.png" alt="\Psi = \sigma^2 \mathbf{I}"/>: This assumption leads to
 the probabilistic model of <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>.</li>
-<li><img class="math" src="../_images/math/1dede435991238f12ccde8a9e1070f21df15dd02.png" alt="\Psi = diag(\psi_1, \psi_2, \dots, \psi_n)"/>: This model is called
+<li><img class="math" src="../_images/math/ef3e564f87f497508cec1baae6385b5575ee176e.png" alt="\Psi = \mathrm{diag}(\psi_1, \psi_2, \dots, \psi_n)"/>: This model is called
 <a class="reference internal" href="generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis" title="sklearn.decomposition.FactorAnalysis"><code class="xref py py-class docutils literal"><span class="pre">FactorAnalysis</span></code></a>, a classical statistical model. The matrix W is
 sometimes called the &#8220;factor loading matrix&#8221;.</li>
 </ul>
@@ -728,7 +728,7 @@ by optimizing the distance <img class="math" src="../_images/math/b9d10b54744d07
 <img class="math" src="../_images/math/1b4db00cd413d967fa2a37e3e5721438674a6b06.png" alt="WH"/>. The most widely used distance function is the squared Frobenius
 norm, which is an obvious extension of the Euclidean norm to matrices:</p>
 <div class="math">
-<p><img src="../_images/math/a6bec04f52fa012b14ca933821077f43153c034b.png" alt="d_{Fro}(X, Y) = \frac{1}{2} ||X - Y||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {Y}_{ij})^2"/></p>
+<p><img src="../_images/math/840ea75beb60826146d5d6a0241d89f05cec37d5.png" alt="d_{\mathrm{Fro}}(X, Y) = \frac{1}{2} ||X - Y||_{\mathrm{Fro}}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {Y}_{ij})^2"/></p>
 </div><p>Unlike <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>, the representation of a vector is obtained in an additive
 fashion, by superimposing the components, without subtracting. Such additive
 models are efficient for representing images and text.</p>
@@ -763,15 +763,15 @@ combination of L1 and L2 with the <code class="xref py py-attr docutils literal"
 and the intensity of the regularization with the <code class="xref py py-attr docutils literal"><span class="pre">alpha</span></code>
 (<img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/>) parameter. Then the priors terms are:</p>
 <div class="math">
-<p><img src="../_images/math/064f9ca9ed5d3fa5b659fa2a50176552cd789296.png" alt="\alpha \rho ||W||_1 + \alpha \rho ||H||_1
-+ \frac{\alpha(1-\rho)}{2} ||W||_{Fro} ^ 2
-+ \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
+<p><img src="../_images/math/ff82a9975f244b0b6ab33fc9dcaf987d58cb7434.png" alt="\alpha \rho ||W||_1 + \alpha \rho ||H||_1
++ \frac{\alpha(1-\rho)}{2} ||W||_{\mathrm{Fro}} ^ 2
++ \frac{\alpha(1-\rho)}{2} ||H||_{\mathrm{Fro}} ^ 2"/></p>
 </div><p>and the regularized objective function is:</p>
 <div class="math">
-<p><img src="../_images/math/d552e3c675ab67e63b1e89b258d23dd4ea589159.png" alt="d_{Fro}(X, WH)
+<p><img src="../_images/math/f3fb3a76653c94e9a66c6f268832edb6f7ed5033.png" alt="d_{\mathrm{Fro}}(X, WH)
 + \alpha \rho ||W||_1 + \alpha \rho ||H||_1
-+ \frac{\alpha(1-\rho)}{2} ||W||_{Fro} ^ 2
-+ \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
++ \frac{\alpha(1-\rho)}{2} ||W||_{\mathrm{Fro}} ^ 2
++ \frac{\alpha(1-\rho)}{2} ||H||_{\mathrm{Fro}} ^ 2"/></p>
 </div><p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> regularizes both W and H. The public function
 <code class="xref py py-func docutils literal"><span class="pre">non_negative_factorization</span></code> allows a finer control through the
 <code class="xref py py-attr docutils literal"><span class="pre">regularization</span></code> attribute, and may regularize only W, only H, or both.</p>
@@ -782,14 +782,14 @@ and the intensity of the regularization with the <code class="xref py py-attr do
 Frobenius norm, which is an obvious extension of the Euclidean norm to
 matrices:</p>
 <div class="math">
-<p><img src="../_images/math/a6bec04f52fa012b14ca933821077f43153c034b.png" alt="d_{Fro}(X, Y) = \frac{1}{2} ||X - Y||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {Y}_{ij})^2"/></p>
+<p><img src="../_images/math/978ad14e245bf6f49d1f9c47ee2462550b006748.png" alt="d_{\mathrm{Fro}}(X, Y) = \frac{1}{2} ||X - Y||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {Y}_{ij})^2"/></p>
 </div><p>Other distance functions can be used in NMF as, for example, the (generalized)
 Kullback-Leibler (KL) divergence, also referred as I-divergence:</p>
 <div class="math">
-<p><img src="../_images/math/3efb03d9eb627bc3a355ce6b57fa821ec5c89c2b.png" alt="d_{KL}(X, Y) = \sum_{i,j} (X_{ij} log(\frac{X_{ij}}{Y_{ij}}) - X_{ij} + Y_{ij})"/></p>
+<p><img src="../_images/math/e491d68ddb32cafeb79af2557a6d6082f6f8f9cd.png" alt="d_{KL}(X, Y) = \sum_{i,j} (X_{ij} \log(\frac{X_{ij}}{Y_{ij}}) - X_{ij} + Y_{ij})"/></p>
 </div><p>Or, the Itakura-Saito (IS) divergence:</p>
 <div class="math">
-<p><img src="../_images/math/00bff41415abb3fbc40fd5071a02724d5fe784ad.png" alt="d_{IS}(X, Y) = \sum_{i,j} (\frac{X_{ij}}{Y_{ij}} - log(\frac{X_{ij}}{Y_{ij}}) - 1)"/></p>
+<p><img src="../_images/math/c16a268fef337aa06a9ecfa2d346c71ab35091a4.png" alt="d_{IS}(X, Y) = \sum_{i,j} (\frac{X_{ij}}{Y_{ij}} - \log(\frac{X_{ij}}{Y_{ij}}) - 1)"/></p>
 </div><p>These three distances are special cases of the beta-divergence family, with
 <img class="math" src="../_images/math/ad2168a54df2336163a312cceaa0a524c645930e.png" alt="\beta = 2, 1, 0"/> respectively <a class="footnote-reference" href="#id15" id="id8">[6]</a>. The beta-divergence are
 defined by :</p>
@@ -887,14 +887,14 @@ discovering abstract topics from a collection of documents.</p>
 a corpus with <img class="math" src="../_images/math/3cf5aa5abe312e6fd4996975341a43aa566e8d8d.png" alt="D"/> documents and <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> topics:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>For each topic <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>, draw <img class="math" src="../_images/math/c3932e7c23d7d40fe51fe10425de8304588f18e6.png" alt="\beta_k \sim Dirichlet(\eta),\: k =1...K"/></li>
-<li>For each document <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/>, draw <img class="math" src="../_images/math/54b3b3ceb2a30104187cd3fe777d6c13dc5f4f94.png" alt="\theta_d \sim Dirichlet(\alpha), \: d=1...D"/></li>
+<li>For each topic <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>, draw <img class="math" src="../_images/math/2c1ff5b3d6f342d7dad0395210c8a13947de451c.png" alt="\beta_k \sim \mathrm{Dirichlet}(\eta),\: k =1...K"/></li>
+<li>For each document <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/>, draw <img class="math" src="../_images/math/530c80986933767c9d182af83075c13d72cdef97.png" alt="\theta_d \sim \mathrm{Dirichlet}(\alpha), \: d=1...D"/></li>
 <li>For each word <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> in document <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/>:</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li>Draw a topic index <img class="math" src="../_images/math/aee6c5c5ea60b277573daa8c3b8765ad0b128cd9.png" alt="z_{di} \sim Multinomial(\theta_d)"/></li>
-<li>Draw the observed word <img class="math" src="../_images/math/6d206c1636c1349687dda8829230465aac927a16.png" alt="w_{ij} \sim Multinomial(beta_{z_{di}}.)"/></li>
+<li>Draw a topic index <img class="math" src="../_images/math/0bb078c0fe621366a147231b5c8240efacdb895b.png" alt="z_{di} \sim \mathrm{Multinomial}(\theta_d)"/></li>
+<li>Draw the observed word <img class="math" src="../_images/math/f7960e06327c64a1e9da6769e68aa4342b7de73d.png" alt="w_{ij} \sim \mathrm{Multinomial}(beta_{z_{di}}.)"/></li>
 </ol>
 </div></blockquote>
 </div></blockquote>
@@ -907,8 +907,8 @@ uses a simpler distribution <img class="math" src="../_images/math/0510b5c618c54
 to approximate it, and those variational parameters <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/>, <img class="math" src="../_images/math/c2f31c22645274c375eff7920cfdfdc18d60341f.png" alt="\phi"/>,
 <img class="math" src="../_images/math/3666981dc77862de77b6ecfcb64aad59b425cbaf.png" alt="\gamma"/> are optimized to maximize the Evidence Lower Bound (ELBO):</p>
 <div class="math">
-<p><img src="../_images/math/2e5a140010bc061501b1b515b57572f993604c2c.png" alt="log\: P(w | \alpha, \eta) \geq L(w,\phi,\gamma,\lambda) \overset{\triangle}{=}
-  E_{q}[log\:p(w,z,\theta,\beta|\alpha,\eta)] - E_{q}[log\:q(z, \theta, \beta)]"/></p>
+<p><img src="../_images/math/7d5e786cb897f1fa254c517025885f31d5996a9e.png" alt="\log\: P(w | \alpha, \eta) \geq L(w,\phi,\gamma,\lambda) \overset{\triangle}{=}
+  E_{q}[\log\:p(w,z,\theta,\beta|\alpha,\eta)] - E_{q}[\log\:q(z, \theta, \beta)]"/></p>
 </div><p>Maximizing ELBO is equivalent to minimizing the Kullback-Leibler(KL) divergence
 between <img class="math" src="../_images/math/30e44216f8466495285af2e10ecf0677614f10d5.png" alt="q(z,\theta,\beta)"/> and the true posterior
 <img class="math" src="../_images/math/4fdab4dc628d7c9a10b0cc7a1b99d672868cb4ed.png" alt="p(z, \theta, \beta |w, \alpha, \eta)"/>.</p>
