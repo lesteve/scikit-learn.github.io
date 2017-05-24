@@ -395,42 +395,19 @@ trying to optimize their implementation).</p>
 <code class="docutils literal"><span class="pre">_nls_subproblem</span></code> function which is the hotspot if we only consider
 Python code: it takes around 100% of the accumulated time of the module. In
 order to better understand the profile of this specific function, let
-us install <code class="docutils literal"><span class="pre">line-prof</span></code> and wire it to IPython:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install line-profiler
+us install <code class="docutils literal"><span class="pre">line_profiler</span></code> and wire it to IPython:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install line_profiler
 </pre></div>
 </div>
 <ul>
-<li><p class="first"><strong>Under IPython &lt;= 0.10</strong>, edit <code class="docutils literal"><span class="pre">~/.ipython/ipy_user_conf.py</span></code> and
-ensure the following lines are present:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
-<span class="n">ip</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">ipapi</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Towards the end of the file, define the <code class="docutils literal"><span class="pre">%lprun</span></code> magic:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">line_profiler</span>
-<span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;lprun&#39;</span><span class="p">,</span> <span class="n">line_profiler</span><span class="o">.</span><span class="n">magic_lprun</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first"><strong>Under IPython 0.11+</strong>, first create a configuration profile:</p>
+<li><p class="first"><strong>Under IPython 0.13+</strong>, first create a configuration profile:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ ipython profile create
 </pre></div>
 </div>
-<p>Then create a file named <code class="docutils literal"><span class="pre">~/.ipython/extensions/line_profiler_ext.py</span></code> with
-the following content:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">line_profiler</span>
-
-<span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
-    <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;lprun&#39;</span><span class="p">,</span> <span class="n">line_profiler</span><span class="o">.</span><span class="n">magic_lprun</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Then register it in <code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;line_profiler_ext&#39;</span><span class="p">,</span>
-<span class="p">]</span>
-<span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;line_profiler_ext&#39;</span><span class="p">,</span>
-<span class="p">]</span>
+<p>Then register the line_profiler extension in
+<code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;line_profiler&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;line_profiler&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This will register the <code class="docutils literal"><span class="pre">%lprun</span></code> magic command in the IPython terminal
@@ -496,39 +473,15 @@ install the latest version:</p>
 </div>
 <p>Then, setup the magics in a manner similar to <code class="docutils literal"><span class="pre">line_profiler</span></code>.</p>
 <ul>
-<li><p class="first"><strong>Under IPython &lt;= 0.10</strong>, edit <code class="docutils literal"><span class="pre">~/.ipython/ipy_user_conf.py</span></code> and
-ensure the following lines are present:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
-<span class="n">ip</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">ipapi</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Towards the end of the file, define the <code class="docutils literal"><span class="pre">%memit</span></code> and <code class="docutils literal"><span class="pre">%mprun</span></code> magics:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">memory_profiler</span>
-<span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;memit&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_memit</span><span class="p">)</span>
-<span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;mprun&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_mprun</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
 <li><p class="first"><strong>Under IPython 0.11+</strong>, first create a configuration profile:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ ipython profile create
 </pre></div>
 </div>
-<p>Then create a file named <code class="docutils literal"><span class="pre">~/.ipython/extensions/memory_profiler_ext.py</span></code>
-with the following content:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">memory_profiler</span>
-
-<span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
-    <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;memit&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_memit</span><span class="p">)</span>
-    <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;mprun&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_mprun</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Then register it in <code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;memory_profiler_ext&#39;</span><span class="p">,</span>
-<span class="p">]</span>
-<span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;memory_profiler_ext&#39;</span><span class="p">,</span>
-<span class="p">]</span>
+<p>Then register the extension in
+<code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>
+alongside the line profiler:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;memory_profiler&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;memory_profiler&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This will register the <code class="docutils literal"><span class="pre">%memit</span></code> and <code class="docutils literal"><span class="pre">%mprun</span></code> magic commands in the
