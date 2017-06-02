@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Spectral clustering for image segmentation" href="plot_segmentation_toy.html" />
-    <link rel="prev" title="K-means Clustering" href="plot_cluster_iris.html" />
+    <link rel="next" title="Hierarchical clustering: structured vs unstructured ward" href="plot_ward_structured_vs_unstructured.html" />
+    <link rel="prev" title="Demo of affinity propagation clustering algorithm" href="plot_affinity_propagation.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_cluster_iris.html"
+        <a href="plot_affinity_propagation.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        K-means Clustering
+        Demo of affin...
         </span>
             <span class="hiddenrellink">
-            K-means Clustering
+            Demo of affinity propagation clustering algorithm
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_segmentation_toy.html"
+        <a href="plot_ward_structured_vs_unstructured.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Spectral clus...
+        Hierarchical ...
         </span>
             <span class="hiddenrellink">
-            Spectral clustering for image segmentation
+            Hierarchical clustering: structured vs unstructured ward
             </span>
         </a>
         </div>
@@ -220,21 +220,14 @@ space to the embedding space.</li>
 
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">image</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.cluster.spectral_clustering.html#sklearn.cluster.spectral_clustering" class="sphx-glr-code-links" tooltip="Link to documentation for sklearn.cluster.spectral_clustering"><span class="n">spectral_clustering</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.utils.testing</span> <span class="kn">import</span> <span class="n">SkipTest</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">sp_version</span>
-
-<span class="k">if</span> <span class="n">sp_version</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
-    <span class="k">raise</span> <span class="n">SkipTest</span><span class="p">(</span><span class="s2">&quot;Skipping because SciPy version earlier than 0.12.0 and &quot;</span>
-                   <span class="s2">&quot;thus does not include the scipy.misc.face() image.&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># load the raccoon face as a numpy array</span>
-<span class="k">try</span><span class="p">:</span>
+<span class="k">try</span><span class="p">:</span>  <span class="c1"># SciPy &gt;= 0.16 have face in misc</span>
+    <span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">face</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-    <span class="c1"># Newer versions of scipy have face in misc</span>
-    <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
-    <span class="n">face</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Resize it to 10% of the original size to speed up the processing</span>
 <span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
@@ -283,11 +276,11 @@ space to the embedding space.</li>
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">kmeans</span><span class="p">,</span> <span class="mf">6.51</span><span class="n">s</span>
-<span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">discretize</span><span class="p">,</span> <span class="mf">5.61</span><span class="n">s</span>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">kmeans</span><span class="p">,</span> <span class="mf">6.24</span><span class="n">s</span>
+<span class="n">Spectral</span> <span class="n">clustering</span><span class="p">:</span> <span class="n">discretize</span><span class="p">,</span> <span class="mf">5.36</span><span class="n">s</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  13.462 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  12.829 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_face_segmentation.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_face_segmentation.py</span></code></a></div>
@@ -312,11 +305,11 @@ space to the embedding space.</li>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_cluster_iris.html">Previous
+      <a href="plot_affinity_propagation.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_segmentation_toy.html">Next
+      <a href="plot_ward_structured_vs_unstructured.html">Next
       </a>
     </div>
     

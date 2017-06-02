@@ -180,9 +180,7 @@
 <li><a class="reference internal" href="#efficient-linear-algebra-array-operations">Efficient Linear Algebra &amp; Array Operations</a></li>
 <li><a class="reference internal" href="#efficient-random-sampling">Efficient Random Sampling</a></li>
 <li><a class="reference internal" href="#efficient-routines-for-sparse-matrices">Efficient Routines for Sparse Matrices</a></li>
-<li><a class="reference internal" href="#graph-routines">Graph Routines</a></li>
-<li><a class="reference internal" href="#backports">Backports</a><ul>
-<li><a class="reference internal" href="#arpack">ARPACK</a></li>
+<li><a class="reference internal" href="#graph-routines">Graph Routines</a><ul>
 <li><a class="reference internal" href="#benchmarking">Benchmarking</a></li>
 </ul>
 </li>
@@ -285,24 +283,12 @@ number of components.</li>
 item from a cholesky factorization.</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">arrayfuncs.min_pos</span></code>: (used in <code class="docutils literal"><span class="pre">sklearn.linear_model.least_angle</span></code>)
 Find the minimum of the positive values within an array.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">extmath.norm</span></code>: computes Euclidean (L2) vector norm
-by directly calling the BLAS
-<code class="docutils literal"><span class="pre">nrm2</span></code> function.  This is more stable than <code class="docutils literal"><span class="pre">scipy.linalg.norm</span></code>.  See
-<a class="reference external" href="http://fa.bianp.net/blog/2011/computing-the-vector-norm">Fabian&#8217;s blog post</a> for a discussion.</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">extmath.fast_logdet</span></code>: efficiently compute the log of the determinant
 of a matrix.</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">extmath.density</span></code>: efficiently compute the density of a sparse vector</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">extmath.safe_sparse_dot</span></code>: dot product which will correctly handle
 <code class="docutils literal"><span class="pre">scipy.sparse</span></code> inputs.  If the inputs are dense, it is equivalent to
 <code class="docutils literal"><span class="pre">numpy.dot</span></code>.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">extmath.logsumexp</span></code>: compute the sum of X assuming X is in the log
-domain. This is equivalent to calling <code class="docutils literal"><span class="pre">np.log(np.sum(np.exp(X)))</span></code>, but is
-robust to overflow/underflow errors.  Note that there is similar
-functionality in <code class="docutils literal"><span class="pre">np.logaddexp.reduce</span></code>, but because of the pairwise nature
-of this routine, it is slower for large arrays.
-Scipy has a similar routine in <code class="docutils literal"><span class="pre">scipy.misc.logsumexp</span></code> (In scipy versions
-&lt; 0.10, this is found in <code class="docutils literal"><span class="pre">scipy.maxentropy.logsumexp</span></code>),
-but the scipy version does not accept an <code class="docutils literal"><span class="pre">axis</span></code> keyword.</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">extmath.weighted_mode</span></code>: an extension of <code class="docutils literal"><span class="pre">scipy.stats.mode</span></code> which
 allows each item to have a real-valued weight.</li>
 <li><a class="reference internal" href="../modules/generated/sklearn.utils.resample.html#sklearn.utils.resample" title="sklearn.utils.resample"><code class="xref py py-func docutils literal"><span class="pre">resample</span></code></a>: Resample arrays or sparse matrices in a consistent way.
@@ -358,37 +344,6 @@ or undirected graph.  Both the Floyd-Warshall algorithm and Dijkstra&#8217;s
 algorithm are available.  The algorithm is most efficient when the
 connectivity matrix is a <code class="docutils literal"><span class="pre">scipy.sparse.csr_matrix</span></code>.</li>
 </ul>
-</div>
-<div class="section" id="backports">
-<h2>Backports<a class="headerlink" href="#backports" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><code class="xref py py-func docutils literal"><span class="pre">fixes.expit</span></code>: Logistic sigmoid function. Replacement for SciPy 0.10&#8217;s
-<code class="docutils literal"><span class="pre">scipy.special.expit</span></code>.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">sparsetools.connected_components</span></code>
-(backported from <code class="docutils literal"><span class="pre">scipy.sparse.connected_components</span></code> in scipy 0.12).
-Used in <code class="docutils literal"><span class="pre">sklearn.cluster.hierarchical</span></code>, as well as in tests for
-<a class="reference internal" href="../modules/classes.html#module-sklearn.feature_extraction" title="sklearn.feature_extraction"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_extraction</span></code></a>.</li>
-</ul>
-<div class="section" id="arpack">
-<h3>ARPACK<a class="headerlink" href="#arpack" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><code class="xref py py-func docutils literal"><span class="pre">arpack.eigs</span></code>
-(backported from <code class="docutils literal"><span class="pre">scipy.sparse.linalg.eigs</span></code> in scipy 0.10)
-Sparse non-symmetric eigenvalue decomposition using the Arnoldi
-method.  A limited version of <code class="docutils literal"><span class="pre">eigs</span></code> is available in earlier
-scipy versions.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">arpack.eigsh</span></code>
-(backported from <code class="docutils literal"><span class="pre">scipy.sparse.linalg.eigsh</span></code> in scipy 0.10)
-Sparse non-symmetric eigenvalue decomposition using the Arnoldi
-method.  A limited version of <code class="docutils literal"><span class="pre">eigsh</span></code> is available in earlier
-scipy versions.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">arpack.svds</span></code>
-(backported from <code class="docutils literal"><span class="pre">scipy.sparse.linalg.svds</span></code> in scipy 0.10)
-Sparse non-symmetric eigenvalue decomposition using the Arnoldi
-method.  A limited version of <code class="docutils literal"><span class="pre">svds</span></code> is available in earlier
-scipy versions.</li>
-</ul>
-</div>
 <div class="section" id="benchmarking">
 <h3>Benchmarking<a class="headerlink" href="#benchmarking" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">

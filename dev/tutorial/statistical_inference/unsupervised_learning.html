@@ -344,26 +344,26 @@ clustering an image:</p>
 
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.image</span> <span class="k">import</span> <span class="n">grid_to_graph</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">AgglomerativeClustering</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.testing</span> <span class="k">import</span> <span class="n">SkipTest</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="k">import</span> <span class="n">sp_version</span>
-
-<span class="k">if</span> <span class="n">sp_version</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
-    <span class="k">raise</span> <span class="n">SkipTest</span><span class="p">(</span><span class="s2">&quot;Skipping because SciPy version earlier than 0.12.0 and &quot;</span>
-                   <span class="s2">&quot;thus does not include the scipy.misc.face() image.&quot;</span><span class="p">)</span>
 
 
 <span class="c1">###############################################################################</span>
 <span class="c1"># Generate data</span>
-<span class="k">try</span><span class="p">:</span>
+<span class="k">try</span><span class="p">:</span>  <span class="c1"># SciPy &gt;= 0.16 have face in misc</span>
+    <span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="k">import</span> <span class="n">face</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-    <span class="c1"># Newer versions of scipy have face in misc</span>
-    <span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">misc</span>
-    <span class="n">face</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Resize it to 10% of the original size to speed up the processing</span>
 <span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Define the structure A of the data. Pixels connected to their neighbors.</span>
+<span class="n">connectivity</span> <span class="o">=</span> <span class="n">grid_to_graph</span><span class="p">(</span><span class="o">*</span><span class="n">face</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
 </pre></div>
 </div>
 </div>
