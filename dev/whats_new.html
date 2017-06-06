@@ -548,7 +548,7 @@ incorrect result when <code class="docutils literal"><span class="pre">n_samples
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8198">#8198</a> by <a class="reference external" href="https://github.com/levy5674">Josh Levy</a>.</li>
 <li>Fixed a bug where <a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LassoLars</span></code></a> does not give
 the same result as the LassoLars implementation available
-in R (lars library). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7849">#7849</a> by <a class="reference external" href="https://github.com/jmontoyam">Jair Montoya Martinez</a></li>
+in R (lars library). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7849">#7849</a> by <a class="reference external" href="https://github.com/jmontoyam">Jair Montoya Martinez</a>.</li>
 <li>Some <code class="docutils literal"><span class="pre">fetch_</span></code> functions in <cite>sklearn.datasets</cite> were ignoring the
 <code class="docutils literal"><span class="pre">download_if_missing</span></code> keyword.  This was fixed in <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7944">#7944</a> by
 <a class="reference external" href="https://github.com/rgommers">Ralf Gommers</a>.</li>
@@ -556,9 +556,9 @@ in R (lars library). <a class="reference external" href="https://github.com/scik
 and <a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor" title="sklearn.ensemble.GradientBoostingRegressor"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.GradientBoostingRegressor</span></code></a>
 where a float being compared to <code class="docutils literal"><span class="pre">0.0</span></code> using <code class="docutils literal"><span class="pre">==</span></code> caused a divide by zero
 error. This was fixed in <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7970">#7970</a> by <a class="reference external" href="https://github.com/chenhe95">He Chen</a>.</li>
-<li>Fix a bug regarding fitting <a class="reference internal" href="modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="sklearn.cluster.KMeans"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.KMeans</span></code></a> with a
-sparse array X and initial centroids, where X&#8217;s means were unnecessarily
-being subtracted from the centroids. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7872">#7872</a> by <a class="reference external" href="https://github.com/jkarno">Josh Karnofsky</a>.</li>
+<li>Fix a bug regarding fitting <a class="reference internal" href="modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="sklearn.cluster.KMeans"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.KMeans</span></code></a> with a sparse
+array X and initial centroids, where X&#8217;s means were unnecessarily being
+subtracted from the centroids. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7872">#7872</a> by <a class="reference external" href="https://github.com/jkarno">Josh Karnofsky</a>.</li>
 <li>Fix estimators to accept a <code class="docutils literal"><span class="pre">sample_weight</span></code> parameter of type
 <code class="docutils literal"><span class="pre">pandas.Series</span></code> in their <code class="docutils literal"><span class="pre">fit</span></code> function. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7825">#7825</a> by
 <a class="reference external" href="https://github.com/kchen17">Kathleen Chen</a>.</li>
@@ -576,6 +576,17 @@ as of version 0.18. <a class="reference external" href="https://github.com/sciki
 <a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor" title="sklearn.ensemble.GradientBoostingRegressor"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.GradientBoostingRegressor</span></code></a> ignored the
 <code class="docutils literal"><span class="pre">min_impurity_split</span></code> parameter.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8006">#8006</a> by <a class="reference external" href="https://github.com/sebp">Sebastian Pölsterl</a>.</li>
+<li>Fixes to the input validation in
+<a class="reference internal" href="modules/generated/sklearn.covariance.EllipticEnvelope.html#sklearn.covariance.EllipticEnvelope" title="sklearn.covariance.EllipticEnvelope"><code class="xref py py-class docutils literal"><span class="pre">sklearn.covariance.EllipticEnvelope</span></code></a>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8086">#8086</a> by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
+<li>Fix output shape and bugs with n_jobs &gt; 1 in
+<a class="reference internal" href="modules/generated/sklearn.decomposition.SparseCoder.html#sklearn.decomposition.SparseCoder" title="sklearn.decomposition.SparseCoder"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.SparseCoder</span></code></a> transform and <code class="xref py py-func docutils literal"><span class="pre">sklarn.decomposition.sparse_encode</span></code>
+for one-dimensional data and one component.
+This also impacts the output shape of <a class="reference internal" href="modules/generated/sklearn.decomposition.DictionaryLearning.html#sklearn.decomposition.DictionaryLearning" title="sklearn.decomposition.DictionaryLearning"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.DictionaryLearning</span></code></a>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8086">#8086</a> by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
+<li>Several fixes to input validation in
+<a class="reference internal" href="modules/generated/sklearn.multiclass.OutputCodeClassifier.html#sklearn.multiclass.OutputCodeClassifier" title="sklearn.multiclass.OutputCodeClassifier"><code class="xref py py-class docutils literal"><span class="pre">multiclass.OutputCodeClassifier</span></code></a>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8086">#8086</a> by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
 <li>Fix a bug where
 <code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.gradient_boosting.QuantileLossFunction</span></code> computed
 negative errors for negative values of <code class="docutils literal"><span class="pre">ytrue</span> <span class="pre">-</span> <span class="pre">ypred</span></code> leading to
@@ -655,6 +666,15 @@ and conforming to this convention will allow the hyperparameter
 selection classes to be used with tools such as
 <a class="reference internal" href="modules/generated/sklearn.model_selection.cross_val_predict.html#sklearn.model_selection.cross_val_predict" title="sklearn.model_selection.cross_val_predict"><code class="xref py py-func docutils literal"><span class="pre">sklearn.model_selection.cross_val_predict</span></code></a>.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/2879">#2879</a> by <a class="reference external" href="https://github.com/stephen-hoover">Stephen Hoover</a>.</li>
+<li>Gradient boosting base models are no longer estimators. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
+<li><a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectFromModel</span></code></a> now validates the <code class="docutils literal"><span class="pre">threshold</span></code>
+parameter and sets the <code class="docutils literal"><span class="pre">threshold_</span></code> attribute during the call to
+<code class="docutils literal"><span class="pre">fit</span></code>, and no longer during the call to <code class="docutils literal"><span class="pre">transform`</span></code>, by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas
+Müller</a>.</li>
+<li><a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectFromModel</span></code></a> now has a <code class="docutils literal"><span class="pre">partial_fit</span></code>
+method only if the underlying estimator does. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
+<li><a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="sklearn.multiclass.OneVsRestClassifier"><code class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsRestClassifier</span></code></a> now has a <code class="docutils literal"><span class="pre">partial_fit</span></code> method
+only if the underlying estimator does.  By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
 <li>Estimators with both methods <code class="docutils literal"><span class="pre">decision_function</span></code> and <code class="docutils literal"><span class="pre">predict_proba</span></code>
 are now required to have a monotonic relation between them. The
 method <code class="docutils literal"><span class="pre">check_decision_proba_consistency</span></code> has been added in
