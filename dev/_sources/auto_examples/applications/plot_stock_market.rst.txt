@@ -72,16 +72,13 @@ axis.
     # Author: Gael Varoquaux gael.varoquaux@normalesup.org
     # License: BSD 3 clause
 
-    import datetime
+    from datetime import datetime
 
     import numpy as np
-    import matplotlib.pyplot as plt
-    try:
-         from matplotlib.finance import quotes_historical_yahoo_ochl
-    except ImportError:
-         # quotes_historical_yahoo_ochl was named quotes_historical_yahoo before matplotlib 1.4
-         from matplotlib.finance import quotes_historical_yahoo as quotes_historical_yahoo_ochl
+    from matplotlib import pyplot as plt
     from matplotlib.collections import LineCollection
+    from six.moves.urllib.request import urlopen
+    from six.moves.urllib.parse import urlencode
     from sklearn import cluster, covariance, manifold
 
 
@@ -97,12 +94,47 @@ Retrieve the data from Internet
 .. code-block:: python
 
 
+    def quotes_historical_google(symbol, date1, date2):
+        """Get the historical data from Google finance.
+
+        Parameters
+        ----------
+        symbol : str
+            Ticker symbol to query for, for example ``"DELL"``.
+        date1 : datetime.datetime
+            Start date.
+        date2 : datetime.datetime
+            End date.
+
+        Returns
+        -------
+        X : array
+            The columns are ``date`` -- datetime, ``open``, ``high``,
+            ``low``, ``close`` and ``volume`` of type float.
+        """
+        params = urlencode({
+            'q': symbol,
+            'startdate': date1.strftime('%b %d, %Y'),
+            'enddate': date2.strftime('%b %d, %Y'),
+            'output': 'csv'
+        })
+        url = 'http://www.google.com/finance/historical?' + params
+        with urlopen(url) as response:
+            dtype = {
+                'names': ['date', 'open', 'high', 'low', 'close', 'volume'],
+                'formats': ['object', 'f4', 'f4', 'f4', 'f4', 'f4']
+            }
+            converters = {0: lambda s: datetime.strptime(s.decode(), '%d-%b-%y')}
+            return np.genfromtxt(response, delimiter=',', skip_header=1,
+                                 dtype=dtype, converters=converters,
+                                 missing_values='-', filling_values=-1)
+
+
     # Choose a time period reasonably calm (not too long ago so that we get
     # high-tech firms, and before the 2008 crash)
-    d1 = datetime.datetime(2003, 1, 1)
-    d2 = datetime.datetime(2008, 1, 1)
+    d1 = datetime(2003, 1, 1)
+    d2 = datetime(2008, 1, 1)
 
-    # kraft symbol has now changed from KFT to MDLZ in yahoo
     symbol_dict = {
         'TOT': 'Total',
         'XOM': 'Exxon',
@@ -120,7 +152,6 @@ Retrieve the data from Internet
         'AMZN': 'Amazon',
         'TM': 'Toyota',
         'CAJ': 'Canon',
-        'MTU': 'Mitsubishi',
         'SNE': 'Sony',
         'F': 'Ford',
         'HMC': 'Honda',
@@ -129,9 +160,8 @@ Retrieve the data from Internet
         'BA': 'Boeing',
         'KO': 'Coca Cola',
         'MMM': '3M',
-        'MCD': 'Mc Donalds',
+        'MCD': 'McDonald\'s',
         'PEP': 'Pepsi',
-        'MDLZ': 'Kraft Foods',
         'K': 'Kellogg',
         'UN': 'Unilever',
         'MAR': 'Marriott',
@@ -147,11 +177,9 @@ Retrieve the data from Internet
         'AAPL': 'Apple',
         'SAP': 'SAP',
         'CSCO': 'Cisco',
-        'TXN': 'Texas instruments',
+        'TXN': 'Texas Instruments',
         'XRX': 'Xerox',
-        'LMT': 'Lookheed Martin',
         'WMT': 'Wal-Mart',
-        'WBA': 'Walgreen',
         'HD': 'Home Depot',
         'GSK': 'GlaxoSmithKline',
         'PFE': 'Pfizer',
@@ -167,54 +195,19 @@ Retrieve the data from Internet
 
     symbols, names = np.array(list(symbol_dict.items())).T
 
-    quotes = [quotes_historical_yahoo_ochl(symbol, d1, d2, asobject=True)
-              for symbol in symbols]
+    quotes = [
+        quotes_historical_google(symbol, d1, d2) for symbol in symbols
+    ]
 
-    open = np.array([q.open for q in quotes]).astype(np.float)
-    close = np.array([q.close for q in quotes]).astype(np.float)
+    close_prices = np.stack([q['close'] for q in quotes])
+    open_prices = np.stack([q['open'] for q in quotes])
 
     # The daily variations of the quotes are what carry most information
-    variation = close - open
+    variation = close_prices - open_prices
 
 
 
 
-.. code-block:: pytb
-
-    Traceback (most recent call last):
-      File "/home/ubuntu/scikit-learn/doc/sphinxext/sphinx_gallery/gen_rst.py", line 472, in execute_code_block
-        exec(code_block, example_globals)
-      File "<string>", line 73, in <module>
-      File "<string>", line 73, in <listcomp>
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/site-packages/matplotlib/finance.py", line 413, in quotes_historical_yahoo_ochl
-        ochl=True)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/site-packages/matplotlib/finance.py", line 503, in _quotes_historical_yahoo
-        fh = fetch_historical_yahoo(ticker, date1, date2, cachename)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/site-packages/matplotlib/finance.py", line 362, in fetch_historical_yahoo
-        with contextlib.closing(urlopen(url)) as urlfh:
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 223, in urlopen
-        return opener.open(url, data, timeout)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 532, in open
-        response = meth(req, response)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 642, in http_response
-        'http', request, response, code, msg, hdrs)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 564, in error
-        result = self._call_chain(*args)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 504, in _call_chain
-        result = func(*args)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 756, in http_error_302
-        return self.parent.open(new, timeout=req.timeout)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 532, in open
-        response = meth(req, response)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 642, in http_response
-        'http', request, response, code, msg, hdrs)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 570, in error
-        return self._call_chain(*args)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 504, in _call_chain
-        result = func(*args)
-      File "/home/ubuntu/miniconda/envs/testenv/lib/python3.6/urllib/request.py", line 650, in http_error_default
-        raise HTTPError(req.full_url, code, msg, hdrs, fp)
-    urllib.error.HTTPError: HTTP Error 404: Not Found
 
 
 
@@ -234,6 +227,11 @@ Learn a graphical structure from the correlations
     edge_model.fit(X)
 
 
+
+
+
+
+
 Cluster using affinity propagation
 
 
@@ -246,6 +244,29 @@ Cluster using affinity propagation
 
     for i in range(n_labels + 1):
         print('Cluster %i: %s' % ((i + 1), ', '.join(names[labels == i])))
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Cluster 1: Total, Exxon, Chevron, ConocoPhillips, Valero Energy
+    Cluster 2: Time Warner
+    Cluster 3: Cablevision
+    Cluster 4: Yahoo, Amazon, Apple
+    Cluster 5: Toyota, Canon, Sony, Honda, Unilever, Xerox, Caterpillar
+    Cluster 6: Navistar
+    Cluster 7: Northrop Grumman, General Dynamics, Raytheon
+    Cluster 8: Boeing
+    Cluster 9: Coca Cola, Pepsi, Kellogg
+    Cluster 10: Procter Gamble, Colgate-Palmolive, Kimberly-Clark
+    Cluster 11: Comcast, Ford, 3M, McDonald's, Marriott, General Electrics, Wells Fargo, JPMorgan Chase, AIG, Bank of America, Goldman Sachs, Wal-Mart, Home Depot, Pfizer, Ryder, CVS, DuPont de Nemours
+    Cluster 12: American express
+    Cluster 13: Microsoft, IBM, Dell, HP, SAP, Cisco, Texas Instruments
+    Cluster 14: GlaxoSmithKline, Sanofi-Aventis, Novartis
 
 
 Find a low-dimension embedding for visualization: find the best position of
@@ -263,6 +284,11 @@ the nodes (the stocks) on a 2D plane
         n_components=2, eigen_solver='dense', n_neighbors=6)
 
     embedding = node_position_model.fit_transform(X.T).T
+
+
+
+
+
 
 
 Visualization
@@ -338,7 +364,15 @@ Visualization
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  0.002 seconds)
+
+
+.. image:: /auto_examples/applications/images/sphx_glr_plot_stock_market_001.png
+    :align: center
+
+
+
+
+**Total running time of the script:** ( 0 minutes  32.494 seconds)
 
 
 
