@@ -177,7 +177,6 @@
     <ul>
 <li><a class="reference internal" href="#">How to optimize for speed</a><ul>
 <li><a class="reference internal" href="#python-cython-or-c-c">Python, Cython or C/C++?</a></li>
-<li><a class="reference internal" href="#fast-matrix-multiplications">Fast matrix multiplications</a></li>
 <li><a class="reference internal" href="#profiling-python-code">Profiling Python code</a></li>
 <li><a class="reference internal" href="#memory-usage-profiling">Memory usage profiling</a></li>
 <li><a class="reference internal" href="#performance-tips-for-the-cython-developer">Performance tips for the Cython developer</a></li>
@@ -276,37 +275,6 @@ with build parameters in each submodule <code class="docutils literal"><span cla
 <p>C/C++ generated files are embedded in distributed stable packages. The goal is
 to make it possible to install scikit-learn stable version
 on any machine with Python, Numpy, Scipy and C/C++ compiler.</p>
-</div>
-<div class="section" id="fast-matrix-multiplications">
-<h2>Fast matrix multiplications<a class="headerlink" href="#fast-matrix-multiplications" title="Permalink to this headline">¶</a></h2>
-<p>Matrix multiplications (matrix-matrix and matrix-vector) are usually handled
-using the NumPy function <code class="docutils literal"><span class="pre">np.dot</span></code>, but in versions of NumPy before 1.7.2
-this function is suboptimal when the inputs are not both in the C (row-major)
-layout; in that case, the inputs may be implicitly copied to obtain the right
-layout. This obviously consumes memory and takes time.</p>
-<p>The function <code class="docutils literal"><span class="pre">fast_dot</span></code> in <code class="docutils literal"><span class="pre">sklearn.utils.extmath</span></code> offers a fast
-replacement for <code class="docutils literal"><span class="pre">np.dot</span></code> that prevents copies from being made in some cases.
-In all other cases, it dispatches to <code class="docutils literal"><span class="pre">np.dot</span></code> and when the NumPy version is
-new enough, it is in fact an alias for that function, making it a drop-in
-replacement. Example usage of <code class="docutils literal"><span class="pre">fast_dot</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils.extmath</span> <span class="k">import</span> <span class="n">fast_dot</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">fast_dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<p>This function operates optimally on 2-dimensional arrays, both of the same
-dtype, which should be either single or double precision float. If these
-requirements aren&#8217;t met or the BLAS package is not available, the call is
-silently dispatched to <code class="docutils literal"><span class="pre">numpy.dot</span></code>. If you want to be sure when the original
-<code class="docutils literal"><span class="pre">numpy.dot</span></code> has been invoked in a situation where it is suboptimal, you can
-activate the related warning:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.exceptions</span> <span class="k">import</span> <span class="n">NonBLASDotWarning</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="n">NonBLASDotWarning</span><span class="p">)</span> 
-</pre></div>
-</div>
 </div>
 <div class="section" id="profiling-python-code">
 <span id="id1"></span><h2>Profiling Python code<a class="headerlink" href="#profiling-python-code" title="Permalink to this headline">¶</a></h2>

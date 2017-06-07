@@ -637,31 +637,35 @@ gradient descent. <a class="reference external" href="https://github.com/scikit-
 <div class="section" id="api-changes-summary">
 <h3>API changes summary<a class="headerlink" href="#api-changes-summary" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><ul class="simple">
-<li>Ensure that estimators&#8217; attributes ending with <code class="docutils literal"><span class="pre">_</span></code> are not set
+<div><ul>
+<li><p class="first">Ensure that estimators&#8217; attributes ending with <code class="docutils literal"><span class="pre">_</span></code> are not set
 in the constructor but only in the <code class="docutils literal"><span class="pre">fit</span></code> method. Most notably,
 ensemble estimators (deriving from <code class="xref py py-class docutils literal"><span class="pre">ensemble.BaseEnsemble</span></code>)
 now only have <code class="docutils literal"><span class="pre">self.estimators_</span></code> available after <code class="docutils literal"><span class="pre">fit</span></code>.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7464">#7464</a> by <a class="reference external" href="https://github.com/larsmans">Lars Buitinck</a> and <a class="reference external" href="https://github.com/lesteve">Loic Esteve</a>.</li>
-<li>Deprecate the <code class="docutils literal"><span class="pre">doc_topic_distr</span></code> argument of the <code class="docutils literal"><span class="pre">perplexity</span></code> method
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7464">#7464</a> by <a class="reference external" href="https://github.com/larsmans">Lars Buitinck</a> and <a class="reference external" href="https://github.com/lesteve">Loic Esteve</a>.</p>
+</li>
+<li><p class="first">Deprecate the <code class="docutils literal"><span class="pre">doc_topic_distr</span></code> argument of the <code class="docutils literal"><span class="pre">perplexity</span></code> method
 in <a class="reference internal" href="modules/generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.LatentDirichletAllocation</span></code></a> because the
 user no longer has access to the unnormalized document topic distribution
 needed for the perplexity calculation. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7954">#7954</a> by
-<a class="reference external" href="https://github.com/garyForeman">Gary Foreman</a>.</li>
-<li>Replace attribute <code class="docutils literal"><span class="pre">named_steps</span></code> <code class="docutils literal"><span class="pre">dict</span></code> to <code class="xref py py-class docutils literal"><span class="pre">sklearn.utils.Bunch</span></code>
+<a class="reference external" href="https://github.com/garyForeman">Gary Foreman</a>.</p>
+</li>
+<li><p class="first">Replace attribute <code class="docutils literal"><span class="pre">named_steps</span></code> <code class="docutils literal"><span class="pre">dict</span></code> to <code class="xref py py-class docutils literal"><span class="pre">sklearn.utils.Bunch</span></code>
 in <a class="reference internal" href="modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">sklearn.pipeline.Pipeline</span></code></a> to enable tab completion in interactive
 environment. In the case conflict value on <code class="docutils literal"><span class="pre">named_steps</span></code> and <code class="docutils literal"><span class="pre">dict</span></code>
 attribute, <code class="docutils literal"><span class="pre">dict</span></code> behavior will be prioritized.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8481">#8481</a> by <a class="reference external" href="https://github.com/herilalaina">Herilalaina Rakotoarison</a>.</li>
-<li>The <a class="reference internal" href="modules/generated/sklearn.multioutput.MultiOutputClassifier.html#sklearn.multioutput.MultiOutputClassifier.predict_proba" title="sklearn.multioutput.MultiOutputClassifier.predict_proba"><code class="xref py py-func docutils literal"><span class="pre">sklearn.multioutput.MultiOutputClassifier.predict_proba</span></code></a>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8481">#8481</a> by <a class="reference external" href="https://github.com/herilalaina">Herilalaina Rakotoarison</a>.</p>
+</li>
+<li><p class="first">The <a class="reference internal" href="modules/generated/sklearn.multioutput.MultiOutputClassifier.html#sklearn.multioutput.MultiOutputClassifier.predict_proba" title="sklearn.multioutput.MultiOutputClassifier.predict_proba"><code class="xref py py-func docutils literal"><span class="pre">sklearn.multioutput.MultiOutputClassifier.predict_proba</span></code></a>
 function used to return a 3d array (<code class="docutils literal"><span class="pre">n_samples</span></code>, <code class="docutils literal"><span class="pre">n_classes</span></code>,
 <code class="docutils literal"><span class="pre">n_outputs</span></code>). In the case where different target columns had different
 numbers of classes, a <cite>ValueError</cite> would be raised on trying to stack
 matrices with different dimensions. This function now returns a list of
 arrays where the length of the list is <code class="docutils literal"><span class="pre">n_outputs</span></code>, and each array is
 (<code class="docutils literal"><span class="pre">n_samples</span></code>, <code class="docutils literal"><span class="pre">n_classes</span></code>) for that particular output.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8093">#8093</a> by <a class="reference external" href="https://github.com/pjbull">Peter Bull</a>.</li>
-<li>Deprecate the <code class="docutils literal"><span class="pre">fit_params</span></code> constructor input to the
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8093">#8093</a> by <a class="reference external" href="https://github.com/pjbull">Peter Bull</a>.</p>
+</li>
+<li><p class="first">Deprecate the <code class="docutils literal"><span class="pre">fit_params</span></code> constructor input to the
 <a class="reference internal" href="modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.GridSearchCV</span></code></a> and
 <a class="reference internal" href="modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.RandomizedSearchCV</span></code></a> in favor
 of passing keyword parameters to the <code class="docutils literal"><span class="pre">fit</span></code> methods
@@ -670,29 +674,68 @@ training should be passed as keyword arguments to <code class="docutils literal"
 and conforming to this convention will allow the hyperparameter
 selection classes to be used with tools such as
 <a class="reference internal" href="modules/generated/sklearn.model_selection.cross_val_predict.html#sklearn.model_selection.cross_val_predict" title="sklearn.model_selection.cross_val_predict"><code class="xref py py-func docutils literal"><span class="pre">sklearn.model_selection.cross_val_predict</span></code></a>.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/2879">#2879</a> by <a class="reference external" href="https://github.com/stephen-hoover">Stephen Hoover</a>.</li>
-<li>Gradient boosting base models are no longer estimators. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
-<li><a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectFromModel</span></code></a> now validates the <code class="docutils literal"><span class="pre">threshold</span></code>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/2879">#2879</a> by <a class="reference external" href="https://github.com/stephen-hoover">Stephen Hoover</a>.</p>
+</li>
+<li><p class="first">Gradient boosting base models are no longer estimators. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectFromModel</span></code></a> now validates the <code class="docutils literal"><span class="pre">threshold</span></code>
 parameter and sets the <code class="docutils literal"><span class="pre">threshold_</span></code> attribute during the call to
 <code class="docutils literal"><span class="pre">fit</span></code>, and no longer during the call to <code class="docutils literal"><span class="pre">transform`</span></code>, by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas
-Müller</a>.</li>
-<li><a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectFromModel</span></code></a> now has a <code class="docutils literal"><span class="pre">partial_fit</span></code>
-method only if the underlying estimator does. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
-<li><a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="sklearn.multiclass.OneVsRestClassifier"><code class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsRestClassifier</span></code></a> now has a <code class="docutils literal"><span class="pre">partial_fit</span></code> method
-only if the underlying estimator does.  By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
-<li>Estimators with both methods <code class="docutils literal"><span class="pre">decision_function</span></code> and <code class="docutils literal"><span class="pre">predict_proba</span></code>
+Müller</a>.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectFromModel</span></code></a> now has a <code class="docutils literal"><span class="pre">partial_fit</span></code>
+method only if the underlying estimator does. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="sklearn.multiclass.OneVsRestClassifier"><code class="xref py py-class docutils literal"><span class="pre">multiclass.OneVsRestClassifier</span></code></a> now has a <code class="docutils literal"><span class="pre">partial_fit</span></code> method
+only if the underlying estimator does.  By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</p>
+</li>
+<li><p class="first">Estimators with both methods <code class="docutils literal"><span class="pre">decision_function</span></code> and <code class="docutils literal"><span class="pre">predict_proba</span></code>
 are now required to have a monotonic relation between them. The
 method <code class="docutils literal"><span class="pre">check_decision_proba_consistency</span></code> has been added in
 <strong>sklearn.utils.estimator_checks</strong> to check their consistency.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7578">#7578</a> by <a class="reference external" href="https://github.com/shubham0704">Shubham Bhardwaj</a></li>
-<li>All tree based estimators now accept a <code class="docutils literal"><span class="pre">min_impurity_decrease</span></code>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7578">#7578</a> by <a class="reference external" href="https://github.com/shubham0704">Shubham Bhardwaj</a></p>
+</li>
+<li><p class="first">All tree based estimators now accept a <code class="docutils literal"><span class="pre">min_impurity_decrease</span></code>
 parameter in lieu of the <code class="docutils literal"><span class="pre">min_impurity_split</span></code>, which is now deprecated.
 The <code class="docutils literal"><span class="pre">min_impurity_decrease</span></code> helps stop splitting the nodes in which
 the weighted impurity decrease from splitting is no longer alteast
-<code class="docutils literal"><span class="pre">min_impurity_decrease</span></code>.  <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8449">#8449</a> by <cite>Raghav RV_</cite></li>
-<li>The <code class="docutils literal"><span class="pre">n_topics</span></code> parameter of <a class="reference internal" href="modules/generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">decomposition.LatentDirichletAllocation</span></code></a>
+<code class="docutils literal"><span class="pre">min_impurity_decrease</span></code>.  <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8449">#8449</a> by <cite>Raghav RV_</cite></p>
+</li>
+<li><p class="first">The <code class="docutils literal"><span class="pre">n_topics</span></code> parameter of <a class="reference internal" href="modules/generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">decomposition.LatentDirichletAllocation</span></code></a>
 has been renamed to <code class="docutils literal"><span class="pre">n_components</span></code> and will be removed in version 0.21.
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8922">#8922</a> by :user:Attractadore</li>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8922">#8922</a> by :user:Attractadore</p>
+</li>
+<li><p class="first">SciPy &gt;= 0.13.3 and NumPy &gt;= 1.8.2 are now the minimum supported versions
+for scikit-learn. The following backported functions in <code class="docutils literal"><span class="pre">sklearn.utils</span></code>
+have been removed or deprecated accordingly.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8854">#8854</a> and <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8874">#8874</a> by <a class="reference external" href="https://github.com/naoyak">Naoya Kanai</a></p>
+<p>Removed in 0.19:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">utils.fixes.argpartition</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.array_equal</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.astype</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.bincount</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.expit</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.frombuffer_empty</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.in1d</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.norm</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.rankdata</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.fixes.safe_copy</span></code></li>
+</ul>
+<p>Deprecated in 0.19, to be removed in 0.21:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">utils.arpack.eigs</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.arpack.eigsh</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.arpack.svds</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.extmath.fast_dot</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.extmath.logsumexp</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.extmath.norm</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.extmath.pinvh</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.random.choice</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.sparsetools.connected_components</span></code></li>
+<li><code class="docutils literal"><span class="pre">utils.stats.rankdata</span></code></li>
+</ul>
+</li>
 </ul>
 </div></blockquote>
 </div>
