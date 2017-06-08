@@ -396,6 +396,10 @@ cannot assure that this list is complete.)</p>
 <h4>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h4>
 <blockquote>
 <div><ul class="simple">
+<li>Validation that input data contains no NaN or inf can now be suppressed
+using <a class="reference internal" href="modules/generated/sklearn.config_context.html#sklearn.config_context" title="sklearn.config_context"><code class="xref py py-func docutils literal"><span class="pre">config_context</span></code></a>, at your own risk. This will save on runtime,
+and may be particularly useful for prediction time. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7548">#7548</a> by
+<a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
 <li>Added the <a class="reference internal" href="modules/generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal"><span class="pre">neighbors.LocalOutlierFactor</span></code></a> class for anomaly
 detection based on nearest neighbors.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/5279">#5279</a> by <a class="reference external" href="https://perso.telecom-paristech.fr/~goix/">Nicolas Goix</a> and <a class="reference external" href="http://alexandre.gramfort.net">Alexandre Gramfort</a>.</li>
@@ -609,6 +613,12 @@ would be raised on trying to stack matrices with different dimensions.
 <li>Fix a bug where <a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars.fit" title="sklearn.linear_model.LassoLars.fit"><code class="xref py py-func docutils literal"><span class="pre">sklearn.linear_model.LassoLars.fit</span></code></a> sometimes
 left <cite>coef_</cite> as a list, rather than an ndarray.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8160">#8160</a> by <a class="reference external" href="https://github.com/perimosocordiae">CJ Carey</a>.</li>
+<li>Fix a bug where <a class="reference internal" href="modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.FeatureHasher</span></code></a>
+mandatorily applied a sparse random projection to the hashed features,
+preventing the use of
+<a class="reference internal" href="modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.text.HashingVectorizer</span></code></a> in a
+pipeline with  <a class="reference internal" href="modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.text.TfidfTransformer</span></code></a>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7513">#7513</a> by <a class="reference external" href="https://github.com/rth">Roman Yurchak</a>.</li>
 <li>Fix a bug in cases where <cite>numpy.cumsum</cite> may be numerically unstable,
 raising an exception if instability is identified.  <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7376">#7376</a> and
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7331">#7331</a> by <a class="reference external" href="http://joelnothman.com">Joel Nothman</a> and <a class="reference external" href="https://github.com/yangarbiter">&#64;yangarbiter</a>.</li>

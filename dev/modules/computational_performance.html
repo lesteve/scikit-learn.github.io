@@ -260,6 +260,25 @@ always faster, and for some of them by 1 to 2 orders of magnitude:</p>
 <code class="docutils literal"><span class="pre">n_features</span></code> parameter in this example:
 <a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#sphx-glr-auto-examples-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a>. This should give
 you an estimate of the order of magnitude of the prediction latency.</p>
+<div class="topic">
+<p class="topic-title first">Configuring Scikit-learn for reduced validation overhead</p>
+<p>Scikit-learn does some validation on data that increases the overhead per
+call to <code class="docutils literal"><span class="pre">predict</span></code> and similar functions. In particular, checking that
+features are finite (not NaN or infinite) involves a full pass over the
+data. If you ensure that your data is acceptable, you may suppress
+checking for finiteness by setting the environment variable
+<code class="docutils literal"><span class="pre">SKLEARN_ASSUME_FINITE</span></code> to a non-empty string before importing
+scikit-learn, or configure it in Python with <a class="reference internal" href="generated/sklearn.set_config.html#sklearn.set_config" title="sklearn.set_config"><code class="xref py py-func docutils literal"><span class="pre">sklearn.set_config</span></code></a>.
+For more control than these global settings, a <code class="xref py py-func docutils literal"><span class="pre">config_context</span></code>
+allows you to set this configuration within a specified context:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">config_context</span><span class="p">(</span><span class="n">assume_finite</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">pass</span>  <span class="c1"># do learning/prediction here with reduced validation</span>
+</pre></div>
+</div>
+<p>Note that this will affect all uses of
+<code class="xref py py-func docutils literal"><span class="pre">sklearn.utils.assert_all_finite</span></code> within the context.</p>
+</div>
 </div>
 <div class="section" id="influence-of-the-number-of-features">
 <h3>7.1.2. Influence of the Number of Features<a class="headerlink" href="#influence-of-the-number-of-features" title="Permalink to this headline">¶</a></h3>
