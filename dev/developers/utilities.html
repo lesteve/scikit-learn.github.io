@@ -226,17 +226,17 @@ dependencies evolve.</p>
 which accepts arrays, matrices, or sparse matrices as arguments, the following
 should be used when applicable.</p>
 <ul class="simple">
-<li><code class="xref py py-func docutils literal"><span class="pre">assert_all_finite</span></code>: Throw an error if array contains NaNs or Infs.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">as_float_array</span></code>: convert input to an array of floats.  If a sparse
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.assert_all_finite.html#sklearn.utils.assert_all_finite" title="sklearn.utils.assert_all_finite"><code class="xref py py-func docutils literal"><span class="pre">assert_all_finite</span></code></a>: Throw an error if array contains NaNs or Infs.</li>
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.as_float_array.html#sklearn.utils.as_float_array" title="sklearn.utils.as_float_array"><code class="xref py py-func docutils literal"><span class="pre">as_float_array</span></code></a>: convert input to an array of floats.  If a sparse
 matrix is passed, a sparse matrix will be returned.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">check_array</span></code>: convert input to 2d array, raise error on sparse
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.check_array.html#sklearn.utils.check_array" title="sklearn.utils.check_array"><code class="xref py py-func docutils literal"><span class="pre">check_array</span></code></a>: convert input to 2d array, raise error on sparse
 matrices.  Allowed sparse matrix formats can be given optionally, as well as
-allowing 1d or nd arrays.  Calls <code class="xref py py-func docutils literal"><span class="pre">assert_all_finite</span></code> by default.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">check_X_y</span></code>: check that X and y have consistent length, calls
+allowing 1d or nd arrays.  Calls <a class="reference internal" href="../modules/generated/sklearn.utils.assert_all_finite.html#sklearn.utils.assert_all_finite" title="sklearn.utils.assert_all_finite"><code class="xref py py-func docutils literal"><span class="pre">assert_all_finite</span></code></a> by default.</li>
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.check_X_y.html#sklearn.utils.check_X_y" title="sklearn.utils.check_X_y"><code class="xref py py-func docutils literal"><span class="pre">check_X_y</span></code></a>: check that X and y have consistent length, calls
 check_array on X, and column_or_1d on y. For multilabel classification or
 multitarget regression, specify multi_output=True, in which case check_array
 will be called on y.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">indexable</span></code>: check that all input arrays have consistent length and can
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.indexable.html#sklearn.utils.indexable" title="sklearn.utils.indexable"><code class="xref py py-func docutils literal"><span class="pre">indexable</span></code></a>: check that all input arrays have consistent length and can
 be sliced or indexed using safe_index.  This is used to validate input for
 cross-validation.</li>
 </ul>
@@ -266,6 +266,15 @@ randomly-initialized <code class="docutils literal"><span class="pre">RandomStat
 <span class="go">array([ 0.5488135 ,  0.71518937,  0.60276338,  0.54488318])</span>
 </pre></div>
 </div>
+<p>When developing your own scikit-learn compatible estimator, the following
+helpers are available.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.validation.check_is_fitted.html#sklearn.utils.validation.check_is_fitted" title="sklearn.utils.validation.check_is_fitted"><code class="xref py py-func docutils literal"><span class="pre">validation.check_is_fitted</span></code></a>: check that the estimator has been fitted
+before calling <code class="docutils literal"><span class="pre">transform</span></code>, <code class="docutils literal"><span class="pre">predict</span></code>, or similar methods. This helper
+allows to raise a standardized error message across estimator.</li>
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.validation.has_fit_parameter.html#sklearn.utils.validation.has_fit_parameter" title="sklearn.utils.validation.has_fit_parameter"><code class="xref py py-func docutils literal"><span class="pre">validation.has_fit_parameter</span></code></a>: check that a given parameter is
+supported in the <code class="docutils literal"><span class="pre">fit</span></code> method of a given estimator.</li>
+</ul>
 </div>
 <div class="section" id="efficient-linear-algebra-array-operations">
 <h2>Efficient Linear Algebra &amp; Array Operations<a class="headerlink" href="#efficient-linear-algebra-array-operations" title="Permalink to this headline">¶</a></h2>
@@ -286,7 +295,7 @@ Find the minimum of the positive values within an array.</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">extmath.fast_logdet</span></code>: efficiently compute the log of the determinant
 of a matrix.</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">extmath.density</span></code>: efficiently compute the density of a sparse vector</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">extmath.safe_sparse_dot</span></code>: dot product which will correctly handle
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.extmath.safe_sparse_dot.html#sklearn.utils.extmath.safe_sparse_dot" title="sklearn.utils.extmath.safe_sparse_dot"><code class="xref py py-func docutils literal"><span class="pre">extmath.safe_sparse_dot</span></code></a>: dot product which will correctly handle
 <code class="docutils literal"><span class="pre">scipy.sparse</span></code> inputs.  If the inputs are dense, it is equivalent to
 <code class="docutils literal"><span class="pre">numpy.dot</span></code>.</li>
 <li><code class="xref py py-func docutils literal"><span class="pre">extmath.weighted_mode</span></code>: an extension of <code class="docutils literal"><span class="pre">scipy.stats.mode</span></code> which
@@ -310,7 +319,7 @@ without replacement.</li>
 <p>The <code class="docutils literal"><span class="pre">sklearn.utils.sparsefuncs</span></code> cython module hosts compiled extensions to
 efficiently process <code class="docutils literal"><span class="pre">scipy.sparse</span></code> data.</p>
 <ul class="simple">
-<li><code class="xref py py-func docutils literal"><span class="pre">sparsefuncs.mean_variance_axis</span></code>: compute the means and
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.sparsefuncs.mean_variance_axis.html#sklearn.utils.sparsefuncs.mean_variance_axis" title="sklearn.utils.sparsefuncs.mean_variance_axis"><code class="xref py py-func docutils literal"><span class="pre">sparsefuncs.mean_variance_axis</span></code></a>: compute the means and
 variances along a specified axis of a CSR matrix.
 Used for normalizing the tolerance stopping criterion in
 <code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.k_means_.KMeans</span></code>.</li>
