@@ -183,15 +183,16 @@
 <li><a class="reference internal" href="#centering-kernel-matrices">4.3.1.4. Centering kernel matrices</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#normalization">4.3.2. Normalization</a></li>
-<li><a class="reference internal" href="#binarization">4.3.3. Binarization</a><ul>
-<li><a class="reference internal" href="#feature-binarization">4.3.3.1. Feature binarization</a></li>
+<li><a class="reference internal" href="#non-linear-transformation">4.3.2. Non-linear transformation</a></li>
+<li><a class="reference internal" href="#normalization">4.3.3. Normalization</a></li>
+<li><a class="reference internal" href="#binarization">4.3.4. Binarization</a><ul>
+<li><a class="reference internal" href="#feature-binarization">4.3.4.1. Feature binarization</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#encoding-categorical-features">4.3.4. Encoding categorical features</a></li>
-<li><a class="reference internal" href="#imputation-of-missing-values">4.3.5. Imputation of missing values</a></li>
-<li><a class="reference internal" href="#generating-polynomial-features">4.3.6. Generating polynomial features</a></li>
-<li><a class="reference internal" href="#custom-transformers">4.3.7. Custom transformers</a></li>
+<li><a class="reference internal" href="#encoding-categorical-features">4.3.5. Encoding categorical features</a></li>
+<li><a class="reference internal" href="#imputation-of-missing-values">4.3.6. Imputation of missing values</a></li>
+<li><a class="reference internal" href="#generating-polynomial-features">4.3.7. Generating polynomial features</a></li>
+<li><a class="reference internal" href="#custom-transformers">4.3.8. Custom transformers</a></li>
 </ul>
 </li>
 </ul>
@@ -216,6 +217,11 @@
 <p>The <code class="docutils literal"><span class="pre">sklearn.preprocessing</span></code> package provides several common
 utility functions and transformer classes to change raw feature vectors
 into a representation that is more suitable for the downstream estimators.</p>
+<p>In general, learning algorithms benefit from standardization of the data set. If
+some outliers are present in the set, robust scalers or transformers are more
+appropriate. The behaviors of the different scalers, transformers, and
+normalizers on a dataset containing marginal outliers is highlighted in
+<a class="reference internal" href="../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">Compare the effect of different scalers on data with outliers</span></a>.</p>
 <div class="section" id="standardization-or-mean-removal-and-variance-scaling">
 <span id="preprocessing-scaler"></span><h2>4.3.1. Standardization, or mean removal and variance scaling<a class="headerlink" href="#standardization-or-mean-removal-and-variance-scaling" title="Permalink to this headline">¶</a></h2>
 <p><strong>Standardization</strong> of datasets is a <strong>common requirement for many
@@ -237,10 +243,10 @@ estimator unable to learn from other features correctly as expected.</p>
 operation on a single array-like dataset:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">preprocessing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
-<span class="gp">... </span>              <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
-<span class="gp">... </span>              <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span>                                          
 <span class="go">array([[ 0.  ..., -1.22...,  1.33...],</span>
@@ -262,7 +268,7 @@ the mean and standard deviation on a training set so as to be
 able to later reapply the same transformation on the testing set.
 This class is hence suitable for use in the early steps of a
 <a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">sklearn.pipeline.Pipeline</span></code></a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span>
 <span class="go">StandardScaler(copy=True, with_mean=True, with_std=True)</span>
 
@@ -272,7 +278,7 @@ This class is hence suitable for use in the early steps of a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">scale_</span>                                       
 <span class="go">array([ 0.81...,  0.81...,  1.24...])</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                               
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>                           
 <span class="go">array([[ 0.  ..., -1.22...,  1.33...],</span>
 <span class="go">       [ 1.22...,  0.  ..., -0.26...],</span>
 <span class="go">       [-1.22...,  1.22..., -1.06...]])</span>
@@ -280,7 +286,8 @@ This class is hence suitable for use in the early steps of a
 </div>
 <p>The scaler instance can then be used on new data to transform it the
 same way it did on the training set:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>                
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>                
 <span class="go">array([[-2.44...,  1.22..., -0.26...]])</span>
 </pre></div>
 </div>
@@ -421,8 +428,67 @@ so that it contains inner products in the feature space
 defined by <img class="math" src="../_images/math/4efb887d0d27f3caa83f8913c0426dc73021d3e0.png" alt="phi"/> followed by removal of the mean in that space.</p>
 </div>
 </div>
+<div class="section" id="non-linear-transformation">
+<span id="preprocessing-transformer"></span><h2>4.3.2. Non-linear transformation<a class="headerlink" href="#non-linear-transformation" title="Permalink to this headline">¶</a></h2>
+<p>Like scalers, <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> puts each feature into the same
+range or distribution. However, by performing a rank transformation, it smooths
+out unusual distributions and is less influenced by outliers than scaling
+methods. It does, however, distort correlations and distances within and across
+features.</p>
+<p><a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.quantile_transform.html#sklearn.preprocessing.quantile_transform" title="sklearn.preprocessing.quantile_transform"><code class="xref py py-func docutils literal"><span class="pre">quantile_transform</span></code></a> provide a
+non-parametric transformation based on the quantile function to map the data to
+a uniform distribution with values between 0 and 1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">QuantileTransformer</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span> 
+<span class="go">array([ 4.3,  5.1,  5.8,  6.5,  7.9])</span>
+</pre></div>
+</div>
+<p>This feature corresponds to the sepal length in cm. Once the quantile
+transformation applied, those landmarks approach closely the percentiles
+previously defined:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_train_trans</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">array([ 0.00... ,  0.24...,  0.49...,  0.73...,  0.99... ])</span>
+</pre></div>
+</div>
+<p>This can be confirmed on a independent testing set with similar remarks:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">array([ 4.4  ,  5.125,  5.75 ,  6.175,  7.3  ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_test_trans</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">array([ 0.01...,  0.25...,  0.46...,  0.60... ,  0.94...])</span>
+</pre></div>
+</div>
+<p>It is also possible to map the transformed data to a normal distribution by
+setting <code class="docutils literal"><span class="pre">output_distribution='normal'</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">QuantileTransformer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">output_distribution</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span><span class="o">.</span><span class="n">quantiles_</span> 
+<span class="go">array([[ 4.3...,   2...,     1...,     0.1...],</span>
+<span class="go">       [ 4.31...,  2.02...,  1.01...,  0.1...],</span>
+<span class="go">       [ 4.32...,  2.05...,  1.02...,  0.1...],</span>
+<span class="go">       ...,</span>
+<span class="go">       [ 7.84...,  4.34...,  6.84...,  2.5...],</span>
+<span class="go">       [ 7.87...,  4.37...,  6.87...,  2.5...],</span>
+<span class="go">       [ 7.9...,   4.4...,   6.9...,   2.5...]])</span>
+</pre></div>
+</div>
+<p>Thus the median of the input becomes the mean of the output, centered at 0. The
+normal output is clipped so that the input&#8217;s minimum and maximum &#8212;
+corresponding to the 1e-7 and 1 - 1e-7 quantiles respectively &#8212; do not
+become infinite under the transformation.</p>
+</div>
 <div class="section" id="normalization">
-<span id="preprocessing-normalization"></span><h2>4.3.2. Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">¶</a></h2>
+<span id="preprocessing-normalization"></span><h2>4.3.3. Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">¶</a></h2>
 <p><strong>Normalization</strong> is the process of <strong>scaling individual samples to have
 unit norm</strong>. This process can be useful if you plan to use a quadratic form
 such as the dot-product or any other kernel to quantify the similarity
@@ -475,9 +541,9 @@ recommended to choose the CSR representation upstream.</p>
 </div>
 </div>
 <div class="section" id="binarization">
-<span id="preprocessing-binarization"></span><h2>4.3.3. Binarization<a class="headerlink" href="#binarization" title="Permalink to this headline">¶</a></h2>
+<span id="preprocessing-binarization"></span><h2>4.3.4. Binarization<a class="headerlink" href="#binarization" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="feature-binarization">
-<h3>4.3.3.1. Feature binarization<a class="headerlink" href="#feature-binarization" title="Permalink to this headline">¶</a></h3>
+<h3>4.3.4.1. Feature binarization<a class="headerlink" href="#feature-binarization" title="Permalink to this headline">¶</a></h3>
 <p><strong>Feature binarization</strong> is the process of <strong>thresholding numerical
 features to get boolean values</strong>. This can be useful for downstream
 probabilistic estimators that make assumption that the input data
@@ -528,7 +594,7 @@ representation upstream.</p>
 </div>
 </div>
 <div class="section" id="encoding-categorical-features">
-<span id="preprocessing-categorical-features"></span><h2>4.3.4. Encoding categorical features<a class="headerlink" href="#encoding-categorical-features" title="Permalink to this headline">¶</a></h2>
+<span id="preprocessing-categorical-features"></span><h2>4.3.5. Encoding categorical features<a class="headerlink" href="#encoding-categorical-features" title="Permalink to this headline">¶</a></h2>
 <p>Often features are not given as continuous values but categorical.
 For example a person could have features <code class="docutils literal"><span class="pre">[&quot;male&quot;,</span> <span class="pre">&quot;female&quot;]</span></code>,
 <code class="docutils literal"><span class="pre">[&quot;from</span> <span class="pre">Europe&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">US&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">Asia&quot;]</span></code>,
@@ -577,7 +643,7 @@ features, one has to explicitly set <code class="docutils literal"><span class="
 as a dict, not as integers.</p>
 </div>
 <div class="section" id="imputation-of-missing-values">
-<span id="imputation"></span><h2>4.3.5. Imputation of missing values<a class="headerlink" href="#imputation-of-missing-values" title="Permalink to this headline">¶</a></h2>
+<span id="imputation"></span><h2>4.3.6. Imputation of missing values<a class="headerlink" href="#imputation-of-missing-values" title="Permalink to this headline">¶</a></h2>
 <p>For various reasons, many real world datasets contain missing values, often
 encoded as blanks, NaNs or other placeholders. Such datasets however are
 incompatible with scikit-learn estimators which assume that all values in an
@@ -625,7 +691,7 @@ values than observed values.</p>
 estimator that supports imputation. See <span class="xref std std-ref">sphx_glr_auto_examples_missing_values.py</span></p>
 </div>
 <div class="section" id="generating-polynomial-features">
-<span id="polynomial-features"></span><h2>4.3.6. Generating polynomial features<a class="headerlink" href="#generating-polynomial-features" title="Permalink to this headline">¶</a></h2>
+<span id="polynomial-features"></span><h2>4.3.7. Generating polynomial features<a class="headerlink" href="#generating-polynomial-features" title="Permalink to this headline">¶</a></h2>
 <p>Often it&#8217;s useful to add complexity to the model by considering nonlinear features of the input data. A simple and common method to use is polynomial features, which can get features&#8217; high-order and interaction terms. It is implemented in <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal"><span class="pre">PolynomialFeatures</span></code></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">PolynomialFeatures</span>
@@ -660,7 +726,7 @@ estimator that supports imputation. See <span class="xref std std-ref">sphx_glr_
 <p>See <a class="reference internal" href="../auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py"><span class="std std-ref">Polynomial interpolation</span></a> for Ridge regression using created polynomial features.</p>
 </div>
 <div class="section" id="custom-transformers">
-<span id="function-transformer"></span><h2>4.3.7. Custom transformers<a class="headerlink" href="#custom-transformers" title="Permalink to this headline">¶</a></h2>
+<span id="function-transformer"></span><h2>4.3.8. Custom transformers<a class="headerlink" href="#custom-transformers" title="Permalink to this headline">¶</a></h2>
 <p>Often, you will want to convert an existing Python function into a transformer
 to assist in data cleaning or processing. You can implement a transformer from
 an arbitrary function with <a class="reference internal" href="generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer" title="sklearn.preprocessing.FunctionTransformer"><code class="xref py py-class docutils literal"><span class="pre">FunctionTransformer</span></code></a>. For example, to build
