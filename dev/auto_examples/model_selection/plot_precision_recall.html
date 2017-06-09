@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Plotting Learning Curves" href="plot_learning_curve.html" />
-    <link rel="prev" title="Receiver Operating Characteristic (ROC)" href="plot_roc.html" />
+    <link rel="next" title="Nearest Neighbors regression" href="../neighbors/plot_regression.html" />
+    <link rel="prev" title="Plotting Learning Curves" href="plot_learning_curve.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_roc.html"
+        <a href="plot_learning_curve.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Receiver Oper...
+        Plotting Lear...
         </span>
             <span class="hiddenrellink">
-            Receiver Operating Characteristic (ROC)
+            Plotting Learning Curves
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_learning_curve.html"
+        <a href="../neighbors/plot_regression.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Plotting Lear...
+        Nearest Neigh...
         </span>
             <span class="hiddenrellink">
-            Plotting Learning Curves
+            Nearest Neighbors regression
             </span>
         </a>
         </div>
@@ -175,7 +175,22 @@
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
-<li><a class="reference internal" href="#">Precision-Recall</a></li>
+<li><a class="reference internal" href="#">Precision-Recall</a><ul>
+<li><a class="reference internal" href="#in-binary-classification-settings">In binary classification settings</a><ul>
+<li><a class="reference internal" href="#create-simple-data">Create simple data</a></li>
+<li><a class="reference internal" href="#compute-the-average-precision-score">Compute the average precision score</a></li>
+<li><a class="reference internal" href="#plot-the-precision-recall-curve">Plot the Precision-Recall curve</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#in-multi-label-settings">In multi-label settings</a><ul>
+<li><a class="reference internal" href="#create-multi-label-data-fit-and-predict">Create multi-label data, fit, and predict</a></li>
+<li><a class="reference internal" href="#the-average-precision-score-in-multi-label-settings">The average precision score in multi-label settings</a></li>
+<li><a class="reference internal" href="#plot-the-micro-averaged-precision-recall-curve">Plot the micro-averaged Precision-Recall curve</a></li>
+<li><a class="reference internal" href="#plot-precision-recall-curve-for-each-class-and-iso-f1-curves">Plot Precision-Recall curve for each class and iso-f1 curves</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -196,13 +211,17 @@
   <div class="section" id="precision-recall">
 <span id="sphx-glr-auto-examples-model-selection-plot-precision-recall-py"></span><h1>Precision-Recall<a class="headerlink" href="#precision-recall" title="Permalink to this headline">¶</a></h1>
 <p>Example of Precision-Recall metric to evaluate classifier output quality.</p>
-<p>In information retrieval, precision is a measure of result relevancy, while
-recall is a measure of how many truly relevant results are returned. A high
-area under the curve represents both high recall and high precision, where high
-precision relates to a low false positive rate, and high recall relates to a
-low false negative rate. High scores for both show that the classifier is
-returning accurate results (high precision), as well as returning a majority of
-all positive results (high recall).</p>
+<p>Precision-Recall is a useful measure of success of prediction when the
+classes are very imbalanced. In information retrieval, precision is a
+measure of result relevancy, while recall is a measure of how many truly
+relevant results are returned.</p>
+<p>The precision-recall curve shows the tradeoff between precision and
+recall for different threshold. A high area under the curve represents
+both high recall and high precision, where high precision relates to a
+low false positive rate, and high recall relates to a low false negative
+rate. High scores for both show that the classifier is returning accurate
+results (high precision), as well as returning a majority of all positive
+results (high recall).</p>
 <p>A system with high recall but low precision returns many results, but most of
 its predicted labels are incorrect when compared to the training labels. A
 system with high precision but low recall is just the opposite, returning very
@@ -220,7 +239,7 @@ over the number of true positives plus the number of false negatives
 <p>These quantities are also related to the (<img class="math" src="../../_images/math/8c53fbe6ce6d32b88c70c65652fbd3592a4d9048.png" alt="F_1"/>) score, which is defined
 as the harmonic mean of precision and recall.</p>
 <p><img class="math" src="../../_images/math/6d03e9528e504c0801b231b90bdb480e01269ea1.png" alt="F1 = 2\frac{P \times R}{P+R}"/></p>
-<p>It is important to note that the precision may not decrease with recall. The
+<p>Note that the precision may not decrease with recall. The
 definition of precision (<img class="math" src="../../_images/math/f8691f3cf6ee6642cdf86c9512293b7adffe8f89.png" alt="\frac{T_p}{T_p + F_p}"/>) shows that lowering
 the threshold of a classifier may increase the denominator, by increasing the
 number of results returned. If the threshold was previously set too high, the
@@ -235,10 +254,16 @@ unchanged, while the precision fluctuates.</p>
 <p>The relationship between recall and precision can be observed in the
 stairstep area of the plot - at the edges of these steps a small change
 in the threshold considerably reduces precision, with only a minor gain in
-recall. See the corner at recall = .59, precision = .8 for an example of this
-phenomenon.</p>
+recall.</p>
+<p><strong>Average precision</strong> summarizes such a plot as the weighted mean of precisions
+achieved at each threshold, with the increase in recall from the previous
+threshold used as the weight:</p>
+<p><img class="math" src="../../_images/math/55a3b96113273e4a25048306bff9411823131bff.png" alt="\text{AP} = \sum_n (R_n - R_{n-1}) P_n"/></p>
+<p>where <img class="math" src="../../_images/math/1e5d2a8a15728214cc4ddf4013464458f398338a.png" alt="P_n"/> and <img class="math" src="../../_images/math/209d3b1de562f50026e49bca1cd2c42af83383f0.png" alt="R_n"/> are the precision and recall at the
+nth threshold. A pair <img class="math" src="../../_images/math/b3bdafad878c30dafff7bbaed0e860a43e435f4a.png" alt="(R_k, P_k)"/> is referred to as an
+<em>operating point</em>.</p>
 <p>Precision-recall curves are typically used in binary classification to study
-the output of a classifier. In order to extend Precision-recall curve and
+the output of a classifier. In order to extend the precision-recall curve and
 average precision to multi-class or multi-label classification, it is necessary
 to binarize the output. One curve can be drawn per label, but one can also draw
 a precision-recall curve by considering each element of the label indicator
@@ -252,77 +277,156 @@ matrix as a binary prediction (micro-averaging).</p>
 <a class="reference internal" href="../../modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.f1_score</span></code></a></dd>
 </dl>
 </div>
-<img alt="../../_images/sphx_glr_plot_precision_recall_001.png" class="align-center" src="../../_images/sphx_glr_plot_precision_recall_001.png" />
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
-
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+</pre></div>
+</div>
+<div class="section" id="in-binary-classification-settings">
+<h2>In binary classification settings<a class="headerlink" href="#in-binary-classification-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-simple-data">
+<h3>Create simple data<a class="headerlink" href="#create-simple-data" title="Permalink to this headline">¶</a></h3>
+<p>Try to differentiate the two first classes of the iris data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split" title="View documentation for sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.label_binarize.html#sklearn.preprocessing.label_binarize" title="View documentation for sklearn.preprocessing.label_binarize"><span class="n">label_binarize</span></a>
-<span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="View documentation for sklearn.multiclass.OneVsRestClassifier"><span class="n">OneVsRestClassifier</span></a>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="c1"># import some data to play with</span>
 <span class="n">iris</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris" title="View documentation for sklearn.datasets.load_iris"><span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span></a><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
-
-<span class="c1"># setup plot details</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">([</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="s1">&#39;teal&#39;</span><span class="p">])</span>
-<span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="c1"># Binarize the output</span>
-<span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.preprocessing.label_binarize.html#sklearn.preprocessing.label_binarize" title="View documentation for sklearn.preprocessing.label_binarize"><span class="n">label_binarize</span></a><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">n_classes</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># Add noisy features</span>
 <span class="n">random_state</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.RandomState.wald.html#numpy.random.RandomState" title="View documentation for numpy.random.RandomState"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
 <span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.c_.html#numpy.c_" title="View documentation for numpy.c_"><span class="n">np</span><span class="o">.</span><span class="n">c_</span></a><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">random_state</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">200</span> <span class="o">*</span> <span class="n">n_features</span><span class="p">)]</span>
 
-<span class="c1"># Split into training and test</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split" title="View documentation for sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span>
+<span class="c1"># Limit to the two first classes, and split into training and test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split" title="View documentation for sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">],</span>
+                                                    <span class="n">test_size</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span>
                                                     <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
 
-<span class="c1"># Run classifier</span>
-<span class="n">classifier</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="View documentation for sklearn.multiclass.OneVsRestClassifier"><span class="n">OneVsRestClassifier</span></a><span class="p">(</span><a href="../../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="View documentation for sklearn.svm.SVC"><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">probability</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                 <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">))</span>
-<span class="n">y_score</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1"># Create a simple classifier</span>
+<span class="n">classifier</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="View documentation for sklearn.svm.LinearSVC"><span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_score</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compute-the-average-precision-score">
+<h3>Compute the average precision score<a class="headerlink" href="#compute-the-average-precision-score" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a>
+<span class="n">average_precision</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_score</span><span class="p">)</span>
 
-<span class="c1"># Compute Precision-Recall and plot curve</span>
-<span class="n">precision</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="n">recall</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="n">average_precision</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
-    <span class="n">precision</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">recall</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
-                                                        <span class="n">y_score</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
-    <span class="n">average_precision</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">y_score</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Average precision-recall score: {0:0.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="n">average_precision</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Average</span> <span class="n">precision</span><span class="o">-</span><span class="n">recall</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.88</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plot-the-precision-recall-curve">
+<h3>Plot the Precision-Recall curve<a class="headerlink" href="#plot-the-precision-recall-curve" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="c1"># Compute micro-average ROC curve and ROC area</span>
-<span class="n">precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">recall</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
-    <span class="n">y_score</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
-<span class="n">average_precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span>
-                                                     <span class="n">average</span><span class="o">=</span><span class="s2">&quot;micro&quot;</span><span class="p">)</span>
+<span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_score</span><span class="p">)</span>
 
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.step" title="View documentation for matplotlib.pyplot.step"><span class="n">plt</span><span class="o">.</span><span class="n">step</span></a><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+         <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.fill_between" title="View documentation for matplotlib.pyplot.fill_between"><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span></a><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 
-<span class="c1"># Plot Precision-Recall curve</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf" title="View documentation for matplotlib.pyplot.clf"><span class="n">plt</span><span class="o">.</span><span class="n">clf</span></a><span class="p">()</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span>
-         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Precision-Recall curve&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim" title="View documentation for matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim" title="View documentation for matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Precision-Recall example: AUC={0:0.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">average_precision</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend" title="View documentation for matplotlib.pyplot.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;2-class Precision-Recall curve: AUC={0:0.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="n">average_precision</span><span class="p">))</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_plot_precision_recall_001.png" class="align-center" src="../../_images/sphx_glr_plot_precision_recall_001.png" />
+</div>
+</div>
+<div class="section" id="in-multi-label-settings">
+<h2>In multi-label settings<a class="headerlink" href="#in-multi-label-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-multi-label-data-fit-and-predict">
+<h3>Create multi-label data, fit, and predict<a class="headerlink" href="#create-multi-label-data-fit-and-predict" title="Permalink to this headline">¶</a></h3>
+<p>We create a multi-label dataset, to illustrate the precision-recall in
+multi-label settings</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.label_binarize.html#sklearn.preprocessing.label_binarize" title="View documentation for sklearn.preprocessing.label_binarize"><span class="n">label_binarize</span></a>
 
-<span class="c1"># Plot Precision-Recall curve for each class and iso-f1 curves</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf" title="View documentation for matplotlib.pyplot.clf"><span class="n">plt</span><span class="o">.</span><span class="n">clf</span></a><span class="p">()</span>
+<span class="c1"># Use label_binarize to be multi-label like settings</span>
+<span class="n">Y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.preprocessing.label_binarize.html#sklearn.preprocessing.label_binarize" title="View documentation for sklearn.preprocessing.label_binarize"><span class="n">label_binarize</span></a><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">n_classes</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Split into training and test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split" title="View documentation for sklearn.model_selection.train_test_split"><span class="n">train_test_split</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span>
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+
+<span class="c1"># We use OneVsRestClassifier for multi-label prediction</span>
+<span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="View documentation for sklearn.multiclass.OneVsRestClassifier"><span class="n">OneVsRestClassifier</span></a>
+
+<span class="c1"># Run classifier</span>
+<span class="n">classifier</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier" title="View documentation for sklearn.multiclass.OneVsRestClassifier"><span class="n">OneVsRestClassifier</span></a><span class="p">(</span><a href="../../modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="View documentation for sklearn.svm.LinearSVC"><span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">))</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">y_score</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-average-precision-score-in-multi-label-settings">
+<h3>The average precision score in multi-label settings<a class="headerlink" href="#the-average-precision-score-in-multi-label-settings" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a>
+
+<span class="c1"># For each class</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">average_precision</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
+    <span class="n">precision</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">recall</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a><span class="p">(</span><span class="n">Y_test</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+                                                        <span class="n">y_score</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+    <span class="n">average_precision</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a><span class="p">(</span><span class="n">Y_test</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">y_score</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># A &quot;micro-average&quot;: quantifying score on all classes jointly</span>
+<span class="n">precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">recall</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a><span class="p">(</span><span class="n">Y_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
+    <span class="n">y_score</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">average_precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">]</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="View documentation for sklearn.metrics.average_precision_score"><span class="n">average_precision_score</span></a><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span>
+                                                     <span class="n">average</span><span class="o">=</span><span class="s2">&quot;micro&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Average precision score, micro-averaged over all classes: {0:0.2f}&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">average_precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Average</span> <span class="n">precision</span> <span class="n">score</span><span class="p">,</span> <span class="n">micro</span><span class="o">-</span><span class="n">averaged</span> <span class="n">over</span> <span class="nb">all</span> <span class="n">classes</span><span class="p">:</span> <span class="mf">0.43</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plot-the-micro-averaged-precision-recall-curve">
+<h3>Plot the micro-averaged Precision-Recall curve<a class="headerlink" href="#plot-the-micro-averaged-precision-recall-curve" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.step" title="View documentation for matplotlib.pyplot.step"><span class="n">plt</span><span class="o">.</span><span class="n">step</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="s1">&#39;micro&#39;</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="s1">&#39;micro&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+         <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.fill_between" title="View documentation for matplotlib.pyplot.fill_between"><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim" title="View documentation for matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim" title="View documentation for matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span>
+    <span class="s1">&#39;Average precision score, micro-averaged over all classes: AUC={0:0.2f}&#39;</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">average_precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_plot_precision_recall_002.png" class="align-center" src="../../_images/sphx_glr_plot_precision_recall_002.png" />
+</div>
+<div class="section" id="plot-precision-recall-curve-for-each-class-and-iso-f1-curves">
+<h3>Plot Precision-Recall curve for each class and iso-f1 curves<a class="headerlink" href="#plot-precision-recall-curve-for-each-class-and-iso-f1-curves" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
+<span class="c1"># setup plot details</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">([</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="s1">&#39;teal&#39;</span><span class="p">])</span>
+
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">f_scores</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.linspace.html#numpy.linspace" title="View documentation for numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
@@ -334,29 +438,32 @@ matrix as a binary prediction (micro-averaging).</p>
 
 <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;iso-f1 curves&#39;</span><span class="p">)</span>
-<span class="n">l</span><span class="p">,</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
+<span class="n">l</span><span class="p">,</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-<span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;micro-average Precision-recall curve (area = {0:0.2f})&#39;</span>
+<span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;micro-average Precision-recall (area = {0:0.2f})&#39;</span>
               <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">average_precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">]))</span>
+
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">),</span> <span class="n">colors</span><span class="p">):</span>
-    <span class="n">l</span><span class="p">,</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
+    <span class="n">l</span><span class="p">,</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Precision-recall curve of class {0} (area = {1:0.2f})&#39;</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Precision-recall for class {0} (area = {1:0.2f})&#39;</span>
                   <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">average_precision</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 
 <span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gcf" title="View documentation for matplotlib.pyplot.gcf"><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span></a><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim" title="View documentation for matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim" title="View documentation for matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Extension of Precision-Recall curve to multi-class&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.figlegend" title="View documentation for matplotlib.pyplot.figlegend"><span class="n">plt</span><span class="o">.</span><span class="n">figlegend</span></a><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend" title="View documentation for matplotlib.pyplot.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-.</span><span class="mi">38</span><span class="p">),</span> <span class="n">prop</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">))</span>
+
+
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.346 seconds)</p>
+<img alt="../../_images/sphx_glr_plot_precision_recall_003.png" class="align-center" src="../../_images/sphx_glr_plot_precision_recall_003.png" />
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.398 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_precision_recall.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_precision_recall.py</span></code></a></div>
@@ -364,6 +471,8 @@ matrix as a binary prediction (micro-averaging).</p>
 <a class="reference download internal" href="../../_downloads/plot_precision_recall.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_precision_recall.ipynb</span></code></a></div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+</div>
 </div>
 
 
@@ -381,11 +490,11 @@ matrix as a binary prediction (micro-averaging).</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_roc.html">Previous
+      <a href="plot_learning_curve.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_learning_curve.html">Next
+      <a href="../neighbors/plot_regression.html">Next
       </a>
     </div>
     
