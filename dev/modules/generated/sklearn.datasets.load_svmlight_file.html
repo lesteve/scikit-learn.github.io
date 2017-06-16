@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.load_svmlight_file<a class="headerlink" href="#sklearn-datasets-load-svmlight-file" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.load_svmlight_file">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">load_svmlight_file</code><span class="sig-paren">(</span><em>f</em>, <em>n_features=None</em>, <em>dtype=&lt;class 'numpy.float64'&gt;</em>, <em>multilabel=False</em>, <em>zero_based='auto'</em>, <em>query_id=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7238b46/sklearn/datasets/svmlight_format.py#L33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.load_svmlight_file" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">load_svmlight_file</code><span class="sig-paren">(</span><em>f</em>, <em>n_features=None</em>, <em>dtype=&lt;class 'numpy.float64'&gt;</em>, <em>multilabel=False</em>, <em>zero_based='auto'</em>, <em>query_id=False</em>, <em>offset=0</em>, <em>length=-1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a39c8ab/sklearn/datasets/svmlight_format.py#L33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.load_svmlight_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load datasets in the svmlight / libsvm format into sparse CSR matrix</p>
 <p>This format is a text-based format, with one sample per line. It does
 not store zero valued features hence is suitable for sparse dataset.</p>
@@ -238,7 +238,9 @@ by this function. A file-like object must be opened in binary mode.</p>
 argument is useful to load several files that are subsets of a
 bigger sliced dataset: each subset might not have examples of
 every feature, hence the inferred shape might vary from one
-slice to another.</p>
+slice to another.
+n_features is only required if <code class="docutils literal"><span class="pre">offset</span></code> or <code class="docutils literal"><span class="pre">length</span></code> are passed a
+non-default value.</p>
 </div></blockquote>
 <p><strong>multilabel</strong> : boolean, optional, default False</p>
 <blockquote>
@@ -253,7 +255,10 @@ zero-based to match Python/NumPy conventions.
 If set to &#8220;auto&#8221;, a heuristic check is applied to determine this from
 the file contents. Both kinds of files occur &#8220;in the wild&#8221;, but they
 are unfortunately not self-identifying. Using &#8220;auto&#8221; or True should
-always be safe.</p>
+always be safe when no <code class="docutils literal"><span class="pre">offset</span></code> or <code class="docutils literal"><span class="pre">length</span></code> is passed.
+If <code class="docutils literal"><span class="pre">offset</span></code> or <code class="docutils literal"><span class="pre">length</span></code> are passed, the &#8220;auto&#8221; mode falls back
+to <code class="docutils literal"><span class="pre">zero_based=True</span></code> to avoid having the heuristic check yield
+inconsistent results on different segments of the file.</p>
 </div></blockquote>
 <p><strong>query_id</strong> : boolean, default False</p>
 <blockquote>
@@ -263,6 +268,17 @@ always be safe.</p>
 <blockquote>
 <div><p>Data type of dataset to be loaded. This will be the data type of the
 output numpy arrays <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">y</span></code>.</p>
+</div></blockquote>
+<p><strong>offset</strong> : integer, optional, default 0</p>
+<blockquote>
+<div><p>Ignore the offset first bytes by seeking forward, then
+discarding the following bytes up until the next new line
+character.</p>
+</div></blockquote>
+<p><strong>length</strong> : integer, optional, default -1</p>
+<blockquote>
+<div><p>If strictly positive, stop reading any new line of data once the
+position in the file has reached the (offset + length) bytes threshold.</p>
 </div></blockquote>
 </td>
 </tr>

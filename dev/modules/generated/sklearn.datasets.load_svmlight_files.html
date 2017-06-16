@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.load_svmlight_files<a class="headerlink" href="#sklearn-datasets-load-svmlight-files" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.load_svmlight_files">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">load_svmlight_files</code><span class="sig-paren">(</span><em>files</em>, <em>n_features=None</em>, <em>dtype=&lt;class 'numpy.float64'&gt;</em>, <em>multilabel=False</em>, <em>zero_based='auto'</em>, <em>query_id=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/7238b46/sklearn/datasets/svmlight_format.py#L174"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.load_svmlight_files" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">load_svmlight_files</code><span class="sig-paren">(</span><em>files</em>, <em>n_features=None</em>, <em>dtype=&lt;class 'numpy.float64'&gt;</em>, <em>multilabel=False</em>, <em>zero_based='auto'</em>, <em>query_id=False</em>, <em>offset=0</em>, <em>length=-1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a39c8ab/sklearn/datasets/svmlight_format.py#L192"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.load_svmlight_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load dataset from multiple files in SVMlight format</p>
 <p>This function is equivalent to mapping load_svmlight_file over a list of
 files, except that the results are concatenated into a single, flat list
@@ -243,7 +243,10 @@ zero-based to match Python/NumPy conventions.
 If set to &#8220;auto&#8221;, a heuristic check is applied to determine this from
 the file contents. Both kinds of files occur &#8220;in the wild&#8221;, but they
 are unfortunately not self-identifying. Using &#8220;auto&#8221; or True should
-always be safe.</p>
+always be safe when no offset or length is passed.
+If offset or length are passed, the &#8220;auto&#8221; mode falls back
+to zero_based=True to avoid having the heuristic check yield
+inconsistent results on different segments of the file.</p>
 </div></blockquote>
 <p><strong>query_id</strong> : boolean, defaults to False</p>
 <blockquote>
@@ -253,6 +256,17 @@ always be safe.</p>
 <blockquote>
 <div><p>Data type of dataset to be loaded. This will be the data type of the
 output numpy arrays <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">y</span></code>.</p>
+</div></blockquote>
+<p><strong>offset</strong> : integer, optional, default 0</p>
+<blockquote>
+<div><p>Ignore the offset first bytes by seeking forward, then
+discarding the following bytes up until the next new line
+character.</p>
+</div></blockquote>
+<p><strong>length</strong> : integer, optional, default -1</p>
+<blockquote>
+<div><p>If strictly positive, stop reading any new line of data once the
+position in the file has reached the (offset + length) bytes threshold.</p>
 </div></blockquote>
 </td>
 </tr>
