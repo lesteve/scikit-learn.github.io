@@ -500,13 +500,10 @@ to the overall score, through the <code class="docutils literal"><span class="pr
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef" title="sklearn.metrics.matthews_corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">matthews_corrcoef</span></code></a>(y_true,&nbsp;y_pred[,&nbsp;...])</td>
-<td>Compute the Matthews correlation coefficient (MCC) for binary classes</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="sklearn.metrics.precision_recall_curve"><code class="xref py py-obj docutils literal"><span class="pre">precision_recall_curve</span></code></a>(y_true,&nbsp;probas_pred)</td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="sklearn.metrics.precision_recall_curve"><code class="xref py py-obj docutils literal"><span class="pre">precision_recall_curve</span></code></a>(y_true,&nbsp;probas_pred)</td>
 <td>Compute precision-recall pairs for different probability thresholds</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/sklearn.metrics.roc_curve.html#sklearn.metrics.roc_curve" title="sklearn.metrics.roc_curve"><code class="xref py py-obj docutils literal"><span class="pre">roc_curve</span></code></a>(y_true,&nbsp;y_score[,&nbsp;pos_label,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="generated/sklearn.metrics.roc_curve.html#sklearn.metrics.roc_curve" title="sklearn.metrics.roc_curve"><code class="xref py py-obj docutils literal"><span class="pre">roc_curve</span></code></a>(y_true,&nbsp;y_score[,&nbsp;pos_label,&nbsp;...])</td>
 <td>Compute Receiver operating characteristic (ROC)</td>
 </tr>
 </tbody>
@@ -526,6 +523,9 @@ to the overall score, through the <code class="docutils literal"><span class="pr
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="generated/sklearn.metrics.hinge_loss.html#sklearn.metrics.hinge_loss" title="sklearn.metrics.hinge_loss"><code class="xref py py-obj docutils literal"><span class="pre">hinge_loss</span></code></a>(y_true,&nbsp;pred_decision[,&nbsp;labels,&nbsp;...])</td>
 <td>Average hinge loss (non-regularized)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef" title="sklearn.metrics.matthews_corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">matthews_corrcoef</span></code></a>(y_true,&nbsp;y_pred[,&nbsp;...])</td>
+<td>Compute the Matthews correlation coefficient (MCC)</td>
 </tr>
 </tbody>
 </table>
@@ -1206,12 +1206,33 @@ of very different sizes. The MCC is in essence a correlation coefficient
 value between -1 and +1. A coefficient of +1 represents a perfect
 prediction, 0 an average random prediction and -1 an inverse prediction.
 The statistic is also known as the phi coefficient.&#8221;</div></blockquote>
-<p>If <img class="math" src="../_images/math/313d652499f5be81d811f448b22419254d1f0ee0.png" alt="tp"/>, <img class="math" src="../_images/math/ba7faf49238418af6a1467c8384ef48bc1e1d35b.png" alt="tn"/>, <img class="math" src="../_images/math/9ccdebb0c78ec479780e9992358abde45548ec60.png" alt="fp"/> and <img class="math" src="../_images/math/dfdf1a34db03f71975f8ccb055f3b252adb597e9.png" alt="fn"/> are respectively the
-number of true positives, true negatives, false positives and false negatives,
-the MCC coefficient is defined as</p>
+<p>In the binary (two-class) case, <img class="math" src="../_images/math/313d652499f5be81d811f448b22419254d1f0ee0.png" alt="tp"/>, <img class="math" src="../_images/math/ba7faf49238418af6a1467c8384ef48bc1e1d35b.png" alt="tn"/>, <img class="math" src="../_images/math/9ccdebb0c78ec479780e9992358abde45548ec60.png" alt="fp"/> and
+<img class="math" src="../_images/math/dfdf1a34db03f71975f8ccb055f3b252adb597e9.png" alt="fn"/> are respectively the number of true positives, true negatives, false
+positives and false negatives, the MCC is defined as</p>
 <div class="math">
 <p><img src="../_images/math/4fb43b97dd34c1359f59d616613af2d236ff25ee.png" alt="MCC = \frac{tp \times tn - fp \times fn}{\sqrt{(tp + fp)(tp + fn)(tn + fp)(tn + fn)}}."/></p>
-</div><p>Here is a small example illustrating the usage of the <a class="reference internal" href="generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef" title="sklearn.metrics.matthews_corrcoef"><code class="xref py py-func docutils literal"><span class="pre">matthews_corrcoef</span></code></a>
+</div><p>In the multiclass case, the Matthews correlation coefficient can be <a class="reference external" href="http://rk.kvl.dk/introduction/index.html">defined</a> in terms of a
+<a class="reference internal" href="generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix" title="sklearn.metrics.confusion_matrix"><code class="xref py py-func docutils literal"><span class="pre">confusion_matrix</span></code></a> <img class="math" src="../_images/math/afce44aa7c55836ca9345404c22fc7b599d2ed84.png" alt="C"/> for <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> classes.  To simplify the
+definition consider the following intermediate variables:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/a2b414276bb81203e99f0efe8ba0d4c28e5b846c.png" alt="t_k=\sum_{i}^{K} C_{ik}"/> the number of times class <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> truly occurred,</li>
+<li><img class="math" src="../_images/math/82ef3ffe7184510e16ab1d2575004af21af60878.png" alt="p_k=\sum_{i}^{K} C_{ki}"/> the number of times class <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> was predicted,</li>
+<li><img class="math" src="../_images/math/9a07e14a6dbf98f48e1f3de2824cc65e43bf9e26.png" alt="c=\sum_{k}^{K} C_{kk}"/> the total number of samples correctly predicted,</li>
+<li><img class="math" src="../_images/math/db0c33f77f6df40c8a2f226da0cf11e7adda3950.png" alt="s=\sum_{i}^{K} \sum_{j}^{K} C_{ij}"/> the total number of samples.</li>
+</ul>
+<p>Then the multiclass MCC is defined as:</p>
+<div class="math">
+<p><img src="../_images/math/4d4db4ff7bc58b65a5ff723af3d1c55279790ac2.png" alt="MCC = \frac{
+    c \times s - \sum_{k}^{K} p_k \times t_k
+}{\sqrt{
+    (s^2 - \sum_{k}^{K} p_k^2) \times
+    (s^2 - \sum_{k}^{K} t_k^2)
+}}"/></p>
+</div><p>When there are more than two labels, the value of the MCC will no longer range
+between -1 and +1. Instead the minimum value will be somewhere between -1 and 0
+depending on the number and distribution of ground true labels. The maximum
+value is always +1.</p>
+<p>Here is a small example illustrating the usage of the <a class="reference internal" href="generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef" title="sklearn.metrics.matthews_corrcoef"><code class="xref py py-func docutils literal"><span class="pre">matthews_corrcoef</span></code></a>
 function:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">matthews_corrcoef</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
