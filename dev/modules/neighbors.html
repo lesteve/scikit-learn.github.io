@@ -583,10 +583,13 @@ will be required, brute force is better than a tree-based method.</p>
 <p>Currently, <code class="docutils literal"><span class="pre">algorithm</span> <span class="pre">=</span> <span class="pre">'auto'</span></code> selects <code class="docutils literal"><span class="pre">'kd_tree'</span></code> if <img class="math" src="../_images/math/c13e5702e2e5ad681738f9a435ec8aa018e78d5b.png" alt="k &lt; N/2"/>
 and the <code class="docutils literal"><span class="pre">'effective_metric_'</span></code> is in the <code class="docutils literal"><span class="pre">'VALID_METRICS'</span></code> list of
 <code class="docutils literal"><span class="pre">'kd_tree'</span></code>. It selects <code class="docutils literal"><span class="pre">'ball_tree'</span></code> if <img class="math" src="../_images/math/c13e5702e2e5ad681738f9a435ec8aa018e78d5b.png" alt="k &lt; N/2"/> and the
+<code class="docutils literal"><span class="pre">'effective_metric_'</span></code> is in the <code class="docutils literal"><span class="pre">'VALID_METRICS'</span></code> list of
+<code class="docutils literal"><span class="pre">'ball_tree'</span></code>. It selects <code class="docutils literal"><span class="pre">'brute'</span></code> if <img class="math" src="../_images/math/c13e5702e2e5ad681738f9a435ec8aa018e78d5b.png" alt="k &lt; N/2"/> and the
 <code class="docutils literal"><span class="pre">'effective_metric_'</span></code> is not in the <code class="docutils literal"><span class="pre">'VALID_METRICS'</span></code> list of
-<code class="docutils literal"><span class="pre">'kd_tree'</span></code>. It selects <code class="docutils literal"><span class="pre">'brute'</span></code> if <img class="math" src="../_images/math/981b8ac54fb75a8a2bd03480d3c08ecfa0e2027d.png" alt="k &gt;= N/2"/>. This choice is based on the assumption that the number of query points is at least the
-same order as the number of training points, and that <code class="docutils literal"><span class="pre">leaf_size</span></code> is
-close to its default value of <code class="docutils literal"><span class="pre">30</span></code>.</p>
+<code class="docutils literal"><span class="pre">'kd_tree'</span></code> or <code class="docutils literal"><span class="pre">'ball_tree'</span></code>. It selects <code class="docutils literal"><span class="pre">'brute'</span></code> if <img class="math" src="../_images/math/981b8ac54fb75a8a2bd03480d3c08ecfa0e2027d.png" alt="k &gt;= N/2"/>.
+This choice is based on the assumption that the number of query points is at
+least the same order as the number of training points, and that <code class="docutils literal"><span class="pre">leaf_size</span></code>
+is close to its default value of <code class="docutils literal"><span class="pre">30</span></code>.</p>
 </div>
 <div class="section" id="effect-of-leaf-size">
 <h3>1.6.4.5. Effect of <code class="docutils literal"><span class="pre">leaf_size</span></code><a class="headerlink" href="#effect-of-leaf-size" title="Permalink to this headline">¶</a></h3>
