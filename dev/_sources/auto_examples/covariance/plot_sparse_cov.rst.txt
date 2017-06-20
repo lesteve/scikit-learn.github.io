@@ -54,6 +54,24 @@ iteratively refined in the neighborhood of the maximum.
 
 
 
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/covariance/images/sphx_glr_plot_sparse_cov_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/covariance/images/sphx_glr_plot_sparse_cov_002.png
+            :scale: 47
+
+
+
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -67,18 +85,8 @@ iteratively refined in the neighborhood of the maximum.
     from sklearn.covariance import GraphLassoCV, ledoit_wolf
     import matplotlib.pyplot as plt
 
-
-
-
-
-
-
-Generate the data
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Generate the data
     n_samples = 60
     n_features = 20
 
@@ -97,18 +105,8 @@ Generate the data
     X -= X.mean(axis=0)
     X /= X.std(axis=0)
 
-
-
-
-
-
-
-Estimate the covariance
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Estimate the covariance
     emp_cov = np.dot(X.T, X) / n_samples
 
     model = GraphLassoCV()
@@ -119,18 +117,8 @@ Estimate the covariance
     lw_cov_, _ = ledoit_wolf(X)
     lw_prec_ = linalg.inv(lw_cov_)
 
-
-
-
-
-
-
-Plot the results
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Plot the results
     plt.figure(figsize=(10, 6))
     plt.subplots_adjust(left=0.02, right=0.98)
 
@@ -172,25 +160,7 @@ Plot the results
 
     plt.show()
 
-
-
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image:: /auto_examples/covariance/images/sphx_glr_plot_sparse_cov_001.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/covariance/images/sphx_glr_plot_sparse_cov_002.png
-            :scale: 47
-
-
-
-
-**Total running time of the script:** ( 0 minutes  1.453 seconds)
+**Total running time of the script:** ( 0 minutes  1.471 seconds)
 
 
 

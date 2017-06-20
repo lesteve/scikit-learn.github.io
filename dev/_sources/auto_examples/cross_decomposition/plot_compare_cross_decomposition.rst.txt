@@ -24,6 +24,65 @@ weak: the point cloud is very spherical.
 
 
 
+
+.. image:: /auto_examples/cross_decomposition/images/sphx_glr_plot_compare_cross_decomposition_001.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Corr(X)
+    [[ 1.    0.52 -0.03  0.  ]
+     [ 0.52  1.    0.02 -0.01]
+     [-0.03  0.02  1.    0.45]
+     [ 0.   -0.01  0.45  1.  ]]
+    Corr(Y)
+    [[ 1.    0.52  0.01 -0.01]
+     [ 0.52  1.    0.    0.06]
+     [ 0.01  0.    1.    0.52]
+     [-0.01  0.06  0.52  1.  ]]
+    True B (such that: Y = XB + Err)
+    [[1 1 1]
+     [2 2 2]
+     [0 0 0]
+     [0 0 0]
+     [0 0 0]
+     [0 0 0]
+     [0 0 0]
+     [0 0 0]
+     [0 0 0]
+     [0 0 0]]
+    Estimated B
+    [[ 1.   1.   1. ]
+     [ 2.   2.   2. ]
+     [-0.   0.  -0. ]
+     [-0.  -0.  -0. ]
+     [-0.  -0.  -0. ]
+     [ 0.  -0.1 -0. ]
+     [-0.  -0.1  0. ]
+     [-0.   0.  -0. ]
+     [ 0.   0.   0. ]
+     [ 0.   0.   0. ]]
+    Estimated betas
+    [[ 1. ]
+     [ 2.1]
+     [-0. ]
+     [ 0. ]
+     [-0.1]
+     [ 0. ]
+     [ 0.1]
+     [-0.1]
+     [-0. ]
+     [ 0. ]]
+
+
+
+
+|
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -32,18 +91,8 @@ weak: the point cloud is very spherical.
     import matplotlib.pyplot as plt
     from sklearn.cross_decomposition import PLSCanonical, PLSRegression, CCA
 
-
-
-
-
-
-
-Dataset based latent variables model
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Dataset based latent variables model
 
     n = 500
     # 2 latents vars:
@@ -64,32 +113,8 @@ Dataset based latent variables model
     print("Corr(Y)")
     print(np.round(np.corrcoef(Y.T), 2))
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Corr(X)
-    [[ 1.    0.52 -0.03  0.  ]
-     [ 0.52  1.    0.02 -0.01]
-     [-0.03  0.02  1.    0.45]
-     [ 0.   -0.01  0.45  1.  ]]
-    Corr(Y)
-    [[ 1.    0.52  0.01 -0.01]
-     [ 0.52  1.    0.    0.06]
-     [ 0.01  0.    1.    0.52]
-     [-0.01  0.06  0.52  1.  ]]
-
-
-Canonical (symmetric) PLS
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Canonical (symmetric) PLS
 
     # Transform data
     # ~~~~~~~~~~~~~~
@@ -148,21 +173,8 @@ Canonical (symmetric) PLS
     plt.yticks(())
     plt.show()
 
-
-
-
-.. image:: /auto_examples/cross_decomposition/images/sphx_glr_plot_compare_cross_decomposition_001.png
-    :align: center
-
-
-
-
-PLS regression, with multivariate response, a.k.a. PLS2
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # PLS regression, with multivariate response, a.k.a. PLS2
 
     n = 1000
     q = 3
@@ -181,44 +193,7 @@ PLS regression, with multivariate response, a.k.a. PLS2
     print(np.round(pls2.coef_, 1))
     pls2.predict(X)
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    True B (such that: Y = XB + Err)
-    [[1 1 1]
-     [2 2 2]
-     [0 0 0]
-     [0 0 0]
-     [0 0 0]
-     [0 0 0]
-     [0 0 0]
-     [0 0 0]
-     [0 0 0]
-     [0 0 0]]
-    Estimated B
-    [[ 1.   1.   1. ]
-     [ 2.   2.   2. ]
-     [-0.   0.  -0. ]
-     [-0.  -0.  -0. ]
-     [-0.  -0.  -0. ]
-     [ 0.  -0.1 -0. ]
-     [-0.  -0.1  0. ]
-     [-0.   0.  -0. ]
-     [ 0.   0.   0. ]
-     [ 0.   0.   0. ]]
-
-
-PLS regression, with univariate response, a.k.a. PLS1
-
-
-
-.. code-block:: python
-
+    # PLS regression, with univariate response, a.k.a. PLS1
 
     n = 1000
     p = 10
@@ -230,45 +205,15 @@ PLS regression, with univariate response, a.k.a. PLS1
     print("Estimated betas")
     print(np.round(pls1.coef_, 1))
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Estimated betas
-    [[ 1. ]
-     [ 2.1]
-     [-0. ]
-     [ 0. ]
-     [-0.1]
-     [ 0. ]
-     [ 0.1]
-     [-0.1]
-     [-0. ]
-     [ 0. ]]
-
-
-CCA (PLS mode B with symmetric deflation)
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # CCA (PLS mode B with symmetric deflation)
 
     cca = CCA(n_components=2)
     cca.fit(X_train, Y_train)
     X_train_r, Y_train_r = cca.transform(X_train, Y_train)
     X_test_r, Y_test_r = cca.transform(X_test, Y_test)
 
-
-
-
-
-
-**Total running time of the script:** ( 0 minutes  0.385 seconds)
+**Total running time of the script:** ( 0 minutes  0.382 seconds)
 
 
 

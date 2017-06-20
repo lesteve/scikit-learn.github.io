@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Robust linear model estimation using RANSAC" href="plot_ransac.html" />
-    <link rel="prev" title="Lasso and Elastic Net for Sparse Signals" href="plot_lasso_and_elasticnet.html" />
+    <link rel="next" title="Comparing various online solvers" href="plot_sgd_comparison.html" />
+    <link rel="prev" title="Robust linear model estimation using RANSAC" href="plot_ransac.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_lasso_and_elasticnet.html"
+        <a href="plot_ransac.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Lasso and Ela...
+        Robust linear...
         </span>
             <span class="hiddenrellink">
-            Lasso and Elastic Net for Sparse Signals
+            Robust linear model estimation using RANSAC
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_ransac.html"
+        <a href="plot_sgd_comparison.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Robust linear...
+        Comparing var...
         </span>
             <span class="hiddenrellink">
-            Robust linear model estimation using RANSAC
+            Comparing various online solvers
             </span>
         </a>
         </div>
@@ -199,6 +199,14 @@
 plotted below. It illustrates that although feature 2
 has a strong coefficient on the full model, it does not
 give us much regarding <cite>y</cite> when compared to just feature 1</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_ols_3d_001.png"><img alt="../../_images/sphx_glr_plot_ols_3d_001.png" src="../../_images/sphx_glr_plot_ols_3d_001.png" style="width: 188.0px; height: 141.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_ols_3d_002.png"><img alt="../../_images/sphx_glr_plot_ols_3d_002.png" src="../../_images/sphx_glr_plot_ols_3d_002.png" style="width: 188.0px; height: 141.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_ols_3d_003.png"><img alt="../../_images/sphx_glr_plot_ols_3d_003.png" src="../../_images/sphx_glr_plot_ols_3d_003.png" style="width: 188.0px; height: 141.0px;" /></a>
+</li>
+</ul>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 
@@ -222,10 +230,11 @@ give us much regarding <cite>y</cite> when compared to just feature 1</p>
 
 <span class="n">ols</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span></a><span class="p">()</span>
 <span class="n">ols</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Plot the figure</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_figs</span><span class="p">(</span><span class="n">fig_num</span><span class="p">,</span> <span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
+
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot the figure</span>
+<span class="k">def</span> <span class="nf">plot_figs</span><span class="p">(</span><span class="n">fig_num</span><span class="p">,</span> <span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
     <span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">fig_num</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf" title="View documentation for matplotlib.pyplot.clf"><span class="n">plt</span><span class="o">.</span><span class="n">clf</span></a><span class="p">()</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">Axes3D</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">elev</span><span class="o">=</span><span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="o">=</span><span class="n">azim</span><span class="p">)</span>
@@ -260,15 +269,7 @@ give us much regarding <cite>y</cite> when compared to just feature 1</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_ols_3d_001.png"><img alt="../../_images/sphx_glr_plot_ols_3d_001.png" src="../../_images/sphx_glr_plot_ols_3d_001.png" style="width: 188.0px; height: 141.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_ols_3d_002.png"><img alt="../../_images/sphx_glr_plot_ols_3d_002.png" src="../../_images/sphx_glr_plot_ols_3d_002.png" style="width: 188.0px; height: 141.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_ols_3d_003.png"><img alt="../../_images/sphx_glr_plot_ols_3d_003.png" src="../../_images/sphx_glr_plot_ols_3d_003.png" style="width: 188.0px; height: 141.0px;" /></a>
-</li>
-</ul>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.376 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.444 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_ols_3d.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ols_3d.py</span></code></a></div>
@@ -293,11 +294,11 @@ give us much regarding <cite>y</cite> when compared to just feature 1</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_lasso_and_elasticnet.html">Previous
+      <a href="plot_ransac.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_ransac.html">Next
+      <a href="plot_sgd_comparison.html">Next
       </a>
     </div>
     

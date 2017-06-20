@@ -36,6 +36,42 @@ on the parameters epsilon and C of the SVR.
 
 
 
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_kernel_ridge_regression_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_kernel_ridge_regression_002.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_kernel_ridge_regression_003.png
+            :scale: 47
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    SVR complexity and bandwidth selected and model fitted in 0.706 s
+    KRR complexity and bandwidth selected and model fitted in 0.441 s
+    Support vector ratio: 0.320
+    SVR prediction for 100000 inputs in 0.160 s
+    KRR prediction for 100000 inputs in 0.384 s
+
+
+
+
+|
+
+
 .. code-block:: python
 
 
@@ -56,18 +92,8 @@ on the parameters epsilon and C of the SVR.
 
     rng = np.random.RandomState(0)
 
-
-
-
-
-
-
-Generate sample data
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Generate sample data
     X = 5 * rng.rand(10000, 1)
     y = np.sin(X).ravel()
 
@@ -76,18 +102,8 @@ Generate sample data
 
     X_plot = np.linspace(0, 5, 100000)[:, None]
 
-
-
-
-
-
-
-Fit regression model
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Fit regression model
     train_size = 100
     svr = GridSearchCV(SVR(kernel='rbf', gamma=0.1), cv=5,
                        param_grid={"C": [1e0, 1e1, 1e2, 1e3],
@@ -125,27 +141,8 @@ Fit regression model
           % (X_plot.shape[0], kr_predict))
 
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    SVR complexity and bandwidth selected and model fitted in 0.719 s
-    KRR complexity and bandwidth selected and model fitted in 0.456 s
-    Support vector ratio: 0.320
-    SVR prediction for 100000 inputs in 0.160 s
-    KRR prediction for 100000 inputs in 0.390 s
-
-
-look at the results
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Look at the results
     sv_ind = svr.best_estimator_.support_
     plt.scatter(X[sv_ind], y[sv_ind], c='r', s=50, label='SVR support vectors',
                 zorder=2, edgecolors=(0, 0, 0))
@@ -218,30 +215,7 @@ look at the results
 
     plt.show()
 
-
-
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_kernel_ridge_regression_001.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_kernel_ridge_regression_002.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_kernel_ridge_regression_003.png
-            :scale: 47
-
-
-
-
-**Total running time of the script:** ( 0 minutes  50.511 seconds)
+**Total running time of the script:** ( 0 minutes  49.737 seconds)
 
 
 

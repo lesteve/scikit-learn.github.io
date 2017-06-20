@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Concatenating multiple feature extraction methods" href="plot_feature_stacker.html" />
-    <link rel="prev" title="Plotting Cross-Validated Predictions" href="plot_cv_predict.html" />
+    <link rel="next" title="Imputing missing values before building an estimator" href="plot_missing_values.html" />
+    <link rel="prev" title="Pipelining: chaining a PCA and a logistic regression" href="plot_digits_pipe.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_cv_predict.html"
+        <a href="plot_digits_pipe.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Plotting Cros...
+        Pipelining: c...
         </span>
             <span class="hiddenrellink">
-            Plotting Cross-Validated Predictions
+            Pipelining: chaining a PCA and a logistic regression
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_feature_stacker.html"
+        <a href="plot_missing_values.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Concatenating...
+        Imputing miss...
         </span>
             <span class="hiddenrellink">
-            Concatenating multiple feature extraction methods
+            Imputing missing values before building an estimator
             </span>
         </a>
         </div>
@@ -201,6 +201,7 @@ while minimizing the mean squared error on the training data. The benefit
 of such a model is that it does not assume any form for the target
 function such as linearity. For comparison a linear regression is also
 presented.</p>
+<img alt="../_images/sphx_glr_plot_isotonic_regression_001.png" class="align-center" src="../_images/sphx_glr_plot_isotonic_regression_001.png" />
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Nelle Varoquaux &lt;nelle.varoquaux@gmail.com&gt;</span>
@@ -219,19 +220,21 @@ presented.</p>
 <span class="n">x</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">rs</span> <span class="o">=</span> <a href="../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state" title="View documentation for sklearn.utils.check_random_state"><span class="n">check_random_state</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,))</span> <span class="o">+</span> <span class="mf">50.</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.log.html#numpy.log" title="View documentation for numpy.log"><span class="n">np</span><span class="o">.</span><span class="n">log</span></a><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Fit IsotonicRegression and LinearRegression models</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ir</span> <span class="o">=</span> <a href="../modules/generated/sklearn.isotonic.IsotonicRegression.html#sklearn.isotonic.IsotonicRegression" title="View documentation for sklearn.isotonic.IsotonicRegression"><span class="n">IsotonicRegression</span></a><span class="p">()</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Fit IsotonicRegression and LinearRegression models</span>
+
+<span class="n">ir</span> <span class="o">=</span> <a href="../modules/generated/sklearn.isotonic.IsotonicRegression.html#sklearn.isotonic.IsotonicRegression" title="View documentation for sklearn.isotonic.IsotonicRegression"><span class="n">IsotonicRegression</span></a><span class="p">()</span>
 
 <span class="n">y_</span> <span class="o">=</span> <span class="n">ir</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="n">lr</span> <span class="o">=</span> <a href="../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">()</span>
 <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/arrays.indexing.html#numpy.newaxis" title="View documentation for numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">],</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># x needs to be 2d for LinearRegression</span>
-</pre></div>
-</div>
-<p>plot result</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">segments</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">y_</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot result</span>
+
+<span class="n">segments</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">y_</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 <span class="n">lc</span> <span class="o">=</span> <a href="http://matplotlib.org/api/collections_api.html#matplotlib.collections.LineCollection" title="View documentation for matplotlib.collections.LineCollection"><span class="n">LineCollection</span></a><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">lc</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.ones.html#numpy.ones" title="View documentation for numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 <span class="n">lc</span><span class="o">.</span><span class="n">set_linewidths</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.ones.html#numpy.ones" title="View documentation for numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="n">n</span><span class="p">))</span>
@@ -246,8 +249,7 @@ presented.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/sphx_glr_plot_isotonic_regression_001.png" class="align-center" src="../_images/sphx_glr_plot_isotonic_regression_001.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.123 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.118 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/plot_isotonic_regression.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_isotonic_regression.py</span></code></a></div>
@@ -272,11 +274,11 @@ presented.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_cv_predict.html">Previous
+      <a href="plot_digits_pipe.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_feature_stacker.html">Next
+      <a href="plot_missing_values.html">Next
       </a>
     </div>
     

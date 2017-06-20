@@ -29,6 +29,38 @@ by Thomas P. Minka is also compared.
 
 
 
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_pca_vs_fa_model_selection_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_pca_vs_fa_model_selection_002.png
+            :scale: 47
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    best n_components by PCA CV = 10
+    best n_components by FactorAnalysis CV = 10
+    best n_components by PCA MLE = 10
+    best n_components by PCA CV = 40
+    best n_components by FactorAnalysis CV = 10
+    best n_components by PCA MLE = 38
+
+
+
+
+|
+
+
 .. code-block:: python
 
 
@@ -47,18 +79,8 @@ by Thomas P. Minka is also compared.
 
     print(__doc__)
 
-
-
-
-
-
-
-Create the data
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Create the data
 
     n_samples, n_features, rank = 1000, 50, 10
     sigma = 1.
@@ -73,18 +95,8 @@ Create the data
     sigmas = sigma * rng.rand(n_features) + sigma / 2.
     X_hetero = X + rng.randn(n_samples, n_features) * sigmas
 
-
-
-
-
-
-
-Fit the models
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Fit the models
 
     n_components = np.arange(0, n_features, 5)  # options for n_components
 
@@ -152,35 +164,7 @@ Fit the models
 
     plt.show()
 
-
-
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_pca_vs_fa_model_selection_001.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_pca_vs_fa_model_selection_002.png
-            :scale: 47
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    best n_components by PCA CV = 10
-    best n_components by FactorAnalysis CV = 10
-    best n_components by PCA MLE = 10
-    best n_components by PCA CV = 40
-    best n_components by FactorAnalysis CV = 10
-    best n_components by PCA MLE = 38
-
-
-**Total running time of the script:** ( 0 minutes  12.911 seconds)
+**Total running time of the script:** ( 0 minutes  12.657 seconds)
 
 
 

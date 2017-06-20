@@ -36,7 +36,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Path with L1- Logistic Regression" href="plot_logistic_path.html" />
+    <link rel="next" title="SGD: Maximum margin separating hyperplane" href="plot_sgd_separating_hyperplane.html" />
     <link rel="prev" title="Lasso path using LARS" href="plot_lasso_lars.html" />
   
   
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_logistic_path.html"
+        <a href="plot_sgd_separating_hyperplane.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Path with L1-...
+        SGD: Maximum ...
         </span>
             <span class="hiddenrellink">
-            Path with L1- Logistic Regression
+            SGD: Maximum margin separating hyperplane
             </span>
         </a>
         </div>
@@ -211,6 +211,7 @@ At the end of the path, as alpha tends toward zero
 and the solution tends towards the ordinary least squares, coefficients
 exhibit big oscillations. In practise it is necessary to tune alpha
 in such a way that a balance is maintained between both.</p>
+<img alt="../../_images/sphx_glr_plot_ridge_path_001.png" class="align-center" src="../../_images/sphx_glr_plot_ridge_path_001.png" />
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Author: Fabian Pedregosa -- &lt;fabian.pedregosa@inria.fr&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
@@ -223,10 +224,11 @@ in such a way that a balance is maintained between both.</p>
 <span class="c1"># X is the 10x10 Hilbert matrix</span>
 <span class="n">X</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/arrays.indexing.html#numpy.newaxis" title="View documentation for numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">])</span>
 <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.ones.html#numpy.ones" title="View documentation for numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Compute paths</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_alphas</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Compute paths</span>
+
+<span class="n">n_alphas</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">alphas</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.logspace.html#numpy.logspace" title="View documentation for numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_alphas</span><span class="p">)</span>
 
 <span class="n">coefs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -234,10 +236,11 @@ in such a way that a balance is maintained between both.</p>
     <span class="n">ridge</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="View documentation for sklearn.linear_model.Ridge"><span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">coefs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ridge</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Display results</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gca" title="View documentation for matplotlib.pyplot.gca"><span class="n">plt</span><span class="o">.</span><span class="n">gca</span></a><span class="p">()</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Display results</span>
+
+<span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gca" title="View documentation for matplotlib.pyplot.gca"><span class="n">plt</span><span class="o">.</span><span class="n">gca</span></a><span class="p">()</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">coefs</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
@@ -249,7 +252,6 @@ in such a way that a balance is maintained between both.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_ridge_path_001.png" class="align-center" src="../../_images/sphx_glr_plot_ridge_path_001.png" />
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.185 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
@@ -279,7 +281,7 @@ in such a way that a balance is maintained between both.</p>
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_logistic_path.html">Next
+      <a href="plot_sgd_separating_hyperplane.html">Next
       </a>
     </div>
     

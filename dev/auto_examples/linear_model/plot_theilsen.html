@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="L1 Penalty and Sparsity in Logistic Regression" href="plot_logistic_l1_l2_sparsity.html" />
-    <link rel="prev" title="Plot multi-class SGD on the iris dataset" href="plot_sgd_iris.html" />
+    <link rel="next" title="Plot multinomial and One-vs-Rest Logistic Regression" href="plot_logistic_multinomial.html" />
+    <link rel="prev" title="L1 Penalty and Sparsity in Logistic Regression" href="plot_logistic_l1_l2_sparsity.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_sgd_iris.html"
+        <a href="plot_logistic_l1_l2_sparsity.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Plot multi-cl...
+        L1 Penalty an...
         </span>
             <span class="hiddenrellink">
-            Plot multi-class SGD on the iris dataset
+            L1 Penalty and Sparsity in Logistic Regression
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_logistic_l1_l2_sparsity.html"
+        <a href="plot_logistic_multinomial.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        L1 Penalty an...
+        Plot multinom...
         </span>
             <span class="hiddenrellink">
-            L1 Penalty and Sparsity in Logistic Regression
+            Plot multinomial and One-vs-Rest Logistic Regression
             </span>
         </a>
         </div>
@@ -219,6 +219,12 @@ possible combinations of p subsample points to a randomly chosen subset and
 therefore also limits the runtime. Therefore, Theil-Sen is applicable to larger
 problems with the drawback of losing some of its mathematical properties since
 it then works on a random subset.</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_theilsen_001.png"><img alt="../../_images/sphx_glr_plot_theilsen_001.png" src="../../_images/sphx_glr_plot_theilsen_001.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_theilsen_002.png"><img alt="../../_images/sphx_glr_plot_theilsen_002.png" src="../../_images/sphx_glr_plot_theilsen_002.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+</li>
+</ul>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Author: Florian Wilhelm -- &lt;florian.wilhelm@gmail.com&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
 
@@ -235,10 +241,11 @@ it then works on a random subset.</p>
               <span class="p">(</span><span class="s1">&#39;RANSAC&#39;</span><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor" title="View documentation for sklearn.linear_model.RANSACRegressor"><span class="n">RANSACRegressor</span></a><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span> <span class="p">]</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OLS&#39;</span><span class="p">:</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;Theil-Sen&#39;</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="s1">&#39;RANSAC&#39;</span><span class="p">:</span> <span class="s1">&#39;lightgreen&#39;</span><span class="p">}</span>
 <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
-</pre></div>
-</div>
-<p>Outliers only in the y direction</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Outliers only in the y direction</span>
+
+<a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="c1"># Linear model y = 3*x + N(2, 0.1**2)</span>
 <span class="n">x</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
@@ -263,11 +270,11 @@ it then works on a random subset.</p>
 <a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis" title="View documentation for matplotlib.pyplot.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend" title="View documentation for matplotlib.pyplot.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Corrupt y&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<img alt="../../_images/sphx_glr_plot_theilsen_001.png" class="align-center" src="../../_images/sphx_glr_plot_theilsen_001.png" />
-<p>Outliers in the X direction</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Outliers in the X direction</span>
+
+<a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># Linear model y = 3*x + N(2, 0.1**2)</span>
 <span class="n">x</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="n">noise</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
@@ -295,8 +302,7 @@ it then works on a random subset.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_theilsen_002.png" class="align-center" src="../../_images/sphx_glr_plot_theilsen_002.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  2.022 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  2.045 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_theilsen.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_theilsen.py</span></code></a></div>
@@ -321,11 +327,11 @@ it then works on a random subset.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_sgd_iris.html">Previous
+      <a href="plot_logistic_l1_l2_sparsity.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_logistic_l1_l2_sparsity.html">Next
+      <a href="plot_logistic_multinomial.html">Next
       </a>
     </div>
     

@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Spectral clustering for image segmentation" href="plot_segmentation_toy.html" />
-    <link rel="prev" title="K-means Clustering" href="plot_cluster_iris.html" />
+    <link rel="next" title="Hierarchical clustering: structured vs unstructured ward" href="plot_ward_structured_vs_unstructured.html" />
+    <link rel="prev" title="Spectral clustering for image segmentation" href="plot_segmentation_toy.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_cluster_iris.html"
+        <a href="plot_segmentation_toy.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        K-means Clustering
+        Spectral clus...
         </span>
             <span class="hiddenrellink">
-            K-means Clustering
+            Spectral clustering for image segmentation
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_segmentation_toy.html"
+        <a href="plot_ward_structured_vs_unstructured.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Spectral clus...
+        Hierarchical ...
         </span>
             <span class="hiddenrellink">
-            Spectral clustering for image segmentation
+            Hierarchical clustering: structured vs unstructured ward
             </span>
         </a>
         </div>
@@ -196,6 +196,20 @@
   <div class="section" id="demo-of-dbscan-clustering-algorithm">
 <span id="sphx-glr-auto-examples-cluster-plot-dbscan-py"></span><h1>Demo of DBSCAN clustering algorithm<a class="headerlink" href="#demo-of-dbscan-clustering-algorithm" title="Permalink to this headline">¶</a></h1>
 <p>Finds core samples of high density and expands clusters from them.</p>
+<img alt="../../_images/sphx_glr_plot_dbscan_001.png" class="align-center" src="../../_images/sphx_glr_plot_dbscan_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Estimated</span> <span class="n">number</span> <span class="n">of</span> <span class="n">clusters</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">Homogeneity</span><span class="p">:</span> <span class="mf">0.953</span>
+<span class="n">Completeness</span><span class="p">:</span> <span class="mf">0.883</span>
+<span class="n">V</span><span class="o">-</span><span class="n">measure</span><span class="p">:</span> <span class="mf">0.917</span>
+<span class="n">Adjusted</span> <span class="n">Rand</span> <span class="n">Index</span><span class="p">:</span> <span class="mf">0.952</span>
+<span class="n">Adjusted</span> <span class="n">Mutual</span> <span class="n">Information</span><span class="p">:</span> <span class="mf">0.883</span>
+<span class="n">Silhouette</span> <span class="n">Coefficient</span><span class="p">:</span> <span class="mf">0.626</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -204,18 +218,19 @@
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs" title="View documentation for sklearn.datasets.samples_generator.make_blobs"><span class="n">make_blobs</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="View documentation for sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a>
-</pre></div>
-</div>
-<p>Generate sample data</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">centers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Generate sample data</span>
+<span class="n">centers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">labels_true</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs" title="View documentation for sklearn.datasets.samples_generator.make_blobs"><span class="n">make_blobs</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
                             <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">X</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="View documentation for sklearn.preprocessing.StandardScaler"><span class="n">StandardScaler</span></a><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Compute DBSCAN</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">db</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="View documentation for sklearn.cluster.DBSCAN"><span class="n">DBSCAN</span></a><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Compute DBSCAN</span>
+<span class="n">db</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="View documentation for sklearn.cluster.DBSCAN"><span class="n">DBSCAN</span></a><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">core_samples_mask</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.zeros_like.html#numpy.zeros_like" title="View documentation for numpy.zeros_like"><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span></a><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
 <span class="n">core_samples_mask</span><span class="p">[</span><span class="n">db</span><span class="o">.</span><span class="n">core_sample_indices_</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span>
@@ -233,20 +248,10 @@
       <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.adjusted_mutual_info_score.html#sklearn.metrics.adjusted_mutual_info_score" title="View documentation for sklearn.metrics.adjusted_mutual_info_score"><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_mutual_info_score</span></a><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Coefficient: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
       <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="View documentation for sklearn.metrics.silhouette_score"><span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
-</pre></div>
-</div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Estimated</span> <span class="n">number</span> <span class="n">of</span> <span class="n">clusters</span><span class="p">:</span> <span class="mi">3</span>
-<span class="n">Homogeneity</span><span class="p">:</span> <span class="mf">0.953</span>
-<span class="n">Completeness</span><span class="p">:</span> <span class="mf">0.883</span>
-<span class="n">V</span><span class="o">-</span><span class="n">measure</span><span class="p">:</span> <span class="mf">0.917</span>
-<span class="n">Adjusted</span> <span class="n">Rand</span> <span class="n">Index</span><span class="p">:</span> <span class="mf">0.952</span>
-<span class="n">Adjusted</span> <span class="n">Mutual</span> <span class="n">Information</span><span class="p">:</span> <span class="mf">0.883</span>
-<span class="n">Silhouette</span> <span class="n">Coefficient</span><span class="p">:</span> <span class="mf">0.626</span>
-</pre></div>
-</div>
-<p>Plot result</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot result</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Black removed and is used for noise instead.</span>
 <span class="n">unique_labels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
@@ -271,8 +276,7 @@
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_dbscan_001.png" class="align-center" src="../../_images/sphx_glr_plot_dbscan_001.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.145 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.147 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_dbscan.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_dbscan.py</span></code></a></div>
@@ -297,11 +301,11 @@
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_cluster_iris.html">Previous
+      <a href="plot_segmentation_toy.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_segmentation_toy.html">Next
+      <a href="plot_ward_structured_vs_unstructured.html">Next
       </a>
     </div>
     

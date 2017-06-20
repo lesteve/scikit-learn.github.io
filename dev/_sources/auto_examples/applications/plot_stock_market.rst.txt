@@ -65,6 +65,36 @@ axis.
 
 
 
+
+.. image:: /auto_examples/applications/images/sphx_glr_plot_stock_market_001.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Cluster 1: Total, Exxon, Chevron, ConocoPhillips, Valero Energy
+    Cluster 2: Time Warner
+    Cluster 3: Cablevision
+    Cluster 4: Yahoo, Amazon, Apple
+    Cluster 5: Toyota, Canon, Sony, Honda, Unilever, Xerox, Caterpillar
+    Cluster 6: Navistar
+    Cluster 7: Northrop Grumman, General Dynamics, Raytheon
+    Cluster 8: Boeing
+    Cluster 9: Coca Cola, Pepsi, Kellogg
+    Cluster 10: Procter Gamble, Colgate-Palmolive, Kimberly-Clark
+    Cluster 11: Comcast, Ford, 3M, McDonald's, Marriott, General Electrics, Wells Fargo, JPMorgan Chase, AIG, Bank of America, Goldman Sachs, Wal-Mart, Home Depot, Pfizer, Ryder, CVS, DuPont de Nemours
+    Cluster 12: American express
+    Cluster 13: Microsoft, IBM, Dell, HP, SAP, Cisco, Texas Instruments
+    Cluster 14: GlaxoSmithKline, Sanofi-Aventis, Novartis
+
+
+
+
+|
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -82,18 +112,8 @@ axis.
     from sklearn import cluster, covariance, manifold
 
 
-
-
-
-
-
-
-Retrieve the data from Internet
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Retrieve the data from Internet
 
     def quotes_historical_google(symbol, date1, date2):
         """Get the historical data from Google finance.
@@ -207,18 +227,8 @@ Retrieve the data from Internet
     variation = close_prices - open_prices
 
 
-
-
-
-
-
-
-Learn a graphical structure from the correlations
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Learn a graphical structure from the correlations
     edge_model = covariance.GraphLassoCV()
 
     # standardize the time series: using correlations rather than covariance
@@ -227,18 +237,8 @@ Learn a graphical structure from the correlations
     X /= X.std(axis=0)
     edge_model.fit(X)
 
-
-
-
-
-
-
-Cluster using affinity propagation
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Cluster using affinity propagation
 
     _, labels = cluster.affinity_propagation(edge_model.covariance_)
     n_labels = labels.max()
@@ -246,37 +246,9 @@ Cluster using affinity propagation
     for i in range(n_labels + 1):
         print('Cluster %i: %s' % ((i + 1), ', '.join(names[labels == i])))
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Cluster 1: Total, Exxon, Chevron, ConocoPhillips, Valero Energy
-    Cluster 2: Time Warner
-    Cluster 3: Cablevision
-    Cluster 4: Yahoo, Amazon, Apple
-    Cluster 5: Toyota, Canon, Sony, Honda, Unilever, Xerox, Caterpillar
-    Cluster 6: Navistar
-    Cluster 7: Northrop Grumman, General Dynamics, Raytheon
-    Cluster 8: Boeing
-    Cluster 9: Coca Cola, Pepsi, Kellogg
-    Cluster 10: Procter Gamble, Colgate-Palmolive, Kimberly-Clark
-    Cluster 11: Comcast, Ford, 3M, McDonald's, Marriott, General Electrics, Wells Fargo, JPMorgan Chase, AIG, Bank of America, Goldman Sachs, Wal-Mart, Home Depot, Pfizer, Ryder, CVS, DuPont de Nemours
-    Cluster 12: American express
-    Cluster 13: Microsoft, IBM, Dell, HP, SAP, Cisco, Texas Instruments
-    Cluster 14: GlaxoSmithKline, Sanofi-Aventis, Novartis
-
-
-Find a low-dimension embedding for visualization: find the best position of
-the nodes (the stocks) on a 2D plane
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Find a low-dimension embedding for visualization: find the best position of
+    # the nodes (the stocks) on a 2D plane
 
     # We use a dense eigen_solver to achieve reproducibility (arpack is
     # initiated with random vectors that we don't control). In addition, we
@@ -286,18 +258,8 @@ the nodes (the stocks) on a 2D plane
 
     embedding = node_position_model.fit_transform(X.T).T
 
-
-
-
-
-
-
-Visualization
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Visualization
     plt.figure(1, facecolor='w', figsize=(10, 8))
     plt.clf()
     ax = plt.axes([0., 0., 1., 1.])
@@ -365,15 +327,7 @@ Visualization
 
     plt.show()
 
-
-
-.. image:: /auto_examples/applications/images/sphx_glr_plot_stock_market_001.png
-    :align: center
-
-
-
-
-**Total running time of the script:** ( 0 minutes  53.106 seconds)
+**Total running time of the script:** ( 0 minutes  25.935 seconds)
 
 
 

@@ -324,10 +324,10 @@ and has no <code class="docutils literal"><span class="pre">inverse_transform</s
 a signed hash function is used and the sign of the hash value
 determines the sign of the value stored in the output matrix for a feature.
 This way, collisions are likely to cancel out rather than accumulate error,
-and the expected mean of any output feature&#8217;s value is zero.</p>
-<p>If <code class="docutils literal"><span class="pre">non_negative=True</span></code> is passed to the constructor, the absolute
-value is taken.  This undoes some of the collision handling, but allows
-the output to be passed to estimators like
+and the expected mean of any output feature&#8217;s value is zero. This mechanism
+is enabled by default with <code class="docutils literal"><span class="pre">alternate_sign=True</span></code> and is particularly useful
+for small hash table sizes (<code class="docutils literal"><span class="pre">n_features</span> <span class="pre">&lt;</span> <span class="pre">10000</span></code>). For large hash table
+sizes, it can be disabled, to allow the output to be passed to estimators like
 <a class="reference internal" href="generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" title="sklearn.naive_bayes.MultinomialNB"><code class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.MultinomialNB</span></code></a> or
 <a class="reference internal" href="generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_selection.chi2</span></code></a>
 feature selectors that expect non-negative inputs.</p>

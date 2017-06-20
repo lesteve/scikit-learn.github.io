@@ -14,6 +14,33 @@ This exercise is used in the :ref:`cv_estimators_tut` part of the
 
 
 
+
+.. image:: /auto_examples/exercises/images/sphx_glr_plot_cv_diabetes_001.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Answer to the bonus question: how much can you trust the selection of alpha?
+
+    Alpha parameters maximising the generalization score on different
+    subsets of the data:
+    [fold 0] alpha: 0.10405, score: 0.53573
+    [fold 1] alpha: 0.05968, score: 0.16278
+    [fold 2] alpha: 0.10405, score: 0.44437
+
+    Answer: Not very much since we obtained different alphas for different
+    subsets of the data and moreover, the scores for these alphas differ
+    quite substantially.
+
+
+
+
+|
+
+
 .. code-block:: python
 
 
@@ -60,21 +87,8 @@ This exercise is used in the :ref:`cv_estimators_tut` part of the
     plt.axhline(np.max(scores), linestyle='--', color='.5')
     plt.xlim([alphas[0], alphas[-1]])
 
-
-
-
-.. image:: /auto_examples/exercises/images/sphx_glr_plot_cv_diabetes_001.png
-    :align: center
-
-
-
-
-Bonus: how much can you trust the selection of alpha?
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Bonus: how much can you trust the selection of alpha?
 
     # To answer this question we use the LassoCV object that sets its alpha
     # parameter automatically from the data by internal cross-validation (i.e. it
@@ -100,27 +114,7 @@ Bonus: how much can you trust the selection of alpha?
 
     plt.show()
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Answer to the bonus question: how much can you trust the selection of alpha?
-
-    Alpha parameters maximising the generalization score on different
-    subsets of the data:
-    [fold 0] alpha: 0.10405, score: 0.53573
-    [fold 1] alpha: 0.05968, score: 0.16278
-    [fold 2] alpha: 0.10405, score: 0.44437
-
-    Answer: Not very much since we obtained different alphas for different
-    subsets of the data and moreover, the scores for these alphas differ
-    quite substantially.
-
-
-**Total running time of the script:** ( 0 minutes  0.557 seconds)
+**Total running time of the script:** ( 0 minutes  0.546 seconds)
 
 
 

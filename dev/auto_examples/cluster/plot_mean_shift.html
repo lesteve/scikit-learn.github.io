@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="A demo of structured Ward hierarchical clustering on a raccoon face image" href="plot_face_ward_segmentation.html" />
-    <link rel="prev" title="Linear and Quadratic Discriminant Analysis with covariance ellipsoid" href="../classification/plot_lda_qda.html" />
+    <link rel="next" title="Demonstration of k-means assumptions" href="plot_kmeans_assumptions.html" />
+    <link rel="prev" title="Feature agglomeration" href="plot_digits_agglomeration.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="../classification/plot_lda_qda.html"
+        <a href="plot_digits_agglomeration.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Linear and Qu...
+        Feature agglomeration
         </span>
             <span class="hiddenrellink">
-            Linear and Quadratic Discriminant Analysis with covariance ellipsoid
+            Feature agglomeration
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_face_ward_segmentation.html"
+        <a href="plot_kmeans_assumptions.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        A demo of str...
+        Demonstration...
         </span>
             <span class="hiddenrellink">
-            A demo of structured Ward hierarchical clustering on a raccoon face image
+            Demonstration of k-means assumptions
             </span>
         </a>
         </div>
@@ -199,20 +199,29 @@
 <p>Dorin Comaniciu and Peter Meer, &#8220;Mean Shift: A robust approach toward
 feature space analysis&#8221;. IEEE Transactions on Pattern Analysis and
 Machine Intelligence. 2002. pp. 603-619.</p>
+<img alt="../../_images/sphx_glr_plot_mean_shift_001.png" class="align-center" src="../../_images/sphx_glr_plot_mean_shift_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">number</span> <span class="n">of</span> <span class="n">estimated</span> <span class="n">clusters</span> <span class="p">:</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.cluster.MeanShift.html#sklearn.cluster.MeanShift" title="View documentation for sklearn.cluster.MeanShift"><span class="n">MeanShift</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.cluster.estimate_bandwidth.html#sklearn.cluster.estimate_bandwidth" title="View documentation for sklearn.cluster.estimate_bandwidth"><span class="n">estimate_bandwidth</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs" title="View documentation for sklearn.datasets.samples_generator.make_blobs"><span class="n">make_blobs</span></a>
-</pre></div>
-</div>
-<p>Generate sample data</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">centers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Generate sample data</span>
+<span class="n">centers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs" title="View documentation for sklearn.datasets.samples_generator.make_blobs"><span class="n">make_blobs</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Compute clustering with MeanShift</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># The following bandwidth can be automatically detected using</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Compute clustering with MeanShift</span>
+
+<span class="c1"># The following bandwidth can be automatically detected using</span>
 <span class="n">bandwidth</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.estimate_bandwidth.html#sklearn.cluster.estimate_bandwidth" title="View documentation for sklearn.cluster.estimate_bandwidth"><span class="n">estimate_bandwidth</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">quantile</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
 <span class="n">ms</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.MeanShift.html#sklearn.cluster.MeanShift" title="View documentation for sklearn.cluster.MeanShift"><span class="n">MeanShift</span></a><span class="p">(</span><span class="n">bandwidth</span><span class="o">=</span><span class="n">bandwidth</span><span class="p">,</span> <span class="n">bin_seeding</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -224,14 +233,10 @@ Machine Intelligence. 2002. pp. 603-619.</p>
 <span class="n">n_clusters_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels_unique</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;number of estimated clusters : </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_clusters_</span><span class="p">)</span>
-</pre></div>
-</div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">number</span> <span class="n">of</span> <span class="n">estimated</span> <span class="n">clusters</span> <span class="p">:</span> <span class="mi">3</span>
-</pre></div>
-</div>
-<p>Plot result</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot result</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
 
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -248,8 +253,7 @@ Machine Intelligence. 2002. pp. 603-619.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_mean_shift_001.png" class="align-center" src="../../_images/sphx_glr_plot_mean_shift_001.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.642 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.559 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_mean_shift.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_mean_shift.py</span></code></a></div>
@@ -274,11 +278,11 @@ Machine Intelligence. 2002. pp. 603-619.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="../classification/plot_lda_qda.html">Previous
+      <a href="plot_digits_agglomeration.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_face_ward_segmentation.html">Next
+      <a href="plot_kmeans_assumptions.html">Next
       </a>
     </div>
     

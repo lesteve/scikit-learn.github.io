@@ -14,6 +14,30 @@ compared with the ground-truth.
 
 
 
+
+.. image:: /auto_examples/linear_model/images/sphx_glr_plot_lasso_and_elasticnet_001.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Lasso(alpha=0.1, copy_X=True, fit_intercept=True, max_iter=1000,
+       normalize=False, positive=False, precompute=False, random_state=None,
+       selection='cyclic', tol=0.0001, warm_start=False)
+    r^2 on test data : 0.385982
+    ElasticNet(alpha=0.1, copy_X=True, fit_intercept=True, l1_ratio=0.7,
+          max_iter=1000, normalize=False, positive=False, precompute=False,
+          random_state=None, selection='cyclic', tol=0.0001, warm_start=False)
+    r^2 on test data : 0.240498
+
+
+
+
+|
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -23,18 +47,8 @@ compared with the ground-truth.
 
     from sklearn.metrics import r2_score
 
-
-
-
-
-
-
-generate some sparse data to play with
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Generate some sparse data to play with
     np.random.seed(42)
 
     n_samples, n_features = 50, 200
@@ -53,18 +67,8 @@ generate some sparse data to play with
     X_train, y_train = X[:n_samples // 2], y[:n_samples // 2]
     X_test, y_test = X[n_samples // 2:], y[n_samples // 2:]
 
-
-
-
-
-
-
-Lasso
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Lasso
     from sklearn.linear_model import Lasso
 
     alpha = 0.1
@@ -75,26 +79,8 @@ Lasso
     print(lasso)
     print("r^2 on test data : %f" % r2_score_lasso)
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Lasso(alpha=0.1, copy_X=True, fit_intercept=True, max_iter=1000,
-       normalize=False, positive=False, precompute=False, random_state=None,
-       selection='cyclic', tol=0.0001, warm_start=False)
-    r^2 on test data : 0.385982
-
-
-ElasticNet
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # ElasticNet
     from sklearn.linear_model import ElasticNet
 
     enet = ElasticNet(alpha=alpha, l1_ratio=0.7)
@@ -114,23 +100,7 @@ ElasticNet
               % (r2_score_lasso, r2_score_enet))
     plt.show()
 
-
-
-.. image:: /auto_examples/linear_model/images/sphx_glr_plot_lasso_and_elasticnet_001.png
-    :align: center
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    ElasticNet(alpha=0.1, copy_X=True, fit_intercept=True, l1_ratio=0.7,
-          max_iter=1000, normalize=False, positive=False, precompute=False,
-          random_state=None, selection='cyclic', tol=0.0001, warm_start=False)
-    r^2 on test data : 0.240498
-
-
-**Total running time of the script:** ( 0 minutes  0.211 seconds)
+**Total running time of the script:** ( 0 minutes  0.124 seconds)
 
 
 

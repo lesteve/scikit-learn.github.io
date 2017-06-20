@@ -71,6 +71,33 @@ map.
 
 
 
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/svm/images/sphx_glr_plot_rbf_parameters_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/svm/images/sphx_glr_plot_rbf_parameters_002.png
+            :scale: 47
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    The best parameters are {'C': 1.0, 'gamma': 0.10000000000000001} with a score of 0.97
+
+
+
+
+|
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -99,20 +126,10 @@ map.
             x, y = [self.vmin, self.midpoint, self.vmax], [0, 0.5, 1]
             return np.ma.masked_array(np.interp(value, x, y))
 
-
-
-
-
-
-
-Load and prepare data set
-
-dataset for grid search
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Load and prepare data set
+    #
+    # dataset for grid search
 
     iris = load_iris()
     X = iris.data
@@ -136,22 +153,12 @@ dataset for grid search
     X = scaler.fit_transform(X)
     X_2d = scaler.fit_transform(X_2d)
 
-
-
-
-
-
-
-Train classifiers
-
-For an initial search, a logarithmic grid with basis
-10 is often helpful. Using a basis of 2, a finer
-tuning can be achieved but at a much higher cost.
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Train classifiers
+    #
+    # For an initial search, a logarithmic grid with basis
+    # 10 is often helpful. Using a basis of 2, a finer
+    # tuning can be achieved but at a much higher cost.
 
     C_range = np.logspace(-2, 10, 13)
     gamma_range = np.logspace(-9, 3, 13)
@@ -175,25 +182,10 @@ tuning can be achieved but at a much higher cost.
             clf.fit(X_2d, y_2d)
             classifiers.append((C, gamma, clf))
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    The best parameters are {'C': 1.0, 'gamma': 0.10000000000000001} with a score of 0.97
-
-
-visualization
-
-draw visualization of parameter effects
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Visualization
+    #
+    # draw visualization of parameter effects
 
     plt.figure(figsize=(8, 6))
     xx, yy = np.meshgrid(np.linspace(-3, 3, 200), np.linspace(-3, 3, 200))
@@ -239,25 +231,7 @@ draw visualization of parameter effects
     plt.title('Validation accuracy')
     plt.show()
 
-
-
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image:: /auto_examples/svm/images/sphx_glr_plot_rbf_parameters_001.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/svm/images/sphx_glr_plot_rbf_parameters_002.png
-            :scale: 47
-
-
-
-
-**Total running time of the script:** ( 0 minutes  7.260 seconds)
+**Total running time of the script:** ( 0 minutes  7.178 seconds)
 
 
 

@@ -12,6 +12,14 @@ Toy example of 1D regression using linear, polynomial and RBF kernels.
 
 
 
+
+.. image:: /auto_examples/svm/images/sphx_glr_plot_svm_regression_001.png
+    :align: center
+
+
+
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -20,47 +28,17 @@ Toy example of 1D regression using linear, polynomial and RBF kernels.
     from sklearn.svm import SVR
     import matplotlib.pyplot as plt
 
-
-
-
-
-
-
-Generate sample data
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Generate sample data
     X = np.sort(5 * np.random.rand(40, 1), axis=0)
     y = np.sin(X).ravel()
 
-
-
-
-
-
-
-Add noise to targets
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Add noise to targets
     y[::5] += 3 * (0.5 - np.random.rand(8))
 
-
-
-
-
-
-
-Fit regression model
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Fit regression model
     svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
     svr_lin = SVR(kernel='linear', C=1e3)
     svr_poly = SVR(kernel='poly', C=1e3, degree=2)
@@ -68,18 +46,8 @@ Fit regression model
     y_lin = svr_lin.fit(X, y).predict(X)
     y_poly = svr_poly.fit(X, y).predict(X)
 
-
-
-
-
-
-
-look at the results
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Look at the results
     lw = 2
     plt.scatter(X, y, color='darkorange', label='data')
     plt.hold('on')
@@ -92,15 +60,7 @@ look at the results
     plt.legend()
     plt.show()
 
-
-
-.. image:: /auto_examples/svm/images/sphx_glr_plot_svm_regression_001.png
-    :align: center
-
-
-
-
-**Total running time of the script:** ( 0 minutes  0.778 seconds)
+**Total running time of the script:** ( 0 minutes  0.785 seconds)
 
 
 

@@ -13,6 +13,28 @@ data and that in the case of sparse data the speed is improved.
 
 
 
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    --- Dense matrices
+    Sparse Lasso done in 0.168568s
+    Dense Lasso done in 0.060398s
+    Distance between coefficients : 1.0054870144020999e-13
+    --- Sparse matrices
+    Matrix density : 0.6263000000000001 %
+    Sparse Lasso done in 0.238201s
+    Dense Lasso done in 1.062809s
+    Distance between coefficients : 1.0424172088134681e-11
+
+
+
+
+|
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -25,18 +47,8 @@ data and that in the case of sparse data the speed is improved.
     from sklearn.linear_model import Lasso
 
 
-
-
-
-
-
-
-The two Lasso implementations on Dense data
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # The two Lasso implementations on Dense data
     print("--- Dense matrices")
 
     X, y = make_regression(n_samples=200, n_features=5000, random_state=0)
@@ -57,26 +69,8 @@ The two Lasso implementations on Dense data
     print("Distance between coefficients : %s"
           % linalg.norm(sparse_lasso.coef_ - dense_lasso.coef_))
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    --- Dense matrices
-    Sparse Lasso done in 0.168457s
-    Dense Lasso done in 0.060827s
-    Distance between coefficients : 1.0054870144020999e-13
-
-
-The two Lasso implementations on Sparse data
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # The two Lasso implementations on Sparse data
     print("--- Sparse matrices")
 
     Xs = X.copy()
@@ -101,21 +95,7 @@ The two Lasso implementations on Sparse data
     print("Distance between coefficients : %s"
           % linalg.norm(sparse_lasso.coef_ - dense_lasso.coef_))
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    --- Sparse matrices
-    Matrix density : 0.6263000000000001 %
-    Sparse Lasso done in 0.228806s
-    Dense Lasso done in 1.060128s
-    Distance between coefficients : 1.0424172088134681e-11
-
-
-**Total running time of the script:** ( 0 minutes  1.649 seconds)
+**Total running time of the script:** ( 0 minutes  1.657 seconds)
 
 
 

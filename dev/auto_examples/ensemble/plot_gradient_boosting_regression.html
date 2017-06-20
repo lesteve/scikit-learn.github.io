@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Prediction Intervals for Gradient Boosting Regression" href="plot_gradient_boosting_quantile.html" />
-    <link rel="prev" title="Comparing random forests and the multi-output meta estimator" href="plot_random_forest_regression_multioutput.html" />
+    <link rel="next" title="OOB Errors for Random Forests" href="plot_ensemble_oob.html" />
+    <link rel="prev" title="Gradient Boosting regularization" href="plot_gradient_boosting_regularization.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_random_forest_regression_multioutput.html"
+        <a href="plot_gradient_boosting_regularization.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Comparing ran...
+        Gradient Boos...
         </span>
             <span class="hiddenrellink">
-            Comparing random forests and the multi-output meta estimator
+            Gradient Boosting regularization
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_gradient_boosting_quantile.html"
+        <a href="plot_ensemble_oob.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Prediction In...
+        OOB Errors fo...
         </span>
             <span class="hiddenrellink">
-            Prediction Intervals for Gradient Boosting Regression
+            OOB Errors for Random Forests
             </span>
         </a>
         </div>
@@ -198,6 +198,14 @@
 <p>Demonstrate Gradient Boosting on the Boston housing dataset.</p>
 <p>This example fits a Gradient Boosting model with least squares loss and
 500 regression trees of depth 4.</p>
+<img alt="../../_images/sphx_glr_plot_gradient_boosting_regression_001.png" class="align-center" src="../../_images/sphx_glr_plot_gradient_boosting_regression_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">MSE</span><span class="p">:</span> <span class="mf">6.6213</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Peter Prettenhofer &lt;peter.prettenhofer@gmail.com&gt;</span>
@@ -211,33 +219,30 @@
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle" title="View documentation for sklearn.utils.shuffle"><span class="n">shuffle</span></a>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="View documentation for sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a>
-</pre></div>
-</div>
-<p>Load data</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">boston</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston" title="View documentation for sklearn.datasets.load_boston"><span class="n">datasets</span><span class="o">.</span><span class="n">load_boston</span></a><span class="p">()</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Load data</span>
+<span class="n">boston</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston" title="View documentation for sklearn.datasets.load_boston"><span class="n">datasets</span><span class="o">.</span><span class="n">load_boston</span></a><span class="p">()</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle" title="View documentation for sklearn.utils.shuffle"><span class="n">shuffle</span></a><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">)</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">offset</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">offset</span><span class="p">]</span>
 <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">offset</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">offset</span><span class="p">:]</span>
-</pre></div>
-</div>
-<p>Fit regression model</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Fit regression model</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
           <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="s1">&#39;ls&#39;</span><span class="p">}</span>
 <span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor" title="View documentation for sklearn.ensemble.GradientBoostingRegressor"><span class="n">ensemble</span><span class="o">.</span><span class="n">GradientBoostingRegressor</span></a><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">mse</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="View documentation for sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;MSE: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mse</span><span class="p">)</span>
-</pre></div>
-</div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">MSE</span><span class="p">:</span> <span class="mf">6.6213</span>
-</pre></div>
-</div>
-<p>Plot training deviance</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># compute test set deviance</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot training deviance</span>
+
+<span class="c1"># compute test set deviance</span>
 <span class="n">test_score</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.zeros.html#numpy.zeros" title="View documentation for numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">],),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">staged_predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)):</span>
@@ -253,11 +258,10 @@
 <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend" title="View documentation for matplotlib.pyplot.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Boosting Iterations&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Deviance&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<img alt="../../_images/sphx_glr_plot_gradient_boosting_regression_001.png" class="align-center" src="../../_images/sphx_glr_plot_gradient_boosting_regression_001.png" />
-<p>Plot feature importance</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">feature_importance</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot feature importance</span>
+<span class="n">feature_importance</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span>
 <span class="c1"># make importances relative to max importance</span>
 <span class="n">feature_importance</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">feature_importance</span> <span class="o">/</span> <span class="n">feature_importance</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 <span class="n">sorted_idx</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.argsort.html#numpy.argsort" title="View documentation for numpy.argsort"><span class="n">np</span><span class="o">.</span><span class="n">argsort</span></a><span class="p">(</span><span class="n">feature_importance</span><span class="p">)</span>
@@ -270,8 +274,7 @@
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_gradient_boosting_regression_002.png" class="align-center" src="../../_images/sphx_glr_plot_gradient_boosting_regression_002.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.703 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.700 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_gradient_boosting_regression.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_gradient_boosting_regression.py</span></code></a></div>
@@ -296,11 +299,11 @@
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_random_forest_regression_multioutput.html">Previous
+      <a href="plot_gradient_boosting_regularization.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_gradient_boosting_quantile.html">Next
+      <a href="plot_ensemble_oob.html">Next
       </a>
     </div>
     

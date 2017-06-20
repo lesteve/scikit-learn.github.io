@@ -16,6 +16,23 @@ Machine Intelligence. 2002. pp. 603-619.
 
 
 
+
+.. image:: /auto_examples/cluster/images/sphx_glr_plot_mean_shift_001.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    number of estimated clusters : 3
+
+
+
+
+|
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -24,33 +41,13 @@ Machine Intelligence. 2002. pp. 603-619.
     from sklearn.cluster import MeanShift, estimate_bandwidth
     from sklearn.datasets.samples_generator import make_blobs
 
-
-
-
-
-
-
-Generate sample data
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Generate sample data
     centers = [[1, 1], [-1, -1], [1, -1]]
     X, _ = make_blobs(n_samples=10000, centers=centers, cluster_std=0.6)
 
-
-
-
-
-
-
-Compute clustering with MeanShift
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Compute clustering with MeanShift
 
     # The following bandwidth can be automatically detected using
     bandwidth = estimate_bandwidth(X, quantile=0.2, n_samples=500)
@@ -65,23 +62,8 @@ Compute clustering with MeanShift
 
     print("number of estimated clusters : %d" % n_clusters_)
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    number of estimated clusters : 3
-
-
-Plot result
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Plot result
     import matplotlib.pyplot as plt
     from itertools import cycle
 
@@ -98,15 +80,7 @@ Plot result
     plt.title('Estimated number of clusters: %d' % n_clusters_)
     plt.show()
 
-
-
-.. image:: /auto_examples/cluster/images/sphx_glr_plot_mean_shift_001.png
-    :align: center
-
-
-
-
-**Total running time of the script:** ( 0 minutes  0.642 seconds)
+**Total running time of the script:** ( 0 minutes  0.559 seconds)
 
 
 

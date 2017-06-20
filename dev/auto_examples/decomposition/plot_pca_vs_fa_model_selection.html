@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Sparse coding with a precomputed dictionary" href="plot_sparse_coding.html" />
-    <link rel="prev" title="Principal components analysis (PCA)" href="plot_pca_3d.html" />
+    <link rel="next" title="Image denoising using dictionary learning" href="plot_image_denoising.html" />
+    <link rel="prev" title="Sparse coding with a precomputed dictionary" href="plot_sparse_coding.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_pca_3d.html"
+        <a href="plot_sparse_coding.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Principal com...
+        Sparse coding...
         </span>
             <span class="hiddenrellink">
-            Principal components analysis (PCA)
+            Sparse coding with a precomputed dictionary
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_sparse_coding.html"
+        <a href="plot_image_denoising.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Sparse coding...
+        Image denoisi...
         </span>
             <span class="hiddenrellink">
-            Sparse coding with a precomputed dictionary
+            Image denoising using dictionary learning
             </span>
         </a>
         </div>
@@ -211,6 +211,24 @@ circumstances the low rank models are more likely than shrinkage models.</p>
 <p>The automatic estimation from
 Automatic Choice of Dimensionality for PCA. NIPS 2000: 598-604
 by Thomas P. Minka is also compared.</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png"><img alt="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png" src="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png"><img alt="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" src="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis" title="View documentation for sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis" title="View documentation for sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">38</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Authors: Alexandre Gramfort</span>
 <span class="c1">#          Denis A. Engemann</span>
 <span class="c1"># License: BSD 3 clause</span>
@@ -225,10 +243,11 @@ by Thomas P. Minka is also compared.</p>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="View documentation for sklearn.model_selection.GridSearchCV"><span class="n">GridSearchCV</span></a>
 
 <span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Create the data</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Create the data</span>
+
+<span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
 <span class="n">rng</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.RandomState.wald.html#numpy.random.RandomState" title="View documentation for numpy.random.RandomState"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span></a><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">U</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
@@ -240,10 +259,11 @@ by Thomas P. Minka is also compared.</p>
 <span class="c1"># Adding heteroscedastic noise</span>
 <span class="n">sigmas</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_features</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">/</span> <span class="mf">2.</span>
 <span class="n">X_hetero</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigmas</span>
-</pre></div>
-</div>
-<p>Fit the models</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># options for n_components</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Fit the models</span>
+
+<span class="n">n_components</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># options for n_components</span>
 
 
 <span class="k">def</span> <span class="nf">compute_scores</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -310,22 +330,7 @@ by Thomas P. Minka is also compared.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png"><img alt="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png" src="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_001.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png"><img alt="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" src="../../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
-</li>
-</ul>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis" title="View documentation for sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis" title="View documentation for sklearn.decomposition.FactorAnalysis"><span class="n">FactorAnalysis</span></a> <span class="n">CV</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">best</span> <span class="n">n_components</span> <span class="n">by</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a> <span class="n">MLE</span> <span class="o">=</span> <span class="mi">38</span>
-</pre></div>
-</div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  12.911 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  12.657 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_pca_vs_fa_model_selection.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pca_vs_fa_model_selection.py</span></code></a></div>
@@ -350,11 +355,11 @@ by Thomas P. Minka is also compared.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_pca_3d.html">Previous
+      <a href="plot_sparse_coding.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_sparse_coding.html">Next
+      <a href="plot_image_denoising.html">Next
       </a>
     </div>
     

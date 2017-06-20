@@ -285,10 +285,11 @@ automatically downloaded, then cached.</p>
 <span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 <span class="n">op</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
 <span class="k">print</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Load some categories from the training set</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">all_categories</span><span class="p">:</span>
+
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Load some categories from the training set</span>
+<span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">all_categories</span><span class="p">:</span>
     <span class="n">categories</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
@@ -338,7 +339,7 @@ automatically downloaded, then cached.</p>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Extracting features from the training data using a sparse vectorizer&quot;</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">use_hashing</span><span class="p">:</span>
-    <span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="View documentation for sklearn.feature_extraction.text.HashingVectorizer"><span class="n">HashingVectorizer</span></a><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">,</span> <span class="n">non_negative</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="View documentation for sklearn.feature_extraction.text.HashingVectorizer"><span class="n">HashingVectorizer</span></a><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">,</span> <span class="n">alternate_sign</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                                    <span class="n">n_features</span><span class="o">=</span><span class="n">opts</span><span class="o">.</span><span class="n">n_features</span><span class="p">)</span>
     <span class="n">X_train</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
@@ -385,10 +386,11 @@ automatically downloaded, then cached.</p>
 <span class="k">def</span> <span class="nf">trim</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Trim string to fit on terminal (assuming 80-column display)&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">s</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">80</span> <span class="k">else</span> <span class="n">s</span><span class="p">[:</span><span class="mi">77</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span>
-</pre></div>
-</div>
-<p>Benchmark classifiers</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">benchmark</span><span class="p">(</span><span class="n">clf</span><span class="p">):</span>
+
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Benchmark classifiers</span>
+<span class="k">def</span> <span class="nf">benchmark</span><span class="p">(</span><span class="n">clf</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;_&#39;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Training: &quot;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>

@@ -17,6 +17,14 @@ presented.
 
 
 
+
+.. image:: /auto_examples/images/sphx_glr_plot_isotonic_regression_001.png
+    :align: center
+
+
+
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -38,18 +46,8 @@ presented.
     rs = check_random_state(0)
     y = rs.randint(-50, 50, size=(n,)) + 50. * np.log(1 + np.arange(n))
 
-
-
-
-
-
-
-Fit IsotonicRegression and LinearRegression models
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Fit IsotonicRegression and LinearRegression models
 
     ir = IsotonicRegression()
 
@@ -58,18 +56,8 @@ Fit IsotonicRegression and LinearRegression models
     lr = LinearRegression()
     lr.fit(x[:, np.newaxis], y)  # x needs to be 2d for LinearRegression
 
-
-
-
-
-
-
-plot result
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Plot result
 
     segments = [[[i, y[i]], [i, y_[i]]] for i in range(n)]
     lc = LineCollection(segments, zorder=0)
@@ -85,15 +73,7 @@ plot result
     plt.title('Isotonic regression')
     plt.show()
 
-
-
-.. image:: /auto_examples/images/sphx_glr_plot_isotonic_regression_001.png
-    :align: center
-
-
-
-
-**Total running time of the script:** ( 0 minutes  0.123 seconds)
+**Total running time of the script:** ( 0 minutes  0.118 seconds)
 
 
 

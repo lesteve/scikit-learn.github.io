@@ -37,7 +37,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Pipelining: chaining a PCA and a logistic regression" href="plot_digits_pipe.html" />
-    <link rel="prev" title="Isotonic Regression" href="plot_isotonic_regression.html" />
+    <link rel="prev" title="Plotting Cross-Validated Predictions" href="plot_cv_predict.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_isotonic_regression.html"
+        <a href="plot_cv_predict.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Isotonic Regression
+        Plotting Cros...
         </span>
             <span class="hiddenrellink">
-            Isotonic Regression
+            Plotting Cross-Validated Predictions
             </span>
         </a>
         </div>
@@ -316,7 +316,7 @@ dataset and is only used to illustrate the usage of FeatureUnion.</p>
 <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="View documentation for sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
      <span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;features&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.pipeline.FeatureUnion.html#sklearn.pipeline.FeatureUnion" title="View documentation for sklearn.pipeline.FeatureUnion"><span class="n">FeatureUnion</span></a><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
        <span class="n">transformer_list</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">iterated_power</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-  <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;univ_select&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="View documentation for sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">score_func</span><span class="o">=&lt;</span><span class="n">function</span> <span class="n">f_classif</span> <span class="n">at</span> <span class="mh">0x2ba1e13cbd08</span><span class="o">&gt;</span><span class="p">))],</span>
+  <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;univ_select&#39;</span><span class="p">,</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest" title="View documentation for sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">score_func</span><span class="o">=&lt;</span><span class="n">function</span> <span class="n">f_classif</span> <span class="n">at</span> <span class="mh">0x2ab5766f0d08</span><span class="o">&gt;</span><span class="p">))],</span>
        <span class="n">transformer</span><span class="o">...</span><span class="p">,</span>
   <span class="n">max_iter</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">probability</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shrinking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
   <span class="n">tol</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">))])</span>
@@ -368,7 +368,7 @@ dataset and is only used to illustrate the usage of FeatureUnion.</p>
 <span class="k">print</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.674 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.643 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/plot_feature_stacker.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_feature_stacker.py</span></code></a></div>
@@ -393,7 +393,7 @@ dataset and is only used to illustrate the usage of FeatureUnion.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_isotonic_regression.html">Previous
+      <a href="plot_cv_predict.html">Previous
       </a>
     </div>
     <div class="buttonNext">

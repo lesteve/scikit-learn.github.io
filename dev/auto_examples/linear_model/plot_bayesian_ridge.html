@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Automatic Relevance Determination Regression (ARD)" href="plot_ard.html" />
-    <link rel="prev" title="Robust linear estimator fitting" href="plot_robust_fit.html" />
+    <link rel="next" title="Lasso model selection: Cross-Validation / AIC / BIC" href="plot_lasso_model_selection.html" />
+    <link rel="prev" title="Automatic Relevance Determination Regression (ARD)" href="plot_ard.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_robust_fit.html"
+        <a href="plot_ard.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Robust linear...
+        Automatic Rel...
         </span>
             <span class="hiddenrellink">
-            Robust linear estimator fitting
+            Automatic Relevance Determination Regression (ARD)
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_ard.html"
+        <a href="plot_lasso_model_selection.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Automatic Rel...
+        Lasso model s...
         </span>
             <span class="hiddenrellink">
-            Automatic Relevance Determination Regression (ARD)
+            Lasso model selection: Cross-Validation / AIC / BIC
             </span>
         </a>
         </div>
@@ -208,6 +208,16 @@ for one dimensional regression using polynomial feature expansion.
 Note the uncertainty starts going up on the right side of the plot.
 This is because these test samples are outside of the range of the training
 samples.</p>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_001.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_001.png" src="../../_images/sphx_glr_plot_bayesian_ridge_001.png" style="width: 282.0px; height: 235.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_002.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_002.png" src="../../_images/sphx_glr_plot_bayesian_ridge_002.png" style="width: 282.0px; height: 235.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_003.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_003.png" src="../../_images/sphx_glr_plot_bayesian_ridge_003.png" style="width: 282.0px; height: 235.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_004.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_004.png" src="../../_images/sphx_glr_plot_bayesian_ridge_004.png" style="width: 282.0px; height: 235.0px;" /></a>
+</li>
+</ul>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -215,10 +225,10 @@ samples.</p>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.BayesianRidge.html#sklearn.linear_model.BayesianRidge" title="View documentation for sklearn.linear_model.BayesianRidge"><span class="n">BayesianRidge</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a>
-</pre></div>
-</div>
-<p>Generating simulated data with Gaussian weights</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Generating simulated data with Gaussian weights</span>
+<a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
 <span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>  <span class="c1"># Create Gaussian data</span>
 <span class="c1"># Create weights with a precision lambda_ of 4.</span>
@@ -233,19 +243,19 @@ samples.</p>
 <span class="n">noise</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.sqrt.html#numpy.sqrt" title="View documentation for numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">alpha_</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="c1"># Create the target</span>
 <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.dot.html#numpy.dot" title="View documentation for numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span>
-</pre></div>
-</div>
-<p>Fit the Bayesian Ridge Regression and an OLS for comparison</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.BayesianRidge.html#sklearn.linear_model.BayesianRidge" title="View documentation for sklearn.linear_model.BayesianRidge"><span class="n">BayesianRidge</span></a><span class="p">(</span><span class="n">compute_score</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Fit the Bayesian Ridge Regression and an OLS for comparison</span>
+<span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.BayesianRidge.html#sklearn.linear_model.BayesianRidge" title="View documentation for sklearn.linear_model.BayesianRidge"><span class="n">BayesianRidge</span></a><span class="p">(</span><span class="n">compute_score</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="n">ols</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">()</span>
 <span class="n">ols</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Plot true weights, estimated weights, histogram of the weights, and
-predictions with standard deviations</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot true weights, estimated weights, histogram of the weights, and</span>
+<span class="c1"># predictions with standard deviations</span>
+<span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Weights of the model&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
@@ -300,17 +310,7 @@ predictions with standard deviations</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_001.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_001.png" src="../../_images/sphx_glr_plot_bayesian_ridge_001.png" style="width: 282.0px; height: 235.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_002.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_002.png" src="../../_images/sphx_glr_plot_bayesian_ridge_002.png" style="width: 282.0px; height: 235.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_003.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_003.png" src="../../_images/sphx_glr_plot_bayesian_ridge_003.png" style="width: 282.0px; height: 235.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../../_images/sphx_glr_plot_bayesian_ridge_004.png"><img alt="../../_images/sphx_glr_plot_bayesian_ridge_004.png" src="../../_images/sphx_glr_plot_bayesian_ridge_004.png" style="width: 282.0px; height: 235.0px;" /></a>
-</li>
-</ul>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.569 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.519 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_bayesian_ridge.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_bayesian_ridge.py</span></code></a></div>
@@ -335,11 +335,11 @@ predictions with standard deviations</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_robust_fit.html">Previous
+      <a href="plot_ard.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_ard.html">Next
+      <a href="plot_lasso_model_selection.html">Next
       </a>
     </div>
     

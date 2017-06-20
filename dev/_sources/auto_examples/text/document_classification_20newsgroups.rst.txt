@@ -108,13 +108,8 @@ The bar plot indicates the accuracy, training time (normalized) and test time
     print()
 
 
-
-Load some categories from the training set
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Load some categories from the training set
     if opts.all_categories:
         categories = None
     else:
@@ -165,7 +160,7 @@ Load some categories from the training set
     print("Extracting features from the training data using a sparse vectorizer")
     t0 = time()
     if opts.use_hashing:
-        vectorizer = HashingVectorizer(stop_words='english', non_negative=True,
+        vectorizer = HashingVectorizer(stop_words='english', alternate_sign=False,
                                        n_features=opts.n_features)
         X_train = vectorizer.transform(data_train.data)
     else:
@@ -214,13 +209,8 @@ Load some categories from the training set
         return s if len(s) <= 80 else s[:77] + "..."
 
 
-
-Benchmark classifiers
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Benchmark classifiers
     def benchmark(clf):
         print('_' * 80)
         print("Training: ")

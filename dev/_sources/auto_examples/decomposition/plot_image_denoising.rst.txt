@@ -37,6 +37,71 @@ necessarily related to visualisation.
 
 
 
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_002.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_003.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_004.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_005.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_006.png
+            :scale: 47
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Distorting image...
+    Extracting reference patches...
+    done in 0.06s.
+    Learning the dictionary...
+    done in 10.08s.
+    Extracting noisy patches... 
+    done in 0.02s.
+    Orthogonal Matching Pursuit
+    1 atom...
+    done in 12.71s.
+    Orthogonal Matching Pursuit
+    2 atoms...
+    done in 25.68s.
+    Least-angle regression
+    5 atoms...
+    done in 143.91s.
+    Thresholding
+     alpha=0.1...
+    done in 1.17s.
+
+
+
+
+|
+
+
 .. code-block:: python
 
     print(__doc__)
@@ -51,15 +116,6 @@ necessarily related to visualisation.
     from sklearn.feature_extraction.image import extract_patches_2d
     from sklearn.feature_extraction.image import reconstruct_from_patches_2d
 
-
-
-
-
-
-
-
-
-.. code-block:: python
 
     try:  # SciPy >= 0.16 have face in misc
         from scipy.misc import face
@@ -91,25 +147,8 @@ necessarily related to visualisation.
     data /= np.std(data, axis=0)
     print('done in %.2fs.' % (time() - t0))
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Distorting image...
-    Extracting reference patches...
-    done in 0.06s.
-
-
-Learn the dictionary from reference patches
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Learn the dictionary from reference patches
 
     print('Learning the dictionary...')
     t0 = time()
@@ -131,27 +170,8 @@ Learn the dictionary from reference patches
     plt.subplots_adjust(0.08, 0.02, 0.92, 0.85, 0.08, 0.23)
 
 
-
-
-
-.. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_001.png
-    :align: center
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Learning the dictionary...
-    done in 10.12s.
-
-
-Display the distorted image
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Display the distorted image
 
     def show_with_diff(image, reference, title):
         """Helper function to display denoising"""
@@ -175,21 +195,8 @@ Display the distorted image
 
     show_with_diff(distorted, face, 'Distorted image')
 
-
-
-
-.. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_002.png
-    :align: center
-
-
-
-
-Extract noisy patches and reconstruct them using the dictionary
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Extract noisy patches and reconstruct them using the dictionary
 
     print('Extracting noisy patches... ')
     t0 = time()
@@ -231,53 +238,7 @@ Extract noisy patches and reconstruct them using the dictionary
 
     plt.show()
 
-
-
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_003.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_004.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_005.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/decomposition/images/sphx_glr_plot_image_denoising_006.png
-            :scale: 47
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Extracting noisy patches... 
-    done in 0.02s.
-    Orthogonal Matching Pursuit
-    1 atom...
-    done in 12.71s.
-    Orthogonal Matching Pursuit
-    2 atoms...
-    done in 25.58s.
-    Least-angle regression
-    5 atoms...
-    done in 143.44s.
-    Thresholding
-     alpha=0.1...
-    done in 1.18s.
-
-
-**Total running time of the script:** ( 3 minutes  21.029 seconds)
+**Total running time of the script:** ( 3 minutes  21.796 seconds)
 
 
 

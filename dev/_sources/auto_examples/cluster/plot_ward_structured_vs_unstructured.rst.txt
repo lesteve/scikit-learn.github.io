@@ -24,6 +24,38 @@ the clusters form a nice parcellation of the swiss roll.
 
 
 
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/cluster/images/sphx_glr_plot_ward_structured_vs_unstructured_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/cluster/images/sphx_glr_plot_ward_structured_vs_unstructured_002.png
+            :scale: 47
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Compute unstructured hierarchical clustering...
+    Elapsed time: 0.06s
+    Number of points: 1500
+    Compute structured hierarchical clustering...
+    Elapsed time: 0.16s
+    Number of points: 1500
+
+
+
+
+|
+
+
 .. code-block:: python
 
 
@@ -41,36 +73,16 @@ the clusters form a nice parcellation of the swiss roll.
     from sklearn.cluster import AgglomerativeClustering
     from sklearn.datasets.samples_generator import make_swiss_roll
 
-
-
-
-
-
-
-Generate data (swiss roll dataset)
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Generate data (swiss roll dataset)
     n_samples = 1500
     noise = 0.05
     X, _ = make_swiss_roll(n_samples, noise)
     # Make it thinner
     X[:, 1] *= .5
 
-
-
-
-
-
-
-Compute clustering
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Compute clustering
     print("Compute unstructured hierarchical clustering...")
     st = time.time()
     ward = AgglomerativeClustering(n_clusters=6, linkage='ward').fit(X)
@@ -79,25 +91,8 @@ Compute clustering
     print("Elapsed time: %.2fs" % elapsed_time)
     print("Number of points: %i" % label.size)
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Compute unstructured hierarchical clustering...
-    Elapsed time: 0.06s
-    Number of points: 1500
-
-
-Plot result
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Plot result
     fig = plt.figure()
     ax = p3.Axes3D(fig)
     ax.view_init(7, -80)
@@ -107,36 +102,13 @@ Plot result
     plt.title('Without connectivity constraints (time %.2fs)' % elapsed_time)
 
 
-
-
-
-.. image:: /auto_examples/cluster/images/sphx_glr_plot_ward_structured_vs_unstructured_001.png
-    :align: center
-
-
-
-
-Define the structure A of the data. Here a 10 nearest neighbors
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Define the structure A of the data. Here a 10 nearest neighbors
     from sklearn.neighbors import kneighbors_graph
     connectivity = kneighbors_graph(X, n_neighbors=10, include_self=False)
 
-
-
-
-
-
-
-Compute clustering
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Compute clustering
     print("Compute structured hierarchical clustering...")
     st = time.time()
     ward = AgglomerativeClustering(n_clusters=6, connectivity=connectivity,
@@ -146,25 +118,8 @@ Compute clustering
     print("Elapsed time: %.2fs" % elapsed_time)
     print("Number of points: %i" % label.size)
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Compute structured hierarchical clustering...
-    Elapsed time: 0.16s
-    Number of points: 1500
-
-
-Plot result
-
-
-
-.. code-block:: python
-
+    # #############################################################################
+    # Plot result
     fig = plt.figure()
     ax = p3.Axes3D(fig)
     ax.view_init(7, -80)
@@ -175,15 +130,7 @@ Plot result
 
     plt.show()
 
-
-
-.. image:: /auto_examples/cluster/images/sphx_glr_plot_ward_structured_vs_unstructured_002.png
-    :align: center
-
-
-
-
-**Total running time of the script:** ( 0 minutes  0.327 seconds)
+**Total running time of the script:** ( 0 minutes  0.323 seconds)
 
 
 

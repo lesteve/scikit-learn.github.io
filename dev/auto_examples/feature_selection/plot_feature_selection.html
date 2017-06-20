@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Test with permutations the significance of a classification score" href="plot_permutation_test_for_classification.html" />
-    <link rel="prev" title="Feature selection using SelectFromModel and LassoCV" href="plot_select_from_model_boston.html" />
+    <link rel="next" title="Illustration of Gaussian process classification (GPC) on the XOR dataset" href="../gaussian_process/plot_gpc_xor.html" />
+    <link rel="prev" title="Test with permutations the significance of a classification score" href="plot_permutation_test_for_classification.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_select_from_model_boston.html"
+        <a href="plot_permutation_test_for_classification.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Feature selec...
+        Test with per...
         </span>
             <span class="hiddenrellink">
-            Feature selection using SelectFromModel and LassoCV
+            Test with permutations the significance of a classification score
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_permutation_test_for_classification.html"
+        <a href="../gaussian_process/plot_gpc_xor.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Test with per...
+        Illustration ...
         </span>
             <span class="hiddenrellink">
-            Test with permutations the significance of a classification score
+            Illustration of Gaussian process classification (GPC) on the XOR dataset
             </span>
         </a>
         </div>
@@ -208,6 +208,7 @@ Selects many of the non-informative features.
 Applying univariate feature selection before the SVM
 increases the SVM weight attributed to the significant features, and will
 thus improve classification.</p>
+<img alt="../../_images/sphx_glr_plot_feature_selection_001.png" class="align-center" src="../../_images/sphx_glr_plot_feature_selection_001.png" />
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -215,10 +216,11 @@ thus improve classification.</p>
 
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="View documentation for sklearn.feature_selection.SelectPercentile"><span class="n">SelectPercentile</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif" title="View documentation for sklearn.feature_selection.f_classif"><span class="n">f_classif</span></a>
-</pre></div>
-</div>
-<p>import some data to play with</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># The iris dataset</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Import some data to play with</span>
+
+<span class="c1"># The iris dataset</span>
 <span class="n">iris</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris" title="View documentation for sklearn.datasets.load_iris"><span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span></a><span class="p">()</span>
 
 <span class="c1"># Some noisy data not correlated</span>
@@ -227,29 +229,26 @@ thus improve classification.</p>
 <span class="c1"># Add the noisy data to the informative features</span>
 <span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.hstack.html#numpy.hstack" title="View documentation for numpy.hstack"><span class="n">np</span><span class="o">.</span><span class="n">hstack</span></a><span class="p">((</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">E</span><span class="p">))</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf" title="View documentation for matplotlib.pyplot.clf"><span class="n">plt</span><span class="o">.</span><span class="n">clf</span></a><span class="p">()</span>
 
 <span class="n">X_indices</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-<img alt="../../_images/sphx_glr_plot_feature_selection_001.png" class="align-center" src="../../_images/sphx_glr_plot_feature_selection_001.png" />
-<p>Univariate feature selection with F-test for feature scoring
-We use the default selection function: the 10% most significant features</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">selector</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="View documentation for sklearn.feature_selection.SelectPercentile"><span class="n">SelectPercentile</span></a><span class="p">(</span><a href="../../modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif" title="View documentation for sklearn.feature_selection.f_classif"><span class="n">f_classif</span></a><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Univariate feature selection with F-test for feature scoring</span>
+<span class="c1"># We use the default selection function: the 10% most significant features</span>
+<span class="n">selector</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="View documentation for sklearn.feature_selection.SelectPercentile"><span class="n">SelectPercentile</span></a><span class="p">(</span><a href="../../modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif" title="View documentation for sklearn.feature_selection.f_classif"><span class="n">f_classif</span></a><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="o">-</span><a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.log10.html#numpy.log10" title="View documentation for numpy.log10"><span class="n">np</span><span class="o">.</span><span class="n">log10</span></a><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">pvalues_</span><span class="p">)</span>
 <span class="n">scores</span> <span class="o">/=</span> <span class="n">scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar" title="View documentation for matplotlib.pyplot.bar"><span class="n">plt</span><span class="o">.</span><span class="n">bar</span></a><span class="p">(</span><span class="n">X_indices</span> <span class="o">-</span> <span class="o">.</span><span class="mi">45</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">width</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Univariate score ($-Log(p_{value})$)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span>
         <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<img alt="../../_images/sphx_glr_plot_feature_selection_002.png" class="align-center" src="../../_images/sphx_glr_plot_feature_selection_002.png" />
-<p>Compare to the weights of an SVM</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="View documentation for sklearn.svm.SVC"><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Compare to the weights of an SVM</span>
+<span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="View documentation for sklearn.svm.SVC"><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="n">svm_weights</span> <span class="o">=</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -277,8 +276,7 @@ We use the default selection function: the 10% most significant features</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_feature_selection_003.png" class="align-center" src="../../_images/sphx_glr_plot_feature_selection_003.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.263 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.144 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_feature_selection.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_feature_selection.py</span></code></a></div>
@@ -303,11 +301,11 @@ We use the default selection function: the 10% most significant features</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_select_from_model_boston.html">Previous
+      <a href="plot_permutation_test_for_classification.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_permutation_test_for_classification.html">Next
+      <a href="../gaussian_process/plot_gpc_xor.html">Next
       </a>
     </div>
     

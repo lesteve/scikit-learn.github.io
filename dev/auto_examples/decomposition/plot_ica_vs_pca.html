@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Kernel PCA" href="plot_kernel_pca.html" />
-    <link rel="prev" title="Blind source separation using FastICA" href="plot_ica_blind_source_separation.html" />
+    <link rel="next" title="Principal components analysis (PCA)" href="plot_pca_3d.html" />
+    <link rel="prev" title="Kernel PCA" href="plot_kernel_pca.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_ica_blind_source_separation.html"
+        <a href="plot_kernel_pca.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Blind source ...
+        Kernel PCA
         </span>
             <span class="hiddenrellink">
-            Blind source separation using FastICA
+            Kernel PCA
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_kernel_pca.html"
+        <a href="plot_pca_3d.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Kernel PCA
+        Principal com...
         </span>
             <span class="hiddenrellink">
-            Kernel PCA
+            Principal components analysis (PCA)
             </span>
         </a>
         </div>
@@ -214,6 +214,7 @@ represented by orange vectors. We represent the signal in the PCA space,
 after whitening by the variance corresponding to the PCA vectors (lower
 left). Running ICA corresponds to finding a rotation in this space to
 identify the directions of largest non-Gaussianity (lower right).</p>
+<img alt="../../_images/sphx_glr_plot_ica_vs_pca_001.png" class="align-center" src="../../_images/sphx_glr_plot_ica_vs_pca_001.png" />
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Authors: Alexandre Gramfort, Gael Varoquaux</span>
@@ -223,10 +224,10 @@ identify the directions of largest non-Gaussianity (lower right).</p>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA" title="View documentation for sklearn.decomposition.FastICA"><span class="n">FastICA</span></a>
-</pre></div>
-</div>
-<p>Generate sample data</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.RandomState.wald.html#numpy.random.RandomState" title="View documentation for numpy.random.RandomState"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span></a><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Generate sample data</span>
+<span class="n">rng</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.RandomState.wald.html#numpy.random.RandomState" title="View documentation for numpy.random.RandomState"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span></a><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">S</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_t</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="n">S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">2.</span>
 
@@ -242,10 +243,12 @@ identify the directions of largest non-Gaussianity (lower right).</p>
 <span class="n">S_ica_</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Estimate the sources</span>
 
 <span class="n">S_ica_</span> <span class="o">/=</span> <span class="n">S_ica_</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Plot results</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_samples</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Plot results</span>
+
+<span class="k">def</span> <span class="nf">plot_samples</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter" title="View documentation for matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">S</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">axis_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -290,8 +293,7 @@ identify the directions of largest non-Gaussianity (lower right).</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_ica_vs_pca_001.png" class="align-center" src="../../_images/sphx_glr_plot_ica_vs_pca_001.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.693 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.829 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_ica_vs_pca.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ica_vs_pca.py</span></code></a></div>
@@ -316,11 +318,11 @@ identify the directions of largest non-Gaussianity (lower right).</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_ica_blind_source_separation.html">Previous
+      <a href="plot_kernel_pca.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_kernel_pca.html">Next
+      <a href="plot_pca_3d.html">Next
       </a>
     </div>
     
