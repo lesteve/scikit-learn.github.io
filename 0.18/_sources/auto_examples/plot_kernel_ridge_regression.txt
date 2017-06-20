@@ -70,7 +70,7 @@ Generate sample data
     y = np.sin(X).ravel()
 
     # Add noise to targets
-    y[::5] += 3 * (0.5 - rng.rand(X.shape[0]/5))
+    y[::5] += 3 * (0.5 - rng.rand(X.shape[0] // 5))
 
     X_plot = np.linspace(0, 5, 100000)[:, None]
 
@@ -130,11 +130,11 @@ Fit regression model
 
  Out::
 
-      SVR complexity and bandwidth selected and model fitted in 0.888 s
-    KRR complexity and bandwidth selected and model fitted in 0.499 s
+      SVR complexity and bandwidth selected and model fitted in 0.970 s
+    KRR complexity and bandwidth selected and model fitted in 0.606 s
     Support vector ratio: 0.320
-    SVR prediction for 100000 inputs in 0.146 s
-    KRR prediction for 100000 inputs in 0.774 s
+    SVR prediction for 100000 inputs in 0.157 s
+    KRR prediction for 100000 inputs in 0.385 s
 
 
 look at the results
@@ -162,8 +162,8 @@ look at the results
     # Generate sample data
     X = 5 * rng.rand(10000, 1)
     y = np.sin(X).ravel()
-    y[::5] += 3 * (0.5 - rng.rand(X.shape[0]/5))
-    sizes = np.logspace(1, 4, 7)
+    y[::5] += 3 * (0.5 - rng.rand(X.shape[0] // 5))
+    sizes = np.logspace(1, 4, 7, dtype=np.int)
     for name, estimator in {"KRR": KernelRidge(kernel='rbf', alpha=0.1,
                                                gamma=10),
                             "SVR": SVR(kernel='rbf', C=1e1, gamma=10)}.items():
@@ -237,7 +237,7 @@ look at the results
 
 
 **Total running time of the script:**
-(0 minutes 36.276 seconds)
+(0 minutes 51.023 seconds)
 
 
 
