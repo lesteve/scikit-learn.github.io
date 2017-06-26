@@ -225,18 +225,20 @@ $ git push origin --tags
 </pre></div>
 </div>
 </li>
-<li><p class="first">Upload manually the tarball on SourceForge:
-<a class="reference external" href="https://sourceforge.net/projects/scikit-learn/files/">https://sourceforge.net/projects/scikit-learn/files/</a></p>
-</li>
 </ul>
 </li>
 <li><p class="first">Push the documentation to the website (see README in doc folder)</p>
 </li>
-<li><p class="first">Build binaries for windows and push them to PyPI:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py bdist_wininst upload
+<li><p class="first">Build binaries using dedicated CI servers by updating the git submodule
+reference to the new scikit-learn tag of the release at:</p>
+<p><a class="reference external" href="https://github.com/MacPython/scikit-learn-wheels">https://github.com/MacPython/scikit-learn-wheels</a></p>
+<p>Once the CI has completed successfully, collect the generated binary wheel
+packages and upload them to PyPI by running the following commands in the
+scikit-learn source folder (checked out at the release tag):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install -U wheelhouse_uploader
+$ python setup.py sdist fetch_artifacts upload_all
 </pre></div>
 </div>
-<p>And upload them also to sourceforge</p>
 </li>
 <li><p class="first">FOR FINAL RELEASE: Update the release date in What&#8217;s New</p>
 </li>

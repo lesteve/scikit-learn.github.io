@@ -493,6 +493,14 @@ to enable selection of the norm order when <code class="docutils literal"><span 
 <li><code class="docutils literal"><span class="pre">check_estimator</span></code> now attempts to ensure that methods transform, predict, etc.
 do not set attributes on the estimator.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7533">#7533</a> by <a class="reference external" href="https://github.com/kiote">Ekaterina Krivich</a>.</li>
+<li><a class="reference internal" href="modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDClassifier</span></code></a>, <a class="reference internal" href="modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDRegressor</span></code></a>,
+<a class="reference internal" href="modules/generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier" title="sklearn.linear_model.PassiveAggressiveClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.PassiveAggressiveClassifier</span></code></a>,
+<a class="reference internal" href="modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html#sklearn.linear_model.PassiveAggressiveRegressor" title="sklearn.linear_model.PassiveAggressiveRegressor"><code class="xref py py-class docutils literal"><span class="pre">linear_model.PassiveAggressiveRegressor</span></code></a> and
+<a class="reference internal" href="modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron" title="sklearn.linear_model.Perceptron"><code class="xref py py-class docutils literal"><span class="pre">linear_model.Perceptron</span></code></a> now expose a <code class="docutils literal"><span class="pre">max_iter</span></code> and
+<code class="docutils literal"><span class="pre">tol</span></code> parameters, to handle convergence more precisely.
+<code class="docutils literal"><span class="pre">n_iter</span></code> parameter is deprecated, and the fitted estimator exposes
+a <code class="docutils literal"><span class="pre">n_iter_</span></code> attribute, with actual number of iterations before
+convergence. By <a class="reference external" href="https://github.com/TomDLT">Tom Dupre la Tour</a>.</li>
 <li>For sparse matrices, <a class="reference internal" href="modules/generated/sklearn.preprocessing.normalize.html#sklearn.preprocessing.normalize" title="sklearn.preprocessing.normalize"><code class="xref py py-func docutils literal"><span class="pre">preprocessing.normalize</span></code></a> with <code class="docutils literal"><span class="pre">return_norm=True</span></code>
 will now raise a <code class="docutils literal"><span class="pre">NotImplementedError</span></code> with &#8216;l1&#8217; or &#8216;l2&#8217; norm and with
 norm &#8216;max&#8217; the norms returned will be the same as for dense matrices.
@@ -545,12 +553,16 @@ by <a class="reference external" href="https://github.com/massich">Joan Massich<
 <li>Make it possible to load a chunk of an svmlight formatted file by
 passing a range of bytes to <a class="reference internal" href="modules/generated/sklearn.datasets.load_svmlight_file.html#sklearn.datasets.load_svmlight_file" title="sklearn.datasets.load_svmlight_file"><code class="xref py py-func docutils literal"><span class="pre">datasets.load_svmlight_file</span></code></a>.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/935">#935</a> by <a class="reference external" href="https://github.com/ogrisel">Olivier Grisel</a>.</li>
+<li>Small performance improvement to n-gram creation in
+<code class="xref py py-mod docutils literal"><span class="pre">feature_extraction.text</span></code> by binding methods for loops and
+special-casing unigrams. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7567">#7567</a> by <cite>Jaye Doepke &lt;jtdoepke&gt;</cite></li>
 </ul>
 </div></blockquote>
 </div>
 <div class="section" id="bug-fixes">
 <h4>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
 <blockquote>
+<div><blockquote>
 <div><ul class="simple">
 <li><a class="reference internal" href="modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="sklearn.metrics.average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.average_precision_score</span></code></a> no longer linearly
 interpolates between operating points, and instead weighs precisions
@@ -702,12 +714,24 @@ classes are provided up-front. <a class="reference external" href="https://githu
 <li>Fixed an integer overflow bug in <a class="reference internal" href="modules/generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix" title="sklearn.metrics.confusion_matrix"><code class="xref py py-func docutils literal"><span class="pre">metrics.confusion_matrix</span></code></a> and
 hence <a class="reference internal" href="modules/generated/sklearn.metrics.cohen_kappa_score.html#sklearn.metrics.cohen_kappa_score" title="sklearn.metrics.cohen_kappa_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.cohen_kappa_score</span></code></a>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8354">#8354</a>, <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7929">#7929</a>
 by <a class="reference external" href="http://joelnothman.com">Joel Nothman</a> and <a class="reference external" href="https://github.com/Erotemic">Jon Crall</a>.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Fixed a bug in <a class="reference internal" href="modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor" title="sklearn.gaussian_process.GaussianProcessRegressor"><code class="xref py py-class docutils literal"><span class="pre">gaussian_process.GaussianProcessRegressor</span></code></a>
+when the standard deviation and covariance predicted without fit
+would fail with a unmeaningful error by default.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6573">#6573</a> by <a class="reference external" href="https://github.com/qmaruf">Quazi Marufur Rahman</a> and
+<a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
 <li>Fixed the implementation of <cite>explained_variance_</cite>
 in <a class="reference internal" href="modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.PCA</span></code></a>,
 <a class="reference internal" href="modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.RandomizedPCA</span></code></a> and
 <a class="reference internal" href="modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.IncrementalPCA</span></code></a>.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9105">#9105</a> by <a class="reference external" href="https://github.com/qinhanmin2014">Hanmin Qin</a>.</li>
 </ul>
+</div></blockquote>
 </div></blockquote>
 </div>
 </div>
@@ -839,6 +863,14 @@ for scikit-learn. The following backported functions in
 </ul>
 </li>
 </ul>
+<blockquote>
+<div><ul class="simple">
+<li>Deprecate the <code class="docutils literal"><span class="pre">y</span></code> parameter in <cite>transform</cite> and <cite>inverse_transform</cite>.
+The method  should not accept <code class="docutils literal"><span class="pre">y</span></code> parameter, as it&#8217;s used at the prediction time.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8174">#8174</a> by <a class="reference external" href="https://github.com/tzano">Tahar Zanouda</a>, <a class="reference external" href="http://alexandre.gramfort.net">Alexandre Gramfort</a>
+and <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
+</ul>
+</div></blockquote>
 </div></blockquote>
 </div>
 </div>
@@ -2250,7 +2282,7 @@ built when n_clusters is high and is early stopped when n_clusters is
 low, while the behavior should be vice-versa in
 <a class="reference internal" href="modules/generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal"><span class="pre">cluster.AgglomerativeClustering</span></code></a> (and friends).
 This has been fixed By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a></li>
-<li>Fix lazy centering of data in <code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> and
+<li>Fix lazy centering of data in <a class="reference internal" href="modules/generated/sklearn.linear_model.enet_path.html#sklearn.linear_model.enet_path" title="sklearn.linear_model.enet_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code></a> and
 <a class="reference internal" href="modules/generated/sklearn.linear_model.lasso_path.html#sklearn.linear_model.lasso_path" title="sklearn.linear_model.lasso_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.lasso_path</span></code></a>. It was centered around one. It has
 been changed to be centered around the origin. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a></li>
 <li>Fix handling of precomputed affinity matrices in
@@ -2323,8 +2355,8 @@ computationally expensive and outweighs the benefit of fitting the Gram
 for just one alpha.
 <code class="docutils literal"><span class="pre">precompute=&quot;auto&quot;</span></code> is now deprecated and will be removed in 0.18
 By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
-<li>Expose <code class="docutils literal"><span class="pre">positive</span></code> option in <code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> and
-<code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> which constrains coefficients to be
+<li>Expose <code class="docutils literal"><span class="pre">positive</span></code> option in <a class="reference internal" href="modules/generated/sklearn.linear_model.enet_path.html#sklearn.linear_model.enet_path" title="sklearn.linear_model.enet_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code></a> and
+<a class="reference internal" href="modules/generated/sklearn.linear_model.enet_path.html#sklearn.linear_model.enet_path" title="sklearn.linear_model.enet_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code></a> which constrains coefficients to be
 positive. By <a class="reference external" href="https://manojbits.wordpress.com">Manoj Kumar</a>.</li>
 <li>Users should now supply an explicit <code class="docutils literal"><span class="pre">average</span></code> parameter to
 <a class="reference internal" href="modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.f1_score</span></code></a>, <a class="reference internal" href="modules/generated/sklearn.metrics.fbeta_score.html#sklearn.metrics.fbeta_score" title="sklearn.metrics.fbeta_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.fbeta_score</span></code></a>,
@@ -2336,7 +2368,7 @@ or multilabel (i.e. not binary) classification. By <a class="reference external"
 only. Similar changes apply to <cite>&#8216;precision&#8217;</cite> and <cite>&#8216;recall&#8217;</cite>.
 By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
 <li>The <code class="docutils literal"><span class="pre">fit_intercept</span></code>, <code class="docutils literal"><span class="pre">normalize</span></code> and <code class="docutils literal"><span class="pre">return_models</span></code> parameters in
-<code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code> and <a class="reference internal" href="modules/generated/sklearn.linear_model.lasso_path.html#sklearn.linear_model.lasso_path" title="sklearn.linear_model.lasso_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.lasso_path</span></code></a> have
+<a class="reference internal" href="modules/generated/sklearn.linear_model.enet_path.html#sklearn.linear_model.enet_path" title="sklearn.linear_model.enet_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.enet_path</span></code></a> and <a class="reference internal" href="modules/generated/sklearn.linear_model.lasso_path.html#sklearn.linear_model.lasso_path" title="sklearn.linear_model.lasso_path"><code class="xref py py-func docutils literal"><span class="pre">linear_model.lasso_path</span></code></a> have
 been removed. They were deprecated since 0.14</li>
 <li>From now onwards, all estimators will uniformly raise <code class="docutils literal"><span class="pre">NotFittedError</span></code>
 (<code class="xref py py-class docutils literal"><span class="pre">utils.validation.NotFittedError</span></code>), when any of the <code class="docutils literal"><span class="pre">predict</span></code>
@@ -3119,7 +3151,7 @@ are now computed on the fly when accessing  the <code class="docutils literal"><
 attribute. Setting <code class="docutils literal"><span class="pre">compute_importances=True</span></code> is no longer required.
 By <a class="reference external" href="http://www.montefiore.ulg.ac.be/~glouppe/">Gilles Louppe</a>.</li>
 <li><a class="reference internal" href="modules/generated/sklearn.linear_model.lasso_path.html#sklearn.linear_model.lasso_path" title="sklearn.linear_model.lasso_path"><code class="xref py py-class docutils literal"><span class="pre">linear_model.lasso_path</span></code></a> and
-<code class="xref py py-class docutils literal"><span class="pre">linear_model.enet_path</span></code> can return its results in the same
+<a class="reference internal" href="modules/generated/sklearn.linear_model.enet_path.html#sklearn.linear_model.enet_path" title="sklearn.linear_model.enet_path"><code class="xref py py-class docutils literal"><span class="pre">linear_model.enet_path</span></code></a> can return its results in the same
 format as that of <a class="reference internal" href="modules/generated/sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-class docutils literal"><span class="pre">linear_model.lars_path</span></code></a>. This is done by
 setting the <code class="docutils literal"><span class="pre">return_models</span></code> parameter to <code class="docutils literal"><span class="pre">False</span></code>. By
 <a class="reference external" href="https://github.com/jaquesgrobler">Jaques Grobler</a> and <a class="reference external" href="http://alexandre.gramfort.net">Alexandre Gramfort</a></li>
