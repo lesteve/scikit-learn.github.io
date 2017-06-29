@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -224,7 +224,7 @@ the case in this dataset which contains 2 redundant features.</li>
 <li><a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal"><span class="pre">RandomForestClassifier</span></code></a> shows the opposite behavior: the histograms
 show peaks at approximately 0.2 and 0.9 probability, while probabilities close to
 0 or 1 are very rare. An explanation for this is given by Niculescu-Mizil
-and Caruana [4]: &#8220;Methods such as bagging and random forests that average
+and Caruana [4]: “Methods such as bagging and random forests that average
 predictions from a base set of models can have difficulty making predictions
 near 0 and 1 because variance in the underlying base models will bias
 predictions that should be near zero or one away from these values. Because
@@ -236,10 +236,10 @@ averaging over, this noise will cause some trees to predict values larger
 than 0 for this case, thus moving the average prediction of the bagged
 ensemble away from 0. We observe this effect most strongly with random
 forests because the base-level trees trained with random forests have
-relatively high variance due to feature subseting.&#8221; As a result, the
+relatively high variance due to feature subseting.” As a result, the
 calibration curve also referred to as the reliability diagram (Wilks 1995[5]) shows a
 characteristic sigmoid shape, indicating that the classifier could trust its
-&#8220;intuition&#8221; more and return probabilties closer to 0 or 1 typically.</li>
+“intuition” more and return probabilties closer to 0 or 1 typically.</li>
 </ul>
 <ul class="simple">
 <li>Linear Support Vector Classification (<a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a>) shows an even more sigmoid curve
@@ -248,14 +248,14 @@ as the RandomForestClassifier, which is typical for maximum-margin methods
 that are close to the decision boundary (the support vectors).</li>
 </ul>
 <p>Two approaches for performing calibration of probabilistic predictions are
-provided: a parametric approach based on Platt&#8217;s sigmoid model and a
+provided: a parametric approach based on Platt’s sigmoid model and a
 non-parametric approach based on isotonic regression (<a class="reference internal" href="classes.html#module-sklearn.isotonic" title="sklearn.isotonic"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.isotonic</span></code></a>).
 Probability calibration should be done on new data not used for model fitting.
 The class <a class="reference internal" href="generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV" title="sklearn.calibration.CalibratedClassifierCV"><code class="xref py py-class docutils literal"><span class="pre">CalibratedClassifierCV</span></code></a> uses a cross-validation generator and
 estimates for each split the model parameter on the train samples and the
 calibration of the test samples. The probabilities predicted for the
 folds are then averaged. Already fitted classifiers can be calibrated by
-<a class="reference internal" href="generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV" title="sklearn.calibration.CalibratedClassifierCV"><code class="xref py py-class docutils literal"><span class="pre">CalibratedClassifierCV</span></code></a> via the paramter cv=&#8221;prefit&#8221;. In this case,
+<a class="reference internal" href="generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV" title="sklearn.calibration.CalibratedClassifierCV"><code class="xref py py-class docutils literal"><span class="pre">CalibratedClassifierCV</span></code></a> via the paramter cv=”prefit”. In this case,
 the user has to take care manually that data for model fitting and calibration
 are disjoint.</p>
 <p>The following images demonstrate the benefit of probability calibration.
@@ -286,7 +286,7 @@ is evaluated with Brier score <a class="reference internal" href="generated/skle
 <a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0021.png" src="../_images/sphx_glr_plot_calibration_curve_0021.png" /></a>
 </div>
 <p>One can observe here that logistic regression is well calibrated as its curve is
-nearly diagonal. Linear SVC&#8217;s calibration curve or reliability diagram has a
+nearly diagonal. Linear SVC’s calibration curve or reliability diagram has a
 sigmoid curve, which is typical for an under-confident classifier. In the case of
 LinearSVC, this is caused by the margin property of the hinge loss, which lets
 the model focus on hard samples that are close to the decision boundary
@@ -299,8 +299,8 @@ without calibration.</p>
 </div>
 <p>One can see that Gaussian naive Bayes performs very badly but does so in an
 other way than linear SVC: While linear SVC exhibited a sigmoid calibration
-curve, Gaussian naive Bayes&#8217; calibration curve has a transposed-sigmoid shape.
-This is typical for an over-confident classifier. In this case, the classifier&#8217;s
+curve, Gaussian naive Bayes’ calibration curve has a transposed-sigmoid shape.
+This is typical for an over-confident classifier. In this case, the classifier’s
 overconfidence is caused by the redundant features which violate the naive Bayes
 assumption of feature-independence.</p>
 <p>Calibration of the probabilities of Gaussian naive Bayes with isotonic
@@ -335,7 +335,7 @@ on a hold-out validation set. Colors indicate the true class of an instance
 (trees). If this classifier is trained on all 800 training datapoints, it is
 overly confident in its predictions and thus incurs a large log-loss.
 Calibrating an identical classifier, which was trained on 600 datapoints, with
-method=&#8217;sigmoid&#8217; on the remaining 200 datapoints reduces the confidence of the
+method=’sigmoid’ on the remaining 200 datapoints reduces the confidence of the
 predictions, i.e., moves the probability vectors from the edges of the simplex
 towards the center:</p>
 <div class="figure align-center">

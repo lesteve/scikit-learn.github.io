@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.logistic_regression_path<a class="headerlink" href="#sklearn-linear-model-logistic-regression-path" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.linear_model.logistic_regression_path">
-<code class="descclassname">sklearn.linear_model.</code><code class="descname">logistic_regression_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>pos_class=None</em>, <em>Cs=10</em>, <em>fit_intercept=True</em>, <em>max_iter=100</em>, <em>tol=0.0001</em>, <em>verbose=0</em>, <em>solver='lbfgs'</em>, <em>coef=None</em>, <em>class_weight=None</em>, <em>dual=False</em>, <em>penalty='l2'</em>, <em>intercept_scaling=1.0</em>, <em>multi_class='ovr'</em>, <em>random_state=None</em>, <em>check_input=True</em>, <em>max_squared_sum=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/linear_model/logistic.py#L449"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.logistic_regression_path" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.linear_model.</code><code class="descname">logistic_regression_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>pos_class=None</em>, <em>Cs=10</em>, <em>fit_intercept=True</em>, <em>max_iter=100</em>, <em>tol=0.0001</em>, <em>verbose=0</em>, <em>solver=’lbfgs’</em>, <em>coef=None</em>, <em>class_weight=None</em>, <em>dual=False</em>, <em>penalty=’l2’</em>, <em>intercept_scaling=1.0</em>, <em>multi_class=’ovr’</em>, <em>random_state=None</em>, <em>check_input=True</em>, <em>max_squared_sum=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/linear_model/logistic.py#L449"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.logistic_regression_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a Logistic Regression model for a list of regularization
 parameters.</p>
 <p>This is an implementation that uses the result of the previous model
@@ -250,7 +250,7 @@ where <code class="docutils literal"><span class="pre">g_i</span></code> is the 
 <div><p>For the liblinear and lbfgs solvers set verbose to any positive
 number for verbosity.</p>
 </div></blockquote>
-<p><strong>solver</strong> : {&#8216;lbfgs&#8217;, &#8216;newton-cg&#8217;, &#8216;liblinear&#8217;, &#8216;sag&#8217;, &#8216;saga&#8217;}</p>
+<p><strong>solver</strong> : {‘lbfgs’, ‘newton-cg’, ‘liblinear’, ‘sag’, ‘saga’}</p>
 <blockquote>
 <div><p>Numerical solver to use.</p>
 </div></blockquote>
@@ -259,11 +259,11 @@ number for verbosity.</p>
 <div><p>Initialization value for coefficients of logistic regression.
 Useless for liblinear solver.</p>
 </div></blockquote>
-<p><strong>class_weight</strong> : dict or &#8216;balanced&#8217;, optional</p>
+<p><strong>class_weight</strong> : dict or ‘balanced’, optional</p>
 <blockquote>
 <div><p>Weights associated with classes in the form <code class="docutils literal"><span class="pre">{class_label:</span> <span class="pre">weight}</span></code>.
 If not given, all classes are supposed to have weight one.</p>
-<p>The &#8220;balanced&#8221; mode uses the values of y to automatically adjust
+<p>The “balanced” mode uses the values of y to automatically adjust
 weights inversely proportional to class frequencies in the input data
 as <code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">/</span> <span class="pre">(n_classes</span> <span class="pre">*</span> <span class="pre">np.bincount(y))</span></code>.</p>
 <p>Note that these weights will be multiplied with sample_weight (passed
@@ -275,17 +275,17 @@ through the fit method) if sample_weight is specified.</p>
 l2 penalty with liblinear solver. Prefer dual=False when
 n_samples &gt; n_features.</p>
 </div></blockquote>
-<p><strong>penalty</strong> : str, &#8216;l1&#8217; or &#8216;l2&#8217;</p>
+<p><strong>penalty</strong> : str, ‘l1’ or ‘l2’</p>
 <blockquote>
-<div><p>Used to specify the norm used in the penalization. The &#8216;newton-cg&#8217;,
-&#8216;sag&#8217; and &#8216;lbfgs&#8217; solvers support only l2 penalties.</p>
+<div><p>Used to specify the norm used in the penalization. The ‘newton-cg’,
+‘sag’ and ‘lbfgs’ solvers support only l2 penalties.</p>
 </div></blockquote>
 <p><strong>intercept_scaling</strong> : float, default 1.</p>
 <blockquote>
-<div><p>Useful only when the solver &#8216;liblinear&#8217; is used
+<div><p>Useful only when the solver ‘liblinear’ is used
 and self.fit_intercept is set to True. In this case, x becomes
 [x, self.intercept_scaling],
-i.e. a &#8220;synthetic&#8221; feature with constant value equal to
+i.e. a “synthetic” feature with constant value equal to
 intercept_scaling is appended to the instance vector.
 The intercept becomes <code class="docutils literal"><span class="pre">intercept_scaling</span> <span class="pre">*</span> <span class="pre">synthetic_feature_weight</span></code>.</p>
 <p>Note! the synthetic feature weight is subject to l1/l2 regularization
@@ -293,13 +293,13 @@ as all other features.
 To lessen the effect of regularization on synthetic feature weight
 (and therefore on the intercept) intercept_scaling has to be increased.</p>
 </div></blockquote>
-<p><strong>multi_class</strong> : str, {&#8216;ovr&#8217;, &#8216;multinomial&#8217;}</p>
+<p><strong>multi_class</strong> : str, {‘ovr’, ‘multinomial’}</p>
 <blockquote>
-<div><p>Multiclass option can be either &#8216;ovr&#8217; or &#8216;multinomial&#8217;. If the option
-chosen is &#8216;ovr&#8217;, then a binary problem is fit for each label. Else
+<div><p>Multiclass option can be either ‘ovr’ or ‘multinomial’. If the option
+chosen is ‘ovr’, then a binary problem is fit for each label. Else
 the loss minimised is the multinomial loss fit across
-the entire probability distribution. Works only for the &#8216;lbfgs&#8217; and
-&#8216;newton-cg&#8217; solvers.</p>
+the entire probability distribution. Works only for the ‘lbfgs’ and
+‘newton-cg’ solvers.</p>
 </div></blockquote>
 <p><strong>random_state</strong> : int, RandomState instance or None, optional, default None</p>
 <blockquote>
@@ -307,8 +307,8 @@ the entire probability distribution. Works only for the &#8216;lbfgs&#8217; and
 the data.  If int, random_state is the seed used by the random number
 generator; If RandomState instance, random_state is the random number
 generator; If None, the random number generator is the RandomState
-instance used by <cite>np.random</cite>. Used when <code class="docutils literal"><span class="pre">solver</span></code> == &#8216;sag&#8217; or
-&#8216;liblinear&#8217;.</p>
+instance used by <cite>np.random</cite>. Used when <code class="docutils literal"><span class="pre">solver</span></code> == ‘sag’ or
+‘liblinear’.</p>
 </div></blockquote>
 <p><strong>check_input</strong> : bool, default True</p>
 <blockquote>
@@ -349,7 +349,7 @@ n_features + 1, where the last item represents the intercept.</p>
 <p>You might get slightly different results with the solver liblinear than
 with the others since this uses LIBLINEAR which penalizes the intercept.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.19: </span>The &#8220;copy&#8221; parameter was removed.</p>
+<p><span class="versionmodified">Changed in version 0.19: </span>The “copy” parameter was removed.</p>
 </div>
 </dd></dl>
 

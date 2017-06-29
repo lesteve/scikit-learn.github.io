@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.PCA<a class="headerlink" href="#sklearn-decomposition-pca" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.decomposition.PCA">
-<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">PCA</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>copy=True</em>, <em>whiten=False</em>, <em>svd_solver='auto'</em>, <em>tol=0.0</em>, <em>iterated_power='auto'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/pca.py#L107"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">PCA</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>copy=True</em>, <em>whiten=False</em>, <em>svd_solver=’auto’</em>, <em>tol=0.0</em>, <em>iterated_power=’auto’</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/pca.py#L107"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Principal component analysis (PCA)</p>
 <p>Linear dimensionality reduction using Singular Value Decomposition of the
 data to project it to a lower dimensional space.</p>
@@ -223,12 +223,12 @@ if n_components is not set all components are kept:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>if n_components == &#8216;mle&#8217; and svd_solver == &#8216;full&#8217;, Minka&#8217;s MLE is used
+<p>if n_components == ‘mle’ and svd_solver == ‘full’, Minka’s MLE is used
 to guess the dimension
-if <code class="docutils literal"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">n_components</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> and svd_solver == &#8216;full&#8217;, select the number
+if <code class="docutils literal"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">n_components</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> and svd_solver == ‘full’, select the number
 of components such that the amount of variance that needs to be
 explained is greater than the percentage specified by n_components
-n_components cannot be equal to n_features for svd_solver == &#8216;arpack&#8217;.</p>
+n_components cannot be equal to n_features for svd_solver == ‘arpack’.</p>
 </div></blockquote>
 <p><strong>copy</strong> : bool (default True)</p>
 <blockquote>
@@ -246,14 +246,14 @@ to ensure uncorrelated outputs with unit component-wise variances.</p>
 improve the predictive accuracy of the downstream estimators by
 making their data respect some hard-wired assumptions.</p>
 </div></blockquote>
-<p><strong>svd_solver</strong> : string {&#8216;auto&#8217;, &#8216;full&#8217;, &#8216;arpack&#8217;, &#8216;randomized&#8217;}</p>
+<p><strong>svd_solver</strong> : string {‘auto’, ‘full’, ‘arpack’, ‘randomized’}</p>
 <blockquote>
 <div><dl class="docutils">
 <dt>auto :</dt>
 <dd><p class="first last">the solver is selected by a default policy based on <cite>X.shape</cite> and
 <cite>n_components</cite>: if the input data is larger than 500x500 and the
 number of components to extract is lower than 80% of the smallest
-dimension of the data, then the more efficient &#8216;randomized&#8217;
+dimension of the data, then the more efficient ‘randomized’
 method is enabled. Otherwise the exact full SVD is computed and
 optionally truncated afterwards.</p>
 </dd>
@@ -276,15 +276,15 @@ optionally truncated afterwards.</p>
 </div></blockquote>
 <p><strong>tol</strong> : float &gt;= 0, optional (default .0)</p>
 <blockquote>
-<div><p>Tolerance for singular values computed by svd_solver == &#8216;arpack&#8217;.</p>
+<div><p>Tolerance for singular values computed by svd_solver == ‘arpack’.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.18.0.</span></p>
 </div>
 </div></blockquote>
-<p><strong>iterated_power</strong> : int &gt;= 0, or &#8216;auto&#8217;, (default &#8216;auto&#8217;)</p>
+<p><strong>iterated_power</strong> : int &gt;= 0, or ‘auto’, (default ‘auto’)</p>
 <blockquote>
 <div><p>Number of iterations for the power method computed by
-svd_solver == &#8216;randomized&#8217;.</p>
+svd_solver == ‘randomized’.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.18.0.</span></p>
 </div>
@@ -294,7 +294,7 @@ svd_solver == &#8216;randomized&#8217;.</p>
 <div><p>If int, random_state is the seed used by the random number generator;
 If RandomState instance, random_state is the random number generator;
 If None, the random number generator is the RandomState instance used
-by <cite>np.random</cite>. Used when <code class="docutils literal"><span class="pre">svd_solver</span></code> == &#8216;arpack&#8217; or &#8216;randomized&#8217;.</p>
+by <cite>np.random</cite>. Used when <code class="docutils literal"><span class="pre">svd_solver</span></code> == ‘arpack’ or ‘randomized’.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.18.0.</span></p>
 </div>
@@ -334,15 +334,15 @@ variables in the lower-dimensional space.</p>
 <p><strong>n_components_</strong> : int</p>
 <blockquote>
 <div><p>The estimated number of components. When n_components is set
-to &#8216;mle&#8217; or a number between 0 and 1 (with svd_solver == &#8216;full&#8217;) this
+to ‘mle’ or a number between 0 and 1 (with svd_solver == ‘full’) this
 number is estimated from input data. Otherwise it equals the parameter
 n_components, or n_features if n_components is None.</p>
 </div></blockquote>
 <p><strong>noise_variance_</strong> : float</p>
 <blockquote class="last">
 <div><p>The estimated noise covariance following the Probabilistic PCA model
-from Tipping and Bishop 1999. See &#8220;Pattern Recognition and
-Machine Learning&#8221; by C. Bishop, 12.2.1 p. 574 or
+from Tipping and Bishop 1999. See “Pattern Recognition and
+Machine Learning” by C. Bishop, 12.2.1 p. 574 or
 <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a>. It is required to
 computed the estimated data covariance and score samples.</p>
 </div></blockquote>
@@ -355,15 +355,15 @@ computed the estimated data covariance and score samples.</p>
 <p class="last"><a class="reference internal" href="sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA" title="sklearn.decomposition.KernelPCA"><code class="xref py py-obj docutils literal"><span class="pre">KernelPCA</span></code></a>, <a class="reference internal" href="sklearn.decomposition.SparsePCA.html#sklearn.decomposition.SparsePCA" title="sklearn.decomposition.SparsePCA"><code class="xref py py-obj docutils literal"><span class="pre">SparsePCA</span></code></a>, <a class="reference internal" href="sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD" title="sklearn.decomposition.TruncatedSVD"><code class="xref py py-obj docutils literal"><span class="pre">TruncatedSVD</span></code></a>, <a class="reference internal" href="sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-obj docutils literal"><span class="pre">IncrementalPCA</span></code></a></p>
 </div>
 <p class="rubric">References</p>
-<p>For n_components == &#8216;mle&#8217;, this class uses the method of <cite>Thomas P. Minka:
+<p>For n_components == ‘mle’, this class uses the method of <cite>Thomas P. Minka:
 Automatic Choice of Dimensionality for PCA. NIPS 2000: 598-604</cite></p>
 <p>Implements the probabilistic PCA model from:
 M. Tipping and C. Bishop, Probabilistic Principal Component Analysis,
 Journal of the Royal Statistical Society, Series B, 61, Part 3, pp. 611-622
 via the score and score_samples methods.
 See <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a></p>
-<p>For svd_solver == &#8216;arpack&#8217;, refer to <cite>scipy.sparse.linalg.svds</cite>.</p>
-<p>For svd_solver == &#8216;randomized&#8217;, see:
+<p>For svd_solver == ‘arpack’, refer to <cite>scipy.sparse.linalg.svds</cite>.</p>
+<p>For svd_solver == ‘randomized’, see:
 <cite>Finding structure with randomness: Stochastic algorithms
 for constructing approximate matrix decompositions Halko, et al., 2009
 (arXiv:909)</cite>
@@ -444,12 +444,12 @@ Per-Gunnar Martinsson, Vladimir Rokhlin and Mark Tygert</cite></p>
 </table>
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>copy=True</em>, <em>whiten=False</em>, <em>svd_solver='auto'</em>, <em>tol=0.0</em>, <em>iterated_power='auto'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/pca.py#L296"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>copy=True</em>, <em>whiten=False</em>, <em>svd_solver=’auto’</em>, <em>tol=0.0</em>, <em>iterated_power=’auto’</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/pca.py#L296"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/pca.py#L307"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/pca.py#L307"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model with X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -474,7 +474,7 @@ and n_features is the number of features.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/pca.py#L324"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/pca.py#L324"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model with X and apply the dimensionality reduction on X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -496,7 +496,7 @@ and n_features is the number of features.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.get_covariance">
-<code class="descname">get_covariance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/base.py#L27"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.get_covariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_covariance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/base.py#L27"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.get_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute data covariance with the generative model.</p>
 <p><code class="docutils literal"><span class="pre">cov</span> <span class="pre">=</span> <span class="pre">components_.T</span> <span class="pre">*</span> <span class="pre">S**2</span> <span class="pre">*</span> <span class="pre">components_</span> <span class="pre">+</span> <span class="pre">sigma2</span> <span class="pre">*</span> <span class="pre">eye(n_features)</span></code>
 where  S**2 contains the explained variances, and sigma2 contains the
@@ -517,7 +517,7 @@ noise variances.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -542,7 +542,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.get_precision">
-<code class="descname">get_precision</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/base.py#L48"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.get_precision" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_precision</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/base.py#L48"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.get_precision" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute data precision matrix with the generative model.</p>
 <p>Equals the inverse of the covariance but computed with
 the matrix inversion lemma for efficiency.</p>
@@ -562,7 +562,7 @@ the matrix inversion lemma for efficiency.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.inverse_transform">
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/base.py#L136"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/base.py#L136"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform data back to its original space.</p>
 <p>In other words, return an input X_original whose transform would be X.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -588,9 +588,9 @@ exact inverse operation, which includes reversing whitening.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/pca.py#L534"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/pca.py#L534"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the average log-likelihood of all samples.</p>
-<p>See. &#8220;Pattern Recognition and Machine Learning&#8221;
+<p>See. “Pattern Recognition and Machine Learning”
 by C. Bishop, 12.2.1 p. 574
 or <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -615,9 +615,9 @@ or <a class="reference external" href="http://www.miketipping.com/papers/met-mpp
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.score_samples">
-<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/pca.py#L505"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.score_samples" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/pca.py#L505"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.score_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the log-likelihood of each sample.</p>
-<p>See. &#8220;Pattern Recognition and Machine Learning&#8221;
+<p>See. “Pattern Recognition and Machine Learning”
 by C. Bishop, 12.2.1 p. 574
 or <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -642,11 +642,11 @@ or <a class="reference external" href="http://www.miketipping.com/papers/met-mpp
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -660,7 +660,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.PCA.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/base.py#L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/base.py#L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.PCA.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply dimensionality reduction to X.</p>
 <p>X is projected on the first principal components previously extracted
 from a training set.</p>

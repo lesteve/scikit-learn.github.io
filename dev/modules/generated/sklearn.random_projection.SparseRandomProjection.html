@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.random_projection" title="sklearn.random_projection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.random_projection</span></code></a>.SparseRandomProjection<a class="headerlink" href="#sklearn-random-projection-sparserandomprojection" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.random_projection.SparseRandomProjection">
-<em class="property">class </em><code class="descclassname">sklearn.random_projection.</code><code class="descname">SparseRandomProjection</code><span class="sig-paren">(</span><em>n_components='auto'</em>, <em>density='auto'</em>, <em>eps=0.1</em>, <em>dense_output=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/random_projection.py#L502"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.random_projection.</code><code class="descname">SparseRandomProjection</code><span class="sig-paren">(</span><em>n_components=’auto’</em>, <em>density=’auto’</em>, <em>eps=0.1</em>, <em>dense_output=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/random_projection.py#L502"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce dimensionality through sparse random projection</p>
 <p>Sparse random matrix is an alternative to dense random
 projection matrix that guarantees similar embedding quality while being
@@ -220,7 +220,7 @@ drawn from:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int or &#8216;auto&#8217;, optional (default = &#8216;auto&#8217;)</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int or ‘auto’, optional (default = ‘auto’)</p>
 <blockquote>
 <div><p>Dimensionality of the target projection space.</p>
 <p>n_components can be automatically adjusted according to the
@@ -231,10 +231,10 @@ embedding is controlled by the <code class="docutils literal"><span class="pre">
 very conservative estimated of the required number of components
 as it makes no assumption on the structure of the dataset.</p>
 </div></blockquote>
-<p><strong>density</strong> : float in range ]0, 1], optional (default=&#8217;auto&#8217;)</p>
+<p><strong>density</strong> : float in range ]0, 1], optional (default=’auto’)</p>
 <blockquote>
 <div><p>Ratio of non-zero component in the random projection matrix.</p>
-<p>If density = &#8216;auto&#8217;, the value is set to the minimum density
+<p>If density = ‘auto’, the value is set to the minimum density
 as recommended by Ping Li et al.: 1 / sqrt(n_features).</p>
 <p>Use density = 1 / 3.0 if you want to reproduce the results from
 Achlioptas, 2001.</p>
@@ -243,7 +243,7 @@ Achlioptas, 2001.</p>
 <blockquote>
 <div><p>Parameter to control the quality of the embedding according to
 the Johnson-Lindenstrauss lemma when n_components is set to
-&#8216;auto&#8217;.</p>
+‘auto’.</p>
 <p>Smaller values lead to better embedding and higher number of
 dimensions (n_components) in the target projection space.</p>
 </div></blockquote>
@@ -270,7 +270,7 @@ RandomState instance used by <cite>np.random</cite>.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>n_component_</strong> : int</p>
 <blockquote>
-<div><p>Concrete number of components computed when n_components=&#8221;auto&#8221;.</p>
+<div><p>Concrete number of components computed when n_components=”auto”.</p>
 </div></blockquote>
 <p><strong>components_</strong> : CSR matrix with shape [n_components, n_features]</p>
 <blockquote>
@@ -278,7 +278,7 @@ RandomState instance used by <cite>np.random</cite>.</p>
 </div></blockquote>
 <p><strong>density_</strong> : float in range 0.0 - 1.0</p>
 <blockquote class="last">
-<div><p>Concrete density computed from when density = &#8220;auto&#8221;.</p>
+<div><p>Concrete density computed from when density = “auto”.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -293,14 +293,14 @@ RandomState instance used by <cite>np.random</cite>.</p>
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[R250]</a></td><td>Ping Li, T. Hastie and K. W. Church, 2006,
-&#8220;Very Sparse Random Projections&#8221;.
+“Very Sparse Random Projections”.
 <a class="reference external" href="http://web.stanford.edu/~hastie/Papers/Ping/KDD06_rp.pdf">http://web.stanford.edu/~hastie/Papers/Ping/KDD06_rp.pdf</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="r251" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[R251]</a></td><td>D. Achlioptas, 2001, &#8220;Database-friendly random projections&#8221;,
+<tr><td class="label"><a class="fn-backref" href="#id2">[R251]</a></td><td>D. Achlioptas, 2001, “Database-friendly random projections”,
 <a class="reference external" href="https://users.soe.ucsc.edu/~optas/papers/jl.pdf">https://users.soe.ucsc.edu/~optas/papers/jl.pdf</a></td></tr>
 </tbody>
 </table>
@@ -330,12 +330,12 @@ RandomState instance used by <cite>np.random</cite>.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.random_projection.SparseRandomProjection.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components='auto'</em>, <em>density='auto'</em>, <em>eps=0.1</em>, <em>dense_output=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/random_projection.py#L594"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=’auto’</em>, <em>density=’auto’</em>, <em>eps=0.1</em>, <em>dense_output=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/random_projection.py#L594"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.random_projection.SparseRandomProjection.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/random_projection.py#L330"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/random_projection.py#L330"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a sparse random projection matrix</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -359,7 +359,7 @@ afore mentioned papers.</p>
 
 <dl class="method">
 <dt id="sklearn.random_projection.SparseRandomProjection.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/base.py#L471"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/base.py#L471"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit to data, then transform it.</p>
 <p>Fits transformer to X and y with optional parameters fit_params
 and returns a transformed version of X.</p>
@@ -389,7 +389,7 @@ and returns a transformed version of X.</p>
 
 <dl class="method">
 <dt id="sklearn.random_projection.SparseRandomProjection.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -414,11 +414,11 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.random_projection.SparseRandomProjection.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -432,7 +432,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.random_projection.SparseRandomProjection.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/random_projection.py#L395"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/random_projection.py#L395"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.SparseRandomProjection.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project the data by using matrix product with the random matrix</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -464,7 +464,7 @@ component of a nested object.</p>
 </div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="An illustration of various embeddings on the digits dataset."><div class="figure" id="id4">
 <img alt="../../_images/sphx_glr_plot_lle_digits_thumb.png" src="../../_images/sphx_glr_plot_lle_digits_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/manifold/plot_lle_digits.html#sphx-glr-auto-examples-manifold-plot-lle-digits-py"><span class="std std-ref">Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...</span></a></span></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/manifold/plot_lle_digits.html#sphx-glr-auto-examples-manifold-plot-lle-digits-py"><span class="std std-ref">Manifold learning on handwritten digits: Locally Linear Embedding, Isomap…</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>

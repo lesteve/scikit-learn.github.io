@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -247,7 +247,7 @@ for dimensionality reduction of the Iris dataset</p>
 <h2>1.2.2. Mathematical formulation of the LDA and QDA classifiers<a class="headerlink" href="#mathematical-formulation-of-the-lda-and-qda-classifiers" title="Permalink to this headline">¶</a></h2>
 <p>Both LDA and QDA can be derived from simple probabilistic models which model
 the class conditional distribution of the data <img class="math" src="../_images/math/9645b6a35da0e999282a01e7eb9c0b987b968155.png" alt="P(X|y=k)"/> for each class
-<img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>. Predictions can then be obtained by using Bayes&#8217; rule:</p>
+<img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>. Predictions can then be obtained by using Bayes’ rule:</p>
 <div class="math">
 <p><img src="../_images/math/478e4d9a1681e569927f5731a20e736e1eb9094b.png" alt="P(y=k | X) = \frac{P(X | y=k) P(y=k)}{P(X)} = \frac{P(X | y=k) P(y = k)}{ \sum_{l} P(X | y=l) \cdot P(y=l)}"/></p>
 </div><p>and we select the class <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> which maximizes this conditional probability.</p>
@@ -309,11 +309,11 @@ transformed class means <img class="math" src="../_images/math/7e3b8a648d99cac62
 where the number of training samples is small compared to the number of
 features. In this scenario, the empirical sample covariance is a poor
 estimator. Shrinkage LDA can be used by setting the <code class="docutils literal"><span class="pre">shrinkage</span></code> parameter of
-the <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code></a> class to &#8216;auto&#8217;.
+the <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code></a> class to ‘auto’.
 This automatically determines the optimal shrinkage parameter in an analytic
 way following the lemma introduced by Ledoit and Wolf <a class="footnote-reference" href="#id5" id="id3">[4]</a>. Note that
-currently shrinkage only works when setting the <code class="docutils literal"><span class="pre">solver</span></code> parameter to &#8216;lsqr&#8217;
-or &#8216;eigen&#8217;.</p>
+currently shrinkage only works when setting the <code class="docutils literal"><span class="pre">solver</span></code> parameter to ‘lsqr’
+or ‘eigen’.</p>
 <p>The <code class="docutils literal"><span class="pre">shrinkage</span></code> parameter can also be manually set between 0 and 1. In
 particular, a value of 0 corresponds to no shrinkage (which means the empirical
 covariance matrix will be used) and a value of 1 corresponds to complete
@@ -325,15 +325,15 @@ matrix.</p>
 <strong><a class="reference external" href="../auto_examples/classification/plot_lda.html"><img alt="shrinkage" src="../_images/sphx_glr_plot_lda_0011.png" style="width: 480.0px; height: 360.0px;" /></a></strong></p></div>
 <div class="section" id="estimation-algorithms">
 <h2>1.2.5. Estimation algorithms<a class="headerlink" href="#estimation-algorithms" title="Permalink to this headline">¶</a></h2>
-<p>The default solver is &#8216;svd&#8217;. It can perform both classification and transform,
+<p>The default solver is ‘svd’. It can perform both classification and transform,
 and it does not rely on the calculation of the covariance matrix. This can be
 an advantage in situations where the number of features is large. However, the
-&#8216;svd&#8217; solver cannot be used with shrinkage.</p>
-<p>The &#8216;lsqr&#8217; solver is an efficient algorithm that only works for classification.
+‘svd’ solver cannot be used with shrinkage.</p>
+<p>The ‘lsqr’ solver is an efficient algorithm that only works for classification.
 It supports shrinkage.</p>
-<p>The &#8216;eigen&#8217; solver is based on the optimization of the between class scatter to
+<p>The ‘eigen’ solver is based on the optimization of the between class scatter to
 within class scatter ratio. It can be used for both classification and
-transform, and it supports shrinkage. However, the &#8216;eigen&#8217; solver needs to
+transform, and it supports shrinkage. However, the ‘eigen’ solver needs to
 compute the covariance matrix, so it might not be suitable for situations with
 a high number of features.</p>
 <div class="topic">
@@ -346,7 +346,7 @@ with and without shrinkage.</p>
 <table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> &#8220;The Elements of Statistical Learning&#8221;, Hastie T., Tibshirani R.,
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> “The Elements of Statistical Learning”, Hastie T., Tibshirani R.,
 Friedman J., Section 4.3, p.106-119, 2008.</td></tr>
 </tbody>
 </table>

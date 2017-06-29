@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -237,13 +237,13 @@ This situation is called <strong>overfitting</strong>.
 To avoid it, it is common practice when performing
 a (supervised) machine learning experiment
 to hold out part of the available data as a <strong>test set</strong> <code class="docutils literal"><span class="pre">X_test,</span> <span class="pre">y_test</span></code>.
-Note that the word &#8220;experiment&#8221; is not intended
+Note that the word “experiment” is not intended
 to denote academic use only,
 because even in commercial settings
 machine learning usually starts out experimentally.</p>
 <p>In scikit-learn a random split into training and test sets
 can be quickly computed with the <a class="reference internal" href="generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split" title="sklearn.model_selection.train_test_split"><code class="xref py py-func docutils literal"><span class="pre">train_test_split</span></code></a> helper function.
-Let&#8217;s load the iris data set to fit a linear support vector machine on it:</p>
+Let’s load the iris data set to fit a linear support vector machine on it:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -269,14 +269,14 @@ data for testing (evaluating) our classifier:</p>
 <span class="go">0.96...</span>
 </pre></div>
 </div>
-<p>When evaluating different settings (&#8220;hyperparameters&#8221;) for estimators,
+<p>When evaluating different settings (“hyperparameters”) for estimators,
 such as the <code class="docutils literal"><span class="pre">C</span></code> setting that must be manually set for an SVM,
 there is still a risk of overfitting <em>on the test set</em>
 because the parameters can be tweaked until the estimator performs optimally.
-This way, knowledge about the test set can &#8220;leak&#8221; into the model
+This way, knowledge about the test set can “leak” into the model
 and evaluation metrics no longer report on generalization performance.
 To solve this problem, yet another part of the dataset can be held out
-as a so-called &#8220;validation set&#8221;: training proceeds on the training set,
+as a so-called “validation set”: training proceeds on the training set,
 after which evaluation is done on the validation set,
 and when the experiment seems to be successful,
 final evaluation can be done on the test set.</p>
@@ -294,7 +294,7 @@ In the basic approach, called <em>k</em>-fold CV,
 the training set is split into <em>k</em> smaller sets
 (other approaches are described below,
 but generally follow the same principles).
-The following procedure is followed for each of the <em>k</em> &#8220;folds&#8221;:</p>
+The following procedure is followed for each of the <em>k</em> “folds”:</p>
 <blockquote>
 <div><ul class="simple">
 <li>A model is trained using <img class="math" src="../_images/math/61e28425012ff04c501a81720cdd9f9b5afb962e.png" alt="k-1"/> of the folds as training data;</li>
@@ -433,7 +433,7 @@ samples.</p>
 <p><strong>NOTE</strong></p>
 <p>While i.i.d. data is a common assumption in machine learning theory, it rarely
 holds in practice. If one knows that the samples have been generated using a
-time-dependent process, it&#8217;s safer to
+time-dependent process, it’s safer to
 use a <cite>time-series aware cross-validation scheme &lt;time_series_cv&gt;</cite>
 Similarly if we know that the generative process has a group structure
 (samples from collected from different subjects, experiments, measurement
@@ -762,7 +762,7 @@ cross-validation techniques such as <a class="reference internal" href="generate
 identically distributed, and would result in unreasonable correlation
 between training and testing instances (yielding poor estimates of
 generalisation error) on time series data. Therefore, it is very important
-to evaluate our model for time series data on the &#8220;future&#8221; observations
+to evaluate our model for time series data on the “future” observations
 least like those that are used to train the model. To achieve this, one
 solution is provided by <a class="reference internal" href="generated/sklearn.model_selection.TimeSeriesSplit.html#sklearn.model_selection.TimeSeriesSplit" title="sklearn.model_selection.TimeSeriesSplit"><code class="xref py py-class docutils literal"><span class="pre">TimeSeriesSplit</span></code></a>.</p>
 <div class="section" id="time-series-split">

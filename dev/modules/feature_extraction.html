@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -235,15 +235,15 @@ is a machine learning technique applied on these features.</p>
 <p>The class <a class="reference internal" href="generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" title="sklearn.feature_extraction.DictVectorizer"><code class="xref py py-class docutils literal"><span class="pre">DictVectorizer</span></code></a> can be used to convert feature
 arrays represented as lists of standard Python <code class="docutils literal"><span class="pre">dict</span></code> objects to the
 NumPy/SciPy representation used by scikit-learn estimators.</p>
-<p>While not particularly fast to process, Python&#8217;s <code class="docutils literal"><span class="pre">dict</span></code> has the
+<p>While not particularly fast to process, Python’s <code class="docutils literal"><span class="pre">dict</span></code> has the
 advantages of being convenient to use, being sparse (absent features
 need not be stored) and storing feature names in addition to values.</p>
-<p><a class="reference internal" href="generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" title="sklearn.feature_extraction.DictVectorizer"><code class="xref py py-class docutils literal"><span class="pre">DictVectorizer</span></code></a> implements what is called one-of-K or &#8220;one-hot&#8221;
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" title="sklearn.feature_extraction.DictVectorizer"><code class="xref py py-class docutils literal"><span class="pre">DictVectorizer</span></code></a> implements what is called one-of-K or “one-hot”
 coding for categorical (aka nominal, discrete) features. Categorical
-features are &#8220;attribute-value&#8221; pairs where the value is restricted
+features are “attribute-value” pairs where the value is restricted
 to a list of discrete of possibilities without ordering (e.g. topic
-identifiers, types of objects, tags, names...).</p>
-<p>In the following, &#8220;city&#8221; is a categorical attribute while &#8220;temperature&#8221;
+identifiers, types of objects, tags, names…).</p>
+<p>In the following, “city” is a categorical attribute while “temperature”
 is a traditional numerical feature:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span>
 <span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Dubai&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">33.</span><span class="p">},</span>
@@ -270,8 +270,8 @@ word of interest.</p>
 <p>For example, suppose that we have a first algorithm that extracts Part of
 Speech (PoS) tags that we want to use as complementary tags for training
 a sequence classifier (e.g. a chunker). The following dict could be
-such a window of features extracted around the word &#8216;sat&#8217; in the sentence
-&#8216;The cat sat on the mat.&#8217;:</p>
+such a window of features extracted around the word ‘sat’ in the sentence
+‘The cat sat on the mat.’:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_window</span> <span class="o">=</span> <span class="p">[</span>
 <span class="gp">... </span>    <span class="p">{</span>
 <span class="gp">... </span>        <span class="s1">&#39;word-2&#39;</span><span class="p">:</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span>
@@ -311,7 +311,7 @@ default instead of a <code class="docutils literal"><span class="pre">numpy.ndar
 <p>The class <a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal"><span class="pre">FeatureHasher</span></code></a> is a high-speed, low-memory vectorizer that
 uses a technique known as
 <a class="reference external" href="https://en.wikipedia.org/wiki/Feature_hashing">feature hashing</a>,
-or the &#8220;hashing trick&#8221;.
+or the “hashing trick”.
 Instead of building a hash table of the features encountered in training,
 as the vectorizers do, instances of <a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal"><span class="pre">FeatureHasher</span></code></a>
 apply a hash function to the features
@@ -324,7 +324,7 @@ and has no <code class="docutils literal"><span class="pre">inverse_transform</s
 a signed hash function is used and the sign of the hash value
 determines the sign of the value stored in the output matrix for a feature.
 This way, collisions are likely to cancel out rather than accumulate error,
-and the expected mean of any output feature&#8217;s value is zero. This mechanism
+and the expected mean of any output feature’s value is zero. This mechanism
 is enabled by default with <code class="docutils literal"><span class="pre">alternate_sign=True</span></code> and is particularly useful
 for small hash table sizes (<code class="docutils literal"><span class="pre">n_features</span> <span class="pre">&lt;</span> <span class="pre">10000</span></code>). For large hash table
 sizes, it can be disabled, to allow the output to be passed to estimators like
@@ -332,7 +332,7 @@ sizes, it can be disabled, to allow the output to be passed to estimators like
 <a class="reference internal" href="generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_selection.chi2</span></code></a>
 feature selectors that expect non-negative inputs.</p>
 <p><a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal"><span class="pre">FeatureHasher</span></code></a> accepts either mappings
-(like Python&#8217;s <code class="docutils literal"><span class="pre">dict</span></code> and its variants in the <code class="docutils literal"><span class="pre">collections</span></code> module),
+(like Python’s <code class="docutils literal"><span class="pre">dict</span></code> and its variants in the <code class="docutils literal"><span class="pre">collections</span></code> module),
 <code class="docutils literal"><span class="pre">(feature,</span> <span class="pre">value)</span></code> pairs, or strings,
 depending on the constructor parameter <code class="docutils literal"><span class="pre">input_type</span></code>.
 Mapping are treated as lists of <code class="docutils literal"><span class="pre">(feature,</span> <span class="pre">value)</span></code> pairs,
@@ -432,7 +432,7 @@ per document and one column per token (e.g. word) occurring in the corpus.</p>
 <p>We call <strong>vectorization</strong> the general process of turning a collection
 of text documents into numerical feature vectors. This specific strategy
 (tokenization, counting and normalization) is called the <strong>Bag of Words</strong>
-or &#8220;Bag of n-grams&#8221; representation. Documents are described by word
+or “Bag of n-grams” representation. Documents are described by word
 occurrences while completely ignoring the relative position information
 of the words in the document.</p>
 </div>
@@ -468,7 +468,7 @@ reasonable (please see  the <a class="reference internal" href="classes.html#tex
 <span class="go">        tokenizer=None, vocabulary=None)</span>
 </pre></div>
 </div>
-<p>Let&#8217;s use it to tokenize and count the word occurrences of a minimalistic
+<p>Let’s use it to tokenize and count the word occurrences of a minimalistic
 corpus of text documents:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
 <span class="gp">... </span>    <span class="s1">&#39;This is the first document.&#39;</span><span class="p">,</span>
@@ -543,7 +543,7 @@ can now resolve ambiguities encoded in local positioning patterns:</p>
 <span class="go">       [0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1]]...)</span>
 </pre></div>
 </div>
-<p>In particular the interrogative form &#8220;Is this&#8221; is only present in the
+<p>In particular the interrogative form “Is this” is only present in the
 last document:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">feature_index</span> <span class="o">=</span> <span class="n">bigram_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;is this&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_2</span><span class="p">[:,</span> <span class="n">feature_index</span><span class="p">]</span>     
@@ -553,8 +553,8 @@ last document:</p>
 </div>
 <div class="section" id="tfidf-term-weighting">
 <span id="tfidf"></span><h3>4.2.3.4. Tf–idf term weighting<a class="headerlink" href="#tfidf-term-weighting" title="Permalink to this headline">¶</a></h3>
-<p>In a large text corpus, some words will be very present (e.g. &#8220;the&#8221;, &#8220;a&#8221;,
-&#8220;is&#8221; in English) hence carrying very little meaningful information about
+<p>In a large text corpus, some words will be very present (e.g. “the”, “a”,
+“is” in English) hence carrying very little meaningful information about
 the actual contents of the document. If we were to feed the direct count
 data directly to a classifier those very frequent terms would shadow
 the frequencies of rarer yet more interesting terms.</p>
@@ -564,7 +564,7 @@ transform.</p>
 <p>Tf means <strong>term-frequency</strong> while tf–idf means term-frequency times
 <strong>inverse document-frequency</strong>:
 <img class="math" src="../_images/math/40f34fb794a1d3561d64bc55e344634b1451a21f.png" alt="\text{tf-idf(t,d)}=\text{tf(t,d)} \times \text{idf(t)}"/>.</p>
-<p>Using the <code class="docutils literal"><span class="pre">TfidfTransformer</span></code>&#8216;s default settings,
+<p>Using the <code class="docutils literal"><span class="pre">TfidfTransformer</span></code>’s default settings,
 <code class="docutils literal"><span class="pre">TfidfTransformer(norm='l2',</span> <span class="pre">use_idf=True,</span> <span class="pre">smooth_idf=True,</span> <span class="pre">sublinear_tf=False)</span></code>
 the term frequency, the number of times a term occurs in a given document,
 is multiplied with idf component, which is computed as</p>
@@ -579,13 +579,13 @@ v{_2}^2 + \dots + v{_n}^2}}"/>.</p>
 use in document classification and clustering.</p>
 <p>The following sections contain further explanations and examples that
 illustrate how the tf-idfs are computed exactly and how the tf-idfs
-computed in scikit-learn&#8217;s <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a>
+computed in scikit-learn’s <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a>
 and <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal"><span class="pre">TfidfVectorizer</span></code></a> differ slightly from the standard textbook
 notation that defines the idf as</p>
 <p><img class="math" src="../_images/math/6d6ca8415893d5c7c420dc438d2d0488426d1124.png" alt="\text{idf}(t) = log{\frac{n_d}{1+\text{df}(d,t)}}."/></p>
 <p>In the <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a> and <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal"><span class="pre">TfidfVectorizer</span></code></a>
 with <code class="docutils literal"><span class="pre">smooth_idf=False</span></code>, the
-&#8220;1&#8221; count is added to the idf instead of the idf&#8217;s denominator:</p>
+“1” count is added to the idf instead of the idf’s denominator:</p>
 <p><img class="math" src="../_images/math/d210fb6831f799e768f25c722773fe9912c1f7e3.png" alt="\text{idf}(t) = log{\frac{n_d}{\text{df}(d,t)}} + 1"/></p>
 <p>This normalization is implemented by the <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a>
 class:</p>
@@ -597,7 +597,7 @@ class:</p>
 </pre></div>
 </div>
 <p>Again please see the <a class="reference internal" href="classes.html#text-feature-extraction-ref"><span class="std std-ref">reference documentation</span></a> for the details on all the parameters.</p>
-<p>Let&#8217;s take an example with the following counts. The first term is present
+<p>Let’s take an example with the following counts. The first term is present
 100% of the time hence not very interesting. The two other features only
 in less than 50% of the time hence probably more representative of the
 content of the documents:</p>
@@ -642,7 +642,7 @@ we get</p>
 for document 1:</p>
 <p><img class="math" src="../_images/math/340067f7295131605fd009f446fdaeda5cf21abb.png" alt="\frac{[3, 0, 2.0986]}{\sqrt{\big(3^2 + 0^2 + 2.0986^2\big)}}
 = [ 0.819,  0,  0.573]."/></p>
-<p>Furthermore, the default parameter <code class="docutils literal"><span class="pre">smooth_idf=True</span></code> adds &#8220;1&#8221; to the numerator
+<p>Furthermore, the default parameter <code class="docutils literal"><span class="pre">smooth_idf=True</span></code> adds “1” to the numerator
 and  denominator as if an extra document was seen containing every term in the
 collection exactly once, which prevents zero divisions:</p>
 <p><img class="math" src="../_images/math/9b51d66bf06313c9ed7e2014ad2dae110e764d7b.png" alt="\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1"/></p>
@@ -705,7 +705,7 @@ Common encodings are ASCII, Latin-1 (Western Europe), KOI8-R (Russian)
 and the universal encodings UTF-8 and UTF-16. Many others exist.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">An encoding can also be called a &#8216;character set&#8217;,
+<p class="last">An encoding can also be called a ‘character set’,
 but this term is less accurate: several encodings can exist
 for a single character set.</p>
 </div>
@@ -764,7 +764,7 @@ The output is not shown here.</p>
 </div>
 <p>(Depending on the version of <code class="docutils literal"><span class="pre">chardet</span></code>, it might get the first one wrong.)</p>
 <p>For an introduction to Unicode and character encodings in general,
-see Joel Spolsky&#8217;s <a class="reference external" href="http://www.joelonsoftware.com/articles/Unicode.html">Absolute Minimum Every Software Developer Must Know
+see Joel Spolsky’s <a class="reference external" href="http://www.joelonsoftware.com/articles/Unicode.html">Absolute Minimum Every Software Developer Must Know
 About Unicode</a>.</p>
 </div>
 <div class="section" id="applications-and-examples">
@@ -799,16 +799,16 @@ using <a class="reference internal" href="decomposition.html#nmf"><span class="s
 <h3>4.2.3.7. Limitations of the Bag of Words representation<a class="headerlink" href="#limitations-of-the-bag-of-words-representation" title="Permalink to this headline">¶</a></h3>
 <p>A collection of unigrams (what bag of words is) cannot capture phrases
 and multi-word expressions, effectively disregarding any word order
-dependence. Additionally, the bag of words model doesn&#8217;t account for potential
+dependence. Additionally, the bag of words model doesn’t account for potential
 misspellings or word derivations.</p>
 <p>N-grams to the rescue! Instead of building a simple collection of
 unigrams (n=1), one might prefer a collection of bigrams (n=2), where
 occurrences of pairs of consecutive words are counted.</p>
 <p>One might alternatively consider a collection of character n-grams, a
 representation resilient against misspellings and derivations.</p>
-<p>For example, let&#8217;s say we&#8217;re dealing with a corpus of two documents:
+<p>For example, let’s say we’re dealing with a corpus of two documents:
 <code class="docutils literal"><span class="pre">['words',</span> <span class="pre">'wprds']</span></code>. The second document contains a misspelling
-of the word &#8216;words&#8217;.
+of the word ‘words’.
 A simple bag of words representation would consider these two as
 very distinct documents, differing in both of the two possible features.
 A character 2-gram representation, however, would find the documents
@@ -860,7 +860,7 @@ destroy most of the inner structure of the document and hence most of
 the meaning carried by that internal structure.</p>
 <p>In order to address the wider task of Natural Language Understanding,
 the local structure of sentences and paragraphs should thus be taken
-into account. Many such models will thus be casted as &#8220;Structured output&#8221;
+into account. Many such models will thus be casted as “Structured output”
 problems which are currently outside of the scope of scikit-learn.</p>
 </div>
 <div class="section" id="vectorizing-a-large-text-corpus-with-the-hashing-trick">
@@ -883,17 +883,17 @@ such as a NumPy array of the same size),</li>
 tasks as the <code class="docutils literal"><span class="pre">vocabulary_</span></code> attribute would have to be a shared state with a
 fine grained synchronization barrier: the mapping from token string to
 feature index is dependent on ordering of the first occurrence of each token
-hence would have to be shared, potentially harming the concurrent workers&#8217;
+hence would have to be shared, potentially harming the concurrent workers’
 performance to the point of making them slower than the sequential variant.</li>
 </ul>
-<p>It is possible to overcome those limitations by combining the &#8220;hashing trick&#8221;
+<p>It is possible to overcome those limitations by combining the “hashing trick”
 (<a class="reference internal" href="#feature-hashing"><span class="std std-ref">Feature hashing</span></a>) implemented by the
 <a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.FeatureHasher</span></code></a> class and the text
 preprocessing and tokenization features of the <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal"><span class="pre">CountVectorizer</span></code></a>.</p>
 <p>This combination is implementing in <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal"><span class="pre">HashingVectorizer</span></code></a>,
 a transformer class that is mostly API compatible with <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal"><span class="pre">CountVectorizer</span></code></a>.
 <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal"><span class="pre">HashingVectorizer</span></code></a> is stateless,
-meaning that you don&#8217;t have to call <code class="docutils literal"><span class="pre">fit</span></code> on it:</p>
+meaning that you don’t have to call <code class="docutils literal"><span class="pre">fit</span></code> on it:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">HashingVectorizer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span> <span class="o">=</span> <span class="n">HashingVectorizer</span><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
@@ -916,7 +916,7 @@ algorithms which operate on CSR matrices (<code class="docutils literal"><span c
 <code class="docutils literal"><span class="pre">Perceptron</span></code>, <code class="docutils literal"><span class="pre">SGDClassifier</span></code>, <code class="docutils literal"><span class="pre">PassiveAggressive</span></code>) but it does for
 algorithms that work with CSC matrices (<code class="docutils literal"><span class="pre">LinearSVC(dual=False)</span></code>, <code class="docutils literal"><span class="pre">Lasso()</span></code>,
 etc).</p>
-<p>Let&#8217;s try again with the default setting:</p>
+<p>Let’s try again with the default setting:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span> <span class="o">=</span> <span class="n">HashingVectorizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
 <span class="gp">... </span>                              
@@ -942,7 +942,7 @@ required.</li>
 <h3>4.2.3.9. Performing out-of-core scaling with HashingVectorizer<a class="headerlink" href="#performing-out-of-core-scaling-with-hashingvectorizer" title="Permalink to this headline">¶</a></h3>
 <p>An interesting development of using a <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal"><span class="pre">HashingVectorizer</span></code></a> is the ability
 to perform <a class="reference external" href="https://en.wikipedia.org/wiki/Out-of-core_algorithm">out-of-core</a> scaling. This means that we can learn from data that
-does not fit into the computer&#8217;s main memory.</p>
+does not fit into the computer’s main memory.</p>
 <p>A strategy to implement out-of-core scaling is to stream data to the estimator
 in mini-batches. Each mini-batch is vectorized using <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal"><span class="pre">HashingVectorizer</span></code></a>
 so as to guarantee that the input space of the estimator has always the same
@@ -999,7 +999,7 @@ files (or strings) with the tokens separated by whitespace and pass
 splitting, filtering based on part-of-speech, etc. are not included in the
 scikit-learn codebase, but can be added by customizing either the
 tokenizer or the analyzer.
-Here&#8217;s a <code class="docutils literal"><span class="pre">CountVectorizer</span></code> with a tokenizer and lemmatizer using
+Here’s a <code class="docutils literal"><span class="pre">CountVectorizer</span></code> with a tokenizer and lemmatizer using
 <a class="reference external" href="http://www.nltk.org">NLTK</a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nltk</span> <span class="k">import</span> <span class="n">word_tokenize</span>          
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="k">import</span> <span class="n">WordNetLemmatizer</span> 
@@ -1082,7 +1082,7 @@ of an image, thus forming contiguous patches:</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_face_ward_segmentation.html"><img alt="../_images/sphx_glr_plot_face_ward_segmentation_0011.png" src="../_images/sphx_glr_plot_face_ward_segmentation_0011.png" style="width: 200.0px; height: 200.0px;" /></a>
 </div>
-<p>For this purpose, the estimators use a &#8216;connectivity&#8217; matrix, giving
+<p>For this purpose, the estimators use a ‘connectivity’ matrix, giving
 which samples are connected.</p>
 <p>The function <a class="reference internal" href="generated/sklearn.feature_extraction.image.img_to_graph.html#sklearn.feature_extraction.image.img_to_graph" title="sklearn.feature_extraction.image.img_to_graph"><code class="xref py py-func docutils literal"><span class="pre">img_to_graph</span></code></a> returns such a matrix from a 2D or 3D
 image. Similarly, <a class="reference internal" href="generated/sklearn.feature_extraction.image.grid_to_graph.html#sklearn.feature_extraction.image.grid_to_graph" title="sklearn.feature_extraction.image.grid_to_graph"><code class="xref py py-func docutils literal"><span class="pre">grid_to_graph</span></code></a> build a connectivity matrix for

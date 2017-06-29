@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -209,12 +209,12 @@
 <span id="id1"></span><h1>1.13. Feature selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">¶</a></h1>
 <p>The classes in the <a class="reference internal" href="classes.html#module-sklearn.feature_selection" title="sklearn.feature_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_selection</span></code></a> module can be used
 for feature selection/dimensionality reduction on sample sets, either to
-improve estimators&#8217; accuracy scores or to boost their performance on very
+improve estimators’ accuracy scores or to boost their performance on very
 high-dimensional datasets.</p>
 <div class="section" id="removing-features-with-low-variance">
 <span id="variance-threshold"></span><h2>1.13.1. Removing features with low variance<a class="headerlink" href="#removing-features-with-low-variance" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="generated/sklearn.feature_selection.VarianceThreshold.html#sklearn.feature_selection.VarianceThreshold" title="sklearn.feature_selection.VarianceThreshold"><code class="xref py py-class docutils literal"><span class="pre">VarianceThreshold</span></code></a> is a simple baseline approach to feature selection.
-It removes all features whose variance doesn&#8217;t meet some threshold.
+It removes all features whose variance doesn’t meet some threshold.
 By default, it removes all zero-variance features,
 i.e. features that have the same value in all samples.</p>
 <p>As an example, suppose that we have a dataset with boolean features,
@@ -336,8 +336,8 @@ The features are considered unimportant and removed, if the corresponding
 <code class="docutils literal"><span class="pre">coef_</span></code> or <code class="docutils literal"><span class="pre">feature_importances_</span></code> values are below the provided
 <code class="docutils literal"><span class="pre">threshold</span></code> parameter. Apart from specifying the threshold numerically,
 there are built-in heuristics for finding a threshold using a string argument.
-Available heuristics are &#8220;mean&#8221;, &#8220;median&#8221; and float multiples of these like
-&#8220;0.1*mean&#8221;.</p>
+Available heuristics are “mean”, “median” and float multiples of these like
+“0.1*mean”.</p>
 <p>For examples on how it is to be used refer to the sections below.</p>
 <div class="topic">
 <p class="topic-title first">Examples</p>
@@ -387,8 +387,8 @@ feature selection.</li>
 <p>For a good choice of alpha, the <a class="reference internal" href="linear_model.html#lasso"><span class="std std-ref">Lasso</span></a> can fully recover the
 exact set of non-zero variables using only few observations, provided
 certain specific conditions are met. In particular, the number of
-samples should be &#8220;sufficiently large&#8221;, or L1 models will perform at
-random, where &#8220;sufficiently large&#8221; depends on the number of non-zero
+samples should be “sufficiently large”, or L1 models will perform at
+random, where “sufficiently large” depends on the number of non-zero
 coefficients, the logarithm of the number of features, the amount of
 noise, the smallest absolute value of non-zero coefficients, and the
 structure of the design matrix X. In addition, the design matrix must
@@ -400,7 +400,7 @@ under-penalized models: including a small number of non-relevant
 variables is not detrimental to prediction score. BIC
 (<code class="xref py py-class docutils literal"><span class="pre">LassoLarsIC</span></code>) tends, on the opposite, to set high values of
 alpha.</p>
-<p><strong>Reference</strong> Richard G. Baraniuk &#8220;Compressive Sensing&#8221;, IEEE Signal
+<p><strong>Reference</strong> Richard G. Baraniuk “Compressive Sensing”, IEEE Signal
 Processing Magazine [120] July 2007
 <a class="reference external" href="http://dsp.rice.edu/sites/dsp.rice.edu/files/cs/baraniukCSlecture07.pdf">http://dsp.rice.edu/sites/dsp.rice.edu/files/cs/baraniukCSlecture07.pdf</a></p>
 </div>
@@ -412,7 +412,7 @@ L1-penalized models for regression and classification. For example, it is
 known that the Lasso will tend to select an individual variable out of a group
 of highly correlated features. Furthermore, even when the correlation between
 features is not too high, the conditions under which L1-penalized methods
-consistently select &#8220;good&#8221; features can be restrictive in general.</p>
+consistently select “good” features can be restrictive in general.</p>
 <p>To mitigate this problem, it is possible to use randomization techniques such
 as those presented in <a class="reference internal" href="#b2009" id="id3">[B2009]</a> and <a class="reference internal" href="#m2010" id="id4">[M2010]</a>. The latter technique, known as
 stability selection, is implemented in the module <a class="reference internal" href="classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.
@@ -453,14 +453,14 @@ which situation each approach is to be favored.</li>
 <table class="docutils citation" frame="void" id="b2009" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[B2009]</a></td><td>F. Bach, &#8220;Model-Consistent Sparse Estimation through the
-Bootstrap.&#8221; <a class="reference external" href="https://hal.inria.fr/hal-00354771/">https://hal.inria.fr/hal-00354771/</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[B2009]</a></td><td>F. Bach, “Model-Consistent Sparse Estimation through the
+Bootstrap.” <a class="reference external" href="https://hal.inria.fr/hal-00354771/">https://hal.inria.fr/hal-00354771/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="m2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[M2010]</a></td><td>N. Meinshausen, P. Buhlmann, &#8220;Stability selection&#8221;,
+<tr><td class="label"><a class="fn-backref" href="#id4">[M2010]</a></td><td>N. Meinshausen, P. Buhlmann, “Stability selection”,
 Journal of the Royal Statistical Society, 72 (2010)
 <a class="reference external" href="http://arxiv.org/pdf/0809.2932.pdf">http://arxiv.org/pdf/0809.2932.pdf</a></td></tr>
 </tbody>

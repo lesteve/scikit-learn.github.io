@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -236,7 +236,7 @@ looping code using the vectorized idioms of those libraries. In practice
 this means trying to <strong>replace any nested for loops by calls to equivalent
 Numpy array methods</strong>. The goal is to avoid the CPU wasting time in the
 Python interpreter rather than crunching numbers to fit your statistical
-model. It&#8217;s generally a good idea to consider NumPy and SciPy performance tips:
+model. It’s generally a good idea to consider NumPy and SciPy performance tips:
 <a class="reference external" href="http://scipy.github.io/old-wiki/pages/PerformanceTips">http://scipy.github.io/old-wiki/pages/PerformanceTips</a></p>
 <p>Sometimes however an algorithm cannot be expressed efficiently in simple
 vectorized Numpy code. In this case, the recommended strategy is the
@@ -324,7 +324,7 @@ executing the code of a given function ignoring the time spent in executing the
 sub-functions. The real total time (local code + sub-function calls) is given by
 the <code class="docutils literal"><span class="pre">cumtime</span></code> column.</p>
 <p>Note the use of the <code class="docutils literal"><span class="pre">-l</span> <span class="pre">nmf.py</span></code> that restricts the output to lines that
-contains the &#8220;nmf.py&#8221; string. This is useful to have a quick look at the hotspot
+contains the “nmf.py” string. This is useful to have a quick look at the hotspot
 of the nmf Python module it-self ignoring anything else.</p>
 <p>Here is the beginning of the output of the same command without the <code class="docutils literal"><span class="pre">-l</span> <span class="pre">nmf.py</span></code>
 filter:</p>
@@ -359,7 +359,7 @@ we would not gain more than a 2.4x speed-up globally.</p>
 improvements</strong> in this particular example (e.g. trying to find operation
 that are both costly and useless to avoid computing then rather than
 trying to optimize their implementation).</p>
-<p>It is however still interesting to check what&#8217;s happening inside the
+<p>It is however still interesting to check what’s happening inside the
 <code class="docutils literal"><span class="pre">_nls_subproblem</span></code> function which is the hotspot if we only consider
 Python code: it takes around 100% of the accumulated time of the module. In
 order to better understand the profile of this specific function, let
@@ -492,7 +492,7 @@ analogous to <code class="docutils literal"><span class="pre">%timeit</span></co
 <p>If profiling of the Python code reveals that the Python interpreter
 overhead is larger by one order of magnitude or more than the cost of the
 actual numerical computation (e.g. <code class="docutils literal"><span class="pre">for</span></code> loops over vector components,
-nested evaluation of conditional expression, scalar arithmetic...), it
+nested evaluation of conditional expression, scalar arithmetic…), it
 is probably adequate to extract the hotspot portion of the code as a
 standalone function in a <code class="docutils literal"><span class="pre">.pyx</span></code> file, add static type declarations and
 then use Cython to generate a C program suitable to be compiled as a
@@ -503,7 +503,7 @@ following we will just highlight a couple of tricks that we found
 important in practice on the existing cython codebase in the scikit-learn
 project.</p>
 <p>TODO: html report, type declarations, bound checks, division by zero checks,
-memory alignment, direct blas calls...</p>
+memory alignment, direct blas calls…</p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.youtube.com/watch?v=gMvkiQ-gOW8">https://www.youtube.com/watch?v=gMvkiQ-gOW8</a></li>
 <li><a class="reference external" href="http://conference.scipy.org/proceedings/SciPy2009/paper_1/">http://conference.scipy.org/proceedings/SciPy2009/paper_1/</a></li>
@@ -514,7 +514,7 @@ memory alignment, direct blas calls...</p>
 <span id="profiling-compiled-extension"></span><h2>Profiling compiled extensions<a class="headerlink" href="#profiling-compiled-extensions" title="Permalink to this headline">¶</a></h2>
 <p>When working with compiled extensions (written in C/C++ with a wrapper or
 directly as Cython extension), the default Python profiler is useless:
-we need a dedicated tool to introspect what&#8217;s happening inside the
+we need a dedicated tool to introspect what’s happening inside the
 compiled extension it-self.</p>
 <div class="section" id="using-yep-and-google-perftools">
 <h3>Using yep and google-perftools<a class="headerlink" href="#using-yep-and-google-perftools" title="Permalink to this headline">¶</a></h3>
@@ -525,7 +525,7 @@ compiled extension it-self.</p>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">google-perftools provides a nice &#8216;line by line&#8217; report mode that
+<p class="last">google-perftools provides a nice ‘line by line’ report mode that
 can be triggered with the <code class="docutils literal"><span class="pre">--lines</span></code> option. However this
 does not seem to work correctly at the time of writing. This
 issue can be tracked on the <a class="reference external" href="https://github.com/gperftools/gperftools">project issue tracker</a>.</p>
@@ -538,7 +538,7 @@ after having recompiled the project with <code class="docutils literal"><span cl
 <code class="docutils literal"><span class="pre">python-dbg</span></code> variant of the interpreter on debian / ubuntu: however
 this approach requires to also have <code class="docutils literal"><span class="pre">numpy</span></code> and <code class="docutils literal"><span class="pre">scipy</span></code> recompiled
 with <code class="docutils literal"><span class="pre">-pg</span></code> which is rather complicated to get working.</p>
-<p>Fortunately there exist two alternative profilers that don&#8217;t require you to
+<p>Fortunately there exist two alternative profilers that don’t require you to
 recompile everything.</p>
 </div>
 <div class="section" id="using-valgrind-callgrind-kcachegrind">

@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -360,7 +360,7 @@ as GridSearchCV except that it defaults to Generalized Cross-Validation
 <div class="topic">
 <p class="topic-title first">References</p>
 <ul class="simple">
-<li>&#8220;Notes on Regularized Least Squares&#8221;, Rifkin &amp; Lippert (<a class="reference external" href="http://cbcl.mit.edu/projects/cbcl/publications/ps/MIT-CSAIL-TR-2007-025.pdf">technical report</a>,
+<li>“Notes on Regularized Least Squares”, Rifkin &amp; Lippert (<a class="reference external" href="http://cbcl.mit.edu/projects/cbcl/publications/ps/MIT-CSAIL-TR-2007-025.pdf">technical report</a>,
 <a class="reference external" href="http://www.mit.edu/~9.520/spring07/Classes/rlsslides.pdf">course slides</a>).</li>
 </ul>
 </div>
@@ -510,7 +510,7 @@ combination of L1 and L2 using the <code class="docutils literal"><span class="p
 correlated with one another. Lasso is likely to pick one of these
 at random, while elastic-net is likely to pick both.</p>
 <p>A practical advantage of trading-off between Lasso and Ridge is it allows
-Elastic-Net to inherit some of Ridge&#8217;s stability under rotation.</p>
+Elastic-Net to inherit some of Ridge’s stability under rotation.</p>
 <p>The objective function to minimize is in this case</p>
 <div class="math">
 <p><img src="../_images/math/51443eb62398fc5253e0a0d06a5695686e972d08.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 +
@@ -617,7 +617,7 @@ consist of retrieving the path with function <a class="reference internal" href=
 <h3>1.1.8.1. Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h3>
 <p>The algorithm is similar to forward stepwise regression, but instead
 of including variables at each step, the estimated parameters are
-increased in a direction equiangular to each one&#8217;s correlations with
+increased in a direction equiangular to each one’s correlations with
 the residual.</p>
 <p>Instead of giving a vector result, the LARS solution consists of a
 curve denoting the solution for each value of the L1 norm of the
@@ -846,27 +846,27 @@ optimization problem</p>
 <div class="math">
 <p><img src="../_images/math/6a0bcf21baaeb0c2b879ab74fe333c0aab0d6ae6.png" alt="\underset{w, c}{min\,} \|w\|_1 + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) ."/></p>
 </div><p>The solvers implemented in the class <a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a>
-are &#8220;liblinear&#8221;, &#8220;newton-cg&#8221;, &#8220;lbfgs&#8221;, &#8220;sag&#8221; and &#8220;saga&#8221;:</p>
-<p>The solver &#8220;liblinear&#8221; uses a coordinate descent (CD) algorithm, and relies
+are “liblinear”, “newton-cg”, “lbfgs”, “sag” and “saga”:</p>
+<p>The solver “liblinear” uses a coordinate descent (CD) algorithm, and relies
 on the excellent C++ <a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR library</a>, which is shipped with
 scikit-learn. However, the CD algorithm implemented in liblinear cannot learn
 a true multinomial (multiclass) model; instead, the optimization problem is
-decomposed in a &#8220;one-vs-rest&#8221; fashion so separate binary classifiers are
+decomposed in a “one-vs-rest” fashion so separate binary classifiers are
 trained for all classes. This happens under the hood, so
 <a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a> instances using this solver behave as multiclass
 classifiers. For L1 penalization <a class="reference internal" href="generated/sklearn.svm.l1_min_c.html#sklearn.svm.l1_min_c" title="sklearn.svm.l1_min_c"><code class="xref py py-func docutils literal"><span class="pre">sklearn.svm.l1_min_c</span></code></a> allows to
-calculate the lower bound for C in order to get a non &#8220;null&#8221; (all feature
+calculate the lower bound for C in order to get a non “null” (all feature
 weights to zero) model.</p>
-<p>The &#8220;lbfgs&#8221;, &#8220;sag&#8221; and &#8220;newton-cg&#8221; solvers only support L2 penalization and
+<p>The “lbfgs”, “sag” and “newton-cg” solvers only support L2 penalization and
 are found to converge faster for some high dimensional data. Setting
-<cite>multi_class</cite> to &#8220;multinomial&#8221; with these solvers learns a true multinomial
+<cite>multi_class</cite> to “multinomial” with these solvers learns a true multinomial
 logistic regression model <a class="footnote-reference" href="#id23" id="id20">[5]</a>, which means that its probability estimates
-should be better calibrated than the default &#8220;one-vs-rest&#8221; setting.</p>
-<p>The &#8220;sag&#8221; solver uses a Stochastic Average Gradient descent <a class="footnote-reference" href="#id24" id="id21">[6]</a>. It is faster
+should be better calibrated than the default “one-vs-rest” setting.</p>
+<p>The “sag” solver uses a Stochastic Average Gradient descent <a class="footnote-reference" href="#id24" id="id21">[6]</a>. It is faster
 than other solvers for large datasets, when both the number of samples and the
 number of features are large.</p>
-<p>The &#8220;saga&#8221; solver <a class="footnote-reference" href="#id25" id="id22">[7]</a> is a variant of &#8220;sag&#8221; that also supports the
-non-smooth <cite>penalty=&#8221;l1&#8221;</cite> option. This is therefore the solver of choice
+<p>The “saga” solver <a class="footnote-reference" href="#id25" id="id22">[7]</a> is a variant of “sag” that also supports the
+non-smooth <cite>penalty=”l1”</cite> option. This is therefore the solver of choice
 for sparse multinomial logistic regression.</p>
 <p>In a nutshell, one may choose the solver with the following rules:</p>
 <table border="1" class="docutils">
@@ -881,20 +881,20 @@ for sparse multinomial logistic regression.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>L1 penalty</td>
-<td>&#8220;liblinear&#8221; or &#8220;saga&#8221;</td>
+<td>“liblinear” or “saga”</td>
 </tr>
 <tr class="row-odd"><td>Multinomial loss</td>
-<td>&#8220;lbfgs&#8221;, &#8220;sag&#8221;, &#8220;saga&#8221; or &#8220;newton-cg&#8221;</td>
+<td>“lbfgs”, “sag”, “saga” or “newton-cg”</td>
 </tr>
 <tr class="row-even"><td>Very Large dataset (<cite>n_samples</cite>)</td>
-<td>&#8220;sag&#8221; or &#8220;saga&#8221;</td>
+<td>“sag” or “saga”</td>
 </tr>
 </tbody>
 </table>
-<p>The &#8220;saga&#8221; solver is often the best choice. The &#8220;liblinear&#8221; solver is
+<p>The “saga” solver is often the best choice. The “liblinear” solver is
 used by default for historical reasons.</p>
 <p>For large dataset, you may also consider using <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a>
-with &#8216;log&#8217; loss.</p>
+with ‘log’ loss.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
@@ -927,11 +927,11 @@ thus be used to perform feature selection, as detailed in
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegressionCV.html#sklearn.linear_model.LogisticRegressionCV" title="sklearn.linear_model.LogisticRegressionCV"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegressionCV</span></code></a> implements Logistic Regression with
 builtin cross-validation to find out the optimal C parameter.
-&#8220;newton-cg&#8221;, &#8220;sag&#8221;, &#8220;saga&#8221; and &#8220;lbfgs&#8221; solvers are found to be faster
+“newton-cg”, “sag”, “saga” and “lbfgs” solvers are found to be faster
 for high-dimensional dense data, due to warm-starting. For the
-multiclass case, if <cite>multi_class</cite> option is set to &#8220;ovr&#8221;, an optimal C
+multiclass case, if <cite>multi_class</cite> option is set to “ovr”, an optimal C
 is obtained for each class and if the <cite>multi_class</cite> option is set to
-&#8220;multinomial&#8221;, an optimal C is obtained by minimizing the cross-entropy
+“multinomial”, an optimal C is obtained by minimizing the cross-entropy
 loss.</p>
 <div class="topic">
 <p class="topic-title first">References:</p>
@@ -1003,7 +1003,7 @@ regularization parameter <code class="docutils literal"><span class="pre">C</spa
 <div class="topic">
 <p class="topic-title first">References:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume7/crammer06a/crammer06a.pdf">&#8220;Online Passive-Aggressive Algorithms&#8221;</a>
+<li><a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume7/crammer06a/crammer06a.pdf">“Online Passive-Aggressive Algorithms”</a>
 K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR 7 (2006)</li>
 </ul>
 </div>
@@ -1144,10 +1144,10 @@ performance.</p>
 <p class="topic-title first">References:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://en.wikipedia.org/wiki/RANSAC">https://en.wikipedia.org/wiki/RANSAC</a></li>
-<li><a class="reference external" href="http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf">&#8220;Random Sample Consensus: A Paradigm for Model Fitting with Applications to
-Image Analysis and Automated Cartography&#8221;</a>
+<li><a class="reference external" href="http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf">“Random Sample Consensus: A Paradigm for Model Fitting with Applications to
+Image Analysis and Automated Cartography”</a>
 Martin A. Fischler and Robert C. Bolles - SRI International (1981)</li>
-<li><a class="reference external" href="http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf">&#8220;Performance Evaluation of RANSAC Family&#8221;</a>
+<li><a class="reference external" href="http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf">“Performance Evaluation of RANSAC Family”</a>
 Sunglok Choi, Taemin Kim and Wonpil Yu - BMVC (2009)</li>
 </ul>
 </div>
@@ -1304,7 +1304,7 @@ to see this, imagine creating a new variable</p>
 <div class="math">
 <p><img src="../_images/math/618623438e33ecf053d364a0b938f056cd758b34.png" alt="\hat{y}(w, x) = w_0 + w_1 z_1 + w_2 z_2 + w_3 z_3 + w_4 z_4 + w_5 z_5"/></p>
 </div><p>We see that the resulting <em>polynomial regression</em> is in the same class of
-linear models we&#8217;d considered above (i.e. the model is linear in <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/>)
+linear models we’d considered above (i.e. the model is linear in <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/>)
 and can be solved by the same techniques.  By considering linear fits within
 a higher-dimensional space built with these basis functions, the model has the
 flexibility to fit a much broader range of data.</p>
@@ -1352,7 +1352,7 @@ polynomial regression can be created and used as follows:</p>
 </div>
 <p>The linear model trained on polynomial features is able to exactly recover
 the input polynomial coefficients.</p>
-<p>In some cases it&#8217;s not necessary to include higher powers of any single feature,
+<p>In some cases it’s not necessary to include higher powers of any single feature,
 but only the so-called <em>interaction features</em>
 that multiply together at most <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/> distinct features.
 These can be gotten from <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal"><span class="pre">PolynomialFeatures</span></code></a> with the setting
@@ -1378,7 +1378,7 @@ This way, we can solve the XOR problem with a linear classifier:</p>
 <span class="gp">... </span>                 <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>And the classifier &#8220;predictions&#8221; are perfect:</p>
+<p>And the classifier “predictions” are perfect:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="go">array([0, 1, 1, 0])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>

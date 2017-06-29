@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -297,7 +297,7 @@ memory footprint and estimator).</p>
 <div class="section" id="influence-of-the-input-data-representation">
 <h3>7.1.3. Influence of the Input Data Representation<a class="headerlink" href="#influence-of-the-input-data-representation" title="Permalink to this headline">¶</a></h3>
 <p>Scipy provides sparse matrix datastructures which are optimized for storing
-sparse data. The main feature of sparse formats is that you don&#8217;t store zeros
+sparse data. The main feature of sparse formats is that you don’t store zeros
 so if your data is sparse then you use much less memory. A non-zero value in
 a sparse (<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/sparse.html">CSR or CSC</a>)
 representation will only take on average one 32bit integer position + the 64
@@ -319,7 +319,7 @@ with many CPUs and an optimized BLAS implementation.</p>
 </pre></div>
 </div>
 <p>As a rule of thumb you can consider that if the sparsity ratio is greater
-than 90% you can probably benefit from sparse formats. Check Scipy&#8217;s sparse
+than 90% you can probably benefit from sparse formats. Check Scipy’s sparse
 matrix formats <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/sparse.html">documentation</a>
 for more information on how to build (or convert your data to) sparse matrix
 formats. Most of the time the <code class="docutils literal"><span class="pre">CSR</span></code> and <code class="docutils literal"><span class="pre">CSC</span></code> formats work best.</p>
@@ -333,7 +333,7 @@ prediction latency too much. We will now review this idea for different
 families of supervised models.</p>
 <p>For <a class="reference internal" href="classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a> (e.g. Lasso, ElasticNet,
 SGDClassifier/Regressor, Ridge &amp; RidgeClassifier,
-PassiveAgressiveClassifier/Regressor, LinearSVC, LogisticRegression...) the
+PassiveAgressiveClassifier/Regressor, LinearSVC, LogisticRegression…) the
 decision function that is applied at prediction time is the same (a dot product)
 , so latency should be equivalent.</p>
 <p>Here is an example using
@@ -441,12 +441,12 @@ from Daniel Nouri which has some nice step by step install instructions for
 Debian / Ubuntu.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>Multithreaded BLAS libraries sometimes conflict with Python&#8217;s
+<p>Multithreaded BLAS libraries sometimes conflict with Python’s
 <code class="docutils literal"><span class="pre">multiprocessing</span></code> module, which is used by e.g. <code class="docutils literal"><span class="pre">GridSearchCV</span></code> and
 most other estimators that take an <code class="docutils literal"><span class="pre">n_jobs</span></code> argument (with the exception
 of <code class="docutils literal"><span class="pre">SGDClassifier</span></code>, <code class="docutils literal"><span class="pre">SGDRegressor</span></code>, <code class="docutils literal"><span class="pre">Perceptron</span></code>,
 <code class="docutils literal"><span class="pre">PassiveAggressiveClassifier</span></code> and tree-based methods such as random
-forests). This is true of Apple&#8217;s Accelerate and OpenBLAS when built with
+forests). This is true of Apple’s Accelerate and OpenBLAS when built with
 OpenMP support.</p>
 <p>Besides scikit-learn, NumPy and SciPy also use BLAS internally, as
 explained earlier.</p>

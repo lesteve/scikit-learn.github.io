@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -309,8 +309,8 @@ ready-to-use tfidf features instead of file names.</p>
 <p>It is easy for a classifier to overfit on particular things that appear in the
 20 Newsgroups data, such as newsgroup headers. Many classifiers achieve very
 high F-scores, but their results would not generalize to other documents that
-aren&#8217;t from this window of time.</p>
-<p>For example, let&#8217;s look at the results of a multinomial Naive Bayes classifier,
+aren’t from this window of time.</p>
+<p>For example, let’s look at the results of a multinomial Naive Bayes classifier,
 which is fast to train and achieves a decent F-score:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <span class="n">MultinomialNB</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
@@ -327,8 +327,8 @@ which is fast to train and achieves a decent F-score:</p>
 <p>(The example <a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#sphx-glr-auto-examples-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a> shuffles
 the training and test data, instead of segmenting by time, and in that case
 multinomial Naive Bayes gets a much higher F-score of 0.88. Are you suspicious
-yet of what&#8217;s going on inside this classifier?)</p>
-<p>Let&#8217;s take a look at what the most informative features are:</p>
+yet of what’s going on inside this classifier?)</p>
+<p>Let’s take a look at what the most informative features are:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">show_top10</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">vectorizer</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
@@ -349,9 +349,9 @@ yet of what&#8217;s going on inside this classifier?)</p>
 <code class="docutils literal"><span class="pre">NNTP-Posting-Host:</span></code> and <code class="docutils literal"><span class="pre">Distribution:</span></code> appear more or less often.</li>
 <li>Another significant feature involves whether the sender is affiliated with
 a university, as indicated either by their headers or their signature.</li>
-<li>The word &#8220;article&#8221; is a significant feature, based on how often people quote
-previous posts like this: &#8220;In article [article ID], [name] &lt;[e-mail address]&gt;
-wrote:&#8221;</li>
+<li>The word “article” is a significant feature, based on how often people quote
+previous posts like this: “In article [article ID], [name] &lt;[e-mail address]&gt;
+wrote:”</li>
 <li>Other features match the names and e-mail addresses of particular people who
 were posting at the time.</li>
 </ul>

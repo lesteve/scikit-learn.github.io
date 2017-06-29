@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -230,7 +230,7 @@ on the local density of points (radius-based neighbor learning).
 The distance can, in general, be any metric measure: standard Euclidean
 distance is the most common choice.
 Neighbors-based methods are known as <em>non-generalizing</em> machine
-learning methods, since they simply &#8220;remember&#8221; all of its training data
+learning methods, since they simply “remember” all of its training data
 (possibly transformed into a fast indexing structure such as a
 <a class="reference internal" href="#ball-tree"><span class="std std-ref">Ball Tree</span></a> or <a class="reference internal" href="#kd-tree"><span class="std std-ref">KD Tree</span></a>.).</p>
 <p>Despite its simplicity, nearest neighbors has been successful in a
@@ -318,7 +318,7 @@ unsupervised learning: in particular, see <a class="reference internal" href="ge
 <p>Alternatively, one can use the <a class="reference internal" href="generated/sklearn.neighbors.KDTree.html#sklearn.neighbors.KDTree" title="sklearn.neighbors.KDTree"><code class="xref py py-class docutils literal"><span class="pre">KDTree</span></code></a> or <a class="reference internal" href="generated/sklearn.neighbors.BallTree.html#sklearn.neighbors.BallTree" title="sklearn.neighbors.BallTree"><code class="xref py py-class docutils literal"><span class="pre">BallTree</span></code></a> classes
 directly to find nearest neighbors.  This is the functionality wrapped by
 the <a class="reference internal" href="generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors" title="sklearn.neighbors.NearestNeighbors"><code class="xref py py-class docutils literal"><span class="pre">NearestNeighbors</span></code></a> class used above.  The Ball Tree and KD Tree
-have the same interface; we&#8217;ll show an example of using the KD Tree here:</p>
+have the same interface; we’ll show an example of using the KD Tree here:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KDTree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
@@ -364,7 +364,7 @@ classification in <a class="reference internal" href="generated/sklearn.neighbor
 The user specifies a fixed radius <img class="math" src="../_images/math/eaa6ad49a7f78fe5a13b486690163bf2dc7e3e60.png" alt="r"/>, such that points in sparser
 neighborhoods use fewer nearest neighbors for the classification.  For
 high-dimensional parameter spaces, this method becomes less effective due
-to the so-called &#8220;curse of dimensionality&#8221;.</p>
+to the so-called “curse of dimensionality”.</p>
 <p>The basic nearest neighbors classification uses uniform weights: that is, the
 value assigned to a query point is computed from a simple majority vote of
 the nearest neighbors.  Under some circumstances, it is better to weight the
@@ -466,14 +466,14 @@ need to be computed.  Once constructed, the nearest neighbor of a query
 point can be determined with only <img class="math" src="../_images/math/d62a221f87954d151fa2c39566f1a243a294e625.png" alt="O[\log(N)]"/> distance computations.
 Though the KD tree approach is very fast for low-dimensional (<img class="math" src="../_images/math/7842f70bd20e56ab5363a6ae2466b4e9e4af6594.png" alt="D &lt; 20"/>)
 neighbors searches, it becomes inefficient as <img class="math" src="../_images/math/3cf5aa5abe312e6fd4996975341a43aa566e8d8d.png" alt="D"/> grows very large:
-this is one manifestation of the so-called &#8220;curse of dimensionality&#8221;.
+this is one manifestation of the so-called “curse of dimensionality”.
 In scikit-learn, KD tree neighbors searches are specified using the
 keyword <code class="docutils literal"><span class="pre">algorithm</span> <span class="pre">=</span> <span class="pre">'kd_tree'</span></code>, and are computed using the class
 <a class="reference internal" href="generated/sklearn.neighbors.KDTree.html#sklearn.neighbors.KDTree" title="sklearn.neighbors.KDTree"><code class="xref py py-class docutils literal"><span class="pre">KDTree</span></code></a>.</p>
 <div class="topic">
 <p class="topic-title first">References:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://dl.acm.org/citation.cfm?doid=361002.361007">&#8220;Multidimensional binary search trees used for associative searching&#8221;</a>,
+<li><a class="reference external" href="http://dl.acm.org/citation.cfm?doid=361002.361007">“Multidimensional binary search trees used for associative searching”</a>,
 Bentley, J.L., Communications of the ACM (1975)</li>
 </ul>
 </div>
@@ -507,7 +507,7 @@ Alternatively, the user can work with the <a class="reference internal" href="ge
 <div class="topic">
 <p class="topic-title first">References:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.91.8209">&#8220;Five balltree construction algorithms&#8221;</a>,
+<li><a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.91.8209">“Five balltree construction algorithms”</a>,
 Omohundro, S.M., International Computer Science Institute
 Technical Report (1989)</li>
 </ul>
@@ -544,9 +544,9 @@ of the data. Intrinsic dimensionality refers to the dimension
 <img class="math" src="../_images/math/87a92a98b4d03a624fe14157b41596719aa0f965.png" alt="d \le D"/> of a manifold on which the data lies, which can be linearly
 or non-linearly embedded in the parameter space. Sparsity refers to the
 degree to which the data fills the parameter space (this is to be
-distinguished from the concept as used in &#8220;sparse&#8221; matrices.  The data
+distinguished from the concept as used in “sparse” matrices.  The data
 matrix may have no zero entries, but the <strong>structure</strong> can still be
-&#8220;sparse&#8221; in this sense).</p>
+“sparse” in this sense).</p>
 <ul class="simple">
 <li><em>Brute force</em> query time is unchanged by data structure.</li>
 <li><em>Ball tree</em> and <em>KD tree</em> query times can be greatly influenced

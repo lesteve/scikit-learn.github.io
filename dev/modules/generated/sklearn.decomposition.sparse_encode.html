@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.sparse_encode<a class="headerlink" href="#sklearn-decomposition-sparse-encode" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.decomposition.sparse_encode">
-<code class="descclassname">sklearn.decomposition.</code><code class="descname">sparse_encode</code><span class="sig-paren">(</span><em>X</em>, <em>dictionary</em>, <em>gram=None</em>, <em>cov=None</em>, <em>algorithm='lasso_lars'</em>, <em>n_nonzero_coefs=None</em>, <em>alpha=None</em>, <em>copy_cov=True</em>, <em>init=None</em>, <em>max_iter=1000</em>, <em>n_jobs=1</em>, <em>check_input=True</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/dict_learning.py#L171"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.sparse_encode" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.decomposition.</code><code class="descname">sparse_encode</code><span class="sig-paren">(</span><em>X</em>, <em>dictionary</em>, <em>gram=None</em>, <em>cov=None</em>, <em>algorithm=’lasso_lars’</em>, <em>n_nonzero_coefs=None</em>, <em>alpha=None</em>, <em>copy_cov=True</em>, <em>init=None</em>, <em>max_iter=1000</em>, <em>n_jobs=1</em>, <em>check_input=True</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/dict_learning.py#L171"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.sparse_encode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sparse coding</p>
 <p>Each row of the result is the solution to a sparse coding problem.
 The goal is to find a sparse array <cite>code</cite> such that:</p>
@@ -221,13 +221,13 @@ output.</p>
 </div></blockquote>
 <p><strong>gram</strong> : array, shape=(n_components, n_components)</p>
 <blockquote>
-<div><p>Precomputed Gram matrix, dictionary * dictionary&#8217;</p>
+<div><p>Precomputed Gram matrix, dictionary * dictionary’</p>
 </div></blockquote>
 <p><strong>cov</strong> : array, shape=(n_components, n_samples)</p>
 <blockquote>
-<div><p>Precomputed covariance, dictionary&#8217; * X</p>
+<div><p>Precomputed covariance, dictionary’ * X</p>
 </div></blockquote>
-<p><strong>algorithm</strong> : {&#8216;lasso_lars&#8217;, &#8216;lasso_cd&#8217;, &#8216;lars&#8217;, &#8216;omp&#8217;, &#8216;threshold&#8217;}</p>
+<p><strong>algorithm</strong> : {‘lasso_lars’, ‘lasso_cd’, ‘lars’, ‘omp’, ‘threshold’}</p>
 <blockquote>
 <div><p>lars: uses the least angle regression method (linear_model.lars_path)
 lasso_lars: uses Lars to compute the Lasso solution
@@ -236,32 +236,32 @@ Lasso solution (linear_model.Lasso). lasso_lars will be faster if
 the estimated components are sparse.
 omp: uses orthogonal matching pursuit to estimate the sparse solution
 threshold: squashes to zero all coefficients less than alpha from
-the projection dictionary * X&#8217;</p>
+the projection dictionary * X’</p>
 </div></blockquote>
 <p><strong>n_nonzero_coefs</strong> : int, 0.1 * n_features by default</p>
 <blockquote>
 <div><p>Number of nonzero coefficients to target in each column of the
-solution. This is only used by <cite>algorithm=&#8217;lars&#8217;</cite> and <cite>algorithm=&#8217;omp&#8217;</cite>
+solution. This is only used by <cite>algorithm=’lars’</cite> and <cite>algorithm=’omp’</cite>
 and is overridden by <cite>alpha</cite> in the <cite>omp</cite> case.</p>
 </div></blockquote>
 <p><strong>alpha</strong> : float, 1. by default</p>
 <blockquote>
-<div><p>If <cite>algorithm=&#8217;lasso_lars&#8217;</cite> or <cite>algorithm=&#8217;lasso_cd&#8217;</cite>, <cite>alpha</cite> is the
+<div><p>If <cite>algorithm=’lasso_lars’</cite> or <cite>algorithm=’lasso_cd’</cite>, <cite>alpha</cite> is the
 penalty applied to the L1 norm.
-If <cite>algorithm=&#8217;threshold&#8217;</cite>, <cite>alpha</cite> is the absolute value of the
+If <cite>algorithm=’threshold’</cite>, <cite>alpha</cite> is the absolute value of the
 threshold below which coefficients will be squashed to zero.
-If <cite>algorithm=&#8217;omp&#8217;</cite>, <cite>alpha</cite> is the tolerance parameter: the value of
+If <cite>algorithm=’omp’</cite>, <cite>alpha</cite> is the tolerance parameter: the value of
 the reconstruction error targeted. In this case, it overrides
 <cite>n_nonzero_coefs</cite>.</p>
 </div></blockquote>
 <p><strong>init</strong> : array of shape (n_samples, n_components)</p>
 <blockquote>
 <div><p>Initialization value of the sparse codes. Only used if
-<cite>algorithm=&#8217;lasso_cd&#8217;</cite>.</p>
+<cite>algorithm=’lasso_cd’</cite>.</p>
 </div></blockquote>
 <p><strong>max_iter</strong> : int, 1000 by default</p>
 <blockquote>
-<div><p>Maximum number of iterations to perform if <cite>algorithm=&#8217;lasso_cd&#8217;</cite>.</p>
+<div><p>Maximum number of iterations to perform if <cite>algorithm=’lasso_cd’</cite>.</p>
 </div></blockquote>
 <p><strong>copy_cov</strong> : boolean, optional</p>
 <blockquote>

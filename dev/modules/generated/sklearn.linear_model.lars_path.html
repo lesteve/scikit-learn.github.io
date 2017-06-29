@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -200,13 +200,13 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.lars_path<a class="headerlink" href="#sklearn-linear-model-lars-path" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.linear_model.lars_path">
-<code class="descclassname">sklearn.linear_model.</code><code class="descname">lars_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>Xy=None</em>, <em>Gram=None</em>, <em>max_iter=500</em>, <em>alpha_min=0</em>, <em>method='lar'</em>, <em>copy_X=True</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_Gram=True</em>, <em>verbose=0</em>, <em>return_path=True</em>, <em>return_n_iter=False</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/linear_model/least_angle.py#L33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.lars_path" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.linear_model.</code><code class="descname">lars_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>Xy=None</em>, <em>Gram=None</em>, <em>max_iter=500</em>, <em>alpha_min=0</em>, <em>method=’lar’</em>, <em>copy_X=True</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_Gram=True</em>, <em>verbose=0</em>, <em>return_path=True</em>, <em>return_n_iter=False</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/linear_model/least_angle.py#L33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.lars_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Least Angle Regression or Lasso path using LARS algorithm [1]</p>
-<p>The optimization objective for the case method=&#8217;lasso&#8217; is:</p>
+<p>The optimization objective for the case method=’lasso’ is:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">))</span> <span class="o">*</span> <span class="o">||</span><span class="n">y</span> <span class="o">-</span> <span class="n">Xw</span><span class="o">||^</span><span class="mi">2</span><span class="n">_2</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="o">||</span><span class="n">w</span><span class="o">||</span><span class="n">_1</span>
 </pre></div>
 </div>
-<p>in the case of method=&#8217;lars&#8217;, the objective function is only known in
+<p>in the case of method=’lars’, the objective function is only known in
 the form of an implicit equation (see discussion in [1])</p>
 <p>Read more in the <a class="reference internal" href="../linear_model.html#least-angle-regression"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -224,9 +224,9 @@ the form of an implicit equation (see discussion in [1])</p>
 <p><strong>positive</strong> : boolean (default=False)</p>
 <blockquote>
 <div><p>Restrict coefficients to be &gt;= 0.
-When using this option together with method &#8216;lasso&#8217; the model
+When using this option together with method ‘lasso’ the model
 coefficients will not converge to the ordinary-least-squares solution
-for small values of alpha (neither will they when using method &#8216;lar&#8217;
+for small values of alpha (neither will they when using method ‘lar’
 ..). Only coefficients up to the smallest alpha value (<code class="docutils literal"><span class="pre">alphas_[alphas_</span> <span class="pre">&gt;</span>
 <span class="pre">0.].min()</span></code> when fit_path=True) reached by the stepwise Lars-Lasso
 algorithm are typically in congruence with the solution of the
@@ -236,9 +236,9 @@ coordinate descent lasso_path function.</p>
 <blockquote>
 <div><p>Maximum number of iterations to perform, set to infinity for no limit.</p>
 </div></blockquote>
-<p><strong>Gram</strong> : None, &#8216;auto&#8217;, array, shape: (n_features, n_features), optional</p>
+<p><strong>Gram</strong> : None, ‘auto’, array, shape: (n_features, n_features), optional</p>
 <blockquote>
-<div><p>Precomputed Gram matrix (X&#8217; * X), if <code class="docutils literal"><span class="pre">'auto'</span></code>, the Gram
+<div><p>Precomputed Gram matrix (X’ * X), if <code class="docutils literal"><span class="pre">'auto'</span></code>, the Gram
 matrix is precomputed from the given X, if there are more samples
 than features.</p>
 </div></blockquote>
@@ -247,12 +247,12 @@ than features.</p>
 <div><p>Minimum correlation along the path. It corresponds to the
 regularization parameter alpha parameter in the Lasso.</p>
 </div></blockquote>
-<p><strong>method</strong> : {&#8216;lar&#8217;, &#8216;lasso&#8217;}, optional (default=&#8217;lar&#8217;)</p>
+<p><strong>method</strong> : {‘lar’, ‘lasso’}, optional (default=’lar’)</p>
 <blockquote>
 <div><p>Specifies the returned model. Select <code class="docutils literal"><span class="pre">'lar'</span></code> for Least Angle
 Regression, <code class="docutils literal"><span class="pre">'lasso'</span></code> for the Lasso.</p>
 </div></blockquote>
-<p><strong>eps</strong> : float, optional (default=``np.finfo(np.float).eps``)</p>
+<p><strong>eps</strong> : float, optional (default=“np.finfo(np.float).eps“)</p>
 <blockquote>
 <div><p>The machine-precision regularization in the computation of the
 Cholesky diagonal factors. Increase this for very ill-conditioned
@@ -313,7 +313,7 @@ to True.</p>
 <table class="docutils citation" frame="void" id="r188" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R188]</a></td><td>&#8220;Least Angle Regression&#8221;, Effron et al.
+<tr><td class="label"><a class="fn-backref" href="#id1">[R188]</a></td><td>“Least Angle Regression”, Effron et al.
 <a class="reference external" href="http://statweb.stanford.edu/~tibs/ftp/lars.pdf">http://statweb.stanford.edu/~tibs/ftp/lars.pdf</a></td></tr>
 </tbody>
 </table>

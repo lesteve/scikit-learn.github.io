@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -257,7 +257,7 @@ it is also possible to specify custom kernels.</li>
 <div><ul class="simple">
 <li>They are not sparse, i.e., they use the whole samples/features information to
 perform the prediction.</li>
-<li>They lose efficiency in high dimensional spaces &#8211; namely when the number
+<li>They lose efficiency in high dimensional spaces – namely when the number
 of features exceeds a few dozens.</li>
 </ul>
 </div></blockquote>
@@ -266,7 +266,7 @@ of features exceeds a few dozens.</li>
 <p>The <a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor" title="sklearn.gaussian_process.GaussianProcessRegressor"><code class="xref py py-class docutils literal"><span class="pre">GaussianProcessRegressor</span></code></a> implements Gaussian processes (GP) for
 regression purposes. For this, the prior of the GP needs to be specified. The
 prior mean is assumed to be constant and zero (for <code class="docutils literal"><span class="pre">normalize_y=False</span></code>) or the
-training data&#8217;s mean (for <code class="docutils literal"><span class="pre">normalize_y=True</span></code>). The prior&#8217;s
+training data’s mean (for <code class="docutils literal"><span class="pre">normalize_y=True</span></code>). The prior’s
 covariance is specified by a passing a <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a> object. The
 hyperparameters of the kernel are optimized during fitting of
 GaussianProcessRegressor by maximizing the log-marginal-likelihood (LML) based
@@ -325,7 +325,7 @@ times for different initializations.</p>
 <div class="section" id="comparison-of-gpr-and-kernel-ridge-regression">
 <h3>1.7.2.2. Comparison of GPR and Kernel Ridge Regression<a class="headerlink" href="#comparison-of-gpr-and-kernel-ridge-regression" title="Permalink to this headline">¶</a></h3>
 <p>Both kernel ridge regression (KRR) and GPR learn
-a target function by employing internally the &#8220;kernel trick&#8221;. KRR learns a
+a target function by employing internally the “kernel trick”. KRR learns a
 linear function in the space induced by the respective kernel which corresponds
 to a non-linear function in the original space. The linear function in the
 kernel space is chosen based on the mean-squared error loss with
@@ -334,7 +334,7 @@ a prior distribution over the target functions and uses the observed training
 data to define a likelihood function. Based on Bayes theorem, a (Gaussian)
 posterior distribution over target functions is defined, whose mean is used
 for prediction.</p>
-<p>A major difference is that GPR can choose the kernel&#8217;s hyperparameters based
+<p>A major difference is that GPR can choose the kernel’s hyperparameters based
 on gradient-ascent on the marginal likelihood function while KRR needs to
 perform a grid search on a cross-validated loss function (mean-squared error
 loss). A further difference is that GPR learns a generative, probabilistic
@@ -344,7 +344,7 @@ provides predictions.</p>
 <p>The following figure illustrates both methods on an artificial dataset, which
 consists of a sinusoidal target function and strong noise. The figure compares
 the learned model of KRR and GPR based on a ExpSineSquared kernel, which is
-suited for learning periodic functions. The kernel&#8217;s hyperparameters control
+suited for learning periodic functions. The kernel’s hyperparameters control
 the smoothness (length_scale) and periodicity of the kernel (periodicity).
 Moreover, the noise level
 of the data is learned explicitly by GPR by an additional WhiteKernel component
@@ -360,7 +360,7 @@ that, GPR provides reasonable confidence bounds on the prediction which are not
 available for KRR. A major difference between the two methods is the time
 required for fitting and predicting: while fitting KRR is fast in principle,
 the grid-search for hyperparameter optimization scales exponentially with the
-number of hyperparameters (&#8220;curse of dimensionality&#8221;). The gradient-based
+number of hyperparameters (“curse of dimensionality”). The gradient-based
 optimization of the parameters in GPR does not suffer from this exponential
 scaling and is thus considerable faster on this example with 3-dimensional
 hyperparameter space. The time for predicting is similar; however, generating
@@ -395,12 +395,12 @@ which determines the diffuseness of the length-scales, are to be determined.
 According to [RW2006], these irregularities can better be explained by
 a RationalQuadratic than an RBF kernel component, probably because it can
 accommodate several length-scales.</li>
-<li>a &#8220;noise&#8221; term, consisting of an RBF kernel contribution, which shall
+<li>a “noise” term, consisting of an RBF kernel contribution, which shall
 explain the correlated noise components such as local weather phenomena,
 and a WhiteKernel contribution for the white noise. The relative amplitudes
-and the RBF&#8217;s length scale are further free parameters.</li>
+and the RBF’s length scale are further free parameters.</li>
 </ul>
-<p>Maximizing the log-marginal-likelihood after subtracting the target&#8217;s mean
+<p>Maximizing the log-marginal-likelihood after subtracting the target’s mean
 yields the following kernel with an LML of -83.214:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">34.4</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">41.8</span><span class="p">)</span>
 <span class="o">+</span> <span class="mf">3.27</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <span class="n">ExpSineSquared</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.44</span><span class="p">,</span>
@@ -443,7 +443,7 @@ corresponding to the logistic link function (logit) is used.
 GaussianProcessClassifier approximates the non-Gaussian posterior with a
 Gaussian based on the Laplace approximation. More details can be found in
 Chapter 3 of [RW2006].</p>
-<p>The GP prior mean is assumed to be zero. The prior&#8217;s
+<p>The GP prior mean is assumed to be zero. The prior’s
 covariance is specified by a passing a <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a> object. The
 hyperparameters of the kernel are optimized during fitting of
 GaussianProcessRegressor by maximizing the log-marginal-likelihood (LML) based
@@ -458,16 +458,16 @@ optimizer.</p>
 by performing either one-versus-rest or one-versus-one based training and
 prediction.  In one-versus-rest, one binary Gaussian process classifier is
 fitted for each class, which is trained to separate this class from the rest.
-In &#8220;one_vs_one&#8221;, one binary Gaussian process classifier is fitted for each pair
+In “one_vs_one”, one binary Gaussian process classifier is fitted for each pair
 of classes, which is trained to separate these two classes. The predictions of
 these binary predictors are combined into multi-class predictions. See the
 section on <a class="reference internal" href="multiclass.html#multiclass"><span class="std std-ref">multi-class classification</span></a> for more details.</p>
-<p>In the case of Gaussian process classification, &#8220;one_vs_one&#8221; might be
+<p>In the case of Gaussian process classification, “one_vs_one” might be
 computationally  cheaper since it has to solve many problems involving only a
 subset of the whole training set rather than fewer problems on the whole
 dataset. Since Gaussian process classification scales cubically with the size
 of the dataset, this might be considerably faster. However, note that
-&#8220;one_vs_one&#8221; does not support predicting probability estimates but only plain
+“one_vs_one” does not support predicting probability estimates but only plain
 predictions. Moreover, note that <a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier" title="sklearn.gaussian_process.GaussianProcessClassifier"><code class="xref py py-class docutils literal"><span class="pre">GaussianProcessClassifier</span></code></a> does not
 (yet) implement a true multi-class Laplace approximation internally, but
 as discussed aboved is based on solving several binary classification tasks
@@ -489,7 +489,7 @@ probabilities close to 0.5 far away from the class boundaries (which is bad)
 This undesirable effect is caused by the Laplace approximation used
 internally by GPC.</p>
 <p>The second figure shows the log-marginal-likelihood for different choices of
-the kernel&#8217;s hyperparameters, highlighting the two choices of the
+the kernel’s hyperparameters, highlighting the two choices of the
 hyperparameters used in the first figure by black dots.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc.html"><img alt="../_images/sphx_glr_plot_gpc_0001.png" src="../_images/sphx_glr_plot_gpc_0001.png" /></a>
@@ -523,9 +523,9 @@ assigning different length-scales to the two feature dimensions.</p>
 </div>
 <div class="section" id="kernels-for-gaussian-processes">
 <span id="gp-kernels"></span><h2>1.7.5. Kernels for Gaussian Processes<a class="headerlink" href="#kernels-for-gaussian-processes" title="Permalink to this headline">¶</a></h2>
-<p>Kernels (also called &#8220;covariance functions&#8221; in the context of GPs) are a crucial
+<p>Kernels (also called “covariance functions” in the context of GPs) are a crucial
 ingredient of GPs which determine the shape of prior and posterior of the GP.
-They encode the assumptions on the function being learned by defining the &#8220;similarity&#8221;
+They encode the assumptions on the function being learned by defining the “similarity”
 of two datapoints combined with the assumption that similar datapoints should
 have similar target values. Two categories of kernels can be distinguished:
 stationary kernels depend only on the distance of two datapoints and not on their
@@ -537,10 +537,10 @@ also invariant to rotations in the input space. For more details, we refer to
 Chapter 4 of [RW2006].</p>
 <div class="section" id="gaussian-process-kernel-api">
 <h3>1.7.5.1. Gaussian Process Kernel API<a class="headerlink" href="#gaussian-process-kernel-api" title="Permalink to this headline">¶</a></h3>
-<p>The main usage of a <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Kernel.html#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal"><span class="pre">Kernel</span></code></a> is to compute the GP&#8217;s covariance between
+<p>The main usage of a <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Kernel.html#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal"><span class="pre">Kernel</span></code></a> is to compute the GP’s covariance between
 datapoints. For this, the method <code class="docutils literal"><span class="pre">__call__</span></code> of the kernel can be called. This
-method can either be used to compute the &#8220;auto-covariance&#8221; of all pairs of
-datapoints in a 2d array X, or the &#8220;cross-covariance&#8221; of all combinations
+method can either be used to compute the “auto-covariance” of all pairs of
+datapoints in a 2d array X, or the “cross-covariance” of all combinations
 of datapoints of a 2d array X with datapoints in a 2d array Y. The following
 identity holds true for all kernels k (except for the <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel" title="sklearn.gaussian_process.kernels.WhiteKernel"><code class="xref py py-class docutils literal"><span class="pre">WhiteKernel</span></code></a>):
 <code class="docutils literal"><span class="pre">k(X)</span> <span class="pre">==</span> <span class="pre">K(X,</span> <span class="pre">Y=X)</span></code></p>
@@ -550,7 +550,7 @@ equivalent call to <code class="docutils literal"><span class="pre">__call__</sp
 <p>Kernels are parameterized by a vector <img class="math" src="../_images/math/3be04d4207434584251f6921820c24ac9fa8c6f1.png" alt="\theta"/> of hyperparameters. These
 hyperparameters can for instance control length-scales or periodicity of a
 kernel (see below). All kernels support computing analytic gradients of
-of the kernel&#8217;s auto-covariance with respect to <img class="math" src="../_images/math/3be04d4207434584251f6921820c24ac9fa8c6f1.png" alt="\theta"/> via setting
+of the kernel’s auto-covariance with respect to <img class="math" src="../_images/math/3be04d4207434584251f6921820c24ac9fa8c6f1.png" alt="\theta"/> via setting
 <code class="docutils literal"><span class="pre">eval_gradient=True</span></code> in the <code class="docutils literal"><span class="pre">__call__</span></code> method. This gradient is used by the
 Gaussian process (both regressor and classifier) in computing the gradient
 of the log-marginal-likelihood, which in turn is used to determine the
@@ -564,7 +564,7 @@ accessed by the property <code class="docutils literal"><span class="pre">bounds
 since those are typically more amenable to gradient-based optimization.
 The specification of each hyperparameter is stored in the form of an instance of
 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Hyperparameter.html#sklearn.gaussian_process.kernels.Hyperparameter" title="sklearn.gaussian_process.kernels.Hyperparameter"><code class="xref py py-class docutils literal"><span class="pre">Hyperparameter</span></code></a> in the respective kernel. Note that a kernel using a
-hyperparameter with name &#8220;x&#8221; must have the attributes self.x and self.x_bounds.</p>
+hyperparameter with name “x” must have the attributes self.x and self.x_bounds.</p>
 <p>The abstract base class for all kernels is <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Kernel.html#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal"><span class="pre">Kernel</span></code></a>. Kernel implements a
 similar interface as <code class="xref py py-class docutils literal"><span class="pre">Estimator</span></code>, providing the methods <code class="docutils literal"><span class="pre">get_params()</span></code>,
 <code class="docutils literal"><span class="pre">set_params()</span></code>, and <code class="docutils literal"><span class="pre">clone()</span></code>. This allows setting kernel values also via
@@ -603,7 +603,7 @@ kernel but with the hyperparameters set to <code class="docutils literal"><span 
 </div>
 <p>All Gaussian process kernels are interoperable with <a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics.pairwise</span></code></a>
 and vice versa: instances of subclasses of <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Kernel.html#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal"><span class="pre">Kernel</span></code></a> can be passed as
-<code class="docutils literal"><span class="pre">metric</span></code> to pairwise_kernels`` from <a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics.pairwise</span></code></a>. Moreover,
+<code class="docutils literal"><span class="pre">metric</span></code> to pairwise_kernels“ from <a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics.pairwise</span></code></a>. Moreover,
 kernel functions from pairwise can be used as GP kernels by using the wrapper
 class <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.PairwiseKernel.html#sklearn.gaussian_process.kernels.PairwiseKernel" title="sklearn.gaussian_process.kernels.PairwiseKernel"><code class="xref py py-class docutils literal"><span class="pre">PairwiseKernel</span></code></a>. The only caveat is that the gradient of
 the hyperparameters is not analytic but numeric and all those kernels support
@@ -639,8 +639,8 @@ The <a class="reference internal" href="generated/sklearn.gaussian_process.kerne
 </div>
 <div class="section" id="radial-basis-function-rbf-kernel">
 <h3>1.7.5.4. Radial-basis function (RBF) kernel<a class="headerlink" href="#radial-basis-function-rbf-kernel" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal"><span class="pre">RBF</span></code></a> kernel is a stationary kernel. It is also known as the &#8220;squared
-exponential&#8221; kernel. It is parameterized by a length-scale parameter <img class="math" src="../_images/math/2b03f10859ffeeee9ece9f213287e3b54f5f39b8.png" alt="l&gt;0"/>, which
+<p>The <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal"><span class="pre">RBF</span></code></a> kernel is a stationary kernel. It is also known as the “squared
+exponential” kernel. It is parameterized by a length-scale parameter <img class="math" src="../_images/math/2b03f10859ffeeee9ece9f213287e3b54f5f39b8.png" alt="l&gt;0"/>, which
 can either be a scalar (isotropic variant of the kernel) or a vector with the same
 number of dimensions as the inputs <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> (anisotropic variant of the kernel).
 The kernel is given by:</p>
@@ -818,7 +818,7 @@ basic least squares linear regression problem:</p>
 </div><p>Except we additionally assume some spatial coherence (correlation) between the
 samples dictated by the correlation function. Indeed, ordinary least squares
 assumes the correlation model <img class="math" src="../_images/math/7a42ce125aa465fa1885cd5405aec2aac4d360bc.png" alt="R(|X - X'|)"/> is one when <img class="math" src="../_images/math/1103e88c4e6e6e69dfca9fd3d110911904484bd7.png" alt="X = X'"/>
-and zero otherwise : a <em>dirac</em> correlation model &#8211; sometimes referred to as a
+and zero otherwise : a <em>dirac</em> correlation model – sometimes referred to as a
 <em>nugget</em> correlation model in the kriging literature.</p>
 </div>
 <div class="section" id="the-best-linear-unbiased-prediction-blup">
@@ -852,7 +852,7 @@ equality constrained optimization problem:</p>
                    {\rm s. t.} &amp; \; \mathbb{E}[G(X) - a(X)^T y] = 0"/></p>
 </div><p>Rewriting this constrained optimization problem in the form of a Lagrangian and
 looking further for the first order optimality conditions to be satisfied, one
-ends up with a closed form expression for the sought predictor &#8211; see
+ends up with a closed form expression for the sought predictor – see
 references for the complete proof.</p>
 <p>In the end, the BLUP is shown to be a Gaussian random variate with mean:</p>
 <div class="math">
@@ -909,29 +909,29 @@ In practice however they are never known in advance so that one has to make
 <p>Provided these choices are made, one should estimate the remaining unknown
 parameters involved in the BLUP. To do so, one uses the set of provided
 observations in conjunction with some inference technique. The present
-implementation, which is based on the DACE&#8217;s Matlab toolbox uses the <em>maximum
-likelihood estimation</em> technique &#8211; see DACE manual in references for the
+implementation, which is based on the DACE’s Matlab toolbox uses the <em>maximum
+likelihood estimation</em> technique – see DACE manual in references for the
 complete equations. This maximum likelihood estimation problem is turned into
 a global optimization problem onto the autocorrelation parameters. In the
 present implementation, this global optimization is solved by means of the
 fmin_cobyla optimization function from scipy.optimize. In the case of
-anisotropy however, we provide an implementation of Welch&#8217;s componentwise
-optimization algorithm &#8211; see references.</p>
+anisotropy however, we provide an implementation of Welch’s componentwise
+optimization algorithm – see references.</p>
 </div>
 </div>
 <div class="section" id="correlation-models">
 <span id="id7"></span><h3>1.7.6.4. Correlation Models<a class="headerlink" href="#correlation-models" title="Permalink to this headline">¶</a></h3>
-<p>Common correlation models matches some famous SVM&#8217;s kernels because they are
-mostly built on equivalent assumptions. They must fulfill Mercer&#8217;s conditions
+<p>Common correlation models matches some famous SVM’s kernels because they are
+mostly built on equivalent assumptions. They must fulfill Mercer’s conditions
 and should additionally remain stationary. Note however, that the choice of the
 correlation model should be made in agreement with the known properties of the
 original experiment from which the observations come. For instance:</p>
 <ul class="simple">
 <li>If the original experiment is known to be infinitely differentiable (smooth),
 then one should use the <em>squared-exponential correlation model</em>.</li>
-<li>If it&#8217;s not, then one should rather use the <em>exponential correlation model</em>.</li>
+<li>If it’s not, then one should rather use the <em>exponential correlation model</em>.</li>
 <li>Note also that there exists a correlation model that takes the degree of
-derivability as input: this is the Matern correlation model, but it&#8217;s not
+derivability as input: this is the Matern correlation model, but it’s not
 implemented here (TODO).</li>
 </ul>
 <p>For a more detailed discussion on the selection of appropriate correlation
@@ -957,7 +957,7 @@ toolbox.</p>
 Sondergaard 2002,</li>
 <li>W.J. Welch, R.J. Buck, J. Sacks, H.P. Wynn, T.J. Mitchell, and M.D.
 Morris (1992). Screening, predicting, and computer experiments.
-Technometrics, 34(1) 15&#8211;25.</li>
+Technometrics, 34(1) 15–25.</li>
 </ul>
 </div>
 </div>

@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -211,8 +211,8 @@ approaches. In these cases scikit-learn has a number of options you can
 consider to make your system scale.</p>
 <div class="section" id="scaling-with-instances-using-out-of-core-learning">
 <h2>6.1. Scaling with instances using out-of-core learning<a class="headerlink" href="#scaling-with-instances-using-out-of-core-learning" title="Permalink to this headline">¶</a></h2>
-<p>Out-of-core (or &#8220;external memory&#8221;) learning is a technique used to learn from
-data that cannot fit in a computer&#8217;s main memory (RAM).</p>
+<p>Out-of-core (or “external memory”) learning is a technique used to learn from
+data that cannot fit in a computer’s main memory (RAM).</p>
 <p>Here is sketch of a system designed to achieve this goal:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -249,7 +249,7 @@ variables represented as list of Python dicts or
 algorithms cannot learn incrementally (i.e. without seeing all the instances
 at once), all estimators implementing the <code class="docutils literal"><span class="pre">partial_fit</span></code> API are candidates.
 Actually, the ability to learn incrementally from a mini-batch of instances
-(sometimes called &#8220;online learning&#8221;) is key to out-of-core learning as it
+(sometimes called “online learning”) is key to out-of-core learning as it
 guarantees that at any given time there will be only a small amount of
 instances in the main memory. Choosing a good size for the mini-batch that
 balances relevancy and memory footprint could involve some tuning <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
@@ -316,7 +316,7 @@ attributes, the incremental learner itself may be unable to cope with
 new/unseen targets classes. In this case you have to pass all the possible
 classes to the first <code class="docutils literal"><span class="pre">partial_fit</span></code> call using the <code class="docutils literal"><span class="pre">classes=</span></code> parameter.</p>
 <p>Another aspect to consider when choosing a proper algorithm is that all of them
-don&#8217;t put the same importance on each example over time. Namely, the
+don’t put the same importance on each example over time. Namely, the
 <code class="docutils literal"><span class="pre">Perceptron</span></code> is still sensitive to badly labeled examples even after many
 examples whereas the <code class="docutils literal"><span class="pre">SGD*</span></code> and <code class="docutils literal"><span class="pre">PassiveAggressive*</span></code> families are more
 robust to this kind of artifacts. Conversely, the later also tend to give less

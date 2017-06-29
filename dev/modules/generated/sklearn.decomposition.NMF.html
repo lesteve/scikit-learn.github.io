@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.NMF<a class="headerlink" href="#sklearn-decomposition-nmf" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.decomposition.NMF">
-<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">NMF</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>init=None</em>, <em>solver='cd'</em>, <em>beta_loss='frobenius'</em>, <em>tol=0.0001</em>, <em>max_iter=200</em>, <em>random_state=None</em>, <em>alpha=0.0</em>, <em>l1_ratio=0.0</em>, <em>verbose=0</em>, <em>shuffle=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/nmf.py#L1026"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">NMF</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>init=None</em>, <em>solver=’cd’</em>, <em>beta_loss=’frobenius’</em>, <em>tol=0.0001</em>, <em>max_iter=200</em>, <em>random_state=None</em>, <em>alpha=0.0</em>, <em>l1_ratio=0.0</em>, <em>verbose=0</em>, <em>shuffle=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/nmf.py#L1026"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF" title="Permalink to this definition">¶</a></dt>
 <dd><p>Non-Negative Matrix Factorization (NMF)</p>
 <p>Find two non-negative matrices (W, H) whose product approximates the non-
 negative matrix X. This factorization can be used for example for
@@ -218,7 +218,7 @@ dimensionality reduction, source separation or topic extraction.</p>
 <span class="o">||</span><span class="n">vec</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">||</span><span class="n">_1</span> <span class="o">=</span> \<span class="n">sum_</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">}</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A_</span><span class="p">{</span><span class="n">ij</span><span class="p">})</span> <span class="p">(</span><span class="n">Elementwise</span> <span class="n">L1</span> <span class="n">norm</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For multiplicative-update (&#8216;mu&#8217;) solver, the Frobenius norm
+<p>For multiplicative-update (‘mu’) solver, the Frobenius norm
 (0.5 * ||X - WH||_Fro^2) can be changed into another beta-divergence loss,
 by changing the beta_loss parameter.</p>
 <p>The objective function is minimized with an alternating minimization of W
@@ -233,41 +233,41 @@ and H.</p>
 <div><p>Number of components, if n_components is not set all features
 are kept.</p>
 </div></blockquote>
-<p><strong>init</strong> :  &#8216;random&#8217; | &#8216;nndsvd&#8217; |  &#8216;nndsvda&#8217; | &#8216;nndsvdar&#8217; | &#8216;custom&#8217;</p>
+<p><strong>init</strong> :  ‘random’ | ‘nndsvd’ |  ‘nndsvda’ | ‘nndsvdar’ | ‘custom’</p>
 <blockquote>
 <div><p>Method used to initialize the procedure.
-Default: &#8216;nndsvd&#8217; if n_components &lt; n_features, otherwise random.
+Default: ‘nndsvd’ if n_components &lt; n_features, otherwise random.
 Valid options:</p>
 <ul class="simple">
 <li><dl class="first docutils">
-<dt>&#8216;random&#8217;: non-negative random matrices, scaled with:</dt>
+<dt>‘random’: non-negative random matrices, scaled with:</dt>
 <dd>sqrt(X.mean() / n_components)</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&#8216;nndsvd&#8217;: Nonnegative Double Singular Value Decomposition (NNDSVD)</dt>
+<dt>‘nndsvd’: Nonnegative Double Singular Value Decomposition (NNDSVD)</dt>
 <dd>initialization (better for sparseness)</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&#8216;nndsvda&#8217;: NNDSVD with zeros filled with the average of X</dt>
+<dt>‘nndsvda’: NNDSVD with zeros filled with the average of X</dt>
 <dd>(better when sparsity is not desired)</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&#8216;nndsvdar&#8217;: NNDSVD with zeros filled with small random values</dt>
+<dt>‘nndsvdar’: NNDSVD with zeros filled with small random values</dt>
 <dd>(generally faster, less accurate alternative to NNDSVDa
 for when sparsity is not desired)</dd>
 </dl>
 </li>
-<li>&#8216;custom&#8217;: use custom matrices W and H</li>
+<li>‘custom’: use custom matrices W and H</li>
 </ul>
 </div></blockquote>
-<p><strong>solver</strong> : &#8216;cd&#8217; | &#8216;mu&#8217;</p>
+<p><strong>solver</strong> : ‘cd’ | ‘mu’</p>
 <blockquote>
 <div><p>Numerical solver to use:
-&#8216;cd&#8217; is a Coordinate Descent solver.
-&#8216;mu&#8217; is a Multiplicative Update solver.</p>
+‘cd’ is a Coordinate Descent solver.
+‘mu’ is a Multiplicative Update solver.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.17: </span>Coordinate Descent solver.</p>
 </div>
@@ -275,14 +275,14 @@ for when sparsity is not desired)</dd>
 <p><span class="versionmodified">New in version 0.19: </span>Multiplicative Update solver.</p>
 </div>
 </div></blockquote>
-<p><strong>beta_loss</strong> : float or string, default &#8216;frobenius&#8217;</p>
+<p><strong>beta_loss</strong> : float or string, default ‘frobenius’</p>
 <blockquote>
-<div><p>String must be in {&#8216;frobenius&#8217;, &#8216;kullback-leibler&#8217;, &#8216;itakura-saito&#8217;}.
+<div><p>String must be in {‘frobenius’, ‘kullback-leibler’, ‘itakura-saito’}.
 Beta divergence to be minimized, measuring the distance between X
-and the dot product WH. Note that values different from &#8216;frobenius&#8217;
-(or 2) and &#8216;kullback-leibler&#8217; (or 1) lead to significantly slower
-fits. Note that for beta_loss &lt;= 0 (or &#8216;itakura-saito&#8217;), the input
-matrix X cannot contain zeros. Used only in &#8216;mu&#8217; solver.</p>
+and the dot product WH. Note that values different from ‘frobenius’
+(or 2) and ‘kullback-leibler’ (or 1) lead to significantly slower
+fits. Note that for beta_loss &lt;= 0 (or ‘itakura-saito’), the input
+matrix X cannot contain zeros. Used only in ‘mu’ solver.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.19.</span></p>
 </div>
@@ -333,7 +333,7 @@ solver.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>components_</strong> : array, [n_components, n_features]</p>
 <blockquote>
-<div><p>Factorization matrix, sometimes called &#8216;dictionary&#8217;.</p>
+<div><p>Factorization matrix, sometimes called ‘dictionary’.</p>
 </div></blockquote>
 <p><strong>reconstruction_err_</strong> : number</p>
 <blockquote>
@@ -350,8 +350,8 @@ the fitted model.</p>
 </tbody>
 </table>
 <p class="rubric">References</p>
-<p>Cichocki, Andrzej, and P. H. A. N. Anh-Huy. &#8220;Fast local algorithms for
-large scale nonnegative matrix and tensor factorizations.&#8221;
+<p>Cichocki, Andrzej, and P. H. A. N. Anh-Huy. “Fast local algorithms for
+large scale nonnegative matrix and tensor factorizations.”
 IEICE transactions on fundamentals of electronics, communications and
 computer sciences 92.3: 708-721, 2009.</p>
 <p>Fevotte, C., &amp; Idier, J. (2011). Algorithms for nonnegative matrix
@@ -394,12 +394,12 @@ factorization with the beta-divergence. Neural Computation, 23(9).</p>
 </table>
 <dl class="method">
 <dt id="sklearn.decomposition.NMF.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>init=None</em>, <em>solver='cd'</em>, <em>beta_loss='frobenius'</em>, <em>tol=0.0001</em>, <em>max_iter=200</em>, <em>random_state=None</em>, <em>alpha=0.0</em>, <em>l1_ratio=0.0</em>, <em>verbose=0</em>, <em>shuffle=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/nmf.py#L1170"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>init=None</em>, <em>solver=’cd’</em>, <em>beta_loss=’frobenius’</em>, <em>tol=0.0001</em>, <em>max_iter=200</em>, <em>random_state=None</em>, <em>alpha=0.0</em>, <em>l1_ratio=0.0</em>, <em>verbose=0</em>, <em>shuffle=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/nmf.py#L1170"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.decomposition.NMF.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/nmf.py#L1226"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/nmf.py#L1226"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learn a NMF model for the data X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -420,7 +420,7 @@ factorization with the beta-divergence. Neural Computation, 23(9).</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.NMF.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>W=None</em>, <em>H=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/nmf.py#L1186"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>W=None</em>, <em>H=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/nmf.py#L1186"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learn a NMF model for the data X and returns the transformed data.</p>
 <p>This is more efficient than calling fit followed by transform.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -433,11 +433,11 @@ factorization with the beta-divergence. Neural Computation, 23(9).</p>
 </div></blockquote>
 <p><strong>W</strong> : array-like, shape (n_samples, n_components)</p>
 <blockquote>
-<div><p>If init=&#8217;custom&#8217;, it is used as initial guess for the solution.</p>
+<div><p>If init=’custom’, it is used as initial guess for the solution.</p>
 </div></blockquote>
 <p><strong>H</strong> : array-like, shape (n_components, n_features)</p>
 <blockquote>
-<div><p>If init=&#8217;custom&#8217;, it is used as initial guess for the solution.</p>
+<div><p>If init=’custom’, it is used as initial guess for the solution.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -453,7 +453,7 @@ factorization with the beta-divergence. Neural Computation, 23(9).</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.NMF.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -478,7 +478,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.NMF.inverse_transform">
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>W</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/nmf.py#L1266"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>W</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/nmf.py#L1266"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform data back to its original space.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -503,11 +503,11 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.NMF.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -521,7 +521,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.decomposition.NMF.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/decomposition/nmf.py#L1241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/decomposition/nmf.py#L1241"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.NMF.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform the data X according to the fitted NMF model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

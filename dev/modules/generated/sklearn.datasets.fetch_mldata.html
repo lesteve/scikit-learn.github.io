@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.fetch_mldata<a class="headerlink" href="#sklearn-datasets-fetch-mldata" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.fetch_mldata">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_mldata</code><span class="sig-paren">(</span><em>dataname</em>, <em>target_name='label'</em>, <em>data_name='data'</em>, <em>transpose_data=True</em>, <em>data_home=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b413299/sklearn/datasets/mldata.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_mldata" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_mldata</code><span class="sig-paren">(</span><em>dataname</em>, <em>target_name=’label’</em>, <em>data_name=’data’</em>, <em>transpose_data=True</em>, <em>data_home=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fa73cd79/sklearn/datasets/mldata.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_mldata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch an mldata.org data set</p>
 <p>If the file does not exist yet, it is downloaded from mldata.org .</p>
 <p>mldata.org does not have an enforced convention for storing data or
@@ -208,8 +208,8 @@ naming the columns in a data set. The default behavior of this function
 works well with the most common cases:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>data values are stored in the column &#8216;data&#8217;, and target values in the
-column &#8216;label&#8217;</li>
+<li>data values are stored in the column ‘data’, and target values in the
+column ‘label’</li>
 <li>alternatively, the first column stores target values, and the second
 data values</li>
 <li>the data array is stored as <cite>n_features x n_samples</cite> , and thus needs
@@ -228,14 +228,14 @@ Bunch object with their original name.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dataname :</strong> :</p>
 <blockquote>
 <div><p>Name of the data set on mldata.org,
-e.g.: &#8220;leukemia&#8221;, &#8220;Whistler Daily Snowfall&#8221;, etc.
+e.g.: “leukemia”, “Whistler Daily Snowfall”, etc.
 The raw name is automatically converted to a mldata.org URL .</p>
 </div></blockquote>
-<p><strong>target_name</strong> : optional, default: &#8216;label&#8217;</p>
+<p><strong>target_name</strong> : optional, default: ‘label’</p>
 <blockquote>
 <div><p>Name or index of the column containing the target values.</p>
 </div></blockquote>
-<p><strong>data_name</strong> : optional, default: &#8216;data&#8217;</p>
+<p><strong>data_name</strong> : optional, default: ‘data’</p>
 <blockquote>
 <div><p>Name or index of the column containing the data.</p>
 </div></blockquote>
@@ -246,23 +246,23 @@ The raw name is automatically converted to a mldata.org URL .</p>
 <p><strong>data_home</strong> : optional, default: None</p>
 <blockquote>
 <div><p>Specify another download and cache folder for the data sets. By default
-all scikit-learn data is stored in &#8216;~/scikit_learn_data&#8217; subfolders.</p>
+all scikit-learn data is stored in ‘~/scikit_learn_data’ subfolders.</p>
 </div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : Bunch</p>
 <blockquote class="last">
 <div><p>Dictionary-like object, the interesting attributes are:
-&#8216;data&#8217;, the data to learn, &#8216;target&#8217;, the classification labels,
-&#8216;DESCR&#8217;, the full description of the dataset, and
-&#8216;COL_NAMES&#8217;, the original names of the dataset columns.</p>
+‘data’, the data to learn, ‘target’, the classification labels,
+‘DESCR’, the full description of the dataset, and
+‘COL_NAMES’, the original names of the dataset columns.</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<p>Load the &#8216;iris&#8217; dataset from mldata.org:</p>
+<p>Load the ‘iris’ dataset from mldata.org:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets.mldata</span> <span class="k">import</span> <span class="n">fetch_mldata</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test_data_home</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
@@ -275,7 +275,7 @@ all scikit-learn data is stored in &#8216;~/scikit_learn_data&#8217; subfolders.
 <span class="go">(150, 4)</span>
 </pre></div>
 </div>
-<p>Load the &#8216;leukemia&#8217; dataset from mldata.org, which needs to be transposed
+<p>Load the ‘leukemia’ dataset from mldata.org, which needs to be transposed
 to respects the scikit-learn axes convention:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leuk</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;leukemia&#39;</span><span class="p">,</span> <span class="n">transpose_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="n">data_home</span><span class="o">=</span><span class="n">test_data_home</span><span class="p">)</span>
@@ -283,7 +283,7 @@ to respects the scikit-learn axes convention:</p>
 <span class="go">(72, 7129)</span>
 </pre></div>
 </div>
-<p>Load an alternative &#8216;iris&#8217; dataset, which has different names for the
+<p>Load an alternative ‘iris’ dataset, which has different names for the
 columns:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris2</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="gp">... </span>                     <span class="n">data_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">test_data_home</span><span class="p">)</span>

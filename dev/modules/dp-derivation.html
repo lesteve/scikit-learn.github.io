@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -62,7 +62,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -182,8 +182,8 @@ are concerned with the structure of the dirichlet process, it does not
 go into detail in the mixture modeling part, which can be just as
 complex, or even more. For this reason we present here a full
 derivation of the inference algorithm and all the update and
-lower-bound equations. If you&#8217;re not interested in learning how to
-derive similar algorithms yourself and you&#8217;re not interested in
+lower-bound equations. If you’re not interested in learning how to
+derive similar algorithms yourself and you’re not interested in
 changing/debugging the implementation in the scikit this document is
 not for you.</p>
 <p>The complexity of this implementation is linear in the number of
@@ -220,7 +220,7 @@ Positive Definite matrix.</p>
 z_{i}     &amp;\sim&amp; SBP(\phi) \\
 X_t &amp;\sim&amp; Normal(\mu_{z_i}, \frac{1}{\sigma_{z_i}} \mathbf{I})
 \end{array}"/></p>
-</div><p>The variational distribution we&#8217;ll use is</p>
+</div><p>The variational distribution we’ll use is</p>
 <div class="math">
 <p><img src="../_images/math/500f272547d6a0c02c56f01d92dda611f8a5b38b.png" alt="\begin{array}{rcl}
 \phi_k   &amp;\sim&amp; Beta(\gamma_{k,1}, \gamma_{k,2}) \\
@@ -271,7 +271,7 @@ E_q[\log Beta(1,\alpha)] - E[\log Beta(\gamma_{k,1},\gamma_{k,2})]
 + \frac{D}{2} \log 2\pi e
 \end{array}"/></p>
 </div><p><strong>The bound for</strong> <img class="math" src="../_images/math/9e70b174c2318da1a45cb73475cce11edc58382e.png" alt="\sigma_k"/></p>
-<p>Here I&#8217;ll use the inverse scale parametrization of the gamma
+<p>Here I’ll use the inverse scale parametrization of the gamma
 distribution.</p>
 <div class="math">
 <p><img src="../_images/math/28de4c9bd00036944fc5c8912665e192ae6ccf7f.png" alt="\begin{array}{rcl}
@@ -296,7 +296,7 @@ E_q[\log P(X_i)] &amp;=&amp; \sum_k \nu_{z_k} \left( - \frac{D}{2}\log 2\pi
 +\frac{D}{2} (\Psi(a_k) - \log(b_k))
 -\frac{a_k}{2b_k} (||X_i - \nu_{\mu_k}||^2+D) - \log 2 \pi e  \right)
 \end{array}"/></p>
-</div><p>For simplicity I&#8217;ll later call the term inside the parenthesis <img class="math" src="../_images/math/c0649a6a3aa920dfc51c38dbdc02218e3dec88b9.png" alt="E_q[\log P(X_i|z_i=k)]"/></p>
+</div><p>For simplicity I’ll later call the term inside the parenthesis <img class="math" src="../_images/math/c0649a6a3aa920dfc51c38dbdc02218e3dec88b9.png" alt="E_q[\log P(X_i|z_i=k)]"/></p>
 </div>
 <div class="section" id="the-updates">
 <h3>The updates<a class="headerlink" href="#the-updates" title="Permalink to this headline">¶</a></h3>
@@ -317,7 +317,7 @@ The gradient is</p>
 <div class="math">
 <p><img src="../_images/math/abe1296ca943363ae01d4489009b65ebfa3df2fb.png" alt="\nu_{\mu_k} = \frac{\sum_i \frac{\nu_{z_{i,k}}b_k}{a_k}X_i}{1+\sum_i \frac{\nu_{z_{i,k}}b_k}{a_k}}"/></p>
 </div><p><strong>Updating</strong> <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> <strong>and</strong> <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/></p>
-<p>For some odd reason it doesn&#8217;t really work when you derive the updates
+<p>For some odd reason it doesn’t really work when you derive the updates
 for a and b using the gradients of the lower bound (terms involving the
 <img class="math" src="../_images/math/ae5e82b247f75cb3b518ccd00155258b6bf130a0.png" alt="\Psi'"/> function show up and <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> is hard to isolate).
 However, we can use the other formula,</p>
@@ -351,7 +351,7 @@ constant and we get two terms: the prior and the probability of
 z_{i}     &amp;\sim&amp; SBP(\phi) \\
 X_t &amp;\sim&amp; Normal(\mu_{z_i}, \bm{\sigma_{z_i}}^{-1})
 \end{array}"/></p>
-</div><p>Tha variational distribution we&#8217;ll use is</p>
+</div><p>Tha variational distribution we’ll use is</p>
 <div class="math">
 <p><img src="../_images/math/441c4234684348045fd5b6ddf9699a755bf62970.png" alt="\begin{array}{rcl}
 \phi_k   &amp;\sim&amp; Beta(\gamma_{k,1}, \gamma_{k,2}) \\
@@ -389,7 +389,7 @@ E_q[\log P(X_i)] &amp;=&amp; \sum_k \nu_{z_k} \Big( - \frac{D}{2}\log 2\pi
 <div class="math">
 <p><img src="../_images/math/b02e60a14e81e36439e72abcec135a8c648a9dee.png" alt="\nu_{\mu_k} = \left(\mathbf{I}+\sum_i \frac{\nu_{z_{i,k}}\mathbf{b_k}}{\mathbf{a_k}}\right)^{-1}\left(\sum_i \frac{\nu_{z_{i,k}}b_k}{a_k}X_i\right)"/></p>
 </div><p><strong>The updates for a and b</strong></p>
-<p>Here we&#8217;ll do something very similar to the spheric model. The main
+<p>Here we’ll do something very similar to the spheric model. The main
 difference is that now each <img class="math" src="../_images/math/595d61db4bc538b93c6ef7dabbe8a74ac4f0a5b3.png" alt="\sigma_{k,d}"/> controls only one dimension
 of the bound:</p>
 <div class="math">
@@ -413,7 +413,7 @@ of the bound:</p>
 z_{i}     &amp;\sim&amp; SBP(\phi) \\
 X_t &amp;\sim&amp; Normal(\mu_{z_i},  \Sigma^{-1})
 \end{array}"/></p>
-</div><p>Tha variational distribution we&#8217;ll use is</p>
+</div><p>Tha variational distribution we’ll use is</p>
 <div class="math">
 <p><img src="../_images/math/139a83d550c438f7355a466a0202ac9f3233522e.png" alt="\begin{array}{rcl}
 \phi_k   &amp;\sim&amp; Beta(\gamma_{k,1}, \gamma_{k,2}) \\
@@ -452,7 +452,7 @@ the update for <img class="math" src="../_images/math/d79e8a2c7ce54906c2b25549da
 <p><img src="../_images/math/10a839b4842b75d9b305b7bc7bbf7bb15900c5a4.png" alt="\nu_{\mu_k} = \left(\mathbf{I}+ a\mathbf{B}\sum_i \nu_{z_{i,k}}\right)^{-1}
 \left(a\mathbf{B}\sum_i \nu_{z_{i,k}} X_i\right)"/></p>
 </div><p><strong>The update for</strong> <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> <strong>and</strong> <img class="math" src="../_images/math/9805f44feec6f81d376d09e88b8236635edbb3c8.png" alt="B"/></p>
-<p>As this distribution is far too complicated I&#8217;m not even going to try
+<p>As this distribution is far too complicated I’m not even going to try
 going at it the gradient way.</p>
 <div class="math">
 <p><img src="../_images/math/47560247dcb89478ab0b7cc10f25586526b80c7e.png" alt="\log Q(\Sigma) = +\frac{1}{2}\log |\Sigma| - \frac{1}{2} \mathbf{tr}[\Sigma]
@@ -482,7 +482,7 @@ the middle can be expressed as the trace of something) reduces to</p>
 z_{i}     &amp;\sim&amp; SBP(\phi) \\
 X_t &amp;\sim&amp; Normal(\mu_{z_i},  \Sigma_{z,i}^{-1})
 \end{array}"/></p>
-</div><p>The variational distribution we&#8217;ll use is</p>
+</div><p>The variational distribution we’ll use is</p>
 <div class="math">
 <p><img src="../_images/math/0deb9268e6bc532bde7a3360fcd132fdee3fedc0.png" alt="\begin{array}{rcl}
 \phi_k   &amp;\sim&amp; Beta(\gamma_{k,1}, \gamma_{k,2}) \\
@@ -499,7 +499,7 @@ and there are the correct indices on the bound for X.</p>
 <div class="section" id="id5">
 <h3>The updates<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>All that changes in the updates is that the update for mu uses only
-the proper sigma and the updates for a and B don&#8217;t have a sum over K, so</p>
+the proper sigma and the updates for a and B don’t have a sum over K, so</p>
 <div class="math">
 <p><img src="../_images/math/61398a6b1bb5be39b1c7eeba1ef45eadb33c25fe.png" alt="\nu_{\mu_k} = \left(\mathbf{I}+ a_k\mathbf{B_k}\sum_i \nu_{z_{i,k}}\right)^{-1}
 \left(a_k\mathbf{B_k}\sum_i \nu_{z_{i,k}} X_i\right)"/></p>

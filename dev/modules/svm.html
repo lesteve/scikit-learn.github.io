@@ -1,7 +1,7 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -64,7 +64,7 @@
   </script>
 
   </head>
-  <body role="document">
+  <body>
 
 <div class="header-wrapper">
     <div class="header">
@@ -309,13 +309,13 @@ can be found in members <code class="docutils literal"><span class="pre">support
 </div>
 <div class="section" id="multi-class-classification">
 <span id="svm-multi-class"></span><h3>1.4.1.1. Multi-class classification<a class="headerlink" href="#multi-class-classification" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> and <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a> implement the &#8220;one-against-one&#8221;
+<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> and <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a> implement the “one-against-one”
 approach (Knerr et al., 1990) for multi- class classification. If
 <code class="docutils literal"><span class="pre">n_class</span></code> is the number of classes, then <code class="docutils literal"><span class="pre">n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code>
 classifiers are constructed and each one trains data from two classes.
 To provide a consistent interface with other classifiers, the
 <code class="docutils literal"><span class="pre">decision_function_shape</span></code> option allows to aggregate the results of the
-&#8220;one-against-one&#8221; classifiers to a decision function of shape <code class="docutils literal"><span class="pre">(n_samples,</span>
+“one-against-one” classifiers to a decision function of shape <code class="docutils literal"><span class="pre">(n_samples,</span>
 <span class="pre">n_classes)</span></code>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
@@ -334,7 +334,7 @@ To provide a consistent interface with other classifiers, the
 <span class="go">4</span>
 </pre></div>
 </div>
-<p>On the other hand, <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> implements &#8220;one-vs-the-rest&#8221;
+<p>On the other hand, <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> implements “one-vs-the-rest”
 multi-class strategy, thus training n_class models. If there are only
 two classes, only one model is trained:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">()</span>
@@ -356,23 +356,23 @@ using the option <code class="docutils literal"><span class="pre">multi_class='c
 which is not true for one-vs-rest classification.
 In practice, one-vs-rest classification is usually preferred, since the results
 are mostly similar, but the runtime is significantly less.</p>
-<p>For &#8220;one-vs-rest&#8221; <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> the attributes <code class="docutils literal"><span class="pre">coef_</span></code> and <code class="docutils literal"><span class="pre">intercept_</span></code>
+<p>For “one-vs-rest” <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> the attributes <code class="docutils literal"><span class="pre">coef_</span></code> and <code class="docutils literal"><span class="pre">intercept_</span></code>
 have the shape <code class="docutils literal"><span class="pre">[n_class,</span> <span class="pre">n_features]</span></code> and <code class="docutils literal"><span class="pre">[n_class]</span></code> respectively.
 Each row of the coefficients corresponds to one of the <code class="docutils literal"><span class="pre">n_class</span></code> many
-&#8220;one-vs-rest&#8221; classifiers and similar for the intercepts, in the
-order of the &#8220;one&#8221; class.</p>
-<p>In the case of &#8220;one-vs-one&#8221; <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a>, the layout of the attributes
+“one-vs-rest” classifiers and similar for the intercepts, in the
+order of the “one” class.</p>
+<p>In the case of “one-vs-one” <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a>, the layout of the attributes
 is a little more involved. In the case of having a linear kernel,
 The layout of <code class="docutils literal"><span class="pre">coef_</span></code> and <code class="docutils literal"><span class="pre">intercept_</span></code> is similar to the one
 described for <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> described above, except that the shape of
 <code class="docutils literal"><span class="pre">coef_</span></code> is <code class="docutils literal"><span class="pre">[n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2,</span> <span class="pre">n_features]</span></code>, corresponding to as
 many binary classifiers. The order for classes
-0 to n is &#8220;0 vs 1&#8221;, &#8220;0 vs 2&#8221; , ... &#8220;0 vs n&#8221;, &#8220;1 vs 2&#8221;, &#8220;1 vs 3&#8221;, &#8220;1 vs n&#8221;, . .
-. &#8220;n-1 vs n&#8221;.</p>
+0 to n is “0 vs 1”, “0 vs 2” , … “0 vs n”, “1 vs 2”, “1 vs 3”, “1 vs n”, . .
+. “n-1 vs n”.</p>
 <p>The shape of <code class="docutils literal"><span class="pre">dual_coef_</span></code> is <code class="docutils literal"><span class="pre">[n_class-1,</span> <span class="pre">n_SV]</span></code> with
 a somewhat hard to grasp layout.
 The columns correspond to the support vectors involved in any
-of the <code class="docutils literal"><span class="pre">n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code> &#8220;one-vs-one&#8221; classifiers.
+of the <code class="docutils literal"><span class="pre">n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code> “one-vs-one” classifiers.
 Each of the support vectors is used in <code class="docutils literal"><span class="pre">n_class</span> <span class="pre">-</span> <span class="pre">1</span></code> classifiers.
 The <code class="docutils literal"><span class="pre">n_class</span> <span class="pre">-</span> <span class="pre">1</span></code> entries in each row correspond to the dual coefficients
 for these classifiers.</p>
@@ -380,7 +380,7 @@ for these classifiers.</p>
 <p>Consider a three class problem with class 0 having three support vectors
 <img class="math" src="../_images/math/773bcf5cf311791578c5444d0557e58a2d81d16f.png" alt="v^{0}_0, v^{1}_0, v^{2}_0"/> and class 1 and 2 having two support vectors
 <img class="math" src="../_images/math/5c032716cc6b50ab78538cab7725241bb8e6756b.png" alt="v^{0}_1, v^{1}_1"/> and <img class="math" src="../_images/math/f864937fe75bc5ce50ba6e8fd303af07a7c7b080.png" alt="v^{0}_2, v^{1}_2"/> respectively.  For each
-support vector <img class="math" src="../_images/math/22d275b512db1a089ef1416dfcddb889b16880f7.png" alt="v^{j}_i"/>, there are two dual coefficients.  Let&#8217;s call
+support vector <img class="math" src="../_images/math/22d275b512db1a089ef1416dfcddb889b16880f7.png" alt="v^{j}_i"/>, there are two dual coefficients.  Let’s call
 the coefficient of support vector <img class="math" src="../_images/math/22d275b512db1a089ef1416dfcddb889b16880f7.png" alt="v^{j}_i"/> in the classifier between
 classes <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> <img class="math" src="../_images/math/da22b3bba4f7a4c4c646d9710aa7af4f022fec4c.png" alt="\alpha^{j}_{i,k}"/>.
 Then <code class="docutils literal"><span class="pre">dual_coef_</span></code> looks like this:</p>
@@ -429,18 +429,18 @@ When the constructor option <code class="docutils literal"><span class="pre">pro
 class membership probability estimates
 (from the methods <code class="docutils literal"><span class="pre">predict_proba</span></code> and <code class="docutils literal"><span class="pre">predict_log_proba</span></code>) are enabled.
 In the binary case, the probabilities are calibrated using Platt scaling:
-logistic regression on the SVM&#8217;s scores,
+logistic regression on the SVM’s scores,
 fit by an additional cross-validation on the training data.
 In the multiclass case, this is extended as per Wu et al. (2004).</p>
 <p>Needless to say, the cross-validation involved in Platt scaling
 is an expensive operation for large datasets.
 In addition, the probability estimates may be inconsistent with the scores,
-in the sense that the &#8220;argmax&#8221; of the scores
+in the sense that the “argmax” of the scores
 may not be the argmax of the probabilities.
 (E.g., in binary classification,
 a sample may be labeled by <code class="docutils literal"><span class="pre">predict</span></code> as belonging to a class
 that has probability &lt;½ according to <code class="docutils literal"><span class="pre">predict_proba</span></code>.)
-Platt&#8217;s method is also known to have theoretical issues.
+Platt’s method is also known to have theoretical issues.
 If confidence scores are required, but these do not have to be probabilities,
 then it is advisable to set <code class="docutils literal"><span class="pre">probability=False</span></code>
 and use <code class="docutils literal"><span class="pre">decision_function</span></code> instead of <code class="docutils literal"><span class="pre">predict_proba</span></code>.</p>
@@ -448,10 +448,10 @@ and use <code class="docutils literal"><span class="pre">decision_function</span
 <p class="topic-title first">References:</p>
 <ul class="simple">
 <li>Wu, Lin and Weng,
-<a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/svmprob/svmprob.pdf">&#8220;Probability estimates for multi-class classification by pairwise coupling&#8221;</a>,
+<a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/svmprob/svmprob.pdf">“Probability estimates for multi-class classification by pairwise coupling”</a>,
 JMLR 5:975-1005, 2004.</li>
 <li>Platt
-<cite>&#8220;Probabilistic outputs for SVMs and comparisons to regularized likelihood methods&#8221;
+<cite>“Probabilistic outputs for SVMs and comparisons to regularized likelihood methods”
 &lt;http://www.cs.colorado.edu/~mozer/Teaching/syllabi/6622/papers/Platt1999.pdf&gt;</cite>.</li>
 </ul>
 </div>
@@ -462,7 +462,7 @@ JMLR 5:975-1005, 2004.</li>
 classes or certain individual samples keywords <code class="docutils literal"><span class="pre">class_weight</span></code> and
 <code class="docutils literal"><span class="pre">sample_weight</span></code> can be used.</p>
 <p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> (but not <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a>) implement a keyword
-<code class="docutils literal"><span class="pre">class_weight</span></code> in the <code class="docutils literal"><span class="pre">fit</span></code> method. It&#8217;s a dictionary of the form
+<code class="docutils literal"><span class="pre">class_weight</span></code> in the <code class="docutils literal"><span class="pre">fit</span></code> method. It’s a dictionary of the form
 <code class="docutils literal"><span class="pre">{class_label</span> <span class="pre">:</span> <span class="pre">value}</span></code>, where value is a floating point number &gt; 0
 that sets the parameter <code class="docutils literal"><span class="pre">C</span></code> of class <code class="docutils literal"><span class="pre">class_label</span></code> to <code class="docutils literal"><span class="pre">C</span> <span class="pre">*</span> <span class="pre">value</span></code>.</p>
 <div class="figure align-center">
@@ -587,7 +587,7 @@ times for larger problems.  If you have enough RAM available, it is
 recommended to set <code class="docutils literal"><span class="pre">cache_size</span></code> to a higher value than the default of
 200(MB), such as 500(MB) or 1000(MB).</p>
 </li>
-<li><p class="first"><strong>Setting C</strong>: <code class="docutils literal"><span class="pre">C</span></code> is <code class="docutils literal"><span class="pre">1</span></code> by default and it&#8217;s a reasonable default
+<li><p class="first"><strong>Setting C</strong>: <code class="docutils literal"><span class="pre">C</span></code> is <code class="docutils literal"><span class="pre">1</span></code> by default and it’s a reasonable default
 choice.  If you have a lot of noisy observations you should decrease it.
 It corresponds to regularize more the estimation.</p>
 </li>
@@ -614,7 +614,7 @@ input data. If that happens, try with a smaller tol parameter.</p>
 <span class="pre">dual=False)</span></code> yields a sparse solution, i.e. only a subset of feature
 weights is different from zero and contribute to the decision function.
 Increasing <code class="docutils literal"><span class="pre">C</span></code> yields a more complex model (more feature are selected).
-The <code class="docutils literal"><span class="pre">C</span></code> value that yields a &#8220;null&#8221; model (all weights equal to zero) can
+The <code class="docutils literal"><span class="pre">C</span></code> value that yields a “null” model (all weights equal to zero) can
 be calculated using <a class="reference internal" href="generated/sklearn.svm.l1_min_c.html#sklearn.svm.l1_min_c" title="sklearn.svm.l1_min_c"><code class="xref py py-func docutils literal"><span class="pre">l1_min_c</span></code></a>.</p>
 </li>
 </ul>
@@ -714,7 +714,7 @@ against simplicity of the decision surface. A low <code class="docutils literal"
 surface smooth, while a high <code class="docutils literal"><span class="pre">C</span></code> aims at classifying all training examples
 correctly.  <code class="docutils literal"><span class="pre">gamma</span></code> defines how much influence a single training example has.
 The larger <code class="docutils literal"><span class="pre">gamma</span></code> is, the closer other examples must be to be affected.</p>
-<p>Proper choice of <code class="docutils literal"><span class="pre">C</span></code> and <code class="docutils literal"><span class="pre">gamma</span></code> is critical to the SVM&#8217;s performance.  One
+<p>Proper choice of <code class="docutils literal"><span class="pre">C</span></code> and <code class="docutils literal"><span class="pre">gamma</span></code> is critical to the SVM’s performance.  One
 is advised to use <a class="reference internal" href="generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.GridSearchCV</span></code></a> with
 <code class="docutils literal"><span class="pre">C</span></code> and <code class="docutils literal"><span class="pre">gamma</span></code> spaced exponentially far apart to choose good values.</p>
 <div class="topic">
@@ -740,7 +740,7 @@ generalization error of the classifier.</p>
 </div>
 <div class="section" id="svc">
 <h3>1.4.7.1. SVC<a class="headerlink" href="#svc" title="Permalink to this headline">¶</a></h3>
-<p>Given training vectors <img class="math" src="../_images/math/3c2810ae28117c8ad2d9464adc7f57ad2143887c.png" alt="x_i \in \mathbb{R}^p"/>, i=1,..., n, in two classes, and a
+<p>Given training vectors <img class="math" src="../_images/math/3c2810ae28117c8ad2d9464adc7f57ad2143887c.png" alt="x_i \in \mathbb{R}^p"/>, i=1,…, n, in two classes, and a
 vector <img class="math" src="../_images/math/ede528003a9c8d8f47c5e4c3c8ed4dc0056b8c36.png" alt="y \in \{1, -1\}^n"/>, SVC solves the following primal problem:</p>
 <div class="math">
 <p><img src="../_images/math/afe25ea32dba823e13d2ae45b439d4529cd15364.png" alt="\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i
@@ -780,10 +780,10 @@ term <img class="math" src="../_images/math/9a51ab9a0b521705e1e8762fac6bdd6f1177
 <div class="topic">
 <p class="topic-title first">References:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.17.7215">&#8220;Automatic Capacity Tuning of Very Large VC-dimension Classifiers&#8221;</a>,
+<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.17.7215">“Automatic Capacity Tuning of Very Large VC-dimension Classifiers”</a>,
 I. Guyon, B. Boser, V. Vapnik - Advances in neural information
 processing 1993.</li>
-<li><a class="reference external" href="http://link.springer.com/article/10.1007%2FBF00994018">&#8220;Support-vector networks&#8221;</a>,
+<li><a class="reference external" href="http://link.springer.com/article/10.1007%2FBF00994018">“Support-vector networks”</a>,
 C. Cortes, V. Vapnik - Machine Learning, 20, 273-297 (1995).</li>
 </ul>
 </div>
@@ -799,7 +799,7 @@ of the <img class="math" src="../_images/math/afce44aa7c55836ca9345404c22fc7b599
 </div>
 <div class="section" id="svr">
 <h3>1.4.7.3. SVR<a class="headerlink" href="#svr" title="Permalink to this headline">¶</a></h3>
-<p>Given training vectors <img class="math" src="../_images/math/3c2810ae28117c8ad2d9464adc7f57ad2143887c.png" alt="x_i \in \mathbb{R}^p"/>, i=1,..., n, and a
+<p>Given training vectors <img class="math" src="../_images/math/3c2810ae28117c8ad2d9464adc7f57ad2143887c.png" alt="x_i \in \mathbb{R}^p"/>, i=1,…, n, and a
 vector <img class="math" src="../_images/math/1269782190e528401491505bf582106d5990f870.png" alt="y \in \mathbb{R}^n"/> <img class="math" src="../_images/math/3cb373a8030ad846aed7b1ee45bab27b13775928.png" alt="\varepsilon"/>-SVR solves the following primal problem:</p>
 <div class="math">
 <p><img src="../_images/math/84dfa253bd3c36093102158fbe951a73819f96df.png" alt="\min_ {w, b, \zeta, \zeta^*} \frac{1}{2} w^T w + C \sum_{i=1}^{n} (\zeta_i + \zeta_i^*)
@@ -831,7 +831,7 @@ term <img class="math" src="../_images/math/9a51ab9a0b521705e1e8762fac6bdd6f1177
 <div class="topic">
 <p class="topic-title first">References:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.114.4288">&#8220;A Tutorial on Support Vector Regression&#8221;</a>,
+<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.114.4288">“A Tutorial on Support Vector Regression”</a>,
 Alex J. Smola, Bernhard Schölkopf - Statistics and Computing archive
 Volume 14 Issue 3, August 2004, p. 199-222.</li>
 </ul>
@@ -849,7 +849,7 @@ used, please refer to</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">LIBSVM: A Library for Support Vector Machines</a>.</li>
-<li><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR &#8211; A Library for Large Linear Classification</a>.</li>
+<li><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR – A Library for Large Linear Classification</a>.</li>
 </ul>
 </div></blockquote>
 </div>
