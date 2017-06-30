@@ -181,8 +181,7 @@
 <li><a class="reference internal" href="#recursive-feature-elimination">1.13.3. Recursive feature elimination</a></li>
 <li><a class="reference internal" href="#feature-selection-using-selectfrommodel">1.13.4. Feature selection using SelectFromModel</a><ul>
 <li><a class="reference internal" href="#l1-based-feature-selection">1.13.4.1. L1-based feature selection</a></li>
-<li><a class="reference internal" href="#randomized-sparse-models">1.13.4.2. Randomized sparse models</a></li>
-<li><a class="reference internal" href="#tree-based-feature-selection">1.13.4.3. Tree-based feature selection</a></li>
+<li><a class="reference internal" href="#tree-based-feature-selection">1.13.4.2. Tree-based feature selection</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#feature-selection-as-part-of-a-pipeline">1.13.5. Feature selection as part of a pipeline</a></li>
@@ -405,70 +404,8 @@ Processing Magazine [120] July 2007
 <a class="reference external" href="http://dsp.rice.edu/sites/dsp.rice.edu/files/cs/baraniukCSlecture07.pdf">http://dsp.rice.edu/sites/dsp.rice.edu/files/cs/baraniukCSlecture07.pdf</a></p>
 </div>
 </div>
-<div class="section" id="randomized-sparse-models">
-<span id="randomized-l1"></span><h3>1.13.4.2. Randomized sparse models<a class="headerlink" href="#randomized-sparse-models" title="Permalink to this headline">¶</a></h3>
-<p>In terms of feature selection, there are some well-known limitations of
-L1-penalized models for regression and classification. For example, it is
-known that the Lasso will tend to select an individual variable out of a group
-of highly correlated features. Furthermore, even when the correlation between
-features is not too high, the conditions under which L1-penalized methods
-consistently select “good” features can be restrictive in general.</p>
-<p>To mitigate this problem, it is possible to use randomization techniques such
-as those presented in <a class="reference internal" href="#b2009" id="id3">[B2009]</a> and <a class="reference internal" href="#m2010" id="id4">[M2010]</a>. The latter technique, known as
-stability selection, is implemented in the module <a class="reference internal" href="classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.
-In the stability selection method, a subsample of the data is fit to a
-L1-penalized model where the penalty of a random subset of coefficients has
-been scaled. Specifically, given a subsample of the data
-<img class="math" src="../_images/math/9a90667c80b11d2d568fe3065592b13c15f637ee.png" alt="(x_i, y_i), i \in I"/>, where <img class="math" src="../_images/math/0162782742077677bc10695880c89f8aa5849ed9.png" alt="I \subset \{1, 2, \ldots, n\}"/> is a
-random subset of the data of size <img class="math" src="../_images/math/9b1880e80dfcb7523851dcaca38d12d406a1f132.png" alt="n_I"/>, the following modified Lasso
-fit is obtained:</p>
-<div class="math">
-<p><img src="../_images/math/4acc0a6f15fe13747aa33b703297ad73e52fa869.png" alt="\hat{w_I} = \mathrm{arg}\min_{w} \frac{1}{2n_I} \sum_{i \in I} (y_i - x_i^T w)^2 + \alpha \sum_{j=1}^p \frac{ \vert w_j \vert}{s_j},"/></p>
-</div><p>where <img class="math" src="../_images/math/bf86601e781b576beed93089c6f2f80932a8b8d9.png" alt="s_j \in \{s, 1\}"/> are independent trials of a fair Bernoulli
-random variable, and <img class="math" src="../_images/math/88d039035672a3d21ee95abb710aa8fc7b05dc93.png" alt="0&lt;s&lt;1"/> is the scaling factor. By repeating this
-procedure across different random subsamples and Bernoulli trials, one can
-count the fraction of times the randomized procedure selected each feature,
-and used these fractions as scores for feature selection.</p>
-<p><a class="reference internal" href="generated/sklearn.linear_model.RandomizedLasso.html#sklearn.linear_model.RandomizedLasso" title="sklearn.linear_model.RandomizedLasso"><code class="xref py py-class docutils literal"><span class="pre">RandomizedLasso</span></code></a> implements this strategy for regression
-settings, using the Lasso, while <a class="reference internal" href="generated/sklearn.linear_model.RandomizedLogisticRegression.html#sklearn.linear_model.RandomizedLogisticRegression" title="sklearn.linear_model.RandomizedLogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">RandomizedLogisticRegression</span></code></a> uses the
-logistic regression and is suitable for classification tasks. To get a full
-path of stability scores you can use <a class="reference internal" href="generated/sklearn.linear_model.lasso_stability_path.html#sklearn.linear_model.lasso_stability_path" title="sklearn.linear_model.lasso_stability_path"><code class="xref py py-func docutils literal"><span class="pre">lasso_stability_path</span></code></a>.</p>
-<div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sparse_recovery.html"><img alt="../_images/sphx_glr_plot_sparse_recovery_0031.png" src="../_images/sphx_glr_plot_sparse_recovery_0031.png" style="width: 384.0px; height: 288.0px;" /></a>
-</div>
-<p>Note that for randomized sparse models to be more powerful than standard
-F statistics at detecting non-zero features, the ground truth model
-should be sparse, in other words, there should be only a small fraction
-of features non zero.</p>
-<div class="topic">
-<p class="topic-title first">Examples:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_sparse_recovery.html#sphx-glr-auto-examples-linear-model-plot-sparse-recovery-py"><span class="std std-ref">Sparse recovery: feature selection for sparse linear models</span></a>: An example
-comparing different feature selection approaches and discussing in
-which situation each approach is to be favored.</li>
-</ul>
-</div>
-<div class="topic">
-<p class="topic-title first">References:</p>
-<table class="docutils citation" frame="void" id="b2009" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[B2009]</a></td><td>F. Bach, “Model-Consistent Sparse Estimation through the
-Bootstrap.” <a class="reference external" href="https://hal.inria.fr/hal-00354771/">https://hal.inria.fr/hal-00354771/</a></td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="m2010" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[M2010]</a></td><td>N. Meinshausen, P. Buhlmann, “Stability selection”,
-Journal of the Royal Statistical Society, 72 (2010)
-<a class="reference external" href="http://arxiv.org/pdf/0809.2932.pdf">http://arxiv.org/pdf/0809.2932.pdf</a></td></tr>
-</tbody>
-</table>
-</div>
-</div>
 <div class="section" id="tree-based-feature-selection">
-<h3>1.13.4.3. Tree-based feature selection<a class="headerlink" href="#tree-based-feature-selection" title="Permalink to this headline">¶</a></h3>
+<h3>1.13.4.2. Tree-based feature selection<a class="headerlink" href="#tree-based-feature-selection" title="Permalink to this headline">¶</a></h3>
 <p>Tree-based estimators (see the <a class="reference internal" href="classes.html#module-sklearn.tree" title="sklearn.tree"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.tree</span></code></a> module and forest
 of trees in the <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.ensemble</span></code></a> module) can be used to compute
 feature importances, which in turn can be used to discard irrelevant
