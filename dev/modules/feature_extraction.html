@@ -458,7 +458,7 @@ counting in a single class:</p>
 </div>
 <p>This model has many parameters, however the default values are quite
 reasonable (please see  the <a class="reference internal" href="classes.html#text-feature-extraction-ref"><span class="std std-ref">reference documentation</span></a> for the details):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span>                     
 <span class="go">CountVectorizer(analyzer=...&#39;word&#39;, binary=False, decode_error=...&#39;strict&#39;,</span>
 <span class="go">        dtype=&lt;... &#39;numpy.int64&#39;&gt;, encoding=...&#39;utf-8&#39;, input=...&#39;content&#39;,</span>
@@ -673,7 +673,7 @@ attribute:</p>
 class called <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal"><span class="pre">TfidfVectorizer</span></code></a> that combines all the options of
 <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal"><span class="pre">CountVectorizer</span></code></a> and <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a> in a single model:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfVectorizer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
 <span class="gp">... </span>                               
 <span class="go">&lt;4x9 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
@@ -814,7 +814,7 @@ very distinct documents, differing in both of the two possible features.
 A character 2-gram representation, however, would find the documents
 matching in 4 out of 8 features, which may help the preferred classifier
 decide better:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char_wb&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char_wb&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">counts</span> <span class="o">=</span> <span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="s1">&#39;wprds&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39; w&#39;</span><span class="p">,</span> <span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;pr&#39;</span><span class="p">,</span> <span class="s1">&#39;rd&#39;</span><span class="p">,</span> <span class="s1">&#39;s &#39;</span><span class="p">,</span> <span class="s1">&#39;wo&#39;</span><span class="p">,</span> <span class="s1">&#39;wp&#39;</span><span class="p">])</span>
@@ -828,7 +828,7 @@ decide better:</p>
 only from characters inside word boundaries (padded with space on each
 side). The <code class="docutils literal"><span class="pre">'char'</span></code> analyzer, alternatively, creates n-grams that
 span across words:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char_wb&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char_wb&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s1">&#39;jumpy fox&#39;</span><span class="p">])</span>
 <span class="gp">... </span>                               
 <span class="go">&lt;1x4 sparse matrix of type &#39;&lt;... &#39;numpy.int64&#39;&gt;&#39;</span>
@@ -837,7 +837,7 @@ span across words:</p>
 <span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39; fox &#39;</span><span class="p">,</span> <span class="s1">&#39; jump&#39;</span><span class="p">,</span> <span class="s1">&#39;jumpy&#39;</span><span class="p">,</span> <span class="s1">&#39;umpy &#39;</span><span class="p">])</span>
 <span class="go">True</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s1">&#39;jumpy fox&#39;</span><span class="p">])</span>
 <span class="gp">... </span>                               
 <span class="go">&lt;1x5 sparse matrix of type &#39;&lt;... &#39;numpy.int64&#39;&gt;&#39;</span>
@@ -1013,6 +1013,33 @@ Here’s a <code class="docutils literal"><span class="pre">CountVectorizer</spa
 </pre></div>
 </div>
 <p>(Note that this will not filter out punctuation.)</p>
+<p>The following example will, for instance, transform some British spelling
+to American spelling:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">to_british</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(...)our$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1or&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([bt])re$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1er&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([iy])s(e$|ing|ation)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1z\2&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;ogue$&quot;</span><span class="p">,</span> <span class="s2">&quot;og&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">yield</span> <span class="n">t</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">CustomVectorizer</span><span class="p">(</span><span class="n">CountVectorizer</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">build_tokenizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tokenize</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CustomVectorizer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build_tokenizer</span><span class="p">()</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">to_british</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">doc</span><span class="p">)))</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">CustomVectorizer</span><span class="p">()</span><span class="o">.</span><span class="n">build_analyzer</span><span class="p">()(</span><span class="sa">u</span><span class="s2">&quot;color colour&quot;</span><span class="p">))</span> 
+<span class="go">[...&#39;color&#39;, ...&#39;color&#39;]</span>
+</pre></div>
+</div>
+<p>for other styles of preprocessing; examples include stemming, lemmatization,
+or normalizing numerical tokens, with the latter illustrated in:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../auto_examples/bicluster/plot_bicluster_newsgroups.html#sphx-glr-auto-examples-bicluster-plot-bicluster-newsgroups-py"><span class="std std-ref">Biclustering documents with the Spectral Co-clustering algorithm</span></a></li>
+</ul>
+</div></blockquote>
 </li>
 </ul>
 </div></blockquote>
