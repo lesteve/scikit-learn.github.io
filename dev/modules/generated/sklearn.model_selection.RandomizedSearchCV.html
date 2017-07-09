@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.RandomizedSearchCV<a class="headerlink" href="#sklearn-model-selection-randomizedsearchcv" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.model_selection.RandomizedSearchCV">
-<em class="property">class </em><code class="descclassname">sklearn.model_selection.</code><code class="descname">RandomizedSearchCV</code><span class="sig-paren">(</span><em>estimator</em>, <em>param_distributions</em>, <em>n_iter=10</em>, <em>scoring=None</em>, <em>fit_params=None</em>, <em>n_jobs=1</em>, <em>iid=True</em>, <em>refit=True</em>, <em>cv=None</em>, <em>verbose=0</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>random_state=None</em>, <em>error_score=’raise’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/model_selection/_search.py#L973"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.model_selection.</code><code class="descname">RandomizedSearchCV</code><span class="sig-paren">(</span><em>estimator</em>, <em>param_distributions</em>, <em>n_iter=10</em>, <em>scoring=None</em>, <em>fit_params=None</em>, <em>n_jobs=1</em>, <em>iid=True</em>, <em>refit=True</em>, <em>cv=None</em>, <em>verbose=0</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>random_state=None</em>, <em>error_score=’raise’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/model_selection/_search.py#L1061"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomized search on hyper parameters.</p>
 <p>RandomizedSearchCV implements a “fit” and a “score” method.
 It also implements “predict”, “predict_proba”, “decision_function”,
@@ -241,12 +241,17 @@ If a list is given, it is sampled uniformly.</p>
 <div><p>Number of parameter settings that are sampled. n_iter trades
 off runtime vs quality of the solution.</p>
 </div></blockquote>
-<p><strong>scoring</strong> : string, callable or None, default=None</p>
+<p><strong>scoring</strong> : string, callable, list/tuple, dict or None, default: None</p>
 <blockquote>
-<div><p>A string (see model evaluation documentation) or
-a scorer callable object / function with signature
-<code class="docutils literal"><span class="pre">scorer(estimator,</span> <span class="pre">X,</span> <span class="pre">y)</span></code>.
-If <code class="docutils literal"><span class="pre">None</span></code>, the <code class="docutils literal"><span class="pre">score</span></code> method of the estimator is used.</p>
+<div><p>A single string (see <a class="reference internal" href="../model_evaluation.html#scoring-parameter"><span class="std std-ref">The scoring parameter: defining model evaluation rules</span></a>) or a callable
+(see <a class="reference internal" href="../model_evaluation.html#scoring"><span class="std std-ref">Defining your scoring strategy from metric functions</span></a>) to evaluate the predictions on the test set.</p>
+<p>For evaluating multiple metrics, either give a list of (unique) strings
+or a dict with names as keys and callables as values.</p>
+<p>NOTE that when using custom scorers, each scorer should return a single
+value. Metric functions returning a list/array of values can be wrapped
+into multiple scorers that return one value each.</p>
+<p>See <span class="xref std std-ref">multivalued_scorer_wrapping</span> for an example.</p>
+<p>If None, the estimator’s default scorer (if available) is used.</p>
 </div></blockquote>
 <p><strong>fit_params</strong> : dict, optional</p>
 <blockquote>
@@ -304,11 +309,22 @@ other cases, <a class="reference internal" href="sklearn.model_selection.KFold.h
 <p>Refer <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a> for the various
 cross-validation strategies that can be used here.</p>
 </div></blockquote>
-<p><strong>refit</strong> : boolean, default=True</p>
+<p><strong>refit</strong> : boolean, or string default=True</p>
 <blockquote>
-<div><p>Refit the best estimator with the entire dataset.
-If “False”, it is impossible to make predictions using
-this RandomizedSearchCV instance after fitting.</p>
+<div><p>Refit an estimator using the best found parameters on the whole
+dataset.</p>
+<p>For multiple metric evaluation, this needs to be a string denoting the
+scorer that would be used to find the best parameters for refitting
+the estimator at the end.</p>
+<p>The refitted estimator is made available at the <code class="docutils literal"><span class="pre">best_estimator_</span></code>
+attribute and permits using <code class="docutils literal"><span class="pre">predict</span></code> directly on this
+<code class="docutils literal"><span class="pre">RandomizedSearchCV</span></code> instance.</p>
+<p>Also for multiple metric evaluation, the attributes <code class="docutils literal"><span class="pre">best_index_</span></code>,
+<code class="docutils literal"><span class="pre">best_score_</span></code> and <code class="docutils literal"><span class="pre">best_parameters_</span></code> will only be available if
+<code class="docutils literal"><span class="pre">refit</span></code> is set and all of them will be determined w.r.t this specific
+scorer.</p>
+<p>See <code class="docutils literal"><span class="pre">scoring</span></code> parameter to know more about multiple metric
+evaluation.</p>
 </div></blockquote>
 <p><strong>verbose</strong> : integer</p>
 <blockquote>
@@ -397,28 +413,40 @@ imported into a pandas <code class="docutils literal"><span class="pre">DataFram
 <span class="s1">&#39;std_fit_time&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
 <span class="s1">&#39;mean_score_time&#39;</span>    <span class="p">:</span> <span class="p">[</span><span class="mf">0.007</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">],</span>
 <span class="s1">&#39;std_score_time&#39;</span>     <span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">],</span>
-<span class="s1">&#39;params&#39;</span> <span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;kernel&#39;</span> <span class="p">:</span> <span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="s1">&#39;gamma&#39;</span> <span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span>
+<span class="s1">&#39;params&#39;</span>             <span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;kernel&#39;</span> <span class="p">:</span> <span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="s1">&#39;gamma&#39;</span> <span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>NOTE that the key <code class="docutils literal"><span class="pre">'params'</span></code> is used to store a list of parameter
-settings dict for all the parameter candidates.</p>
+<p>NOTE</p>
+<p>The key <code class="docutils literal"><span class="pre">'params'</span></code> is used to store a list of parameter
+settings dicts for all the parameter candidates.</p>
 <p>The <code class="docutils literal"><span class="pre">mean_fit_time</span></code>, <code class="docutils literal"><span class="pre">std_fit_time</span></code>, <code class="docutils literal"><span class="pre">mean_score_time</span></code> and
 <code class="docutils literal"><span class="pre">std_score_time</span></code> are all in seconds.</p>
+<p>For multi-metric evaluation, the scores for all the scorers are
+available in the <code class="docutils literal"><span class="pre">cv_results_</span></code> dict at the keys ending with that
+scorer’s name (<code class="docutils literal"><span class="pre">'_&lt;scorer_name&gt;'</span></code>) instead of <code class="docutils literal"><span class="pre">'_score'</span></code> shown
+above. (‘split0_test_precision’, ‘mean_train_precision’ etc.)</p>
 </div></blockquote>
-<p><strong>best_estimator_</strong> : estimator</p>
+<p><strong>best_estimator_</strong> : estimator or dict</p>
 <blockquote>
 <div><p>Estimator that was chosen by the search, i.e. estimator
 which gave highest score (or smallest loss if specified)
-on the left out data. Not available if refit=False.</p>
+on the left out data. Not available if <code class="docutils literal"><span class="pre">refit=False</span></code>.</p>
+<p>For multi-metric evaluation, this attribute is present only if
+<code class="docutils literal"><span class="pre">refit</span></code> is specified.</p>
+<p>See <code class="docutils literal"><span class="pre">refit</span></code> parameter for more information on allowed values.</p>
 </div></blockquote>
 <p><strong>best_score_</strong> : float</p>
 <blockquote>
-<div><p>Score of best_estimator on the left out data.</p>
+<div><p>Mean cross-validated score of the best_estimator.</p>
+<p>For multi-metric evaluation, this is not available if <code class="docutils literal"><span class="pre">refit</span></code> is
+<code class="docutils literal"><span class="pre">False</span></code>. See <code class="docutils literal"><span class="pre">refit</span></code> parameter for more information.</p>
 </div></blockquote>
 <p><strong>best_params_</strong> : dict</p>
 <blockquote>
 <div><p>Parameter setting that gave the best results on the hold out data.</p>
+<p>For multi-metric evaluation, this is not available if <code class="docutils literal"><span class="pre">refit</span></code> is
+<code class="docutils literal"><span class="pre">False</span></code>. See <code class="docutils literal"><span class="pre">refit</span></code> parameter for more information.</p>
 </div></blockquote>
 <p><strong>best_index_</strong> : int</p>
 <blockquote>
@@ -427,11 +455,15 @@ candidate parameter setting.</p>
 <p>The dict at <code class="docutils literal"><span class="pre">search.cv_results_['params'][search.best_index_]</span></code> gives
 the parameter setting for the best model, that gives the highest
 mean score (<code class="docutils literal"><span class="pre">search.best_score_</span></code>).</p>
+<p>For multi-metric evaluation, this is not available if <code class="docutils literal"><span class="pre">refit</span></code> is
+<code class="docutils literal"><span class="pre">False</span></code>. See <code class="docutils literal"><span class="pre">refit</span></code> parameter for more information.</p>
 </div></blockquote>
-<p><strong>scorer_</strong> : function</p>
+<p><strong>scorer_</strong> : function or a dict</p>
 <blockquote>
 <div><p>Scorer function used on the held out data to choose the best
 parameters for the model.</p>
+<p>For multi-metric evaluation, this attribute holds the validated
+<code class="docutils literal"><span class="pre">scoring</span></code> dict which maps the scorer key to the scorer callable.</p>
 </div></blockquote>
 <p><strong>n_splits_</strong> : int</p>
 <blockquote class="last">
@@ -501,12 +533,12 @@ n_jobs</cite>.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em>, <em>param_distributions</em>, <em>n_iter=10</em>, <em>scoring=None</em>, <em>fit_params=None</em>, <em>n_jobs=1</em>, <em>iid=True</em>, <em>refit=True</em>, <em>cv=None</em>, <em>verbose=0</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>random_state=None</em>, <em>error_score=’raise’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/model_selection/_search.py#L1191"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em>, <em>param_distributions</em>, <em>n_iter=10</em>, <em>scoring=None</em>, <em>fit_params=None</em>, <em>n_jobs=1</em>, <em>iid=True</em>, <em>refit=True</em>, <em>cv=None</em>, <em>verbose=0</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>random_state=None</em>, <em>error_score=’raise’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/model_selection/_search.py#L1327"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.decision_function">
-<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/utils/metaestimators.py#L488"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.decision_function" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/utils/metaestimators.py#L502"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.decision_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call decision_function on the estimator with the best found parameters.</p>
 <p>Only available if <code class="docutils literal"><span class="pre">refit=True</span></code> and the underlying estimator supports
 <code class="docutils literal"><span class="pre">decision_function</span></code>.</p>
@@ -527,7 +559,7 @@ underlying estimator.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/model_selection/_search.py#L544"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/model_selection/_search.py#L558"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run fit with all sets of parameters.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -560,7 +592,7 @@ train/test set.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -585,7 +617,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.inverse_transform">
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>Xt</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/utils/metaestimators.py#L522"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>Xt</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/utils/metaestimators.py#L536"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call inverse_transform on the estimator with the best found params.</p>
 <p>Only available if the underlying estimator implements
 <code class="docutils literal"><span class="pre">inverse_transform</span></code> and <code class="docutils literal"><span class="pre">refit=True</span></code>.</p>
@@ -606,7 +638,7 @@ underlying estimator.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/utils/metaestimators.py#L437"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/utils/metaestimators.py#L451"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call predict on the estimator with the best found parameters.</p>
 <p>Only available if <code class="docutils literal"><span class="pre">refit=True</span></code> and the underlying estimator supports
 <code class="docutils literal"><span class="pre">predict</span></code>.</p>
@@ -627,7 +659,7 @@ underlying estimator.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.predict_log_proba">
-<code class="descname">predict_log_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/utils/metaestimators.py#L471"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.predict_log_proba" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict_log_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/utils/metaestimators.py#L485"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.predict_log_proba" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call predict_log_proba on the estimator with the best found parameters.</p>
 <p>Only available if <code class="docutils literal"><span class="pre">refit=True</span></code> and the underlying estimator supports
 <code class="docutils literal"><span class="pre">predict_log_proba</span></code>.</p>
@@ -648,7 +680,7 @@ underlying estimator.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/utils/metaestimators.py#L454"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.predict_proba" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/utils/metaestimators.py#L468"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.predict_proba" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call predict_proba on the estimator with the best found parameters.</p>
 <p>Only available if <code class="docutils literal"><span class="pre">refit=True</span></code> and the underlying estimator supports
 <code class="docutils literal"><span class="pre">predict_proba</span></code>.</p>
@@ -669,7 +701,7 @@ underlying estimator.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/model_selection/_search.py#L402"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/model_selection/_search.py#L411"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the score on the given data, if the estimator has been refit.</p>
 <p>This uses the score defined by <code class="docutils literal"><span class="pre">scoring</span></code> where provided, and the
 <code class="docutils literal"><span class="pre">best_estimator_.score</span></code> method otherwise.</p>
@@ -698,7 +730,7 @@ None for unsupervised learning.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -716,7 +748,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.model_selection.RandomizedSearchCV.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/587bf3ac/sklearn/utils/metaestimators.py#L505"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/a6753f3e/sklearn/utils/metaestimators.py#L519"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.RandomizedSearchCV.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call transform on the estimator with the best found parameters.</p>
 <p>Only available if the underlying estimator supports <code class="docutils literal"><span class="pre">transform</span></code> and
 <code class="docutils literal"><span class="pre">refit=True</span></code>.</p>

@@ -180,10 +180,11 @@
 <li><a class="reference internal" href="#randomized-parameter-optimization">3.2.2. Randomized Parameter Optimization</a></li>
 <li><a class="reference internal" href="#tips-for-parameter-search">3.2.3. Tips for parameter search</a><ul>
 <li><a class="reference internal" href="#specifying-an-objective-metric">3.2.3.1. Specifying an objective metric</a></li>
-<li><a class="reference internal" href="#composite-estimators-and-parameter-spaces">3.2.3.2. Composite estimators and parameter spaces</a></li>
-<li><a class="reference internal" href="#model-selection-development-and-evaluation">3.2.3.3. Model selection: development and evaluation</a></li>
-<li><a class="reference internal" href="#parallelism">3.2.3.4. Parallelism</a></li>
-<li><a class="reference internal" href="#robustness-to-failure">3.2.3.5. Robustness to failure</a></li>
+<li><a class="reference internal" href="#specifying-multiple-metrics-for-evaluation">3.2.3.2. Specifying multiple metrics for evaluation</a></li>
+<li><a class="reference internal" href="#composite-estimators-and-parameter-spaces">3.2.3.3. Composite estimators and parameter spaces</a></li>
+<li><a class="reference internal" href="#model-selection-development-and-evaluation">3.2.3.4. Model selection: development and evaluation</a></li>
+<li><a class="reference internal" href="#parallelism">3.2.3.5. Parallelism</a></li>
+<li><a class="reference internal" href="#robustness-to-failure">3.2.3.6. Robustness to failure</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#alternatives-to-brute-force-parameter-search">3.2.4. Alternatives to brute force parameter search</a><ul>
@@ -278,6 +279,9 @@ net or L2 penalty) using a <code class="xref py py-class docutils literal"><span
 for an example of Grid Search within a cross validation loop on the iris
 dataset. This is the best practice for evaluating the performance of a
 model with grid search.</li>
+<li>See <span class="xref std std-ref">sphx_glr_auto_examples_model_selection_plot_multi_metric_evaluation</span>
+for an example of <a class="reference internal" href="generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> being used to evaluate multiple
+metrics simultaneously.</li>
 </ul>
 </div>
 </div>
@@ -355,13 +359,28 @@ scoring function can be specified via the <code class="docutils literal"><span c
 specialized cross-validation tools described below.
 See <a class="reference internal" href="model_evaluation.html#scoring-parameter"><span class="std std-ref">The scoring parameter: defining model evaluation rules</span></a> for more details.</p>
 </div>
+<div class="section" id="specifying-multiple-metrics-for-evaluation">
+<span id="multimetric-grid-search"></span><h3>3.2.3.2. Specifying multiple metrics for evaluation<a class="headerlink" href="#specifying-multiple-metrics-for-evaluation" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">GridSearchCV</span></code> and <code class="docutils literal"><span class="pre">RandomizedSearchCV</span></code> allow specifying multiple metrics
+for the <code class="docutils literal"><span class="pre">scoring</span></code> parameter.</p>
+<p>Multimetric scoring can either be specified as a list of strings of predefined
+scores names or a dict mapping the scorer name to the scorer function and/or
+the predefined scorer name(s). See <a class="reference internal" href="model_evaluation.html#multimetric-scoring"><span class="std std-ref">Using mutiple metric evaluation</span></a> for more details.</p>
+<p>When specifying multiple metrics, the <code class="docutils literal"><span class="pre">refit</span></code> parameter must be set to the
+metric (string) for which the <code class="docutils literal"><span class="pre">best_params_</span></code> will be found and used to build
+the <code class="docutils literal"><span class="pre">best_estimator_</span></code> on the whole dataset. If the search should not be
+refit, set <code class="docutils literal"><span class="pre">refit=False</span></code>. Leaving refit to the default value <code class="docutils literal"><span class="pre">None</span></code> will
+result in an error when using multiple metrics.</p>
+<p>See <span class="xref std std-ref">sphx_glr_auto_examples_model_selection_plot_multi_metric_evaluation</span>
+for an example usage.</p>
+</div>
 <div class="section" id="composite-estimators-and-parameter-spaces">
-<h3>3.2.3.2. Composite estimators and parameter spaces<a class="headerlink" href="#composite-estimators-and-parameter-spaces" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.3.3. Composite estimators and parameter spaces<a class="headerlink" href="#composite-estimators-and-parameter-spaces" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline: chaining estimators</span></a> describes building composite estimators whose
 parameter space can be searched with these tools.</p>
 </div>
 <div class="section" id="model-selection-development-and-evaluation">
-<h3>3.2.3.3. Model selection: development and evaluation<a class="headerlink" href="#model-selection-development-and-evaluation" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.3.4. Model selection: development and evaluation<a class="headerlink" href="#model-selection-development-and-evaluation" title="Permalink to this headline">¶</a></h3>
 <p>Model selection by evaluating various parameter settings can be seen as a way
 to use the labeled data to “train” the parameters of the grid.</p>
 <p>When evaluating the resulting model it is important to do it on
@@ -373,14 +392,14 @@ to compute performance metrics.</p>
 utility function.</p>
 </div>
 <div class="section" id="parallelism">
-<h3>3.2.3.4. Parallelism<a class="headerlink" href="#parallelism" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.3.5. Parallelism<a class="headerlink" href="#parallelism" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> and <a class="reference internal" href="generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">RandomizedSearchCV</span></code></a> evaluate each parameter
 setting independently.  Computations can be run in parallel if your OS
 supports it, by using the keyword <code class="docutils literal"><span class="pre">n_jobs=-1</span></code>. See function signature for
 more details.</p>
 </div>
 <div class="section" id="robustness-to-failure">
-<h3>3.2.3.5. Robustness to failure<a class="headerlink" href="#robustness-to-failure" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.3.6. Robustness to failure<a class="headerlink" href="#robustness-to-failure" title="Permalink to this headline">¶</a></h3>
 <p>Some parameter settings may result in a failure to <code class="docutils literal"><span class="pre">fit</span></code> one or more folds
 of the data.  By default, this will cause the entire search to fail, even if
 some parameter settings could be fully evaluated. Setting <code class="docutils literal"><span class="pre">error_score=0</span></code>

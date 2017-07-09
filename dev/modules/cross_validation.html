@@ -177,7 +177,8 @@
     <ul>
 <li><a class="reference internal" href="#">3.1. Cross-validation: evaluating estimator performance</a><ul>
 <li><a class="reference internal" href="#computing-cross-validated-metrics">3.1.1. Computing cross-validated metrics</a><ul>
-<li><a class="reference internal" href="#obtaining-predictions-by-cross-validation">3.1.1.1. Obtaining predictions by cross-validation</a></li>
+<li><a class="reference internal" href="#the-cross-validate-function-and-multiple-metric-evaluation">3.1.1.1. The cross_validate function and multiple metric evaluation</a></li>
+<li><a class="reference internal" href="#obtaining-predictions-by-cross-validation">3.1.1.2. Obtaining predictions by cross-validation</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#cross-validation-iterators">3.1.2. Cross validation iterators</a></li>
@@ -385,8 +386,59 @@ estimators, providing this behavior under cross-validation:</p>
 </div>
 <p>See <a class="reference internal" href="pipeline.html#combining-estimators"><span class="std std-ref">Pipeline and FeatureUnion: combining estimators</span></a>.</p>
 </div>
+<div class="section" id="the-cross-validate-function-and-multiple-metric-evaluation">
+<span id="multimetric-cross-validation"></span><h3>3.1.1.1. The cross_validate function and multiple metric evaluation<a class="headerlink" href="#the-cross-validate-function-and-multiple-metric-evaluation" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">cross_validate</span></code> function differs from <code class="docutils literal"><span class="pre">cross_val_score</span></code> in two ways -</p>
+<ul class="simple">
+<li>It allows specifying multiple metrics for evaluation.</li>
+<li>It returns a dict containing training scores, fit-times and score-times in
+addition to the test score.</li>
+</ul>
+<p>For single metric evaluation, where the scoring parameter is a string,
+callable or None, the keys will be - <code class="docutils literal"><span class="pre">['test_score',</span> <span class="pre">'fit_time',</span> <span class="pre">'score_time']</span></code></p>
+<p>And for multiple metric evaluation, the return value is a dict with the
+following keys -
+<code class="docutils literal"><span class="pre">['test_&lt;scorer1_name&gt;',</span> <span class="pre">'test_&lt;scorer2_name&gt;',</span> <span class="pre">'test_&lt;scorer...&gt;',</span> <span class="pre">'fit_time',</span> <span class="pre">'score_time']</span></code></p>
+<p><code class="docutils literal"><span class="pre">return_train_score</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code> by default. It adds train score keys
+for all the scorers. If train scores are not needed, this should be set to
+<code class="docutils literal"><span class="pre">False</span></code> explicitly.</p>
+<p>The multiple metrics can be specified either as a list, tuple or set of
+predefined scorer names:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_validate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">recall_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoring</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;precision_macro&#39;</span><span class="p">,</span> <span class="s1">&#39;recall_macro&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="go">[&#39;fit_time&#39;, &#39;score_time&#39;, &#39;test_precision_macro&#39;, &#39;test_recall_macro&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;test_recall_macro&#39;</span><span class="p">]</span>                       
+<span class="go">array([ 0.96...,  1.  ...,  0.96...,  0.96...,  1.        ])</span>
+</pre></div>
+</div>
+<p>Or as a dict mapping scorer name to a predefined or custom scoring function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.scorer</span> <span class="k">import</span> <span class="n">make_scorer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoring</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;prec_macro&#39;</span><span class="p">:</span> <span class="s1">&#39;precision_macro&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="s1">&#39;rec_micro&#39;</span><span class="p">:</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">recall_score</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>                 
+<span class="go">[&#39;fit_time&#39;, &#39;score_time&#39;, &#39;test_prec_macro&#39;, &#39;test_rec_micro&#39;,</span>
+<span class="go"> &#39;train_prec_macro&#39;, &#39;train_rec_micro&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;train_rec_micro&#39;</span><span class="p">]</span>                         
+<span class="go">array([ 0.97...,  0.97...,  0.99...,  0.98...,  0.98...])</span>
+</pre></div>
+</div>
+<p>Here is an example of <code class="docutils literal"><span class="pre">cross_validate</span></code> using a single metric:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;precision_macro&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="go">[&#39;fit_time&#39;, &#39;score_time&#39;, &#39;test_score&#39;, &#39;train_score&#39;]</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="obtaining-predictions-by-cross-validation">
-<h3>3.1.1.1. Obtaining predictions by cross-validation<a class="headerlink" href="#obtaining-predictions-by-cross-validation" title="Permalink to this headline">¶</a></h3>
+<h3>3.1.1.2. Obtaining predictions by cross-validation<a class="headerlink" href="#obtaining-predictions-by-cross-validation" title="Permalink to this headline">¶</a></h3>
 <p>The function <a class="reference internal" href="generated/sklearn.model_selection.cross_val_predict.html#sklearn.model_selection.cross_val_predict" title="sklearn.model_selection.cross_val_predict"><code class="xref py py-func docutils literal"><span class="pre">cross_val_predict</span></code></a> has a similar interface to
 <a class="reference internal" href="generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score" title="sklearn.model_selection.cross_val_score"><code class="xref py py-func docutils literal"><span class="pre">cross_val_score</span></code></a>, but returns, for each element in the input, the
 prediction that was obtained for that element when it was in the test set. Only
@@ -396,7 +448,7 @@ can be used (otherwise, an exception is raised).</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_predict</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">predicted</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span> 
-<span class="go">0.966...</span>
+<span class="go">0.973...</span>
 </pre></div>
 </div>
 <p>Note that the result of this computation may be slightly different from those
