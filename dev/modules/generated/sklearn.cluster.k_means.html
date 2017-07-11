@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster</span></code></a>.k_means<a class="headerlink" href="#sklearn-cluster-k-means" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.cluster.k_means">
-<code class="descclassname">sklearn.cluster.</code><code class="descname">k_means</code><span class="sig-paren">(</span><em>X</em>, <em>n_clusters</em>, <em>init=’k-means++’</em>, <em>precompute_distances=’auto’</em>, <em>n_init=10</em>, <em>max_iter=300</em>, <em>verbose=False</em>, <em>tol=0.0001</em>, <em>random_state=None</em>, <em>copy_x=True</em>, <em>n_jobs=1</em>, <em>algorithm=’auto’</em>, <em>return_n_iter=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/cluster/k_means_.py#L167"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.k_means" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.cluster.</code><code class="descname">k_means</code><span class="sig-paren">(</span><em>X</em>, <em>n_clusters</em>, <em>init=’k-means++’</em>, <em>precompute_distances=’auto’</em>, <em>n_init=10</em>, <em>max_iter=300</em>, <em>verbose=False</em>, <em>tol=0.0001</em>, <em>random_state=None</em>, <em>copy_x=True</em>, <em>n_jobs=1</em>, <em>algorithm=’auto’</em>, <em>return_n_iter=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/cluster/k_means_.py#L167"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.k_means" title="Permalink to this definition">¶</a></dt>
 <dd><p>K-means clustering algorithm.</p>
 <p>Read more in the <a class="reference internal" href="../clustering.html#k-means"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -213,16 +213,6 @@
 <div><p>The number of clusters to form as well as the number of
 centroids to generate.</p>
 </div></blockquote>
-<p><strong>max_iter</strong> : int, optional, default 300</p>
-<blockquote>
-<div><p>Maximum number of iterations of the k-means algorithm to run.</p>
-</div></blockquote>
-<p><strong>n_init</strong> : int, optional, default: 10</p>
-<blockquote>
-<div><p>Number of time the k-means algorithm will be run with different
-centroid seeds. The final results will be the best output of
-n_init consecutive runs in terms of inertia.</p>
-</div></blockquote>
 <p><strong>init</strong> : {‘k-means++’, ‘random’, or ndarray, or a callable}, optional</p>
 <blockquote>
 <div><p>Method for initialization, default to ‘k-means++’:</p>
@@ -236,13 +226,6 @@ and gives the initial centers.</p>
 <p>If a callable is passed, it should take arguments X, k and
 and a random state and return an initialization.</p>
 </div></blockquote>
-<p><strong>algorithm</strong> : “auto”, “full” or “elkan”, default=”auto”</p>
-<blockquote>
-<div><p>K-means algorithm to use. The classical EM-style algorithm is “full”.
-The “elkan” variation is more efficient by using the triangle
-inequality, but currently doesn’t support sparse data. “auto” chooses
-“elkan” for dense data and “full” for sparse data.</p>
-</div></blockquote>
 <p><strong>precompute_distances</strong> : {‘auto’, True, False}</p>
 <blockquote>
 <div><p>Precompute distances (faster but takes more memory).</p>
@@ -252,13 +235,23 @@ double precision.</p>
 <p>True : always precompute distances</p>
 <p>False : never precompute distances</p>
 </div></blockquote>
-<p><strong>tol</strong> : float, optional</p>
+<p><strong>n_init</strong> : int, optional, default: 10</p>
 <blockquote>
-<div><p>The relative increment in the results before declaring convergence.</p>
+<div><p>Number of time the k-means algorithm will be run with different
+centroid seeds. The final results will be the best output of
+n_init consecutive runs in terms of inertia.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int, optional, default 300</p>
+<blockquote>
+<div><p>Maximum number of iterations of the k-means algorithm to run.</p>
 </div></blockquote>
 <p><strong>verbose</strong> : boolean, optional</p>
 <blockquote>
 <div><p>Verbosity mode.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float, optional</p>
+<blockquote>
+<div><p>The relative increment in the results before declaring convergence.</p>
 </div></blockquote>
 <p><strong>random_state</strong> : int, RandomState instance or None, optional, default: None</p>
 <blockquote>
@@ -283,6 +276,13 @@ each of the n_init runs in parallel.</p>
 used at all, which is useful for debugging. For n_jobs below -1,
 (n_cpus + 1 + n_jobs) are used. Thus for n_jobs = -2, all CPUs but one
 are used.</p>
+</div></blockquote>
+<p><strong>algorithm</strong> : “auto”, “full” or “elkan”, default=”auto”</p>
+<blockquote>
+<div><p>K-means algorithm to use. The classical EM-style algorithm is “full”.
+The “elkan” variation is more efficient by using the triangle
+inequality, but currently doesn’t support sparse data. “auto” chooses
+“elkan” for dense data and “full” for sparse data.</p>
 </div></blockquote>
 <p><strong>return_n_iter</strong> : bool, optional</p>
 <blockquote>

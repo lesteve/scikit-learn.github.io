@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.pairwise_distances_argmin<a class="headerlink" href="#sklearn-metrics-pairwise-distances-argmin" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.pairwise_distances_argmin">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">pairwise_distances_argmin</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em>, <em>axis=1</em>, <em>metric=’euclidean’</em>, <em>batch_size=500</em>, <em>metric_kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/metrics/pairwise.py#L386"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.pairwise_distances_argmin" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">pairwise_distances_argmin</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em>, <em>axis=1</em>, <em>metric=’euclidean’</em>, <em>batch_size=500</em>, <em>metric_kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/metrics/pairwise.py#L388"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.pairwise_distances_argmin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute minimum distances between one point and a set of points.</p>
 <p>This function computes for each row in X, the index of the row of Y which
 is closest (according to the specified distance).</p>
@@ -223,13 +223,9 @@ and (n_samples2, n_features)</p>
 <div><p>Arrays containing points. Respective shapes (n_samples1, n_features)
 and (n_samples2, n_features)</p>
 </div></blockquote>
-<p><strong>batch_size</strong> : integer</p>
+<p><strong>axis</strong> : int, optional, default 1</p>
 <blockquote>
-<div><p>To reduce memory consumption over the naive solution, data are
-processed in batches, comprising batch_size rows of X and
-batch_size rows of Y. The default value is quite conservative, but
-can be changed for fine-tuning. The larger the number, the larger the
-memory usage.</p>
+<div><p>Axis along which the argmin and distances are to be computed.</p>
 </div></blockquote>
 <p><strong>metric</strong> : string or callable</p>
 <blockquote>
@@ -254,13 +250,17 @@ efficient than passing the metric name as a string.</p>
 <p>See the documentation for scipy.spatial.distance for details on these
 metrics.</p>
 </div></blockquote>
+<p><strong>batch_size</strong> : integer</p>
+<blockquote>
+<div><p>To reduce memory consumption over the naive solution, data are
+processed in batches, comprising batch_size rows of X and
+batch_size rows of Y. The default value is quite conservative, but
+can be changed for fine-tuning. The larger the number, the larger the
+memory usage.</p>
+</div></blockquote>
 <p><strong>metric_kwargs</strong> : dict</p>
 <blockquote>
 <div><p>keyword arguments to pass to specified metric function.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int, optional, default 1</p>
-<blockquote>
-<div><p>Axis along which the argmin and distances are to be computed.</p>
 </div></blockquote>
 </td>
 </tr>

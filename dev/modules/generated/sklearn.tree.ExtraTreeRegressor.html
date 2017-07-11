@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.tree" title="sklearn.tree"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.tree</span></code></a>.ExtraTreeRegressor<a class="headerlink" href="#sklearn-tree-extratreeregressor" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.tree.ExtraTreeRegressor">
-<em class="property">class </em><code class="descclassname">sklearn.tree.</code><code class="descname">ExtraTreeRegressor</code><span class="sig-paren">(</span><em>criterion=’mse’</em>, <em>splitter=’random’</em>, <em>max_depth=None</em>, <em>min_samples_split=2</em>, <em>min_samples_leaf=1</em>, <em>min_weight_fraction_leaf=0.0</em>, <em>max_features=’auto’</em>, <em>random_state=None</em>, <em>min_impurity_decrease=0.0</em>, <em>min_impurity_split=None</em>, <em>max_leaf_nodes=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/tree/tree.py#L1181"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.tree.</code><code class="descname">ExtraTreeRegressor</code><span class="sig-paren">(</span><em>criterion=’mse’</em>, <em>splitter=’random’</em>, <em>max_depth=None</em>, <em>min_samples_split=2</em>, <em>min_samples_leaf=1</em>, <em>min_weight_fraction_leaf=0.0</em>, <em>max_features=’auto’</em>, <em>random_state=None</em>, <em>min_impurity_decrease=0.0</em>, <em>min_impurity_split=None</em>, <em>max_leaf_nodes=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/tree/tree.py#L1302"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>An extremely randomized tree regressor.</p>
 <p>Extra-trees differ from classic decision trees in the way they are built.
 When looking for the best split to separate the samples of a node into two
@@ -207,6 +207,126 @@ selected features and the best split among those is chosen. When
 decision tree.</p>
 <p>Warning: Extra-trees should only be used within ensemble methods.</p>
 <p>Read more in the <a class="reference internal" href="../tree.html#tree"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>criterion</strong> : string, optional (default=”mse”)</p>
+<blockquote>
+<div><p>The function to measure the quality of a split. Supported criteria
+are “mse” for the mean squared error, which is equal to variance
+reduction as feature selection criterion, and “mae” for the mean
+absolute error.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.18: </span>Mean Absolute Error (MAE) criterion.</p>
+</div>
+</div></blockquote>
+<p><strong>splitter</strong> : string, optional (default=”best”)</p>
+<blockquote>
+<div><p>The strategy used to choose the split at each node. Supported
+strategies are “best” to choose the best split and “random” to choose
+the best random split.</p>
+</div></blockquote>
+<p><strong>max_depth</strong> : int or None, optional (default=None)</p>
+<blockquote>
+<div><p>The maximum depth of the tree. If None, then nodes are expanded until
+all leaves are pure or until all leaves contain less than
+min_samples_split samples.</p>
+</div></blockquote>
+<p><strong>min_samples_split</strong> : int, float, optional (default=2)</p>
+<blockquote>
+<div><p>The minimum number of samples required to split an internal node:</p>
+<ul class="simple">
+<li>If int, then consider <cite>min_samples_split</cite> as the minimum number.</li>
+<li>If float, then <cite>min_samples_split</cite> is a percentage and
+<cite>ceil(min_samples_split * n_samples)</cite> are the minimum
+number of samples for each split.</li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.18: </span>Added float values for percentages.</p>
+</div>
+</div></blockquote>
+<p><strong>min_samples_leaf</strong> : int, float, optional (default=1)</p>
+<blockquote>
+<div><p>The minimum number of samples required to be at a leaf node:</p>
+<ul class="simple">
+<li>If int, then consider <cite>min_samples_leaf</cite> as the minimum number.</li>
+<li>If float, then <cite>min_samples_leaf</cite> is a percentage and
+<cite>ceil(min_samples_leaf * n_samples)</cite> are the minimum
+number of samples for each node.</li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.18: </span>Added float values for percentages.</p>
+</div>
+</div></blockquote>
+<p><strong>min_weight_fraction_leaf</strong> : float, optional (default=0.)</p>
+<blockquote>
+<div><p>The minimum weighted fraction of the sum total of weights (of all
+the input samples) required to be at a leaf node. Samples have
+equal weight when sample_weight is not provided.</p>
+</div></blockquote>
+<p><strong>max_features</strong> : int, float, string or None, optional (default=None)</p>
+<blockquote>
+<div><p>The number of features to consider when looking for the best split:</p>
+<ul class="simple">
+<li>If int, then consider <cite>max_features</cite> features at each split.</li>
+<li>If float, then <cite>max_features</cite> is a percentage and
+<cite>int(max_features * n_features)</cite> features are considered at each
+split.</li>
+<li>If “auto”, then <cite>max_features=n_features</cite>.</li>
+<li>If “sqrt”, then <cite>max_features=sqrt(n_features)</cite>.</li>
+<li>If “log2”, then <cite>max_features=log2(n_features)</cite>.</li>
+<li>If None, then <cite>max_features=n_features</cite>.</li>
+</ul>
+<p>Note: the search for a split does not stop until at least one
+valid partition of the node samples is found, even if it requires to
+effectively inspect more than <code class="docutils literal"><span class="pre">max_features</span></code> features.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int, RandomState instance or None, optional (default=None)</p>
+<blockquote>
+<div><p>If int, random_state is the seed used by the random number generator;
+If RandomState instance, random_state is the random number generator;
+If None, the random number generator is the RandomState instance used
+by <cite>np.random</cite>.</p>
+</div></blockquote>
+<p><strong>min_impurity_decrease</strong> : float, optional (default=0.)</p>
+<blockquote>
+<div><p>A node will be split if this split induces a decrease of the impurity
+greater than or equal to this value.</p>
+<p>The weighted impurity decrease equation is the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">N_t</span> <span class="o">/</span> <span class="n">N</span> <span class="o">*</span> <span class="p">(</span><span class="n">impurity</span> <span class="o">-</span> <span class="n">N_t_R</span> <span class="o">/</span> <span class="n">N_t</span> <span class="o">*</span> <span class="n">right_impurity</span>
+                    <span class="o">-</span> <span class="n">N_t_L</span> <span class="o">/</span> <span class="n">N_t</span> <span class="o">*</span> <span class="n">left_impurity</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">N</span></code> is the total number of samples, <code class="docutils literal"><span class="pre">N_t</span></code> is the number of
+samples at the current node, <code class="docutils literal"><span class="pre">N_t_L</span></code> is the number of samples in the
+left child, and <code class="docutils literal"><span class="pre">N_t_R</span></code> is the number of samples in the right child.</p>
+<p><code class="docutils literal"><span class="pre">N</span></code>, <code class="docutils literal"><span class="pre">N_t</span></code>, <code class="docutils literal"><span class="pre">N_t_R</span></code> and <code class="docutils literal"><span class="pre">N_t_L</span></code> all refer to the weighted sum,
+if <code class="docutils literal"><span class="pre">sample_weight</span></code> is passed.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.19.</span></p>
+</div>
+</div></blockquote>
+<p><strong>min_impurity_split</strong> : float,</p>
+<blockquote>
+<div><p>Threshold for early stopping in tree growth. A node will split
+if its impurity is above the threshold, otherwise it is a leaf.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.19: </span><code class="docutils literal"><span class="pre">min_impurity_split</span></code> has been deprecated in favor of
+<code class="docutils literal"><span class="pre">min_impurity_decrease</span></code> in 0.19 and will be removed in 0.21.
+Use <code class="docutils literal"><span class="pre">min_impurity_decrease</span></code> instead.</p>
+</div>
+</div></blockquote>
+<p><strong>max_leaf_nodes</strong> : int or None, optional (default=None)</p>
+<blockquote class="last">
+<div><p>Grow a tree with <code class="docutils literal"><span class="pre">max_leaf_nodes</span></code> in best-first fashion.
+Best nodes are defined as relative reduction in impurity.
+If None then unlimited number of leaf nodes.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="sklearn.tree.ExtraTreeClassifier.html#sklearn.tree.ExtraTreeClassifier" title="sklearn.tree.ExtraTreeClassifier"><code class="xref py py-obj docutils literal"><span class="pre">ExtraTreeClassifier</span></code></a>, <code class="xref py py-obj docutils literal"><span class="pre">ExtraTreesClassifier</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">ExtraTreesRegressor</span></code></p>
@@ -257,12 +377,12 @@ Machine Learning, 63(1), 3-42, 2006.</td></tr>
 </table>
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>criterion=’mse’</em>, <em>splitter=’random’</em>, <em>max_depth=None</em>, <em>min_samples_split=2</em>, <em>min_samples_leaf=1</em>, <em>min_weight_fraction_leaf=0.0</em>, <em>max_features=’auto’</em>, <em>random_state=None</em>, <em>min_impurity_decrease=0.0</em>, <em>min_impurity_split=None</em>, <em>max_leaf_nodes=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/tree/tree.py#L1213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>criterion=’mse’</em>, <em>splitter=’random’</em>, <em>max_depth=None</em>, <em>min_samples_split=2</em>, <em>min_samples_leaf=1</em>, <em>min_weight_fraction_leaf=0.0</em>, <em>max_features=’auto’</em>, <em>random_state=None</em>, <em>min_impurity_decrease=0.0</em>, <em>min_impurity_split=None</em>, <em>max_leaf_nodes=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/tree/tree.py#L1437"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.apply">
-<code class="descname">apply</code><span class="sig-paren">(</span><em>X</em>, <em>check_input=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/tree/tree.py#L438"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.apply" title="Permalink to this definition">¶</a></dt>
+<code class="descname">apply</code><span class="sig-paren">(</span><em>X</em>, <em>check_input=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/tree/tree.py#L438"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the leaf that each sample is predicted as.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.17.</span></p>
@@ -299,7 +419,7 @@ numbering.</p>
 
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.decision_path">
-<code class="descname">decision_path</code><span class="sig-paren">(</span><em>X</em>, <em>check_input=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/tree/tree.py#L467"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.decision_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decision_path</code><span class="sig-paren">(</span><em>X</em>, <em>check_input=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/tree/tree.py#L467"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.decision_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the decision path in the tree</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.18.</span></p>
@@ -351,7 +471,7 @@ It is also known as the Gini importance.</p>
 
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em>, <em>check_input=True</em>, <em>X_idx_sorted=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/tree/tree.py#L1077"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em>, <em>check_input=True</em>, <em>X_idx_sorted=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/tree/tree.py#L1080"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a decision tree regressor from the training set (X, y).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -400,7 +520,7 @@ Don’t use this parameter unless you know what to do.</p>
 
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -425,7 +545,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em>, <em>check_input=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/tree/tree.py#L387"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em>, <em>check_input=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/tree/tree.py#L387"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict class or regression value for X.</p>
 <p>For a classification model, the predicted class for each sample in X is
 returned. For a regression model, the predicted value based on X is
@@ -459,7 +579,7 @@ Don’t use this parameter unless you know what you do.</p>
 
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/base.py#L358"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/base.py#L358"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
 <p>The coefficient R^2 is defined as (1 - u/v), where u is the residual
 sum of squares ((y_true - y_pred) ** 2).sum() and v is the total
@@ -498,7 +618,7 @@ would get a R^2 score of 0.0.</p>
 
 <dl class="method">
 <dt id="sklearn.tree.ExtraTreeRegressor.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/90f0bbf3/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/b6f8865b/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.tree.ExtraTreeRegressor.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
