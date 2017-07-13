@@ -516,7 +516,9 @@ is given.</p>
 <p>Affinity Propagation can be interesting as it chooses the number of
 clusters based on the data provided. For this purpose, the two important
 parameters are the <em>preference</em>, which controls how many exemplars are
-used, and the <em>damping factor</em>.</p>
+used, and the <em>damping factor</em> which damps the responsibility and
+availability messages to avoid numerical oscillations when updating these
+messages.</p>
 <p>The main drawback of Affinity Propagation is its complexity. The
 algorithm has a time complexity of the order <img class="math" src="../_images/math/17245ed0c52b27603fc90accab918af090e79b39.png" alt="O(N^2 T)"/>, where <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/>
 is the number of samples and <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/> is the number of iterations until
@@ -555,7 +557,14 @@ to be the exemplar of sample <img class="math" src="../_images/math/df0deb143e5a
 <div class="math">
 <p><img src="../_images/math/a1de3bf17f7d12320cc8973c0e1b4eb257475344.png" alt="a(i, k) \leftarrow min [0, r(k, k) + \sum_{i'~s.t.~i' \notin \{i, k\}}{r(i', k)}]"/></p>
 </div><p>To begin with, all values for <img class="math" src="../_images/math/eaa6ad49a7f78fe5a13b486690163bf2dc7e3e60.png" alt="r"/> and <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> are set to zero,
-and the calculation of each iterates until convergence.</p>
+and the calculation of each iterates until convergence.
+As discussed above, in order to avoid numerical oscillations when updating the
+messages, the damping factor <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> is introduced to iteration process:</p>
+<div class="math">
+<p><img src="../_images/math/2e5d6b08818284ef89b5e9e1dc43752ff9340b06.png" alt="r_{t+1}(i, k) = \lambda\cdot r_{t}(i, k) + (1-\lambda)\cdot r_{t+1}(i, k)"/></p>
+</div><div class="math">
+<p><img src="../_images/math/73bcd59429c3fa5a6678e7ef9fce687d9e1ec207.png" alt="a_{t+1}(i, k) = \lambda\cdot a_{t}(i, k) + (1-\lambda)\cdot a_{t+1}(i, k)"/></p>
+</div><p>where <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> indicates the iteration times.</p>
 </div>
 <div class="section" id="mean-shift">
 <span id="id4"></span><h2>2.3.4. Mean Shift<a class="headerlink" href="#mean-shift" title="Permalink to this headline">¶</a></h2>
