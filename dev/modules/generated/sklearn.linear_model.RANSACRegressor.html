@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.RANSACRegressor<a class="headerlink" href="#sklearn-linear-model-ransacregressor" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.linear_model.RANSACRegressor">
-<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">RANSACRegressor</code><span class="sig-paren">(</span><em>base_estimator=None</em>, <em>min_samples=None</em>, <em>residual_threshold=None</em>, <em>is_data_valid=None</em>, <em>is_model_valid=None</em>, <em>max_trials=100</em>, <em>max_skips=inf</em>, <em>stop_n_inliers=inf</em>, <em>stop_score=inf</em>, <em>stop_probability=0.99</em>, <em>residual_metric=None</em>, <em>loss=’absolute_loss’</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/ransac.py#L54"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">RANSACRegressor</code><span class="sig-paren">(</span><em>base_estimator=None</em>, <em>min_samples=None</em>, <em>residual_threshold=None</em>, <em>is_data_valid=None</em>, <em>is_model_valid=None</em>, <em>max_trials=100</em>, <em>max_skips=inf</em>, <em>stop_n_inliers=inf</em>, <em>stop_score=inf</em>, <em>stop_probability=0.99</em>, <em>residual_metric=None</em>, <em>loss=’absolute_loss’</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/ransac.py#L54"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>RANSAC (RANdom SAmple Consensus) algorithm.</p>
 <p>RANSAC is an iterative algorithm for the robust estimation of parameters
 from a subset of inliers from the complete data set. More information can
@@ -320,7 +320,7 @@ on <code class="docutils literal"><span class="pre">X[i]</span></code>.</p>
 then this sample is classified as an outlier.</p>
 </div></blockquote>
 <p><strong>random_state</strong> : int, RandomState instance or None, optional, default None</p>
-<blockquote>
+<blockquote class="last">
 <div><p>The generator used to initialize the centers.  If int, random_state is
 the seed used by the random number generator; If RandomState instance,
 random_state is the random number generator; If None, the random number
@@ -328,63 +328,52 @@ generator is the RandomState instance used by <cite>np.random</cite>.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>estimator_</strong> : object</p>
-<blockquote>
-<div><p>Best fitted model (copy of the <cite>base_estimator</cite> object).</p>
-</div></blockquote>
-<p><strong>n_trials_</strong> : int</p>
-<blockquote>
-<div><p>Number of random selection trials until one of the stop criteria is
-met. It is always <code class="docutils literal"><span class="pre">&lt;=</span> <span class="pre">max_trials</span></code>.</p>
-</div></blockquote>
-<p><strong>inlier_mask_</strong> : bool array of shape [n_samples]</p>
-<blockquote>
-<div><p>Boolean mask of inliers classified as <code class="docutils literal"><span class="pre">True</span></code>.</p>
-</div></blockquote>
-<p><strong>n_skips_no_inliers_</strong> : int</p>
-<blockquote>
-<div><p>Number of iterations skipped due to finding zero inliers.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.</span></p>
-</div>
-</div></blockquote>
-<p><strong>n_skips_invalid_data_</strong> : int</p>
-<blockquote>
-<div><p>Number of iterations skipped due to invalid data defined by
-<code class="docutils literal"><span class="pre">is_data_valid</span></code>.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.</span></p>
-</div>
-</div></blockquote>
-<p><strong>n_skips_invalid_model_</strong> : int</p>
-<blockquote class="last">
-<div><p>Number of iterations skipped due to an invalid model defined by
-<code class="docutils literal"><span class="pre">is_model_valid</span></code>.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.</span></p>
-</div>
-</div></blockquote>
-</td>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>estimator_</strong></td>
+<td>(object) Best fitted model (copy of the <cite>base_estimator</cite> object).</td>
+</tr>
+<tr class="row-even"><td><strong>n_trials_</strong></td>
+<td>(int) Number of random selection trials until one of the stop criteria is met. It is always <code class="docutils literal"><span class="pre">&lt;=</span> <span class="pre">max_trials</span></code>.</td>
+</tr>
+<tr class="row-odd"><td><strong>inlier_mask_</strong></td>
+<td>(bool array of shape [n_samples]) Boolean mask of inliers classified as <code class="docutils literal"><span class="pre">True</span></code>.</td>
+</tr>
+<tr class="row-even"><td><strong>n_skips_no_inliers_</strong></td>
+<td>(int) Number of iterations skipped due to finding zero inliers.  .. versionadded:: 0.19</td>
+</tr>
+<tr class="row-odd"><td><strong>n_skips_invalid_data_</strong></td>
+<td>(int) Number of iterations skipped due to invalid data defined by <code class="docutils literal"><span class="pre">is_data_valid</span></code>.  .. versionadded:: 0.19</td>
+</tr>
+<tr class="row-even"><td><strong>n_skips_invalid_model_</strong></td>
+<td>(int) Number of iterations skipped due to an invalid model defined by <code class="docutils literal"><span class="pre">is_model_valid</span></code>.  .. versionadded:: 0.19</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="r186" rules="none">
+<table class="docutils citation" frame="void" id="r411413" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R186]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/RANSAC">https://en.wikipedia.org/wiki/RANSAC</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[R411413]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/RANSAC">https://en.wikipedia.org/wiki/RANSAC</a></td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="r187" rules="none">
+<table class="docutils citation" frame="void" id="r412413" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[R187]</a></td><td><a class="reference external" href="http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf">http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[R412413]</a></td><td><a class="reference external" href="http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf">http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf</a></td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="r188" rules="none">
+<table class="docutils citation" frame="void" id="r413413" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[R188]</a></td><td><a class="reference external" href="http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf">http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[R413413]</a></td><td><a class="reference external" href="http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf">http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf</a></td></tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
@@ -413,12 +402,12 @@ met. It is always <code class="docutils literal"><span class="pre">&lt;=</span> 
 </table>
 <dl class="method">
 <dt id="sklearn.linear_model.RANSACRegressor.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>base_estimator=None</em>, <em>min_samples=None</em>, <em>residual_threshold=None</em>, <em>is_data_valid=None</em>, <em>is_model_valid=None</em>, <em>max_trials=100</em>, <em>max_skips=inf</em>, <em>stop_n_inliers=inf</em>, <em>stop_score=inf</em>, <em>stop_probability=0.99</em>, <em>residual_metric=None</em>, <em>loss=’absolute_loss’</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/ransac.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>base_estimator=None</em>, <em>min_samples=None</em>, <em>residual_threshold=None</em>, <em>is_data_valid=None</em>, <em>is_model_valid=None</em>, <em>max_trials=100</em>, <em>max_skips=inf</em>, <em>stop_n_inliers=inf</em>, <em>stop_score=inf</em>, <em>stop_probability=0.99</em>, <em>residual_metric=None</em>, <em>loss=’absolute_loss’</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/ransac.py#L204"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RANSACRegressor.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/ransac.py#L225"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/ransac.py#L225"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit estimator using RANSAC algorithm.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -440,7 +429,7 @@ fit method does not support it.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong> :</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
 <blockquote class="last">
 <div><p>If no valid consensus set could be found. This occurs if
 <cite>is_data_valid</cite> and <cite>is_model_valid</cite> return False for all
@@ -454,7 +443,7 @@ fit method does not support it.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RANSACRegressor.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -479,7 +468,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RANSACRegressor.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/ransac.py#L465"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/ransac.py#L465"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict using the estimated model.</p>
 <p>This is a wrapper for <cite>estimator_.predict(X)</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -501,7 +490,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RANSACRegressor.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/ransac.py#L483"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/ransac.py#L483"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the score of the prediction.</p>
 <p>This is a wrapper for <cite>estimator_.score(X, y)</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -530,7 +519,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RANSACRegressor.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -540,7 +529,7 @@ component of a nested object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>

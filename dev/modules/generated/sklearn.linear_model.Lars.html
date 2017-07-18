@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.Lars<a class="headerlink" href="#sklearn-linear-model-lars" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.linear_model.Lars">
-<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">Lars</code><span class="sig-paren">(</span><em>fit_intercept=True</em>, <em>verbose=False</em>, <em>normalize=True</em>, <em>precompute=’auto’</em>, <em>n_nonzero_coefs=500</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_X=True</em>, <em>fit_path=True</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/least_angle.py#L499"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">Lars</code><span class="sig-paren">(</span><em>fit_intercept=True</em>, <em>verbose=False</em>, <em>normalize=True</em>, <em>precompute=’auto’</em>, <em>n_nonzero_coefs=500</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_X=True</em>, <em>fit_path=True</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/least_angle.py#L499"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars" title="Permalink to this definition">¶</a></dt>
 <dd><p>Least Angle Regression model a.k.a. LAR</p>
 <p>Read more in the <a class="reference internal" href="../linear_model.html#least-angle-regression"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -253,39 +253,38 @@ setting <code class="docutils literal"><span class="pre">fit_path</span></code> 
 with a small alpha.</p>
 </div></blockquote>
 <p><strong>positive</strong> : boolean (default=False)</p>
-<blockquote>
+<blockquote class="last">
 <div><p>Restrict coefficients to be &gt;= 0. Be aware that you might want to
 remove fit_intercept which is set True by default.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>alphas_</strong> : array, shape (n_alphas + 1,) | list of n_targets such arrays</p>
-<blockquote>
-<div><p>Maximum of covariances (in absolute value) at each iteration.         <code class="docutils literal"><span class="pre">n_alphas</span></code> is either <code class="docutils literal"><span class="pre">n_nonzero_coefs</span></code> or <code class="docutils literal"><span class="pre">n_features</span></code>,         whichever is smaller.</p>
-</div></blockquote>
-<p><strong>active_</strong> : list, length = n_alphas | list of n_targets such lists</p>
-<blockquote>
-<div><p>Indices of active variables at the end of the path.</p>
-</div></blockquote>
-<p><strong>coef_path_</strong> : array, shape (n_features, n_alphas + 1)         | list of n_targets such arrays</p>
-<blockquote>
-<div><p>The varying values of the coefficients along the path. It is not
-present if the <code class="docutils literal"><span class="pre">fit_path</span></code> parameter is <code class="docutils literal"><span class="pre">False</span></code>.</p>
-</div></blockquote>
-<p><strong>coef_</strong> : array, shape (n_features,) or (n_targets, n_features)</p>
-<blockquote>
-<div><p>Parameter vector (w in the formulation formula).</p>
-</div></blockquote>
-<p><strong>intercept_</strong> : float | array, shape (n_targets,)</p>
-<blockquote>
-<div><p>Independent term in decision function.</p>
-</div></blockquote>
-<p><strong>n_iter_</strong> : array-like or int</p>
-<blockquote class="last">
-<div><p>The number of iterations taken by lars_path to find the
-grid of alphas for each target.</p>
-</div></blockquote>
-</td>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>alphas_</strong></td>
+<td>(array, shape (n_alphas + 1,) | list of n_targets such arrays) Maximum of covariances (in absolute value) at each iteration.         <code class="docutils literal"><span class="pre">n_alphas</span></code> is either <code class="docutils literal"><span class="pre">n_nonzero_coefs</span></code> or <code class="docutils literal"><span class="pre">n_features</span></code>,         whichever is smaller.</td>
+</tr>
+<tr class="row-even"><td><strong>active_</strong></td>
+<td>(list, length = n_alphas | list of n_targets such lists) Indices of active variables at the end of the path.</td>
+</tr>
+<tr class="row-odd"><td><strong>coef_path_</strong></td>
+<td>(array, shape (n_features, n_alphas + 1)         | list of n_targets such arrays) The varying values of the coefficients along the path. It is not present if the <code class="docutils literal"><span class="pre">fit_path</span></code> parameter is <code class="docutils literal"><span class="pre">False</span></code>.</td>
+</tr>
+<tr class="row-even"><td><strong>coef_</strong></td>
+<td>(array, shape (n_features,) or (n_targets, n_features)) Parameter vector (w in the formulation formula).</td>
+</tr>
+<tr class="row-odd"><td><strong>intercept_</strong></td>
+<td>(float | array, shape (n_targets,)) Independent term in decision function.</td>
+</tr>
+<tr class="row-even"><td><strong>n_iter_</strong></td>
+<td>(array-like or int) The number of iterations taken by lars_path to find the grid of alphas for each target.</td>
 </tr>
 </tbody>
 </table>
@@ -331,12 +330,12 @@ grid of alphas for each target.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.linear_model.Lars.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>fit_intercept=True</em>, <em>verbose=False</em>, <em>normalize=True</em>, <em>precompute=’auto’</em>, <em>n_nonzero_coefs=500</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_X=True</em>, <em>fit_path=True</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/least_angle.py#L595"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>fit_intercept=True</em>, <em>verbose=False</em>, <em>normalize=True</em>, <em>precompute=’auto’</em>, <em>n_nonzero_coefs=500</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_X=True</em>, <em>fit_path=True</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/least_angle.py#L595"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.linear_model.Lars.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>Xy=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/least_angle.py#L678"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>Xy=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/least_angle.py#L678"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model using X, y as training data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -369,7 +368,7 @@ only when the Gram matrix is precomputed.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.Lars.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -394,7 +393,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.Lars.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/linear_model/base.py#L243"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/linear_model/base.py#L243"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict using the linear model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -418,7 +417,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.Lars.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/base.py#L358"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/base.py#L358"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
 <p>The coefficient R^2 is defined as (1 - u/v), where u is the residual
 sum of squares ((y_true - y_pred) ** 2).sum() and v is the total
@@ -457,7 +456,7 @@ would get a R^2 score of 0.0.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.Lars.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/8cee70d0/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/71408e09/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.Lars.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -467,7 +466,7 @@ component of a nested object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>
