@@ -476,7 +476,7 @@ that can be used to generate dataset splits according to different cross
 validation strategies.</p>
 </div>
 <div class="section" id="cross-validation-iterators-for-i-i-d-data">
-<h2>3.1.3. Cross-validation iterators for i.i.d. data<a class="headerlink" href="#cross-validation-iterators-for-i-i-d-data" title="Permalink to this headline">¶</a></h2>
+<span id="iid-cv"></span><h2>3.1.3. Cross-validation iterators for i.i.d. data<a class="headerlink" href="#cross-validation-iterators-for-i-i-d-data" title="Permalink to this headline">¶</a></h2>
 <p>Assuming that some data is Independent and Identically Distributed (i.i.d.) is
 making the assumption that all samples stem from the same generative process
 and that the generative process is assumed to have no memory of past generated
@@ -486,10 +486,10 @@ samples.</p>
 <p>While i.i.d. data is a common assumption in machine learning theory, it rarely
 holds in practice. If one knows that the samples have been generated using a
 time-dependent process, it’s safer to
-use a <span class="xref std std-ref">time-series aware cross-validation scheme</span>
+use a <a class="reference internal" href="#timeseries-cv"><span class="std std-ref">time-series aware cross-validation scheme</span></a>
 Similarly if we know that the generative process has a group structure
 (samples from collected from different subjects, experiments, measurement
-devices) it safer to use <span class="xref std std-ref">group-wise cross-validation</span>.</p>
+devices) it safer to use <a class="reference internal" href="#group-cv"><span class="std std-ref">group-wise cross-validation</span></a>.</p>
 <div class="section" id="k-fold">
 <h3>3.1.3.1. K-fold<a class="headerlink" href="#k-fold" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a> divides all the samples in <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> groups of samples,
@@ -677,7 +677,7 @@ percentage for each target class as in the complete set.</p>
 </div>
 </div>
 <div class="section" id="cross-validation-iterators-for-grouped-data">
-<h2>3.1.5. Cross-validation iterators for grouped data.<a class="headerlink" href="#cross-validation-iterators-for-grouped-data" title="Permalink to this headline">¶</a></h2>
+<span id="group-cv"></span><h2>3.1.5. Cross-validation iterators for grouped data.<a class="headerlink" href="#cross-validation-iterators-for-grouped-data" title="Permalink to this headline">¶</a></h2>
 <p>The i.i.d. assumption is broken if the underlying generative process yield
 groups of dependent samples.</p>
 <p>Such a grouping of data is domain specific. An example would be when there is
@@ -693,11 +693,11 @@ The grouping identifier for the samples is specified via the <code class="docuti
 parameter.</p>
 <div class="section" id="group-k-fold">
 <h3>3.1.5.1. Group k-fold<a class="headerlink" href="#group-k-fold" title="Permalink to this headline">¶</a></h3>
-<p>class:GroupKFold is a variation of k-fold which ensures that the same group is
+<p><a class="reference internal" href="generated/sklearn.model_selection.GroupKFold.html#sklearn.model_selection.GroupKFold" title="sklearn.model_selection.GroupKFold"><code class="xref py py-class docutils literal"><span class="pre">GroupKFold</span></code></a> is a variation of k-fold which ensures that the same group is
 not represented in both testing and training sets. For example if the data is
 obtained from different subjects with several samples per-subject and if the
 model is flexible enough to learn from highly person specific features it
-could fail to generalize to new subjects. class:GroupKFold makes it possible
+could fail to generalize to new subjects. <a class="reference internal" href="generated/sklearn.model_selection.GroupKFold.html#sklearn.model_selection.GroupKFold" title="sklearn.model_selection.GroupKFold"><code class="xref py py-class docutils literal"><span class="pre">GroupKFold</span></code></a> makes it possible
 to detect this kind of overfitting situations.</p>
 <p>Imagine you have three subjects, each with an associated number from 1 to 3:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GroupKFold</span>
@@ -805,7 +805,7 @@ e.g. when searching for hyperparameters.</p>
 samples that are part of the validation set, and to -1 for all other samples.</p>
 </div>
 <div class="section" id="cross-validation-of-time-series-data">
-<h2>3.1.7. Cross validation of time series data<a class="headerlink" href="#cross-validation-of-time-series-data" title="Permalink to this headline">¶</a></h2>
+<span id="timeseries-cv"></span><h2>3.1.7. Cross validation of time series data<a class="headerlink" href="#cross-validation-of-time-series-data" title="Permalink to this headline">¶</a></h2>
 <p>Time series data is characterised by the correlation between observations
 that are near in time (<em>autocorrelation</em>). However, classical
 cross-validation techniques such as <a class="reference internal" href="generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a> and
