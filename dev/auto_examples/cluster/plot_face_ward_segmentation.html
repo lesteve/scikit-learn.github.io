@@ -201,7 +201,7 @@ for each segmented region to be in one piece.</p>
 <img alt="../../_images/sphx_glr_plot_face_ward_segmentation_001.png" class="align-center" src="../../_images/sphx_glr_plot_face_ward_segmentation_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Compute</span> <span class="n">structured</span> <span class="n">hierarchical</span> <span class="n">clustering</span><span class="o">...</span>
-<span class="n">Elapsed</span> <span class="n">time</span><span class="p">:</span>  <span class="mf">0.7124035358428955</span>
+<span class="n">Elapsed</span> <span class="n">time</span><span class="p">:</span>  <span class="mf">0.7552657127380371</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">pixels</span><span class="p">:</span>  <span class="mi">7752</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">clusters</span><span class="p">:</span>  <span class="mi">15</span>
 </pre></div>
@@ -237,7 +237,7 @@ for each segmented region to be in one piece.</p>
 <span class="c1"># Resize it to 10% of the original size to speed up the processing</span>
 <span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.reshape.html#numpy.reshape" title="View documentation for numpy.reshape"><span class="n">np</span><span class="o">.</span><span class="n">reshape</span></a><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="c1"># #############################################################################</span>
 <span class="c1"># Define the structure A of the data. Pixels connected to their neighbors.</span>
@@ -251,10 +251,10 @@ for each segmented region to be in one piece.</p>
 <span class="n">ward</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="View documentation for sklearn.cluster.AgglomerativeClustering"><span class="n">AgglomerativeClustering</span></a><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span>
                                <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">)</span>
 <span class="n">ward</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ward</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">face</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.reshape.html#numpy.reshape" title="View documentation for numpy.reshape"><span class="n">np</span><span class="o">.</span><span class="n">reshape</span></a><span class="p">(</span><span class="n">ward</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">face</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Elapsed time: &quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">st</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of pixels: &quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of clusters: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of clusters: &quot;</span><span class="p">,</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.unique.html#numpy.unique" title="View documentation for numpy.unique"><span class="n">np</span><span class="o">.</span><span class="n">unique</span></a><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 
 <span class="c1"># #############################################################################</span>
 <span class="c1"># Plot the results on an image</span>
@@ -268,7 +268,7 @@ for each segmented region to be in one piece.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  1.141 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  1.204 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_face_ward_segmentation.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_face_ward_segmentation.py</span></code></a></div>

@@ -201,13 +201,6 @@ The goal is to predict the lower half of a face given its upper half.</p>
 how extremely randomized trees, k nearest neighbors, linear
 regression and ridge regression complete the lower half of those faces.</p>
 <img alt="../_images/sphx_glr_plot_multioutput_face_completion_001.png" class="align-center" src="../_images/sphx_glr_plot_multioutput_face_completion_001.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">downloading</span> <span class="n">Olivetti</span> <span class="n">faces</span> <span class="kn">from</span> <span class="nn">http</span><span class="p">:</span><span class="o">//</span><span class="n">cs</span><span class="o">.</span><span class="n">nyu</span><span class="o">.</span><span class="n">edu</span><span class="o">/~</span><span class="n">roweis</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">olivettifaces</span><span class="o">.</span><span class="n">mat</span> <span class="n">to</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">/</span><span class="n">scikit_learn_data</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -265,7 +258,7 @@ regression and ridge regression complete the lower half of those faces.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.suptitle" title="View documentation for matplotlib.pyplot.suptitle"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span></a><span class="p">(</span><span class="s2">&quot;Face completion with multi-output estimators&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_faces</span><span class="p">):</span>
-    <span class="n">true_face</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_test</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">true_face</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.hstack.html#numpy.hstack" title="View documentation for numpy.hstack"><span class="n">np</span><span class="o">.</span><span class="n">hstack</span></a><span class="p">((</span><span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_test</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 
     <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
         <span class="n">sub</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="n">n_faces</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -279,7 +272,7 @@ regression and ridge regression complete the lower half of those faces.</p>
                <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">est</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ESTIMATORS</span><span class="p">)):</span>
-        <span class="n">completed_face</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_test_predict</span><span class="p">[</span><span class="n">est</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">completed_face</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.hstack.html#numpy.hstack" title="View documentation for numpy.hstack"><span class="n">np</span><span class="o">.</span><span class="n">hstack</span></a><span class="p">((</span><span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_test_predict</span><span class="p">[</span><span class="n">est</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
 
         <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
             <span class="n">sub</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="n">n_faces</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
@@ -296,7 +289,7 @@ regression and ridge regression complete the lower half of those faces.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  5.046 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.873 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/plot_multioutput_face_completion.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_multioutput_face_completion.py</span></code></a></div>
