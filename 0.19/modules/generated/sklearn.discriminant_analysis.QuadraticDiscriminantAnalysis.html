@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.discriminant_analysis" title="sklearn.discriminant_analysis"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.discriminant_analysis</span></code></a>.QuadraticDiscriminantAnalysis<a class="headerlink" href="#sklearn-discriminant-analysis-quadraticdiscriminantanalysis" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis">
-<em class="property">class </em><code class="descclassname">sklearn.discriminant_analysis.</code><code class="descname">QuadraticDiscriminantAnalysis</code><span class="sig-paren">(</span><em>priors=None</em>, <em>reg_param=0.0</em>, <em>store_covariances=False</em>, <em>tol=0.0001</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/discriminant_analysis.py#L534"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.discriminant_analysis.</code><code class="descname">QuadraticDiscriminantAnalysis</code><span class="sig-paren">(</span><em>priors=None</em>, <em>reg_param=0.0</em>, <em>store_covariances=False</em>, <em>tol=0.0001</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/discriminant_analysis.py#L534"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quadratic Discriminant Analysis</p>
 <p>A classifier with a quadratic decision boundary, generated
 by fitting class conditional densities to the data
@@ -222,6 +222,21 @@ and using Bayes’ rule.</p>
 <blockquote>
 <div><p>Regularizes the covariance estimate as
 <code class="docutils literal"><span class="pre">(1-reg_param)*Sigma</span> <span class="pre">+</span> <span class="pre">reg_param*np.eye(n_features)</span></code></p>
+</div></blockquote>
+<p><strong>store_covariances</strong> : boolean</p>
+<blockquote>
+<div><p>If True the covariance matrices are computed and stored in the
+<cite>self.covariances_</cite> attribute.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17.</span></p>
+</div>
+</div></blockquote>
+<p><strong>tol</strong> : float, optional, default 1.0e-4</p>
+<blockquote>
+<div><p>Threshold used for rank estimation.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17.</span></p>
+</div>
 </div></blockquote>
 </td>
 </tr>
@@ -245,25 +260,10 @@ It is the rotation of the Gaussian distribution, i.e. its
 principal axis.</p>
 </div></blockquote>
 <p><strong>scalings_</strong> : list of arrays</p>
-<blockquote>
+<blockquote class="last">
 <div><p>For each class k an array of shape [n_k]. It contains the scaling
 of the Gaussian distributions along its principal axes, i.e. the
 variance in the rotated coordinate system.</p>
-</div></blockquote>
-<p><strong>store_covariances</strong> : boolean</p>
-<blockquote>
-<div><p>If True the covariance matrices are computed and stored in the
-<cite>self.covariances_</cite> attribute.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.17.</span></p>
-</div>
-</div></blockquote>
-<p><strong>tol</strong> : float, optional, default 1.0e-4</p>
-<blockquote class="last">
-<div><p>Threshold used for rank estimation.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.17.</span></p>
-</div>
 </div></blockquote>
 </td>
 </tr>
@@ -325,12 +325,12 @@ variance in the rotated coordinate system.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>priors=None</em>, <em>reg_param=0.0</em>, <em>store_covariances=False</em>, <em>tol=0.0001</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/discriminant_analysis.py#L610"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>priors=None</em>, <em>reg_param=0.0</em>, <em>store_covariances=False</em>, <em>tol=0.0001</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/discriminant_analysis.py#L610"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.decision_function">
-<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/discriminant_analysis.py#L695"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.decision_function" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/discriminant_analysis.py#L695"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.decision_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply decision function to an array of samples.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -356,7 +356,7 @@ log likelihood ratio of the positive class.</p>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/discriminant_analysis.py#L617"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/discriminant_analysis.py#L617"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model according to the given training data and parameters.</p>
 <blockquote>
 <div><div class="versionchanged">
@@ -372,7 +372,7 @@ log likelihood ratio of the positive class.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = [n_samples, n_features]</p>
 <blockquote>
-<div><p>Training vector, where n_samples in the number of samples and
+<div><p>Training vector, where n_samples is the number of samples and
 n_features is the number of features.</p>
 </div></blockquote>
 <p><strong>y</strong> : array, shape = [n_samples]</p>
@@ -387,7 +387,7 @@ n_features is the number of features.</p>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -412,7 +412,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/discriminant_analysis.py#L716"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/discriminant_analysis.py#L716"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform classification on an array of test vectors X.</p>
 <p>The predicted class C for each sample in X is returned.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -429,7 +429,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict_log_proba">
-<code class="descname">predict_log_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/discriminant_analysis.py#L753"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict_log_proba" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict_log_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/discriminant_analysis.py#L753"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict_log_proba" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return posterior probabilities of classification.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -453,7 +453,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/discriminant_analysis.py#L733"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict_proba" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/discriminant_analysis.py#L733"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.predict_proba" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return posterior probabilities of classification.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -477,7 +477,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/base.py#L325"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/base.py#L325"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the mean accuracy on the given test data and labels.</p>
 <p>In multi-label classification, this is the subset accuracy
 which is a harsh metric since you require for each sample that
@@ -512,7 +512,7 @@ each label set be correctly predicted.</p>
 
 <dl class="method">
 <dt id="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5c3db727/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ed8161f3/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
