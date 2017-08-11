@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.10. Decision Trees &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>1.10. Decision Trees &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -88,9 +88,9 @@
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -590,7 +590,10 @@ observations, let</p>
 <h3>1.10.7.2. Regression criteria<a class="headerlink" href="#regression-criteria" title="Permalink to this headline">¶</a></h3>
 <p>If the target is a continuous value, then for node <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/>,
 representing a region <img class="math" src="../_images/math/02eada2efb3d986ab718e831b1a6bc8a5ee68f71.png" alt="R_m"/> with <img class="math" src="../_images/math/74f4b22af0f8f9823c68376042f9831dc60b45f4.png" alt="N_m"/> observations, common
-criteria to minimise are</p>
+criteria to minimise as for determining locations for future
+splits are Mean Squared Error, which minimizes the L2 error
+using mean values at terminal nodes, and Mean Absolute Error, which
+minimizes the L1 error using median values at terminal nodes.</p>
 <p>Mean Squared Error:</p>
 <div class="math">
 <p><img src="../_images/math/18b1a49e164e731a75bb626f23ecce70fdf0a181.png" alt="c_m = \frac{1}{N_m} \sum_{i \in N_m} y_i

@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>sklearn.model_selection.cross_validate &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>sklearn.model_selection.cross_validate &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -36,7 +36,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="sklearn.model_selection.cross_val_score" href="sklearn.model_selection.cross_val_score.html" />
+    <link rel="next" title="sklearn.model_selection.cross_val_predict" href="sklearn.model_selection.cross_val_predict.html" />
     <link rel="prev" title="sklearn.model_selection.fit_grid_point" href="sklearn.model_selection.fit_grid_point.html" />
   
   
@@ -88,9 +88,9 @@
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="sklearn.model_selection.cross_val_score.html"
+        <a href="sklearn.model_selection.cross_val_predict.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
         sklearn.model...
         </span>
             <span class="hiddenrellink">
-            sklearn.model_selection.cross_val_score
+            sklearn.model_selection.cross_val_predict
             </span>
         </a>
         </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.cross_validate<a class="headerlink" href="#sklearn-model-selection-cross-validate" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.model_selection.cross_validate">
-<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3fdddb68/sklearn/model_selection/_validation.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f2d66b80/sklearn/model_selection/_validation.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate metric(s) by cross-validation and also record fit/score times.</p>
 <p>Read more in the <a class="reference internal" href="../cross_validation.html#multimetric-cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -231,7 +231,7 @@ or a dict with names as keys and callables as values.</p>
 <p>NOTE that when using custom scorers, each scorer should return a single
 value. Metric functions returning a list/array of values can be wrapped
 into multiple scorers that return one value each.</p>
-<p>See <span class="xref std std-ref">multivalued_scorer_wrapping</span> for an example.</p>
+<p>See <a class="reference internal" href="../grid_search.html#multimetric-grid-search"><span class="std std-ref">Specifying multiple metrics for evaluation</span></a> for an example.</p>
 <p>If None, the estimator’s default scorer (if available) is used.</p>
 </div></blockquote>
 <p><strong>cv</strong> : int, cross-validation generator or an iterable, optional</p>
@@ -380,7 +380,7 @@ array([ 0.33…,  0.08…,  0.03…])</p>
       </a>
     </div>
     <div class="buttonNext">
-      <a href="sklearn.model_selection.cross_val_score.html">Next
+      <a href="sklearn.model_selection.cross_val_predict.html">Next
       </a>
     </div>
     

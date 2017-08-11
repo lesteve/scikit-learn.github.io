@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>sklearn.isotonic.isotonic_regression &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>sklearn.isotonic.isotonic_regression &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -36,8 +36,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="sklearn.isotonic.check_increasing" href="sklearn.isotonic.check_increasing.html" />
-    <link rel="prev" title="sklearn.isotonic.IsotonicRegression" href="sklearn.isotonic.IsotonicRegression.html" />
+    <link rel="next" title="sklearn.kernel_approximation.AdditiveChi2Sampler" href="sklearn.kernel_approximation.AdditiveChi2Sampler.html" />
+    <link rel="prev" title="sklearn.isotonic.check_increasing" href="sklearn.isotonic.check_increasing.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -88,9 +88,9 @@
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -125,14 +125,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="sklearn.isotonic.IsotonicRegression.html"
+        <a href="sklearn.isotonic.check_increasing.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         sklearn.isoto...
         </span>
             <span class="hiddenrellink">
-            sklearn.isotonic.IsotonicRegression
+            sklearn.isotonic.check_increasing
             </span>
         </a>
         </div>
@@ -140,14 +140,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="sklearn.isotonic.check_increasing.html"
+        <a href="sklearn.kernel_approximation.AdditiveChi2Sampler.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        sklearn.isoto...
+        sklearn.kerne...
         </span>
             <span class="hiddenrellink">
-            sklearn.isotonic.check_increasing
+            sklearn.kernel_approximation.AdditiveChi2Sampler
             </span>
         </a>
         </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.isotonic" title="sklearn.isotonic"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.isotonic</span></code></a>.isotonic_regression<a class="headerlink" href="#sklearn-isotonic-isotonic-regression" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.isotonic.isotonic_regression">
-<code class="descclassname">sklearn.isotonic.</code><code class="descname">isotonic_regression</code><span class="sig-paren">(</span><em>y</em>, <em>sample_weight=None</em>, <em>y_min=None</em>, <em>y_max=None</em>, <em>increasing=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3fdddb68/sklearn/isotonic.py#L78"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.isotonic.isotonic_regression" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.isotonic.</code><code class="descname">isotonic_regression</code><span class="sig-paren">(</span><em>y</em>, <em>sample_weight=None</em>, <em>y_min=None</em>, <em>y_max=None</em>, <em>increasing=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f2d66b80/sklearn/isotonic.py#L78"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.isotonic.isotonic_regression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solve the isotonic regression model:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">min</span> <span class="nb">sum</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
 
@@ -272,11 +272,11 @@ by Michael J. Best and Nilotpal Chakravarti, section 3.</p>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="sklearn.isotonic.IsotonicRegression.html">Previous
+      <a href="sklearn.isotonic.check_increasing.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="sklearn.isotonic.check_increasing.html">Next
+      <a href="sklearn.kernel_approximation.AdditiveChi2Sampler.html">Next
       </a>
     </div>
     

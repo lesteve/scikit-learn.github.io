@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.11. Ensemble methods &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>1.11. Ensemble methods &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -88,9 +88,9 @@
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -211,14 +211,14 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#votingclassifier">1.11.5. VotingClassifier</a><ul>
+<li><a class="reference internal" href="#voting-classifier">1.11.5. Voting Classifier</a><ul>
 <li><a class="reference internal" href="#majority-class-labels-majority-hard-voting">1.11.5.1. Majority Class Labels (Majority/Hard Voting)</a><ul>
-<li><a class="reference internal" href="#id24">1.11.5.1.1. Usage</a></li>
+<li><a class="reference internal" href="#id25">1.11.5.1.1. Usage</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#weighted-average-probabilities-soft-voting">1.11.5.2. Weighted Average Probabilities (Soft Voting)</a></li>
 <li><a class="reference internal" href="#using-the-votingclassifier-with-gridsearch">1.11.5.3. Using the <cite>VotingClassifier</cite> with <cite>GridSearch</cite></a><ul>
-<li><a class="reference internal" href="#id25">1.11.5.3.1. Usage</a></li>
+<li><a class="reference internal" href="#id26">1.11.5.3.1. Usage</a></li>
 </ul>
 </li>
 </ul>
@@ -500,13 +500,10 @@ amount of time (e.g., on large datasets).</p>
 </td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="gew2006" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[GEW2006]</td><td>P. Geurts, D. Ernst., and L. Wehenkel, “Extremely randomized
-trees”, Machine Learning, 63(1), 3-42, 2006.</td></tr>
-</tbody>
-</table>
+<ul class="simple">
+<li>P. Geurts, D. Ernst., and L. Wehenkel, “Extremely randomized
+trees”, Machine Learning, 63(1), 3-42, 2006.</li>
+</ul>
 </div>
 </div>
 <div class="section" id="feature-importance-evaluation">
@@ -1164,9 +1161,9 @@ The Annals of Statistics, Vol. 29, No. 5, 2001.</td></tr>
 </div>
 </div>
 </div>
-<div class="section" id="votingclassifier">
-<span id="voting-classifier"></span><h2>1.11.5. VotingClassifier<a class="headerlink" href="#votingclassifier" title="Permalink to this headline">¶</a></h2>
-<p>The idea behind the voting classifier implementation is to combine
+<div class="section" id="voting-classifier">
+<span id="id24"></span><h2>1.11.5. Voting Classifier<a class="headerlink" href="#voting-classifier" title="Permalink to this headline">¶</a></h2>
+<p>The idea behind the <code class="xref py py-class docutils literal"><span class="pre">VotingClassifier</span></code> is to combine
 conceptually different machine learning classifiers and use a majority vote
 or the average predicted probabilities (soft vote) to predict the class labels.
 Such a classifier can be useful for a set of equally well performing model
@@ -1191,8 +1188,8 @@ on the ascending sort order. E.g., in the following scenario</p>
 <li>classifier 2 -&gt; class 1</li>
 </ul>
 <p>the class label 1 will be assigned to the sample.</p>
-<div class="section" id="id24">
-<h4>1.11.5.1.1. Usage<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id25">
+<h4>1.11.5.1.1. Usage<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
 <p>The following example shows how to fit the majority rule classifier:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
@@ -1321,8 +1318,8 @@ to tune the hyperparameters of the individual estimators:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="id25">
-<h4>1.11.5.3.1. Usage<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id26">
+<h4>1.11.5.3.1. Usage<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
 <p>In order to predict the class labels based on the predicted
 class-probabilities (scikit-learn estimators in the VotingClassifier
 must support <code class="docutils literal"><span class="pre">predict_proba</span></code> method):</p>

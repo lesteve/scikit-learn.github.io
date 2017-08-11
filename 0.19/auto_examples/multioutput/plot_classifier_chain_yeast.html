@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Classifier Chain &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>Classifier Chain &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -88,9 +88,9 @@
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -196,13 +196,12 @@
   <div class="section" id="classifier-chain">
 <span id="sphx-glr-auto-examples-multioutput-plot-classifier-chain-yeast-py"></span><h1>Classifier Chain<a class="headerlink" href="#classifier-chain" title="Permalink to this headline">¶</a></h1>
 <p>Example of using classifier chain on a multilabel dataset.</p>
-<p>For this example we will use the <a href="#id1"><span class="problematic" id="id2">`yeast
-http://mldata.org/repository/data/viewslug/yeast/`_</span></a> dataset which
-contains 2417 datapoints each with 103 features and 14 possible labels. Each
-datapoint has at least one label. As a baseline we first train a logistic
-regression classifier for each of the 14 labels. To evaluate the performance
-of these classifiers we predict on a held-out test set and calculate the
-<a class="reference internal" href="../../modules/model_evaluation.html#jaccard-similarity-score"><span class="std std-ref">User Guide</span></a>.</p>
+<p>For this example we will use the <a class="reference external" href="http://mldata.org/repository/data/viewslug/yeast">yeast</a> dataset which contains
+2417 datapoints each with 103 features and 14 possible labels. Each
+data point has at least one label. As a baseline we first train a logistic
+regression classifier for each of the 14 labels. To evaluate the performance of
+these classifiers we predict on a held-out test set and calculate the
+<a class="reference internal" href="../../modules/model_evaluation.html#jaccard-similarity-score"><span class="std std-ref">jaccard similarity score</span></a>.</p>
 <p>Next we create 10 classifier chains. Each classifier chain contains a
 logistic regression model for each of the 14 labels. The models in each
 chain are ordered randomly. In addition to the 103 features in the dataset,
@@ -268,7 +267,7 @@ with randomly ordered chains).</p>
 <span class="n">model_scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">ovr_jaccard_score</span><span class="p">]</span> <span class="o">+</span> <span class="n">chain_jaccard_scores</span>
 <span class="n">model_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ensemble_jaccard_score</span><span class="p">)</span>
 
-<span class="n">model_names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Independent Models&#39;</span><span class="p">,</span>
+<span class="n">model_names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Independent&#39;</span><span class="p">,</span>
                <span class="s1">&#39;Chain 1&#39;</span><span class="p">,</span>
                <span class="s1">&#39;Chain 2&#39;</span><span class="p">,</span>
                <span class="s1">&#39;Chain 3&#39;</span><span class="p">,</span>
@@ -279,27 +278,28 @@ with randomly ordered chains).</p>
                <span class="s1">&#39;Chain 8&#39;</span><span class="p">,</span>
                <span class="s1">&#39;Chain 9&#39;</span><span class="p">,</span>
                <span class="s1">&#39;Chain 10&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;Ensemble Average&#39;</span><span class="p">)</span>
+               <span class="s1">&#39;Ensemble&#39;</span><span class="p">)</span>
 
-<span class="n">y_pos</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">model_names</span><span class="p">))</span>
-<span class="n">y_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">y_pos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">x_pos</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">model_names</span><span class="p">))</span>
 
 <span class="c1"># Plot the Jaccard similarity scores for the independent model, each of the</span>
 <span class="c1"># chains, and the ensemble (note that the vertical axis on this plot does</span>
 <span class="c1"># not begin at 0).</span>
 
-<span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Classifier Chain Ensemble&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks" title="View documentation for matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">(</span><span class="n">y_pos</span><span class="p">,</span> <span class="n">model_names</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Jaccard Similarity Score&#39;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim" title="View documentation for matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">model_scores</span><span class="p">)</span> <span class="o">*</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">model_scores</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">])</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots" title="View documentation for matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Classifier Chain Ensemble Performance Comparison&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_pos</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">model_names</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Jaccard Similarity Score&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">model_scores</span><span class="p">)</span> <span class="o">*</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">model_scores</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">])</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">chain_jaccard_scores</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar" title="View documentation for matplotlib.pyplot.bar"><span class="n">plt</span><span class="o">.</span><span class="n">bar</span></a><span class="p">(</span><span class="n">y_pos</span><span class="p">,</span> <span class="n">model_scores</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_pos</span><span class="p">,</span> <span class="n">model_scores</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  4.776 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.726 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_classifier_chain_yeast.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_classifier_chain_yeast.py</span></code></a></div>

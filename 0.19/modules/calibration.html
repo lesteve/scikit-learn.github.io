@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.16. Probability calibration &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>1.16. Probability calibration &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -88,9 +88,9 @@
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -224,7 +224,7 @@ the case in this dataset which contains 2 redundant features.</li>
 <li><a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal"><span class="pre">RandomForestClassifier</span></code></a> shows the opposite behavior: the histograms
 show peaks at approximately 0.2 and 0.9 probability, while probabilities close to
 0 or 1 are very rare. An explanation for this is given by Niculescu-Mizil
-and Caruana [4]: “Methods such as bagging and random forests that average
+and Caruana <a class="footnote-reference" href="#id4" id="id1">[4]</a>: “Methods such as bagging and random forests that average
 predictions from a base set of models can have difficulty making predictions
 near 0 and 1 because variance in the underlying base models will bias
 predictions that should be near zero or one away from these values. Because
@@ -237,14 +237,14 @@ than 0 for this case, thus moving the average prediction of the bagged
 ensemble away from 0. We observe this effect most strongly with random
 forests because the base-level trees trained with random forests have
 relatively high variance due to feature subseting.” As a result, the
-calibration curve also referred to as the reliability diagram (Wilks 1995[5]) shows a
+calibration curve also referred to as the reliability diagram (Wilks 1995 <a class="footnote-reference" href="#id5" id="id2">[5]</a>) shows a
 characteristic sigmoid shape, indicating that the classifier could trust its
 “intuition” more and return probabilties closer to 0 or 1 typically.</li>
 </ul>
 <ul class="simple">
 <li>Linear Support Vector Classification (<a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a>) shows an even more sigmoid curve
 as the RandomForestClassifier, which is typical for maximum-margin methods
-(compare Niculescu-Mizil and Caruana [4]), which focus on hard samples
+(compare Niculescu-Mizil and Caruana <a class="footnote-reference" href="#id4" id="id3">[4]</a>), which focus on hard samples
 that are close to the decision boundary (the support vectors).</li>
 </ul>
 <p>Two approaches for performing calibration of probabilistic predictions are
@@ -346,40 +346,27 @@ have been to increase the number of base estimators which would have resulted in
 a similar decrease in log-loss.</p>
 <div class="topic">
 <p class="topic-title first">References:</p>
-<table class="docutils footnote" frame="void" id="id1" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[1]</td><td>Obtaining calibrated probability estimates from decision trees
-and naive Bayesian classifiers, B. Zadrozny &amp; C. Elkan, ICML 2001</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[2]</td><td>Transforming Classifier Scores into Accurate Multiclass
-Probability Estimates, B. Zadrozny &amp; C. Elkan, (KDD 2002)</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[3]</td><td>Probabilistic Outputs for Support Vector Machines and Comparisons to
-Regularized Likelihood Methods, J. Platt, (1999)</td></tr>
-</tbody>
-</table>
+<ul class="simple">
+<li>Obtaining calibrated probability estimates from decision trees
+and naive Bayesian classifiers, B. Zadrozny &amp; C. Elkan, ICML 2001</li>
+<li>Transforming Classifier Scores into Accurate Multiclass
+Probability Estimates, B. Zadrozny &amp; C. Elkan, (KDD 2002)</li>
+<li>Probabilistic Outputs for Support Vector Machines and Comparisons to
+Regularized Likelihood Methods, J. Platt, (1999)</li>
+</ul>
 <table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[4]</td><td>Predicting Good Probabilities with Supervised Learning,
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> Predicting Good Probabilities with Supervised Learning,
 A. Niculescu-Mizil &amp; R. Caruana, ICML 2005</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[5]</td><td>On the combination of forecast probabilities for
-consecutive precipitation periods. Wea. Forecasting, 5, 640–
-650., Wilks, D. S., 1990a</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[5]</a></td><td>On the combination of forecast probabilities for
+consecutive precipitation periods. Wea. Forecasting, 5, 640–650.,
+Wilks, D. S., 1990a</td></tr>
 </tbody>
 </table>
 </div>

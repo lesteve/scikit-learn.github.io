@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.12. Multiclass and multilabel algorithms &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>1.12. Multiclass and multilabel algorithms &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -88,9 +88,9 @@
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -187,7 +187,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#error-correcting-output-codes">1.12.4. Error-Correcting Output-Codes</a><ul>
-<li><a class="reference internal" href="#id4">1.12.4.1. Multiclass learning</a></li>
+<li><a class="reference internal" href="#id3">1.12.4.1. Multiclass learning</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multioutput-regression">1.12.5. Multioutput regression</a></li>
@@ -224,8 +224,7 @@ unless you want to experiment with different multiclass strategies.</p>
 <code class="docutils literal"><span class="pre">multiclass</span></code> and <code class="docutils literal"><span class="pre">multilabel</span></code> classification problems
 by decomposing such problems into binary classification problems. Multitarget
 regression is also supported.</p>
-<blockquote>
-<div><ul>
+<ul>
 <li><p class="first"><strong>Multiclass classification</strong> means a classification task with more than
 two classes; e.g., classify a set of images of fruits which may be oranges,
 apples, or pears. Multiclass classification makes the assumption that each
@@ -262,7 +261,6 @@ classification task with different model formulations. For
 more information, see the relevant estimator documentation.</p>
 </li>
 </ul>
-</div></blockquote>
 <p>All scikit-learn classifiers are capable of multiclass classification,
 but the meta-estimators offered by <a class="reference internal" href="classes.html#module-sklearn.multiclass" title="sklearn.multiclass"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.multiclass</span></code></a>
 permit changing the way they handle more than two classes
@@ -271,23 +269,67 @@ because this may have an effect on classifier performance
 <p>Below is a summary of the classifiers supported by scikit-learn
 grouped by strategy; you don’t need the meta-estimators in this class
 if you’re using one of these, unless you want custom multiclass behavior:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Inherently multiclass: <a class="reference internal" href="naive_bayes.html#naive-bayes"><span class="std std-ref">Naive Bayes</span></a>,
-<a class="reference internal" href="lda_qda.html#lda-qda"><span class="std std-ref">LDA and QDA</span></a>,
-<a class="reference internal" href="tree.html#tree"><span class="std std-ref">Decision Trees</span></a>, <a class="reference internal" href="ensemble.html#forest"><span class="std std-ref">Random Forests</span></a>,
-<a class="reference internal" href="neighbors.html#neighbors"><span class="std std-ref">Nearest Neighbors</span></a>,
-setting <code class="docutils literal"><span class="pre">multi_class='multinomial'</span></code> in
-<a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegression</span></code></a>.</li>
-<li>Support multilabel: <a class="reference internal" href="tree.html#tree"><span class="std std-ref">Decision Trees</span></a>,
-<a class="reference internal" href="ensemble.html#forest"><span class="std std-ref">Random Forests</span></a>, <a class="reference internal" href="neighbors.html#neighbors"><span class="std std-ref">Nearest Neighbors</span></a>.</li>
-<li>One-Vs-One: <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></code></a>.</li>
-<li>One-Vs-All: all linear models except <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></code></a>.</li>
+<ul class="simple">
+<li><strong>Inherently multiclass:</strong><ul>
+<li><a class="reference internal" href="generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB" title="sklearn.naive_bayes.BernoulliNB"><code class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.BernoulliNB</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.tree.DecisionTreeClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.tree.ExtraTreeClassifier.html#sklearn.tree.ExtraTreeClassifier" title="sklearn.tree.ExtraTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.tree.ExtraTreeClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.ExtraTreesClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.GaussianNB</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier" title="sklearn.neighbors.KNeighborsClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.KNeighborsClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.semi_supervised.LabelPropagation.html#sklearn.semi_supervised.LabelPropagation" title="sklearn.semi_supervised.LabelPropagation"><code class="xref py py-class docutils literal"><span class="pre">sklearn.semi_supervised.LabelPropagation</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.semi_supervised.LabelSpreading.html#sklearn.semi_supervised.LabelSpreading" title="sklearn.semi_supervised.LabelSpreading"><code class="xref py py-class docutils literal"><span class="pre">sklearn.semi_supervised.LabelSpreading</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal"><span class="pre">sklearn.discriminant_analysis.LinearDiscriminantAnalysis</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.LinearSVC</span></code></a> (setting multi_class=”crammer_singer”)</li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegression</span></code></a> (setting multi_class=”multinomial”)</li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegressionCV.html#sklearn.linear_model.LogisticRegressionCV" title="sklearn.linear_model.LogisticRegressionCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegressionCV</span></code></a> (setting multi_class=”multinomial”)</li>
+<li><a class="reference internal" href="generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier" title="sklearn.neural_network.MLPClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neural_network.MLPClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neighbors.NearestCentroid.html#sklearn.neighbors.NearestCentroid" title="sklearn.neighbors.NearestCentroid"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.NearestCentroid</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis" title="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis"><code class="xref py py-class docutils literal"><span class="pre">sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neighbors.RadiusNeighborsClassifier.html#sklearn.neighbors.RadiusNeighborsClassifier" title="sklearn.neighbors.RadiusNeighborsClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.RadiusNeighborsClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.RandomForestClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.RidgeClassifier.html#sklearn.linear_model.RidgeClassifier" title="sklearn.linear_model.RidgeClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.RidgeClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.RidgeClassifierCV.html#sklearn.linear_model.RidgeClassifierCV" title="sklearn.linear_model.RidgeClassifierCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.RidgeClassifierCV</span></code></a></li>
 </ul>
-</div></blockquote>
-<p>Some estimators also support multioutput-multiclass classification
-tasks <a class="reference internal" href="tree.html#tree"><span class="std std-ref">Decision Trees</span></a>, <a class="reference internal" href="ensemble.html#forest"><span class="std std-ref">Random Forests</span></a>,
-<a class="reference internal" href="neighbors.html#neighbors"><span class="std std-ref">Nearest Neighbors</span></a>.</p>
+</li>
+<li><strong>Multiclass as One-Vs-One:</strong><ul>
+<li><a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.NuSVC</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></code></a>.</li>
+<li><a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier" title="sklearn.gaussian_process.GaussianProcessClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.gaussian_process.GaussianProcessClassifier</span></code></a> (setting multi_class = “one_vs_one”)</li>
+</ul>
+</li>
+<li><strong>Multiclass as One-Vs-All:</strong><ul>
+<li><a class="reference internal" href="generated/sklearn.ensemble.GradientBoostingClassifier.html#sklearn.ensemble.GradientBoostingClassifier" title="sklearn.ensemble.GradientBoostingClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.GradientBoostingClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier" title="sklearn.gaussian_process.GaussianProcessClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.gaussian_process.GaussianProcessClassifier</span></code></a> (setting multi_class = “one_vs_rest”)</li>
+<li><a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.LinearSVC</span></code></a> (setting multi_class=”ovr”)</li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegression</span></code></a> (setting multi_class=”ovr”)</li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegressionCV.html#sklearn.linear_model.LogisticRegressionCV" title="sklearn.linear_model.LogisticRegressionCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegressionCV</span></code></a> (setting multi_class=”ovr”)</li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron" title="sklearn.linear_model.Perceptron"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Perceptron</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier" title="sklearn.linear_model.PassiveAggressiveClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.PassiveAggressiveClassifier</span></code></a></li>
+</ul>
+</li>
+<li><strong>Support multilabel:</strong><ul>
+<li><a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.tree.DecisionTreeClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.tree.ExtraTreeClassifier.html#sklearn.tree.ExtraTreeClassifier" title="sklearn.tree.ExtraTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.tree.ExtraTreeClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.ExtraTreesClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier" title="sklearn.neighbors.KNeighborsClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.KNeighborsClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier" title="sklearn.neural_network.MLPClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neural_network.MLPClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neighbors.RadiusNeighborsClassifier.html#sklearn.neighbors.RadiusNeighborsClassifier" title="sklearn.neighbors.RadiusNeighborsClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.RadiusNeighborsClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.RandomForestClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.linear_model.RidgeClassifierCV.html#sklearn.linear_model.RidgeClassifierCV" title="sklearn.linear_model.RidgeClassifierCV"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.RidgeClassifierCV</span></code></a></li>
+</ul>
+</li>
+<li><strong>Support multiclass-multioutput:</strong><ul>
+<li><a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.tree.DecisionTreeClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.tree.ExtraTreeClassifier.html#sklearn.tree.ExtraTreeClassifier" title="sklearn.tree.ExtraTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.tree.ExtraTreeClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.ExtraTreesClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier" title="sklearn.neighbors.KNeighborsClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.KNeighborsClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.neighbors.RadiusNeighborsClassifier.html#sklearn.neighbors.RadiusNeighborsClassifier" title="sklearn.neighbors.RadiusNeighborsClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.RadiusNeighborsClassifier</span></code></a></li>
+<li><a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.RandomForestClassifier</span></code></a></li>
+</ul>
+</li>
+</ul>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">At present, no metric in <a class="reference internal" href="classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>
@@ -397,13 +439,10 @@ dataset is used <code class="docutils literal"><span class="pre">n_classes</span
 </div>
 <div class="topic">
 <p class="topic-title first">References:</p>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[1]</td><td>“Pattern Recognition and Machine Learning. Springer”,
-Christopher M. Bishop, page 183, (First Edition)</td></tr>
-</tbody>
-</table>
+<ul class="simple">
+<li>“Pattern Recognition and Machine Learning. Springer”,
+Christopher M. Bishop, page 183, (First Edition)</li>
+</ul>
 </div>
 </div>
 </div>
@@ -418,7 +457,7 @@ code book. The code size is the dimensionality of the aforementioned space.
 Intuitively, each class should be represented by a code as unique as
 possible and a good code book should be designed to optimize classification
 accuracy. In this implementation, we simply use a randomly-generated code
-book as advocated in <a class="footnote-reference" href="#id6" id="id3">[3]</a> although more elaborate methods may be added in the
+book as advocated in <a class="footnote-reference" href="#id4" id="id2">[3]</a> although more elaborate methods may be added in the
 future.</p>
 <p>At fitting time, one binary classifier per bit in the code book is fitted.
 At prediction time, the classifiers are used to project new points in the
@@ -436,8 +475,8 @@ the mistakes made by other classifiers, hence the name “error-correcting”.
 In practice, however, this may not happen as classifier mistakes will
 typically be correlated. The error-correcting output codes have a similar
 effect to bagging.</p>
-<div class="section" id="id4">
-<h3>1.12.4.1. Multiclass learning<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>1.12.4.1. Multiclass learning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Below is an example of multiclass learning using Output-Codes:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="k">import</span> <span class="n">OutputCodeClassifier</span>
@@ -458,32 +497,26 @@ effect to bagging.</p>
 </div>
 <div class="topic">
 <p class="topic-title first">References:</p>
-<table class="docutils footnote" frame="void" id="id5" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[2]</td><td>“Solving multiclass learning problems via error-correcting output codes”,
+<ul class="simple">
+<li>“Solving multiclass learning problems via error-correcting output codes”,
 Dietterich T., Bakiri G.,
 Journal of Artificial Intelligence Research 2,
-1995.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id6" rules="none">
+1995.</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>“The error coding method and PICTs”,
+<tr><td class="label"><a class="fn-backref" href="#id2">[3]</a></td><td>“The error coding method and PICTs”,
 James G., Hastie T.,
 Journal of Computational and Graphical statistics 7,
 1998.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id7" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[4]</td><td>“The Elements of Statistical Learning”,
+<ul class="simple">
+<li>“The Elements of Statistical Learning”,
 Hastie T., Tibshirani R., Friedman J., page 606 (second-edition)
-2008.</td></tr>
-</tbody>
-</table>
+2008.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -556,9 +589,8 @@ of reponses (y1,y2,y3…,yn).</p>
 <div class="section" id="classifier-chain">
 <h2>1.12.7. Classifier Chain<a class="headerlink" href="#classifier-chain" title="Permalink to this headline">¶</a></h2>
 <p>Classifier chains (see <code class="xref py py-class docutils literal"><span class="pre">ClassifierChain</span></code>) are a way of combining a
-number of binary classifiers into a single multi-label model that is capable</p>
-<blockquote>
-<div>of exploiting correlations among targets.</div></blockquote>
+number of binary classifiers into a single multi-label model that is capable
+of exploiting correlations among targets.</p>
 <p>For a multi-label classification problem with N classes, N binary
 classifiers are assigned an integer between 0 and N-1. These integers
 define the order of models in the chain. Each classifier is then fit on the
@@ -573,6 +605,13 @@ has features indicating the presence of all of the other labels. In general
 one does not know the optimal ordering of the models in the chain so
 typically many randomly ordered chains are fit and their predictions are
 averaged together.</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<dl class="docutils">
+<dt>Jesse Read, Bernhard Pfahringer, Geoff Holmes, Eibe Frank,</dt>
+<dd>“Classifier Chains for Multi-label Classification”, 2009.</dd>
+</dl>
+</div>
 </div>
 </div>
 

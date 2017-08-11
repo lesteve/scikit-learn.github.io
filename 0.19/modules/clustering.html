@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>2.3. Clustering &#8212; scikit-learn 0.19.dev0 documentation</title>
+    <title>2.3. Clustering &#8212; scikit-learn 0.19.0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.dev0',
+        VERSION:     '0.19.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -88,9 +88,9 @@
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
+                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
                 <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
 				<li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.dev0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -516,7 +516,9 @@ is given.</p>
 <p>Affinity Propagation can be interesting as it chooses the number of
 clusters based on the data provided. For this purpose, the two important
 parameters are the <em>preference</em>, which controls how many exemplars are
-used, and the <em>damping factor</em>.</p>
+used, and the <em>damping factor</em> which damps the responsibility and
+availability messages to avoid numerical oscillations when updating these
+messages.</p>
 <p>The main drawback of Affinity Propagation is its complexity. The
 algorithm has a time complexity of the order <img class="math" src="../_images/math/17245ed0c52b27603fc90accab918af090e79b39.png" alt="O(N^2 T)"/>, where <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/>
 is the number of samples and <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/> is the number of iterations until
@@ -555,7 +557,14 @@ to be the exemplar of sample <img class="math" src="../_images/math/df0deb143e5a
 <div class="math">
 <p><img src="../_images/math/a1de3bf17f7d12320cc8973c0e1b4eb257475344.png" alt="a(i, k) \leftarrow min [0, r(k, k) + \sum_{i'~s.t.~i' \notin \{i, k\}}{r(i', k)}]"/></p>
 </div><p>To begin with, all values for <img class="math" src="../_images/math/eaa6ad49a7f78fe5a13b486690163bf2dc7e3e60.png" alt="r"/> and <img class="math" src="../_images/math/bd9d9c7512c898e0a254a0882184197bc1bd9c9f.png" alt="a"/> are set to zero,
-and the calculation of each iterates until convergence.</p>
+and the calculation of each iterates until convergence.
+As discussed above, in order to avoid numerical oscillations when updating the
+messages, the damping factor <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> is introduced to iteration process:</p>
+<div class="math">
+<p><img src="../_images/math/2e5d6b08818284ef89b5e9e1dc43752ff9340b06.png" alt="r_{t+1}(i, k) = \lambda\cdot r_{t}(i, k) + (1-\lambda)\cdot r_{t+1}(i, k)"/></p>
+</div><div class="math">
+<p><img src="../_images/math/73bcd59429c3fa5a6678e7ef9fce687d9e1ec207.png" alt="a_{t+1}(i, k) = \lambda\cdot a_{t}(i, k) + (1-\lambda)\cdot a_{t+1}(i, k)"/></p>
+</div><p>where <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> indicates the iteration times.</p>
 </div>
 <div class="section" id="mean-shift">
 <span id="id4"></span><h2>2.3.4. Mean Shift<a class="headerlink" href="#mean-shift" title="Permalink to this headline">¶</a></h2>
@@ -1392,14 +1401,11 @@ mean of homogeneity and completeness</strong>:</p>
 <p><img src="../_images/math/75386d3303e203cc2e0a4176e7139bac314e1ac2.png" alt="v = 2 \cdot \frac{h \cdot c}{h + c}"/></p>
 </div><div class="topic">
 <p class="topic-title first">References</p>
-<table class="docutils citation" frame="void" id="rh2007" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[RH2007]</td><td><a class="reference external" href="http://aclweb.org/anthology/D/D07/D07-1043.pdf">V-Measure: A conditional entropy-based external cluster evaluation
+<ul class="simple">
+<li><a class="reference external" href="http://aclweb.org/anthology/D/D07/D07-1043.pdf">V-Measure: A conditional entropy-based external cluster evaluation
 measure</a>
-Andrew Rosenberg and Julia Hirschberg, 2007</td></tr>
-</tbody>
-</table>
+Andrew Rosenberg and Julia Hirschberg, 2007</li>
+</ul>
 <table class="docutils citation" frame="void" id="b2011" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
