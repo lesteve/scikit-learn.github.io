@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.cross_validate<a class="headerlink" href="#sklearn-model-selection-cross-validate" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.model_selection.cross_validate">
-<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/88f529ef/sklearn/model_selection/_validation.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fbca098c/sklearn/model_selection/_validation.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate metric(s) by cross-validation and also record fit/score times.</p>
 <p>Read more in the <a class="reference internal" href="../cross_validation.html#multimetric-cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -333,7 +333,7 @@ included even if <code class="docutils literal"><span class="pre">return_train_s
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_validate</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.scorer</span> <span class="k">import</span> <span class="n">make_scorer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">confusion_matrix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">LinearSVC</span>
@@ -343,20 +343,24 @@ included even if <code class="docutils literal"><span class="pre">return_train_s
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lasso</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">()</span>
 </pre></div>
 </div>
-<p># single metric evaluation using cross_validate
-&gt;&gt;&gt; cv_results = cross_validate(lasso, X, y, return_train_score=False)
-&gt;&gt;&gt; sorted(cv_results.keys())                         # doctest: +ELLIPSIS
-[‘fit_time’, ‘score_time’, ‘test_score’]
-&gt;&gt;&gt; cv_results[‘test_score’]    # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-array([ 0.33…,  0.08…,  0.03…])</p>
-<p># Multiple metric evaluation using cross_validate
-# (Please refer the <code class="docutils literal"><span class="pre">scoring</span></code> parameter doc for more information)
-&gt;&gt;&gt; scores = cross_validate(lasso, X, y,
-…                         scoring=(‘r2’, ‘neg_mean_squared_error’))
-&gt;&gt;&gt; print(scores[‘test_neg_mean_squared_error’])      # doctest: +ELLIPSIS
-[-3635.5… -3573.3… -6114.7…]
-&gt;&gt;&gt; print(scores[‘train_r2’])                         # doctest: +ELLIPSIS
-[ 0.28…  0.39…  0.22…]</p>
+<p>Single metric evaluation using <code class="docutils literal"><span class="pre">cross_validate</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">lasso</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">cv_results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>                         
+<span class="go">[&#39;fit_time&#39;, &#39;score_time&#39;, &#39;test_score&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv_results</span><span class="p">[</span><span class="s1">&#39;test_score&#39;</span><span class="p">]</span>    
+<span class="go">array([ 0.33...,  0.08...,  0.03...])</span>
+</pre></div>
+</div>
+<p>Multiple metric evaluation using <code class="docutils literal"><span class="pre">cross_validate</span></code>
+(please refer the <code class="docutils literal"><span class="pre">scoring</span></code> parameter doc for more information)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">lasso</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">scoring</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;test_neg_mean_squared_error&#39;</span><span class="p">])</span>      
+<span class="go">[-3635.5... -3573.3... -6114.7...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;train_r2&#39;</span><span class="p">])</span>                         
+<span class="go">[ 0.28...  0.39...  0.22...]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <div class="clearer"></div></div>
