@@ -178,8 +178,9 @@
 <li><a class="reference internal" href="#">1.9. Naive Bayes</a><ul>
 <li><a class="reference internal" href="#gaussian-naive-bayes">1.9.1. Gaussian Naive Bayes</a></li>
 <li><a class="reference internal" href="#multinomial-naive-bayes">1.9.2. Multinomial Naive Bayes</a></li>
-<li><a class="reference internal" href="#bernoulli-naive-bayes">1.9.3. Bernoulli Naive Bayes</a></li>
-<li><a class="reference internal" href="#out-of-core-naive-bayes-model-fitting">1.9.4. Out-of-core naive Bayes model fitting</a></li>
+<li><a class="reference internal" href="#complement-naive-bayes">1.9.3. Complement Naive Bayes</a></li>
+<li><a class="reference internal" href="#bernoulli-naive-bayes">1.9.4. Bernoulli Naive Bayes</a></li>
+<li><a class="reference internal" href="#out-of-core-naive-bayes-model-fitting">1.9.5. Out-of-core naive Bayes model fitting</a></li>
 </ul>
 </li>
 </ul>
@@ -298,8 +299,44 @@ in further computations.
 Setting <img class="math" src="../_images/math/42839bc86a7e883dcb0a636add188e5c920bb513.png" alt="\alpha = 1"/> is called Laplace smoothing,
 while <img class="math" src="../_images/math/f7c5135a83ac112fff6f442a31cda3a7944b7549.png" alt="\alpha &lt; 1"/> is called Lidstone smoothing.</p>
 </div>
+<div class="section" id="complement-naive-bayes">
+<span id="id4"></span><h2>1.9.3. Complement Naive Bayes<a class="headerlink" href="#complement-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.naive_bayes.ComplementNB.html#sklearn.naive_bayes.ComplementNB" title="sklearn.naive_bayes.ComplementNB"><code class="xref py py-class docutils literal"><span class="pre">ComplementNB</span></code></a> implements the complement naive Bayes (CNB) algorithm.
+CNB is an adaptation of the standard multinomial naive Bayes (MNB) algorithm
+that is particularly suited for imbalanced data sets. Specifically, CNB uses
+statistics from the <em>complement</em> of each class to compute the model’s weights.
+The inventors of CNB show empirically that the parameter estimates for CNB are
+more stable than those for MNB. Further, CNB regularly outperforms MNB (often
+by a considerable margin) on text classification tasks. The procedure for
+calculating the weights is as follows:</p>
+<div class="math">
+<p><img src="../_images/math/505d180de11ed14aeb540f7f8b304e0ab5ac25c8.png" alt="\hat{\theta}_{ci} = \frac{\alpha_i + \sum_{j:y_j \neq c} d_{ij}}
+                         {\alpha + \sum_{j:y_j \neq c} \sum_{k} d_{kj}}
+
+w_{ci} = \log \hat{\theta}_{ci}
+
+w_{ci} = \frac{w_{ci}}{\sum_{j} w_{cj}}"/></p>
+</div><p>where the summations are over all documents <img class="math" src="../_images/math/6b21e0b0899a0d2879d3b8019087fa630bab4ea2.png" alt="j"/> not in class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/406a8370de4ff1f761deac919314201f000f8a46.png" alt="d_{ij}"/> is either the count or tf-idf value of term <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> in document
+<img class="math" src="../_images/math/6b21e0b0899a0d2879d3b8019087fa630bab4ea2.png" alt="j"/>, <img class="math" src="../_images/math/4f034deb7443b8ce1957aae3b736d391516b2461.png" alt="\alpha_i"/> is a smoothing hyperparameter like that found in
+MNB, and <img class="math" src="../_images/math/d9e7b972eed7b0e6902a9fa95410eb7acb3dc1d7.png" alt="\alpha = \sum_{i} \alpha_i"/>. The second normalization addresses
+the tendency for longer documents to dominate parameter estimates in MNB. The
+classification rule is:</p>
+<div class="math">
+<p><img src="../_images/math/a0371343b44db5f3439fee42ab2f495d18fd5e0b.png" alt="\hat{c} = \arg\min_c \sum_{i} t_i w_{ci}"/></p>
+</div><p>i.e., a document is assigned to the class that is the <em>poorest</em> complement
+match.</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Rennie, J. D., Shih, L., Teevan, J., &amp; Karger, D. R. (2003).
+<a class="reference external" href="http://people.csail.mit.edu/jrennie/papers/icml03-nb.pdf">Tackling the poor assumptions of naive bayes text classifiers.</a>
+In ICML (Vol. 3, pp. 616-623).</li>
+</ul>
+</div>
+</div>
 <div class="section" id="bernoulli-naive-bayes">
-<span id="id4"></span><h2>1.9.3. Bernoulli Naive Bayes<a class="headerlink" href="#bernoulli-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>1.9.4. Bernoulli Naive Bayes<a class="headerlink" href="#bernoulli-naive-bayes" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB" title="sklearn.naive_bayes.BernoulliNB"><code class="xref py py-class docutils literal"><span class="pre">BernoulliNB</span></code></a> implements the naive Bayes training and classification
 algorithms for data that is distributed according to multivariate Bernoulli
 distributions; i.e., there may be multiple features but each one is assumed
@@ -333,7 +370,7 @@ Proc. AAAI/ICML-98 Workshop on Learning for Text Categorization, pp. 41-48.</li>
 </div>
 </div>
 <div class="section" id="out-of-core-naive-bayes-model-fitting">
-<h2>1.9.4. Out-of-core naive Bayes model fitting<a class="headerlink" href="#out-of-core-naive-bayes-model-fitting" title="Permalink to this headline">¶</a></h2>
+<h2>1.9.5. Out-of-core naive Bayes model fitting<a class="headerlink" href="#out-of-core-naive-bayes-model-fitting" title="Permalink to this headline">¶</a></h2>
 <p>Naive Bayes models can be used to tackle large scale classification problems
 for which the full training set might not fit in memory. To handle this case,
 <a class="reference internal" href="generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" title="sklearn.naive_bayes.MultinomialNB"><code class="xref py py-class docutils literal"><span class="pre">MultinomialNB</span></code></a>, <a class="reference internal" href="generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB" title="sklearn.naive_bayes.BernoulliNB"><code class="xref py py-class docutils literal"><span class="pre">BernoulliNB</span></code></a>, and <a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">GaussianNB</span></code></a>
