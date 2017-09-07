@@ -423,13 +423,12 @@ for SVs of class 2</td>
 </div>
 <div class="section" id="scores-and-probabilities">
 <span id="scores-probabilities"></span><h3>1.4.1.2. Scores and probabilities<a class="headerlink" href="#scores-and-probabilities" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> method <code class="docutils literal"><span class="pre">decision_function</span></code> gives per-class scores
-for each sample (or a single score per sample in the binary case).
-When the constructor option <code class="docutils literal"><span class="pre">probability</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code>,
-class membership probability estimates
-(from the methods <code class="docutils literal"><span class="pre">predict_proba</span></code> and <code class="docutils literal"><span class="pre">predict_log_proba</span></code>) are enabled.
-In the binary case, the probabilities are calibrated using Platt scaling:
-logistic regression on the SVM’s scores,
+<p>The <code class="docutils literal"><span class="pre">decision_function</span></code> method of <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> and <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a> gives
+per-class scores for each sample (or a single score per sample in the binary
+case). When the constructor option <code class="docutils literal"><span class="pre">probability</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code>,
+class membership probability estimates (from the methods <code class="docutils literal"><span class="pre">predict_proba</span></code> and
+<code class="docutils literal"><span class="pre">predict_log_proba</span></code>) are enabled. In the binary case, the probabilities are
+calibrated using Platt scaling: logistic regression on the SVM’s scores,
 fit by an additional cross-validation on the training data.
 In the multiclass case, this is extended as per Wu et al. (2004).</p>
 <p>Needless to say, the cross-validation involved in Platt scaling
@@ -451,8 +450,7 @@ and use <code class="docutils literal"><span class="pre">decision_function</span
 <a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/svmprob/svmprob.pdf">“Probability estimates for multi-class classification by pairwise coupling”</a>,
 JMLR 5:975-1005, 2004.</li>
 <li>Platt
-<cite>“Probabilistic outputs for SVMs and comparisons to regularized likelihood methods”
-&lt;http://www.cs.colorado.edu/~mozer/Teaching/syllabi/6622/papers/Platt1999.pdf&gt;</cite>.</li>
+<a class="reference external" href="http://www.cs.colorado.edu/~mozer/Teaching/syllabi/6622/papers/Platt1999.pdf">“Probabilistic outputs for SVMs and comparisons to regularized likelihood methods”</a>.</li>
 </ul>
 </div>
 </div>
@@ -581,7 +579,7 @@ suggest to use the <a class="reference internal" href="generated/sklearn.linear_
 function can be configured to be almost the same as the <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a>
 model.</p>
 </li>
-<li><p class="first"><strong>Kernel cache size</strong>: For <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal"><span class="pre">SVR</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">nuSVC</span></code> and
+<li><p class="first"><strong>Kernel cache size</strong>: For <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal"><span class="pre">SVR</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a> and
 <a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal"><span class="pre">NuSVR</span></code></a>, the size of the kernel cache has a strong impact on run
 times for larger problems.  If you have enough RAM available, it is
 recommended to set <code class="docutils literal"><span class="pre">cache_size</span></code> to a higher value than the default of
@@ -605,10 +603,23 @@ approximates the fraction of training errors and support vectors.</p>
 positive and few negative), set <code class="docutils literal"><span class="pre">class_weight='balanced'</span></code> and/or try
 different penalty parameters <code class="docutils literal"><span class="pre">C</span></code>.</p>
 </li>
-<li><p class="first">The underlying <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> implementation uses a random
-number generator to select features when fitting the model. It is
-thus not uncommon, to have slightly different results for the same
-input data. If that happens, try with a smaller tol parameter.</p>
+<li><p class="first"><strong>Randomness of the underlying implementations</strong>: The underlying
+implementations of <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> and <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a> use a random number
+generator only to shuffle the data for probability estimation (when
+<code class="docutils literal"><span class="pre">probability</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code>). This randomness can be controlled
+with the <code class="docutils literal"><span class="pre">random_state</span></code> parameter. If <code class="docutils literal"><span class="pre">probability</span></code> is set to <code class="docutils literal"><span class="pre">False</span></code>
+these estimators are not random and <code class="docutils literal"><span class="pre">random_state</span></code> has no effect on the
+results. The underlying <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">OneClassSVM</span></code></a> implementation is similar to
+the ones of <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">SVC</span></code></a> and <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal"><span class="pre">NuSVC</span></code></a>. As no probability estimation
+is provided for <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal"><span class="pre">OneClassSVM</span></code></a>, it is not random.</p>
+<p>The underlying <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> implementation uses a random number
+generator to select features when fitting the model with a dual coordinate
+descent (i.e when <code class="docutils literal"><span class="pre">dual</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code>). It is thus not uncommon,
+to have slightly different results for the same input data. If that
+happens, try with a smaller tol parameter. This randomness can also be
+controlled with the <code class="docutils literal"><span class="pre">random_state</span></code> parameter. When <code class="docutils literal"><span class="pre">dual</span></code> is
+set to <code class="docutils literal"><span class="pre">False</span></code> the underlying implementation of <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code></a> is
+not random and <code class="docutils literal"><span class="pre">random_state</span></code> has no effect on the results.</p>
 </li>
 <li><p class="first">Using L1 penalization as provided by <code class="docutils literal"><span class="pre">LinearSVC(loss='l2',</span> <span class="pre">penalty='l1',</span>
 <span class="pre">dual=False)</span></code> yields a sparse solution, i.e. only a subset of feature
