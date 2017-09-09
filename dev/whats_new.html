@@ -314,7 +314,7 @@ underlying implementation is not random.
 <h4>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
 <p>Decomposition, manifold learning and clustering</p>
 <ul class="simple">
-<li>Fix for uninformative error in <code class="xref py py-class docutils literal"><span class="pre">decomposition.incremental_pca</span></code>:
+<li>Fix for uninformative error in <a class="reference internal" href="modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.IncrementalPCA</span></code></a>:
 now an error is raised if the number of components is larger than the
 chosen batch size. The <code class="docutils literal"><span class="pre">n_components=None</span></code> case was adapted accordingly.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6452">#6452</a>. By <a class="reference external" href="https://github.com/wallygauze">Wally Gauze</a>.</li>
@@ -328,6 +328,10 @@ centers as 3d array instead of 2d array in case of non-convergence. For the
 same class, fixed undefined and arbitrary behavior in case of training data
 where all samples had equal similarity.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9612">#9612</a>. By <a class="reference external" href="https://github.com/jsamoocha">Jonatan Samoocha</a>.</li>
+<li>In <a class="reference internal" href="modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.PCA</span></code></a> selecting a n_components parameter greater than
+the number of samples now raises an error.
+Similarly, the <code class="docutils literal"><span class="pre">n_components=None</span></code> case now selects the minimum of
+n_samples and n_features. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8484">#8484</a>. By <a class="reference external" href="https://github.com/wallygauze">Wally Gauze</a>.</li>
 </ul>
 </div>
 </div>
