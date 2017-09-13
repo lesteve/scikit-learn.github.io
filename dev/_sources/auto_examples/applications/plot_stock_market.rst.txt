@@ -74,20 +74,20 @@ axis.
 
  Out::
 
-    Cluster 1: Total, Exxon, Chevron, ConocoPhillips, Valero Energy
-    Cluster 2: Time Warner
-    Cluster 3: Cablevision
-    Cluster 4: Yahoo, Amazon, Apple
-    Cluster 5: Toyota, Canon, Sony, Honda, Unilever, Xerox, Caterpillar
-    Cluster 6: Navistar
-    Cluster 7: Northrop Grumman, General Dynamics, Raytheon
-    Cluster 8: Boeing
-    Cluster 9: Coca Cola, Pepsi, Kellogg
-    Cluster 10: Procter Gamble, Colgate-Palmolive, Kimberly-Clark
-    Cluster 11: Comcast, Ford, 3M, McDonald's, Marriott, General Electrics, Wells Fargo, JPMorgan Chase, AIG, Bank of America, Goldman Sachs, Wal-Mart, Home Depot, Pfizer, Ryder, CVS, DuPont de Nemours
-    Cluster 12: American express
-    Cluster 13: Microsoft, IBM, Dell, HP, SAP, Cisco, Texas Instruments
-    Cluster 14: GlaxoSmithKline, Sanofi-Aventis, Novartis
+    Cluster 1: Apple, Amazon, Yahoo
+    Cluster 2: American express
+    Cluster 3: Boeing
+    Cluster 4: Cisco, Dell, HP, IBM, Microsoft, SAP, Texas Instruments
+    Cluster 5: Cablevision
+    Cluster 6: ConocoPhillips, Chevron, Total, Valero Energy, Exxon
+    Cluster 7: AIG, Bank of America, Comcast, CVS, DuPont de Nemours, Ford, General Electrics, Goldman Sachs, Home Depot, JPMorgan Chase, Marriott, McDonald's, 3M, Pfizer, Ryder, Wells Fargo, Wal-Mart
+    Cluster 8: Navistar
+    Cluster 9: General Dynamics, Northrop Grumman, Raytheon
+    Cluster 10: GlaxoSmithKline, Novartis, Sanofi-Aventis
+    Cluster 11: Kellogg, Coca Cola, Pepsi
+    Cluster 12: Colgate-Palmolive, Kimberly-Clark, Procter Gamble
+    Cluster 13: Canon, Caterpillar, Honda, Sony, Toyota, Unilever, Xerox
+    Cluster 14: Time Warner
 
 
 
@@ -97,11 +97,12 @@ axis.
 
 .. code-block:: python
 
-    print(__doc__)
+    from __future__ import print_function
 
     # Author: Gael Varoquaux gael.varoquaux@normalesup.org
     # License: BSD 3 clause
 
+    import sys
     from datetime import datetime
 
     import numpy as np
@@ -111,6 +112,7 @@ axis.
     from six.moves.urllib.parse import urlencode
     from sklearn import cluster, covariance, manifold
 
+    print(__doc__)
 
     # #############################################################################
     # Retrieve the data from Internet
@@ -208,7 +210,7 @@ axis.
         'BAC': 'Bank of America',
         'GS': 'Goldman Sachs',
         'AAPL': 'Apple',
-        'SAP': 'SAP',
+        'NYSE:SAP': 'SAP',
         'CSCO': 'Cisco',
         'TXN': 'Texas Instruments',
         'XRX': 'Xerox',
@@ -226,13 +228,15 @@ axis.
         'CAT': 'Caterpillar',
         'DD': 'DuPont de Nemours'}
 
-    symbols, names = np.array(list(symbol_dict.items())).T
+    symbols, names = np.array(sorted(symbol_dict.items())).T
 
     # retry is used because quotes_historical_google can temporarily fail
     # for various reasons (e.g. empty result from Google API).
-    quotes = [
-        retry(quotes_historical_google)(symbol, d1, d2) for symbol in symbols
-    ]
+    quotes = []
+
+    for symbol in symbols:
+        print('Fetching quote history for %r' % symbol, file=sys.stderr)
+        quotes.append(retry(quotes_historical_google)(symbol, d1, d2))
 
     close_prices = np.vstack([q['close'] for q in quotes])
     open_prices = np.vstack([q['open'] for q in quotes])
@@ -341,7 +345,7 @@ axis.
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  31.859 seconds)
+**Total running time of the script:** ( 0 minutes  29.635 seconds)
 
 
 
