@@ -284,8 +284,6 @@ axis.</p>
 
 <span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
-<span class="c1"># #############################################################################</span>
-<span class="c1"># Retrieve the data from Internet</span>
 
 <span class="k">def</span> <span class="nf">retry</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n_attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="s2">&quot;Wrapper function to retry function calls in case of exceptions&quot;</span>
@@ -293,7 +291,7 @@ axis.</p>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_attempts</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n_attempts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">raise</span>
     <span class="k">return</span> <span class="n">wrapper</span>
@@ -330,15 +328,33 @@ axis.</p>
         <span class="s1">&#39;formats&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">]</span>
     <span class="p">}</span>
     <span class="n">converters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%b-%y&#39;</span><span class="p">)}</span>
-    <span class="k">return</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt" title="View documentation for numpy.genfromtxt"><span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span></a><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt" title="View documentation for numpy.genfromtxt"><span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span></a><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                          <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="n">converters</span><span class="p">,</span>
                          <span class="n">missing_values</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">filling_values</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">expected_len_data</span> <span class="o">=</span> <span class="mi">1258</span>
+    <span class="n">len_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">min_date</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">max_date</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">len_data</span> <span class="o">!=</span> <span class="n">expected_len_data</span> <span class="ow">or</span> <span class="n">min_date</span> <span class="o">!=</span> <span class="n">d1</span> <span class="ow">or</span> <span class="n">max_date</span> <span class="o">!=</span> <span class="n">d2</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;Got wrong data for symbol {}, url {}</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;  - min_date should be {}, got {}</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;  - max_date should be {}, got {}</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;  - len(data) should be {}, got {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">symbol</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
+                <span class="n">d1</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">min_date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span>
+                <span class="n">d2</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">max_date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span>
+                <span class="n">expected_len_data</span><span class="p">,</span> <span class="n">len_data</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
 
+<span class="c1"># #############################################################################</span>
+<span class="c1"># Retrieve the data from Internet</span>
 
 <span class="c1"># Choose a time period reasonably calm (not too long ago so that we get</span>
 <span class="c1"># high-tech firms, and before the 2008 crash)</span>
-<span class="n">d1</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
 
 <span class="n">symbol_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;TOT&#39;</span><span class="p">:</span> <span class="s1">&#39;Total&#39;</span><span class="p">,</span>
@@ -516,7 +532,7 @@ axis.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  29.635 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  25.990 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_stock_market.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_stock_market.py</span></code></a></div>

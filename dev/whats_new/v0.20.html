@@ -162,6 +162,7 @@ occurs due to changes in the modelling logic (bug fixes or enhancements), or in
 random sampling procedures.</p>
 <ul class="simple">
 <li><a class="reference internal" href="../modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.IncrementalPCA</span></code></a> in Python 2 (bug fix)</li>
+<li><a class="reference internal" href="../modules/generated/sklearn.isotonic.IsotonicRegression.html#sklearn.isotonic.IsotonicRegression" title="sklearn.isotonic.IsotonicRegression"><code class="xref py py-class docutils literal"><span class="pre">isotonic.IsotonicRegression</span></code></a> (bug fix)</li>
 </ul>
 <p>Details are listed in the changelog below.</p>
 <p>(While we are trying to better inform users by providing this information, we
@@ -208,6 +209,13 @@ underlying implementation is not random.
 </div>
 <div class="section" id="bug-fixes">
 <h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<p>Classifiers and regressors</p>
+<ul class="simple">
+<li>Fixed a bug in <a class="reference internal" href="../modules/generated/sklearn.isotonic.IsotonicRegression.html#sklearn.isotonic.IsotonicRegression" title="sklearn.isotonic.IsotonicRegression"><code class="xref py py-class docutils literal"><span class="pre">isotonic.IsotonicRegression</span></code></a> which incorrectly
+combined weights when fitting a model to data involving points with
+identical X values.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9432">#9432</a> by <a class="reference external" href="https://github.com/dallascard">Dallas Card</a></li>
+</ul>
 <p>Decomposition, manifold learning and clustering</p>
 <ul class="simple">
 <li>Fix for uninformative error in <a class="reference internal" href="../modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.IncrementalPCA</span></code></a>:
@@ -228,6 +236,8 @@ where all samples had equal similarity.
 the number of samples now raises an error.
 Similarly, the <code class="docutils literal"><span class="pre">n_components=None</span></code> case now selects the minimum of
 n_samples and n_features. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8484">#8484</a>. By <a class="reference external" href="https://github.com/wallygauze">Wally Gauze</a>.</li>
+<li>Fixed a bug in <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_kddcup99.html#sklearn.datasets.fetch_kddcup99" title="sklearn.datasets.fetch_kddcup99"><code class="xref py py-func docutils literal"><span class="pre">datasets.fetch_kddcup99</span></code></a>, where data were not properly
+shuffled. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9731">#9731</a> by <a class="reference external" href="https://perso.telecom-paristech.fr/~goix/">Nicolas Goix</a>.</li>
 </ul>
 </div>
 </div>
