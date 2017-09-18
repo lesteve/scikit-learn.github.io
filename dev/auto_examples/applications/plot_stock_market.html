@@ -297,55 +297,59 @@ axis.</p>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 
-<span class="k">def</span> <span class="nf">quotes_historical_google</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">date1</span><span class="p">,</span> <span class="n">date2</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">quotes_historical_google</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span>
+                             <span class="n">expected</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get the historical data from Google finance.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    symbol : str</span>
 <span class="sd">        Ticker symbol to query for, for example ``&quot;DELL&quot;``.</span>
-<span class="sd">    date1 : datetime.datetime</span>
+<span class="sd">    start_date : datetime.datetime</span>
 <span class="sd">        Start date.</span>
-<span class="sd">    date2 : datetime.datetime</span>
+<span class="sd">    end_date : datetime.datetime</span>
 <span class="sd">        End date.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    X : array</span>
-<span class="sd">        The columns are ``date`` -- datetime, ``open``, ``high``,</span>
+<span class="sd">        The columns are ``date`` -- date, ``open``, ``high``,</span>
 <span class="sd">        ``low``, ``close`` and ``volume`` of type float.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">({</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="n">symbol</span><span class="p">,</span>
-        <span class="s1">&#39;startdate&#39;</span><span class="p">:</span> <span class="n">date1</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%b </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;enddate&#39;</span><span class="p">:</span> <span class="n">date2</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%b </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;csv&#39;</span>
-    <span class="p">})</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.google.com/finance/historical?&#39;</span> <span class="o">+</span> <span class="n">params</span>
+        <span class="s1">&#39;startdate&#39;</span><span class="p">:</span> <span class="n">start_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;enddate&#39;</span><span class="p">:</span> <span class="n">end_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;csv&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://finance.google.com/finance/historical?&#39;</span> <span class="o">+</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">dtype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">],</span>
         <span class="s1">&#39;formats&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">]</span>
     <span class="p">}</span>
-    <span class="n">converters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%b-%y&#39;</span><span class="p">)}</span>
+    <span class="n">converters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%b-%y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()}</span>
     <span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt" title="View documentation for numpy.genfromtxt"><span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span></a><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                          <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="n">converters</span><span class="p">,</span>
                          <span class="n">missing_values</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">filling_values</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">expected_len_data</span> <span class="o">=</span> <span class="mi">1258</span>
-    <span class="n">len_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">min_date</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-    <span class="n">max_date</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">len_data</span> <span class="o">!=</span> <span class="n">expected_len_data</span> <span class="ow">or</span> <span class="n">min_date</span> <span class="o">!=</span> <span class="n">d1</span> <span class="ow">or</span> <span class="n">max_date</span> <span class="o">!=</span> <span class="n">d2</span><span class="p">):</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s1">&#39;Got wrong data for symbol {}, url {}</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="s1">&#39;  - min_date should be {}, got {}</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="s1">&#39;  - max_date should be {}, got {}</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="s1">&#39;  - len(data) should be {}, got {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">symbol</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
-                <span class="n">d1</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">min_date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span>
-                <span class="n">d2</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">max_date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span>
-                <span class="n">expected_len_data</span><span class="p">,</span> <span class="n">len_data</span><span class="p">))</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">expected</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">len_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">min_date</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="n">max_date</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">len_data</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">[</span><span class="s1">&#39;len_data&#39;</span><span class="p">]</span> <span class="ow">or</span>
+            <span class="n">min_date</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">[</span><span class="s1">&#39;min_date&#39;</span><span class="p">]</span> <span class="ow">or</span>
+                <span class="n">max_date</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">[</span><span class="s1">&#39;max_date&#39;</span><span class="p">]):</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s1">&#39;Got wrong data for symbol {}, url {}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;  - min_date should be {}, got {}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;  - max_date should be {}, got {}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;  - len(data) should be {}, got {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">symbol</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
+                    <span class="n">expected</span><span class="p">[</span><span class="s1">&#39;min_date&#39;</span><span class="p">],</span> <span class="n">min_date</span><span class="p">,</span>
+                    <span class="n">expected</span><span class="p">[</span><span class="s1">&#39;max_date&#39;</span><span class="p">],</span> <span class="n">max_date</span><span class="p">,</span>
+                    <span class="n">expected</span><span class="p">[</span><span class="s1">&#39;len_data&#39;</span><span class="p">],</span> <span class="n">len_data</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span>
 
 <span class="c1"># #############################################################################</span>
@@ -353,8 +357,8 @@ axis.</p>
 
 <span class="c1"># Choose a time period reasonably calm (not too long ago so that we get</span>
 <span class="c1"># high-tech firms, and before the 2008 crash)</span>
-<span class="n">d1</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
 
 <span class="n">symbol_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;NYSE:TOT&#39;</span><span class="p">:</span> <span class="s1">&#39;Total&#39;</span><span class="p">,</span>
@@ -420,10 +424,13 @@ axis.</p>
 <span class="c1"># retry is used because quotes_historical_google can temporarily fail</span>
 <span class="c1"># for various reasons (e.g. empty result from Google API).</span>
 <span class="n">quotes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># expected min_date, max_date and length for each stock timeseries</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min_date&#39;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span> <span class="s1">&#39;max_date&#39;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">,</span> <span class="s1">&#39;len_data&#39;</span><span class="p">:</span> <span class="mi">1258</span><span class="p">}</span>
 
 <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Fetching quote history for </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">symbol</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
-    <span class="n">quotes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">retry</span><span class="p">(</span><span class="n">quotes_historical_google</span><span class="p">)(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span>
+    <span class="n">quotes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">retry</span><span class="p">(</span><span class="n">quotes_historical_google</span><span class="p">)(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span>
+                                                  <span class="n">expected</span><span class="o">=</span><span class="n">expected</span><span class="p">))</span>
 
 <span class="n">close_prices</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.vstack.html#numpy.vstack" title="View documentation for numpy.vstack"><span class="n">np</span><span class="o">.</span><span class="n">vstack</span></a><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quotes</span><span class="p">])</span>
 <span class="n">open_prices</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.vstack.html#numpy.vstack" title="View documentation for numpy.vstack"><span class="n">np</span><span class="o">.</span><span class="n">vstack</span></a><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="s1">&#39;open&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quotes</span><span class="p">])</span>
@@ -533,7 +540,7 @@ axis.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  26.160 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  28.196 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_stock_market.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_stock_market.py</span></code></a></div>
