@@ -216,7 +216,7 @@ SVC (support vector classifier) to improve the classification scores.</p>
 <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_samples</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="c1"># add 200 non-informative features</span>
-<span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.hstack.html#numpy.hstack" title="View documentation for numpy.hstack"><span class="n">np</span><span class="o">.</span><span class="n">hstack</span></a><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.wald.html#numpy.random" title="View documentation for numpy.random.random"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span></a><span class="p">((</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">200</span><span class="p">))))</span>
+<span class="n">X</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.html#numpy.hstack" title="View documentation for numpy.hstack"><span class="n">np</span><span class="o">.</span><span class="n">hstack</span></a><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.random.html#numpy.random.random" title="View documentation for numpy.random.random"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span></a><span class="p">((</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">200</span><span class="p">))))</span>
 
 <span class="c1"># #############################################################################</span>
 <span class="c1"># Create a feature-selection transform and an instance of SVM that we</span>
@@ -239,25 +239,25 @@ SVC (support vector classifier) to improve the classification scores.</p>
     <span class="n">score_means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">score_stds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_scores</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 
-<a href="http://matplotlib.org/api/_as_gen/matplotlib.pyplot.errorbar.html#matplotlib.pyplot.errorbar" title="View documentation for matplotlib.pyplot.errorbar"><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span></a><span class="p">(</span><span class="n">percentiles</span><span class="p">,</span> <span class="n">score_means</span><span class="p">,</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.array.html#numpy.array" title="View documentation for numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">score_stds</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/_as_gen/matplotlib.pyplot.errorbar.html#matplotlib.pyplot.errorbar" title="View documentation for matplotlib.pyplot.errorbar"><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span></a><span class="p">(</span><span class="n">percentiles</span><span class="p">,</span> <span class="n">score_means</span><span class="p">,</span> <a href="http://docs.scipy.org/doc/numpy-1.8.1/reference/generated/numpy.html#numpy.array" title="View documentation for numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">score_stds</span><span class="p">))</span>
 
 <a href="http://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span>
     <span class="s1">&#39;Performance of the SVM-Anova varying the percentile of features selected&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlabel.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Percentile&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylabel.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Prediction rate&#39;</span><span class="p">)</span>
 
-<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis" title="View documentation for matplotlib.pyplot.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/_as_gen/matplotlib.pyplot.axis.html#matplotlib.pyplot.axis" title="View documentation for matplotlib.pyplot.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.617 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.620 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_svm_anova.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_svm_anova.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_svm_anova.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_svm_anova.ipynb</span></code></a></div>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 
