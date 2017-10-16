@@ -177,6 +177,7 @@
     <ul>
 <li><a class="reference internal" href="#">Contributing</a><ul>
 <li><a class="reference internal" href="#submitting-a-bug-report">Submitting a bug report</a></li>
+<li><a class="reference internal" href="#ways-to-contribute">Ways to contribute</a></li>
 <li><a class="reference internal" href="#retrieving-the-latest-code">Retrieving the latest code</a></li>
 <li><a class="reference internal" href="#contributing-code">Contributing code</a><ul>
 <li><a class="reference internal" href="#how-to-contribute">How to contribute</a></li>
@@ -189,7 +190,6 @@
 <li><a class="reference internal" href="#issue-tracker-tags">Issue Tracker Tags</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#other-ways-to-contribute">Other ways to contribute</a></li>
 <li><a class="reference internal" href="#coding-guidelines">Coding guidelines</a><ul>
 <li><a class="reference internal" href="#input-validation">Input validation</a></li>
 <li><a class="reference internal" href="#random-numbers">Random Numbers</a></li>
@@ -197,6 +197,7 @@
 <li><a class="reference internal" href="#python-versions-supported">Python versions supported</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#code-review-guidelines">Code Review Guidelines</a></li>
 <li><a class="reference internal" href="#apis-of-scikit-learn-objects">APIs of scikit-learn objects</a><ul>
 <li><a class="reference internal" href="#different-objects">Different objects</a></li>
 <li><a class="reference internal" href="#estimators">Estimators</a><ul>
@@ -270,6 +271,23 @@ ticket to the
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">Bug Tracker</a>. You are
 also welcome to post feature requests or pull requests.</p>
 </div>
+<div class="section" id="ways-to-contribute">
+<h2>Ways to contribute<a class="headerlink" href="#ways-to-contribute" title="Permalink to this headline">¶</a></h2>
+<p>There are many ways to contribute to scikit-learn, with the most common ones
+being contribution of code or documentation to the project. Improving the
+documentation is no less important than improving the library itself.  If you
+find a typo in the documentation, or have made improvements, do not hesitate to
+send an email to the mailing list or preferably submit a GitHub pull request.
+Full documentation can be found under the doc/ directory.</p>
+<p>But there are many other ways to help. In particular answering queries on the
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">issue tracker</a>,
+investigating bugs, and <a class="reference internal" href="#code-review"><span class="std std-ref">reviewing other developers’ pull requests</span></a> are very valuable contributions that decrease the burden on the
+project maintainers.</p>
+<p>Another way to contribute is to report issues you’re facing, and give a “thumbs up”
+on issues that others reported and that are relevant to you.
+It also helps us if you spread the word: reference the project from your blog
+and articles, link to it from your website, or simply say “I use it”:</p>
+<script type="text/javascript" src="http://www.ohloh.net/p/480792/widgets/project_users.js?style=rainbow"></script></div>
 <div class="section" id="retrieving-the-latest-code">
 <span id="git-repo"></span><h2>Retrieving the latest code<a class="headerlink" href="#retrieving-the-latest-code" title="Permalink to this headline">¶</a></h2>
 <p>We use <a class="reference external" href="https://git-scm.com/">Git</a> for version control and
@@ -759,17 +777,6 @@ contributors will have this tag.</td>
 </table>
 </div>
 </div>
-<div class="section" id="other-ways-to-contribute">
-<h2>Other ways to contribute<a class="headerlink" href="#other-ways-to-contribute" title="Permalink to this headline">¶</a></h2>
-<p>Code is not the only way to contribute to scikit-learn. For instance,
-documentation is also a very important part of the project and often
-doesn’t get as much attention as it deserves. If you find a typo in
-the documentation, or have made improvements, do not hesitate to send
-an email to the mailing list or submit a GitHub pull request. Full
-documentation can be found under the doc/ directory.</p>
-<p>It also helps us if you spread the word: reference the project from your blog
-and articles, link to it from your website, or simply say “I use it”:</p>
-<script type="text/javascript" src="http://www.ohloh.net/p/480792/widgets/project_users.js?style=rainbow"></script></div>
 <div class="section" id="coding-guidelines">
 <span id="id3"></span><h2>Coding guidelines<a class="headerlink" href="#coding-guidelines" title="Permalink to this headline">¶</a></h2>
 <p>The following are some guidelines on how new code should be written. Of
@@ -960,6 +967,51 @@ The <a class="reference external" href="http://pythonhosted.org/six/">six</a> pa
 cross-compatibility and is included in scikit-learn as
 <code class="docutils literal"><span class="pre">sklearn.externals.six</span></code>.</p>
 </div>
+</div>
+<div class="section" id="code-review-guidelines">
+<span id="code-review"></span><h2>Code Review Guidelines<a class="headerlink" href="#code-review-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>Reviewing code contributed to the project as PRs is a crucial component of
+scikit-learn development. We encourage anyone to start reviewing code of other
+developers. The code review process is often highly educational for everybody
+involved. This is particularly appropriate if it is a feature you would like to
+use, and so can respond critically about whether the PR meets your needs. While
+each pull request needs to be signed off by two core developers, you can speed
+up this process by providing your feedback.</p>
+<p>Here are a few important aspects that need to be covered in any code review,
+from high-level questions to a more detailed check-list.</p>
+<ul class="simple">
+<li>Do we want this in the library? Is it likely to be used? Do you, as
+a scikit-learn user, like the change and intend to use it? Is it in
+the scope of scikit-learn? Will the cost of maintaining a new
+feature be worth its benefits?</li>
+<li>Is the code consistent with the API of scikit-learn? Are public
+functions/classes/parameters well named and intuitively designed?</li>
+<li>Are all public functions/classes and their parameters, return types, and
+stored attributes named according to scikit-learn conventions and documented clearly?</li>
+<li>Is any new functionality described in the user-guide and illustrated with examples?</li>
+<li>Is every public function/class tested? Are a reasonable set of
+parameters, their values, value types, and combinations tested? Do
+the tests validate that the code is correct, i.e. doing what the
+documentation says it does? If the change is a bug-fix, is a
+non-regression test included? Look at <a class="reference external" href="https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing">this</a>
+to get started with testing in Python.</li>
+<li>Do the tests pass in the continuous integration build? If
+appropriate, help the contributor understand why tests failed.</li>
+<li>Do the tests cover every line of code (see the coverage report in the build
+log)? If not, are the lines missing coverage good exceptions?</li>
+<li>Is the code easy to read and low on redundancy? Should variable names be
+improved for clarity or consistency? Should comments be added? Should comments
+be removed as unhelpful or extraneous?</li>
+<li>Could the code easily be rewritten to run much more efficiently for
+relevant settings?</li>
+<li>Is the code backwards compatible with previous versions? (or is a
+deprecation cycle necessary?)</li>
+<li>Will the new code add any dependencies on other libraries? (this is
+unlikely to be accepted)</li>
+<li>Does the documentation render properly (see the
+<a class="reference internal" href="#contribute-documentation"><span class="std std-ref">Documentation</span></a> section for more details), and are the plots
+instructive?</li>
+</ul>
 </div>
 <div class="section" id="apis-of-scikit-learn-objects">
 <h2>APIs of scikit-learn objects<a class="headerlink" href="#apis-of-scikit-learn-objects" title="Permalink to this headline">¶</a></h2>
