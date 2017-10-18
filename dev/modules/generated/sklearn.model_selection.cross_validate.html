@@ -197,7 +197,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.cross_validate<a class="headerlink" href="#sklearn-model-selection-cross-validate" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.model_selection.cross_validate">
-<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/3111b8e5/sklearn/model_selection/_validation.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>return_train_score=’warn’</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/80e08530/sklearn/model_selection/_validation.py#L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate metric(s) by cross-validation and also record fit/score times.</p>
 <p>Read more in the <a class="reference internal" href="../cross_validation.html#multimetric-cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -284,10 +284,17 @@ as in ‘2*n_jobs’</li>
 </ul>
 </div></blockquote>
 </div></blockquote>
-<p><strong>return_train_score</strong> : boolean, default True</p>
+<p><strong>return_train_score</strong> : boolean, optional</p>
 <blockquote>
-<div><p>Whether to include train scores in the return dict if <code class="docutils literal"><span class="pre">scoring</span></code> is
-of multimetric type.</p>
+<div><p>Whether to include train scores.</p>
+<p>Current default is <code class="docutils literal"><span class="pre">'warn'</span></code>, which behaves as <code class="docutils literal"><span class="pre">True</span></code> in addition
+to raising a warning when a training score is looked up.
+That default will be changed to <code class="docutils literal"><span class="pre">False</span></code> in 0.21.
+Computing training scores is used to get insights on how different
+parameter settings impact the overfitting/underfitting trade-off.
+However computing the scores on the training set can be computationally
+expensive and is not strictly required to select the parameters that
+yield the best generalization performance.</p>
 </div></blockquote>
 </td>
 </tr>
