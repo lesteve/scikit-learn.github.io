@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.cross_val_predict<a class="headerlink" href="#sklearn-model-selection-cross-val-predict" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.model_selection.cross_val_predict">
-<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_val_predict</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>method=’predict’</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/45d1dd2e/sklearn/model_selection/_validation.py#L571"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_val_predict" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_val_predict</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>method=’predict’</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/ebc87303/sklearn/model_selection/_validation.py#L571"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_val_predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate cross-validated estimates for each input data point</p>
 <p>Read more in the <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -289,6 +289,13 @@ in sorted order.</p>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Notes</p>
+<p>In the case that one or more classes are absent in a training portion, a
+default score needs to be assigned to all instances for that class if
+<code class="docutils literal"><span class="pre">method</span></code> produces columns per class, as in {‘decision_function’,
+‘predict_proba’, ‘predict_log_proba’}.  For <code class="docutils literal"><span class="pre">predict_proba</span></code> this value is
+0.  In order to ensure finite output, we approximate negative infinity by
+the minimum finite float value for the dtype in other cases.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_predict</span>
