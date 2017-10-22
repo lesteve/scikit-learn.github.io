@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Contributing &#8212; scikit-learn 0.19.0 documentation</title>
+    <title>Contributing &#8212; scikit-learn 0.19.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.0',
+        VERSION:     '0.19.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -111,7 +111,7 @@
 </div>
 
 
-<!-- Github "fork me" ribbon -->
+<!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
   <img class="fork-me"
        style="position: absolute; top: 0; right: 0; border: 0;"
@@ -171,12 +171,13 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.1</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
 <li><a class="reference internal" href="#">Contributing</a><ul>
 <li><a class="reference internal" href="#submitting-a-bug-report">Submitting a bug report</a></li>
+<li><a class="reference internal" href="#ways-to-contribute">Ways to contribute</a></li>
 <li><a class="reference internal" href="#retrieving-the-latest-code">Retrieving the latest code</a></li>
 <li><a class="reference internal" href="#contributing-code">Contributing code</a><ul>
 <li><a class="reference internal" href="#how-to-contribute">How to contribute</a></li>
@@ -189,7 +190,6 @@
 <li><a class="reference internal" href="#issue-tracker-tags">Issue Tracker Tags</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#other-ways-to-contribute">Other ways to contribute</a></li>
 <li><a class="reference internal" href="#coding-guidelines">Coding guidelines</a><ul>
 <li><a class="reference internal" href="#input-validation">Input validation</a></li>
 <li><a class="reference internal" href="#random-numbers">Random Numbers</a></li>
@@ -197,6 +197,7 @@
 <li><a class="reference internal" href="#python-versions-supported">Python versions supported</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#code-review-guidelines">Code Review Guidelines</a></li>
 <li><a class="reference internal" href="#apis-of-scikit-learn-objects">APIs of scikit-learn objects</a><ul>
 <li><a class="reference internal" href="#different-objects">Different objects</a></li>
 <li><a class="reference internal" href="#estimators">Estimators</a><ul>
@@ -270,6 +271,23 @@ ticket to the
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">Bug Tracker</a>. You are
 also welcome to post feature requests or pull requests.</p>
 </div>
+<div class="section" id="ways-to-contribute">
+<h2>Ways to contribute<a class="headerlink" href="#ways-to-contribute" title="Permalink to this headline">¶</a></h2>
+<p>There are many ways to contribute to scikit-learn, with the most common ones
+being contribution of code or documentation to the project. Improving the
+documentation is no less important than improving the library itself.  If you
+find a typo in the documentation, or have made improvements, do not hesitate to
+send an email to the mailing list or preferably submit a GitHub pull request.
+Full documentation can be found under the doc/ directory.</p>
+<p>But there are many other ways to help. In particular answering queries on the
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">issue tracker</a>,
+investigating bugs, and <a class="reference internal" href="#code-review"><span class="std std-ref">reviewing other developers’ pull requests</span></a> are very valuable contributions that decrease the burden on the
+project maintainers.</p>
+<p>Another way to contribute is to report issues you’re facing, and give a “thumbs up”
+on issues that others reported and that are relevant to you.
+It also helps us if you spread the word: reference the project from your blog
+and articles, link to it from your website, or simply say “I use it”:</p>
+<script type="text/javascript" src="http://www.ohloh.net/p/480792/widgets/project_users.js?style=rainbow"></script></div>
 <div class="section" id="retrieving-the-latest-code">
 <span id="git-repo"></span><h2>Retrieving the latest code<a class="headerlink" href="#retrieving-the-latest-code" title="Permalink to this headline">¶</a></h2>
 <p>We use <a class="reference external" href="https://git-scm.com/">Git</a> for version control and
@@ -407,9 +425,18 @@ Unix-like system.</p>
 <code class="docutils literal"><span class="pre">sklearn.utils</span></code> submodule.  A list of utility routines available
 for developers can be found in the <a class="reference internal" href="utilities.html#developers-utils"><span class="std std-ref">Utilities for Developers</span></a> page.</p>
 </li>
-<li><p class="first">If your pull request addresses an issue, please use the title to describe
-the issue and mention the issue number in the pull request description to
-ensure a link is created to the original issue.</p>
+<li><p class="first">Give your pull request a helpful title that summarises what your
+contribution does. In some cases “Fix &lt;ISSUE TITLE&gt;” is enough.
+“Fix #&lt;ISSUE NUMBER&gt;” is not enough.</p>
+</li>
+<li><p class="first">Often pull requests resolve one or more other issues (or pull requests).
+If merging your pull request means that some other issues/PRs should
+be closed, you should <a class="reference external" href="https://github.com/blog/1506-closing-issues-via-pull-requests/">use keywords to create link to them</a>
+(e.g., <code class="docutils literal"><span class="pre">Fixes</span> <span class="pre">#1234</span></code>; multiple issues/PRs are allowed as long as each
+one is preceded by a keyword). Upon merging, those issues/PRs will
+automatically be closed by GitHub. If your pull request is simply
+related to some other issues/PRs, create a link to them without using
+the keywords (e.g., <code class="docutils literal"><span class="pre">See</span> <span class="pre">also</span> <span class="pre">#1234</span></code>).</p>
 </li>
 <li><p class="first">All public methods should have informative docstrings with sample
 usage presented as doctests when appropriate.</p>
@@ -581,27 +608,34 @@ please provide the traceback.</p>
 </div>
 <div class="section" id="issues-for-new-contributors">
 <span id="new-contributors"></span><h3>Issues for New Contributors<a class="headerlink" href="#issues-for-new-contributors" title="Permalink to this headline">¶</a></h3>
-<p>New contributors should look for the following tags when looking for issues.
-We strongly recommend that new contributors tackle “easy” issues first: this
-helps the contributor become familiar with the contribution workflow, and
-for the core devs to become acquainted with the contributor; besides which,
-we frequently underestimate how easy an issue is to solve!</p>
+<p>New contributors should look for the following tags when looking for issues.  We
+strongly recommend that new contributors tackle “easy” issues first: this helps
+the contributor become familiar with the contribution workflow, and for the core
+devs to become acquainted with the contributor; besides which, we frequently
+underestimate how easy an issue is to solve!</p>
 <div class="topic">
-<p class="topic-title first">Easy Tags</p>
-<p>A great way to start contributing to scikit-learn is to pick an item from the
-list of <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues?q=is%3Aopen+label%3AEasy+is%3Aissue">Easy issues</a>
+<p class="topic-title first">good first issue tag</p>
+<p>A great way to start contributing to scikit-learn is to pick an item from
+the list of <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/labels/good%20first%20issue">good first issues</a>
 in the issue tracker. Resolving these issues allow you to start contributing
-to the project without much prior knowledge. Your assistance in this area will
-be greatly appreciated by the more experienced developers as it helps free up
-their time to concentrate on other issues.</p>
+to the project without much prior knowledge. If you have already contributed
+to scikit-learn, you should look at Easy issues instead.</p>
 </div>
 <div class="topic">
-<p class="topic-title first">Need Contributor Tags</p>
-<p>We often use the Need Contributor tag to mark issues regardless of difficulty. Additionally,
-we use the Need Contributor tag to mark Pull Requests which have been abandoned
+<p class="topic-title first">Easy tag</p>
+<p>Another great way to contribute to scikit-learn is to pick an item from the
+list of <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/labels/Easy">Easy issues</a> in the issue
+tracker.  Your assistance in this area will be greatly appreciated by the
+more experienced developers as it helps free up their time to concentrate on
+other issues.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">help wanted tag</p>
+<p>We often use the help wanted tag to mark issues regardless of difficulty. Additionally,
+we use the help wanted tag to mark Pull Requests which have been abandoned
 by their original contributor and are available for someone to pick up where the original
-contributor left off. The list of issues with the Need Contributor tag can be found
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/labels/Need%20Contributor">here</a> .</p>
+contributor left off. The list of issues with the help wanted tag can be found
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/labels/help%20wanted">here</a> .</p>
 <p>Note that not all issues which need contributors will have this tag.</p>
 </div>
 </div>
@@ -735,19 +769,22 @@ Wrong results as well as unexpected errors from estimators go here.</td>
 </tr>
 </tbody>
 </table>
-<p>There are three other tags to help new contributors:</p>
+<p>There are four other tags to help new contributors:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Easy:</th><td class="field-body">This issue can be tackled by anyone, no experience needed.
-Ask for help if the formulation is unclear.</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">good first issue:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">This issue is ideal for a first contribution to scikit-learn. Ask for help
+if the formulation is unclear. If you have already contributed to
+scikit-learn, look at Easy issues instead.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Moderate:</th><td class="field-body">Might need some knowledge of machine learning or the package,
+<tr class="field-even field"><th class="field-name">Easy:</th><td class="field-body">This issue can be tackled without much prior experience.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Moderate:</th><td class="field-body">Might need some knowledge of machine learning or the package,
 but is still approachable for someone new to the project.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Needs Contributor:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">This tag marks an issue which currently lacks a contributor or a
+<tr class="field-even field"><th class="field-name">help wanted:</th><td class="field-body">This tag marks an issue which currently lacks a contributor or a
 PR that needs another contributor to take over the work. These
 issues can range in difficulty, and may not be approachable
 for new contributors. Note that not all issues which need
@@ -757,17 +794,6 @@ contributors will have this tag.</td>
 </table>
 </div>
 </div>
-<div class="section" id="other-ways-to-contribute">
-<h2>Other ways to contribute<a class="headerlink" href="#other-ways-to-contribute" title="Permalink to this headline">¶</a></h2>
-<p>Code is not the only way to contribute to scikit-learn. For instance,
-documentation is also a very important part of the project and often
-doesn’t get as much attention as it deserves. If you find a typo in
-the documentation, or have made improvements, do not hesitate to send
-an email to the mailing list or submit a GitHub pull request. Full
-documentation can be found under the doc/ directory.</p>
-<p>It also helps us if you spread the word: reference the project from your blog
-and articles, link to it from your website, or simply say “I use it”:</p>
-<script type="text/javascript" src="http://www.ohloh.net/p/480792/widgets/project_users.js?style=rainbow"></script></div>
 <div class="section" id="coding-guidelines">
 <span id="id3"></span><h2>Coding guidelines<a class="headerlink" href="#coding-guidelines" title="Permalink to this headline">¶</a></h2>
 <p>The following are some guidelines on how new code should be written. Of
@@ -958,6 +984,51 @@ The <a class="reference external" href="http://pythonhosted.org/six/">six</a> pa
 cross-compatibility and is included in scikit-learn as
 <code class="docutils literal"><span class="pre">sklearn.externals.six</span></code>.</p>
 </div>
+</div>
+<div class="section" id="code-review-guidelines">
+<span id="code-review"></span><h2>Code Review Guidelines<a class="headerlink" href="#code-review-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>Reviewing code contributed to the project as PRs is a crucial component of
+scikit-learn development. We encourage anyone to start reviewing code of other
+developers. The code review process is often highly educational for everybody
+involved. This is particularly appropriate if it is a feature you would like to
+use, and so can respond critically about whether the PR meets your needs. While
+each pull request needs to be signed off by two core developers, you can speed
+up this process by providing your feedback.</p>
+<p>Here are a few important aspects that need to be covered in any code review,
+from high-level questions to a more detailed check-list.</p>
+<ul class="simple">
+<li>Do we want this in the library? Is it likely to be used? Do you, as
+a scikit-learn user, like the change and intend to use it? Is it in
+the scope of scikit-learn? Will the cost of maintaining a new
+feature be worth its benefits?</li>
+<li>Is the code consistent with the API of scikit-learn? Are public
+functions/classes/parameters well named and intuitively designed?</li>
+<li>Are all public functions/classes and their parameters, return types, and
+stored attributes named according to scikit-learn conventions and documented clearly?</li>
+<li>Is any new functionality described in the user-guide and illustrated with examples?</li>
+<li>Is every public function/class tested? Are a reasonable set of
+parameters, their values, value types, and combinations tested? Do
+the tests validate that the code is correct, i.e. doing what the
+documentation says it does? If the change is a bug-fix, is a
+non-regression test included? Look at <a class="reference external" href="https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing">this</a>
+to get started with testing in Python.</li>
+<li>Do the tests pass in the continuous integration build? If
+appropriate, help the contributor understand why tests failed.</li>
+<li>Do the tests cover every line of code (see the coverage report in the build
+log)? If not, are the lines missing coverage good exceptions?</li>
+<li>Is the code easy to read and low on redundancy? Should variable names be
+improved for clarity or consistency? Should comments be added? Should comments
+be removed as unhelpful or extraneous?</li>
+<li>Could the code easily be rewritten to run much more efficiently for
+relevant settings?</li>
+<li>Is the code backwards compatible with previous versions? (or is a
+deprecation cycle necessary?)</li>
+<li>Will the new code add any dependencies on other libraries? (this is
+unlikely to be accepted)</li>
+<li>Does the documentation render properly (see the
+<a class="reference internal" href="#contribute-documentation"><span class="std std-ref">Documentation</span></a> section for more details), and are the plots
+instructive?</li>
+</ul>
 </div>
 <div class="section" id="apis-of-scikit-learn-objects">
 <h2>APIs of scikit-learn objects<a class="headerlink" href="#apis-of-scikit-learn-objects" title="Permalink to this headline">¶</a></h2>
@@ -1260,7 +1331,7 @@ implement the interface is:</p>
 
 <span class="k">def</span> <span class="nf">set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span>
 </pre></div>
 </div>

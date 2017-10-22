@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.7. Gaussian Processes &#8212; scikit-learn 0.19.0 documentation</title>
+    <title>1.7. Gaussian Processes &#8212; scikit-learn 0.19.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.0',
+        VERSION:     '0.19.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -111,7 +111,7 @@
 </div>
 
 
-<!-- Github "fork me" ribbon -->
+<!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
   <img class="fork-me"
        style="position: absolute; top: 0; right: 0; border: 0;"
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.1</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -200,20 +200,6 @@
 <li><a class="reference internal" href="#exp-sine-squared-kernel">1.7.5.7. Exp-Sine-Squared kernel</a></li>
 <li><a class="reference internal" href="#dot-product-kernel">1.7.5.8. Dot-Product kernel</a></li>
 <li><a class="reference internal" href="#references">1.7.5.9. References</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#legacy-gaussian-processes">1.7.6. Legacy Gaussian Processes</a><ul>
-<li><a class="reference internal" href="#an-introductory-regression-example">1.7.6.1. An introductory regression example</a></li>
-<li><a class="reference internal" href="#fitting-noisy-data">1.7.6.2. Fitting Noisy Data</a></li>
-<li><a class="reference internal" href="#mathematical-formulation">1.7.6.3. Mathematical formulation</a><ul>
-<li><a class="reference internal" href="#the-initial-assumption">1.7.6.3.1. The initial assumption</a></li>
-<li><a class="reference internal" href="#the-best-linear-unbiased-prediction-blup">1.7.6.3.2. The best linear unbiased prediction (BLUP)</a></li>
-<li><a class="reference internal" href="#the-empirical-best-linear-unbiased-predictor-eblup">1.7.6.3.3. The empirical best linear unbiased predictor (EBLUP)</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#correlation-models">1.7.6.4. Correlation Models</a></li>
-<li><a class="reference internal" href="#regression-models">1.7.6.5. Regression Models</a></li>
-<li><a class="reference internal" href="#implementation-details">1.7.6.6. Implementation details</a></li>
 </ul>
 </li>
 </ul>
@@ -470,7 +456,7 @@ of the dataset, this might be considerably faster. However, note that
 “one_vs_one” does not support predicting probability estimates but only plain
 predictions. Moreover, note that <a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier" title="sklearn.gaussian_process.GaussianProcessClassifier"><code class="xref py py-class docutils literal"><span class="pre">GaussianProcessClassifier</span></code></a> does not
 (yet) implement a true multi-class Laplace approximation internally, but
-as discussed aboved is based on solving several binary classification tasks
+as discussed above is based on solving several binary classification tasks
 internally, which are combined using one-versus-rest or one-versus-one.</p>
 </div>
 <div class="section" id="gpc-examples">
@@ -738,225 +724,6 @@ shown in the following figure:</p>
 <tr><td class="label">[RW2006]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>, <a class="fn-backref" href="#id3">3</a>, <a class="fn-backref" href="#id4">4</a>, <a class="fn-backref" href="#id5">5</a>, <a class="fn-backref" href="#id6">6</a>)</em> Carl Eduard Rasmussen and Christopher K.I. Williams, “Gaussian Processes for Machine Learning”, MIT Press 2006, Link to an official complete PDF version of the book <a class="reference external" href="http://www.gaussianprocess.org/gpml/chapters/RW.pdf">here</a> .</td></tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="legacy-gaussian-processes">
-<h2>1.7.6. Legacy Gaussian Processes<a class="headerlink" href="#legacy-gaussian-processes" title="Permalink to this headline">¶</a></h2>
-<p>In this section, the implementation of Gaussian processes used in scikit-learn
-until release 0.16.1 is described. Note that this implementation is deprecated
-and will be removed in version 0.18.</p>
-<div class="section" id="an-introductory-regression-example">
-<h3>1.7.6.1. An introductory regression example<a class="headerlink" href="#an-introductory-regression-example" title="Permalink to this headline">¶</a></h3>
-<p>Say we want to surrogate the function <img class="math" src="../_images/math/4fb3ff02fcf59ecca945a30ea54943beec6170b2.png" alt="g(x) = x \sin(x)"/>. To do so,
-the function is evaluated onto a design of experiments. Then, we define a
-GaussianProcess model whose regression and correlation models might be
-specified using additional kwargs, and ask for the model to be fitted to the
-data. Depending on the number of parameters provided at instantiation, the
-fitting procedure may recourse to maximum likelihood estimation for the
-parameters or alternatively it uses the given parameters.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">gaussian_process</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">theta0</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">thetaL</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">thetaU</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
-<span class="go">GaussianProcess(beta0=None, corr=&lt;function squared_exponential at 0x...&gt;,</span>
-<span class="go">        normalize=True, nugget=array(2.22...-15),</span>
-<span class="go">        optimizer=&#39;fmin_cobyla&#39;, random_start=1, random_state=...</span>
-<span class="go">        regr=&lt;function constant at 0x...&gt;, storage_mode=&#39;full&#39;,</span>
-<span class="go">        theta0=array([[ 0.01]]), thetaL=array([[ 0.0001]]),</span>
-<span class="go">        thetaU=array([[ 0.1]]), verbose=False)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span><span class="p">,</span> <span class="n">sigma2_pred</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="fitting-noisy-data">
-<h3>1.7.6.2. Fitting Noisy Data<a class="headerlink" href="#fitting-noisy-data" title="Permalink to this headline">¶</a></h3>
-<p>When the data to be fit includes noise, the Gaussian process model can be
-used by specifying the variance of the noise for each point.
-<a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcess.html#sklearn.gaussian_process.GaussianProcess" title="sklearn.gaussian_process.GaussianProcess"><code class="xref py py-class docutils literal"><span class="pre">GaussianProcess</span></code></a> takes a parameter <code class="docutils literal"><span class="pre">nugget</span></code> which
-is added to the diagonal of the correlation matrix between training points:
-in general this is a type of Tikhonov regularization.  In the special case
-of a squared-exponential correlation function, this normalization is
-equivalent to specifying a fractional variance in the input.  That is</p>
-<div class="math">
-<p><img src="../_images/math/bec91d7032e113797c13fb4b50295c35309bbd60.png" alt="\mathrm{nugget}_i = \left[\frac{\sigma_i}{y_i}\right]^2"/></p>
-</div><p>With <code class="docutils literal"><span class="pre">nugget</span></code> and <code class="docutils literal"><span class="pre">corr</span></code> properly set, Gaussian Processes can be
-used to robustly recover an underlying function from noisy data.</p>
-</div>
-<div class="section" id="mathematical-formulation">
-<h3>1.7.6.3. Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="the-initial-assumption">
-<h4>1.7.6.3.1. The initial assumption<a class="headerlink" href="#the-initial-assumption" title="Permalink to this headline">¶</a></h4>
-<p>Suppose one wants to model the output of a computer experiment, say a
-mathematical function:</p>
-<div class="math">
-<p><img src="../_images/math/69d2415c9026b7a1b47321ff64417833632a8357.png" alt="g: &amp; \mathbb{R}^{n_{\rm features}} \rightarrow \mathbb{R} \\
-   &amp; X \mapsto y = g(X)"/></p>
-</div><p>GPML starts with the assumption that this function is <em>a</em> conditional sample
-path of <em>a</em> Gaussian process <img class="math" src="../_images/math/dee63237674afc3154c2e33b7b68d67f85f2ee0a.png" alt="G"/> which is additionally assumed to read as
-follows:</p>
-<div class="math">
-<p><img src="../_images/math/041d4c39282499c142df53da634fbca34bf0eaec.png" alt="G(X) = f(X)^T \beta + Z(X)"/></p>
-</div><p>where <img class="math" src="../_images/math/4bf3f79e592f44a0918ad6060416de45a8dea3b1.png" alt="f(X)^T \beta"/> is a linear regression model and <img class="math" src="../_images/math/42684295c2eb32524bd1d7ec928f9a968c554c9a.png" alt="Z(X)"/> is a
-zero-mean Gaussian process with a fully stationary covariance function:</p>
-<div class="math">
-<p><img src="../_images/math/9d813e7d4f6a54efb73241b2847fc09b6d6b4577.png" alt="C(X, X') = \sigma^2 R(|X - X'|)"/></p>
-</div><p><img class="math" src="../_images/math/7a3d0c9264473a58cc3a769f99a662631131377c.png" alt="\sigma^2"/> being its variance and <img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> being the correlation
-function which solely depends on the absolute relative distance between each
-sample, possibly featurewise (this is the stationarity assumption).</p>
-<p>From this basic formulation, note that GPML is nothing but an extension of a
-basic least squares linear regression problem:</p>
-<div class="math">
-<p><img src="../_images/math/c3d5bd15d3878ea8d4317646629723e693d14ab1.png" alt="g(X) \approx f(X)^T \beta"/></p>
-</div><p>Except we additionally assume some spatial coherence (correlation) between the
-samples dictated by the correlation function. Indeed, ordinary least squares
-assumes the correlation model <img class="math" src="../_images/math/7a42ce125aa465fa1885cd5405aec2aac4d360bc.png" alt="R(|X - X'|)"/> is one when <img class="math" src="../_images/math/1103e88c4e6e6e69dfca9fd3d110911904484bd7.png" alt="X = X'"/>
-and zero otherwise : a <em>dirac</em> correlation model – sometimes referred to as a
-<em>nugget</em> correlation model in the kriging literature.</p>
-</div>
-<div class="section" id="the-best-linear-unbiased-prediction-blup">
-<h4>1.7.6.3.2. The best linear unbiased prediction (BLUP)<a class="headerlink" href="#the-best-linear-unbiased-prediction-blup" title="Permalink to this headline">¶</a></h4>
-<p>We now derive the <em>best linear unbiased prediction</em> of the sample path
-<img class="math" src="../_images/math/307b3725cbb03398131f9ca542d79aff4933195f.png" alt="g"/> conditioned on the observations:</p>
-<div class="math">
-<p><img src="../_images/math/63c9610b9dbef0e08c93d3d0f6606910749f7360.png" alt="\hat{G}(X) = G(X | y_1 = g(X_1), ...,
-                            y_{n_{\rm samples}} = g(X_{n_{\rm samples}}))"/></p>
-</div><p>It is derived from its <em>given properties</em>:</p>
-<ul class="simple">
-<li>It is linear (a linear combination of the observations)</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/cee1832e9eb1d42f48aaa5751956b8ba529e23cd.png" alt="\hat{G}(X) \equiv a(X)^T y"/></p>
-</div><ul class="simple">
-<li>It is unbiased</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/f750e6bb18a235003a6a3bdef92bedca8c043ba9.png" alt="\mathbb{E}[G(X) - \hat{G}(X)] = 0"/></p>
-</div><ul class="simple">
-<li>It is the best (in the Mean Squared Error sense)</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/87701822cbf21bb28139288a2ab081911785ef58.png" alt="\hat{G}(X)^* = \arg \min\limits_{\hat{G}(X)} \;
-                                        \mathbb{E}[(G(X) - \hat{G}(X))^2]"/></p>
-</div><p>So that the optimal weight vector <img class="math" src="../_images/math/d6b710f7b85b73b7fa48070ffd5a306128331a4e.png" alt="a(X)"/> is solution of the following
-equality constrained optimization problem:</p>
-<div class="math">
-<p><img src="../_images/math/cdac62152599b18e381d5e60cb87cc2f31d4046e.png" alt="a(X)^* = \arg \min\limits_{a(X)} &amp; \; \mathbb{E}[(G(X) - a(X)^T y)^2] \\
-                   {\rm s. t.} &amp; \; \mathbb{E}[G(X) - a(X)^T y] = 0"/></p>
-</div><p>Rewriting this constrained optimization problem in the form of a Lagrangian and
-looking further for the first order optimality conditions to be satisfied, one
-ends up with a closed form expression for the sought predictor – see
-references for the complete proof.</p>
-<p>In the end, the BLUP is shown to be a Gaussian random variate with mean:</p>
-<div class="math">
-<p><img src="../_images/math/0de279ae0d207f7cd045fc0b2b14c24ffa0f99f9.png" alt="\mu_{\hat{Y}}(X) = f(X)^T\,\hat{\beta} + r(X)^T\,\gamma"/></p>
-</div><p>and variance:</p>
-<div class="math">
-<p><img src="../_images/math/0f517571c98035dfcf5baf68cf7fa2b64a005657.png" alt="\sigma_{\hat{Y}}^2(X) = \sigma_{Y}^2\,
-( 1
-- r(X)^T\,R^{-1}\,r(X)
-+ u(X)^T\,(F^T\,R^{-1}\,F)^{-1}\,u(X)
-)"/></p>
-</div><p>where we have introduced:</p>
-<ul class="simple">
-<li>the correlation matrix whose terms are defined wrt the autocorrelation
-function and its built-in parameters <img class="math" src="../_images/math/3be04d4207434584251f6921820c24ac9fa8c6f1.png" alt="\theta"/>:</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/1722557cac6e58298c0b2436e514891edf85f64e.png" alt="R_{i\,j} = R(|X_i - X_j|, \theta), \; i,\,j = 1, ..., m"/></p>
-</div><ul class="simple">
-<li>the vector of cross-correlations between the point where the prediction is
-made and the points in the DOE:</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/f3ccfb83a31f41f8829cbd986b5e589ed1b62795.png" alt="r_i = R(|X - X_i|, \theta), \; i = 1, ..., m"/></p>
-</div><ul class="simple">
-<li>the regression matrix (eg the Vandermonde matrix if <img class="math" src="../_images/math/875eb40014526135383caa89fd500ae40a835f56.png" alt="f"/> is a polynomial
-basis):</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/693dba60f07eadbda2ba980e37e419718ca37745.png" alt="F_{i\,j} = f_i(X_j), \; i = 1, ..., p, \, j = 1, ..., m"/></p>
-</div><ul class="simple">
-<li>the generalized least square regression weights:</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/ce6094ccf2ce46a4e9622a23e98ab4223884c84f.png" alt="\hat{\beta} =(F^T\,R^{-1}\,F)^{-1}\,F^T\,R^{-1}\,Y"/></p>
-</div><ul class="simple">
-<li>and the vectors:</li>
-</ul>
-<div class="math">
-<p><img src="../_images/math/cbdf7d1a061e7d00cd0186dd20f7a54724463cd1.png" alt="\gamma &amp; = R^{-1}(Y - F\,\hat{\beta}) \\
-u(X) &amp; = F^T\,R^{-1}\,r(X) - f(X)"/></p>
-</div><p>It is important to notice that the probabilistic response of a Gaussian Process
-predictor is fully analytic and mostly relies on basic linear algebra
-operations. More precisely the mean prediction is the sum of two simple linear
-combinations (dot products), and the variance requires two matrix inversions,
-but the correlation matrix can be decomposed only once using a Cholesky
-decomposition algorithm.</p>
-</div>
-<div class="section" id="the-empirical-best-linear-unbiased-predictor-eblup">
-<h4>1.7.6.3.3. The empirical best linear unbiased predictor (EBLUP)<a class="headerlink" href="#the-empirical-best-linear-unbiased-predictor-eblup" title="Permalink to this headline">¶</a></h4>
-<p>Until now, both the autocorrelation and regression models were assumed given.
-In practice however they are never known in advance so that one has to make
-(motivated) empirical choices for these models <a class="reference internal" href="#correlation-models"><span class="std std-ref">Correlation Models</span></a>.</p>
-<p>Provided these choices are made, one should estimate the remaining unknown
-parameters involved in the BLUP. To do so, one uses the set of provided
-observations in conjunction with some inference technique. The present
-implementation, which is based on the DACE’s Matlab toolbox uses the <em>maximum
-likelihood estimation</em> technique – see DACE manual in references for the
-complete equations. This maximum likelihood estimation problem is turned into
-a global optimization problem onto the autocorrelation parameters. In the
-present implementation, this global optimization is solved by means of the
-fmin_cobyla optimization function from scipy.optimize. In the case of
-anisotropy however, we provide an implementation of Welch’s componentwise
-optimization algorithm – see references.</p>
-</div>
-</div>
-<div class="section" id="correlation-models">
-<span id="id7"></span><h3>1.7.6.4. Correlation Models<a class="headerlink" href="#correlation-models" title="Permalink to this headline">¶</a></h3>
-<p>Common correlation models matches some famous SVM’s kernels because they are
-mostly built on equivalent assumptions. They must fulfill Mercer’s conditions
-and should additionally remain stationary. Note however, that the choice of the
-correlation model should be made in agreement with the known properties of the
-original experiment from which the observations come. For instance:</p>
-<ul class="simple">
-<li>If the original experiment is known to be infinitely differentiable (smooth),
-then one should use the <em>squared-exponential correlation model</em>.</li>
-<li>If it’s not, then one should rather use the <em>exponential correlation model</em>.</li>
-<li>Note also that there exists a correlation model that takes the degree of
-derivability as input: this is the Matern correlation model, but it’s not
-implemented here (TODO).</li>
-</ul>
-<p>For a more detailed discussion on the selection of appropriate correlation
-models, see the book by Rasmussen &amp; Williams in references.</p>
-</div>
-<div class="section" id="regression-models">
-<span id="id8"></span><h3>1.7.6.5. Regression Models<a class="headerlink" href="#regression-models" title="Permalink to this headline">¶</a></h3>
-<p>Common linear regression models involve zero- (constant), first- and
-second-order polynomials. But one may specify its own in the form of a Python
-function that takes the features X as input and that returns a vector
-containing the values of the functional set. The only constraint is that the
-number of functions must not exceed the number of available observations so
-that the underlying regression problem is not <em>underdetermined</em>.</p>
-</div>
-<div class="section" id="implementation-details">
-<h3>1.7.6.6. Implementation details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h3>
-<p>The implementation is based on a translation of the DACE Matlab
-toolbox.</p>
-<div class="topic">
-<p class="topic-title first">References:</p>
-<ul class="simple">
-<li><a class="reference external" href="http://imedea.uib-csic.es/master/cambioglobal/Modulo_V_cod101615/Lab/lab_maps/krigging/DACE-krigingsoft/dace/dace.pdf">DACE, A Matlab Kriging Toolbox</a> S Lophaven, HB Nielsen, J
-Sondergaard 2002,</li>
-<li>W.J. Welch, R.J. Buck, J. Sacks, H.P. Wynn, T.J. Mitchell, and M.D.
-Morris (1992). Screening, predicting, and computer experiments.
-Technometrics, 34(1) 15–25.</li>
-</ul>
-</div>
 </div>
 </div>
 </div>

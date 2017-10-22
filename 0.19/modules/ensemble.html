@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>1.11. Ensemble methods &#8212; scikit-learn 0.19.0 documentation</title>
+    <title>1.11. Ensemble methods &#8212; scikit-learn 0.19.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -22,7 +22,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.19.0',
+        VERSION:     '0.19.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -111,7 +111,7 @@
 </div>
 
 
-<!-- Github "fork me" ribbon -->
+<!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
   <img class="fork-me"
        style="position: absolute; top: 0; right: 0; border: 0;"
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-      <p class="doc-version"><b>scikit-learn v0.19.0</b><br/>
+      <p class="doc-version"><b>scikit-learn v0.19.1</b><br/>
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
@@ -442,7 +442,7 @@ bias. Empirical good default values are <code class="docutils literal"><span cla
 for regression problems, and <code class="docutils literal"><span class="pre">max_features=sqrt(n_features)</span></code> for
 classification tasks (where <code class="docutils literal"><span class="pre">n_features</span></code> is the number of features
 in the data). Good results are often achieved when setting <code class="docutils literal"><span class="pre">max_depth=None</span></code>
-in combination with <code class="docutils literal"><span class="pre">min_samples_split=1</span></code> (i.e., when fully developing the
+in combination with <code class="docutils literal"><span class="pre">min_samples_split=2</span></code> (i.e., when fully developing the
 trees). Bear in mind though that these values are usually not optimal, and
 might result in models that consume a lot of RAM. The best parameter values
 should always be cross-validated. In addition, note that in random forests,
@@ -834,8 +834,8 @@ minimize the loss function <img class="math" src="../_images/math/ae2b750f71e1fc
 <img class="math" src="../_images/math/ae9df12c10481b6e843e2b8a0e1058dc40d356e5.png" alt="F_{m-1}"/> and its fit <img class="math" src="../_images/math/aaa0095d8e9f1d72aba0a1b5871ae4f4f6d35ccc.png" alt="F_{m-1}(x_i)"/></p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/9aeabf91d2d9c30ca45c2618f51e8d8c82ba4d77.png" alt="F_m(x) = F_{m-1}(x) + \arg\min_{h} \sum_{i=1}^{n} L(y_i,
-F_{m-1}(x_i) - h(x))"/></p>
+<p><img src="../_images/math/146b3d8d96434a5d99cdd142b83b1eac93c87044.png" alt="F_m(x) = F_{m-1}(x) + \arg\min_{h} \sum_{i=1}^{n} L(y_i,
+F_{m-1}(x_i) + h(x))"/></p>
 </div></div></blockquote>
 <p>The initial model <img class="math" src="../_images/math/31a04d17cd387e3b19d104a29ba2bd159f42eccb.png" alt="F_{0}"/> is problem specific, for least-squares
 regression one usually chooses the mean of the target values.</p>
@@ -851,7 +851,7 @@ model <img class="math" src="../_images/math/ae9df12c10481b6e843e2b8a0e1058dc40d
 loss function:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/eac4fdf64ca91da58bfcbda90a05067118d52429.png" alt="F_m(x) = F_{m-1}(x) + \gamma_m \sum_{i=1}^{n} \nabla_F L(y_i,
+<p><img src="../_images/math/06f2fba1034b14a871eef1ece614a8badd8fa081.png" alt="F_m(x) = F_{m-1}(x) - \gamma_m \sum_{i=1}^{n} \nabla_F L(y_i,
 F_{m-1}(x_i))"/></p>
 </div></div></blockquote>
 <p>Where the step length <img class="math" src="../_images/math/ab2418d0fe06e2097d0d32cece8f0ab21b9227b4.png" alt="\gamma_m"/> is chosen using line search:</p>
