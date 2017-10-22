@@ -208,32 +208,33 @@
 </li>
 <li><a class="reference internal" href="#forest-covertypes">5.11. Forest covertypes</a></li>
 <li><a class="reference internal" href="#rcv1-dataset">5.12. RCV1 dataset</a></li>
-<li><a class="reference internal" href="#boston-house-prices-dataset">5.13. Boston House Prices dataset</a><ul>
-<li><a class="reference internal" href="#notes">5.13.1. Notes</a></li>
+<li><a class="reference internal" href="#kddcup-99-dataset">5.13. Kddcup 99 dataset</a></li>
+<li><a class="reference internal" href="#boston-house-prices-dataset">5.14. Boston House Prices dataset</a><ul>
+<li><a class="reference internal" href="#notes">5.14.1. Notes</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#breast-cancer-wisconsin-diagnostic-database">5.14. Breast Cancer Wisconsin (Diagnostic) Database</a><ul>
-<li><a class="reference internal" href="#id10">5.14.1. Notes</a></li>
-<li><a class="reference internal" href="#references">5.14.2. References</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#diabetes-dataset">5.15. Diabetes dataset</a><ul>
+<li><a class="reference internal" href="#breast-cancer-wisconsin-diagnostic-database">5.15. Breast Cancer Wisconsin (Diagnostic) Database</a><ul>
 <li><a class="reference internal" href="#id11">5.15.1. Notes</a></li>
+<li><a class="reference internal" href="#references">5.15.2. References</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#optical-recognition-of-handwritten-digits-data-set">5.16. Optical Recognition of Handwritten Digits Data Set</a><ul>
+<li><a class="reference internal" href="#diabetes-dataset">5.16. Diabetes dataset</a><ul>
 <li><a class="reference internal" href="#id12">5.16.1. Notes</a></li>
-<li><a class="reference internal" href="#id13">5.16.2. References</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#iris-plants-database">5.17. Iris Plants Database</a><ul>
-<li><a class="reference internal" href="#id14">5.17.1. Notes</a></li>
-<li><a class="reference internal" href="#id15">5.17.2. References</a></li>
+<li><a class="reference internal" href="#optical-recognition-of-handwritten-digits-data-set">5.17. Optical Recognition of Handwritten Digits Data Set</a><ul>
+<li><a class="reference internal" href="#id13">5.17.1. Notes</a></li>
+<li><a class="reference internal" href="#id14">5.17.2. References</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#linnerrud-dataset">5.18. Linnerrud dataset</a><ul>
-<li><a class="reference internal" href="#id16">5.18.1. Notes</a></li>
-<li><a class="reference internal" href="#id17">5.18.2. References</a></li>
+<li><a class="reference internal" href="#iris-plants-database">5.18. Iris Plants Database</a><ul>
+<li><a class="reference internal" href="#id15">5.18.1. Notes</a></li>
+<li><a class="reference internal" href="#id16">5.18.2. References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linnerrud-dataset">5.19. Linnerrud dataset</a><ul>
+<li><a class="reference internal" href="#id17">5.19.1. Notes</a></li>
+<li><a class="reference internal" href="#id18">5.19.2. References</a></li>
 </ul>
 </li>
 </ul>
@@ -1031,10 +1032,39 @@ The compressed size is about 656 MB.</p>
 </table>
 </div>
 </div>
+<div class="section" id="kddcup-99-dataset">
+<span id="kddcup99"></span><h2>5.13. Kddcup 99 dataset<a class="headerlink" href="#kddcup-99-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The KDD Cup ‘99 dataset was created by processing the tcpdump portions
+of the 1998 DARPA Intrusion Detection System (IDS) Evaluation dataset,
+created by MIT Lincoln Lab. The artificial data (described on the <a class="reference external" href="http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html">dataset’s
+homepage</a>) was
+generated using a closed network and hand-injected attacks to produce a
+large number of different types of attack with normal activity in the
+background. As the initial goal was to produce a large training set for
+supervised learning algorithms, there is a large proportion (80.1%) of
+abnormal data which is unrealistic in real world, and inappropriate for
+unsupervised anomaly detection which aims at detecting ‘abnormal’ data, ie
+1) qualitatively different from normal data
+2) in large minority among the observations.
+We thus transform the KDD Data set into two different data sets: SA and SF.</p>
+<p>-SA is obtained by simply selecting all the normal data, and a small
+proportion of abnormal data to gives an anomaly proportion of 1%.</p>
+<p>-SF is obtained as in [2]
+by simply picking up the data whose attribute logged_in is positive, thus
+focusing on the intrusion attack, which gives a proportion of 0.3% of
+attack.</p>
+<p>-http and smtp are two subsets of SF corresponding with third feature
+equal to ‘http’ (resp. to ‘smtp’)</p>
+<p><a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_kddcup99.html#sklearn.datasets.fetch_kddcup99" title="sklearn.datasets.fetch_kddcup99"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_kddcup99</span></code></a> will load the kddcup99 dataset;
+it returns a dictionary-like object
+with the feature matrix in the <code class="docutils literal"><span class="pre">data</span></code> member
+and the target values in <code class="docutils literal"><span class="pre">target</span></code>.
+The dataset will be downloaded from the web if necessary.</p>
+</div>
 <div class="section" id="boston-house-prices-dataset">
-<span id="boston-house-prices"></span><h2>5.13. Boston House Prices dataset<a class="headerlink" href="#boston-house-prices-dataset" title="Permalink to this headline">¶</a></h2>
+<span id="boston-house-prices"></span><h2>5.14. Boston House Prices dataset<a class="headerlink" href="#boston-house-prices-dataset" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="notes">
-<h3>5.13.1. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<h3>5.14.1. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
 <p>Data Set Characteristics:</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -1104,9 +1134,9 @@ problems.</p>
 </div>
 </div>
 <div class="section" id="breast-cancer-wisconsin-diagnostic-database">
-<span id="breast-cancer"></span><h2>5.14. Breast Cancer Wisconsin (Diagnostic) Database<a class="headerlink" href="#breast-cancer-wisconsin-diagnostic-database" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id10">
-<h3>5.14.1. Notes<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<span id="breast-cancer"></span><h2>5.15. Breast Cancer Wisconsin (Diagnostic) Database<a class="headerlink" href="#breast-cancer-wisconsin-diagnostic-database" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>5.15.1. Notes<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Data Set Characteristics:</dt>
 <dd><table class="first docutils field-list" frame="void" rules="none">
@@ -1334,7 +1364,7 @@ Optimization Methods and Software 1, 1992, 23-34].</p>
 cd math-prog/cpo-dataset/machine-learn/WDBC/</p>
 </div>
 <div class="section" id="references">
-<h3>5.14.2. References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<h3>5.15.2. References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>W.N. Street, W.H. Wolberg and O.L. Mangasarian. Nuclear feature extraction
@@ -1352,9 +1382,9 @@ to diagnose breast cancer from fine-needle aspirates. Cancer Letters 77 (1994)
 </div>
 </div>
 <div class="section" id="diabetes-dataset">
-<span id="diabetes"></span><h2>5.15. Diabetes dataset<a class="headerlink" href="#diabetes-dataset" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id11">
-<h3>5.15.1. Notes<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<span id="diabetes"></span><h2>5.16. Diabetes dataset<a class="headerlink" href="#diabetes-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id12">
+<h3>5.16.1. Notes<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>Ten baseline variables, age, sex, body mass index, average blood
 pressure, and six blood serum measurements were obtained for each of n =
 442 diabetes patients, as well as the response of interest, a
@@ -1418,9 +1448,9 @@ Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) “Lea
 </div>
 </div>
 <div class="section" id="optical-recognition-of-handwritten-digits-data-set">
-<span id="digits"></span><h2>5.16. Optical Recognition of Handwritten Digits Data Set<a class="headerlink" href="#optical-recognition-of-handwritten-digits-data-set" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id12">
-<h3>5.16.1. Notes<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<span id="digits"></span><h2>5.17. Optical Recognition of Handwritten Digits Data Set<a class="headerlink" href="#optical-recognition-of-handwritten-digits-data-set" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id13">
+<h3>5.17.1. Notes<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Data Set Characteristics:</dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
@@ -1472,8 +1502,8 @@ T. Candela, D. L. Dimmick, J. Geist, P. J. Grother, S. A. Janet, and C.
 L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
 1994.</p>
 </div>
-<div class="section" id="id13">
-<h3>5.16.2. References<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id14">
+<h3>5.17.2. References<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>C. Kaynak (1995) Methods of Combining Multiple Classifiers and Their
@@ -1494,9 +1524,9 @@ Algorithm. NIPS. 2000.</li>
 </div>
 </div>
 <div class="section" id="iris-plants-database">
-<span id="iris"></span><h2>5.17. Iris Plants Database<a class="headerlink" href="#iris-plants-database" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id14">
-<h3>5.17.1. Notes<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<span id="iris"></span><h2>5.18. Iris Plants Database<a class="headerlink" href="#iris-plants-database" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id15">
+<h3>5.18.1. Notes<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Data Set Characteristics:</dt>
 <dd><table class="first docutils field-list" frame="void" rules="none">
@@ -1614,8 +1644,8 @@ data set contains 3 classes of 50 instances each, where each class refers to a
 type of iris plant.  One class is linearly separable from the other 2; the
 latter are NOT linearly separable from each other.</p>
 </div>
-<div class="section" id="id15">
-<h3>5.17.2. References<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id16">
+<h3>5.18.2. References<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Fisher,R.A. “The use of multiple measurements in taxonomic problems”
@@ -1637,9 +1667,9 @@ conceptual clustering system finds 3 classes in the data.</li>
 </div>
 </div>
 <div class="section" id="linnerrud-dataset">
-<span id="linnerud"></span><h2>5.18. Linnerrud dataset<a class="headerlink" href="#linnerrud-dataset" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id16">
-<h3>5.18.1. Notes<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<span id="linnerud"></span><h2>5.19. Linnerrud dataset<a class="headerlink" href="#linnerrud-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id17">
+<h3>5.19.1. Notes<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Data Set Characteristics:</dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
@@ -1670,8 +1700,8 @@ conceptual clustering system finds 3 classes in the data.</li>
 </li>
 </ul>
 </div>
-<div class="section" id="id17">
-<h3>5.18.2. References<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h3>5.19.2. References<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Tenenhaus, M. (1998). La regression PLS: theorie et pratique. Paris: Editions Technic.</li>
