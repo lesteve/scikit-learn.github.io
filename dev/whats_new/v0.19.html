@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
   
-    <title>Version 0.19 &#8212; scikit-learn 0.20.dev0 documentation</title>
+    <title>Version 0.19.1 &#8212; scikit-learn 0.20.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -124,17 +124,27 @@
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
-<li><a class="reference internal" href="#">Version 0.19</a><ul>
+<li><a class="reference internal" href="#">Version 0.19.1</a><ul>
+<li><a class="reference internal" href="#changelog">Changelog</a><ul>
+<li><a class="reference internal" href="#api-changes">API changes</a></li>
+<li><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+<li><a class="reference internal" href="#enhancements">Enhancements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#code-and-documentation-contributors">Code and Documentation Contributors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-0-19">Version 0.19</a><ul>
 <li><a class="reference internal" href="#highlights">Highlights</a></li>
 <li><a class="reference internal" href="#changed-models">Changed models</a></li>
-<li><a class="reference internal" href="#changelog">Changelog</a><ul>
+<li><a class="reference internal" href="#id1">Changelog</a><ul>
 <li><a class="reference internal" href="#new-features">New features</a></li>
-<li><a class="reference internal" href="#enhancements">Enhancements</a></li>
-<li><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+<li><a class="reference internal" href="#id2">Enhancements</a></li>
+<li><a class="reference internal" href="#id3">Bug fixes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#api-changes-summary">API changes summary</a></li>
-<li><a class="reference internal" href="#code-and-documentation-contributors">Code and Documentation Contributors</a></li>
+<li><a class="reference internal" href="#id8">Code and Documentation Contributors</a></li>
 </ul>
 </li>
 </ul>
@@ -154,8 +164,114 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="version-0-19">
-<span id="changes-0-19"></span><h1>Version 0.19<a class="headerlink" href="#version-0-19" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="version-0-19-1">
+<span id="changes-0-19"></span><h1>Version 0.19.1<a class="headerlink" href="#version-0-19-1" title="Permalink to this headline">¶</a></h1>
+<p><strong>October 23, 2017</strong></p>
+<p>This is a bug-fix release with some minor documentation improvements and
+enhancements to features released in 0.19.0.</p>
+<p>Note there may be minor differences in TSNE output in this release (due to
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9623">#9623</a>), in the case where multiple samples have equal distance to some
+sample.</p>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="api-changes">
+<h3>API changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Reverted the addition of <code class="docutils literal"><span class="pre">metrics.ndcg_score</span></code> and <code class="docutils literal"><span class="pre">metrics.dcg_score</span></code>
+which had been merged into version 0.19.0 by error.  The implementations
+were broken and undocumented.</li>
+<li><code class="docutils literal"><span class="pre">return_train_score</span></code> which was added to
+<a class="reference internal" href="../modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.GridSearchCV</span></code></a>,
+<a class="reference internal" href="../modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="sklearn.model_selection.RandomizedSearchCV"><code class="xref py py-class docutils literal"><span class="pre">model_selection.RandomizedSearchCV</span></code></a> and
+<a class="reference internal" href="../modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate" title="sklearn.model_selection.cross_validate"><code class="xref py py-func docutils literal"><span class="pre">model_selection.cross_validate</span></code></a> in version 0.19.0 will be changing its
+default value from True to False in version 0.21.  We found that calculating
+training score could have a great effect on cross validation runtime in some
+cases.  Users should explicitly set <code class="docutils literal"><span class="pre">return_train_score</span></code> to False if
+prediction or scoring functions are slow, resulting in a deleterious effect
+on CV runtime, or to True if they wish to use the calculated scores.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9677">#9677</a> by <a class="reference external" href="https://github.com/thechargedneutron">Kumar Ashutosh</a> and <a class="reference external" href="http://joelnothman.com">Joel
+Nothman</a>.</li>
+<li><code class="docutils literal"><span class="pre">correlation_models</span></code> and <code class="docutils literal"><span class="pre">regression_models</span></code> from the legacy gaussian
+processes implementation have been belatedly deprecated. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9717">#9717</a> by
+<a class="reference external" href="https://github.com/thechargedneutron">Kumar Ashutosh</a>.</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Avoid integer overflows in <a class="reference internal" href="../modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef" title="sklearn.metrics.matthews_corrcoef"><code class="xref py py-func docutils literal"><span class="pre">metrics.matthews_corrcoef</span></code></a>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9693">#9693</a> by <a class="reference external" href="https://github.com/sam-s">Sam Steingold</a>.</li>
+<li>Fix ValueError in <a class="reference internal" href="../modules/generated/sklearn.preprocessing.LabelEncoder.html#sklearn.preprocessing.LabelEncoder" title="sklearn.preprocessing.LabelEncoder"><code class="xref py py-class docutils literal"><span class="pre">preprocessing.LabelEncoder</span></code></a> when using
+<code class="docutils literal"><span class="pre">inverse_transform</span></code> on unseen labels. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9816">#9816</a> by <a class="reference external" href="https://github.com/newey01c">Charlie Newey</a>.</li>
+<li>Fixed a bug in the objective function for <a class="reference internal" href="../modules/generated/sklearn.manifold.TSNE.html#sklearn.manifold.TSNE" title="sklearn.manifold.TSNE"><code class="xref py py-class docutils literal"><span class="pre">manifold.TSNE</span></code></a> (both exact
+and with the Barnes-Hut approximation) when <code class="docutils literal"><span class="pre">n_components</span> <span class="pre">&gt;=</span> <span class="pre">3</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9711">#9711</a> by <a class="reference external" href="https://github.com/goncalo-rodrigues">&#64;goncalo-rodrigues</a>.</li>
+<li>Fix regression in <a class="reference internal" href="../modules/generated/sklearn.model_selection.cross_val_predict.html#sklearn.model_selection.cross_val_predict" title="sklearn.model_selection.cross_val_predict"><code class="xref py py-func docutils literal"><span class="pre">model_selection.cross_val_predict</span></code></a> where it
+raised an error with <code class="docutils literal"><span class="pre">method='predict_proba'</span></code> for some probabilistic
+classifiers. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9641">#9641</a> by <a class="reference external" href="https://github.com/jrbourbeau">James Bourbeau</a>.</li>
+<li>Fixed a bug where <a class="reference internal" href="../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification" title="sklearn.datasets.make_classification"><code class="xref py py-func docutils literal"><span class="pre">datasets.make_classification</span></code></a> modified its input
+<code class="docutils literal"><span class="pre">weights</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9865">#9865</a> by <a class="reference external" href="https://github.com/s4chin">Sachin Kelkar</a>.</li>
+<li><a class="reference internal" href="../modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html#sklearn.model_selection.StratifiedShuffleSplit" title="sklearn.model_selection.StratifiedShuffleSplit"><code class="xref py py-class docutils literal"><span class="pre">model_selection.StratifiedShuffleSplit</span></code></a> now works with multioutput
+multiclass or multilabel data with more than 1000 columns.  <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9922">#9922</a> by
+<a class="reference external" href="https://github.com/crbrummitt">Charlie Brummitt</a>.</li>
+<li>Fixed a bug with nested and conditional parameter setting, e.g. setting a
+pipeline step and its parameter at the same time. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9945">#9945</a> by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas
+Müller</a> and <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
+</ul>
+<p>Regressions in 0.19.0 fixed in 0.19.1:</p>
+<ul class="simple">
+<li>Fixed a bug where parallelised prediction in random forests was not
+thread-safe and could (rarely) result in arbitrary errors. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9830">#9830</a> by
+<a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
+<li>Fix regression in <a class="reference internal" href="../modules/generated/sklearn.model_selection.cross_val_predict.html#sklearn.model_selection.cross_val_predict" title="sklearn.model_selection.cross_val_predict"><code class="xref py py-func docutils literal"><span class="pre">model_selection.cross_val_predict</span></code></a> where it no
+longer accepted <code class="docutils literal"><span class="pre">X</span></code> as a list. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9600">#9600</a> by <a class="reference external" href="https://github.com/CoderINusE">Rasul Kerimov</a>.</li>
+<li>Fixed handling of <code class="xref py py-func docutils literal"><span class="pre">cross_val_predict</span></code> for binary classification with
+<code class="docutils literal"><span class="pre">method='decision_function'</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9593">#9593</a> by <a class="reference external" href="https://github.com/reiinakano">Reiichiro Nakano</a> and core devs.</li>
+<li>Fix regression in <a class="reference internal" href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">pipeline.Pipeline</span></code></a> where it no longer accepted
+<code class="docutils literal"><span class="pre">steps</span></code> as a tuple. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9604">#9604</a> by <a class="reference external" href="https://github.com/jorisvandenbossche">Joris Van den Bossche</a>.</li>
+<li>Fix bug where <code class="docutils literal"><span class="pre">n_iter</span></code> was not properly deprecated, leaving <code class="docutils literal"><span class="pre">n_iter</span></code>
+unavailable for interim use in
+<a class="reference internal" href="../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDClassifier</span></code></a>, <a class="reference internal" href="../modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDRegressor</span></code></a>,
+<a class="reference internal" href="../modules/generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier" title="sklearn.linear_model.PassiveAggressiveClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.PassiveAggressiveClassifier</span></code></a>,
+<a class="reference internal" href="../modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html#sklearn.linear_model.PassiveAggressiveRegressor" title="sklearn.linear_model.PassiveAggressiveRegressor"><code class="xref py py-class docutils literal"><span class="pre">linear_model.PassiveAggressiveRegressor</span></code></a> and
+<a class="reference internal" href="../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron" title="sklearn.linear_model.Perceptron"><code class="xref py py-class docutils literal"><span class="pre">linear_model.Perceptron</span></code></a>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9558">#9558</a> by <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
+<li>Dataset fetchers make sure temporary files are closed before removing them,
+which caused errors on Windows. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9847">#9847</a> by <a class="reference external" href="https://github.com/massich">Joan Massich</a>.</li>
+<li>Fixed a regression in <a class="reference internal" href="../modules/generated/sklearn.manifold.TSNE.html#sklearn.manifold.TSNE" title="sklearn.manifold.TSNE"><code class="xref py py-class docutils literal"><span class="pre">manifold.TSNE</span></code></a> where it no longer supported
+metrics other than ‘euclidean’ and ‘precomputed’. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9623">#9623</a> by <a class="reference external" href="https://github.com/oliblum90">Oli
+Blum</a>.</li>
+</ul>
+</div>
+<div class="section" id="enhancements">
+<h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Our test suite and <code class="xref py py-func docutils literal"><span class="pre">utils.estimator_checks.check_estimators</span></code> can now be
+run without Nose installed. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9697">#9697</a> by <a class="reference external" href="https://github.com/massich">Joan Massich</a>.</li>
+<li>To improve usability of version 0.19’s <a class="reference internal" href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">pipeline.Pipeline</span></code></a>
+caching, <code class="docutils literal"><span class="pre">memory</span></code> now allows <code class="docutils literal"><span class="pre">joblib.Memory</span></code> instances.
+This make use of the new <a class="reference internal" href="../modules/generated/sklearn.utils.validation.check_memory.html#sklearn.utils.validation.check_memory" title="sklearn.utils.validation.check_memory"><code class="xref py py-func docutils literal"><span class="pre">utils.validation.check_memory</span></code></a> helper.
+issue:<cite>9584</cite> by <a class="reference external" href="https://github.com/thechargedneutron">Kumar Ashutosh</a></li>
+<li>Some fixes to examples: <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9750">#9750</a>, <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9788">#9788</a>, <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9815">#9815</a></li>
+<li>Made a FutureWarning in SGD-based estimators less verbose. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9802">#9802</a> by
+<a class="reference external" href="https://github.com/vrishank97">Vrishank Bhardwaj</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="code-and-documentation-contributors">
+<h2>Code and Documentation Contributors<a class="headerlink" href="#code-and-documentation-contributors" title="Permalink to this headline">¶</a></h2>
+<p>With thanks to:</p>
+<p>Joel Nothman, Loic Esteve, Andreas Mueller, Kumar Ashutosh,
+Vrishank Bhardwaj, Hanmin Qin, Rasul Kerimov, James Bourbeau,
+Nagarjuna Kumar, Nathaniel Saul, Olivier Grisel, Roman
+Yurchak, Reiichiro Nakano, Sachin Kelkar, Sam Steingold,
+Yaroslav Halchenko, diegodlh, felix, goncalo-rodrigues,
+jkleint, oliblum90, pasbi, Anthony Gitter, Ben Lawson, Charlie
+Brummitt, Didi Bar-Zev, Gael Varoquaux, Joan Massich, Joris
+Van den Bossche, nielsenmarkus11</p>
+</div>
+</div>
+<div class="section" id="version-0-19">
+<h1>Version 0.19<a class="headerlink" href="#version-0-19" title="Permalink to this headline">¶</a></h1>
 <p><strong>August 12, 2017</strong></p>
 <div class="section" id="highlights">
 <h2>Highlights<a class="headerlink" href="#highlights" title="Permalink to this headline">¶</a></h2>
@@ -214,8 +330,8 @@ with <code class="docutils literal"><span class="pre">scale=True</span></code> (
 <p>(While we are trying to better inform users by providing this information, we
 cannot assure that this list is complete.)</p>
 </div>
-<div class="section" id="changelog">
-<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Changelog<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="new-features">
 <h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
 <p>Classifiers and regressors</p>
@@ -282,8 +398,8 @@ function/class signature. <a class="reference external" href="https://github.com
 <a class="reference external" href="https://github.com/raghavrv">Raghav RV</a>.</li>
 </ul>
 </div>
-<div class="section" id="enhancements">
-<h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Enhancements<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Trees and ensembles</p>
 <ul class="simple">
 <li>The <code class="docutils literal"><span class="pre">min_weight_fraction_leaf</span></code> constraint in tree construction is now
@@ -453,8 +569,8 @@ passing a range of bytes to <a class="reference internal" href="../modules/gener
 now accept non-finite features. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8931">#8931</a> by <a class="reference external" href="https://github.com/Attractadore">&#64;Attractadore</a>.</li>
 </ul>
 </div>
-<div class="section" id="bug-fixes">
-<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Bug fixes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Trees and ensembles</p>
 <ul class="simple">
 <li>Fixed a memory leak in trees when using trees with <code class="docutils literal"><span class="pre">criterion='mae'</span></code>.
@@ -872,8 +988,8 @@ now only have <code class="docutils literal"><span class="pre">self.estimators_<
 </li>
 </ul>
 </div>
-<div class="section" id="code-and-documentation-contributors">
-<h2>Code and Documentation Contributors<a class="headerlink" href="#code-and-documentation-contributors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>Code and Documentation Contributors<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p>Thanks to everyone who has contributed to the maintenance and improvement of the
 project since version 0.18, including:</p>
 <p>Joel Nothman, Loic Esteve, Andreas Mueller, Guillaume Lemaitre, Olivier Grisel,
