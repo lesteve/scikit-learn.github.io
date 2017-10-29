@@ -800,8 +800,52 @@ given binary <code class="docutils literal"><span class="pre">y_true</span></cod
 <p>(but in general, <a class="reference internal" href="generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-func docutils literal"><span class="pre">roc_auc_score</span></code></a> takes as its second argument non-binary scores).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Currently this score function is only defined for binary classification problems, you
+<p>Currently this score function is only defined for binary classification problems, you
 may need to wrap it by yourself if you want to use it for multilabel problems.</p>
+<p>There is no clear consensus on the definition of a balanced accuracy for the
+multiclass setting. Here are some definitions that can be found in the literature:</p>
+<ul class="simple">
+<li>Normalized class-wise accuracy average as described in <a class="reference internal" href="#guyon2015" id="id5">[Guyon2015]</a>: for multi-class
+classification problem, each sample is assigned the class with maximum prediction value.
+The predictions are then binarized to compute the accuracy of each class on a
+one-vs-rest fashion. The balanced accuracy is obtained by averaging the individual
+accuracies over all classes and then normalized by the expected value of balanced
+accuracy for random predictions (<img class="math" src="../_images/math/e42f9359918eae0301e59f831a7908e650bf126b.png" alt="0.5"/> for binary classification, <img class="math" src="../_images/math/22fc360282dc345ac5beb06aa267dbac74a0f621.png" alt="1/C"/>
+for C-class classification problem).</li>
+<li>Macro-average recall as described in <a class="reference internal" href="#mosley2013" id="id6">[Mosley2013]</a> and <a class="reference internal" href="#kelleher2015" id="id7">[Kelleher2015]</a>: the recall
+for each class is computed independently and the average is taken over all classes.</li>
+</ul>
+<p class="last">Note that none of these different definitions are currently implemented within
+the <a class="reference internal" href="generated/sklearn.metrics.balanced_accuracy_score.html#sklearn.metrics.balanced_accuracy_score" title="sklearn.metrics.balanced_accuracy_score"><code class="xref py py-func docutils literal"><span class="pre">balanced_accuracy_score</span></code></a> function. However, the macro-averaged recall
+is implemented in <a class="reference internal" href="generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score" title="sklearn.metrics.recall_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.recall_score</span></code></a>: set <code class="docutils literal"><span class="pre">average</span></code> parameter
+to <code class="docutils literal"><span class="pre">&quot;macro&quot;</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils citation" frame="void" id="guyon2015" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[Guyon2015]</a></td><td>I. Guyon, K. Bennett, G. Cawley, H.J. Escalante, S. Escalera, T.K. Ho, N. Macià,
+B. Ray, M. Saeed, A.R. Statnikov, E. Viegas, <a class="reference external" href="http://ieeexplore.ieee.org/document/7280767/">Design of the 2015 ChaLearn AutoML Challenge</a>,
+IJCNN 2015.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="mosley2013" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[Mosley2013]</a></td><td>L. Mosley, <a class="reference external" href="http://lib.dr.iastate.edu/etd/13537/">A balanced approach to the multi-class imbalance problem</a>,
+IJCV 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="kelleher2015" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[Kelleher2015]</a></td><td>John. D. Kelleher, Brian Mac Namee, Aoife D’Arcy, <a class="reference external" href="https://mitpress.mit.edu/books/fundamentals-machine-learning-predictive-data-analytics">Fundamentals of
+Machine Learning for Predictive Data Analytics: Algorithms, Worked Examples,
+and Case Studies</a>,
+2015.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="cohen-s-kappa">
@@ -824,7 +868,7 @@ and not for more than two annotators.</p>
 </div>
 </div>
 <div class="section" id="confusion-matrix">
-<span id="id6"></span><h3>3.3.2.5. Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">¶</a></h3>
+<span id="id9"></span><h3>3.3.2.5. Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.confusion_matrix.html#sklearn.metrics.confusion_matrix" title="sklearn.metrics.confusion_matrix"><code class="xref py py-func docutils literal"><span class="pre">confusion_matrix</span></code></a> function evaluates
 classification accuracy by computing the <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">confusion matrix</a>.</p>
 <p>By definition, entry <img class="math" src="../_images/math/47b7cdfce0ff3b88ec161712afff3e96a73d9de1.png" alt="i, j"/> in a confusion matrix is
@@ -867,7 +911,7 @@ documents.</li>
 </div>
 </div>
 <div class="section" id="classification-report">
-<span id="id8"></span><h3>3.3.2.6. Classification report<a class="headerlink" href="#classification-report" title="Permalink to this headline">¶</a></h3>
+<span id="id11"></span><h3>3.3.2.6. Classification report<a class="headerlink" href="#classification-report" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report" title="sklearn.metrics.classification_report"><code class="xref py py-func docutils literal"><span class="pre">classification_report</span></code></a> function builds a text report showing the
 main classification metrics. Here is a small example with custom <code class="docutils literal"><span class="pre">target_names</span></code>
 and inferred labels:</p>
@@ -901,7 +945,7 @@ grid search with nested cross-validation.</li>
 </div>
 </div>
 <div class="section" id="hamming-loss">
-<span id="id9"></span><h3>3.3.2.7. Hamming loss<a class="headerlink" href="#hamming-loss" title="Permalink to this headline">¶</a></h3>
+<span id="id12"></span><h3>3.3.2.7. Hamming loss<a class="headerlink" href="#hamming-loss" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.hamming_loss.html#sklearn.metrics.hamming_loss" title="sklearn.metrics.hamming_loss"><code class="xref py py-func docutils literal"><span class="pre">hamming_loss</span></code></a> computes the average Hamming loss or <a class="reference external" href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming
 distance</a> between two sets
 of samples.</p>
@@ -988,10 +1032,10 @@ AP is defined as</p>
 </div><p>where <img class="math" src="../_images/math/1e5d2a8a15728214cc4ddf4013464458f398338a.png" alt="P_n"/> and <img class="math" src="../_images/math/209d3b1de562f50026e49bca1cd2c42af83383f0.png" alt="R_n"/> are the precision and recall at the
 nth threshold. With random predictions, the AP is the fraction of positive
 samples.</p>
-<p>References <a class="reference internal" href="#manning2008" id="id11">[Manning2008]</a> and <a class="reference internal" href="#everingham2010" id="id12">[Everingham2010]</a> present alternative variants of
+<p>References <a class="reference internal" href="#manning2008" id="id14">[Manning2008]</a> and <a class="reference internal" href="#everingham2010" id="id15">[Everingham2010]</a> present alternative variants of
 AP that interpolate the precision-recall curve. Currently,
 <a class="reference internal" href="generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="sklearn.metrics.average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">average_precision_score</span></code></a> does not implement any interpolated variant.
-References <a class="reference internal" href="#davis2006" id="id13">[Davis2006]</a> and <a class="reference internal" href="#flach2015" id="id14">[Flach2015]</a> describe why a linear interpolation of
+References <a class="reference internal" href="#davis2006" id="id16">[Davis2006]</a> and <a class="reference internal" href="#flach2015" id="id17">[Flach2015]</a> describe why a linear interpolation of
 points on the precision-recall curve provides an overly-optimistic measure of
 classifier performance. This linear interpolation is used when computing area
 under the curve with the trapezoidal rule in <a class="reference internal" href="generated/sklearn.metrics.auc.html#sklearn.metrics.auc" title="sklearn.metrics.auc"><code class="xref py py-func docutils literal"><span class="pre">auc</span></code></a>.</p>
@@ -1048,14 +1092,14 @@ classifier output quality.</li>
 <table class="docutils citation" frame="void" id="manning2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id11">[Manning2008]</a></td><td>C.D. Manning, P. Raghavan, H. Schütze, <a class="reference external" href="http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html">Introduction to Information Retrieval</a>,
+<tr><td class="label"><a class="fn-backref" href="#id14">[Manning2008]</a></td><td>C.D. Manning, P. Raghavan, H. Schütze, <a class="reference external" href="http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html">Introduction to Information Retrieval</a>,
 2008.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="everingham2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id12">[Everingham2010]</a></td><td>M. Everingham, L. Van Gool, C.K.I. Williams, J. Winn, A. Zisserman,
+<tr><td class="label"><a class="fn-backref" href="#id15">[Everingham2010]</a></td><td>M. Everingham, L. Van Gool, C.K.I. Williams, J. Winn, A. Zisserman,
 <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.157.5766&amp;rep=rep1&amp;type=pdf">The Pascal Visual Object Classes (VOC) Challenge</a>,
 IJCV 2010.</td></tr>
 </tbody>
@@ -1063,14 +1107,14 @@ IJCV 2010.</td></tr>
 <table class="docutils citation" frame="void" id="davis2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id13">[Davis2006]</a></td><td>J. Davis, M. Goadrich, <a class="reference external" href="http://www.machinelearning.org/proceedings/icml2006/030_The_Relationship_Bet.pdf">The Relationship Between Precision-Recall and ROC Curves</a>,
+<tr><td class="label"><a class="fn-backref" href="#id16">[Davis2006]</a></td><td>J. Davis, M. Goadrich, <a class="reference external" href="http://www.machinelearning.org/proceedings/icml2006/030_The_Relationship_Bet.pdf">The Relationship Between Precision-Recall and ROC Curves</a>,
 ICML 2006.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="flach2015" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id14">[Flach2015]</a></td><td>P.A. Flach, M. Kull, <a class="reference external" href="http://papers.nips.cc/paper/5867-precision-recall-gain-curves-pr-analysis-done-right.pdf">Precision-Recall-Gain Curves: PR Analysis Done Right</a>,
+<tr><td class="label"><a class="fn-backref" href="#id17">[Flach2015]</a></td><td>P.A. Flach, M. Kull, <a class="reference external" href="http://papers.nips.cc/paper/5867-precision-recall-gain-curves-pr-analysis-done-right.pdf">Precision-Recall-Gain Curves: PR Analysis Done Right</a>,
 NIPS 2015.</td></tr>
 </tbody>
 </table>
@@ -1255,7 +1299,7 @@ i.e. <img class="math" src="../_images/math/224970d16cb36dc2cc073b5af1fff933d0b6
 </div>
 </div>
 <div class="section" id="hinge-loss">
-<span id="id15"></span><h3>3.3.2.10. Hinge loss<a class="headerlink" href="#hinge-loss" title="Permalink to this headline">¶</a></h3>
+<span id="id18"></span><h3>3.3.2.10. Hinge loss<a class="headerlink" href="#hinge-loss" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.hinge_loss.html#sklearn.metrics.hinge_loss" title="sklearn.metrics.hinge_loss"><code class="xref py py-func docutils literal"><span class="pre">hinge_loss</span></code></a> function computes the average distance between
 the model and the data using
 <a class="reference external" href="https://en.wikipedia.org/wiki/Hinge_loss">hinge loss</a>, a one-sided metric
@@ -1314,7 +1358,7 @@ with a svm classifier in a multiclass problem:</p>
 </div>
 </div>
 <div class="section" id="log-loss">
-<span id="id17"></span><h3>3.3.2.11. Log loss<a class="headerlink" href="#log-loss" title="Permalink to this headline">¶</a></h3>
+<span id="id20"></span><h3>3.3.2.11. Log loss<a class="headerlink" href="#log-loss" title="Permalink to this headline">¶</a></h3>
 <p>Log loss, also called logistic regression loss or
 cross-entropy loss, is defined on probability estimates.  It is
 commonly used in (multinomial) logistic regression and neural networks, as well
@@ -1473,7 +1517,7 @@ model species distribution.</li>
 </div>
 </div>
 <div class="section" id="zero-one-loss">
-<span id="id18"></span><h3>3.3.2.14. Zero one loss<a class="headerlink" href="#zero-one-loss" title="Permalink to this headline">¶</a></h3>
+<span id="id21"></span><h3>3.3.2.14. Zero one loss<a class="headerlink" href="#zero-one-loss" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss" title="sklearn.metrics.zero_one_loss"><code class="xref py py-func docutils literal"><span class="pre">zero_one_loss</span></code></a> function computes the sum or the average of the 0-1
 classification loss (<img class="math" src="../_images/math/4459f985f11b045ebfc1846fda53f9a64fb52b69.png" alt="L_{0-1}"/>) over <img class="math" src="../_images/math/d733c4bbf4bf946394a40154c6a82f0f936b6e58.png" alt="n_{\text{samples}}"/>. By
 default, the function normalizes over the sample. To get the sum of the
@@ -1517,7 +1561,7 @@ elimination with cross-validation.</li>
 </div>
 </div>
 <div class="section" id="brier-score-loss">
-<span id="id20"></span><h3>3.3.2.15. Brier score loss<a class="headerlink" href="#brier-score-loss" title="Permalink to this headline">¶</a></h3>
+<span id="id23"></span><h3>3.3.2.15. Brier score loss<a class="headerlink" href="#brier-score-loss" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.brier_score_loss.html#sklearn.metrics.brier_score_loss" title="sklearn.metrics.brier_score_loss"><code class="xref py py-func docutils literal"><span class="pre">brier_score_loss</span></code></a> function computes the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Brier_score">Brier score</a>
 for binary classes. Quoting Wikipedia:</p>
@@ -1572,12 +1616,12 @@ Monthly weather review 78.1 (1950)</li>
 </div>
 </div>
 <div class="section" id="multilabel-ranking-metrics">
-<span id="id21"></span><h2>3.3.3. Multilabel ranking metrics<a class="headerlink" href="#multilabel-ranking-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="id24"></span><h2>3.3.3. Multilabel ranking metrics<a class="headerlink" href="#multilabel-ranking-metrics" title="Permalink to this headline">¶</a></h2>
 <p>In multilabel learning, each sample can have any number of ground truth labels
 associated with it. The goal is to give high scores and better rank to
 the ground truth labels.</p>
 <div class="section" id="coverage-error">
-<span id="id22"></span><h3>3.3.3.1. Coverage error<a class="headerlink" href="#coverage-error" title="Permalink to this headline">¶</a></h3>
+<span id="id25"></span><h3>3.3.3.1. Coverage error<a class="headerlink" href="#coverage-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.coverage_error.html#sklearn.metrics.coverage_error" title="sklearn.metrics.coverage_error"><code class="xref py py-func docutils literal"><span class="pre">coverage_error</span></code></a> function computes the average number of labels that
 have to be included in the final prediction such that all true labels
 are predicted. This is useful if you want to know how many top-scored-labels
@@ -1611,7 +1655,7 @@ maximal rank that would have been assigned to all tied values.</p>
 </div>
 </div>
 <div class="section" id="label-ranking-average-precision">
-<span id="id23"></span><h3>3.3.3.2. Label ranking average precision<a class="headerlink" href="#label-ranking-average-precision" title="Permalink to this headline">¶</a></h3>
+<span id="id26"></span><h3>3.3.3.2. Label ranking average precision<a class="headerlink" href="#label-ranking-average-precision" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.label_ranking_average_precision_score.html#sklearn.metrics.label_ranking_average_precision_score" title="sklearn.metrics.label_ranking_average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">label_ranking_average_precision_score</span></code></a> function
 implements label ranking average precision (LRAP). This metric is linked to
 the <a class="reference internal" href="generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="sklearn.metrics.average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">average_precision_score</span></code></a> function, but is based on the notion of
@@ -1685,7 +1729,7 @@ Data mining and knowledge discovery handbook (pp. 667-685). Springer US.</li>
 </div>
 </div>
 <div class="section" id="regression-metrics">
-<span id="id24"></span><h2>3.3.4. Regression metrics<a class="headerlink" href="#regression-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="id27"></span><h2>3.3.4. Regression metrics<a class="headerlink" href="#regression-metrics" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a> module implements several loss, score, and utility
 functions to measure regression performance. Some of those have been enhanced
 to handle the multioutput case: <a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">mean_squared_error</span></code></a>,
@@ -1709,7 +1753,7 @@ score puts more importance on well explaining the higher variance variables.
 for backward compatibility. This will be changed to <code class="docutils literal"><span class="pre">uniform_average</span></code> in the
 future.</p>
 <div class="section" id="explained-variance-score">
-<span id="id25"></span><h3>3.3.4.1. Explained variance score<a class="headerlink" href="#explained-variance-score" title="Permalink to this headline">¶</a></h3>
+<span id="id28"></span><h3>3.3.4.1. Explained variance score<a class="headerlink" href="#explained-variance-score" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.explained_variance_score.html#sklearn.metrics.explained_variance_score" title="sklearn.metrics.explained_variance_score"><code class="xref py py-func docutils literal"><span class="pre">explained_variance_score</span></code></a> computes the <a class="reference external" href="https://en.wikipedia.org/wiki/Explained_variation">explained variance
 regression score</a>.</p>
 <p>If <img class="math" src="../_images/math/480dcbe70367e5f775ea3004cce070d91315d6a2.png" alt="\hat{y}"/> is the estimated target output, <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> the corresponding
@@ -1737,7 +1781,7 @@ function:</p>
 </div>
 </div>
 <div class="section" id="mean-absolute-error">
-<span id="id26"></span><h3>3.3.4.2. Mean absolute error<a class="headerlink" href="#mean-absolute-error" title="Permalink to this headline">¶</a></h3>
+<span id="id29"></span><h3>3.3.4.2. Mean absolute error<a class="headerlink" href="#mean-absolute-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.mean_absolute_error.html#sklearn.metrics.mean_absolute_error" title="sklearn.metrics.mean_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">mean_absolute_error</span></code></a> function computes <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_absolute_error">mean absolute
 error</a>, a risk
 metric corresponding to the expected value of the absolute error loss or
@@ -1766,7 +1810,7 @@ and <img class="math" src="../_images/math/07f6018e00c747406442bb3912e0209766fc9
 </div>
 </div>
 <div class="section" id="mean-squared-error">
-<span id="id28"></span><h3>3.3.4.3. Mean squared error<a class="headerlink" href="#mean-squared-error" title="Permalink to this headline">¶</a></h3>
+<span id="id31"></span><h3>3.3.4.3. Mean squared error<a class="headerlink" href="#mean-squared-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="sklearn.metrics.mean_squared_error"><code class="xref py py-func docutils literal"><span class="pre">mean_squared_error</span></code></a> function computes <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">mean square
 error</a>, a risk
 metric corresponding to the expected value of the squared (quadratic) error or
@@ -1829,7 +1873,7 @@ function:</p>
 </div>
 </div>
 <div class="section" id="median-absolute-error">
-<span id="id29"></span><h3>3.3.4.5. Median absolute error<a class="headerlink" href="#median-absolute-error" title="Permalink to this headline">¶</a></h3>
+<span id="id32"></span><h3>3.3.4.5. Median absolute error<a class="headerlink" href="#median-absolute-error" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="generated/sklearn.metrics.median_absolute_error.html#sklearn.metrics.median_absolute_error" title="sklearn.metrics.median_absolute_error"><code class="xref py py-func docutils literal"><span class="pre">median_absolute_error</span></code></a> is particularly interesting because it is
 robust to outliers. The loss is calculated by taking the median of all absolute
 differences between the target and the prediction.</p>
@@ -1899,14 +1943,14 @@ evaluate Lasso and Elastic Net on sparse signals.</li>
 </div>
 </div>
 <div class="section" id="clustering-metrics">
-<span id="id30"></span><h2>3.3.5. Clustering metrics<a class="headerlink" href="#clustering-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="id33"></span><h2>3.3.5. Clustering metrics<a class="headerlink" href="#clustering-metrics" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a> module implements several loss, score, and utility
 functions. For more information see the <a class="reference internal" href="clustering.html#clustering-evaluation"><span class="std std-ref">Clustering performance evaluation</span></a>
 section for instance clustering, and <a class="reference internal" href="biclustering.html#biclustering-evaluation"><span class="std std-ref">Biclustering evaluation</span></a> for
 biclustering.</p>
 </div>
 <div class="section" id="dummy-estimators">
-<span id="id31"></span><h2>3.3.6. Dummy estimators<a class="headerlink" href="#dummy-estimators" title="Permalink to this headline">¶</a></h2>
+<span id="id34"></span><h2>3.3.6. Dummy estimators<a class="headerlink" href="#dummy-estimators" title="Permalink to this headline">¶</a></h2>
 <p>When doing supervised learning, a simple sanity check consists of comparing
 one’s estimator against simple rules of thumb. <a class="reference internal" href="generated/sklearn.dummy.DummyClassifier.html#sklearn.dummy.DummyClassifier" title="sklearn.dummy.DummyClassifier"><code class="xref py py-class docutils literal"><span class="pre">DummyClassifier</span></code></a>
 implements several such simple strategies for classification:</p>
