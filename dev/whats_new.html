@@ -278,6 +278,9 @@ random sampling procedures.</p>
 <li><a class="reference internal" href="modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.IncrementalPCA</span></code></a> in Python 2 (bug fix)</li>
 <li><a class="reference internal" href="modules/generated/sklearn.isotonic.IsotonicRegression.html#sklearn.isotonic.IsotonicRegression" title="sklearn.isotonic.IsotonicRegression"><code class="xref py py-class docutils literal"><span class="pre">isotonic.IsotonicRegression</span></code></a> (bug fix)</li>
 <li><a class="reference internal" href="modules/generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-class docutils literal"><span class="pre">metrics.roc_auc_score</span></code></a> (bug fix)</li>
+<li><code class="xref py py-class docutils literal"><span class="pre">neural_network.BaseMultilayerPerceptron</span></code> (bug fix)</li>
+<li><a class="reference internal" href="modules/generated/sklearn.neural_network.MLPRegressor.html#sklearn.neural_network.MLPRegressor" title="sklearn.neural_network.MLPRegressor"><code class="xref py py-class docutils literal"><span class="pre">neural_network.MLPRegressor</span></code></a> (bug fix)</li>
+<li><a class="reference internal" href="modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier" title="sklearn.neural_network.MLPClassifier"><code class="xref py py-class docutils literal"><span class="pre">neural_network.MLPClassifier</span></code></a> (bug fix)</li>
 </ul>
 <p>Details are listed in the changelog below.</p>
 <p>(While we are trying to better inform users by providing this information, we
@@ -318,6 +321,12 @@ estimators. <a class="reference external" href="https://github.com/scikit-learn/
 <li>Add <cite>var_smoothing</cite> parameter in
 <a class="reference internal" href="modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.GaussianNB</span></code></a> to give a precise control over
 variances calculation. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9681">#9681</a> by <a class="reference external" href="https://github.com/Mottl">Dmitry Mottl</a>.</li>
+<li>Add <cite>n_iter_no_change</cite> parameter in
+<code class="xref py py-class docutils literal"><span class="pre">neural_network.BaseMultilayerPerceptron</span></code>,
+<a class="reference internal" href="modules/generated/sklearn.neural_network.MLPRegressor.html#sklearn.neural_network.MLPRegressor" title="sklearn.neural_network.MLPRegressor"><code class="xref py py-class docutils literal"><span class="pre">neural_network.MLPRegressor</span></code></a>, and
+<a class="reference internal" href="modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier" title="sklearn.neural_network.MLPClassifier"><code class="xref py py-class docutils literal"><span class="pre">neural_network.MLPClassifier</span></code></a> to give control over
+maximum number of epochs to not meet <code class="docutils literal"><span class="pre">tol</span></code> improvement.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9456">#9456</a> by <a class="reference external" href="https://github.com/nnadeau">Nicholas Nadeau</a>.</li>
 <li>A parameter <code class="docutils literal"><span class="pre">check_inverse</span></code> was added to <code class="xref py py-class docutils literal"><span class="pre">FunctionTransformer</span></code>
 to ensure that <code class="docutils literal"><span class="pre">func</span></code> and <code class="docutils literal"><span class="pre">inverse_func</span></code> are the inverse of each
 other.
@@ -348,6 +357,14 @@ underlying implementation is not random.
 combined weights when fitting a model to data involving points with
 identical X values.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9432">#9432</a> by <a class="reference external" href="https://github.com/dallascard">Dallas Card</a></li>
+<li>Fixed a bug in <code class="xref py py-class docutils literal"><span class="pre">neural_network.BaseMultilayerPerceptron</span></code>,
+<a class="reference internal" href="modules/generated/sklearn.neural_network.MLPRegressor.html#sklearn.neural_network.MLPRegressor" title="sklearn.neural_network.MLPRegressor"><code class="xref py py-class docutils literal"><span class="pre">neural_network.MLPRegressor</span></code></a>, and
+<a class="reference internal" href="modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier" title="sklearn.neural_network.MLPClassifier"><code class="xref py py-class docutils literal"><span class="pre">neural_network.MLPClassifier</span></code></a> with new <code class="docutils literal"><span class="pre">n_iter_no_change</span></code>
+parameter now at 10 from previously hardcoded 2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9456">#9456</a> by <a class="reference external" href="https://github.com/nnadeau">Nicholas Nadeau</a>.</li>
+<li>Fixed a bug in <a class="reference internal" href="modules/generated/sklearn.neural_network.MLPRegressor.html#sklearn.neural_network.MLPRegressor" title="sklearn.neural_network.MLPRegressor"><code class="xref py py-class docutils literal"><span class="pre">neural_network.MLPRegressor</span></code></a> where fitting
+quit unexpectedly early due to local minima or fluctuations.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9456">#9456</a> by <a class="reference external" href="https://github.com/nnadeau">Nicholas Nadeau</a></li>
 <li>Fixed a bug in <a class="reference internal" href="modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">naive_bayes.GaussianNB</span></code></a> which incorrectly raised
 error for prior list which summed to 1.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/10005">#10005</a> by <a class="reference external" href="https://github.com/gxyd">Gaurav Dhingra</a>.</li>
