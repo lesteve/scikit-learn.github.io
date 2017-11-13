@@ -200,34 +200,30 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.cross_val_predict<a class="headerlink" href="#sklearn-model-selection-cross-val-predict" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.model_selection.cross_val_predict">
-<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_val_predict</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>method=’predict’</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/30c9dbfc/sklearn/model_selection/_validation.py#L571"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_val_predict" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_val_predict</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch=‘2*n_jobs’</em>, <em>method=’predict’</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/94c5b803/sklearn/model_selection/_validation.py#L571"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_val_predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate cross-validated estimates for each input data point</p>
 <p>Read more in the <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator</strong> : estimator object implementing ‘fit’ and ‘predict’</p>
-<blockquote>
-<div><p>The object to use to fit the data.</p>
-</div></blockquote>
-<p><strong>X</strong> : array-like</p>
-<blockquote>
-<div><p>The data to fit. Can be, for example a list, or an array at least 2d.</p>
-</div></blockquote>
-<p><strong>y</strong> : array-like, optional, default: None</p>
-<blockquote>
-<div><p>The target variable to try to predict in the case of
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt>estimator <span class="classifier-delimiter">:</span> <span class="classifier">estimator object implementing ‘fit’ and ‘predict’</span></dt>
+<dd><p class="first last">The object to use to fit the data.</p>
+</dd>
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array-like</span></dt>
+<dd><p class="first last">The data to fit. Can be, for example a list, or an array at least 2d.</p>
+</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array-like, optional, default: None</span></dt>
+<dd><p class="first last">The target variable to try to predict in the case of
 supervised learning.</p>
-</div></blockquote>
-<p><strong>groups</strong> : array-like, with shape (n_samples,), optional</p>
-<blockquote>
-<div><p>Group labels for the samples used while splitting the dataset into
+</dd>
+<dt>groups <span class="classifier-delimiter">:</span> <span class="classifier">array-like, with shape (n_samples,), optional</span></dt>
+<dd><p class="first last">Group labels for the samples used while splitting the dataset into
 train/test set.</p>
-</div></blockquote>
-<p><strong>cv</strong> : int, cross-validation generator or an iterable, optional</p>
-<blockquote>
-<div><p>Determines the cross-validation splitting strategy.
+</dd>
+<dt>cv <span class="classifier-delimiter">:</span> <span class="classifier">int, cross-validation generator or an iterable, optional</span></dt>
+<dd><p class="first">Determines the cross-validation splitting strategy.
 Possible inputs for cv are:</p>
 <ul class="simple">
 <li>None, to use the default 3-fold cross validation,</li>
@@ -238,29 +234,25 @@ Possible inputs for cv are:</p>
 <p>For integer/None inputs, if the estimator is a classifier and <code class="docutils literal"><span class="pre">y</span></code> is
 either binary or multiclass, <a class="reference internal" href="sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a> is used. In all
 other cases, <a class="reference internal" href="sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a> is used.</p>
-<p>Refer <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a> for the various
+<p class="last">Refer <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a> for the various
 cross-validation strategies that can be used here.</p>
-</div></blockquote>
-<p><strong>n_jobs</strong> : integer, optional</p>
-<blockquote>
-<div><p>The number of CPUs to use to do the computation. -1 means
+</dd>
+<dt>n_jobs <span class="classifier-delimiter">:</span> <span class="classifier">integer, optional</span></dt>
+<dd><p class="first last">The number of CPUs to use to do the computation. -1 means
 ‘all CPUs’.</p>
-</div></blockquote>
-<p><strong>verbose</strong> : integer, optional</p>
-<blockquote>
-<div><p>The verbosity level.</p>
-</div></blockquote>
-<p><strong>fit_params</strong> : dict, optional</p>
-<blockquote>
-<div><p>Parameters to pass to the fit method of the estimator.</p>
-</div></blockquote>
-<p><strong>pre_dispatch</strong> : int, or string, optional</p>
-<blockquote>
-<div><p>Controls the number of jobs that get dispatched during parallel
+</dd>
+<dt>verbose <span class="classifier-delimiter">:</span> <span class="classifier">integer, optional</span></dt>
+<dd><p class="first last">The verbosity level.</p>
+</dd>
+<dt>fit_params <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Parameters to pass to the fit method of the estimator.</p>
+</dd>
+<dt>pre_dispatch <span class="classifier-delimiter">:</span> <span class="classifier">int, or string, optional</span></dt>
+<dd><p class="first">Controls the number of jobs that get dispatched during parallel
 execution. Reducing this number can be useful to avoid an
 explosion of memory consumption when more jobs get dispatched
 than CPUs can process. This parameter can be:</p>
-<blockquote>
+<blockquote class="last">
 <div><ul class="simple">
 <li>None, in which case all the jobs are immediately
 created and spawned. Use this for lightweight and
@@ -272,19 +264,20 @@ spawned</li>
 as in ‘2*n_jobs’</li>
 </ul>
 </div></blockquote>
-</div></blockquote>
-<p><strong>method</strong> : string, optional, default: ‘predict’</p>
-<blockquote>
-<div><p>Invokes the passed method name of the passed estimator. For
+</dd>
+<dt>method <span class="classifier-delimiter">:</span> <span class="classifier">string, optional, default: ‘predict’</span></dt>
+<dd><p class="first last">Invokes the passed method name of the passed estimator. For
 method=’predict_proba’, the columns correspond to the classes
 in sorted order.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>predictions</strong> : ndarray</p>
-<blockquote class="last">
-<div><p>This is the result of calling <code class="docutils literal"><span class="pre">method</span></code></p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>predictions <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">This is the result of calling <code class="docutils literal"><span class="pre">method</span></code></p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>

@@ -197,51 +197,48 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.normalize<a class="headerlink" href="#sklearn-preprocessing-normalize" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.preprocessing.normalize">
-<code class="descclassname">sklearn.preprocessing.</code><code class="descname">normalize</code><span class="sig-paren">(</span><em>X</em>, <em>norm=’l2’</em>, <em>axis=1</em>, <em>copy=True</em>, <em>return_norm=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/30c9dbfc/sklearn/preprocessing/data.py#L1363"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.normalize" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.preprocessing.</code><code class="descname">normalize</code><span class="sig-paren">(</span><em>X</em>, <em>norm=’l2’</em>, <em>axis=1</em>, <em>copy=True</em>, <em>return_norm=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/94c5b803/sklearn/preprocessing/data.py#L1363"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.normalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scale input vectors individually to unit norm (vector length).</p>
 <p>Read more in the <a class="reference internal" href="../preprocessing.html#preprocessing-normalization"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape [n_samples, n_features]</p>
-<blockquote>
-<div><p>The data to normalize, element by element.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">{array-like, sparse matrix}, shape [n_samples, n_features]</span></dt>
+<dd><p class="first last">The data to normalize, element by element.
 scipy.sparse matrices should be in CSR format to avoid an
 un-necessary copy.</p>
-</div></blockquote>
-<p><strong>norm</strong> : ‘l1’, ‘l2’, or ‘max’, optional (‘l2’ by default)</p>
-<blockquote>
-<div><p>The norm to use to normalize each non zero sample (or each non-zero
+</dd>
+<dt>norm <span class="classifier-delimiter">:</span> <span class="classifier">‘l1’, ‘l2’, or ‘max’, optional (‘l2’ by default)</span></dt>
+<dd><p class="first last">The norm to use to normalize each non zero sample (or each non-zero
 feature if axis is 0).</p>
-</div></blockquote>
-<p><strong>axis</strong> : 0 or 1, optional (1 by default)</p>
-<blockquote>
-<div><p>axis used to normalize the data along. If 1, independently normalize
+</dd>
+<dt>axis <span class="classifier-delimiter">:</span> <span class="classifier">0 or 1, optional (1 by default)</span></dt>
+<dd><p class="first last">axis used to normalize the data along. If 1, independently normalize
 each sample, otherwise (if 0) normalize each feature.</p>
-</div></blockquote>
-<p><strong>copy</strong> : boolean, optional, default True</p>
-<blockquote>
-<div><p>set to False to perform inplace row normalization and avoid a
+</dd>
+<dt>copy <span class="classifier-delimiter">:</span> <span class="classifier">boolean, optional, default True</span></dt>
+<dd><p class="first last">set to False to perform inplace row normalization and avoid a
 copy (if the input is already a numpy array or a scipy.sparse
 CSR matrix and if axis is 1).</p>
-</div></blockquote>
-<p><strong>return_norm</strong> : boolean, default False</p>
-<blockquote>
-<div><p>whether to return the computed norms</p>
-</div></blockquote>
+</dd>
+<dt>return_norm <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default False</span></dt>
+<dd><p class="first last">whether to return the computed norms</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape [n_samples, n_features]</p>
-<blockquote>
-<div><p>Normalized input X.</p>
-</div></blockquote>
-<p><strong>norms</strong> : array, shape [n_samples] if axis=1 else [n_features]</p>
-<blockquote class="last">
-<div><p>An array of norms along given axis for X.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">{array-like, sparse matrix}, shape [n_samples, n_features]</span></dt>
+<dd><p class="first last">Normalized input X.</p>
+</dd>
+<dt>norms <span class="classifier-delimiter">:</span> <span class="classifier">array, shape [n_samples] if axis=1 else [n_features]</span></dt>
+<dd><p class="first last">An array of norms along given axis for X.
 When X is sparse, a NotImplementedError will be raised
 for norm ‘l1’ or ‘l2’.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>

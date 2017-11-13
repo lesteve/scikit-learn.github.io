@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.lars_path<a class="headerlink" href="#sklearn-linear-model-lars-path" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.linear_model.lars_path">
-<code class="descclassname">sklearn.linear_model.</code><code class="descname">lars_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>Xy=None</em>, <em>Gram=None</em>, <em>max_iter=500</em>, <em>alpha_min=0</em>, <em>method=’lar’</em>, <em>copy_X=True</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_Gram=True</em>, <em>verbose=0</em>, <em>return_path=True</em>, <em>return_n_iter=False</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/30c9dbfc/sklearn/linear_model/least_angle.py#L33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.lars_path" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.linear_model.</code><code class="descname">lars_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>Xy=None</em>, <em>Gram=None</em>, <em>max_iter=500</em>, <em>alpha_min=0</em>, <em>method=’lar’</em>, <em>copy_X=True</em>, <em>eps=2.2204460492503131e-16</em>, <em>copy_Gram=True</em>, <em>verbose=0</em>, <em>return_path=True</em>, <em>return_n_iter=False</em>, <em>positive=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/94c5b803/sklearn/linear_model/least_angle.py#L33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.lars_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Least Angle Regression or Lasso path using LARS algorithm [1]</p>
 <p>The optimization objective for the case method=’lasso’ is:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">))</span> <span class="o">*</span> <span class="o">||</span><span class="n">y</span> <span class="o">-</span> <span class="n">Xw</span><span class="o">||^</span><span class="mi">2</span><span class="n">_2</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="o">||</span><span class="n">w</span><span class="o">||</span><span class="n">_1</span>
@@ -213,69 +213,56 @@ the form of an implicit equation (see discussion in [1])</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape: (n_samples, n_features)</p>
-<blockquote>
-<div><p>Input data.</p>
-</div></blockquote>
-<p><strong>y</strong> : array, shape: (n_samples)</p>
-<blockquote>
-<div><p>Input targets.</p>
-</div></blockquote>
-<p><strong>Xy</strong> : array-like, shape (n_samples,) or (n_samples, n_targets),             optional</p>
-<blockquote>
-<div><p>Xy = np.dot(X.T, y) that can be precomputed. It is useful
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array, shape: (n_samples, n_features)</span></dt>
+<dd><p class="first last">Input data.</p>
+</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array, shape: (n_samples)</span></dt>
+<dd><p class="first last">Input targets.</p>
+</dd>
+<dt>Xy <span class="classifier-delimiter">:</span> <span class="classifier">array-like, shape (n_samples,) or (n_samples, n_targets),             optional</span></dt>
+<dd><p class="first last">Xy = np.dot(X.T, y) that can be precomputed. It is useful
 only when the Gram matrix is precomputed.</p>
-</div></blockquote>
-<p><strong>Gram</strong> : None, ‘auto’, array, shape: (n_features, n_features), optional</p>
-<blockquote>
-<div><p>Precomputed Gram matrix (X’ * X), if <code class="docutils literal"><span class="pre">'auto'</span></code>, the Gram
+</dd>
+<dt>Gram <span class="classifier-delimiter">:</span> <span class="classifier">None, ‘auto’, array, shape: (n_features, n_features), optional</span></dt>
+<dd><p class="first last">Precomputed Gram matrix (X’ * X), if <code class="docutils literal"><span class="pre">'auto'</span></code>, the Gram
 matrix is precomputed from the given X, if there are more samples
 than features.</p>
-</div></blockquote>
-<p><strong>max_iter</strong> : integer, optional (default=500)</p>
-<blockquote>
-<div><p>Maximum number of iterations to perform, set to infinity for no limit.</p>
-</div></blockquote>
-<p><strong>alpha_min</strong> : float, optional (default=0)</p>
-<blockquote>
-<div><p>Minimum correlation along the path. It corresponds to the
+</dd>
+<dt>max_iter <span class="classifier-delimiter">:</span> <span class="classifier">integer, optional (default=500)</span></dt>
+<dd><p class="first last">Maximum number of iterations to perform, set to infinity for no limit.</p>
+</dd>
+<dt>alpha_min <span class="classifier-delimiter">:</span> <span class="classifier">float, optional (default=0)</span></dt>
+<dd><p class="first last">Minimum correlation along the path. It corresponds to the
 regularization parameter alpha parameter in the Lasso.</p>
-</div></blockquote>
-<p><strong>method</strong> : {‘lar’, ‘lasso’}, optional (default=’lar’)</p>
-<blockquote>
-<div><p>Specifies the returned model. Select <code class="docutils literal"><span class="pre">'lar'</span></code> for Least Angle
+</dd>
+<dt>method <span class="classifier-delimiter">:</span> <span class="classifier">{‘lar’, ‘lasso’}, optional (default=’lar’)</span></dt>
+<dd><p class="first last">Specifies the returned model. Select <code class="docutils literal"><span class="pre">'lar'</span></code> for Least Angle
 Regression, <code class="docutils literal"><span class="pre">'lasso'</span></code> for the Lasso.</p>
-</div></blockquote>
-<p><strong>copy_X</strong> : bool, optional (default=True)</p>
-<blockquote>
-<div><p>If <code class="docutils literal"><span class="pre">False</span></code>, <code class="docutils literal"><span class="pre">X</span></code> is overwritten.</p>
-</div></blockquote>
-<p><strong>eps</strong> : float, optional (default=``np.finfo(np.float).eps``)</p>
-<blockquote>
-<div><p>The machine-precision regularization in the computation of the
+</dd>
+<dt>copy_X <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional (default=True)</span></dt>
+<dd><p class="first last">If <code class="docutils literal"><span class="pre">False</span></code>, <code class="docutils literal"><span class="pre">X</span></code> is overwritten.</p>
+</dd>
+<dt>eps <span class="classifier-delimiter">:</span> <span class="classifier">float, optional (default=``np.finfo(np.float).eps``)</span></dt>
+<dd><p class="first last">The machine-precision regularization in the computation of the
 Cholesky diagonal factors. Increase this for very ill-conditioned
 systems.</p>
-</div></blockquote>
-<p><strong>copy_Gram</strong> : bool, optional (default=True)</p>
-<blockquote>
-<div><p>If <code class="docutils literal"><span class="pre">False</span></code>, <code class="docutils literal"><span class="pre">Gram</span></code> is overwritten.</p>
-</div></blockquote>
-<p><strong>verbose</strong> : int (default=0)</p>
-<blockquote>
-<div><p>Controls output verbosity.</p>
-</div></blockquote>
-<p><strong>return_path</strong> : bool, optional (default=True)</p>
-<blockquote>
-<div><p>If <code class="docutils literal"><span class="pre">return_path==True</span></code> returns the entire path, else returns only the
+</dd>
+<dt>copy_Gram <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional (default=True)</span></dt>
+<dd><p class="first last">If <code class="docutils literal"><span class="pre">False</span></code>, <code class="docutils literal"><span class="pre">Gram</span></code> is overwritten.</p>
+</dd>
+<dt>verbose <span class="classifier-delimiter">:</span> <span class="classifier">int (default=0)</span></dt>
+<dd><p class="first last">Controls output verbosity.</p>
+</dd>
+<dt>return_path <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional (default=True)</span></dt>
+<dd><p class="first last">If <code class="docutils literal"><span class="pre">return_path==True</span></code> returns the entire path, else returns only the
 last point of the path.</p>
-</div></blockquote>
-<p><strong>return_n_iter</strong> : bool, optional (default=False)</p>
-<blockquote>
-<div><p>Whether to return the number of iterations.</p>
-</div></blockquote>
-<p><strong>positive</strong> : boolean (default=False)</p>
-<blockquote>
-<div><p>Restrict coefficients to be &gt;= 0.
+</dd>
+<dt>return_n_iter <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional (default=False)</span></dt>
+<dd><p class="first last">Whether to return the number of iterations.</p>
+</dd>
+<dt>positive <span class="classifier-delimiter">:</span> <span class="classifier">boolean (default=False)</span></dt>
+<dd><p class="first last">Restrict coefficients to be &gt;= 0.
 When using this option together with method ‘lasso’ the model
 coefficients will not converge to the ordinary-least-squares solution
 for small values of alpha (neither will they when using method ‘lar’
@@ -283,29 +270,28 @@ for small values of alpha (neither will they when using method ‘lar’
 (<code class="docutils literal"><span class="pre">alphas_[alphas_</span> <span class="pre">&gt;</span> <span class="pre">0.].min()</span></code> when fit_path=True) reached by the
 stepwise Lars-Lasso algorithm are typically in congruence with the
 solution of the coordinate descent lasso_path function.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>alphas</strong> : array, shape: [n_alphas + 1]</p>
-<blockquote>
-<div><p>Maximum of covariances (in absolute value) at each iteration.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>alphas <span class="classifier-delimiter">:</span> <span class="classifier">array, shape: [n_alphas + 1]</span></dt>
+<dd><p class="first last">Maximum of covariances (in absolute value) at each iteration.
 <code class="docutils literal"><span class="pre">n_alphas</span></code> is either <code class="docutils literal"><span class="pre">max_iter</span></code>, <code class="docutils literal"><span class="pre">n_features</span></code> or the
 number of nodes in the path with <code class="docutils literal"><span class="pre">alpha</span> <span class="pre">&gt;=</span> <span class="pre">alpha_min</span></code>, whichever
 is smaller.</p>
-</div></blockquote>
-<p><strong>active</strong> : array, shape [n_alphas]</p>
-<blockquote>
-<div><p>Indices of active variables at the end of the path.</p>
-</div></blockquote>
-<p><strong>coefs</strong> : array, shape (n_features, n_alphas + 1)</p>
-<blockquote>
-<div><p>Coefficients along the path</p>
-</div></blockquote>
-<p><strong>n_iter</strong> : int</p>
-<blockquote class="last">
-<div><p>Number of iterations run. Returned only if return_n_iter is set
+</dd>
+<dt>active <span class="classifier-delimiter">:</span> <span class="classifier">array, shape [n_alphas]</span></dt>
+<dd><p class="first last">Indices of active variables at the end of the path.</p>
+</dd>
+<dt>coefs <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_features, n_alphas + 1)</span></dt>
+<dd><p class="first last">Coefficients along the path</p>
+</dd>
+<dt>n_iter <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of iterations run. Returned only if return_n_iter is set
 to True.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -315,23 +301,23 @@ to True.</p>
 <p class="last"><a class="reference internal" href="sklearn.linear_model.lasso_path.html#sklearn.linear_model.lasso_path" title="sklearn.linear_model.lasso_path"><code class="xref py py-obj docutils literal"><span class="pre">lasso_path</span></code></a>, <a class="reference internal" href="sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-obj docutils literal"><span class="pre">LassoLars</span></code></a>, <a class="reference internal" href="sklearn.linear_model.Lars.html#sklearn.linear_model.Lars" title="sklearn.linear_model.Lars"><code class="xref py py-obj docutils literal"><span class="pre">Lars</span></code></a>, <a class="reference internal" href="sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-obj docutils literal"><span class="pre">LassoLarsCV</span></code></a>, <a class="reference internal" href="sklearn.linear_model.LarsCV.html#sklearn.linear_model.LarsCV" title="sklearn.linear_model.LarsCV"><code class="xref py py-obj docutils literal"><span class="pre">LarsCV</span></code></a>, <a class="reference internal" href="sklearn.decomposition.sparse_encode.html#sklearn.decomposition.sparse_encode" title="sklearn.decomposition.sparse_encode"><code class="xref py py-obj docutils literal"><span class="pre">sklearn.decomposition.sparse_encode</span></code></a></p>
 </div>
 <p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="r445447" rules="none">
+<table class="docutils citation" frame="void" id="r216" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R445447]</a></td><td>“Least Angle Regression”, Effron et al.
+<tr><td class="label"><a class="fn-backref" href="#id1">[R216]</a></td><td>“Least Angle Regression”, Effron et al.
 <a class="reference external" href="http://statweb.stanford.edu/~tibs/ftp/lars.pdf">http://statweb.stanford.edu/~tibs/ftp/lars.pdf</a></td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="r446447" rules="none">
+<table class="docutils citation" frame="void" id="r217" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[R446447]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Least-angle_regression">Wikipedia entry on the Least-angle regression</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[R217]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Least-angle_regression">Wikipedia entry on the Least-angle regression</a></td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="r447447" rules="none">
+<table class="docutils citation" frame="void" id="r218" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[R447447]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Lasso_(statistics)">Wikipedia entry on the Lasso</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[R218]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Lasso_(statistics)">Wikipedia entry on the Lasso</a></td></tr>
 </tbody>
 </table>
 </dd></dl>

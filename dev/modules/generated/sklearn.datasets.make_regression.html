@@ -200,7 +200,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.make_regression<a class="headerlink" href="#sklearn-datasets-make-regression" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.make_regression">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">make_regression</code><span class="sig-paren">(</span><em>n_samples=100</em>, <em>n_features=100</em>, <em>n_informative=10</em>, <em>n_targets=1</em>, <em>bias=0.0</em>, <em>effective_rank=None</em>, <em>tail_strength=0.5</em>, <em>noise=0.0</em>, <em>shuffle=True</em>, <em>coef=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/30c9dbfc/sklearn/datasets/samples_generator.py#L453"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.make_regression" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">make_regression</code><span class="sig-paren">(</span><em>n_samples=100</em>, <em>n_features=100</em>, <em>n_informative=10</em>, <em>n_targets=1</em>, <em>bias=0.0</em>, <em>effective_rank=None</em>, <em>tail_strength=0.5</em>, <em>noise=0.0</em>, <em>shuffle=True</em>, <em>coef=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/94c5b803/sklearn/datasets/samples_generator.py#L453"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.make_regression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a random regression problem.</p>
 <p>The input set can either be well conditioned (by default) or have a low
 rank-fat tail singular profile. See <a class="reference internal" href="sklearn.datasets.make_low_rank_matrix.html#sklearn.datasets.make_low_rank_matrix" title="sklearn.datasets.make_low_rank_matrix"><code class="xref py py-func docutils literal"><span class="pre">make_low_rank_matrix</span></code></a> for
@@ -214,31 +214,26 @@ scale.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_samples</strong> : int, optional (default=100)</p>
-<blockquote>
-<div><p>The number of samples.</p>
-</div></blockquote>
-<p><strong>n_features</strong> : int, optional (default=100)</p>
-<blockquote>
-<div><p>The number of features.</p>
-</div></blockquote>
-<p><strong>n_informative</strong> : int, optional (default=10)</p>
-<blockquote>
-<div><p>The number of informative features, i.e., the number of features used
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt>n_samples <span class="classifier-delimiter">:</span> <span class="classifier">int, optional (default=100)</span></dt>
+<dd><p class="first last">The number of samples.</p>
+</dd>
+<dt>n_features <span class="classifier-delimiter">:</span> <span class="classifier">int, optional (default=100)</span></dt>
+<dd><p class="first last">The number of features.</p>
+</dd>
+<dt>n_informative <span class="classifier-delimiter">:</span> <span class="classifier">int, optional (default=10)</span></dt>
+<dd><p class="first last">The number of informative features, i.e., the number of features used
 to build the linear model used to generate the output.</p>
-</div></blockquote>
-<p><strong>n_targets</strong> : int, optional (default=1)</p>
-<blockquote>
-<div><p>The number of regression targets, i.e., the dimension of the y output
+</dd>
+<dt>n_targets <span class="classifier-delimiter">:</span> <span class="classifier">int, optional (default=1)</span></dt>
+<dd><p class="first last">The number of regression targets, i.e., the dimension of the y output
 vector associated with a sample. By default, the output is a scalar.</p>
-</div></blockquote>
-<p><strong>bias</strong> : float, optional (default=0.0)</p>
-<blockquote>
-<div><p>The bias term in the underlying linear model.</p>
-</div></blockquote>
-<p><strong>effective_rank</strong> : int or None, optional (default=None)</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>bias <span class="classifier-delimiter">:</span> <span class="classifier">float, optional (default=0.0)</span></dt>
+<dd><p class="first last">The bias term in the underlying linear model.</p>
+</dd>
+<dt>effective_rank <span class="classifier-delimiter">:</span> <span class="classifier">int or None, optional (default=None)</span></dt>
+<dd><dl class="first last docutils">
 <dt>if not None:</dt>
 <dd><p class="first last">The approximate number of singular vectors required to explain most
 of the input data by linear combinations. Using this kind of
@@ -250,46 +245,41 @@ the correlations often observed in practice.</p>
 unit variance.</p>
 </dd>
 </dl>
-</div></blockquote>
-<p><strong>tail_strength</strong> : float between 0.0 and 1.0, optional (default=0.5)</p>
-<blockquote>
-<div><p>The relative importance of the fat noisy tail of the singular values
+</dd>
+<dt>tail_strength <span class="classifier-delimiter">:</span> <span class="classifier">float between 0.0 and 1.0, optional (default=0.5)</span></dt>
+<dd><p class="first last">The relative importance of the fat noisy tail of the singular values
 profile if <cite>effective_rank</cite> is not None.</p>
-</div></blockquote>
-<p><strong>noise</strong> : float, optional (default=0.0)</p>
-<blockquote>
-<div><p>The standard deviation of the gaussian noise applied to the output.</p>
-</div></blockquote>
-<p><strong>shuffle</strong> : boolean, optional (default=True)</p>
-<blockquote>
-<div><p>Shuffle the samples and the features.</p>
-</div></blockquote>
-<p><strong>coef</strong> : boolean, optional (default=False)</p>
-<blockquote>
-<div><p>If True, the coefficients of the underlying linear model are returned.</p>
-</div></blockquote>
-<p><strong>random_state</strong> : int, RandomState instance or None, optional (default=None)</p>
-<blockquote>
-<div><p>If int, random_state is the seed used by the random number generator;
+</dd>
+<dt>noise <span class="classifier-delimiter">:</span> <span class="classifier">float, optional (default=0.0)</span></dt>
+<dd><p class="first last">The standard deviation of the gaussian noise applied to the output.</p>
+</dd>
+<dt>shuffle <span class="classifier-delimiter">:</span> <span class="classifier">boolean, optional (default=True)</span></dt>
+<dd><p class="first last">Shuffle the samples and the features.</p>
+</dd>
+<dt>coef <span class="classifier-delimiter">:</span> <span class="classifier">boolean, optional (default=False)</span></dt>
+<dd><p class="first last">If True, the coefficients of the underlying linear model are returned.</p>
+</dd>
+<dt>random_state <span class="classifier-delimiter">:</span> <span class="classifier">int, RandomState instance or None, optional (default=None)</span></dt>
+<dd><p class="first last">If int, random_state is the seed used by the random number generator;
 If RandomState instance, random_state is the random number generator;
 If None, the random number generator is the RandomState instance used
 by <cite>np.random</cite>.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X</strong> : array of shape [n_samples, n_features]</p>
-<blockquote>
-<div><p>The input samples.</p>
-</div></blockquote>
-<p><strong>y</strong> : array of shape [n_samples] or [n_samples, n_targets]</p>
-<blockquote>
-<div><p>The output values.</p>
-</div></blockquote>
-<p><strong>coef</strong> : array of shape [n_features] or [n_features, n_targets], optional</p>
-<blockquote class="last">
-<div><p>The coefficient of the underlying linear model. It is returned only if
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array of shape [n_samples, n_features]</span></dt>
+<dd><p class="first last">The input samples.</p>
+</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array of shape [n_samples] or [n_samples, n_targets]</span></dt>
+<dd><p class="first last">The output values.</p>
+</dd>
+<dt>coef <span class="classifier-delimiter">:</span> <span class="classifier">array of shape [n_features] or [n_features, n_targets], optional</span></dt>
+<dd><p class="first last">The coefficient of the underlying linear model. It is returned only if
 coef is True.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
