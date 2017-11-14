@@ -161,6 +161,7 @@
     <ul>
 <li><a class="reference internal" href="#">Maintainer / core-developer information</a><ul>
 <li><a class="reference internal" href="#making-a-release">Making a release</a></li>
+<li><a class="reference internal" href="#travis-cron-jobs">Travis Cron jobs</a></li>
 </ul>
 </li>
 </ul>
@@ -182,9 +183,9 @@
             
   <div class="section" id="maintainer-core-developer-information">
 <h1>Maintainer / core-developer information<a class="headerlink" href="#maintainer-core-developer-information" title="Permalink to this headline">¶</a></h1>
-<p>For more information see <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/wiki/How-to-make-a-release">https://github.com/scikit-learn/scikit-learn/wiki/How-to-make-a-release</a></p>
 <div class="section" id="making-a-release">
 <h2>Making a release<a class="headerlink" href="#making-a-release" title="Permalink to this headline">¶</a></h2>
+<p>For more information see <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/wiki/How-to-make-a-release">https://github.com/scikit-learn/scikit-learn/wiki/How-to-make-a-release</a></p>
 <ol class="arabic">
 <li><p class="first">Update docs:</p>
 <blockquote>
@@ -243,6 +244,26 @@ $ python setup.py sdist fetch_artifacts upload_all
 <li><p class="first">FOR FINAL RELEASE: Update the release date in What’s New</p>
 </li>
 </ol>
+</div>
+<div class="section" id="travis-cron-jobs">
+<h2>Travis Cron jobs<a class="headerlink" href="#travis-cron-jobs" title="Permalink to this headline">¶</a></h2>
+<p>From <a class="reference external" href="https://docs.travis-ci.com/user/cron-jobs">https://docs.travis-ci.com/user/cron-jobs</a>: Travis CI cron jobs work
+similarly to the cron utility, they run builds at regular scheduled intervals
+independently of whether any commits were pushed to the repository. Cron jobs
+always fetch the most recent commit on a particular branch and build the project
+at that state. Cron jobs can run daily, weekly or monthly, which in practice
+means up to an hour after the selected time span, and you cannot set them to run
+at a specific time.</p>
+<p>For scikit-learn, Cron jobs are used for builds that we do not want to run in
+each PR. As an example the build with the dev versions of numpy and scipy is
+run as a Cron job. Most of the time when this numpy-dev build fail, it is
+related to a numpy change and not a scikit-learn one, so it would not make sense
+to blame the PR author for the Travis failure.</p>
+<p>The definition of what gets run in the Cron job is done in the .travis.yml
+config file, exactly the same way as the other Travis jobs. We use a <code class="docutils literal"><span class="pre">if:</span> <span class="pre">type</span>
+<span class="pre">=</span> <span class="pre">cron</span></code> filter in order for the build to be run only in Cron jobs.</p>
+<p>The branch targetted by the Cron job and the frequency of the Cron job is set
+via the web UI at <a class="reference external" href="https://www.travis-ci.org/scikit-learn/scikit-learn/settings">https://www.travis-ci.org/scikit-learn/scikit-learn/settings</a>.</p>
 </div>
 </div>
 
