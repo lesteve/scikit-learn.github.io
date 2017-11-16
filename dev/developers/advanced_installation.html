@@ -536,22 +536,15 @@ You will also require Cython &gt;=0.23 in order to build the development version
 <span id="id3"></span><h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="testing-scikit-learn-once-installed">
 <h3>Testing scikit-learn once installed<a class="headerlink" href="#testing-scikit-learn-once-installed" title="Permalink to this headline">¶</a></h3>
-<p>Testing requires having the <a class="reference external" href="https://nose.readthedocs.io/en/latest/">nose</a> library. After
+<p>Testing requires having the <a class="reference external" href="https://docs.pytest.org">pytest</a> library. After
 installation, the package can be tested by executing <em>from outside</em> the
 source directory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ nosetests -v sklearn
-</pre></div>
-</div>
-<p>Under Windows, it is recommended to use the following command (adjust the path
-to the <code class="docutils literal"><span class="pre">python.exe</span></code> program) as using the <code class="docutils literal"><span class="pre">nosetests.exe</span></code> program can badly
-interact with tests that use <code class="docutils literal"><span class="pre">multiprocessing</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Python34</span>\<span class="n">python</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import nose; nose.main()&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="n">sklearn</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pytest sklearn
 </pre></div>
 </div>
 <p>This should give you a lot of output (and some warnings) but
 eventually should finish with a message similar to:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Ran</span> <span class="mi">3246</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">260.618</span><span class="n">s</span>
-<span class="n">OK</span> <span class="p">(</span><span class="n">SKIP</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">===========</span> <span class="mi">8304</span> <span class="n">passed</span><span class="p">,</span> <span class="mi">26</span> <span class="n">skipped</span><span class="p">,</span> <span class="mi">4659</span> <span class="n">warnings</span> <span class="ow">in</span> <span class="mf">557.76</span> <span class="n">seconds</span> <span class="o">===========</span>
 </pre></div>
 </div>
 <p>Otherwise, please consider posting an issue into the <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">bug tracker</a> or to the
@@ -567,8 +560,8 @@ source directory:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span>
 </pre></div>
 </div>
-<p>Test can now be run using nosetests:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="o">-</span><span class="n">v</span> <span class="n">sklearn</span><span class="o">/</span>
+<p>Test can now be run using pytest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">sklearn</span>
 </pre></div>
 </div>
 <p>This is automated by the commands:</p>
