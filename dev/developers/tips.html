@@ -182,6 +182,7 @@
 <li><a class="reference internal" href="#checking-out-pull-requests-as-remote-tracking-branches">Checking out pull requests as remote-tracking branches</a></li>
 <li><a class="reference internal" href="#display-code-coverage-in-pull-requests">Display code coverage in pull requests</a></li>
 <li><a class="reference internal" href="#useful-pytest-aliases-and-flags">Useful pytest aliases and flags</a></li>
+<li><a class="reference internal" href="#standard-replies-for-reviewing">Standard replies for reviewing</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#debugging-memory-errors-in-cython-with-valgrind">Debugging memory errors in Cython with valgrind</a></li>
@@ -264,6 +265,118 @@ shell alias to:</p>
 </li>
 </ol>
 </div></blockquote>
+</div>
+<div class="section" id="standard-replies-for-reviewing">
+<span id="saved-replies"></span><h3>Standard replies for reviewing<a class="headerlink" href="#standard-replies-for-reviewing" title="Permalink to this headline">¶</a></h3>
+<p>It may be helpful to store some of these in GitHub’s <a class="reference external" href="https://github.com/settings/replies/">saved
+replies</a> for reviewing:</p>
+<dl class="docutils">
+<dt>Issue: You’re welcome to update the docs</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please feel free to offer a pull request updating the documentation if you feel it could be improved.
+</pre></div>
+</div>
+</dd>
+<dt>Issue: Self-contained example for bug</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please provide [self-contained example code](https://stackoverflow.com/help/mcve), including imports and data (if possible), so that other contributors can just run it and reproduce your issue. Ideally your example code should be minimal.
+</pre></div>
+</div>
+</dd>
+<dt>Issue: Software versions</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>To help diagnose your issue, could you please paste the output of:
+```py
+import platform; print(platform.platform())
+import sys; print(&quot;Python&quot;, sys.version)
+import numpy; print(&quot;NumPy&quot;, numpy.__version__)
+import scipy; print(&quot;SciPy&quot;, scipy.__version__)
+import sklearn; print(&quot;Scikit-Learn&quot;, sklearn.__version__)
+```
+? Thanks.
+</pre></div>
+</div>
+</dd>
+<dt>Issue: Code blocks</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Readability can be greatly improved if you [format](https://help.github.com/articles/creating-and-highlighting-code-blocks/) your code snippets and complete error messages appropriately. For example:
+
+    ```python
+    print(something)
+    ```
+generates:
+```python
+print(something)
+```
+And:
+
+    ```pytb
+    Traceback (most recent call last):
+      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    ImportError: No module named &#39;hello&#39;
+    ```
+generates:
+```pytb
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+ImportError: No module named &#39;hello&#39;
+```
+You can edit your issue descriptions and comments at any time to improve readability. This helps maintainers a lot. Thanks!
+</pre></div>
+</div>
+</dd>
+<dt>Issue/Comment: Linking to code</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Friendly advice: for clarity&#39;s sake, you can link to code like [this](https://help.github.com/articles/creating-a-permanent-link-to-a-code-snippet/).
+</pre></div>
+</div>
+</dd>
+<dt>Issue/Comment: Linking to issues</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please use links to comments, which make it a lot easier to see what you are referring to, rather than just linking to the issue. See [this](https://stackoverflow.com/questions/25163598/how-do-i-reference-a-specific-issue-comment-on-github) for more details.
+</pre></div>
+</div>
+</dd>
+<dt>PR-NEW: Better description</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Thanks for the pull request! Please make the title of the PR descriptive so that we can easily recall the issue it is resolving. You should state what issue (or PR) it fixes/resolves in the description (see [here](http://scikit-learn.org/dev/developers/contributing.html#contributing-pull-requests)).
+</pre></div>
+</div>
+</dd>
+<dt>PR-NEW: Fix #</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please use &quot;Fix #issueNumber&quot; in your PR description (and you can do it more than once). This way the associated issue gets closed automatically when the PR is merged. For more details, look at [this](https://github.com/blog/1506-closing-issues-via-pull-requests).
+</pre></div>
+</div>
+</dd>
+<dt>PR-NEW or Issue:</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Every feature we include has a [maintenance cost](http://scikit-learn.org/dev/faq.html#why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn). Our maintainers are mostly volunteers. For a new feature to be included, we need evidence that it is often useful and, ideally, [well-established](http://scikit-learn.org/dev/faq.html#what-are-the-inclusion-criteria-for-new-algorithms) in the literature or in practice. That doesn&#39;t stop you implementing it for yourself and publishing it in a separate repository, or even [scikit-learn-contrib](http://scikit-learn-contrib.github.io).
+</pre></div>
+</div>
+</dd>
+<dt>PR-WIP: What’s needed before merge?</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please clarify (perhaps as a TODO list in the PR description) what work you believe still needs to be done before it can be reviewed for merge. When it is ready, please prefix the PR title with `[MRG]`.
+</pre></div>
+</div>
+</dd>
+<dt>PR-WIP: Regression test needed</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please add a [non-regression test](https://en.wikipedia.org/wiki/Non-regression_testing) that would fail at master but pass in this PR.
+</pre></div>
+</div>
+</dd>
+<dt>PR-WIP: PEP8</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>You have some [PEP8](https://www.python.org/dev/peps/pep-0008/) violations, whose details you can see in Travis CI. It might be worth configuring your code editor to check for such errors on the fly, so you can catch them before committing.
+</pre></div>
+</div>
+</dd>
+<dt>PR-MRG: Patience</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Before merging, we generally require two core developers to agree that your pull request is desirable and ready. [Please be patient](http://scikit-learn.org/dev/faq.html#why-is-my-pull-request-not-getting-any-attention), as we mostly rely on volunteered time from busy core developers. (You are also welcome to help us out with [reviewing other PRs](http://scikit-learn.org/dev/developers/contributing.html#code-review-guidelines).)
+</pre></div>
+</div>
+</dd>
+<dt>PR-MRG: Add to what’s new</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please add an entry to the change log at `doc/whats_new/v*.rst`. Like the other entries there, please reference this pull request with `:issue:` and credit yourself (and other contributors if applicable) with `:user:`.
+</pre></div>
+</div>
+</dd>
+<dt>PR: Don’t change unrelated</dt>
+<dd><div class="first last highlight-none"><div class="highlight"><pre><span></span>Please do not change unrelated lines. It makes your contribution harder to review and may introduce merge conflicts to other pull requests.
+</pre></div>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 <div class="section" id="debugging-memory-errors-in-cython-with-valgrind">
