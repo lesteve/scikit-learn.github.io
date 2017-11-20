@@ -42,6 +42,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
   <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.multioutput.MultiOutputClassifier.html" />
 
   <script type="text/javascript">
@@ -81,17 +86,17 @@
                  <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-            <li class="link-title">Scikit-learn 0.19</li>
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
-                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
-                <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">Previous versions</a></li>
+                <li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -197,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.multioutput" title="sklearn.multioutput"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.multioutput</span></code></a>.MultiOutputClassifier<a class="headerlink" href="#sklearn-multioutput-multioutputclassifier" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.multioutput.MultiOutputClassifier">
-<em class="property">class </em><code class="descclassname">sklearn.multioutput.</code><code class="descname">MultiOutputClassifier</code><span class="sig-paren">(</span><em>estimator</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/multioutput.py#L288"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.multioutput.</code><code class="descname">MultiOutputClassifier</code><span class="sig-paren">(</span><em>estimator</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/multioutput.py#L288"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multi target classification</p>
 <p>This strategy consists of fitting one classifier per target. This is a
 simple strategy for extending classifiers that do not natively support
@@ -261,12 +266,12 @@ It does each target variable in y in parallel.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/multioutput.py#L314"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/multioutput.py#L314"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/multioutput.py#L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/multioutput.py#L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model to data.
 Fit a separate model for each output variable.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -302,7 +307,7 @@ weights.</p>
 
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -327,7 +332,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.partial_fit">
-<code class="descname">partial_fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>classes=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/utils/metaestimators.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.partial_fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">partial_fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>classes=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/utils/metaestimators.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.partial_fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Incrementally fit the model to data.
 Fit a separate model for each output variable.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -372,7 +377,7 @@ weights.</p>
 
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/multioutput.py#L173"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/multioutput.py#L173"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.predict" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Predict multi-output variable using a model</dt>
 <dd>trained for each target variable.</dd>
@@ -400,7 +405,7 @@ Note: Separate models are generated for each predictor.</p>
 
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/multioutput.py#L317"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.predict_proba" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/multioutput.py#L317"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.predict_proba" title="Permalink to this definition">¶</a></dt>
 <dd><p>Probability estimates.
 Returns prediction probabilities for each class of each output.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -426,7 +431,7 @@ classes corresponds to that in the attribute <cite>classes_</cite>.</p>
 
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/multioutput.py#L342"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/multioutput.py#L342"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>“Returns the mean accuracy on the given test data and labels.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -454,7 +459,7 @@ classes corresponds to that in the attribute <cite>classes_</cite>.</p>
 
 <dl class="method">
 <dt id="sklearn.multioutput.MultiOutputClassifier.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/base.py#L250"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/base.py#L250"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.multioutput.MultiOutputClassifier.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form

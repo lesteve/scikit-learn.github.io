@@ -43,6 +43,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
   <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.LabelKFold.html" />
 
   <script type="text/javascript">
@@ -82,17 +87,17 @@
                  <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-            <li class="link-title">Scikit-learn 0.19</li>
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.19 (stable)</a></li>
-                <li><a href="http://scikit-learn.org/0.18/documentation.html">Scikit-learn 0.18</a></li>
-                <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">Previous versions</a></li>
+                <li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -202,7 +207,7 @@
 </div>
 <dl class="class">
 <dt id="sklearn.cross_validation.LabelKFold">
-<em class="property">class </em><code class="descclassname">sklearn.cross_validation.</code><code class="descname">LabelKFold</code><span class="sig-paren">(</span><em>labels</em>, <em>n_folds=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/f3320a6f/sklearn/cross_validation.py#L368"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cross_validation.LabelKFold" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.cross_validation.</code><code class="descname">LabelKFold</code><span class="sig-paren">(</span><em>labels</em>, <em>n_folds=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/19eb62ff/sklearn/cross_validation.py#L368"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cross_validation.LabelKFold" title="Permalink to this definition">¶</a></dt>
 <dd><p>K-fold iterator variant with non-overlapping labels.</p>
 <div class="deprecated">
 <p><span class="versionmodified">Deprecated since version 0.18: </span>This module will be removed in 0.20.
