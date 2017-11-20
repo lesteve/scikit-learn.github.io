@@ -42,6 +42,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
   <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.random_projection.johnson_lindenstrauss_min_dim.html" />
 
   <script type="text/javascript">
@@ -81,17 +86,17 @@
                  <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-            <li class="link-title">Scikit-learn 0.19 (development)</li>
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
-                <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
-				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">Previous versions</a></li>
+                <li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -200,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.random_projection" title="sklearn.random_projection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.random_projection</span></code></a>.johnson_lindenstrauss_min_dim<a class="headerlink" href="#sklearn-random-projection-johnson-lindenstrauss-min-dim" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.random_projection.johnson_lindenstrauss_min_dim">
-<code class="descclassname">sklearn.random_projection.</code><code class="descname">johnson_lindenstrauss_min_dim</code><span class="sig-paren">(</span><em>n_samples</em>, <em>eps=0.1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/37ce9aec/sklearn/random_projection.py#L53"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.johnson_lindenstrauss_min_dim" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.random_projection.</code><code class="descname">johnson_lindenstrauss_min_dim</code><span class="sig-paren">(</span><em>n_samples</em>, <em>eps=0.1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/fd254816/sklearn/random_projection.py#L53"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.random_projection.johnson_lindenstrauss_min_dim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a ‘safe’ number of components to randomly project to</p>
 <p>The distortion introduced by a random projection <cite>p</cite> only changes the
 distance between two points by a factor (1 +- eps) in an euclidean space

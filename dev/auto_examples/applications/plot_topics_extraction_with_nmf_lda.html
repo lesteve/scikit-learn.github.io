@@ -42,6 +42,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
   <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/applications/plot_topics_extraction_with_nmf_lda.html" />
 
   <script type="text/javascript">
@@ -81,17 +86,17 @@
                  <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-            <li class="link-title">Scikit-learn 0.19 (development)</li>
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
-                <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
-				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">Previous versions</a></li>
+                <li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -210,14 +215,14 @@ complexity is polynomial in NMF. In LDA, the time complexity is
 proportional to (n_samples * iterations).</p>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Loading</span> <span class="n">dataset</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">1.511</span><span class="n">s</span><span class="o">.</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">1.397</span><span class="n">s</span><span class="o">.</span>
 <span class="n">Extracting</span> <span class="n">tf</span><span class="o">-</span><span class="n">idf</span> <span class="n">features</span> <span class="k">for</span> <a href="../../modules/generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="View documentation for sklearn.decomposition.NMF"><span class="n">NMF</span></a><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.389</span><span class="n">s</span><span class="o">.</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.357</span><span class="n">s</span><span class="o">.</span>
 <span class="n">Extracting</span> <span class="n">tf</span> <span class="n">features</span> <span class="k">for</span> <span class="n">LDA</span><span class="o">...</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.388</span><span class="n">s</span><span class="o">.</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.355</span><span class="n">s</span><span class="o">.</span>
 
 <span class="n">Fitting</span> <span class="n">the</span> <a href="../../modules/generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="View documentation for sklearn.decomposition.NMF"><span class="n">NMF</span></a> <span class="n">model</span> <span class="p">(</span><span class="n">Frobenius</span> <span class="n">norm</span><span class="p">)</span> <span class="k">with</span> <span class="n">tf</span><span class="o">-</span><span class="n">idf</span> <span class="n">features</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">2000</span> <span class="ow">and</span> <span class="n">n_features</span><span class="o">=</span><span class="mf">1000.</span><span class="o">..</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.365</span><span class="n">s</span><span class="o">.</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.344</span><span class="n">s</span><span class="o">.</span>
 
 <span class="n">Topics</span> <span class="ow">in</span> <a href="../../modules/generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="View documentation for sklearn.decomposition.NMF"><span class="n">NMF</span></a> <span class="n">model</span> <span class="p">(</span><span class="n">Frobenius</span> <span class="n">norm</span><span class="p">):</span>
 <span class="n">Topic</span> <span class="c1">#0: just people don think like know time good make way really say right ve want did ll new use years</span>
@@ -232,7 +237,7 @@ proportional to (n_samples * iterations).</p>
 <span class="n">Topic</span> <span class="c1">#9: key chip clipper keys encryption government public use secure enforcement phone nsa communications law encrypted security clinton used legal standard</span>
 
 <span class="n">Fitting</span> <span class="n">the</span> <a href="../../modules/generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="View documentation for sklearn.decomposition.NMF"><span class="n">NMF</span></a> <span class="n">model</span> <span class="p">(</span><span class="n">generalized</span> <span class="n">Kullback</span><span class="o">-</span><span class="n">Leibler</span> <span class="n">divergence</span><span class="p">)</span> <span class="k">with</span> <span class="n">tf</span><span class="o">-</span><span class="n">idf</span> <span class="n">features</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">2000</span> <span class="ow">and</span> <span class="n">n_features</span><span class="o">=</span><span class="mf">1000.</span><span class="o">..</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">1.512</span><span class="n">s</span><span class="o">.</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">1.426</span><span class="n">s</span><span class="o">.</span>
 
 <span class="n">Topics</span> <span class="ow">in</span> <a href="../../modules/generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="View documentation for sklearn.decomposition.NMF"><span class="n">NMF</span></a> <span class="n">model</span> <span class="p">(</span><span class="n">generalized</span> <span class="n">Kullback</span><span class="o">-</span><span class="n">Leibler</span> <span class="n">divergence</span><span class="p">):</span>
 <span class="n">Topic</span> <span class="c1">#0: people just like time don say really know way things make think right said did want ve probably work years</span>
@@ -247,7 +252,7 @@ proportional to (n_samples * iterations).</p>
 <span class="n">Topic</span> <span class="c1">#9: just good use way got like ll doesn want sure don doing thought does wrong right better make stuff speed</span>
 
 <span class="n">Fitting</span> <span class="n">LDA</span> <span class="n">models</span> <span class="k">with</span> <span class="n">tf</span> <span class="n">features</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">2000</span> <span class="ow">and</span> <span class="n">n_features</span><span class="o">=</span><span class="mf">1000.</span><span class="o">..</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">11.090</span><span class="n">s</span><span class="o">.</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">10.006</span><span class="n">s</span><span class="o">.</span>
 
 <span class="n">Topics</span> <span class="ow">in</span> <span class="n">LDA</span> <span class="n">model</span><span class="p">:</span>
 <span class="n">Topic</span> <span class="c1">#0: edu com mail send graphics ftp pub available contact university list faq ca information cs 1993 program sun uk mit</span>
@@ -366,7 +371,7 @@ proportional to (n_samples * iterations).</p>
 <span class="n">print_top_words</span><span class="p">(</span><span class="n">lda</span><span class="p">,</span> <span class="n">tf_feature_names</span><span class="p">,</span> <span class="n">n_top_words</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  15.262 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  13.890 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_topics_extraction_with_nmf_lda.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_topics_extraction_with_nmf_lda.py</span></code></a></div>

@@ -41,6 +41,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
   <link rel="canonical" href="http://scikit-learn.org/stable/developers/maintainer.html" />
 
   <script type="text/javascript">
@@ -80,17 +85,17 @@
                  <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-            <li class="link-title">Scikit-learn 0.19 (development)</li>
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="../modules/classes.html">API</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
-                <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
-				<li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">Previous versions</a></li>
+                <li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -196,10 +201,7 @@ statistics. You can retrieve commit statistics with:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">edit the doc/conf.py to increase the version number</p>
-</li>
-<li><p class="first">edit the doc/themes/scikit-learn/layout.html to change the ‘News’
-entry of the front page.</p>
+<li><p class="first">edit the doc/index.rst to change the ‘News’ entry of the front page.</p>
 </li>
 </ul>
 </div></blockquote>
@@ -228,7 +230,8 @@ $ git push origin --tags
 </li>
 </ul>
 </li>
-<li><p class="first">Push the documentation to the website (see README in doc folder)</p>
+<li><p class="first">Push the documentation to the website. Circle CI should do this
+automatically for master and &lt;N&gt;.&lt;N&gt;.X branches.</p>
 </li>
 <li><p class="first">Build binaries using dedicated CI servers by updating the git submodule
 reference to the new scikit-learn tag of the release at:</p>

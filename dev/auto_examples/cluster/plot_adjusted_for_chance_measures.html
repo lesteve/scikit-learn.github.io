@@ -42,6 +42,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
   <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/cluster/plot_adjusted_for_chance_measures.html" />
 
   <script type="text/javascript">
@@ -81,17 +86,17 @@
                  <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-            <li class="link-title">Scikit-learn 0.19 (development)</li>
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/stable/documentation.html">Scikit-learn 0.18 (stable)</a></li>
-                <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
-				<li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">Previous versions</a></li>
+                <li><a href="../../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -215,21 +220,21 @@ value of k on various overlapping sub-samples of the dataset.</p>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Computing</span> <span class="n">adjusted_rand_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.039</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.037</span><span class="n">s</span>
 <span class="n">Computing</span> <span class="n">v_measure_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.061</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.057</span><span class="n">s</span>
 <span class="n">Computing</span> <span class="n">adjusted_mutual_info_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.597</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.565</span><span class="n">s</span>
 <span class="n">Computing</span> <span class="n">mutual_info_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.050</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.046</span><span class="n">s</span>
 <span class="n">Computing</span> <span class="n">adjusted_rand_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.059</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.055</span><span class="n">s</span>
 <span class="n">Computing</span> <span class="n">v_measure_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.078</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.073</span><span class="n">s</span>
 <span class="n">Computing</span> <span class="n">adjusted_mutual_info_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.334</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.313</span><span class="n">s</span>
 <span class="n">Computing</span> <span class="n">mutual_info_score</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">values</span> <span class="n">of</span> <span class="n">n_clusters</span> <span class="ow">and</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span>
-<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.062</span><span class="n">s</span>
+<span class="n">done</span> <span class="ow">in</span> <span class="mf">0.058</span><span class="n">s</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -337,7 +342,7 @@ value of k on various overlapping sub-samples of the dataset.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  1.390 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  1.311 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_adjusted_for_chance_measures.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_adjusted_for_chance_measures.py</span></code></a></div>
