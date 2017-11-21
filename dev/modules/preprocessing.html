@@ -608,44 +608,84 @@ Such features can be efficiently coded as integers, for instance
 <code class="docutils literal"><span class="pre">[&quot;male&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">US&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Internet</span> <span class="pre">Explorer&quot;]</span></code> could be expressed as
 <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">3]</span></code> while <code class="docutils literal"><span class="pre">[&quot;female&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">Asia&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Chrome&quot;]</span></code> would be
 <code class="docutils literal"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">1]</span></code>.</p>
-<p>Such integer representation can not be used directly with scikit-learn estimators, as these
-expect continuous input, and would interpret the categories as being ordered, which is often
-not desired (i.e. the set of browsers was ordered arbitrarily).</p>
-<p>One possibility to convert categorical features to features that can be used
-with scikit-learn estimators is to use a one-of-K or one-hot encoding, which is
-implemented in <a class="reference internal" href="generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder" title="sklearn.preprocessing.OneHotEncoder"><code class="xref py py-class docutils literal"><span class="pre">OneHotEncoder</span></code></a>.  This estimator transforms each
-categorical feature with <code class="docutils literal"><span class="pre">m</span></code> possible values into <code class="docutils literal"><span class="pre">m</span></code> binary features, with
-only one active.</p>
-<p>Continuing the example above:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>  
-<span class="go">OneHotEncoder(categorical_features=&#39;all&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
-<span class="go">       handle_unknown=&#39;error&#39;, n_values=&#39;auto&#39;, sparse=True)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 1.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  1.]])</span>
+<p>To convert categorical features to such integer codes, we can use the
+<a class="reference internal" href="generated/sklearn.preprocessing.CategoricalEncoder.html#sklearn.preprocessing.CategoricalEncoder" title="sklearn.preprocessing.CategoricalEncoder"><code class="xref py py-class docutils literal"><span class="pre">CategoricalEncoder</span></code></a>. When specifying that we want to perform an
+ordinal encoding, the estimator transforms each categorical feature to one
+new feature of integers (0 to n_categories - 1):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">CategoricalEncoder</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  
+<span class="go">CategoricalEncoder(categories=&#39;auto&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
+<span class="go">          encoding=&#39;ordinal&#39;, handle_unknown=&#39;error&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]])</span>
+<span class="go">array([[ 0.,  1.,  1.]])</span>
 </pre></div>
 </div>
-<p>By default, how many values each feature can take is inferred automatically from the dataset.
-It is possible to specify this explicitly using the parameter <code class="docutils literal"><span class="pre">n_values</span></code>.
-There are two genders, three possible continents and four web browsers in our
-dataset.
-Then we fit the estimator, and transform a data point.
-In the result, the first two numbers encode the gender, the next set of three
-numbers the continent and the last four the web browser.</p>
-<p>Note that, if there is a possibility that the training data might have missing categorical
-features, one has to explicitly set <code class="docutils literal"><span class="pre">n_values</span></code>. For example,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">n_values</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Note that there are missing categorical values for the 2nd and 3rd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># features</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>  
-<span class="go">OneHotEncoder(categorical_features=&#39;all&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
-<span class="go">       handle_unknown=&#39;error&#39;, n_values=[2, 3, 4], sparse=True)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 0.,  1.,  1.,  0.,  0.,  1.,  0.,  0.,  0.]])</span>
+<p>Such integer representation can, however, not be used directly with all
+scikit-learn estimators, as these expect continuous input, and would interpret
+the categories as being ordered, which is often not desired (i.e. the set of
+browsers was ordered arbitrarily).</p>
+<p>Another possibility to convert categorical features to features that can be used
+with scikit-learn estimators is to use a one-of-K, also known as one-hot or
+dummy encoding.
+This type of encoding is the default behaviour of the <a class="reference internal" href="generated/sklearn.preprocessing.CategoricalEncoder.html#sklearn.preprocessing.CategoricalEncoder" title="sklearn.preprocessing.CategoricalEncoder"><code class="xref py py-class docutils literal"><span class="pre">CategoricalEncoder</span></code></a>.
+The <a class="reference internal" href="generated/sklearn.preprocessing.CategoricalEncoder.html#sklearn.preprocessing.CategoricalEncoder" title="sklearn.preprocessing.CategoricalEncoder"><code class="xref py py-class docutils literal"><span class="pre">CategoricalEncoder</span></code></a> then transforms each categorical feature with
+<code class="docutils literal"><span class="pre">n_categories</span></code> possible values into <code class="docutils literal"><span class="pre">n_categories</span></code> binary features, with
+one of them 1, and all others 0.</p>
+<p>Continuing the example above:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">CategoricalEncoder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  
+<span class="go">CategoricalEncoder(categories=&#39;auto&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
+<span class="go">          encoding=&#39;onehot&#39;, handle_unknown=&#39;error&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[ 1.,  0.,  0.,  1.,  0.,  1.],</span>
+<span class="go">       [ 0.,  1.,  1.,  0.,  0.,  1.]])</span>
+</pre></div>
+</div>
+<p>By default, the values each feature can take is inferred automatically
+from the dataset and can be found in the <code class="docutils literal"><span class="pre">categories_</span></code> attribute:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">categories_</span>
+<span class="go">[array([&#39;female&#39;, &#39;male&#39;], dtype=object), array([&#39;from Europe&#39;, &#39;from US&#39;], dtype=object), array([&#39;uses Firefox&#39;, &#39;uses Safari&#39;], dtype=object)]</span>
+</pre></div>
+</div>
+<p>It is possible to specify this explicitly using the parameter <code class="docutils literal"><span class="pre">categories</span></code>.
+There are two genders, four possible continents and four web browsers in our
+dataset:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">genders</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;from Africa&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">browsers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uses Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;uses IE&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">CategoricalEncoder</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="n">genders</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">browsers</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Note that for there are missing categorical values for the 2nd and 3rd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># feature</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+<span class="go">CategoricalEncoder(categories=[...],</span>
+<span class="go">          dtype=&lt;... &#39;numpy.float64&#39;&gt;, encoding=&#39;onehot&#39;,</span>
+<span class="go">          handle_unknown=&#39;error&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Chrome&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[ 1.,  0.,  0.,  1.,  0.,  0.,  1.,  0.,  0.,  0.]])</span>
+</pre></div>
+</div>
+<p>If there is a possibility that the training data might have missing categorical
+features, it can often be better to specify <code class="docutils literal"><span class="pre">handle_unknown='ignore'</span></code> instead
+of setting the <code class="docutils literal"><span class="pre">categories</span></code> manually as above. When
+<code class="docutils literal"><span class="pre">handle_unknown='ignore'</span></code> is specified and unknown categories are encountered
+during transform, no error will be raised but the resulting one-hot encoded
+columns for this feature will be all zeros
+(<code class="docutils literal"><span class="pre">handle_unknown='ignore'</span></code> is only supported for one-hot encoding):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">CategoricalEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+<span class="go">CategoricalEncoder(categories=&#39;auto&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
+<span class="go">          encoding=&#39;onehot&#39;, handle_unknown=&#39;ignore&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Chrome&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[ 1.,  0.,  0.,  0.,  0.,  0.]])</span>
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="feature_extraction.html#dict-feature-extraction"><span class="std std-ref">Loading features from dicts</span></a> for categorical features that are represented
-as a dict, not as integers.</p>
+as a dict, not as scalars.</p>
 </div>
 <div class="section" id="imputation-of-missing-values">
 <span id="imputation"></span><h2>4.3.6. Imputation of missing values<a class="headerlink" href="#imputation-of-missing-values" title="Permalink to this headline">¶</a></h2>
