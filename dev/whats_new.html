@@ -398,6 +398,12 @@ broken when setting <code class="docutils literal"><span class="pre">normalize=F
 <li>Fixed a bug in <a class="reference internal" href="modules/generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="sklearn.linear_model.ARDRegression"><code class="xref py py-class docutils literal"><span class="pre">linear_model.ARDRegression</span></code></a> which caused incorrectly
 updated estimates for the standard deviation and the coefficients.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/10153">#10153</a> by <a class="reference external" href="https://github.com/jdoepfert">Jörg Döpfert</a>.</li>
+<li>Fixed a bug when fitting <a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingClassifier.html#sklearn.ensemble.GradientBoostingClassifier" title="sklearn.ensemble.GradientBoostingClassifier"><code class="xref py py-class docutils literal"><span class="pre">ensemble.GradientBoostingClassifier</span></code></a> or
+<a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor" title="sklearn.ensemble.GradientBoostingRegressor"><code class="xref py py-class docutils literal"><span class="pre">ensemble.GradientBoostingRegressor</span></code></a> with <code class="docutils literal"><span class="pre">warm_start=True</span></code> which
+previously raised a segmentation fault due to a non-conversion of CSC matrix
+into CSR format expected by <code class="docutils literal"><span class="pre">decision_function</span></code>. Similarly, Fortran-ordered
+arrays are converted to C-ordered arrays in the dense case. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9991">#9991</a> by
+<a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</li>
 </ul>
 <p>Decomposition, manifold learning and clustering</p>
 <ul class="simple">
