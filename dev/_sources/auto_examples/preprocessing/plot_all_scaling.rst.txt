@@ -30,8 +30,10 @@ Scalers are linear (or more precisely affine) transformers and differ from each
 other in the way to estimate the parameters used to shift and scale each
 feature.
 
-``QuantileTransformer`` provides a non-linear transformation in which distances
-between marginal outliers and inliers are shrunk.
+``QuantileTransformer`` provides non-linear transformations in which distances
+between marginal outliers and inliers are shrunk. ``PowerTransformer`` provides
+non-linear transformations in which data is mapped to a normal distribution to
+stabilize variance and minimize skewness.
 
 Unlike the previous transformations, normalization refers to a per sample
 transformation instead of a per feature transformation.
@@ -64,7 +66,8 @@ of the results_.
     from sklearn.preprocessing import StandardScaler
     from sklearn.preprocessing import RobustScaler
     from sklearn.preprocessing import Normalizer
-    from sklearn.preprocessing.data import QuantileTransformer
+    from sklearn.preprocessing import QuantileTransformer
+    from sklearn.preprocessing import PowerTransformer
 
     from sklearn.datasets import fetch_california_housing
 
@@ -89,14 +92,16 @@ of the results_.
             MaxAbsScaler().fit_transform(X)),
         ('Data after robust scaling',
             RobustScaler(quantile_range=(25, 75)).fit_transform(X)),
-        ('Data after quantile transformation (uniform pdf)',
-            QuantileTransformer(output_distribution='uniform')
-            .fit_transform(X)),
+        ('Data after power transformation (Box-Cox)',
+         PowerTransformer(method='box-cox').fit_transform(X)),
         ('Data after quantile transformation (gaussian pdf)',
             QuantileTransformer(output_distribution='normal')
             .fit_transform(X)),
+        ('Data after quantile transformation (uniform pdf)',
+            QuantileTransformer(output_distribution='uniform')
+            .fit_transform(X)),
         ('Data after sample-wise L2 normalizing',
-            Normalizer().fit_transform(X))
+            Normalizer().fit_transform(X)),
     ]
 
     # scale the output between 0 and 1 for the colorbar
@@ -372,20 +377,20 @@ required (see below).
 
 
 
-QuantileTransformer (uniform output)
-------------------------------------
+PowerTransformer (Box-Cox)
+--------------------------
 
-``QuantileTransformer`` applies a non-linear transformation such that the
-probability density function of each feature will be mapped to a uniform
-distribution. In this case, all the data will be mapped in the range [0, 1],
-even the outliers which cannot be distinguished anymore from the inliers.
-
-As ``RobustScaler``, ``QuantileTransformer`` is robust to outliers in the
-sense that adding or removing outliers in the training set will yield
-approximately the same transformation on held out data. But contrary to
-``RobustScaler``, ``QuantileTransformer`` will also automatically collapse
-any outlier by setting them to the a priori defined range boundaries (0 and
-1).
+``PowerTransformer`` applies a power transformation to each
+feature to make the data more Gaussian-like. Currently,
+``PowerTransformer`` implements the Box-Cox transform. It differs from
+QuantileTransformer (Gaussian output) in that it does not map the
+data to a zero-mean, unit-variance Gaussian distribution. Instead, Box-Cox
+finds the optimal scaling factor to stabilize variance and mimimize skewness
+through maximum likelihood estimation. Note that Box-Cox can only be applied
+to positive, non-zero data. Income and number of households happen to be
+strictly positive, but if negative values are present, a constant can be
+added to each feature to shift it into the positive range - this is known as
+the two-parameter Box-Cox transform.
 
 
 
@@ -427,6 +432,37 @@ for extreme values.
 
 
 
+QuantileTransformer (uniform output)
+------------------------------------
+
+``QuantileTransformer`` applies a non-linear transformation such that the
+probability density function of each feature will be mapped to a uniform
+distribution. In this case, all the data will be mapped in the range [0, 1],
+even the outliers which cannot be distinguished anymore from the inliers.
+
+As ``RobustScaler``, ``QuantileTransformer`` is robust to outliers in the
+sense that adding or removing outliers in the training set will yield
+approximately the same transformation on held out data. But contrary to
+``RobustScaler``, ``QuantileTransformer`` will also automatically collapse
+any outlier by setting them to the a priori defined range boundaries (0 and
+1).
+
+
+
+.. code-block:: python
+
+
+    make_plot(7)
+
+
+
+
+.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_008.png
+    :align: center
+
+
+
+
 Normalizer
 ----------
 
@@ -442,18 +478,19 @@ case if some original features had a mix of positive and negative values.
 .. code-block:: python
 
 
-    make_plot(7)
+    make_plot(8)
+
     plt.show()
 
 
 
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_008.png
+.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_009.png
     :align: center
 
 
 
 
-**Total running time of the script:** ( 0 minutes  6.139 seconds)
+**Total running time of the script:** ( 0 minutes  7.752 seconds)
 
 
 
