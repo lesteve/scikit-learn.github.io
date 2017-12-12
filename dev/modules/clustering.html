@@ -190,6 +190,7 @@
 <li><a class="reference internal" href="#mean-shift">2.3.4. Mean Shift</a></li>
 <li><a class="reference internal" href="#spectral-clustering">2.3.5. Spectral clustering</a><ul>
 <li><a class="reference internal" href="#different-label-assignment-strategies">2.3.5.1. Different label assignment strategies</a></li>
+<li><a class="reference internal" href="#spectral-clustering-graphs">2.3.5.2. Spectral Clustering Graphs</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#hierarchical-clustering">2.3.6. Hierarchical clustering</a><ul>
@@ -688,6 +689,17 @@ geometrical shape.</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="spectral-clustering-graphs">
+<h3>2.3.5.2. Spectral Clustering Graphs<a class="headerlink" href="#spectral-clustering-graphs" title="Permalink to this headline">¶</a></h3>
+<p>Spectral Clustering can also be used to cluster graphs by their spectral
+embeddings.  In this case, the affinity matrix is the adjacency matrix of the
+graph, and SpectralClustering is initialized with <cite>affinity=’precomputed’</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">SpectralClustering</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">affinity</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">assign_labels</span><span class="o">=</span><span class="s1">&#39;discretize&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">adjacency_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="topic">
 <p class="topic-title first">References:</p>
 <ul class="simple">
