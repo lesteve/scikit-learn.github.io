@@ -1,6 +1,6 @@
 
 
-.. _sphx_glr_auto_examples_text_document_clustering.py:
+.. _sphx_glr_auto_examples_text_plot_document_clustering.py:
 
 
 =======================================
@@ -31,8 +31,8 @@ Two feature extraction methods can be used in this example:
 Two algorithms are demoed: ordinary k-means and its more scalable cousin
 minibatch k-means.
 
-Additionally, latent semantic analysis can also be used to reduce dimensionality
-and discover latent patterns in the data.
+Additionally, latent semantic analysis can also be used to reduce
+dimensionality and discover latent patterns in the data.
 
 It can be noted that k-means (and minibatch k-means) are very sensitive to
 feature scaling and that in this case the IDF weighting helps improve the
@@ -52,6 +52,57 @@ end up in a local optimum. Several runs with independent random init might be
 necessary to get a good convergence.
 
 
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Usage: plot_document_clustering.py [options]
+
+    Options:
+      -h, --help            show this help message and exit
+      --lsa=N_COMPONENTS    Preprocess documents with latent semantic analysis.
+      --no-minibatch        Use ordinary k-means algorithm (in batch mode).
+      --no-idf              Disable Inverse Document Frequency feature weighting.
+      --use-hashing         Use a hashing feature vectorizer
+      --n-features=N_FEATURES
+                            Maximum number of features (dimensions) to extract
+                            from text.
+      --verbose             Print progress reports inside k-means algorithm.
+    Loading 20 newsgroups dataset for categories:
+    ['alt.atheism', 'talk.religion.misc', 'comp.graphics', 'sci.space']
+    3387 documents
+    4 categories
+
+    Extracting features from the training dataset using a sparse vectorizer
+    done in 1.058215s
+    n_samples: 3387, n_features: 10000
+
+    Clustering sparse data with MiniBatchKMeans(batch_size=1000, compute_labels=True, init='k-means++',
+            init_size=1000, max_iter=100, max_no_improvement=10, n_clusters=4,
+            n_init=1, random_state=None, reassignment_ratio=0.01, tol=0.0,
+            verbose=False)
+    done in 0.177s
+
+    Homogeneity: 0.359
+    Completeness: 0.440
+    V-measure: 0.396
+    Adjusted Rand-Index: 0.253
+    Silhouette Coefficient: 0.007
+
+    Top terms per cluster:
+    Cluster 0: henry alaska toronto moon zoo spencer aurora space nsmca zoology
+    Cluster 1: com graphics university posting host nntp know uk article cs
+    Cluster 2: god com sandvik people keith morality sgi kent livesey jesus
+    Cluster 3: space nasa access gov digex pat shuttle hst orbit net
+
+
+
+
+|
 
 
 .. code-block:: python
@@ -114,6 +165,7 @@ necessary to get a good convergence.
     def is_interactive():
         return not hasattr(sys.modules['__main__'], '__file__')
 
+
     # work-around for Jupyter notebook and IPython console
     argv = [] if is_interactive() else sys.argv[1:]
     (opts, args) = op.parse_args(argv)
@@ -146,7 +198,8 @@ necessary to get a good convergence.
     labels = dataset.target
     true_k = np.unique(labels).shape[0]
 
-    print("Extracting features from the training dataset using a sparse vectorizer")
+    print("Extracting features from the training dataset "
+          "using a sparse vectorizer")
     t0 = time()
     if opts.use_hashing:
         if opts.use_idf:
@@ -234,7 +287,7 @@ necessary to get a good convergence.
                 print(' %s' % terms[ind], end='')
             print()
 
-**Total running time of the script:** ( 0 minutes  0.000 seconds)
+**Total running time of the script:** ( 0 minutes  1.607 seconds)
 
 
 
@@ -245,13 +298,13 @@ necessary to get a good convergence.
 
   .. container:: sphx-glr-download
 
-     :download:`Download Python source code: document_clustering.py <document_clustering.py>`
+     :download:`Download Python source code: plot_document_clustering.py <plot_document_clustering.py>`
 
 
 
   .. container:: sphx-glr-download
 
-     :download:`Download Jupyter notebook: document_clustering.ipynb <document_clustering.ipynb>`
+     :download:`Download Jupyter notebook: plot_document_clustering.ipynb <plot_document_clustering.ipynb>`
 
 
 .. only:: html
