@@ -6,7 +6,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
   
     <title>Frequently Asked Questions &#8212; scikit-learn 0.20.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
@@ -14,11 +13,9 @@
   <link rel="stylesheet" href="_static/css/bootstrap.min.css" media="screen" />
   <link rel="stylesheet" href="_static/css/bootstrap-responsive.css"/>
 
-    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -196,7 +193,6 @@
 <li><a class="reference internal" href="#do-you-support-pypy">Do you support PyPy?</a></li>
 <li><a class="reference internal" href="#how-do-i-deal-with-string-data-or-trees-graphs">How do I deal with string data (or trees, graphs…)?</a></li>
 <li><a class="reference internal" href="#why-do-i-sometime-get-a-crash-freeze-with-n-jobs-1-under-osx-or-linux">Why do I sometime get a crash/freeze with n_jobs &gt; 1 under OSX or Linux?</a></li>
-<li><a class="reference internal" href="#why-does-my-job-use-more-cores-than-specified-with-n-jobs-under-osx-or-linux">Why does my job use more cores than specified with n_jobs under OSX or Linux?</a></li>
 <li><a class="reference internal" href="#why-is-there-no-support-for-deep-or-reinforcement-learning-will-there-be-support-for-deep-or-reinforcement-learning-in-scikit-learn">Why is there no support for deep or reinforcement learning / Will there be support for deep or reinforcement learning in scikit-learn?</a></li>
 <li><a class="reference internal" href="#why-is-my-pull-request-not-getting-any-attention">Why is my pull request not getting any attention?</a></li>
 <li><a class="reference internal" href="#how-do-i-set-a-random-state-for-an-entire-execution">How do I set a <code class="docutils literal"><span class="pre">random_state</span></code> for an entire execution?</a></li>
@@ -453,21 +449,6 @@ program: Insert the following instructions in your main script:</p>
 </div>
 <p>You can find more default on the new start methods in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods">multiprocessing
 documentation</a>.</p>
-</div>
-<div class="section" id="why-does-my-job-use-more-cores-than-specified-with-n-jobs-under-osx-or-linux">
-<h2>Why does my job use more cores than specified with n_jobs under OSX or Linux?<a class="headerlink" href="#why-does-my-job-use-more-cores-than-specified-with-n-jobs-under-osx-or-linux" title="Permalink to this headline">¶</a></h2>
-<p>This happens when vectorized numpy operations are handled by libraries such
-as MKL or OpenBLAS.</p>
-<p>While scikit-learn adheres to the limit set by <code class="docutils literal"><span class="pre">n_jobs</span></code>,
-numpy operations vectorized using MKL (or OpenBLAS) will make use of multiple
-threads within each scikit-learn job (thread or process).</p>
-<p>The number of threads used by the BLAS library can be set via an environment
-variable. For example, to set the maximum number of threads to some integer
-value <code class="docutils literal"><span class="pre">N</span></code>, the following environment variables should be set:</p>
-<ul class="simple">
-<li>For MKL: <code class="docutils literal"><span class="pre">export</span> <span class="pre">MKL_NUM_THREADS=N</span></code></li>
-<li>For OpenBLAS: <code class="docutils literal"><span class="pre">export</span> <span class="pre">OPENBLAS_NUM_THREADS=N</span></code></li>
-</ul>
 </div>
 <div class="section" id="why-is-there-no-support-for-deep-or-reinforcement-learning-will-there-be-support-for-deep-or-reinforcement-learning-in-scikit-learn">
 <h2>Why is there no support for deep or reinforcement learning / Will there be support for deep or reinforcement learning in scikit-learn?<a class="headerlink" href="#why-is-there-no-support-for-deep-or-reinforcement-learning-will-there-be-support-for-deep-or-reinforcement-learning-in-scikit-learn" title="Permalink to this headline">¶</a></h2>

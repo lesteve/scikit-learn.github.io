@@ -6,7 +6,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
   
     <title>4.3. Preprocessing data &#8212; scikit-learn 0.20.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
@@ -14,11 +13,9 @@
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
   <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
 
-    
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -188,11 +185,7 @@
 <li><a class="reference internal" href="#centering-kernel-matrices">4.3.1.4. Centering kernel matrices</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#non-linear-transformation">4.3.2. Non-linear transformation</a><ul>
-<li><a class="reference internal" href="#mapping-to-a-uniform-distribution">4.3.2.1. Mapping to a Uniform distribution</a></li>
-<li><a class="reference internal" href="#mapping-to-a-gaussian-distribution">4.3.2.2. Mapping to a Gaussian distribution</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#non-linear-transformation">4.3.2. Non-linear transformation</a></li>
 <li><a class="reference internal" href="#normalization">4.3.3. Normalization</a></li>
 <li><a class="reference internal" href="#binarization">4.3.4. Binarization</a><ul>
 <li><a class="reference internal" href="#feature-binarization">4.3.4.1. Feature binarization</a></li>
@@ -439,13 +432,11 @@ defined by <img class="math" src="../_images/math/4efb887d0d27f3caa83f8913c0426d
 </div>
 <div class="section" id="non-linear-transformation">
 <span id="preprocessing-transformer"></span><h2>4.3.2. Non-linear transformation<a class="headerlink" href="#non-linear-transformation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="mapping-to-a-uniform-distribution">
-<h3>4.3.2.1. Mapping to a Uniform distribution<a class="headerlink" href="#mapping-to-a-uniform-distribution" title="Permalink to this headline">¶</a></h3>
-<p>Like scalers, <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> puts all features into the same,
-known range or distribution. However, by performing a rank transformation, it
-smooths out unusual distributions and is less influenced by outliers than
-scaling methods. It does, however, distort correlations and distances within
-and across features.</p>
+<p>Like scalers, <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> puts each feature into the same
+range or distribution. However, by performing a rank transformation, it smooths
+out unusual distributions and is less influenced by outliers than scaling
+methods. It does, however, distort correlations and distances within and across
+features.</p>
 <p><a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.quantile_transform.html#sklearn.preprocessing.quantile_transform" title="sklearn.preprocessing.quantile_transform"><code class="xref py py-func docutils literal"><span class="pre">quantile_transform</span></code></a> provide a
 non-parametric transformation based on the quantile function to map the data to
 a uniform distribution with values between 0 and 1:</p>
@@ -478,47 +469,8 @@ previously defined:</p>
 <span class="go">array([ 0.01...,  0.25...,  0.46...,  0.60... ,  0.94...])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="mapping-to-a-gaussian-distribution">
-<h3>4.3.2.2. Mapping to a Gaussian distribution<a class="headerlink" href="#mapping-to-a-gaussian-distribution" title="Permalink to this headline">¶</a></h3>
-<p>In many modeling scenarios, normality of the features in a dataset is desirable.
-Power transforms are a family of parametric, monotonic transformations that aim
-to map data from any distribution to as close to a Gaussian distribution as
-possible in order to stabilize variance and minimize skewness.</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-class docutils literal"><span class="pre">PowerTransformer</span></code></a> currently provides one such power transformation,
-the Box-Cox transform. The Box-Cox transform is given by:</p>
-<div class="math">
-<p><img src="../_images/math/2f60310f124a843549a94bf4c0d1b91c10708046.png" alt="y_i^{(\lambda)} =
-\begin{cases}
-\dfrac{y_i^\lambda - 1}{\lambda} &amp; \text{if } \lambda \neq 0, \\[8pt]
-\ln{(y_i)} &amp; \text{if } \lambda = 0,
-\end{cases}"/></p>
-</div><p>Box-Cox can only be applied to strictly positive data. The transformation is
-parameterized by <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/>, which is determined through maximum likelihood
-estimation. Here is an example of using Box-Cox to map samples drawn from a
-lognormal distribution to a normal distribution:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">PowerTransformer</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;box-cox&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">616</span><span class="p">)</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span>                                         
-<span class="go">array([[ 1.28...,  1.18...,  0.84...],</span>
-<span class="go">       [ 0.94...,  1.60...,  0.38...],</span>
-<span class="go">       [ 1.35...,  0.21...,  1.09...]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_lognormal</span><span class="p">)</span>                   
-<span class="go">array([[ 0.49...,  0.17..., -0.15...],</span>
-<span class="go">       [-0.05...,  0.58..., -0.57...],</span>
-<span class="go">       [ 0.69..., -0.84...,  0.10...]])</span>
-</pre></div>
-</div>
-<p>Below are examples of Box-Cox applied to various probability distributions.
-Note that when applied to certain distributions, Box-Cox achieves very
-Gaussian-like results, but with others, it is ineffective. This highlights
-the importance of visualizing the data before and after transformation.</p>
-<div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/preprocessing/plot_power_transformer.html"><img alt="../_images/sphx_glr_plot_power_transformer_0011.png" src="../_images/sphx_glr_plot_power_transformer_0011.png" style="width: 640.0px; height: 480.0px;" /></a>
-</div>
-<p>It is also possible to map data to a normal distribution using
-<a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> by setting <code class="docutils literal"><span class="pre">output_distribution='normal'</span></code>.
-Using the earlier example with the iris dataset:</p>
+<p>It is also possible to map the transformed data to a normal distribution by
+setting <code class="docutils literal"><span class="pre">output_distribution='normal'</span></code>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">QuantileTransformer</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">output_distribution</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -536,7 +488,6 @@ Using the earlier example with the iris dataset:</p>
 normal output is clipped so that the input’s minimum and maximum —
 corresponding to the 1e-7 and 1 - 1e-7 quantiles respectively — do not
 become infinite under the transformation.</p>
-</div>
 </div>
 <div class="section" id="normalization">
 <span id="preprocessing-normalization"></span><h2>4.3.3. Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">¶</a></h2>

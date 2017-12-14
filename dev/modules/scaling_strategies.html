@@ -6,7 +6,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
   
     <title>6. Strategies to scale computationally: bigger data &#8212; scikit-learn 0.20.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
@@ -14,11 +13,9 @@
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
   <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
 
-    
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -250,8 +247,8 @@ variables represented as list of Python dicts or
 </div>
 <div class="section" id="incremental-learning">
 <h3>6.1.3. Incremental learning<a class="headerlink" href="#incremental-learning" title="Permalink to this headline">¶</a></h3>
-<p>Finally, for 3. we have a number of options inside scikit-learn. Although not
-all algorithms can learn incrementally (i.e. without seeing all the instances
+<p>Finally, for 3. we have a number of options inside scikit-learn. Although all
+algorithms cannot learn incrementally (i.e. without seeing all the instances
 at once), all estimators implementing the <code class="docutils literal"><span class="pre">partial_fit</span></code> API are candidates.
 Actually, the ability to learn incrementally from a mini-batch of instances
 (sometimes called “online learning”) is key to out-of-core learning as it
@@ -320,11 +317,11 @@ stateless feature extraction routine may be able to cope with new/unseen
 attributes, the incremental learner itself may be unable to cope with
 new/unseen targets classes. In this case you have to pass all the possible
 classes to the first <code class="docutils literal"><span class="pre">partial_fit</span></code> call using the <code class="docutils literal"><span class="pre">classes=</span></code> parameter.</p>
-<p>Another aspect to consider when choosing a proper algorithm is that not all of
-them put the same importance on each example over time. Namely, the
+<p>Another aspect to consider when choosing a proper algorithm is that all of them
+don’t put the same importance on each example over time. Namely, the
 <code class="docutils literal"><span class="pre">Perceptron</span></code> is still sensitive to badly labeled examples even after many
 examples whereas the <code class="docutils literal"><span class="pre">SGD*</span></code> and <code class="docutils literal"><span class="pre">PassiveAggressive*</span></code> families are more
-robust to this kind of artifacts. Conversely, the latter also tend to give less
+robust to this kind of artifacts. Conversely, the later also tend to give less
 importance to remarkably different, yet properly labeled examples when they
 come late in the stream as their learning rate decreases over time.</p>
 </div>
@@ -337,13 +334,13 @@ systems and demonstrates most of the notions discussed above.</p>
 <p>Furthermore, it also shows the evolution of the performance of different
 algorithms with the number of processed examples.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../_images/sphx_glr_plot_out_of_core_classification_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../_images/sphx_glr_plot_out_of_core_classification_001.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
 vectorization is much more expensive than learning itself. From the different
 algorithms, <code class="docutils literal"><span class="pre">MultinomialNB</span></code> is the most expensive, but its overhead can be
 mitigated by increasing the size of the mini-batches (exercise: change
 <code class="docutils literal"><span class="pre">minibatch_size</span></code> to 100 and 10000 in the program and compare).</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../_images/sphx_glr_plot_out_of_core_classification_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../_images/sphx_glr_plot_out_of_core_classification_003.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
 <div class="section" id="notes">
 <h3>6.1.5. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
 <table class="docutils footnote" frame="void" id="id2" rules="none">

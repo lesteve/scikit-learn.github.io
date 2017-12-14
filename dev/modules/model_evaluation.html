@@ -6,7 +6,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
   
     <title>3.3. Model evaluation: quantifying the quality of predictions &#8212; scikit-learn 0.20.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
@@ -14,11 +13,9 @@
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
   <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
 
-    
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -915,7 +912,7 @@ quality.</li>
 <li>See <a class="reference internal" href="../auto_examples/classification/plot_digits_classification.html#sphx-glr-auto-examples-classification-plot-digits-classification-py"><span class="std std-ref">Recognizing hand-written digits</span></a>
 for an example of using a confusion matrix to classify
 hand-written digits.</li>
-<li>See <span class="xref std std-ref">sphx_glr_auto_examples_text_document_classification_20newsgroups.py</span>
+<li>See <a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#sphx-glr-auto-examples-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a>
 for an example of using a confusion matrix to classify text
 documents.</li>
 </ul>
@@ -946,7 +943,7 @@ and inferred labels:</p>
 <li>See <a class="reference internal" href="../auto_examples/classification/plot_digits_classification.html#sphx-glr-auto-examples-classification-plot-digits-classification-py"><span class="std std-ref">Recognizing hand-written digits</span></a>
 for an example of classification report usage for
 hand-written digits.</li>
-<li>See <span class="xref std std-ref">sphx_glr_auto_examples_text_document_classification_20newsgroups.py</span>
+<li>See <a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#sphx-glr-auto-examples-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a>
 for an example of classification report usage for text
 documents.</li>
 <li>See <a class="reference internal" href="../auto_examples/model_selection/plot_grid_search_digits.html#sphx-glr-auto-examples-model-selection-plot-grid-search-digits-py"><span class="std std-ref">Parameter estimation using grid search with cross-validation</span></a>
@@ -1087,7 +1084,7 @@ binary classification and multilabel indicator format.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li>See <span class="xref std std-ref">sphx_glr_auto_examples_text_document_classification_20newsgroups.py</span>
+<li>See <a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#sphx-glr-auto-examples-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a>
 for an example of <a class="reference internal" href="generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score" title="sklearn.metrics.f1_score"><code class="xref py py-func docutils literal"><span class="pre">f1_score</span></code></a> usage to classify  text
 documents.</li>
 <li>See <a class="reference internal" href="../auto_examples/model_selection/plot_grid_search_digits.html#sphx-glr-auto-examples-model-selection-plot-grid-search-digits-py"><span class="std std-ref">Parameter estimation using grid search with cross-validation</span></a>
@@ -1671,29 +1668,25 @@ maximal rank that would have been assigned to all tied values.</p>
 implements label ranking average precision (LRAP). This metric is linked to
 the <a class="reference internal" href="generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" title="sklearn.metrics.average_precision_score"><code class="xref py py-func docutils literal"><span class="pre">average_precision_score</span></code></a> function, but is based on the notion of
 label ranking instead of precision and recall.</p>
-<p>Label ranking average precision (LRAP) averages over the samples the answer to
-the following question: for each ground truth label, what fraction of
-higher-ranked labels were true labels? This performance measure will be higher
-if you are able to give better rank to the labels associated with each sample.
-The obtained score is always strictly greater than 0, and the best value is 1.
-If there is exactly one relevant label per sample, label ranking average
-precision is equivalent to the <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_reciprocal_rank">mean
+<p>Label ranking average precision (LRAP) is the average over each ground truth
+label assigned to each sample, of the ratio of true vs. total labels with lower
+score. This metric will yield better scores if you are able to give better rank
+to the labels associated with each sample. The obtained score is always strictly
+greater than 0, and the best value is 1. If there is exactly one relevant
+label per sample, label ranking average precision is equivalent to the <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_reciprocal_rank">mean
 reciprocal rank</a>.</p>
 <p>Formally, given a binary indicator matrix of the ground truth labels
-<img class="math" src="../_images/math/4a1c3d72078ae62f723756ca1df1407cb71d9596.png" alt="y \in \left\{0, 1\right\}^{n_\text{samples} \times n_\text{labels}}"/>
-and the score associated with each label
-<img class="math" src="../_images/math/ac9be803b0a88acaa207d8319ab72c384463ed0b.png" alt="\hat{f} \in \mathbb{R}^{n_\text{samples} \times n_\text{labels}}"/>,
+<img class="math" src="../_images/math/79228b5dff40e26d76cebd2c4e0e3d8d5c68591f.png" alt="y \in \mathcal{R}^{n_\text{samples} \times n_\text{labels}}"/> and the
+score associated with each label
+<img class="math" src="../_images/math/63ceae698fbc64e0994a06137d3ae3e9013bcf2e.png" alt="\hat{f} \in \mathcal{R}^{n_\text{samples} \times n_\text{labels}}"/>,
 the average precision is defined as</p>
 <div class="math">
-<p><img src="../_images/math/860c86b91ca8311cdd8255daee8ba112e9bba18a.png" alt="LRAP(y, \hat{f}) = \frac{1}{n_{\text{samples}}}
-  \sum_{i=0}^{n_{\text{samples}} - 1} \frac{1}{||y_i||_0}
+<p><img src="../_images/math/e12ac819800b5ed737277ee0b93716368d02ede1.png" alt="LRAP(y, \hat{f}) = \frac{1}{n_{\text{samples}}}
+  \sum_{i=0}^{n_{\text{samples}} - 1} \frac{1}{|y_i|}
   \sum_{j:y_{ij} = 1} \frac{|\mathcal{L}_{ij}|}{\text{rank}_{ij}}"/></p>
-</div><p>where
-<img class="math" src="../_images/math/3b5accddce11c41c890901a0289ea086cbddfa31.png" alt="\mathcal{L}_{ij} = \left\{k: y_{ik} = 1, \hat{f}_{ik} \geq \hat{f}_{ij} \right\}"/>,
-<img class="math" src="../_images/math/67006064f12550aae8a49036cacc181349240f3f.png" alt="\text{rank}_{ij} = \left|\left\{k: \hat{f}_{ik} \geq \hat{f}_{ij} \right\}\right|"/>,
-<img class="math" src="../_images/math/73a5d67427905db51aa90b8f273b7f7b0eb42bf0.png" alt="|\cdot|"/> computes the cardinality of the set (i.e., the number of
-elements in the set), and <img class="math" src="../_images/math/92606ee751f1af0ce3621ecfdfda5ec968eb2aa3.png" alt="||\cdot||_0"/> is the <img class="math" src="../_images/math/c3fe12d947cfe0592ae367c5b7089b1cccce668b.png" alt="\ell_0"/> “norm”
-(which computes the number of nonzero elements in a vector).</p>
+</div><p>with <img class="math" src="../_images/math/3b5accddce11c41c890901a0289ea086cbddfa31.png" alt="\mathcal{L}_{ij} = \left\{k: y_{ik} = 1, \hat{f}_{ik} \geq \hat{f}_{ij} \right\}"/>,
+<img class="math" src="../_images/math/67006064f12550aae8a49036cacc181349240f3f.png" alt="\text{rank}_{ij} = \left|\left\{k: \hat{f}_{ik} \geq \hat{f}_{ij} \right\}\right|"/>
+and <img class="math" src="../_images/math/73a5d67427905db51aa90b8f273b7f7b0eb42bf0.png" alt="|\cdot|"/> is the l0 norm or the cardinality of the set.</p>
 <p>Here is a small example of usage of this function:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">label_ranking_average_precision_score</span>
@@ -1709,20 +1702,18 @@ elements in the set), and <img class="math" src="../_images/math/92606ee751f1af0
 <p>The <a class="reference internal" href="generated/sklearn.metrics.label_ranking_loss.html#sklearn.metrics.label_ranking_loss" title="sklearn.metrics.label_ranking_loss"><code class="xref py py-func docutils literal"><span class="pre">label_ranking_loss</span></code></a> function computes the ranking loss which
 averages over the samples the number of label pairs that are incorrectly
 ordered, i.e. true labels have a lower score than false labels, weighted by
-the inverse of the number of ordered pairs of false and true labels.
-The lowest achievable ranking loss is zero.</p>
+the inverse number of false and true labels. The lowest achievable
+ranking loss is zero.</p>
 <p>Formally, given a binary indicator matrix of the ground truth labels
 <img class="math" src="../_images/math/4a1c3d72078ae62f723756ca1df1407cb71d9596.png" alt="y \in \left\{0, 1\right\}^{n_\text{samples} \times n_\text{labels}}"/> and the
 score associated with each label
 <img class="math" src="../_images/math/ac9be803b0a88acaa207d8319ab72c384463ed0b.png" alt="\hat{f} \in \mathbb{R}^{n_\text{samples} \times n_\text{labels}}"/>,
 the ranking loss is defined as</p>
 <div class="math">
-<p><img src="../_images/math/ce8921425546823b8302fcb58ce1ba015737f32a.png" alt="\text{ranking\_loss}(y, \hat{f}) =  \frac{1}{n_{\text{samples}}}
-  \sum_{i=0}^{n_{\text{samples}} - 1} \frac{1}{||y_i||_0(n_\text{labels} - ||y_i||_0)}
-  \left|\left\{(k, l): \hat{f}_{ik} \leq \hat{f}_{il}, y_{ik} = 1, y_{il} = 0&nbsp;\right\}\right|"/></p>
-</div><p>where <img class="math" src="../_images/math/73a5d67427905db51aa90b8f273b7f7b0eb42bf0.png" alt="|\cdot|"/> computes the cardinality of the set (i.e., the number of
-elements in the set) and <img class="math" src="../_images/math/92606ee751f1af0ce3621ecfdfda5ec968eb2aa3.png" alt="||\cdot||_0"/> is the <img class="math" src="../_images/math/c3fe12d947cfe0592ae367c5b7089b1cccce668b.png" alt="\ell_0"/> “norm”
-(which computes the number of nonzero elements in a vector).</p>
+<p><img src="../_images/math/558432ab330f5c2b1cda7ca987ec2a2edb0e9046.png" alt="\text{ranking\_loss}(y, \hat{f}) =  \frac{1}{n_{\text{samples}}}
+  \sum_{i=0}^{n_{\text{samples}} - 1} \frac{1}{|y_i|(n_\text{labels} - |y_i|)}
+  \left|\left\{(k, l): \hat{f}_{ik} &lt; \hat{f}_{il}, y_{ik} = 1, y_{il} = 0&nbsp;\right\}\right|"/></p>
+</div><p>where <img class="math" src="../_images/math/73a5d67427905db51aa90b8f273b7f7b0eb42bf0.png" alt="|\cdot|"/> is the <img class="math" src="../_images/math/c3fe12d947cfe0592ae367c5b7089b1cccce668b.png" alt="\ell_0"/> norm or the cardinality of the set.</p>
 <p>Here is a small example of usage of this function:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">label_ranking_loss</span>

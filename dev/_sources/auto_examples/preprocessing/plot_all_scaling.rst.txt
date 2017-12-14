@@ -30,10 +30,8 @@ Scalers are linear (or more precisely affine) transformers and differ from each
 other in the way to estimate the parameters used to shift and scale each
 feature.
 
-``QuantileTransformer`` provides non-linear transformations in which distances
-between marginal outliers and inliers are shrunk. ``PowerTransformer`` provides
-non-linear transformations in which data is mapped to a normal distribution to
-stabilize variance and minimize skewness.
+``QuantileTransformer`` provides a non-linear transformation in which distances
+between marginal outliers and inliers are shrunk.
 
 Unlike the previous transformations, normalization refers to a per sample
 transformation instead of a per feature transformation.
@@ -66,8 +64,7 @@ of the results_.
     from sklearn.preprocessing import StandardScaler
     from sklearn.preprocessing import RobustScaler
     from sklearn.preprocessing import Normalizer
-    from sklearn.preprocessing import QuantileTransformer
-    from sklearn.preprocessing import PowerTransformer
+    from sklearn.preprocessing.data import QuantileTransformer
 
     from sklearn.datasets import fetch_california_housing
 
@@ -92,16 +89,14 @@ of the results_.
             MaxAbsScaler().fit_transform(X)),
         ('Data after robust scaling',
             RobustScaler(quantile_range=(25, 75)).fit_transform(X)),
-        ('Data after power transformation (Box-Cox)',
-         PowerTransformer(method='box-cox').fit_transform(X)),
-        ('Data after quantile transformation (gaussian pdf)',
-            QuantileTransformer(output_distribution='normal')
-            .fit_transform(X)),
         ('Data after quantile transformation (uniform pdf)',
             QuantileTransformer(output_distribution='uniform')
             .fit_transform(X)),
+        ('Data after quantile transformation (gaussian pdf)',
+            QuantileTransformer(output_distribution='normal')
+            .fit_transform(X)),
         ('Data after sample-wise L2 normalizing',
-            Normalizer().fit_transform(X)),
+            Normalizer().fit_transform(X))
     ]
 
     # scale the output between 0 and 1 for the colorbar
@@ -183,11 +178,6 @@ of the results_.
         hist_X0.axis('off')
 
 
-
-
-
-
-
 Two plots will be shown for each scaler/normalizer/transformer. The left
 figure will show a scatter plot of the full data set while the right figure
 will exclude the extreme values considering only 99 % of the data set,
@@ -230,11 +220,6 @@ feature will be shown on the side of the scatter plot.
 
 
 
-
-
-
-
-
 .. _results:
 
 Original data
@@ -256,14 +241,6 @@ presence of marginal outliers.
 
 
     make_plot(0)
-
-
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_001.png
-    :align: center
-
-
 
 
 StandardScaler
@@ -289,14 +266,6 @@ presence of outliers.
     make_plot(1)
 
 
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_002.png
-    :align: center
-
-
-
-
 MinMaxScaler
 ------------
 
@@ -316,14 +285,6 @@ outliers.
     make_plot(2)
 
 
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_003.png
-    :align: center
-
-
-
-
 MaxAbsScaler
 ------------
 
@@ -338,14 +299,6 @@ presence of large outliers.
 
 
     make_plot(3)
-
-
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_004.png
-    :align: center
-
-
 
 
 RobustScaler
@@ -369,69 +322,6 @@ required (see below).
     make_plot(4)
 
 
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_005.png
-    :align: center
-
-
-
-
-PowerTransformer (Box-Cox)
---------------------------
-
-``PowerTransformer`` applies a power transformation to each
-feature to make the data more Gaussian-like. Currently,
-``PowerTransformer`` implements the Box-Cox transform. It differs from
-QuantileTransformer (Gaussian output) in that it does not map the
-data to a zero-mean, unit-variance Gaussian distribution. Instead, Box-Cox
-finds the optimal scaling factor to stabilize variance and mimimize skewness
-through maximum likelihood estimation. Note that Box-Cox can only be applied
-to positive, non-zero data. Income and number of households happen to be
-strictly positive, but if negative values are present, a constant can be
-added to each feature to shift it into the positive range - this is known as
-the two-parameter Box-Cox transform.
-
-
-
-.. code-block:: python
-
-
-    make_plot(5)
-
-
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_006.png
-    :align: center
-
-
-
-
-QuantileTransformer (Gaussian output)
--------------------------------------
-
-``QuantileTransformer`` has an additional ``output_distribution`` parameter
-allowing to match a Gaussian distribution instead of a uniform distribution.
-Note that this non-parametetric transformer introduces saturation artifacts
-for extreme values.
-
-
-
-.. code-block:: python
-
-
-    make_plot(6)
-
-
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_007.png
-    :align: center
-
-
-
-
 QuantileTransformer (uniform output)
 ------------------------------------
 
@@ -452,15 +342,23 @@ any outlier by setting them to the a priori defined range boundaries (0 and
 .. code-block:: python
 
 
-    make_plot(7)
+    make_plot(5)
+
+
+QuantileTransformer (Gaussian output)
+-------------------------------------
+
+``QuantileTransformer`` has an additional ``output_distribution`` parameter
+allowing to match a Gaussian distribution instead of a uniform distribution.
+Note that this non-parametetric transformer introduces saturation artifacts
+for extreme values.
 
 
 
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_008.png
-    :align: center
+.. code-block:: python
 
 
+    make_plot(6)
 
 
 Normalizer
@@ -478,19 +376,10 @@ case if some original features had a mix of positive and negative values.
 .. code-block:: python
 
 
-    make_plot(8)
-
+    make_plot(7)
     plt.show()
 
-
-
-.. image:: /auto_examples/preprocessing/images/sphx_glr_plot_all_scaling_009.png
-    :align: center
-
-
-
-
-**Total running time of the script:** ( 0 minutes  7.465 seconds)
+**Total running time of the script:** ( 0 minutes  0.000 seconds)
 
 
 
