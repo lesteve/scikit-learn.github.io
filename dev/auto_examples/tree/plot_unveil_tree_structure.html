@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -195,7 +198,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="understanding-the-decision-tree-structure">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-tree-plot-unveil-tree-structure-py"><span class="std std-ref">here</span></a> to download the full example code or run this example in your browser via Binder</p>
+</div>
+<div class="sphx-glr-example-title section" id="understanding-the-decision-tree-structure">
 <span id="sphx-glr-auto-examples-tree-plot-unveil-tree-structure-py"></span><h1>Understanding the decision tree structure<a class="headerlink" href="#understanding-the-decision-tree-structure" title="Permalink to this headline">¶</a></h1>
 <p>The decision tree structure can be analysed to gain further insight on the
 relation between the features and the target to predict. In this example, we
@@ -209,18 +216,19 @@ show how to retrieve:</p>
 <li>the decision path shared by a group of samples.</li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">binary</span> <span class="n">tree</span> <span class="n">structure</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">nodes</span> <span class="ow">and</span> <span class="n">has</span> <span class="n">the</span> <span class="n">following</span> <span class="n">tree</span> <span class="n">structure</span><span class="p">:</span>
-<span class="n">node</span><span class="o">=</span><span class="mi">0</span> <span class="n">test</span> <span class="n">node</span><span class="p">:</span> <span class="n">go</span> <span class="n">to</span> <span class="n">node</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.800000011921</span> <span class="k">else</span> <span class="n">to</span> <span class="n">node</span> <span class="mf">2.</span>
-        <span class="n">node</span><span class="o">=</span><span class="mi">1</span> <span class="n">leaf</span> <span class="n">node</span><span class="o">.</span>
-        <span class="n">node</span><span class="o">=</span><span class="mi">2</span> <span class="n">test</span> <span class="n">node</span><span class="p">:</span> <span class="n">go</span> <span class="n">to</span> <span class="n">node</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">4.94999980927</span> <span class="k">else</span> <span class="n">to</span> <span class="n">node</span> <span class="mf">4.</span>
-                <span class="n">node</span><span class="o">=</span><span class="mi">3</span> <span class="n">leaf</span> <span class="n">node</span><span class="o">.</span>
-                <span class="n">node</span><span class="o">=</span><span class="mi">4</span> <span class="n">leaf</span> <span class="n">node</span><span class="o">.</span>
+<div class="sphx-glr-script-out highlight-none"><div class="highlight"><pre><span></span>The binary tree structure has 5 nodes and has the following tree structure:
+node=0 test node: go to node 1 if X[:, 3] &lt;= 0.800000011920929 else to node 2.
+        node=1 leaf node.
+        node=2 test node: go to node 3 if X[:, 2] &lt;= 4.950000047683716 else to node 4.
+                node=3 leaf node.
+                node=4 leaf node.
 
-<span class="n">Rules</span> <span class="n">used</span> <span class="n">to</span> <span class="n">predict</span> <span class="n">sample</span> <span class="mi">0</span><span class="p">:</span>
-<span class="n">decision</span> <span class="nb">id</span> <span class="n">node</span> <span class="mi">4</span> <span class="p">:</span> <span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="p">(</span><span class="o">=</span> <span class="mf">5.1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
+Rules used to predict sample 0:
+decision id node 0 : (X_test[0, 3] (= 2.4) &gt; 0.800000011920929)
+decision id node 2 : (X_test[0, 2] (= 5.1) &gt; 4.950000047683716)
 
-<span class="n">The</span> <span class="n">following</span> <span class="n">samples</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="n">share</span> <span class="n">the</span> <span class="n">node</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">tree</span>
-<span class="n">It</span> <span class="ow">is</span> <span class="mf">40.0</span> <span class="o">%</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">nodes</span><span class="o">.</span>
+The following samples [0, 1] share the node [0 2] in the tree
+It is 40.0 % of all nodes.
 </pre></div>
 </div>
 <div class="line-block">
@@ -317,7 +325,7 @@ show how to retrieve:</p>
 
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rules used to predict sample </span><span class="si">%s</span><span class="s1">: &#39;</span> <span class="o">%</span> <span class="n">sample_id</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="n">node_index</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">leave_id</span><span class="p">[</span><span class="n">sample_id</span><span class="p">]</span> <span class="o">!=</span> <span class="n">node_id</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">leave_id</span><span class="p">[</span><span class="n">sample_id</span><span class="p">]</span> <span class="o">==</span> <span class="n">node_id</span><span class="p">:</span>
         <span class="k">continue</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">sample_id</span><span class="p">,</span> <span class="n">feature</span><span class="p">[</span><span class="n">node_id</span><span class="p">]]</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">[</span><span class="n">node_id</span><span class="p">]):</span>
@@ -346,7 +354,10 @@ show how to retrieve:</p>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.002 seconds)</p>
-<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-tree-plot-unveil-tree-structure-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/tree/plot_unveil_tree_structure.ipynb"><img alt="https://static.mybinder.org/badge.svg" src="https://static.mybinder.org/badge.svg" width="150px" /></a>
+</div>
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_unveil_tree_structure.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_unveil_tree_structure.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
@@ -364,7 +375,7 @@ show how to retrieve:</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/auto_examples/tree/plot_unveil_tree_structure.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

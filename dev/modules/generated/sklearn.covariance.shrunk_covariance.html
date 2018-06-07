@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.covariance" title="sklearn.covariance"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.covariance</span></code></a>.shrunk_covariance<a class="headerlink" href="#sklearn-covariance-shrunk-covariance" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.covariance.shrunk_covariance">
-<code class="descclassname">sklearn.covariance.</code><code class="descname">shrunk_covariance</code><span class="sig-paren">(</span><em>emp_cov</em>, <em>shrinkage=0.1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/37ce9ae/sklearn/covariance/shrunk_covariance_.py#L27"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.shrunk_covariance" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.covariance.</code><code class="descname">shrunk_covariance</code><span class="sig-paren">(</span><em>emp_cov</em>, <em>shrinkage=0.1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/covariance/shrunk_covariance_.py#L27"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.shrunk_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates a covariance matrix shrunk on the diagonal</p>
 <p>Read more in the <a class="reference internal" href="../covariance.html#shrunk-covariance"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -226,14 +229,8 @@ of the shrunk estimate.</p>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>The regularized (shrunk) covariance is given by</p>
-<dl class="docutils">
-<dt>(1 - shrinkage)*cov</dt>
-<dd><ul class="first last simple">
-<li>shrinkage*mu*np.identity(n_features)</li>
-</ul>
-</dd>
-</dl>
+<p>The regularized (shrunk) covariance is given by:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
 <p>where mu = trace(cov) / n_features</p>
 </dd></dl>
 
@@ -248,7 +245,7 @@ of the shrunk estimate.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.covariance.shrunk_covariance.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.fetch_lfw_people<a class="headerlink" href="#sklearn-datasets-fetch-lfw-people" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.fetch_lfw_people">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_lfw_people</code><span class="sig-paren">(</span><em>data_home=None</em>, <em>funneled=True</em>, <em>resize=0.5</em>, <em>min_faces_per_person=0</em>, <em>color=False</em>, <em>slice_=(slice(70</em>, <em>195</em>, <em>None)</em>, <em>slice(78</em>, <em>172</em>, <em>None))</em>, <em>download_if_missing=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/datasets/lfw.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_lfw_people" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_lfw_people</code><span class="sig-paren">(</span><em>data_home=None</em>, <em>funneled=True</em>, <em>resize=0.5</em>, <em>min_faces_per_person=0</em>, <em>color=False</em>, <em>slice_=(slice(70</em>, <em>195</em>, <em>None)</em>, <em>slice(78</em>, <em>172</em>, <em>None))</em>, <em>download_if_missing=True</em>, <em>return_X_y=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/datasets/lfw.py#L238"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_lfw_people" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loader for the Labeled Faces in the Wild (LFW) people dataset</p>
 <p>This dataset is a collection of JPEG pictures of famous people
 collected on the internet, all details are available on the
@@ -255,6 +258,14 @@ correlation from the background</p>
 <div><p>If False, raise a IOError if the data is not locally available
 instead of trying to download the data from the source site.</p>
 </div></blockquote>
+<p><strong>return_X_y</strong> : boolean, default=False. If True, returns <a href="#id1"><span class="problematic" id="id2">``</span></a>(dataset.data,</p>
+<p><strong>dataset.target)`` instead of a Bunch object. See below for more</strong></p>
+<p><strong>information about the `dataset.data` and `dataset.target` object.</strong></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 0.20.</span></p>
+</div>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dataset</strong> : dict-like object with the following attributes:</p>
@@ -276,8 +287,14 @@ the shape of the output.</p>
 and correspond to the person IDs.</p>
 </div></blockquote>
 <p><strong>dataset.DESCR</strong> : string</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Description of the Labeled Faces in the Wild (LFW) dataset.</p>
+</div></blockquote>
+<p><strong>(data, target)</strong> : tuple if <code class="docutils literal"><span class="pre">return_X_y</span></code> is True</p>
+<blockquote class="last">
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 0.20.</span></p>
+</div>
 </div></blockquote>
 </td>
 </tr>
@@ -287,7 +304,7 @@ and correspond to the person IDs.</p>
 
 <div class="section" id="examples-using-sklearn-datasets-fetch-lfw-people">
 <h2>Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.fetch_lfw_people</span></code><a class="headerlink" href="#examples-using-sklearn-datasets-fetch-lfw-people" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="The dataset used in this example is a preprocessed excerpt of the &quot;Labeled Faces in the Wild&quot;, ..."><div class="figure" id="id1">
+<div class="sphx-glr-thumbcontainer" tooltip="The dataset used in this example is a preprocessed excerpt of the &quot;Labeled Faces in the Wild&quot;, ..."><div class="figure" id="id3">
 <img alt="../../_images/sphx_glr_plot_face_recognition_thumb.png" src="../../_images/sphx_glr_plot_face_recognition_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/plot_face_recognition.html#sphx-glr-auto-examples-applications-plot-face-recognition-py"><span class="std std-ref">Faces recognition example using eigenfaces and SVMs</span></a></span></p>
 </div>
@@ -303,7 +320,7 @@ and correspond to the person IDs.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.datasets.fetch_lfw_people.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

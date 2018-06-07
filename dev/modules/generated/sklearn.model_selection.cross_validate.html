@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.cross_validate<a class="headerlink" href="#sklearn-model-selection-cross-validate" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.model_selection.cross_validate">
-<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch='2*n_jobs'</em>, <em>return_train_score='warn'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/37ce9ae/sklearn/model_selection/_validation.py#L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.model_selection.</code><code class="descname">cross_validate</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y=None</em>, <em>groups=None</em>, <em>scoring=None</em>, <em>cv=None</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>fit_params=None</em>, <em>pre_dispatch='2*n_jobs'</em>, <em>return_train_score='warn'</em>, <em>return_estimator=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/model_selection/_validation.py#L40"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.cross_validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate metric(s) by cross-validation and also record fit/score times.</p>
 <p>Read more in the <a class="reference internal" href="../cross_validation.html#multimetric-cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -298,6 +301,10 @@ However computing the scores on the training set can be computationally
 expensive and is not strictly required to select the parameters that
 yield the best generalization performance.</p>
 </div></blockquote>
+<p><strong>return_estimator</strong> : boolean, default False</p>
+<blockquote>
+<div><p>Whether to return the estimators fitted on each split.</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>scores</strong> : dict of float arrays of shape=(n_splits,)</p>
@@ -324,6 +331,11 @@ set for each cv split.</p>
 cv split. (Note time for scoring on the train set is not
 included even if <code class="docutils literal"><span class="pre">return_train_score</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code></p>
 </dd>
+<dt><code class="docutils literal"><span class="pre">estimator</span></code></dt>
+<dd><p class="first last">The estimator objects for each cv split.
+This is available only if <code class="docutils literal"><span class="pre">return_estimator</span></code> parameter
+is set to <code class="docutils literal"><span class="pre">True</span></code>.</p>
+</dd>
 </dl>
 </div></blockquote>
 </div></blockquote>
@@ -336,6 +348,8 @@ included even if <code class="docutils literal"><span class="pre">return_train_s
 <dl class="last docutils">
 <dt><a class="reference internal" href="sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score" title="sklearn.model_selection.cross_val_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.model_selection.cross_val_score</span></code></a></dt>
 <dd>Run cross-validation for single metric evaluation.</dd>
+<dt><a class="reference internal" href="sklearn.model_selection.cross_val_predict.html#sklearn.model_selection.cross_val_predict" title="sklearn.model_selection.cross_val_predict"><code class="xref py py-func docutils literal"><span class="pre">sklearn.model_selection.cross_val_predict</span></code></a></dt>
+<dd>Get predictions from each split of cross-validation for diagnostic purposes.</dd>
 <dt><a class="reference internal" href="sklearn.metrics.make_scorer.html#sklearn.metrics.make_scorer" title="sklearn.metrics.make_scorer"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.make_scorer</span></code></a></dt>
 <dd>Make a scorer from a performance metric or loss function.</dd>
 </dl>
@@ -357,7 +371,7 @@ included even if <code class="docutils literal"><span class="pre">return_train_s
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">cv_results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>                         
 <span class="go">[&#39;fit_time&#39;, &#39;score_time&#39;, &#39;test_score&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cv_results</span><span class="p">[</span><span class="s1">&#39;test_score&#39;</span><span class="p">]</span>    
-<span class="go">array([ 0.33...,  0.08...,  0.03...])</span>
+<span class="go">array([0.33150734, 0.08022311, 0.03531764])</span>
 </pre></div>
 </div>
 <p>Multiple metric evaluation using <code class="docutils literal"><span class="pre">cross_validate</span></code>
@@ -367,7 +381,7 @@ included even if <code class="docutils literal"><span class="pre">return_train_s
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;test_neg_mean_squared_error&#39;</span><span class="p">])</span>      
 <span class="go">[-3635.5... -3573.3... -6114.7...]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;train_r2&#39;</span><span class="p">])</span>                         
-<span class="go">[ 0.28...  0.39...  0.22...]</span>
+<span class="go">[0.28010158 0.39088426 0.22784852]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -383,7 +397,7 @@ included even if <code class="docutils literal"><span class="pre">return_train_s
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.model_selection.cross_validate.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

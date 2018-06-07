@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Comparison of kernel ridge regression and SVR" href="plot_kernel_ridge_regression.html" />
-    <link rel="prev" title="Comparing anomaly detection algorithms for outlier detection on toy datasets" href="plot_anomaly_comparison.html" />
+    <link rel="next" title="Imputing missing values before building an estimator" href="plot_missing_values.html" />
+    <link rel="prev" title="Column Transformer with Heterogeneous Data Sources" href="column_transformer.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -127,14 +130,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_anomaly_comparison.html"
+        <a href="column_transformer.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Comparing ano...
+        Column Transf...
         </span>
             <span class="hiddenrellink">
-            Comparing anomaly detection algorithms for outlier detection on toy datasets
+            Column Transformer with Heterogeneous Data Sources
             </span>
         </a>
         </div>
@@ -142,14 +145,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_kernel_ridge_regression.html"
+        <a href="plot_missing_values.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Comparison of...
+        Imputing miss...
         </span>
             <span class="hiddenrellink">
-            Comparison of kernel ridge regression and SVR
+            Imputing missing values before building an estimator
             </span>
         </a>
         </div>
@@ -200,7 +203,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="the-johnson-lindenstrauss-bound-for-embedding-with-random-projections">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-johnson-lindenstrauss-bound-py"><span class="std std-ref">here</span></a> to download the full example code or run this example in your browser via Binder</p>
+</div>
+<div class="sphx-glr-example-title section" id="the-johnson-lindenstrauss-bound-for-embedding-with-random-projections">
 <span id="sphx-glr-auto-examples-plot-johnson-lindenstrauss-bound-py"></span><h1>The Johnson-Lindenstrauss bound for embedding with random projections<a class="headerlink" href="#the-johnson-lindenstrauss-bound-for-embedding-with-random-projections" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma">Johnson-Lindenstrauss lemma</a> states that any high dimensional
 dataset can be randomly projected into a lower dimensional Euclidean
@@ -211,15 +218,15 @@ space while controlling the distortion in the pairwise distances.</p>
 the fact that <cite>p</cite> is defining an eps-embedding with good probability
 as defined by:</p>
 <div class="math">
-<p><img src="../_images/math/f959343b770e80df34786eebb08e80e60d69d91f.png" alt="(1 - eps) \|u - v\|^2 &lt; \|p(u) - p(v)\|^2 &lt; (1 + eps) \|u - v\|^2"/></p>
-</div><p>Where u and v are any rows taken from a dataset of shape [n_samples,
+\[(1 - eps) \|u - v\|^2 &lt; \|p(u) - p(v)\|^2 &lt; (1 + eps) \|u - v\|^2\]</div>
+<p>Where u and v are any rows taken from a dataset of shape [n_samples,
 n_features] and p is a projection by a random Gaussian N(0, 1) matrix
 with shape [n_components, n_features] (or a sparse Achlioptas matrix).</p>
 <p>The minimum number of components to guarantees the eps-embedding is
 given by:</p>
 <div class="math">
-<p><img src="../_images/math/065d63cc8b891d9269d412a42f0691aeaec0f49f.png" alt="n\_components &gt;= 4 log(n\_samples) / (eps^2 / 2 - eps^3 / 3)"/></p>
-</div><p>The first plot shows that with an increasing number of samples <code class="docutils literal"><span class="pre">n_samples</span></code>,
+\[n\_components &gt;= 4 log(n\_samples) / (eps^2 / 2 - eps^3 / 3)\]</div>
+<p>The first plot shows that with an increasing number of samples <code class="docutils literal"><span class="pre">n_samples</span></code>,
 the minimal number of dimensions <code class="docutils literal"><span class="pre">n_components</span></code> increased logarithmically
 in order to guarantee an <code class="docutils literal"><span class="pre">eps</span></code>-embedding.</p>
 <p>The second plot shows that an increase of the admissible
@@ -265,34 +272,34 @@ reduction in this case.</p>
 <p>On the twenty newsgroups on the other hand the dimensionality can be decreased
 from 56436 down to 10000 while reasonably preserving pairwise distances.</p>
 <ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_001.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_001.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_001.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_001.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_001.png" />
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_002.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_002.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_002.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_002.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_002.png" />
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_003.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_003.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_003.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_003.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_003.png" />
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_004.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_004.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_004.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_004.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_004.png" />
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_005.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_005.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_005.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_005.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_005.png" />
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_006.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_006.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_006.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_006.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_006.png" />
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_007.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_007.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_007.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_007.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_007.png" />
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_008.png"><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_008.png" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_008.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
+<li><img alt="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_008.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_plot_johnson_lindenstrauss_bound_008.png" />
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Embedding</span> <span class="mi">500</span> <span class="n">samples</span> <span class="k">with</span> <span class="n">dim</span> <span class="mi">64</span> <span class="n">using</span> <span class="n">various</span> <span class="n">random</span> <span class="n">projections</span>
-<span class="n">Projected</span> <span class="mi">500</span> <span class="n">samples</span> <span class="kn">from</span> <span class="mi">64</span> <span class="n">to</span> <span class="mi">300</span> <span class="ow">in</span> <span class="mf">0.006</span><span class="n">s</span>
-<span class="n">Random</span> <span class="n">matrix</span> <span class="k">with</span> <span class="n">size</span><span class="p">:</span> <span class="mf">0.029</span><span class="n">MB</span>
-<span class="n">Mean</span> <span class="n">distances</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">0.99</span> <span class="p">(</span><span class="mf">0.08</span><span class="p">)</span>
-<span class="n">Projected</span> <span class="mi">500</span> <span class="n">samples</span> <span class="kn">from</span> <span class="mi">64</span> <span class="n">to</span> <span class="mi">1000</span> <span class="ow">in</span> <span class="mf">0.017</span><span class="n">s</span>
-<span class="n">Random</span> <span class="n">matrix</span> <span class="k">with</span> <span class="n">size</span><span class="p">:</span> <span class="mf">0.097</span><span class="n">MB</span>
-<span class="n">Mean</span> <span class="n">distances</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">1.00</span> <span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
-<span class="n">Projected</span> <span class="mi">500</span> <span class="n">samples</span> <span class="kn">from</span> <span class="mi">64</span> <span class="n">to</span> <span class="mi">10000</span> <span class="ow">in</span> <span class="mf">0.163</span><span class="n">s</span>
-<span class="n">Random</span> <span class="n">matrix</span> <span class="k">with</span> <span class="n">size</span><span class="p">:</span> <span class="mf">0.960</span><span class="n">MB</span>
-<span class="n">Mean</span> <span class="n">distances</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">1.00</span> <span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
+<div class="sphx-glr-script-out highlight-none"><div class="highlight"><pre><span></span>Embedding 500 samples with dim 64 using various random projections
+Projected 500 samples from 64 to 300 in 0.008s
+Random matrix with size: 0.029MB
+Mean distances rate: 1.00 (0.08)
+Projected 500 samples from 64 to 1000 in 0.022s
+Random matrix with size: 0.097MB
+Mean distances rate: 1.02 (0.04)
+Projected 500 samples from 64 to 10000 in 0.211s
+Random matrix with size: 0.962MB
+Mean distances rate: 1.01 (0.01)
 </pre></div>
 </div>
 <div class="line-block">
@@ -408,8 +415,11 @@ from 56436 down to 10000 while reasonably preserving pairwise distances.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  1.195 seconds)</p>
-<div class="sphx-glr-footer docutils container">
+<p><strong>Total running time of the script:</strong> ( 0 minutes  1.046 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-johnson-lindenstrauss-bound-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/plot_johnson_lindenstrauss_bound.ipynb"><img alt="https://static.mybinder.org/badge.svg" src="https://static.mybinder.org/badge.svg" width="150px" /></a>
+</div>
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/plot_johnson_lindenstrauss_bound.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_johnson_lindenstrauss_bound.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
@@ -428,17 +438,17 @@ from 56436 down to 10000 while reasonably preserving pairwise distances.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/auto_examples/plot_johnson_lindenstrauss_bound.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_anomaly_comparison.html">Previous
+      <a href="column_transformer.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_kernel_ridge_regression.html">Next
+      <a href="plot_missing_values.html">Next
       </a>
     </div>
     

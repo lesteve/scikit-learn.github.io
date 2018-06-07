@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_covariance_plot_outlier_detection.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_covariance_plot_outlier_detection.py:
 
@@ -43,17 +47,17 @@ fraction.
     *
 
       .. image:: /auto_examples/covariance/images/sphx_glr_plot_outlier_detection_001.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/covariance/images/sphx_glr_plot_outlier_detection_002.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/covariance/images/sphx_glr_plot_outlier_detection_003.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
 
 
@@ -126,8 +130,6 @@ fraction.
                 clf.fit(X)
                 scores_pred = clf.decision_function(X)
                 y_pred = clf.predict(X)
-            threshold = stats.scoreatpercentile(scores_pred,
-                                                100 * outliers_fraction)
             n_errors = (y_pred != ground_truth).sum()
             # plot the levels lines and the points
             if clf_name == "Local Outlier Factor":
@@ -137,11 +139,11 @@ fraction.
                 Z = clf.decision_function(np.c_[xx.ravel(), yy.ravel()])
             Z = Z.reshape(xx.shape)
             subplot = plt.subplot(2, 2, i + 1)
-            subplot.contourf(xx, yy, Z, levels=np.linspace(Z.min(), threshold, 7),
+            subplot.contourf(xx, yy, Z, levels=np.linspace(Z.min(), 0, 7),
                              cmap=plt.cm.Blues_r)
-            a = subplot.contour(xx, yy, Z, levels=[threshold],
+            a = subplot.contour(xx, yy, Z, levels=[0],
                                 linewidths=2, colors='red')
-            subplot.contourf(xx, yy, Z, levels=[threshold, Z.max()],
+            subplot.contourf(xx, yy, Z, levels=[0, Z.max()],
                              colors='orange')
             b = subplot.scatter(X[:-n_outliers, 0], X[:-n_outliers, 1], c='white',
                                 s=20, edgecolor='k')
@@ -161,13 +163,23 @@ fraction.
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  2.320 seconds)
+**Total running time of the script:** ( 0 minutes  1.273 seconds)
 
+
+.. _sphx_glr_download_auto_examples_covariance_plot_outlier_detection.py:
 
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/covariance/plot_outlier_detection.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4.3. Preprocessing data" href="preprocessing.html" />
-    <link rel="prev" title="4.1. Pipeline and FeatureUnion: combining estimators" href="pipeline.html" />
+    <link rel="prev" title="4.1. Pipelines and composite estimators" href="compose.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -127,14 +130,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="pipeline.html"
+        <a href="compose.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         4.1. Pipeline...
         </span>
             <span class="hiddenrellink">
-            4.1. Pipeline and FeatureUnion: combining estimators
+            4.1. Pipelines and composite estimators
             </span>
         </a>
         </div>
@@ -257,9 +260,9 @@ is a traditional numerical feature:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span> <span class="o">=</span> <span class="n">DictVectorizer</span><span class="p">()</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[  1.,   0.,   0.,  33.],</span>
-<span class="go">       [  0.,   1.,   0.,  12.],</span>
-<span class="go">       [  0.,   0.,   1.,  18.]])</span>
+<span class="go">array([[ 1.,  0.,  0., 33.],</span>
+<span class="go">       [ 0.,  1.,  0., 12.],</span>
+<span class="go">       [ 0.,  0.,  1., 18.]])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
 <span class="go">[&#39;city=Dubai&#39;, &#39;city=London&#39;, &#39;city=San Francisco&#39;, &#39;temperature&#39;]</span>
@@ -296,7 +299,7 @@ suitable for feeding into a classifier (maybe after being piped into a
 <span class="go">&lt;1x6 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
 <span class="go">    with 6 stored elements in Compressed Sparse ... format&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pos_vectorized</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 1.,  1.,  1.,  1.,  1.,  1.]])</span>
+<span class="go">array([[1., 1., 1., 1., 1., 1.]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
 <span class="go">[&#39;pos+1=PP&#39;, &#39;pos-1=NN&#39;, &#39;pos-2=DT&#39;, &#39;word+1=on&#39;, &#39;word-1=cat&#39;, &#39;word-2=the&#39;]</span>
 </pre></div>
@@ -385,9 +388,9 @@ tokens are only processed on demand from the hasher.</p>
 <h3>4.2.2.1. Implementation details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal"><span class="pre">FeatureHasher</span></code></a> uses the signed 32-bit variant of MurmurHash3.
 As a result (and because of limitations in <code class="docutils literal"><span class="pre">scipy.sparse</span></code>),
-the maximum number of features supported is currently <img class="math" src="../_images/math/4b51351b335e6b2e1d241dae81db59a7d70b6dbb.png" alt="2^{31} - 1"/>.</p>
+the maximum number of features supported is currently <span class="math">\(2^{31} - 1\)</span>.</p>
 <p>The original formulation of the hashing trick by Weinberger et al.
-used two separate hash functions <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/> and <img class="math" src="../_images/math/c6e4ff26b53b5d382fc8d80b602a9c95be59adc4.png" alt="\xi"/>
+used two separate hash functions <span class="math">\(h\)</span> and <span class="math">\(\xi\)</span>
 to determine the column index and sign of a feature, respectively.
 The present implementation works under the assumption
 that the sign bit of MurmurHash3 is independent of its other bits.</p>
@@ -565,17 +568,17 @@ suitable for usage by a classifier it is very common to use the tf–idf
 transform.</p>
 <p>Tf means <strong>term-frequency</strong> while tf–idf means term-frequency times
 <strong>inverse document-frequency</strong>:
-<img class="math" src="../_images/math/40f34fb794a1d3561d64bc55e344634b1451a21f.png" alt="\text{tf-idf(t,d)}=\text{tf(t,d)} \times \text{idf(t)}"/>.</p>
+<span class="math">\(\text{tf-idf(t,d)}=\text{tf(t,d)} \times \text{idf(t)}\)</span>.</p>
 <p>Using the <code class="docutils literal"><span class="pre">TfidfTransformer</span></code>’s default settings,
 <code class="docutils literal"><span class="pre">TfidfTransformer(norm='l2',</span> <span class="pre">use_idf=True,</span> <span class="pre">smooth_idf=True,</span> <span class="pre">sublinear_tf=False)</span></code>
 the term frequency, the number of times a term occurs in a given document,
 is multiplied with idf component, which is computed as</p>
-<p><img class="math" src="../_images/math/9b51d66bf06313c9ed7e2014ad2dae110e764d7b.png" alt="\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1"/>,</p>
-<p>where <img class="math" src="../_images/math/7f022743140b3c69e2a3bb796a82bb989ff558af.png" alt="n_d"/> is the total number of documents, and <img class="math" src="../_images/math/a5f393d00e7621eca4b3334f87f15bd31752caa4.png" alt="\text{df}(d,t)"/>
-is the number of documents that contain term <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/>. The resulting tf-idf
+<p><span class="math">\(\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1\)</span>,</p>
+<p>where <span class="math">\(n_d\)</span> is the total number of documents, and <span class="math">\(\text{df}(d,t)\)</span>
+is the number of documents that contain term <span class="math">\(t\)</span>. The resulting tf-idf
 vectors are then normalized by the Euclidean norm:</p>
-<p><img class="math" src="../_images/math/1fa6fb7a6ac6f7a11b410e2ae6f61a2a52283292.png" alt="v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
-v{_2}^2 + \dots + v{_n}^2}}"/>.</p>
+<p><span class="math">\(v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
+v{_2}^2 + \dots + v{_n}^2}}\)</span>.</p>
 <p>This was originally a term weighting scheme developed for information retrieval
 (as a ranking function for search engines results) that has also found good
 use in document classification and clustering.</p>
@@ -584,11 +587,11 @@ illustrate how the tf-idfs are computed exactly and how the tf-idfs
 computed in scikit-learn’s <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a>
 and <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal"><span class="pre">TfidfVectorizer</span></code></a> differ slightly from the standard textbook
 notation that defines the idf as</p>
-<p><img class="math" src="../_images/math/6d6ca8415893d5c7c420dc438d2d0488426d1124.png" alt="\text{idf}(t) = log{\frac{n_d}{1+\text{df}(d,t)}}."/></p>
+<p><span class="math">\(\text{idf}(t) = log{\frac{n_d}{1+\text{df}(d,t)}}.\)</span></p>
 <p>In the <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a> and <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal"><span class="pre">TfidfVectorizer</span></code></a>
 with <code class="docutils literal"><span class="pre">smooth_idf=False</span></code>, the
 “1” count is added to the idf instead of the idf’s denominator:</p>
-<p><img class="math" src="../_images/math/d210fb6831f799e768f25c722773fe9912c1f7e3.png" alt="\text{idf}(t) = log{\frac{n_d}{\text{df}(d,t)}} + 1"/></p>
+<p><span class="math">\(\text{idf}(t) = log{\frac{n_d}{\text{df}(d,t)}} + 1\)</span></p>
 <p>This normalization is implemented by the <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a>
 class:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfTransformer</span>
@@ -616,59 +619,59 @@ content of the documents:</p>
 <span class="go">    with 9 stored elements in Compressed Sparse ... format&gt;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>                        
-<span class="go">array([[ 0.81940995,  0.        ,  0.57320793],</span>
-<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
-<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
-<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
-<span class="go">       [ 0.47330339,  0.88089948,  0.        ],</span>
-<span class="go">       [ 0.58149261,  0.        ,  0.81355169]])</span>
+<span class="go">array([[0.81940995, 0.        , 0.57320793],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [0.47330339, 0.88089948, 0.        ],</span>
+<span class="go">       [0.58149261, 0.        , 0.81355169]])</span>
 </pre></div>
 </div>
 <p>Each row is normalized to have unit Euclidean norm:</p>
-<p><img class="math" src="../_images/math/1fa6fb7a6ac6f7a11b410e2ae6f61a2a52283292.png" alt="v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
-v{_2}^2 + \dots + v{_n}^2}}"/></p>
+<p><span class="math">\(v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
+v{_2}^2 + \dots + v{_n}^2}}\)</span></p>
 <p>For example, we can compute the tf-idf of the first term in the first
 document in the <cite>counts</cite> array as follows:</p>
-<p><img class="math" src="../_images/math/7523b45ec329d94ad2351df53c7b82916aefc731.png" alt="n_{d, {\text{term1}}} = 6"/></p>
-<p><img class="math" src="../_images/math/4a32c65ae608e64745d06811de690ffa3d1315e3.png" alt="\text{df}(d, t)_{\text{term1}} = 6"/></p>
-<p><img class="math" src="../_images/math/cc33f6ac71120b26a4da5a8be6f5fa982c649225.png" alt="\text{idf}(d, t)_{\text{term1}} =
-log \frac{n_d}{\text{df}(d, t)} + 1 = log(1)+1 = 1"/></p>
-<p><img class="math" src="../_images/math/c4943956862790c8e4c23c339402e847d1c00470.png" alt="\text{tf-idf}_{\text{term1}} = \text{tf} \times \text{idf} = 3 \times 1 = 3"/></p>
+<p><span class="math">\(n_{d, {\text{term1}}} = 6\)</span></p>
+<p><span class="math">\(\text{df}(d, t)_{\text{term1}} = 6\)</span></p>
+<p><span class="math">\(\text{idf}(d, t)_{\text{term1}} =
+log \frac{n_d}{\text{df}(d, t)} + 1 = log(1)+1 = 1\)</span></p>
+<p><span class="math">\(\text{tf-idf}_{\text{term1}} = \text{tf} \times \text{idf} = 3 \times 1 = 3\)</span></p>
 <p>Now, if we repeat this computation for the remaining 2 terms in the document,
 we get</p>
-<p><img class="math" src="../_images/math/78281d86dcef4243b4ac1f81237e510dc5cfeb29.png" alt="\text{tf-idf}_{\text{term2}} = 0 \times (log(6/1)+1) = 0"/></p>
-<p><img class="math" src="../_images/math/3ce0d8c6ed45392c5b0939832bddef486703720c.png" alt="\text{tf-idf}_{\text{term3}} = 1 \times (log(6/2)+1) \approx 2.0986"/></p>
+<p><span class="math">\(\text{tf-idf}_{\text{term2}} = 0 \times (log(6/1)+1) = 0\)</span></p>
+<p><span class="math">\(\text{tf-idf}_{\text{term3}} = 1 \times (log(6/2)+1) \approx 2.0986\)</span></p>
 <p>and the vector of raw tf-idfs:</p>
-<p><img class="math" src="../_images/math/526e7e8fa9ae0a7dccba1b55f412d1e1f8966a31.png" alt="\text{tf-idf}_{\text{raw}} = [3, 0, 2.0986]."/></p>
+<p><span class="math">\(\text{tf-idf}_{\text{raw}} = [3, 0, 2.0986].\)</span></p>
 <p>Then, applying the Euclidean (L2) norm, we obtain the following tf-idfs
 for document 1:</p>
-<p><img class="math" src="../_images/math/340067f7295131605fd009f446fdaeda5cf21abb.png" alt="\frac{[3, 0, 2.0986]}{\sqrt{\big(3^2 + 0^2 + 2.0986^2\big)}}
-= [ 0.819,  0,  0.573]."/></p>
+<p><span class="math">\(\frac{[3, 0, 2.0986]}{\sqrt{\big(3^2 + 0^2 + 2.0986^2\big)}}
+= [ 0.819,  0,  0.573].\)</span></p>
 <p>Furthermore, the default parameter <code class="docutils literal"><span class="pre">smooth_idf=True</span></code> adds “1” to the numerator
 and  denominator as if an extra document was seen containing every term in the
 collection exactly once, which prevents zero divisions:</p>
-<p><img class="math" src="../_images/math/9b51d66bf06313c9ed7e2014ad2dae110e764d7b.png" alt="\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1"/></p>
+<p><span class="math">\(\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1\)</span></p>
 <p>Using this modification, the tf-idf of the third term in document 1 changes to
 1.8473:</p>
-<p><img class="math" src="../_images/math/a7a3268b924ac1212ccdd8155d2f3bb51e3bd326.png" alt="\text{tf-idf}_{\text{term3}} = 1 \times log(7/3)+1 \approx 1.8473"/></p>
+<p><span class="math">\(\text{tf-idf}_{\text{term3}} = 1 \times log(7/3)+1 \approx 1.8473\)</span></p>
 <p>And the L2-normalized tf-idf changes to</p>
-<p><img class="math" src="../_images/math/af9b722f57e7fcd9684bab74e58907cbeccd4d35.png" alt="\frac{[3, 0, 1.8473]}{\sqrt{\big(3^2 + 0^2 + 1.8473^2\big)}}
-= [0.8515, 0, 0.5243]"/>:</p>
+<p><span class="math">\(\frac{[3, 0, 1.8473]}{\sqrt{\big(3^2 + 0^2 + 1.8473^2\big)}}
+= [0.8515, 0, 0.5243]\)</span>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 0.85151335,  0.        ,  0.52433293],</span>
-<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
-<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
-<span class="go">       [ 1.        ,  0.        ,  0.        ],</span>
-<span class="go">       [ 0.55422893,  0.83236428,  0.        ],</span>
-<span class="go">       [ 0.63035731,  0.        ,  0.77630514]])</span>
+<span class="go">array([[0.85151335, 0.        , 0.52433293],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [0.55422893, 0.83236428, 0.        ],</span>
+<span class="go">       [0.63035731, 0.        , 0.77630514]])</span>
 </pre></div>
 </div>
 <p>The weights of each
 feature computed by the <code class="docutils literal"><span class="pre">fit</span></code> method call are stored in a model
 attribute:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">idf_</span>                       
-<span class="go">array([ 1. ...,  2.25...,  1.84...])</span>
+<span class="go">array([1. ..., 2.25..., 1.84...])</span>
 </pre></div>
 </div>
 <p>As tf–idf is very often used for text features, there is also another
@@ -778,14 +781,14 @@ with fast and scalable linear models to train <strong>document classifiers</stro
 for instance:</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#sphx-glr-auto-examples-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></li>
+<li><span class="xref std std-ref">sphx_glr_auto_examples_text_document_classification_20newsgroups.py</span></li>
 </ul>
 </div></blockquote>
 <p>In an <strong>unsupervised setting</strong> it can be used to group similar documents
 together by applying clustering algorithms such as <a class="reference internal" href="clustering.html#k-means"><span class="std std-ref">K-means</span></a>:</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference internal" href="../auto_examples/text/document_clustering.html#sphx-glr-auto-examples-text-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></li>
+<li><span class="xref std std-ref">sphx_glr_auto_examples_text_document_clustering.py</span></li>
 </ul>
 </div></blockquote>
 <p>Finally it is possible to discover the main topics of a corpus by
@@ -1109,7 +1112,7 @@ features or samples. For instance Ward clustering
 (<a class="reference internal" href="clustering.html#hierarchical-clustering"><span class="std std-ref">Hierarchical clustering</span></a>) can cluster together only neighboring pixels
 of an image, thus forming contiguous patches:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/cluster/plot_face_ward_segmentation.html"><img alt="../_images/sphx_glr_plot_face_ward_segmentation_0011.png" src="../_images/sphx_glr_plot_face_ward_segmentation_0011.png" style="width: 200.0px; height: 200.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/cluster/plot_coin_ward_segmentation.html"><img alt="../_images/sphx_glr_plot_coin_ward_segmentation_0011.png" src="../_images/sphx_glr_plot_coin_ward_segmentation_0011.png" style="width: 200.0px; height: 200.0px;" /></a>
 </div>
 <p>For this purpose, the estimators use a ‘connectivity’ matrix, giving
 which samples are connected.</p>
@@ -1124,7 +1127,7 @@ or similarity matrices.</p>
 <p class="first admonition-title">Note</p>
 <p><strong>Examples</strong></p>
 <ul class="last simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_face_ward_segmentation.html#sphx-glr-auto-examples-cluster-plot-face-ward-segmentation-py"><span class="std std-ref">A demo of structured Ward hierarchical clustering on a raccoon face image</span></a></li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_coin_ward_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-ward-segmentation-py"><span class="std std-ref">A demo of structured Ward hierarchical clustering on an image of coins</span></a></li>
 <li><a class="reference internal" href="../auto_examples/cluster/plot_segmentation_toy.html#sphx-glr-auto-examples-cluster-plot-segmentation-toy-py"><span class="std std-ref">Spectral clustering for image segmentation</span></a></li>
 <li><a class="reference internal" href="../auto_examples/cluster/plot_feature_agglomeration_vs_univariate_selection.html#sphx-glr-auto-examples-cluster-plot-feature-agglomeration-vs-univariate-selection-py"><span class="std std-ref">Feature agglomeration vs. univariate selection</span></a></li>
 </ul>
@@ -1142,13 +1145,13 @@ or similarity matrices.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/modules/feature_extraction.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="pipeline.html">Previous
+      <a href="compose.html">Previous
       </a>
     </div>
     <div class="buttonNext">

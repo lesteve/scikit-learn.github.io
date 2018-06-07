@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Compare the effect of different scalers on data with outliers" href="plot_all_scaling.html" />
-    <link rel="prev" title="Using FunctionTransformer to select columns" href="plot_function_transformer.html" />
+    <link rel="next" title="Effect of transforming the targets in regression model" href="plot_transformed_target.html" />
+    <link rel="prev" title="Using PowerTransformer to apply the Box-Cox transformation" href="plot_power_transformer.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -127,14 +130,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="plot_function_transformer.html"
+        <a href="plot_power_transformer.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        Using Functio...
+        Using PowerTr...
         </span>
             <span class="hiddenrellink">
-            Using FunctionTransformer to select columns
+            Using PowerTransformer to apply the Box-Cox transformation
             </span>
         </a>
         </div>
@@ -142,14 +145,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="plot_all_scaling.html"
+        <a href="plot_transformed_target.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        Compare the e...
+        Effect of tra...
         </span>
             <span class="hiddenrellink">
-            Compare the effect of different scalers on data with outliers
+            Effect of transforming the targets in regression model
             </span>
         </a>
         </div>
@@ -195,9 +198,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="importance-of-feature-scaling">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-preprocessing-plot-scaling-importance-py"><span class="std std-ref">here</span></a> to download the full example code or run this example in your browser via Binder</p>
+</div>
+<div class="sphx-glr-example-title section" id="importance-of-feature-scaling">
 <span id="sphx-glr-auto-examples-preprocessing-plot-scaling-importance-py"></span><h1>Importance of Feature Scaling<a class="headerlink" href="#importance-of-feature-scaling" title="Permalink to this headline">¶</a></h1>
-<p>Feature scaling though standardization (or Z-score normalization)
+<p>Feature scaling through standardization (or Z-score normalization)
 can be an important preprocessing step for many machine learning
 algorithms. Standardization involves rescaling the features such
 that they have the properties of a standard normal distribution
@@ -227,24 +234,23 @@ properties that they measure (i.e alcohol content, and malic acid).</p>
 <p>The transformed data is then used to train a naive Bayes classifier, and a
 clear difference in prediction accuracies is observed wherein the dataset
 which is scaled before PCA vastly outperforms the unscaled version.</p>
-<img alt="../../_images/sphx_glr_plot_scaling_importance_001.png" class="align-center" src="../../_images/sphx_glr_plot_scaling_importance_001.png" />
+<img alt="../../_images/sphx_glr_plot_scaling_importance_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_scaling_importance_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Prediction</span> <span class="n">accuracy</span> <span class="k">for</span> <span class="n">the</span> <span class="n">normal</span> <span class="n">test</span> <span class="n">dataset</span> <span class="k">with</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a>
-<span class="mf">81.48</span><span class="o">%</span>
+<div class="sphx-glr-script-out highlight-none"><div class="highlight"><pre><span></span>Prediction accuracy for the normal test dataset with PCA
+81.48%
 
 
-<span class="n">Prediction</span> <span class="n">accuracy</span> <span class="k">for</span> <span class="n">the</span> <span class="n">standardized</span> <span class="n">test</span> <span class="n">dataset</span> <span class="k">with</span> <a href="../../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="View documentation for sklearn.decomposition.PCA"><span class="n">PCA</span></a>
-<span class="mf">98.15</span><span class="o">%</span>
+Prediction accuracy for the standardized test dataset with PCA
+98.15%
 
 
-<span class="n">PC</span> <span class="mi">1</span> <span class="n">without</span> <span class="n">scaling</span><span class="p">:</span>
- <span class="p">[</span>  <span class="mf">1.76e-03</span>  <span class="o">-</span><span class="mf">8.36e-04</span>   <span class="mf">1.55e-04</span>  <span class="o">-</span><span class="mf">5.31e-03</span>   <span class="mf">2.02e-02</span>   <span class="mf">1.02e-03</span>
-   <span class="mf">1.53e-03</span>  <span class="o">-</span><span class="mf">1.12e-04</span>   <span class="mf">6.31e-04</span>   <span class="mf">2.33e-03</span>   <span class="mf">1.54e-04</span>   <span class="mf">7.43e-04</span>
-   <span class="mf">1.00e+00</span><span class="p">]</span>
+PC 1 without scaling:
+ [ 1.76e-03 -8.36e-04  1.55e-04 -5.31e-03  2.02e-02  1.02e-03  1.53e-03
+ -1.12e-04  6.31e-04  2.33e-03  1.54e-04  7.43e-04  1.00e+00]
 
-<span class="n">PC</span> <span class="mi">1</span> <span class="k">with</span> <span class="n">scaling</span><span class="p">:</span>
- <span class="p">[</span> <span class="mf">0.13</span> <span class="o">-</span><span class="mf">0.26</span> <span class="o">-</span><span class="mf">0.01</span> <span class="o">-</span><span class="mf">0.23</span>  <span class="mf">0.16</span>  <span class="mf">0.39</span>  <span class="mf">0.42</span> <span class="o">-</span><span class="mf">0.28</span>  <span class="mf">0.33</span> <span class="o">-</span><span class="mf">0.11</span>  <span class="mf">0.3</span>   <span class="mf">0.38</span>
-  <span class="mf">0.28</span><span class="p">]</span>
+PC 1 with scaling:
+ [ 0.13 -0.26 -0.01 -0.23  0.16  0.39  0.42 -0.28  0.33 -0.11  0.3   0.38
+  0.28]
 </pre></div>
 </div>
 <div class="line-block">
@@ -298,7 +304,7 @@ which is scaled before PCA vastly outperforms the unscaled version.</p>
 <span class="n">pca</span> <span class="o">=</span> <span class="n">unscaled_clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;pca&#39;</span><span class="p">]</span>
 <span class="n">pca_std</span> <span class="o">=</span> <span class="n">std_clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;pca&#39;</span><span class="p">]</span>
 
-<span class="c1"># Show first principal componenets</span>
+<span class="c1"># Show first principal components</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">PC 1 without scaling:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">PC 1 with scaling:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pca_std</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
@@ -340,8 +346,11 @@ which is scaled before PCA vastly outperforms the unscaled version.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.095 seconds)</p>
-<div class="sphx-glr-footer docutils container">
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.093 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-preprocessing-plot-scaling-importance-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/preprocessing/plot_scaling_importance.ipynb"><img alt="https://static.mybinder.org/badge.svg" src="https://static.mybinder.org/badge.svg" width="150px" /></a>
+</div>
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_scaling_importance.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_scaling_importance.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
@@ -359,17 +368,17 @@ which is scaled before PCA vastly outperforms the unscaled version.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/auto_examples/preprocessing/plot_scaling_importance.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="plot_function_transformer.html">Previous
+      <a href="plot_power_transformer.html">Previous
       </a>
     </div>
     <div class="buttonNext">
-      <a href="plot_all_scaling.html">Next
+      <a href="plot_transformed_target.html">Next
       </a>
     </div>
     

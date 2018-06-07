@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_svm_plot_separating_hyperplane_unbalanced.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_svm_plot_separating_hyperplane_unbalanced.py:
 
@@ -32,7 +36,7 @@ unbalanced classes.
 
 
 .. image:: /auto_examples/svm/images/sphx_glr_plot_separating_hyperplane_unbalanced_001.png
-    :align: center
+    :class: sphx-glr-single-img
 
 
 
@@ -45,14 +49,17 @@ unbalanced classes.
     import numpy as np
     import matplotlib.pyplot as plt
     from sklearn import svm
+    from sklearn.datasets import make_blobs
 
-    # we create clusters with 1000 and 100 points
-    rng = np.random.RandomState(0)
+    # we create two clusters of random points
     n_samples_1 = 1000
     n_samples_2 = 100
-    X = np.r_[1.5 * rng.randn(n_samples_1, 2),
-              0.5 * rng.randn(n_samples_2, 2) + [2, 2]]
-    y = [0] * (n_samples_1) + [1] * (n_samples_2)
+    centers = [[0.0, 0.0], [2.0, 2.0]]
+    clusters_std = [1.5, 0.5]
+    X, y = make_blobs(n_samples=[n_samples_1, n_samples_2],
+                      centers=centers,
+                      cluster_std=clusters_std,
+                      random_state=0, shuffle=False)
 
     # fit the model and get the separating hyperplane
     clf = svm.SVC(kernel='linear', C=1.0)
@@ -93,13 +100,23 @@ unbalanced classes.
                loc="upper right")
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  0.047 seconds)
+**Total running time of the script:** ( 0 minutes  0.027 seconds)
 
+
+.. _sphx_glr_download_auto_examples_svm_plot_separating_hyperplane_unbalanced.py:
 
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/svm/plot_separating_hyperplane_unbalanced.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

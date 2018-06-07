@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -195,7 +198,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="comparing-different-clustering-algorithms-on-toy-datasets">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-cluster-plot-cluster-comparison-py"><span class="std std-ref">here</span></a> to download the full example code or run this example in your browser via Binder</p>
+</div>
+<div class="sphx-glr-example-title section" id="comparing-different-clustering-algorithms-on-toy-datasets">
 <span id="sphx-glr-auto-examples-cluster-plot-cluster-comparison-py"></span><h1>Comparing different clustering algorithms on toy datasets<a class="headerlink" href="#comparing-different-clustering-algorithms-on-toy-datasets" title="Permalink to this headline">¶</a></h1>
 <p>This example shows characteristics of different
 clustering algorithms on datasets that are “interesting”
@@ -213,7 +220,7 @@ data structure.</p>
 <p>While these examples give some intuition about the
 algorithms, this intuition might not apply to very high
 dimensional data.</p>
-<img alt="../../_images/sphx_glr_plot_cluster_comparison_001.png" class="align-center" src="../../_images/sphx_glr_plot_cluster_comparison_001.png" />
+<img alt="../../_images/sphx_glr_plot_cluster_comparison_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_cluster_comparison_001.png" />
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
@@ -361,6 +368,8 @@ dimensional data.</p>
                                              <span class="s1">&#39;#f781bf&#39;</span><span class="p">,</span> <span class="s1">&#39;#a65628&#39;</span><span class="p">,</span> <span class="s1">&#39;#984ea3&#39;</span><span class="p">,</span>
                                              <span class="s1">&#39;#999999&#39;</span><span class="p">,</span> <span class="s1">&#39;#e41a1c&#39;</span><span class="p">,</span> <span class="s1">&#39;#dede00&#39;</span><span class="p">]),</span>
                                       <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))))</span>
+        <span class="c1"># add black color for outliers (if any)</span>
+        <span class="n">colors</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.append.html#numpy.append" title="View documentation for numpy.append"><span class="n">np</span><span class="o">.</span><span class="n">append</span></a><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;#000000&quot;</span><span class="p">])</span>
         <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="View documentation for matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">y_pred</span><span class="p">])</span>
 
         <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlim.html#matplotlib.pyplot.xlim" title="View documentation for matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
@@ -375,8 +384,11 @@ dimensional data.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  27.020 seconds)</p>
-<div class="sphx-glr-footer docutils container">
+<p><strong>Total running time of the script:</strong> ( 0 minutes  29.043 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-cluster-plot-cluster-comparison-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/cluster/plot_cluster_comparison.ipynb"><img alt="https://static.mybinder.org/badge.svg" src="https://static.mybinder.org/badge.svg" width="150px" /></a>
+</div>
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_cluster_comparison.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_cluster_comparison.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
@@ -394,7 +406,7 @@ dimensional data.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/auto_examples/cluster/plot_cluster_comparison.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

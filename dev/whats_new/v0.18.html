@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -494,7 +497,7 @@ used in <a class="reference internal" href="../modules/generated/sklearn.feature
 <a class="reference internal" href="../modules/generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-class docutils literal"><span class="pre">feature_selection.SelectPercentile</span></code></a> as score functions.
 By <a class="reference external" href="https://github.com/AndreaBravi">Andrea Bravi</a> and <a class="reference external" href="https://github.com/nmayorov">Nikolay Mayorov</a>.</li>
 <li>Added the <a class="reference internal" href="../modules/generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal"><span class="pre">ensemble.IsolationForest</span></code></a> class for anomaly detection based on
-random forests. By <a class="reference external" href="https://perso.telecom-paristech.fr/~goix/">Nicolas Goix</a>.</li>
+random forests. By <a class="reference external" href="http://ngoix.github.io">Nicolas Goix</a>.</li>
 <li>Added <code class="docutils literal"><span class="pre">algorithm=&quot;elkan&quot;</span></code> to <a class="reference internal" href="../modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="sklearn.cluster.KMeans"><code class="xref py py-class docutils literal"><span class="pre">cluster.KMeans</span></code></a> implementing
 Elkan’s fast K-Means algorithm. By <a class="reference external" href="http://peekaboo-vision.blogspot.com">Andreas Müller</a>.</li>
 </ul>
@@ -708,7 +711,7 @@ output with dense in the multioutput case.</li>
 <ul class="simple">
 <li><a class="reference internal" href="../modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">decomposition.RandomizedPCA</span></code></a> default number of <cite>iterated_power</cite> is 4 instead of 3.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/5141">#5141</a> by <a class="reference external" href="https://github.com/giorgiop">Giorgio Patrini</a>.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">utils.extmath.randomized_svd</span></code> performs 4 power iterations by default, instead or 0.
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.extmath.randomized_svd.html#sklearn.utils.extmath.randomized_svd" title="sklearn.utils.extmath.randomized_svd"><code class="xref py py-func docutils literal"><span class="pre">utils.extmath.randomized_svd</span></code></a> performs 4 power iterations by default, instead or 0.
 In practice this is enough for obtaining a good approximation of the
 true eigenvalues/vectors in the presence of noise. When <cite>n_components</cite> is
 small (<code class="docutils literal"><span class="pre">&lt;</span> <span class="pre">.1</span> <span class="pre">*</span> <span class="pre">min(X.shape)</span></code>) <cite>n_iter</cite> is set to 7, unless the user specifies
@@ -764,7 +767,7 @@ By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.
 arbitrary labels, not just those ranging from 0 to n_clusters - 1.</li>
 <li>Fix bug where expected and adjusted mutual information were incorrect if
 cluster contingency cells exceeded <code class="docutils literal"><span class="pre">2**16</span></code>. By <a class="reference external" href="http://joelnothman.com">Joel Nothman</a>.</li>
-<li><a class="reference internal" href="../modules/generated/sklearn.metrics.pairwise.pairwise_distances.html#sklearn.metrics.pairwise.pairwise_distances" title="sklearn.metrics.pairwise.pairwise_distances"><code class="xref py py-func docutils literal"><span class="pre">metrics.pairwise.pairwise_distances</span></code></a> now converts arrays to
+<li><code class="xref py py-func docutils literal"><span class="pre">metrics.pairwise.pairwise_distances</span></code> now converts arrays to
 boolean arrays when required in <code class="docutils literal"><span class="pre">scipy.spatial.distance</span></code>.
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/5460">#5460</a> by <a class="reference external" href="https://github.com/TomDLT">Tom Dupre la Tour</a>.</li>
 <li>Fix sparse input support in <a class="reference internal" href="../modules/generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="sklearn.metrics.silhouette_score"><code class="xref py py-func docutils literal"><span class="pre">metrics.silhouette_score</span></code></a> as well as
@@ -778,7 +781,7 @@ problems for users with very small differences in scores (<a class="reference ex
 <li><code class="xref py py-func docutils literal"><span class="pre">model_selection.tests._search._check_param_grid</span></code> now works correctly with all types
 that extends/implements <cite>Sequence</cite> (except string), including range (Python 3.x) and xrange
 (Python 2.x). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7323">#7323</a> by Viacheslav Kovalevskyi.</li>
-<li><code class="xref py py-func docutils literal"><span class="pre">utils.extmath.randomized_range_finder</span></code> is more numerically stable when many
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.extmath.randomized_range_finder.html#sklearn.utils.extmath.randomized_range_finder" title="sklearn.utils.extmath.randomized_range_finder"><code class="xref py py-func docutils literal"><span class="pre">utils.extmath.randomized_range_finder</span></code></a> is more numerically stable when many
 power iterations are requested, since it applies LU normalization by default.
 If <code class="docutils literal"><span class="pre">n_iter&lt;2</span></code> numerical issues are unlikely, thus no normalization is applied.
 Other normalization options are available: <code class="docutils literal"><span class="pre">'none',</span> <span class="pre">'LU'</span></code> and <code class="docutils literal"><span class="pre">'QR'</span></code>.
@@ -923,7 +926,7 @@ yelite, Yen, YenChenLin, Yichuan Liu, Yoav Ram, Yoshiki, Zheng RuiFeng, zivori, 
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/whats_new/v0.18.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

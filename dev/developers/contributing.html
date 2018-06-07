@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="#">Contributing</a></li>
             <li class="divider"></li>
@@ -178,15 +181,22 @@
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
 <li><a class="reference internal" href="#">Contributing</a><ul>
-<li><a class="reference internal" href="#submitting-a-bug-report">Submitting a bug report</a></li>
 <li><a class="reference internal" href="#ways-to-contribute">Ways to contribute</a></li>
+<li><a class="reference internal" href="#submitting-a-bug-report-or-a-feature-request">Submitting a bug report or a feature request</a><ul>
+<li><a class="reference internal" href="#how-to-make-a-good-bug-report">How to make a good bug report</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#retrieving-the-latest-code">Retrieving the latest code</a></li>
 <li><a class="reference internal" href="#contributing-code">Contributing code</a><ul>
 <li><a class="reference internal" href="#how-to-contribute">How to contribute</a></li>
 <li><a class="reference internal" href="#contributing-pull-requests">Contributing pull requests</a></li>
-<li><a class="reference internal" href="#filing-bugs">Filing Bugs</a></li>
 <li><a class="reference internal" href="#issues-for-new-contributors">Issues for New Contributors</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a><ul>
+<li><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
+<li><a class="reference internal" href="#guidelines-for-writing-documentation">Guidelines for writing documentation</a></li>
+<li><a class="reference internal" href="#generated-documentation-on-circleci">Generated documentation on CircleCI</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#testing-and-improving-test-coverage">Testing and improving test coverage</a></li>
 <li><a class="reference internal" href="#developers-web-site">Developers web site</a></li>
 <li><a class="reference internal" href="#issue-tracker-tags">Issue Tracker Tags</a></li>
@@ -266,13 +276,6 @@ others of the Python Software Foundation:
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="submitting-a-bug-report">
-<h2>Submitting a bug report<a class="headerlink" href="#submitting-a-bug-report" title="Permalink to this headline">¶</a></h2>
-<p>In case you experience issues using this package, do not hesitate to submit a
-ticket to the
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">Bug Tracker</a>. You are
-also welcome to post feature requests or pull requests.</p>
-</div>
 <div class="section" id="ways-to-contribute">
 <h2>Ways to contribute<a class="headerlink" href="#ways-to-contribute" title="Permalink to this headline">¶</a></h2>
 <p>There are many ways to contribute to scikit-learn, with the most common ones
@@ -285,11 +288,62 @@ Full documentation can be found under the doc/ directory.</p>
 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">issue tracker</a>,
 investigating bugs, and <a class="reference internal" href="#code-review"><span class="std std-ref">reviewing other developers’ pull requests</span></a> are very valuable contributions that decrease the burden on the
 project maintainers.</p>
-<p>Another way to contribute is to report issues you’re facing, and give a “thumbs up”
-on issues that others reported and that are relevant to you.
-It also helps us if you spread the word: reference the project from your blog
-and articles, link to it from your website, or simply say “I use it”:</p>
+<p>Another way to contribute is to report issues you’re facing, and give a “thumbs
+up” on issues that others reported and that are relevant to you.  It also helps
+us if you spread the word: reference the project from your blog and articles,
+link to it from your website, or simply say “I use it”:</p>
 <script type="text/javascript" src="http://www.ohloh.net/p/480792/widgets/project_users.js?style=rainbow"></script></div>
+<div class="section" id="submitting-a-bug-report-or-a-feature-request">
+<h2>Submitting a bug report or a feature request<a class="headerlink" href="#submitting-a-bug-report-or-a-feature-request" title="Permalink to this headline">¶</a></h2>
+<p>In case you experience issues using this package, do not hesitate to submit a
+ticket to the
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">Bug Tracker</a>. You are
+also welcome to post feature requests or pull requests.</p>
+<p>It is recommended to check that your issue complies with the
+following rules before submitting:</p>
+<ul class="simple">
+<li>Verify that your issue is not being currently addressed by other
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues?q=">issues</a>
+or <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pulls?q=">pull requests</a>.</li>
+<li>If you are submitting an algorithm or feature request, please verify that
+the algorithm fulfills our
+<a class="reference external" href="http://scikit-learn.org/stable/faq.html#what-are-the-inclusion-criteria-for-new-algorithms">new algorithm requirements</a>.</li>
+<li>If you are submitting a bug report, we strongly encourage you to follow the guidelines in
+<a class="reference internal" href="#filing-bugs"><span class="std std-ref">How to make a good bug report</span></a>.</li>
+</ul>
+<div class="section" id="how-to-make-a-good-bug-report">
+<span id="filing-bugs"></span><h3>How to make a good bug report<a class="headerlink" href="#how-to-make-a-good-bug-report" title="Permalink to this headline">¶</a></h3>
+<p>When you submit an issue to <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">Github</a>, please do your best to
+follow these guidelines! This will make it a lot easier to provide you with good
+feedback:</p>
+<ul>
+<li><p class="first">The ideal bug report contains a <strong>short reproducible code snippet</strong>, this way
+anyone can try to reproduce the bug easily (see <a class="reference external" href="http://stackoverflow.com/help/mcve">this</a> for more details). If your snippet is
+longer than around 50 lines, please link to a <a class="reference external" href="https://gist.github.com">gist</a> or a github repo.</p>
+</li>
+<li><p class="first">If not feasible to include a reproducible snippet, please be specific about
+what <strong>estimators and/or functions are involved and the shape of the data</strong>.</p>
+</li>
+<li><p class="first">If an exception is raised, please <strong>provide the full traceback</strong>.</p>
+</li>
+<li><p class="first">Please include your <strong>operating system type and version number</strong>, as well as
+your <strong>Python, scikit-learn, numpy, and scipy versions</strong>. This information
+can be found by running the following code snippet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">())</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scipy</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SciPy&quot;</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">sklearn</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scikit-Learn&quot;</span><span class="p">,</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Please ensure all <strong>code snippets and error messages are formatted in
+appropriate code blocks</strong>.  See <a class="reference external" href="https://help.github.com/articles/creating-and-highlighting-code-blocks">Creating and highlighting code blocks</a>
+for more details.</p>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="retrieving-the-latest-code">
 <span id="git-repo"></span><h2>Retrieving the latest code<a class="headerlink" href="#retrieving-the-latest-code" title="Permalink to this headline">¶</a></h2>
 <p>We use <a class="reference external" href="https://git-scm.com/">Git</a> for version control and
@@ -416,8 +470,7 @@ the past.</p>
 <h3>Contributing pull requests<a class="headerlink" href="#contributing-pull-requests" title="Permalink to this headline">¶</a></h3>
 <p>It is recommended to check that your contribution complies with the following
 rules before submitting a pull request:</p>
-<blockquote>
-<div><ul>
+<ul>
 <li><p class="first">Follow the <a class="reference internal" href="#coding-guidelines">coding-guidelines</a> (see below). To make sure that
 your PR does not add PEP8 violations you can run
 <cite>./build_tools/travis/flake8_diff.sh</cite> or <cite>make flake8-diff</cite> on a
@@ -483,10 +536,8 @@ the example. For more details on writing and building the
 documentation, see the <a class="reference internal" href="#contribute-documentation"><span class="std std-ref">Documentation</span></a> section.</p>
 </li>
 </ul>
-</div></blockquote>
 <p>You can also check for common programming errors with the following tools:</p>
-<blockquote>
-<div><ul>
+<ul>
 <li><p class="first">Code with a good unittest coverage (at least 90%, better 100%), check
 with:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install pytest pytest-cov
@@ -495,26 +546,13 @@ $ pytest --cov sklearn path/to/tests_for_package
 </div>
 <p>see also <a class="reference internal" href="#testing-coverage"><span class="std std-ref">Testing and improving test coverage</span></a></p>
 </li>
-<li><p class="first">No pyflakes warnings, check with:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install pyflakes
-$ pyflakes path/to/module.py
-</pre></div>
-</div>
-</li>
-<li><p class="first">No PEP8 warnings, check with:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install pep8
-$ pep8 path/to/module.py
-</pre></div>
-</div>
-</li>
-<li><p class="first">AutoPEP8 can help you fix some of the easy redundant errors:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install autopep8
-$ autopep8 path/to/pep8.py
+<li><p class="first">No flake8 warnings, check with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install flake8
+$ flake8 path/to/module.py
 </pre></div>
 </div>
 </li>
 </ul>
-</div></blockquote>
 <p>Bonus points for contributions that include a performance analysis with
 a benchmark script and profiling output (please report on the mailing
 list or on the GitHub wiki).</p>
@@ -570,44 +608,6 @@ message, the following actions are taken.</p>
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="filing-bugs">
-<span id="id2"></span><h3>Filing Bugs<a class="headerlink" href="#filing-bugs" title="Permalink to this headline">¶</a></h3>
-<p>We use GitHub issues to track all bugs and feature requests; feel free to
-open an issue if you have found a bug or wish to see a feature implemented.</p>
-<p>It is recommended to check that your issue complies with the
-following rules before submitting:</p>
-<ul>
-<li><p class="first">Verify that your issue is not being currently addressed by other
-<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues?q=">issues</a>
-or <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pulls?q=">pull requests</a>.</p>
-</li>
-<li><p class="first">If you are submitting an algorithm or feature request, please verify that
-the algorithm fulfills our
-<a class="reference external" href="http://scikit-learn.org/stable/faq.html#can-i-add-this-new-algorithm-that-i-or-someone-else-just-published">new algorithm requirements</a>.</p>
-</li>
-<li><p class="first">Please ensure all code snippets and error messages are formatted in
-appropriate code blocks.
-See <a class="reference external" href="https://help.github.com/articles/creating-and-highlighting-code-blocks">Creating and highlighting code blocks</a>.</p>
-</li>
-<li><p class="first">Please include your operating system type and version number, as well
-as your Python, scikit-learn, numpy, and scipy versions. This information
-can be found by running the following code snippet:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">())</span>
-<span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">numpy</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">scipy</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SciPy&quot;</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">sklearn</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scikit-Learn&quot;</span><span class="p">,</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Please be specific about what estimators and/or functions are involved
-and the shape of the data, as appropriate; please include a
-<a class="reference external" href="http://stackoverflow.com/help/mcve">reproducible</a> code snippet
-or link to a <a class="reference external" href="https://gist.github.com">gist</a>. If an exception is raised,
-please provide the traceback.</p>
-</li>
-</ul>
-</div>
 <div class="section" id="issues-for-new-contributors">
 <span id="new-contributors"></span><h3>Issues for New Contributors<a class="headerlink" href="#issues-for-new-contributors" title="Permalink to this headline">¶</a></h3>
 <p>New contributors should look for the following tags when looking for issues.  We
@@ -645,25 +645,68 @@ contributor left off. The list of issues with the help wanted tag can be found
 <span id="contribute-documentation"></span><h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
 <p>We are glad to accept any sort of documentation: function docstrings,
 reStructuredText documents (like this one), tutorials, etc. reStructuredText
-documents live in the source code repository under the doc/ directory.</p>
-<p>You can edit the documentation using any text editor, and then generate the
-HTML output by typing <code class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></code> from the doc/ directory. Alternatively,
-<code class="docutils literal"><span class="pre">make</span> <span class="pre">html-noplot</span></code> can be used to quickly generate the documentation without
-the example gallery. The resulting HTML files will be placed in _build/html/
-and are viewable in a web browser. See the README file in the doc/ directory
-for more information.</p>
-<p>For building the documentation, you will need <a class="reference external" href="http://www.sphinx-doc.org/en/stable/">sphinx</a>,
-<a class="reference external" href="http://matplotlib.org">matplotlib</a> and
-<a class="reference external" href="http://pillow.readthedocs.io/en/latest/">pillow</a>.</p>
-<p><strong>When you are writing documentation</strong>, it is important to keep a good
-compromise between mathematical and algorithmic details, and give
-intuition to the reader on what the algorithm does.</p>
+documents live in the source code repository under the <code class="docutils literal"><span class="pre">doc/</span></code> directory.
+You can edit the documentation using any text editor, and then generate the
+HTML output by building the documentation website.</p>
+<div class="section" id="building-the-documentation">
+<h4>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h4>
+<p>Building the documentation requires the <code class="docutils literal"><span class="pre">sphinx</span></code>, <code class="docutils literal"><span class="pre">sphinx-gallery</span></code>,
+<code class="docutils literal"><span class="pre">numpydoc</span></code>, <code class="docutils literal"><span class="pre">matplotlib</span></code>, and <code class="docutils literal"><span class="pre">Pillow</span></code> packages:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">gallery</span> <span class="n">numpydoc</span> <span class="n">matplotlib</span> <span class="n">Pillow</span>
+</pre></div>
+</div>
+<p>To build the documentation, you need to be in the <code class="docutils literal"><span class="pre">doc</span></code> folder:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">doc</span>
+</pre></div>
+</div>
+<p>It also requires having the version of scikit-learn installed that corresponds
+to the documentation, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">editable</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>To generate the full web site, including the example gallery:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>Generating the example gallery will run all our examples which takes a
+while. To save some time, you can use:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">make</span> <span class="pre">html-noplot</span></code>: this will generate the documentation without the
+example gallery. This is useful when changing a docstring for example.</li>
+<li><code class="docutils literal"><span class="pre">EXAMPLES_PATTERN=your_regex_goes_here</span> <span class="pre">make</span> <span class="pre">html</span></code>: only the examples
+matching <code class="docutils literal"><span class="pre">your_regex_goes_here</span></code> will be run. This is particularly
+useful if you are modifying a few examples.</li>
+</ul>
+</div></blockquote>
+<p>That should create all the documentation in the <code class="docutils literal"><span class="pre">_build/html/stable</span></code>
+directory.  Set the environment variable <cite>NO_MATHJAX=1</cite> if you intend to view
+the documentation in an offline setting.</p>
+<p>To build the PDF manual, run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">latexpdf</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Sphinx version</strong></p>
+<p class="last">While we do our best to have the documentation build under as many
+versions of Sphinx as possible, the different versions tend to
+behave slightly differently. To get the best results, you should
+use the same version as the one we used on CircleCI. Look at this
+<a class="reference external" href="https://github.com/search?utf8=%E2%9C%93&amp;q=sphinx+repo%3Ascikit-learn%2Fscikit-learn+extension%3Ash+path%3Abuild_tools%2Fcircle&amp;type=Code">github search</a>
+to know the exact version.</p>
+</div>
+</div>
+<div class="section" id="guidelines-for-writing-documentation">
+<h4>Guidelines for writing documentation<a class="headerlink" href="#guidelines-for-writing-documentation" title="Permalink to this headline">¶</a></h4>
+<p>It is important to keep a good compromise between mathematical and algorithmic
+details, and give intuition to the reader on what the algorithm does.</p>
 <p>Basically, to elaborate on the above, it is best to always
 start with a small paragraph with a hand-waving explanation of what the
 method does to the data. Then, it is very helpful
 to point out why the feature is useful and when it should be used -
 the latter also including “big O”
-(<img class="math" src="../_images/math/a40fd9733cd91fc744fb0de48c5dfbceb756c241.png" alt="O\left(g\left(n\right)\right)"/>)
+(<span class="math">\(O\left(g\left(n\right)\right)\)</span>)
 complexities of the algorithm, as opposed to just <em>rules of thumb</em>,
 as the latter can be very machine-dependent.
 If those complexities are not available, then rules of thumb
@@ -677,25 +720,8 @@ can be added to further the documentation. Not starting the
 documentation with the maths makes it more friendly towards
 users that are just interested in what the feature will do, as
 opposed to how it works “under the hood”.</p>
-<p>When you change the documentation in a pull request, CircleCI automatically
-builds it. To view the documentation generated by CircleCI:</p>
-<blockquote>
-<div><ul class="simple">
-<li>navigate to the bottom of the page to see the CI statuses. You may
-need to click on “Show all checks” to see all the CI statuses.</li>
-<li>click on the CircleCI status with python3 in the title.</li>
-<li>add #artifacts at the end of the URL. Note: you need to wait for the
-CircleCI build to finish before being able to look at the artifacts.</li>
-<li>once the artifacts are visible, navigate to <code class="docutils literal"><span class="pre">doc/index.html</span></code> to see the
-generated html documentation. <code class="docutils literal"><span class="pre">doc/_changed.html</span></code> shows html pages that
-are likely to have been affected by your pull request.</li>
-</ul>
-</div></blockquote>
-<p>If you often need to look at the documentation generated by CircleCI you may
-find <a class="reference internal" href="tips.html#viewing-rendered-html-documentation"><span class="std std-ref">this tip</span></a> handy.</p>
 <p>Finally, follow the formatting rules below to make it consistently good:</p>
-<blockquote>
-<div><ul>
+<ul>
 <li><p class="first">Add “See also” in docstrings for related classes/functions.</p>
 </li>
 <li><p class="first">“See also” in docstrings should be one line per reference,
@@ -716,16 +742,25 @@ with a colon and an explanation, for example:</p>
 </div></blockquote>
 </li>
 </ul>
-</div></blockquote>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p><strong>Sphinx version</strong></p>
-<p class="last">While we do our best to have the documentation build under as many
-versions of Sphinx as possible, the different versions tend to
-behave slightly differently. To get the best results, you should
-use the same version as the one we used on CircleCI. Look at this
-<a class="reference external" href="https://github.com/search?utf8=%E2%9C%93&amp;q=sphinx+repo%3Ascikit-learn%2Fscikit-learn+extension%3Ash+path%3Abuild_tools%2Fcircle&amp;type=Code">github search</a>
-to know the exact version.</p>
+</div>
+<div class="section" id="generated-documentation-on-circleci">
+<h4>Generated documentation on CircleCI<a class="headerlink" href="#generated-documentation-on-circleci" title="Permalink to this headline">¶</a></h4>
+<p>When you change the documentation in a pull request, CircleCI automatically
+builds it. To view the documentation generated by CircleCI:</p>
+<ul class="simple">
+<li>navigate to the bottom of your pull request page to see the CI
+statuses. You may need to click on “Show all checks” to see all the CI
+statuses.</li>
+<li>click on the CircleCI status with “python3” in the title.</li>
+<li>add <code class="docutils literal"><span class="pre">#artifacts</span></code> at the end of the URL. Note: you need to wait for the
+CircleCI build to finish before being able to look at the artifacts.</li>
+<li>once the artifacts are visible, navigate to <code class="docutils literal"><span class="pre">doc/_changed.html</span></code> to see a
+list of documentation pages that are likely to be affected by your pull
+request. Navigate to <code class="docutils literal"><span class="pre">doc/index.html</span></code> to see the full generated html
+documentation.</li>
+</ul>
+<p>If you often need to look at the documentation generated by CircleCI, e.g. when
+reviewing pull requests, you may find <a class="reference internal" href="tips.html#viewing-rendered-html-documentation"><span class="std std-ref">this tip</span></a> very handy.</p>
 </div>
 </div>
 <div class="section" id="testing-and-improving-test-coverage">
@@ -815,8 +850,7 @@ detailed in <a class="reference external" href="https://www.python.org/dev/peps/
 detail how code should be formatted and indented. Please read it and
 follow it.</p>
 <p>In addition, we add the following guidelines:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li>Use underscores to separate words in non class names: <code class="docutils literal"><span class="pre">n_samples</span></code>
 rather than <code class="docutils literal"><span class="pre">nsamples</span></code>.</li>
 <li>Avoid multiple statements on one line. Prefer a line return after
@@ -836,7 +870,6 @@ find bugs in scikit-learn.</li>
 <li>Use the <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">numpy docstring standard</a>
 in all your docstrings.</li>
 </ul>
-</div></blockquote>
 <p>A good example of code that we like can be found <a class="reference external" href="https://gist.github.com/nateGeorge/5455d2c57fb33c1ae04706f2dc4fee01">here</a>.</p>
 <div class="section" id="input-validation">
 <h3>Input validation<a class="headerlink" href="#input-validation" title="Permalink to this headline">¶</a></h3>
@@ -921,7 +954,7 @@ it should produce an identical model both times,
 hence the validation in <code class="docutils literal"><span class="pre">fit</span></code>, not <code class="docutils literal"><span class="pre">__init__</span></code>.</p>
 </div>
 <div class="section" id="deprecation">
-<h3>Deprecation<a class="headerlink" href="#deprecation" title="Permalink to this headline">¶</a></h3>
+<span id="contributing-deprecation"></span><h3>Deprecation<a class="headerlink" href="#deprecation" title="Permalink to this headline">¶</a></h3>
 <p>If any publicly accessible method, function, attribute or parameter
 is renamed, we still support the old one for two releases and issue
 a deprecation warning when it is called/passed/accessed.
@@ -1041,11 +1074,13 @@ instructive?</li>
 <p><a class="reference internal" href="tips.html#saved-replies"><span class="std std-ref">Standard replies for reviewing</span></a> includes some frequent comments that reviewers may make.</p>
 </div>
 <div class="section" id="apis-of-scikit-learn-objects">
-<h2>APIs of scikit-learn objects<a class="headerlink" href="#apis-of-scikit-learn-objects" title="Permalink to this headline">¶</a></h2>
+<span id="api-overview"></span><h2>APIs of scikit-learn objects<a class="headerlink" href="#apis-of-scikit-learn-objects" title="Permalink to this headline">¶</a></h2>
 <p>To have a uniform API, we try to have a common basic API for all the
 objects. In addition, to avoid the proliferation of framework code, we
 try to adopt simple conventions and limit to a minimum the number of
 methods an object must implement.</p>
+<p>Elements of the scikit-learn API are described more definitively in the
+<a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">Glossary of Common Terms and API Elements</span></a>.</p>
 <div class="section" id="different-objects">
 <h3>Different objects<a class="headerlink" href="#different-objects" title="Permalink to this headline">¶</a></h3>
 <p>The main objects in scikit-learn are (one class can implement
@@ -1270,7 +1305,7 @@ galleries</li>
 </div>
 <div class="topic">
 <p class="topic-title first"><code class="docutils literal"><span class="pre">BaseEstimator</span></code> and mixins:</p>
-<p>We tend to use use “duck typing”, so building an estimator which follows
+<p>We tend to use “duck typing”, so building an estimator which follows
 the API suffices for compatibility, without needing to inherit from or
 even import any scikit-learn classes.</p>
 <p>However, if a dependency on scikit-learn is acceptable in your code,
@@ -1362,7 +1397,7 @@ fit have a trailing <code class="docutils literal"><span class="pre">_</span></c
 trailing <code class="docutils literal"><span class="pre">_</span></code> is used to check if the estimator has been fitted.</p>
 </div>
 <div class="section" id="cloning">
-<span id="id6"></span><h3>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h3>
+<span id="id7"></span><h3>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h3>
 <p>For use with the <code class="xref py py-mod docutils literal"><span class="pre">model_selection</span></code> module,
 an estimator must support the <code class="docutils literal"><span class="pre">base.clone</span></code> function to replicate an estimator.
 This can be done by providing a <code class="docutils literal"><span class="pre">get_params</span></code> method.
@@ -1397,7 +1432,9 @@ is implemented using the <code class="docutils literal"><span class="pre">_estim
 It should be <code class="docutils literal"><span class="pre">&quot;classifier&quot;</span></code> for classifiers and <code class="docutils literal"><span class="pre">&quot;regressor&quot;</span></code> for
 regressors and <code class="docutils literal"><span class="pre">&quot;clusterer&quot;</span></code> for clustering methods, to work as expected.
 Inheriting from <code class="docutils literal"><span class="pre">ClassifierMixin</span></code>, <code class="docutils literal"><span class="pre">RegressorMixin</span></code> or <code class="docutils literal"><span class="pre">ClusterMixin</span></code>
-will set the attribute automatically.</p>
+will set the attribute automatically.  When a meta-estimator needs to distinguish
+among estimator types, instead of checking <code class="docutils literal"><span class="pre">_estimator_type</span></code> directly, helpers
+like <a class="reference internal" href="../modules/generated/sklearn.base.is_classifier.html#sklearn.base.is_classifier" title="sklearn.base.is_classifier"><code class="xref py py-func docutils literal"><span class="pre">base.is_classifier</span></code></a> should be used.</p>
 </div>
 <div class="section" id="working-notes">
 <h3>Working notes<a class="headerlink" href="#working-notes" title="Permalink to this headline">¶</a></h3>
@@ -1450,7 +1487,7 @@ for working with multiclass and multilabel problems.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/developers/contributing.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

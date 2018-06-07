@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.fetch_20newsgroups_vectorized<a class="headerlink" href="#sklearn-datasets-fetch-20newsgroups-vectorized" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.fetch_20newsgroups_vectorized">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_20newsgroups_vectorized</code><span class="sig-paren">(</span><em>subset='train'</em>, <em>remove=()</em>, <em>data_home=None</em>, <em>download_if_missing=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/datasets/twenty_newsgroups.py#L277"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_20newsgroups_vectorized" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_20newsgroups_vectorized</code><span class="sig-paren">(</span><em>subset='train'</em>, <em>remove=()</em>, <em>data_home=None</em>, <em>download_if_missing=True</em>, <em>return_X_y=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/datasets/twenty_newsgroups.py#L279"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_20newsgroups_vectorized" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the 20 newsgroups dataset and transform it into tf-idf vectors.</p>
 <p>This is a convenience function; the tf-idf transformation is done using the
 default settings for <cite>sklearn.feature_extraction.text.Vectorizer</cite>. For more
@@ -238,13 +241,26 @@ all scikit-learn data is stored in ‘~/scikit_learn_data’ subfolders.</p>
 <div><p>If False, raise an IOError if the data is not locally available
 instead of trying to download the data from the source site.</p>
 </div></blockquote>
+<p><strong>return_X_y</strong> : boolean, default=False. If True, returns <a href="#id1"><span class="problematic" id="id2">``</span></a>(data.data,</p>
+<p><strong>data.target)`` instead of a Bunch object.</strong></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 0.20.</span></p>
+</div>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bunch</strong> : Bunch object</p>
-<blockquote class="last">
+<blockquote>
 <div><p>bunch.data: sparse matrix, shape [n_samples, n_features]
 bunch.target: array, shape [n_samples]
 bunch.target_names: list, length [n_classes]</p>
+</div></blockquote>
+<p><strong>(data, target)</strong> : tuple if <code class="docutils literal"><span class="pre">return_X_y</span></code> is True</p>
+<blockquote class="last">
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 0.20.</span></p>
+</div>
 </div></blockquote>
 </td>
 </tr>
@@ -254,15 +270,15 @@ bunch.target_names: list, length [n_classes]</p>
 
 <div class="section" id="examples-using-sklearn-datasets-fetch-20newsgroups-vectorized">
 <h2>Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.fetch_20newsgroups_vectorized</span></code><a class="headerlink" href="#examples-using-sklearn-datasets-fetch-20newsgroups-vectorized" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip=" The `Johnson-Lindenstrauss lemma`_ states that any high dimensional dataset can be randomly pr..."><div class="figure" id="id1">
+<div class="sphx-glr-thumbcontainer" tooltip=" The `Johnson-Lindenstrauss lemma`_ states that any high dimensional dataset can be randomly pr..."><div class="figure" id="id3">
 <img alt="../../_images/sphx_glr_plot_johnson_lindenstrauss_bound_thumb.png" src="../../_images/sphx_glr_plot_johnson_lindenstrauss_bound_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/plot_johnson_lindenstrauss_bound.html#sphx-glr-auto-examples-plot-johnson-lindenstrauss-bound-py"><span class="std std-ref">The Johnson-Lindenstrauss bound for embedding with random projections</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Demonstrate how model complexity influences both prediction accuracy and computational performa..."><div class="figure" id="id2">
+</div><div class="sphx-glr-thumbcontainer" tooltip="Demonstrate how model complexity influences both prediction accuracy and computational performa..."><div class="figure" id="id4">
 <img alt="../../_images/sphx_glr_plot_model_complexity_influence_thumb.png" src="../../_images/sphx_glr_plot_model_complexity_influence_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/plot_model_complexity_influence.html#sphx-glr-auto-examples-applications-plot-model-complexity-influence-py"><span class="std std-ref">Model Complexity Influence</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Comparison of multinomial logistic L1 vs one-versus-rest L1 logistic regression to classify doc..."><div class="figure" id="id3">
+</div><div class="sphx-glr-thumbcontainer" tooltip="Comparison of multinomial logistic L1 vs one-versus-rest L1 logistic regression to classify doc..."><div class="figure" id="id5">
 <img alt="../../_images/sphx_glr_plot_sparse_logistic_regression_20newsgroups_thumb.png" src="../../_images/sphx_glr_plot_sparse_logistic_regression_20newsgroups_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_sparse_logistic_regression_20newsgroups.html#sphx-glr-auto-examples-linear-model-plot-sparse-logistic-regression-20newsgroups-py"><span class="std std-ref">Multiclass sparse logisitic regression on newgroups20</span></a></span></p>
 </div>
@@ -278,7 +294,7 @@ bunch.target_names: list, length [n_classes]</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.datasets.fetch_20newsgroups_vectorized.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

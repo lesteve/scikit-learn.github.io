@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.roc_auc_score<a class="headerlink" href="#sklearn-metrics-roc-auc-score" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.roc_auc_score">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">roc_auc_score</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_score</em>, <em>average='macro'</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/37ce9ae/sklearn/metrics/ranking.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.roc_auc_score" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">roc_auc_score</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_score</em>, <em>average='macro'</em>, <em>sample_weight=None</em>, <em>max_fpr=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/metrics/ranking.py#L225"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.roc_auc_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Area Under the Receiver Operating Characteristic Curve (ROC AUC)
 from prediction scores.</p>
 <p>Note: this implementation is restricted to the binary classification task
@@ -247,6 +250,11 @@ by support (the number of true instances for each label).</p>
 <blockquote>
 <div><p>Sample weights.</p>
 </div></blockquote>
+<p><strong>max_fpr</strong> : float &gt; 0 and &lt;= 1, optional</p>
+<blockquote>
+<div><p>If not <code class="docutils literal"><span class="pre">None</span></code>, the standardized partial AUC <a class="reference internal" href="#r551551" id="id1">[R551551]</a> over the range
+[0, max_fpr] is returned.</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>auc</strong> : float</p>
@@ -264,17 +272,23 @@ by support (the number of true instances for each label).</p>
 </dl>
 </div>
 <p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="r539540" rules="none">
+<table class="docutils citation" frame="void" id="r549551" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R539540]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">Wikipedia entry for the Receiver operating characteristic</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[R549551]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">Wikipedia entry for the Receiver operating characteristic</a></td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="r540540" rules="none">
+<table class="docutils citation" frame="void" id="r550551" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[R540540]</a></td><td>Fawcett T. An introduction to ROC analysis[J]. Pattern Recognition
+<tr><td class="label"><a class="fn-backref" href="#id3">[R550551]</a></td><td>Fawcett T. An introduction to ROC analysis[J]. Pattern Recognition
 Letters, 2006, 27(8):861-874.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r551551" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R551551]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/2668680">Analyzing a portion of the ROC curve. McClish, 1989</a></td></tr>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
@@ -299,7 +313,7 @@ Letters, 2006, 27(8):861-874.</td></tr>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.metrics.roc_auc_score.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

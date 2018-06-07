@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,13 +205,13 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.adjusted_mutual_info_score<a class="headerlink" href="#sklearn-metrics-adjusted-mutual-info-score" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.adjusted_mutual_info_score">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">adjusted_mutual_info_score</code><span class="sig-paren">(</span><em>labels_true</em>, <em>labels_pred</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/metrics/cluster/supervised.py#L611"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.adjusted_mutual_info_score" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">adjusted_mutual_info_score</code><span class="sig-paren">(</span><em>labels_true</em>, <em>labels_pred</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/metrics/cluster/supervised.py#L611"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.adjusted_mutual_info_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adjusted Mutual Information between two clusterings.</p>
 <p>Adjusted Mutual Information (AMI) is an adjustment of the Mutual
 Information (MI) score to account for chance. It accounts for the fact that
 the MI is generally higher for two clusterings with a larger number of
 clusters, regardless of whether there is actually more information shared.
-For two clusterings <img class="math" src="../../_images/math/169c982b5e649cd1bd6445df5583affe427ea269.png" alt="U"/> and <img class="math" src="../../_images/math/fae0e7a73748991e5540d874416000583f64f58e.png" alt="V"/>, the AMI is given as:</p>
+For two clusterings <span class="math">\(U\)</span> and <span class="math">\(V\)</span>, the AMI is given as:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">AMI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">MI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span> <span class="o">-</span> <span class="n">E</span><span class="p">(</span><span class="n">MI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">))]</span> <span class="o">/</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">U</span><span class="p">),</span> <span class="n">H</span><span class="p">(</span><span class="n">V</span><span class="p">))</span> <span class="o">-</span> <span class="n">E</span><span class="p">(</span><span class="n">MI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">))]</span>
 </pre></div>
 </div>
@@ -256,18 +259,18 @@ an expected AMI around 0 on average hence can be negative.</p>
 </dl>
 </div>
 <p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="r139140" rules="none">
+<table class="docutils citation" frame="void" id="r141142" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R139140]</a></td><td><a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume11/vinh10a/vinh10a.pdf">Vinh, Epps, and Bailey, (2010). Information Theoretic Measures for
+<tr><td class="label"><a class="fn-backref" href="#id1">[R141142]</a></td><td><a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume11/vinh10a/vinh10a.pdf">Vinh, Epps, and Bailey, (2010). Information Theoretic Measures for
 Clusterings Comparison: Variants, Properties, Normalization and
 Correction for Chance, JMLR</a></td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="r140140" rules="none">
+<table class="docutils citation" frame="void" id="r142142" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[R140140]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Adjusted_Mutual_Information">Wikipedia entry for the Adjusted Mutual Information</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[R142142]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Adjusted_Mutual_Information">Wikipedia entry for the Adjusted Mutual Information</a></td></tr>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
@@ -318,7 +321,7 @@ the assignment is totally in-complete, hence the AMI is null:</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.metrics.adjusted_mutual_info_score.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

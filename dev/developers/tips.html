@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -220,18 +223,19 @@ as GitHub gists; to install them, click on the “Raw” button on the gist page
 <div class="section" id="viewing-the-rendered-html-documentation-for-a-pull-request">
 <span id="viewing-rendered-html-documentation"></span><h3>Viewing the rendered HTML documentation for a pull request<a class="headerlink" href="#viewing-the-rendered-html-documentation-for-a-pull-request" title="Permalink to this headline">¶</a></h3>
 <p>We use CircleCI to build the HTML documentation for every pull request. To
-access that documentation, instructions are provided in
-<a class="reference internal" href="contributing.html#contribute-documentation"><span class="std std-ref">documentation section of the contributor guide</span></a>. To save you a few clicks, we provide a
-<a class="reference external" href="https://gist.github.com/lesteve/470170f288884ec052bcf4bc4ffe958a">userscript</a>
-that adds a button to every PR. After installing the userscript, navigate to any
-GitHub PR; a new button labeled “See CircleCI doc for this PR” should appear in
-the top-right area.</p>
+access that documentation, instructions are provided in the <a class="reference internal" href="contributing.html#contribute-documentation"><span class="std std-ref">documentation
+section of the contributor guide</span></a>. To save you a few
+clicks, we provide a <a class="reference external" href="https://raw.githubusercontent.com/lesteve/userscripts/master/add-button-for-pr-circleci-doc.user.js">userscript</a>
+that adds a button to every PR. After installing the userscript, navigate to
+any GitHub PR; a new button labeled “See CircleCI doc for this PR” should
+appear in the top-right area.</p>
 </div>
 <div class="section" id="folding-and-unfolding-outdated-diffs-on-pull-requests">
 <h3>Folding and unfolding outdated diffs on pull requests<a class="headerlink" href="#folding-and-unfolding-outdated-diffs-on-pull-requests" title="Permalink to this headline">¶</a></h3>
 <p>GitHub hides discussions on PRs when the corresponding lines of code have been
-changed in the mean while. This <a class="reference external" href="https://gist.github.com/lesteve/b4ef29bccd42b354a834">userscript</a> provides a button to
-unfold all such hidden discussions at once, so you can catch up.</p>
+changed in the mean while. This <a class="reference external" href="https://raw.githubusercontent.com/lesteve/userscripts/master/github-expand-all.user.js">userscript</a>
+provides a shortcut (Control-Alt-P at the time of writing but look at the code
+to be sure) to unfold all such hidden discussions at once, so you can catch up.</p>
 </div>
 <div class="section" id="checking-out-pull-requests-as-remote-tracking-branches">
 <h3>Checking out pull requests as remote-tracking branches<a class="headerlink" href="#checking-out-pull-requests-as-remote-tracking-branches" title="Permalink to this headline">¶</a></h3>
@@ -251,8 +255,19 @@ will be displayed as a color background behind the line number.</p>
 </div>
 <div class="section" id="useful-pytest-aliases-and-flags">
 <h3>Useful pytest aliases and flags<a class="headerlink" href="#useful-pytest-aliases-and-flags" title="Permalink to this headline">¶</a></h3>
-<p>We recommend using pytest to run unit tests. When a unit tests fail, the
-following tricks can make debugging easier:</p>
+<p>The full test suite takes fairly long to run. For faster iterations,
+it is possibly to select a subset of tests using pytest selectors.
+In particular, one can run a <a class="reference external" href="https://docs.pytest.org/en/latest/example/markers.html#selecting-tests-based-on-their-node-id">single test based on its node ID</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span> <span class="n">sklearn</span><span class="o">/</span><span class="n">linear_model</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_logistic</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_sparsify</span>
+</pre></div>
+</div>
+<p>or use the <a class="reference external" href="https://docs.pytest.org/en/latest/example/markers.html#using-k-expr-to-select-tests-based-on-their-name">-k pytest parameter</a>
+to select tests based on their name. For instance,:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">sklearn</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_common</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">k</span> <span class="n">LogisticRegression</span>
+</pre></div>
+</div>
+<p>will run all <a class="reference internal" href="../glossary.html#term-common-tests"><span class="xref std std-term">common tests</span></a> for the <code class="docutils literal"><span class="pre">LogisticRegression</span></code> estimator.</p>
+<p>When a unit tests fail, the following tricks can make debugging easier:</p>
 <blockquote>
 <div><ol class="arabic">
 <li><p class="first">The command line argument <code class="docutils literal"><span class="pre">pytest</span> <span class="pre">-l</span></code> instructs pytest to print the local
@@ -432,7 +447,7 @@ tutorials and documentation on the <a class="reference external" href="http://va
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/developers/tips.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

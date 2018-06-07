@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_gaussian_process_plot_gpr_noisy_targets.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_gaussian_process_plot_gpr_noisy_targets.py:
 
@@ -31,12 +35,12 @@ regularization of the assumed covariance between the training points.
     *
 
       .. image:: /auto_examples/gaussian_process/images/sphx_glr_plot_gpr_noisy_targets_001.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/gaussian_process/images/sphx_glr_plot_gpr_noisy_targets_002.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
 
 
@@ -75,7 +79,7 @@ regularization of the assumed covariance between the training points.
     # its MSE
     x = np.atleast_2d(np.linspace(0, 10, 1000)).T
 
-    # Instanciate a Gaussian Process model
+    # Instantiate a Gaussian Process model
     kernel = C(1.0, (1e-3, 1e3)) * RBF(10, (1e-2, 1e2))
     gp = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=9)
 
@@ -111,8 +115,8 @@ regularization of the assumed covariance between the training points.
     noise = np.random.normal(0, dy)
     y += noise
 
-    # Instanciate a Gaussian Process model
-    gp = GaussianProcessRegressor(kernel=kernel, alpha=(dy / y) ** 2,
+    # Instantiate a Gaussian Process model
+    gp = GaussianProcessRegressor(kernel=kernel, alpha=dy ** 2,
                                   n_restarts_optimizer=10)
 
     # Fit to data using Maximum Likelihood Estimation of the parameters
@@ -138,13 +142,23 @@ regularization of the assumed covariance between the training points.
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  0.319 seconds)
+**Total running time of the script:** ( 0 minutes  0.271 seconds)
 
+
+.. _sphx_glr_download_auto_examples_gaussian_process_plot_gpr_noisy_targets.py:
 
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/gaussian_process/plot_gpr_noisy_targets.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

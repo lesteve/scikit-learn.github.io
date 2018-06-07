@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.roc_curve<a class="headerlink" href="#sklearn-metrics-roc-curve" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.roc_curve">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">roc_curve</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_score</em>, <em>pos_label=None</em>, <em>sample_weight=None</em>, <em>drop_intermediate=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/metrics/ranking.py#L482"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.roc_curve" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">roc_curve</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_score</em>, <em>pos_label=None</em>, <em>sample_weight=None</em>, <em>drop_intermediate=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/metrics/ranking.py#L513"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.roc_curve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Receiver operating characteristic (ROC)</p>
 <p>Note: this implementation is restricted to the binary classification task.</p>
 <p>Read more in the <a class="reference internal" href="../model_evaluation.html#roc-metrics"><span class="std std-ref">User Guide</span></a>.</p>
@@ -272,16 +275,16 @@ and is arbitrarily set to <cite>max(y_score) + 1</cite>.</p>
 are reversed upon returning them to ensure they correspond to both <code class="docutils literal"><span class="pre">fpr</span></code>
 and <code class="docutils literal"><span class="pre">tpr</span></code>, which are sorted in reversed order during their calculation.</p>
 <p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="r167168" rules="none">
+<table class="docutils citation" frame="void" id="r169170" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R167168]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">Wikipedia entry for the Receiver operating characteristic</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[R169170]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">Wikipedia entry for the Receiver operating characteristic</a></td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="r168168" rules="none">
+<table class="docutils citation" frame="void" id="r170170" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[R168168]</a></td><td>Fawcett T. An introduction to ROC analysis[J]. Pattern Recognition
+<tr><td class="label"><a class="fn-backref" href="#id2">[R170170]</a></td><td>Fawcett T. An introduction to ROC analysis[J]. Pattern Recognition
 Letters, 2006, 27(8):861-874.</td></tr>
 </tbody>
 </table>
@@ -292,11 +295,11 @@ Letters, 2006, 27(8):861-874.</td></tr>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_curve</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpr</span>
-<span class="go">array([ 0. ,  0. ,  0.5,  0.5,  1. ])</span>
+<span class="go">array([0. , 0. , 0.5, 0.5, 1. ])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpr</span>
-<span class="go">array([ 0. ,  0.5,  0.5,  1. ,  1. ])</span>
+<span class="go">array([0. , 0.5, 0.5, 1. , 1. ])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">thresholds</span>
-<span class="go">array([ 1.8 ,  0.8 ,  0.4 ,  0.35,  0.1 ])</span>
+<span class="go">array([1.8 , 0.8 , 0.4 , 0.35, 0.1 ])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -331,7 +334,7 @@ Letters, 2006, 27(8):861-874.</td></tr>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.metrics.roc_curve.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

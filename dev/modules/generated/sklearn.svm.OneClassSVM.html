@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.svm</span></code></a>.OneClassSVM<a class="headerlink" href="#sklearn-svm-oneclasssvm" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.svm.OneClassSVM">
-<em class="property">class </em><code class="descclassname">sklearn.svm.</code><code class="descname">OneClassSVM</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>degree=3</em>, <em>gamma='auto'</em>, <em>coef0=0.0</em>, <em>tol=0.001</em>, <em>nu=0.5</em>, <em>shrinking=True</em>, <em>cache_size=200</em>, <em>verbose=False</em>, <em>max_iter=-1</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/svm/classes.py#L971"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.svm.</code><code class="descname">OneClassSVM</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>degree=3</em>, <em>gamma='auto_deprecated'</em>, <em>coef0=0.0</em>, <em>tol=0.001</em>, <em>nu=0.5</em>, <em>shrinking=True</em>, <em>cache_size=200</em>, <em>verbose=False</em>, <em>max_iter=-1</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/svm/classes.py#L1003"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unsupervised Outlier Detection.</p>
 <p>Estimate the support of a high-dimensional distribution.</p>
 <p>The implementation is based on libsvm.</p>
@@ -233,8 +236,13 @@ Ignored by all other kernels.</p>
 </div></blockquote>
 <p><strong>gamma</strong> : float, optional (default=’auto’)</p>
 <blockquote>
-<div><p>Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’.
-If gamma is ‘auto’ then 1/n_features will be used instead.</p>
+<div><p>Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’.</p>
+<p>Current default is ‘auto’ which uses 1 / n_features,
+if <code class="docutils literal"><span class="pre">gamma='scale'</span></code> is passed then it uses 1 / (n_features * X.std())
+as value of gamma. The current default of gamma, ‘auto’, will change
+to ‘scale’ in version 0.22. ‘auto_deprecated’, a deprecated version of
+‘auto’ is used as a default indicating that no explicit value of gamma
+was passed.</p>
 </div></blockquote>
 <p><strong>coef0</strong> : float, optional (default=0.0)</p>
 <blockquote>
@@ -278,8 +286,8 @@ properly in a multithreaded context.</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="8%" />
-<col width="92%" />
+<col width="7%" />
+<col width="93%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>support_</strong></td>
@@ -297,6 +305,9 @@ properly in a multithreaded context.</p>
 <tr class="row-odd"><td><strong>intercept_</strong></td>
 <td>(array, shape = [1,]) Constant in the decision function.</td>
 </tr>
+<tr class="row-even"><td><strong>offset_</strong></td>
+<td>(float) Offset used to define the decision function from the raw scores. We have the relation: decision_function = score_samples - <a href="#id7"><span class="problematic" id="id8">offset_</span></a>. The offset is the opposite of <a href="#id9"><span class="problematic" id="id10">intercept_</span></a> and is provided for consistency with other outlier detection algorithms.</td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
@@ -312,11 +323,17 @@ properly in a multithreaded context.</p>
 <tr class="row-even"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.fit" title="sklearn.svm.OneClassSVM.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y,&nbsp;sample_weight])</td>
 <td>Detects the soft boundary of the set of samples X.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.get_params" title="sklearn.svm.OneClassSVM.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.fit_predict" title="sklearn.svm.OneClassSVM.fit_predict"><code class="xref py py-obj docutils literal"><span class="pre">fit_predict</span></code></a>(X[,&nbsp;y])</td>
+<td>Performs outlier detection on X.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.get_params" title="sklearn.svm.OneClassSVM.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
 <td>Get parameters for this estimator.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.predict" title="sklearn.svm.OneClassSVM.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.predict" title="sklearn.svm.OneClassSVM.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
 <td>Perform classification on samples in X.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.score_samples" title="sklearn.svm.OneClassSVM.score_samples"><code class="xref py py-obj docutils literal"><span class="pre">score_samples</span></code></a>(X)</td>
+<td>Raw scoring function of the samples.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#sklearn.svm.OneClassSVM.set_params" title="sklearn.svm.OneClassSVM.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(**params)</td>
 <td>Set the parameters of this estimator.</td>
@@ -325,12 +342,12 @@ properly in a multithreaded context.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.svm.OneClassSVM.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>degree=3</em>, <em>gamma='auto'</em>, <em>coef0=0.0</em>, <em>tol=0.001</em>, <em>nu=0.5</em>, <em>shrinking=True</em>, <em>cache_size=200</em>, <em>verbose=False</em>, <em>max_iter=-1</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/svm/classes.py#L1053"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>degree=3</em>, <em>gamma='auto_deprecated'</em>, <em>coef0=0.0</em>, <em>tol=0.001</em>, <em>nu=0.5</em>, <em>shrinking=True</em>, <em>cache_size=200</em>, <em>verbose=False</em>, <em>max_iter=-1</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/svm/classes.py#L1100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.svm.OneClassSVM.decision_function">
-<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/svm/classes.py#L1095"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.decision_function" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/svm/classes.py#L1142"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.decision_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signed distance to the separating hyperplane.</p>
 <p>Signed distance is positive for an inlier and negative for an outlier.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -340,7 +357,7 @@ properly in a multithreaded context.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples, n_features)</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples,)</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dec</strong> : array-like, shape (n_samples,)</p>
 <blockquote class="last">
 <div><p>Returns the decision function of the samples.</p>
 </div></blockquote>
@@ -352,7 +369,7 @@ properly in a multithreaded context.</p>
 
 <dl class="method">
 <dt id="sklearn.svm.OneClassSVM.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>sample_weight=None</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/svm/classes.py#L1062"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>sample_weight=None</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/svm/classes.py#L1109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detects the soft boundary of the set of samples X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -370,10 +387,7 @@ force the classifier to put more emphasis on these points.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self</strong> : object</p>
-<blockquote class="last">
-<div><p>Returns self.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> : object</p>
 </td>
 </tr>
 </tbody>
@@ -383,8 +397,33 @@ force the classifier to put more emphasis on these points.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sklearn.svm.OneClassSVM.fit_predict">
+<code class="descname">fit_predict</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L534"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.fit_predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs outlier detection on X.</p>
+<p>Returns -1 for outliers and 1 for inliers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : ndarray, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y</strong> : ndarray, shape (n_samples,)</p>
+<blockquote class="last">
+<div><p>1 for inliers, -1 for outliers.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="sklearn.svm.OneClassSVM.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -409,7 +448,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.svm.OneClassSVM.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/svm/classes.py#L1112"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/svm/classes.py#L1173"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform classification on samples in X.</p>
 <p>For an one-class model, +1 or -1 is returned.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -434,8 +473,29 @@ contained subobjects that are estimators.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sklearn.svm.OneClassSVM.score_samples">
+<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/svm/classes.py#L1159"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.score_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw scoring function of the samples.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples, n_features)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score_samples</strong> : array-like, shape (n_samples,)</p>
+<blockquote class="last">
+<div><p>Returns the (unshifted) scoring function of the samples.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="sklearn.svm.OneClassSVM.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.OneClassSVM.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -491,7 +551,7 @@ component of a nested object.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.svm.OneClassSVM.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

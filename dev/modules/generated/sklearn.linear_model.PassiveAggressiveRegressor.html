@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.PassiveAggressiveRegressor<a class="headerlink" href="#sklearn-linear-model-passiveaggressiveregressor" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor">
-<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">PassiveAggressiveRegressor</code><span class="sig-paren">(</span><em>C=1.0</em>, <em>fit_intercept=True</em>, <em>max_iter=None</em>, <em>tol=None</em>, <em>shuffle=True</em>, <em>verbose=0</em>, <em>loss='epsilon_insensitive'</em>, <em>epsilon=0.1</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>average=False</em>, <em>n_iter=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/passive_aggressive.py#L228"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">PassiveAggressiveRegressor</code><span class="sig-paren">(</span><em>C=1.0</em>, <em>fit_intercept=True</em>, <em>max_iter=None</em>, <em>tol=None</em>, <em>shuffle=True</em>, <em>verbose=0</em>, <em>loss='epsilon_insensitive'</em>, <em>epsilon=0.1</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>average=False</em>, <em>n_iter=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/passive_aggressive.py#L233"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Passive Aggressive Regressor</p>
 <p>Read more in the <a class="reference internal" href="../linear_model.html#passive-aggressive"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -265,7 +268,11 @@ instance used by <cite>np.random</cite>.</p>
 <p><strong>warm_start</strong> : bool, optional</p>
 <blockquote>
 <div><p>When set to True, reuse the solution of the previous call to fit as
-initialization, otherwise, just erase the previous solution.</p>
+initialization, otherwise, just erase the previous solution.
+See <a class="reference internal" href="../../glossary.html#term-warm-start"><span class="xref std std-term">the Glossary</span></a>.</p>
+<p>Repeatedly calling fit or partial_fit when warm_start is True can
+result in a different solution than when calling fit a single time
+because of the way the data is shuffled.</p>
 </div></blockquote>
 <p><strong>average</strong> : bool or int, optional</p>
 <blockquote>
@@ -327,7 +334,7 @@ K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR (2006)</p>
 <span class="go">              max_iter=None, n_iter=None, random_state=0, shuffle=True,</span>
 <span class="go">              tol=None, verbose=0, warm_start=False)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="go">[ 20.48736655  34.18818427  67.59122734  87.94731329]</span>
+<span class="go">[20.48736655 34.18818427 67.59122734 87.94731329]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
 <span class="go">[-0.02306214]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>
@@ -369,12 +376,12 @@ K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR (2006)</p>
 </table>
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>C=1.0</em>, <em>fit_intercept=True</em>, <em>max_iter=None</em>, <em>tol=None</em>, <em>shuffle=True</em>, <em>verbose=0</em>, <em>loss='epsilon_insensitive'</em>, <em>epsilon=0.1</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>average=False</em>, <em>n_iter=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/passive_aggressive.py#L344"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>C=1.0</em>, <em>fit_intercept=True</em>, <em>max_iter=None</em>, <em>tol=None</em>, <em>shuffle=True</em>, <em>verbose=0</em>, <em>loss='epsilon_insensitive'</em>, <em>epsilon=0.1</em>, <em>random_state=None</em>, <em>warm_start=False</em>, <em>average=False</em>, <em>n_iter=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/passive_aggressive.py#L354"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.densify">
-<code class="descname">densify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.densify" title="Permalink to this definition">¶</a></dt>
+<code class="descname">densify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.densify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert coefficient matrix to dense array format.</p>
 <p>Converts the <code class="docutils literal"><span class="pre">coef_</span></code> member (back) to a numpy.ndarray. This is the
 default format of <code class="docutils literal"><span class="pre">coef_</span></code> and is required for fitting, so calling
@@ -392,7 +399,7 @@ sparsified; otherwise, it is a no-op.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>coef_init=None</em>, <em>intercept_init=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/passive_aggressive.py#L388"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>coef_init=None</em>, <em>intercept_init=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/passive_aggressive.py#L398"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit linear model with Passive Aggressive algorithm.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -425,7 +432,7 @@ sparsified; otherwise, it is a no-op.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -450,7 +457,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.partial_fit">
-<code class="descname">partial_fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/passive_aggressive.py#L365"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.partial_fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">partial_fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/passive_aggressive.py#L375"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.partial_fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit linear model with Passive Aggressive algorithm.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -475,7 +482,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/stochastic_gradient.py#L1080"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/stochastic_gradient.py#L1090"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict using the linear model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -496,7 +503,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L343"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/base.py#L343"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
 <p>The coefficient R^2 is defined as (1 - u/v), where u is the residual
 sum of squares ((y_true - y_pred) ** 2).sum() and v is the total
@@ -511,7 +518,10 @@ would get a R^2 score of 0.0.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = (n_samples, n_features)</p>
 <blockquote>
-<div><p>Test samples.</p>
+<div><p>Test samples. For some estimators this may be a
+precomputed kernel matrix instead, shape = (n_samples,
+n_samples_fitted], where n_samples_fitted is the number of
+samples used in the fitting for the estimator.</p>
 </div></blockquote>
 <p><strong>y</strong> : array-like, shape = (n_samples) or (n_samples, n_outputs)</p>
 <blockquote>
@@ -535,7 +545,7 @@ would get a R^2 score of 0.0.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.PassiveAggressiveRegressor.sparsify">
-<code class="descname">sparsify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/base.py#L375"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.sparsify" title="Permalink to this definition">¶</a></dt>
+<code class="descname">sparsify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/base.py#L375"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.PassiveAggressiveRegressor.sparsify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert coefficient matrix to sparse format.</p>
 <p>Converts the <code class="docutils literal"><span class="pre">coef_</span></code> member to a scipy.sparse matrix, which for
 L1-regularized models can be much more memory- and storage-efficient
@@ -572,7 +582,7 @@ method (if any) will not work until you call densify.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

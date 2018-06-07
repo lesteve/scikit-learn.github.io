@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,16 +205,19 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.make_blobs<a class="headerlink" href="#sklearn-datasets-make-blobs" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.datasets.make_blobs">
-<code class="descclassname">sklearn.datasets.</code><code class="descname">make_blobs</code><span class="sig-paren">(</span><em>n_samples=100</em>, <em>n_features=2</em>, <em>centers=3</em>, <em>cluster_std=1.0</em>, <em>center_box=(-10.0</em>, <em>10.0)</em>, <em>shuffle=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/datasets/samples_generator.py#L699"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.make_blobs" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.datasets.</code><code class="descname">make_blobs</code><span class="sig-paren">(</span><em>n_samples=100</em>, <em>n_features=2</em>, <em>centers=None</em>, <em>cluster_std=1.0</em>, <em>center_box=(-10.0</em>, <em>10.0)</em>, <em>shuffle=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/datasets/samples_generator.py#L699"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.make_blobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate isotropic Gaussian blobs for clustering.</p>
 <p>Read more in the <a class="reference internal" href="../../datasets/index.html#sample-generators"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_samples</strong> : int, optional (default=100)</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_samples</strong> : int or array-like, optional (default=100)</p>
 <blockquote>
-<div><p>The total number of points equally divided among clusters.</p>
+<div><p>If int, it is the total number of points equally divided among
+clusters.
+If array-like, each element of the sequence indicates
+the number of samples per cluster.</p>
 </div></blockquote>
 <p><strong>n_features</strong> : int, optional (default=2)</p>
 <blockquote>
@@ -219,8 +225,11 @@
 </div></blockquote>
 <p><strong>centers</strong> : int or array of shape [n_centers, n_features], optional</p>
 <blockquote>
-<div><p>(default=3)
-The number of centers to generate, or the fixed center locations.</p>
+<div><p>(default=None)
+The number of centers to generate, or the fixed center locations.
+If n_samples is an int and centers is None, 3 centers are generated.
+If n_samples is array-like, centers must be
+either None or an array of length equal to the length of n_samples.</p>
 </div></blockquote>
 <p><strong>cluster_std</strong> : float or sequence of floats, optional (default=1.0)</p>
 <blockquote>
@@ -235,12 +244,11 @@ generated at random.</p>
 <blockquote>
 <div><p>Shuffle the samples.</p>
 </div></blockquote>
-<p><strong>random_state</strong> : int, RandomState instance or None, optional (default=None)</p>
+<p><strong>random_state</strong> : int, RandomState instance or None (default)</p>
 <blockquote>
-<div><p>If int, random_state is the seed used by the random number generator;
-If RandomState instance, random_state is the random number generator;
-If None, the random number generator is the RandomState instance used
-by <cite>np.random</cite>.</p>
+<div><p>Determines random number generation for dataset creation. Pass an int
+for reproducible output across multiple function calls.
+See <a class="reference internal" href="../../glossary.html#term-random-state"><span class="xref std std-term">Glossary</span></a>.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -271,6 +279,12 @@ by <cite>np.random</cite>.</p>
 <span class="go">(10, 2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
 <span class="go">array([0, 0, 1, 0, 2, 2, 2, 1, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">centers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(10, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([0, 1, 2, 0, 2, 2, 2, 1, 1, 0])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -317,29 +331,37 @@ by <cite>np.random</cite>.</p>
 <img alt="../../_images/sphx_glr_plot_mini_batch_kmeans_thumb.png" src="../../_images/sphx_glr_plot_mini_batch_kmeans_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_mini_batch_kmeans.html#sphx-glr-auto-examples-cluster-plot-mini-batch-kmeans-py"><span class="std std-ref">Comparison of the K-Means and MiniBatchKMeans clustering algorithms</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Silhouette analysis can be used to study the separation distance between the resulting clusters..."><div class="figure" id="id11">
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows characteristics of different linkage methods for hierarchical clustering on ..."><div class="figure" id="id11">
+<img alt="../../_images/sphx_glr_plot_linkage_comparison_thumb.png" src="../../_images/sphx_glr_plot_linkage_comparison_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_linkage_comparison.html#sphx-glr-auto-examples-cluster-plot-linkage-comparison-py"><span class="std std-ref">Comparing different hierarchical linkage methods on toy datasets</span></a></span></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Silhouette analysis can be used to study the separation distance between the resulting clusters..."><div class="figure" id="id12">
 <img alt="../../_images/sphx_glr_plot_kmeans_silhouette_analysis_thumb.png" src="../../_images/sphx_glr_plot_kmeans_silhouette_analysis_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_kmeans_silhouette_analysis.html#sphx-glr-auto-examples-cluster-plot-kmeans-silhouette-analysis-py"><span class="std std-ref">Selecting the number of clusters with silhouette analysis on KMeans clustering</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows characteristics of different clustering algorithms on datasets that are &quot;int..."><div class="figure" id="id12">
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows characteristics of different clustering algorithms on datasets that are &quot;int..."><div class="figure" id="id13">
 <img alt="../../_images/sphx_glr_plot_cluster_comparison_thumb.png" src="../../_images/sphx_glr_plot_cluster_comparison_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_cluster_comparison.html#sphx-glr-auto-examples-cluster-plot-cluster-comparison-py"><span class="std std-ref">Comparing different clustering algorithms on toy datasets</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Plot several randomly generated 2D classification datasets. This example illustrates the :func:..."><div class="figure" id="id13">
+</div><div class="sphx-glr-thumbcontainer" tooltip="Plot several randomly generated 2D classification datasets. This example illustrates the :func:..."><div class="figure" id="id14">
 <img alt="../../_images/sphx_glr_plot_random_dataset_thumb.png" src="../../_images/sphx_glr_plot_random_dataset_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/datasets/plot_random_dataset.html#sphx-glr-auto-examples-datasets-plot-random-dataset-py"><span class="std std-ref">Plot randomly generated classification dataset</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Plot the maximum margin separating hyperplane within a two-class separable dataset using a line..."><div class="figure" id="id14">
+</div><div class="sphx-glr-thumbcontainer" tooltip="Plot the maximum margin separating hyperplane within a two-class separable dataset using a line..."><div class="figure" id="id15">
 <img alt="../../_images/sphx_glr_plot_sgd_separating_hyperplane_thumb.png" src="../../_images/sphx_glr_plot_sgd_separating_hyperplane_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_sgd_separating_hyperplane.html#sphx-glr-auto-examples-linear-model-plot-sgd-separating-hyperplane-py"><span class="std std-ref">SGD: Maximum margin separating hyperplane</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Plot decision surface of multinomial and One-vs-Rest Logistic Regression. The hyperplanes corre..."><div class="figure" id="id15">
+</div><div class="sphx-glr-thumbcontainer" tooltip="Plot decision surface of multinomial and One-vs-Rest Logistic Regression. The hyperplanes corre..."><div class="figure" id="id16">
 <img alt="../../_images/sphx_glr_plot_logistic_multinomial_thumb.png" src="../../_images/sphx_glr_plot_logistic_multinomial_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_logistic_multinomial.html#sphx-glr-auto-examples-linear-model-plot-logistic-multinomial-py"><span class="std std-ref">Plot multinomial and One-vs-Rest Logistic Regression</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Plot the maximum margin separating hyperplane within a two-class separable dataset using a Supp..."><div class="figure" id="id16">
+</div><div class="sphx-glr-thumbcontainer" tooltip="Plot the maximum margin separating hyperplane within a two-class separable dataset using a Supp..."><div class="figure" id="id17">
 <img alt="../../_images/sphx_glr_plot_separating_hyperplane_thumb.png" src="../../_images/sphx_glr_plot_separating_hyperplane_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/svm/plot_separating_hyperplane.html#sphx-glr-auto-examples-svm-plot-separating-hyperplane-py"><span class="std std-ref">SVM: Maximum margin separating hyperplane</span></a></span></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Find the optimal separating hyperplane using an SVC for classes that are unbalanced."><div class="figure" id="id18">
+<img alt="../../_images/sphx_glr_plot_separating_hyperplane_unbalanced_thumb.png" src="../../_images/sphx_glr_plot_separating_hyperplane_unbalanced_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#sphx-glr-auto-examples-svm-plot-separating-hyperplane-unbalanced-py"><span class="std std-ref">SVM: Separating hyperplane for unbalanced classes</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>
@@ -353,7 +375,7 @@ by <cite>np.random</cite>.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.datasets.make_blobs.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

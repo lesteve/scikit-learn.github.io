@@ -30,10 +30,12 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="sklearn.preprocessing.QuantileTransformer" href="sklearn.preprocessing.QuantileTransformer.html" />
+    <link rel="next" title="sklearn.preprocessing.PowerTransformer" href="sklearn.preprocessing.PowerTransformer.html" />
     <link rel="prev" title="sklearn.preprocessing.CategoricalEncoder" href="sklearn.preprocessing.CategoricalEncoder.html" />
   
   
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -142,14 +145,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="sklearn.preprocessing.QuantileTransformer.html"
+        <a href="sklearn.preprocessing.PowerTransformer.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
         sklearn.prepr...
         </span>
             <span class="hiddenrellink">
-            sklearn.preprocessing.QuantileTransformer
+            sklearn.preprocessing.PowerTransformer
             </span>
         </a>
         </div>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.PolynomialFeatures<a class="headerlink" href="#sklearn-preprocessing-polynomialfeatures" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.preprocessing.PolynomialFeatures">
-<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">PolynomialFeatures</code><span class="sig-paren">(</span><em>degree=2</em>, <em>interaction_only=False</em>, <em>include_bias=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1196"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">PolynomialFeatures</code><span class="sig-paren">(</span><em>degree=2</em>, <em>interaction_only=False</em>, <em>include_bias=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1209"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate polynomial and interaction features.</p>
 <p>Generate a new feature matrix consisting of all polynomial combinations
 of the features with degree less than or equal to the specified degree.
@@ -263,14 +266,14 @@ exponentially in the degree. High degrees can cause overfitting.</p>
 <span class="go">       [4, 5]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="go">array([[  1.,   0.,   1.,   0.,   0.,   1.],</span>
-<span class="go">       [  1.,   2.,   3.,   4.,   6.,   9.],</span>
-<span class="go">       [  1.,   4.,   5.,  16.,  20.,  25.]])</span>
+<span class="go">array([[ 1.,  0.,  1.,  0.,  0.,  1.],</span>
+<span class="go">       [ 1.,  2.,  3.,  4.,  6.,  9.],</span>
+<span class="go">       [ 1.,  4.,  5., 16., 20., 25.]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">interaction_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="go">array([[  1.,   0.,   1.,   0.],</span>
-<span class="go">       [  1.,   2.,   3.,   6.],</span>
-<span class="go">       [  1.,   4.,   5.,  20.]])</span>
+<span class="go">array([[ 1.,  0.,  1.,  0.],</span>
+<span class="go">       [ 1.,  2.,  3.,  6.],</span>
+<span class="go">       [ 1.,  4.,  5., 20.]])</span>
 </pre></div>
 </div>
 <p class="rubric">Methods</p>
@@ -302,12 +305,12 @@ exponentially in the degree. High degrees can cause overfitting.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.preprocessing.PolynomialFeatures.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>degree=2</em>, <em>interaction_only=False</em>, <em>include_bias=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1259"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>degree=2</em>, <em>interaction_only=False</em>, <em>include_bias=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1272"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.PolynomialFeatures.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1311"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1324"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute number of output features.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -328,7 +331,7 @@ exponentially in the degree. High degrees can cause overfitting.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.PolynomialFeatures.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L479"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L482"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit to data, then transform it.</p>
 <p>Fits transformer to X and y with optional parameters fit_params
 and returns a transformed version of X.</p>
@@ -358,7 +361,7 @@ and returns a transformed version of X.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.PolynomialFeatures.get_feature_names">
-<code class="descname">get_feature_names</code><span class="sig-paren">(</span><em>input_features=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1281"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.get_feature_names" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_feature_names</code><span class="sig-paren">(</span><em>input_features=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1294"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.get_feature_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return feature names for output features</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -380,7 +383,7 @@ and returns a transformed version of X.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.PolynomialFeatures.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -405,7 +408,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.PolynomialFeatures.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -423,19 +426,20 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.PolynomialFeatures.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1333"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1346"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.PolynomialFeatures.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform data to polynomial features</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape [n_samples, n_features]</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape [n_samples, n_features]</p>
 <blockquote>
-<div><p>The data to transform, row by row.</p>
+<div><p>The data to transform, row by row.
+Sparse input should preferably be in CSC format.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>XP</strong> : np.ndarray shape [n_samples, NP]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>XP</strong> : np.ndarray or CSC sparse matrix, shape [n_samples, NP]</p>
 <blockquote class="last">
 <div><p>The matrix of features, where NP is the number of polynomial
 features generated from the combination of inputs.</p>
@@ -474,7 +478,7 @@ features generated from the combination of inputs.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.preprocessing.PolynomialFeatures.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
@@ -484,7 +488,7 @@ features generated from the combination of inputs.</p>
       </a>
     </div>
     <div class="buttonNext">
-      <a href="sklearn.preprocessing.QuantileTransformer.html">Next
+      <a href="sklearn.preprocessing.PowerTransformer.html">Next
       </a>
     </div>
     

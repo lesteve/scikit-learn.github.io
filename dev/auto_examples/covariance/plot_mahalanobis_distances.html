@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -195,17 +198,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="robust-covariance-estimation-and-mahalanobis-distances-relevance">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-covariance-plot-mahalanobis-distances-py"><span class="std std-ref">here</span></a> to download the full example code or run this example in your browser via Binder</p>
+</div>
+<div class="sphx-glr-example-title section" id="robust-covariance-estimation-and-mahalanobis-distances-relevance">
 <span id="sphx-glr-auto-examples-covariance-plot-mahalanobis-distances-py"></span><h1>Robust covariance estimation and Mahalanobis distances relevance<a class="headerlink" href="#robust-covariance-estimation-and-mahalanobis-distances-relevance" title="Permalink to this headline">¶</a></h1>
 <p>An example to show covariance estimation with the Mahalanobis
 distances on Gaussian distributed data.</p>
 <p>For Gaussian distributed data, the distance of an observation
-<img class="math" src="../../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/> to the mode of the distribution can be computed using its
-Mahalanobis distance: <img class="math" src="../../_images/math/b302a53905222981fe58c3519e01434e5e2315e5.png" alt="d_{(\mu,\Sigma)}(x_i)^2 = (x_i -
-\mu)'\Sigma^{-1}(x_i - \mu)"/> where <img class="math" src="../../_images/math/d79e8a2c7ce54906c2b25549da38bdbe02cf40d6.png" alt="\mu"/> and <img class="math" src="../../_images/math/7b887ca4d449002abecf59a472644a272dfcb605.png" alt="\Sigma"/> are
+<span class="math">\(x_i\)</span> to the mode of the distribution can be computed using its
+Mahalanobis distance: <span class="math">\(d_{(\mu,\Sigma)}(x_i)^2 = (x_i -
+\mu)'\Sigma^{-1}(x_i - \mu)\)</span> where <span class="math">\(\mu\)</span> and <span class="math">\(\Sigma\)</span> are
 the location and the covariance of the underlying Gaussian
 distribution.</p>
-<p>In practice, <img class="math" src="../../_images/math/d79e8a2c7ce54906c2b25549da38bdbe02cf40d6.png" alt="\mu"/> and <img class="math" src="../../_images/math/7b887ca4d449002abecf59a472644a272dfcb605.png" alt="\Sigma"/> are replaced by some
+<p>In practice, <span class="math">\(\mu\)</span> and <span class="math">\(\Sigma\)</span> are replaced by some
 estimates.  The usual covariance maximum likelihood estimate is very
 sensitive to the presence of outliers in the data set and therefor,
 the corresponding Mahalanobis distances are. One would better have to
@@ -216,9 +223,9 @@ organisation of the observations.</p>
 <p>The Minimum Covariance Determinant estimator is a robust,
 high-breakdown point (i.e. it can be used to estimate the covariance
 matrix of highly contaminated datasets, up to
-<img class="math" src="../../_images/math/4c8e3b4efc10669b846b2e774aba38a9e7bbcfa7.png" alt="\frac{n_\text{samples}-n_\text{features}-1}{2}"/> outliers)
+<span class="math">\(\frac{n_\text{samples}-n_\text{features}-1}{2}\)</span> outliers)
 estimator of covariance. The idea is to find
-<img class="math" src="../../_images/math/c849d547886f97698a03631dd630940d18aaf45d.png" alt="\frac{n_\text{samples}+n_\text{features}+1}{2}"/>
+<span class="math">\(\frac{n_\text{samples}+n_\text{features}+1}{2}\)</span>
 observations whose empirical covariance has the smallest determinant,
 yielding a “pure” subset of observations from which to compute
 standards estimates of location and covariance.</p>
@@ -240,7 +247,7 @@ are represented in the boxplot, as Wilson and Hilferty suggest [2]</p>
 <dd>Proceedings of the National Academy of Sciences of the United States
 of America, 17, 684-688.</dd>
 </dl>
-<img alt="../../_images/sphx_glr_plot_mahalanobis_distances_001.png" class="align-center" src="../../_images/sphx_glr_plot_mahalanobis_distances_001.png" />
+<img alt="../../_images/sphx_glr_plot_mahalanobis_distances_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_mahalanobis_distances_001.png" />
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -333,8 +340,11 @@ of America, 17, 684-688.</dd>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.158 seconds)</p>
-<div class="sphx-glr-footer docutils container">
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.140 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-covariance-plot-mahalanobis-distances-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/covariance/plot_mahalanobis_distances.ipynb"><img alt="https://static.mybinder.org/badge.svg" src="https://static.mybinder.org/badge.svg" width="150px" /></a>
+</div>
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_mahalanobis_distances.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_mahalanobis_distances.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
@@ -352,7 +362,7 @@ of America, 17, 684-688.</dd>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/auto_examples/covariance/plot_mahalanobis_distances.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

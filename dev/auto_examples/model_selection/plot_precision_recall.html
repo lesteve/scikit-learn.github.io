@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -210,7 +213,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="precision-recall">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-model-selection-plot-precision-recall-py"><span class="std std-ref">here</span></a> to download the full example code or run this example in your browser via Binder</p>
+</div>
+<div class="sphx-glr-example-title section" id="precision-recall">
 <span id="sphx-glr-auto-examples-model-selection-plot-precision-recall-py"></span><h1>Precision-Recall<a class="headerlink" href="#precision-recall" title="Permalink to this headline">¶</a></h1>
 <p>Example of Precision-Recall metric to evaluate classifier output quality.</p>
 <p>Precision-Recall is a useful measure of success of prediction when the
@@ -230,25 +237,25 @@ system with high precision but low recall is just the opposite, returning very
 few results, but most of its predicted labels are correct when compared to the
 training labels. An ideal system with high precision and high recall will
 return many results, with all results labeled correctly.</p>
-<p>Precision (<img class="math" src="../../_images/math/9dcbbef8e0f76051d388013b90a95bec3069e484.png" alt="P"/>) is defined as the number of true positives (<img class="math" src="../../_images/math/d3aa1ff959d5695cfd37dc9e0bbe7da71b7b3bc4.png" alt="T_p"/>)
+<p>Precision (<span class="math">\(P\)</span>) is defined as the number of true positives (<span class="math">\(T_p\)</span>)
 over the number of true positives plus the number of false positives
-(<img class="math" src="../../_images/math/a45eb409815563f5496bf48ef224ce4cb923d210.png" alt="F_p"/>).</p>
-<p><img class="math" src="../../_images/math/4427313bbf584ad5dc95320f3fe1f8356b3c5f9f.png" alt="P = \frac{T_p}{T_p+F_p}"/></p>
-<p>Recall (<img class="math" src="../../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/>) is defined as the number of true positives (<img class="math" src="../../_images/math/d3aa1ff959d5695cfd37dc9e0bbe7da71b7b3bc4.png" alt="T_p"/>)
+(<span class="math">\(F_p\)</span>).</p>
+<p><span class="math">\(P = \frac{T_p}{T_p+F_p}\)</span></p>
+<p>Recall (<span class="math">\(R\)</span>) is defined as the number of true positives (<span class="math">\(T_p\)</span>)
 over the number of true positives plus the number of false negatives
-(<img class="math" src="../../_images/math/afd71442aee38aca1189c1f9637bd1840ae9965e.png" alt="F_n"/>).</p>
-<p><img class="math" src="../../_images/math/3bcc92cd7cbd26a3d6c6aa0b407cb9d7c89c6254.png" alt="R = \frac{T_p}{T_p + F_n}"/></p>
-<p>These quantities are also related to the (<img class="math" src="../../_images/math/8c53fbe6ce6d32b88c70c65652fbd3592a4d9048.png" alt="F_1"/>) score, which is defined
+(<span class="math">\(F_n\)</span>).</p>
+<p><span class="math">\(R = \frac{T_p}{T_p + F_n}\)</span></p>
+<p>These quantities are also related to the (<span class="math">\(F_1\)</span>) score, which is defined
 as the harmonic mean of precision and recall.</p>
-<p><img class="math" src="../../_images/math/6d03e9528e504c0801b231b90bdb480e01269ea1.png" alt="F1 = 2\frac{P \times R}{P+R}"/></p>
+<p><span class="math">\(F1 = 2\frac{P \times R}{P+R}\)</span></p>
 <p>Note that the precision may not decrease with recall. The
-definition of precision (<img class="math" src="../../_images/math/f8691f3cf6ee6642cdf86c9512293b7adffe8f89.png" alt="\frac{T_p}{T_p + F_p}"/>) shows that lowering
+definition of precision (<span class="math">\(\frac{T_p}{T_p + F_p}\)</span>) shows that lowering
 the threshold of a classifier may increase the denominator, by increasing the
 number of results returned. If the threshold was previously set too high, the
 new results may all be true positives, which will increase precision. If the
 previous threshold was about right or too low, further lowering the threshold
 will introduce false positives, decreasing precision.</p>
-<p>Recall is defined as <img class="math" src="../../_images/math/5ba03dfa4df80f4848c44aaac0ba10f8595e4f06.png" alt="\frac{T_p}{T_p+F_n}"/>, where <img class="math" src="../../_images/math/a69e1d587e3642647e53aecf4805d448bc1b9ed0.png" alt="T_p+F_n"/> does
+<p>Recall is defined as <span class="math">\(\frac{T_p}{T_p+F_n}\)</span>, where <span class="math">\(T_p+F_n\)</span> does
 not depend on the classifier threshold. This means that lowering the classifier
 threshold may increase recall, by increasing the number of true positive
 results. It is also possible that lowering the threshold may leave recall
@@ -260,9 +267,9 @@ recall.</p>
 <p><strong>Average precision</strong> (AP) summarizes such a plot as the weighted mean of
 precisions achieved at each threshold, with the increase in recall from the
 previous threshold used as the weight:</p>
-<p><img class="math" src="../../_images/math/55a3b96113273e4a25048306bff9411823131bff.png" alt="\text{AP} = \sum_n (R_n - R_{n-1}) P_n"/></p>
-<p>where <img class="math" src="../../_images/math/1e5d2a8a15728214cc4ddf4013464458f398338a.png" alt="P_n"/> and <img class="math" src="../../_images/math/209d3b1de562f50026e49bca1cd2c42af83383f0.png" alt="R_n"/> are the precision and recall at the
-nth threshold. A pair <img class="math" src="../../_images/math/b3bdafad878c30dafff7bbaed0e860a43e435f4a.png" alt="(R_k, P_k)"/> is referred to as an
+<p><span class="math">\(\text{AP} = \sum_n (R_n - R_{n-1}) P_n\)</span></p>
+<p>where <span class="math">\(P_n\)</span> and <span class="math">\(R_n\)</span> are the precision and recall at the
+nth threshold. A pair <span class="math">\((R_k, P_k)\)</span> is referred to as an
 <em>operating point</em>.</p>
 <p>AP and the trapezoidal area under the operating points
 (<a class="reference internal" href="../../modules/generated/sklearn.metrics.auc.html#sklearn.metrics.auc" title="sklearn.metrics.auc"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.auc</span></code></a>) are common ways to summarize a precision-recall
@@ -326,7 +333,7 @@ matrix as a binary prediction (micro-averaging).</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Average</span> <span class="n">precision</span><span class="o">-</span><span class="n">recall</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.88</span>
+<div class="sphx-glr-script-out highlight-none"><div class="highlight"><pre><span></span>Average precision-recall score: 0.88
 </pre></div>
 </div>
 </div>
@@ -334,13 +341,17 @@ matrix as a binary prediction (micro-averaging).</p>
 <h3>Plot the Precision-Recall curve<a class="headerlink" href="#plot-the-precision-recall-curve" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">signature</span>
 
 <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.metrics.precision_recall_curve.html#sklearn.metrics.precision_recall_curve" title="View documentation for sklearn.metrics.precision_recall_curve"><span class="n">precision_recall_curve</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_score</span><span class="p">)</span>
 
+<span class="c1"># In matplotlib &lt; 1.5, plt.fill_between does not have a &#39;step&#39; argument</span>
+<span class="n">step_kwargs</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;post&#39;</span><span class="p">}</span>
+               <span class="k">if</span> <span class="s1">&#39;step&#39;</span> <span class="ow">in</span> <span class="n">signature</span><span class="p">(</span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.fill_between.html#matplotlib.pyplot.fill_between" title="View documentation for matplotlib.pyplot.fill_between"><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span></a><span class="p">)</span><span class="o">.</span><span class="n">parameters</span>
+               <span class="k">else</span> <span class="p">{})</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.step.html#matplotlib.pyplot.step" title="View documentation for matplotlib.pyplot.step"><span class="n">plt</span><span class="o">.</span><span class="n">step</span></a><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
          <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
-<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.fill_between.html#matplotlib.pyplot.fill_between" title="View documentation for matplotlib.pyplot.fill_between"><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span></a><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.fill_between.html#matplotlib.pyplot.fill_between" title="View documentation for matplotlib.pyplot.fill_between"><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span></a><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">step_kwargs</span><span class="p">)</span>
 
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlabel.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylabel.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
@@ -350,7 +361,7 @@ matrix as a binary prediction (micro-averaging).</p>
           <span class="n">average_precision</span><span class="p">))</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_precision_recall_001.png" class="align-center" src="../../_images/sphx_glr_plot_precision_recall_001.png" />
+<img alt="../../_images/sphx_glr_plot_precision_recall_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_precision_recall_001.png" />
 </div>
 </div>
 <div class="section" id="in-multi-label-settings">
@@ -403,7 +414,7 @@ multi-label settings</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Average</span> <span class="n">precision</span> <span class="n">score</span><span class="p">,</span> <span class="n">micro</span><span class="o">-</span><span class="n">averaged</span> <span class="n">over</span> <span class="nb">all</span> <span class="n">classes</span><span class="p">:</span> <span class="mf">0.43</span>
+<div class="sphx-glr-script-out highlight-none"><div class="highlight"><pre><span></span>Average precision score, micro-averaged over all classes: 0.43
 </pre></div>
 </div>
 </div>
@@ -412,8 +423,8 @@ multi-label settings</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.step.html#matplotlib.pyplot.step" title="View documentation for matplotlib.pyplot.step"><span class="n">plt</span><span class="o">.</span><span class="n">step</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="s1">&#39;micro&#39;</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="s1">&#39;micro&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
          <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
-<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.fill_between.html#matplotlib.pyplot.fill_between" title="View documentation for matplotlib.pyplot.fill_between"><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.fill_between.html#matplotlib.pyplot.fill_between" title="View documentation for matplotlib.pyplot.fill_between"><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span></a><span class="p">(</span><span class="n">recall</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">step_kwargs</span><span class="p">)</span>
 
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlabel.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylabel.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
@@ -424,7 +435,7 @@ multi-label settings</p>
     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">average_precision</span><span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">]))</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_precision_recall_002.png" class="align-center" src="../../_images/sphx_glr_plot_precision_recall_002.png" />
+<img alt="../../_images/sphx_glr_plot_precision_recall_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_precision_recall_002.png" />
 </div>
 <div class="section" id="plot-precision-recall-curve-for-each-class-and-iso-f1-curves">
 <h3>Plot Precision-Recall curve for each class and iso-f1 curves<a class="headerlink" href="#plot-precision-recall-curve-for-each-class-and-iso-f1-curves" title="Permalink to this headline">¶</a></h3>
@@ -468,9 +479,12 @@ multi-label settings</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_precision_recall_003.png" class="align-center" src="../../_images/sphx_glr_plot_precision_recall_003.png" />
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.132 seconds)</p>
-<div class="sphx-glr-footer docutils container">
+<img alt="../../_images/sphx_glr_plot_precision_recall_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_precision_recall_003.png" />
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.088 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-model-selection-plot-precision-recall-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/model_selection/plot_precision_recall.ipynb"><img alt="https://static.mybinder.org/badge.svg" src="https://static.mybinder.org/badge.svg" width="150px" /></a>
+</div>
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../../_downloads/plot_precision_recall.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_precision_recall.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
@@ -490,7 +504,7 @@ multi-label settings</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/auto_examples/model_selection/plot_precision_recall.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -177,7 +180,10 @@
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.preprocessing</span></code>.quantile_transform</a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.preprocessing</span></code>.quantile_transform</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-preprocessing-quantile-transform">Examples using <code class="docutils literal"><span class="pre">sklearn.preprocessing.quantile_transform</span></code></a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -199,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.quantile_transform<a class="headerlink" href="#sklearn-preprocessing-quantile-transform" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.preprocessing.quantile_transform">
-<code class="descclassname">sklearn.preprocessing.</code><code class="descname">quantile_transform</code><span class="sig-paren">(</span><em>X</em>, <em>axis=0</em>, <em>n_quantiles=1000</em>, <em>output_distribution='uniform'</em>, <em>ignore_implicit_zeros=False</em>, <em>subsample=100000</em>, <em>random_state=None</em>, <em>copy=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L2472"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.quantile_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.preprocessing.</code><code class="descname">quantile_transform</code><span class="sig-paren">(</span><em>X</em>, <em>axis=0</em>, <em>n_quantiles=1000</em>, <em>output_distribution='uniform'</em>, <em>ignore_implicit_zeros=False</em>, <em>subsample=100000</em>, <em>random_state=None</em>, <em>copy=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L2508"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.quantile_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform features using quantiles information.</p>
 <p>This method transforms the features to follow a uniform or a normal
 distribution. Therefore, for a given feature, this transformation tends
@@ -285,13 +291,17 @@ input is already a numpy array).</p>
 <dl class="last docutils">
 <dt><a class="reference internal" href="sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-obj docutils literal"><span class="pre">QuantileTransformer</span></code></a></dt>
 <dd>Performs quantile-based scaling using the <code class="docutils literal"><span class="pre">Transformer</span></code> API (e.g. as part of a preprocessing <a class="reference internal" href="sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">sklearn.pipeline.Pipeline</span></code></a>).</dd>
+<dt><a class="reference internal" href="sklearn.preprocessing.power_transform.html#sklearn.preprocessing.power_transform" title="sklearn.preprocessing.power_transform"><code class="xref py py-obj docutils literal"><span class="pre">power_transform</span></code></a></dt>
+<dd>Maps data to a normal distribution using a power transformation.</dd>
 <dt><a class="reference internal" href="sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-obj docutils literal"><span class="pre">scale</span></code></a></dt>
-<dd>perform standardization that is faster, but less robust to outliers.</dd>
+<dd>Performs standardization that is faster, but less robust to outliers.</dd>
 <dt><a class="reference internal" href="sklearn.preprocessing.robust_scale.html#sklearn.preprocessing.robust_scale" title="sklearn.preprocessing.robust_scale"><code class="xref py py-obj docutils literal"><span class="pre">robust_scale</span></code></a></dt>
-<dd>perform robust standardization that removes the influence of outliers but does not put outliers and inliers on the same scale.</dd>
+<dd>Performs robust standardization that removes the influence of outliers but does not put outliers and inliers on the same scale.</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
+<p>NaNs are treated as missing values: disregarded in fit, and maintained in
+transform.</p>
 <p>For a comparison of the different scalers, transformers, and normalizers,
 see <a class="reference internal" href="../../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">examples/preprocessing/plot_all_scaling.py</span></a>.</p>
 <p class="rubric">Examples</p>
@@ -306,7 +316,14 @@ see <a class="reference internal" href="../../auto_examples/preprocessing/plot_a
 </div>
 </dd></dl>
 
-<div class="clearer"></div></div>
+<div class="section" id="examples-using-sklearn-preprocessing-quantile-transform">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.preprocessing.quantile_transform</span></code><a class="headerlink" href="#examples-using-sklearn-preprocessing-quantile-transform" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="In this example, we give an overview of the :class:`sklearn.compose.TransformedTargetRegressor`..."><div class="figure" id="id1">
+<img alt="../../_images/sphx_glr_plot_transformed_target_thumb.png" src="../../_images/sphx_glr_plot_transformed_target_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_transformed_target.html#sphx-glr-auto-examples-preprocessing-plot-transformed-target-py"><span class="std std-ref">Effect of transforming the targets in regression model</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
 
 
           </div>
@@ -317,7 +334,7 @@ see <a class="reference internal" href="../../auto_examples/preprocessing/plot_a
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.preprocessing.quantile_transform.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

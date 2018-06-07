@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
-    <title>4.6. Kernel Approximation &#8212; scikit-learn 0.20.dev0 documentation</title>
+    <title>4.7. Kernel Approximation &#8212; scikit-learn 0.20.dev0 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4.7. Pairwise metrics, Affinities and Kernels" href="metrics.html" />
-    <link rel="prev" title="4.5. Random Projection" href="random_projection.html" />
+    <link rel="next" title="4.8. Pairwise metrics, Affinities and Kernels" href="metrics.html" />
+    <link rel="prev" title="4.6. Random Projection" href="random_projection.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -131,10 +134,10 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        4.5. Random P...
+        4.6. Random P...
         </span>
             <span class="hiddenrellink">
-            4.5. Random Projection
+            4.6. Random Projection
             </span>
         </a>
         </div>
@@ -146,10 +149,10 @@
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        4.7. Pairwise...
+        4.8. Pairwise...
         </span>
             <span class="hiddenrellink">
-            4.7. Pairwise metrics, Affinities and Kernels
+            4.8. Pairwise metrics, Affinities and Kernels
             </span>
         </a>
         </div>
@@ -177,12 +180,12 @@
       <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
-<li><a class="reference internal" href="#">4.6. Kernel Approximation</a><ul>
-<li><a class="reference internal" href="#nystroem-method-for-kernel-approximation">4.6.1. Nystroem Method for Kernel Approximation</a></li>
-<li><a class="reference internal" href="#radial-basis-function-kernel">4.6.2. Radial Basis Function Kernel</a></li>
-<li><a class="reference internal" href="#additive-chi-squared-kernel">4.6.3. Additive Chi Squared Kernel</a></li>
-<li><a class="reference internal" href="#skewed-chi-squared-kernel">4.6.4. Skewed Chi Squared Kernel</a></li>
-<li><a class="reference internal" href="#mathematical-details">4.6.5. Mathematical Details</a></li>
+<li><a class="reference internal" href="#">4.7. Kernel Approximation</a><ul>
+<li><a class="reference internal" href="#nystroem-method-for-kernel-approximation">4.7.1. Nystroem Method for Kernel Approximation</a></li>
+<li><a class="reference internal" href="#radial-basis-function-kernel">4.7.2. Radial Basis Function Kernel</a></li>
+<li><a class="reference internal" href="#additive-chi-squared-kernel">4.7.3. Additive Chi Squared Kernel</a></li>
+<li><a class="reference internal" href="#skewed-chi-squared-kernel">4.7.4. Skewed Chi Squared Kernel</a></li>
+<li><a class="reference internal" href="#mathematical-details">4.7.5. Mathematical Details</a></li>
 </ul>
 </li>
 </ul>
@@ -203,7 +206,7 @@
           <div class="body" role="main">
             
   <div class="section" id="kernel-approximation">
-<span id="id1"></span><h1>4.6. Kernel Approximation<a class="headerlink" href="#kernel-approximation" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>4.7. Kernel Approximation<a class="headerlink" href="#kernel-approximation" title="Permalink to this headline">¶</a></h1>
 <p>This submodule contains functions that approximate the feature mappings that
 correspond to certain kernels, as they are used for example in support vector
 machines (see <a class="reference internal" href="svm.html#svm"><span class="std std-ref">Support Vector Machines</span></a>).
@@ -226,7 +229,7 @@ is advisable to compare results against exact kernel methods when possible.</p>
 <p class="last"><a class="reference internal" href="linear_model.html#polynomial-regression"><span class="std std-ref">Polynomial regression: extending linear models with basis functions</span></a> for an exact polynomial transformation.</p>
 </div>
 <div class="section" id="nystroem-method-for-kernel-approximation">
-<span id="nystroem-kernel-approx"></span><h2>4.6.1. Nystroem Method for Kernel Approximation<a class="headerlink" href="#nystroem-method-for-kernel-approximation" title="Permalink to this headline">¶</a></h2>
+<span id="nystroem-kernel-approx"></span><h2>4.7.1. Nystroem Method for Kernel Approximation<a class="headerlink" href="#nystroem-method-for-kernel-approximation" title="Permalink to this headline">¶</a></h2>
 <p>The Nystroem method, as implemented in <a class="reference internal" href="generated/sklearn.kernel_approximation.Nystroem.html#sklearn.kernel_approximation.Nystroem" title="sklearn.kernel_approximation.Nystroem"><code class="xref py py-class docutils literal"><span class="pre">Nystroem</span></code></a> is a general method
 for low-rank approximations of kernels. It achieves this by essentially subsampling
 the data on which the kernel is evaluated.
@@ -236,7 +239,7 @@ The number of samples used - which is also the dimensionality of the features co
 is given by the parameter <code class="docutils literal"><span class="pre">n_components</span></code>.</p>
 </div>
 <div class="section" id="radial-basis-function-kernel">
-<span id="rbf-kernel-approx"></span><h2>4.6.2. Radial Basis Function Kernel<a class="headerlink" href="#radial-basis-function-kernel" title="Permalink to this headline">¶</a></h2>
+<span id="rbf-kernel-approx"></span><h2>4.7.2. Radial Basis Function Kernel<a class="headerlink" href="#radial-basis-function-kernel" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="generated/sklearn.kernel_approximation.RBFSampler.html#sklearn.kernel_approximation.RBFSampler" title="sklearn.kernel_approximation.RBFSampler"><code class="xref py py-class docutils literal"><span class="pre">RBFSampler</span></code></a> constructs an approximate mapping for the radial basis
 function kernel, also known as <em>Random Kitchen Sinks</em> <a class="reference internal" href="#rr2007" id="id2">[RR2007]</a>. This
 transformation can be used to explicitly model a kernel map, prior to applying
@@ -286,68 +289,68 @@ use of larger feature spaces more efficient.</p>
 </div>
 </div>
 <div class="section" id="additive-chi-squared-kernel">
-<span id="additive-chi-kernel-approx"></span><h2>4.6.3. Additive Chi Squared Kernel<a class="headerlink" href="#additive-chi-squared-kernel" title="Permalink to this headline">¶</a></h2>
+<span id="additive-chi-kernel-approx"></span><h2>4.7.3. Additive Chi Squared Kernel<a class="headerlink" href="#additive-chi-squared-kernel" title="Permalink to this headline">¶</a></h2>
 <p>The additive chi squared kernel is a kernel on histograms, often used in computer vision.</p>
 <p>The additive chi squared kernel as used here is given by</p>
 <div class="math">
-<p><img src="../_images/math/ac2861573c0c123e910c00dad341ba98cd110d3d.png" alt="k(x, y) = \sum_i \frac{2x_iy_i}{x_i+y_i}"/></p>
-</div><p>This is not exactly the same as <code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.additive_chi2_kernel</span></code>.
+\[k(x, y) = \sum_i \frac{2x_iy_i}{x_i+y_i}\]</div>
+<p>This is not exactly the same as <code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.additive_chi2_kernel</span></code>.
 The authors of <a class="reference internal" href="#vz2010" id="id4">[VZ2010]</a> prefer the version above as it is always positive
 definite.
 Since the kernel is additive, it is possible to treat all components
-<img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/> separately for embedding. This makes it possible to sample
+<span class="math">\(x_i\)</span> separately for embedding. This makes it possible to sample
 the Fourier transform in regular intervals, instead of approximating
 using Monte Carlo sampling.</p>
 <p>The class <a class="reference internal" href="generated/sklearn.kernel_approximation.AdditiveChi2Sampler.html#sklearn.kernel_approximation.AdditiveChi2Sampler" title="sklearn.kernel_approximation.AdditiveChi2Sampler"><code class="xref py py-class docutils literal"><span class="pre">AdditiveChi2Sampler</span></code></a> implements this component wise
-deterministic sampling. Each component is sampled <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> times, yielding
-<img class="math" src="../_images/math/6e4e44b685a19e1346d2a7e3a81cc6367a85691d.png" alt="2n+1"/> dimensions per input dimension (the multiple of two stems
+deterministic sampling. Each component is sampled <span class="math">\(n\)</span> times, yielding
+<span class="math">\(2n+1\)</span> dimensions per input dimension (the multiple of two stems
 from the real and complex part of the Fourier transform).
-In the literature, <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> is usually chosen to be 1 or 2, transforming
-the dataset to size <code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">*</span> <span class="pre">5</span> <span class="pre">*</span> <span class="pre">n_features</span></code> (in the case of <img class="math" src="../_images/math/19fd639abdfb31b2bdaf813580ab3d4568716d28.png" alt="n=2"/>).</p>
+In the literature, <span class="math">\(n\)</span> is usually chosen to be 1 or 2, transforming
+the dataset to size <code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">*</span> <span class="pre">5</span> <span class="pre">*</span> <span class="pre">n_features</span></code> (in the case of <span class="math">\(n=2\)</span>).</p>
 <p>The approximate feature map provided by <a class="reference internal" href="generated/sklearn.kernel_approximation.AdditiveChi2Sampler.html#sklearn.kernel_approximation.AdditiveChi2Sampler" title="sklearn.kernel_approximation.AdditiveChi2Sampler"><code class="xref py py-class docutils literal"><span class="pre">AdditiveChi2Sampler</span></code></a> can be combined
 with the approximate feature map provided by <a class="reference internal" href="generated/sklearn.kernel_approximation.RBFSampler.html#sklearn.kernel_approximation.RBFSampler" title="sklearn.kernel_approximation.RBFSampler"><code class="xref py py-class docutils literal"><span class="pre">RBFSampler</span></code></a> to yield an approximate
 feature map for the exponentiated chi squared kernel.
 See the <a class="reference internal" href="#vz2010" id="id5">[VZ2010]</a> for details and <a class="reference internal" href="#vvz2010" id="id6">[VVZ2010]</a> for combination with the <a class="reference internal" href="generated/sklearn.kernel_approximation.RBFSampler.html#sklearn.kernel_approximation.RBFSampler" title="sklearn.kernel_approximation.RBFSampler"><code class="xref py py-class docutils literal"><span class="pre">RBFSampler</span></code></a>.</p>
 </div>
 <div class="section" id="skewed-chi-squared-kernel">
-<span id="skewed-chi-kernel-approx"></span><h2>4.6.4. Skewed Chi Squared Kernel<a class="headerlink" href="#skewed-chi-squared-kernel" title="Permalink to this headline">¶</a></h2>
+<span id="skewed-chi-kernel-approx"></span><h2>4.7.4. Skewed Chi Squared Kernel<a class="headerlink" href="#skewed-chi-squared-kernel" title="Permalink to this headline">¶</a></h2>
 <p>The skewed chi squared kernel is given by:</p>
 <div class="math">
-<p><img src="../_images/math/8aba1f9f945a4d929c209a2814a869155f88d172.png" alt="k(x,y) = \prod_i \frac{2\sqrt{x_i+c}\sqrt{y_i+c}}{x_i + y_i + 2c}"/></p>
-</div><p>It has properties that are similar to the exponentiated chi squared kernel
+\[k(x,y) = \prod_i \frac{2\sqrt{x_i+c}\sqrt{y_i+c}}{x_i + y_i + 2c}\]</div>
+<p>It has properties that are similar to the exponentiated chi squared kernel
 often used in computer vision, but allows for a simple Monte Carlo
 approximation of the feature map.</p>
 <p>The usage of the <a class="reference internal" href="generated/sklearn.kernel_approximation.SkewedChi2Sampler.html#sklearn.kernel_approximation.SkewedChi2Sampler" title="sklearn.kernel_approximation.SkewedChi2Sampler"><code class="xref py py-class docutils literal"><span class="pre">SkewedChi2Sampler</span></code></a> is the same as the usage described
 above for the <a class="reference internal" href="generated/sklearn.kernel_approximation.RBFSampler.html#sklearn.kernel_approximation.RBFSampler" title="sklearn.kernel_approximation.RBFSampler"><code class="xref py py-class docutils literal"><span class="pre">RBFSampler</span></code></a>. The only difference is in the free
-parameter, that is called <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>.
+parameter, that is called <span class="math">\(c\)</span>.
 For a motivation for this mapping and the mathematical details see <a class="reference internal" href="#ls2010" id="id7">[LS2010]</a>.</p>
 </div>
 <div class="section" id="mathematical-details">
-<h2>4.6.5. Mathematical Details<a class="headerlink" href="#mathematical-details" title="Permalink to this headline">¶</a></h2>
+<h2>4.7.5. Mathematical Details<a class="headerlink" href="#mathematical-details" title="Permalink to this headline">¶</a></h2>
 <p>Kernel methods like support vector machines or kernelized
 PCA rely on a property of reproducing kernel Hilbert spaces.
-For any positive definite kernel function <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> (a so called Mercer kernel),
-it is guaranteed that there exists a mapping <img class="math" src="../_images/math/c2f31c22645274c375eff7920cfdfdc18d60341f.png" alt="\phi"/>
-into a Hilbert space <img class="math" src="../_images/math/19b5bf31d66194f0134f27b1556f4818a6b98549.png" alt="\mathcal{H}"/>, such that</p>
+For any positive definite kernel function <span class="math">\(k\)</span> (a so called Mercer kernel),
+it is guaranteed that there exists a mapping <span class="math">\(\phi\)</span>
+into a Hilbert space <span class="math">\(\mathcal{H}\)</span>, such that</p>
 <div class="math">
-<p><img src="../_images/math/2ca953039633babcf676a0a4d14c9a81747fd262.png" alt="k(x,y) = \langle \phi(x), \phi(y) \rangle"/></p>
-</div><p>Where <img class="math" src="../_images/math/400f0c93eeee083c4e94c33380145098a12d9980.png" alt="\langle \cdot, \cdot \rangle"/> denotes the inner product in the
+\[k(x,y) = \langle \phi(x), \phi(y) \rangle\]</div>
+<p>Where <span class="math">\(\langle \cdot, \cdot \rangle\)</span> denotes the inner product in the
 Hilbert space.</p>
 <p>If an algorithm, such as a linear support vector machine or PCA,
-relies only on the scalar product of data points <img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/>, one may use
-the value of <img class="math" src="../_images/math/988eefe7912f7206254738a54182922dcd4461eb.png" alt="k(x_i, x_j)"/>, which corresponds to applying the algorithm
-to the mapped data points <img class="math" src="../_images/math/26df575525cdf71b2df07ab54bf38795ec58aeba.png" alt="\phi(x_i)"/>.
-The advantage of using <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> is that the mapping <img class="math" src="../_images/math/c2f31c22645274c375eff7920cfdfdc18d60341f.png" alt="\phi"/> never has
+relies only on the scalar product of data points <span class="math">\(x_i\)</span>, one may use
+the value of <span class="math">\(k(x_i, x_j)\)</span>, which corresponds to applying the algorithm
+to the mapped data points <span class="math">\(\phi(x_i)\)</span>.
+The advantage of using <span class="math">\(k\)</span> is that the mapping <span class="math">\(\phi\)</span> never has
 to be calculated explicitly, allowing for arbitrary large
 features (even infinite).</p>
 <p>One drawback of kernel methods is, that it might be necessary
-to store many kernel values <img class="math" src="../_images/math/988eefe7912f7206254738a54182922dcd4461eb.png" alt="k(x_i, x_j)"/> during optimization.
-If a kernelized classifier is applied to new data <img class="math" src="../_images/math/2c215c9f2de81ec37e5661af71de2717b10b84e0.png" alt="y_j"/>,
-<img class="math" src="../_images/math/39262ff094ef21b5c09227e146e0bb492b4071ea.png" alt="k(x_i, y_j)"/> needs to be computed to make predictions,
-possibly for many different <img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/> in the training set.</p>
+to store many kernel values <span class="math">\(k(x_i, x_j)\)</span> during optimization.
+If a kernelized classifier is applied to new data <span class="math">\(y_j\)</span>,
+<span class="math">\(k(x_i, y_j)\)</span> needs to be computed to make predictions,
+possibly for many different <span class="math">\(x_i\)</span> in the training set.</p>
 <p>The classes in this submodule allow to approximate the embedding
-<img class="math" src="../_images/math/c2f31c22645274c375eff7920cfdfdc18d60341f.png" alt="\phi"/>, thereby working explicitly with the representations
-<img class="math" src="../_images/math/26df575525cdf71b2df07ab54bf38795ec58aeba.png" alt="\phi(x_i)"/>, which obviates the need to apply the kernel
+<span class="math">\(\phi\)</span>, thereby working explicitly with the representations
+<span class="math">\(\phi(x_i)\)</span>, which obviates the need to apply the kernel
 or store training examples.</p>
 <div class="topic">
 <p class="topic-title first">References:</p>
@@ -393,7 +396,7 @@ Vempati, S. and Vedaldi, A. and Zisserman, A. and Jawahar, CV - 2010</td></tr>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/modules/kernel_approximation.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

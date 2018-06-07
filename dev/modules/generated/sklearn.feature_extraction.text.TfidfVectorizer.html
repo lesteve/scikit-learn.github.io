@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.feature_extraction.text" title="sklearn.feature_extraction.text"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_extraction.text</span></code></a>.TfidfVectorizer<a class="headerlink" href="#sklearn-feature-extraction-text-tfidfvectorizer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer">
-<em class="property">class </em><code class="descclassname">sklearn.feature_extraction.text.</code><code class="descname">TfidfVectorizer</code><span class="sig-paren">(</span><em>input='content'</em>, <em>encoding='utf-8'</em>, <em>decode_error='strict'</em>, <em>strip_accents=None</em>, <em>lowercase=True</em>, <em>preprocessor=None</em>, <em>tokenizer=None</em>, <em>analyzer='word'</em>, <em>stop_words=None</em>, <em>token_pattern='(?u)\b\w\w+\b'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>max_df=1.0</em>, <em>min_df=1</em>, <em>max_features=None</em>, <em>vocabulary=None</em>, <em>binary=False</em>, <em>dtype=&lt;class 'numpy.int64'&gt;</em>, <em>norm='l2'</em>, <em>use_idf=True</em>, <em>smooth_idf=True</em>, <em>sublinear_tf=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L1125"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.feature_extraction.text.</code><code class="descname">TfidfVectorizer</code><span class="sig-paren">(</span><em>input='content'</em>, <em>encoding='utf-8'</em>, <em>decode_error='strict'</em>, <em>strip_accents=None</em>, <em>lowercase=True</em>, <em>preprocessor=None</em>, <em>tokenizer=None</em>, <em>analyzer='word'</em>, <em>stop_words=None</em>, <em>token_pattern='(?u)\b\w\w+\b'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>max_df=1.0</em>, <em>min_df=1</em>, <em>max_features=None</em>, <em>vocabulary=None</em>, <em>binary=False</em>, <em>dtype=&lt;class 'numpy.int64'&gt;</em>, <em>norm='l2'</em>, <em>use_idf=True</em>, <em>smooth_idf=True</em>, <em>sublinear_tf=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L1197"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a collection of raw documents to a matrix of TF-IDF features.</p>
 <p>Equivalent to CountVectorizer followed by TfidfTransformer.</p>
 <p>Read more in the <a class="reference internal" href="../feature_extraction.html#text-feature-extraction"><span class="std std-ref">User Guide</span></a>.</p>
@@ -234,11 +237,14 @@ values are ‘ignore’ and ‘replace’.</p>
 </div></blockquote>
 <p><strong>strip_accents</strong> : {‘ascii’, ‘unicode’, None}</p>
 <blockquote>
-<div><p>Remove accents during the preprocessing step.
+<div><p>Remove accents and perform other character normalization
+during the preprocessing step.
 ‘ascii’ is a fast method that only works on characters that have
 an direct ASCII mapping.
 ‘unicode’ is a slightly slower method that works on any characters.
 None (default) does nothing.</p>
+<p>Both ‘ascii’ and ‘unicode’ use NFKD normalization from
+<a class="reference external" href="https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">unicodedata.normalize</span></code></a>.</p>
 </div></blockquote>
 <p><strong>analyzer</strong> : string, {‘word’, ‘char’} or callable</p>
 <blockquote>
@@ -359,7 +365,7 @@ exactly once. Prevents zero divisions.</p>
 <td>(dict) A mapping of terms to feature indices.</td>
 </tr>
 <tr class="row-even"><td><strong>idf_</strong></td>
-<td>(array, shape = [n_features], or None) The learned idf vector (global term weights) when <code class="docutils literal"><span class="pre">use_idf</span></code> is set to True, None otherwise.</td>
+<td>(array, shape (n_features)) The inverse document frequency (IDF) vector; only defined if  <code class="docutils literal"><span class="pre">use_idf</span></code> is True.</td>
 </tr>
 <tr class="row-odd"><td><strong>stop_words_</strong></td>
 <td>(set) Terms that were ignored because they either:  - occurred in too many documents (<cite>max_df</cite>) - occurred in too few documents (<cite>min_df</cite>) - were cut off by feature selection (<cite>max_features</cite>).  This is only available if no vocabulary was given.</td>
@@ -426,37 +432,37 @@ be safely removed using delattr or set to None before pickling.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>input='content'</em>, <em>encoding='utf-8'</em>, <em>decode_error='strict'</em>, <em>strip_accents=None</em>, <em>lowercase=True</em>, <em>preprocessor=None</em>, <em>tokenizer=None</em>, <em>analyzer='word'</em>, <em>stop_words=None</em>, <em>token_pattern='(?u)\\b\\w\\w+\\b'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>max_df=1.0</em>, <em>min_df=1</em>, <em>max_features=None</em>, <em>vocabulary=None</em>, <em>binary=False</em>, <em>dtype=&lt;class 'numpy.int64'&gt;</em>, <em>norm='l2'</em>, <em>use_idf=True</em>, <em>smooth_idf=True</em>, <em>sublinear_tf=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L1288"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>input='content'</em>, <em>encoding='utf-8'</em>, <em>decode_error='strict'</em>, <em>strip_accents=None</em>, <em>lowercase=True</em>, <em>preprocessor=None</em>, <em>tokenizer=None</em>, <em>analyzer='word'</em>, <em>stop_words=None</em>, <em>token_pattern='(?u)\\b\\w\\w+\\b'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>max_df=1.0</em>, <em>min_df=1</em>, <em>max_features=None</em>, <em>vocabulary=None</em>, <em>binary=False</em>, <em>dtype=&lt;class 'numpy.int64'&gt;</em>, <em>norm='l2'</em>, <em>use_idf=True</em>, <em>smooth_idf=True</em>, <em>sublinear_tf=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L1364"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.build_analyzer">
-<code class="descname">build_analyzer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L247"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.build_analyzer" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build_analyzer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L248"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.build_analyzer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a callable that handles preprocessing and tokenization</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.build_preprocessor">
-<code class="descname">build_preprocessor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L206"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.build_preprocessor" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build_preprocessor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L207"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.build_preprocessor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a function to preprocess the text before tokenization</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.build_tokenizer">
-<code class="descname">build_tokenizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.build_tokenizer" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build_tokenizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L237"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.build_tokenizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a function that splits a string into a sequence of tokens</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.decode">
-<code class="descname">decode</code><span class="sig-paren">(</span><em>doc</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L103"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.decode" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decode</code><span class="sig-paren">(</span><em>doc</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L104"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.decode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decode the input into a string of unicode symbols</p>
 <p>The decoding strategy depends on the vectorizer parameters.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>raw_documents</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L1349"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>raw_documents</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L1435"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learn vocabulary and idf from training set.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -477,7 +483,7 @@ be safely removed using delattr or set to None before pickling.</p>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>raw_documents</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L1365"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>raw_documents</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L1451"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learn vocabulary and idf, return term-document matrix.</p>
 <p>This is equivalent to fit followed by transform, but more efficiently
 implemented.</p>
@@ -503,13 +509,13 @@ implemented.</p>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.get_feature_names">
-<code class="descname">get_feature_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L958"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.get_feature_names" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_feature_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L1014"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.get_feature_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Array mapping from feature integer indices to feature name</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -534,13 +540,13 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.get_stop_words">
-<code class="descname">get_stop_words</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L243"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.get_stop_words" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_stop_words</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L244"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.get_stop_words" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build or fetch the effective stop words list</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.inverse_transform">
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L928"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L984"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return terms per document with nonzero entries in X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -561,7 +567,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -579,7 +585,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.feature_extraction.text.TfidfVectorizer.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>raw_documents</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/feature_extraction/text.py#L1387"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>raw_documents</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/feature_extraction/text.py#L1473"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform documents to document-term matrix.</p>
 <p>Uses the vocabulary and document frequencies (df) learned by fit (or
 fit_transform).</p>
@@ -613,8 +619,8 @@ operations.</p>
 <div class="section" id="examples-using-sklearn-feature-extraction-text-tfidfvectorizer">
 <h2>Examples using <code class="docutils literal"><span class="pre">sklearn.feature_extraction.text.TfidfVectorizer</span></code><a class="headerlink" href="#examples-using-sklearn-feature-extraction-text-tfidfvectorizer" title="Permalink to this headline">¶</a></h2>
 <div class="sphx-glr-thumbcontainer" tooltip="Datasets can often contain components of that require different feature extraction and processi..."><div class="figure" id="id1">
-<img alt="../../_images/sphx_glr_hetero_feature_union_thumb.png" src="../../_images/sphx_glr_hetero_feature_union_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/hetero_feature_union.html#sphx-glr-auto-examples-hetero-feature-union-py"><span class="std std-ref">Feature Union with Heterogeneous Data Sources</span></a></span></p>
+<img alt="../../_images/sphx_glr_column_transformer_thumb.png" src="../../_images/sphx_glr_column_transformer_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/column_transformer.html#sphx-glr-auto-examples-column-transformer-py"><span class="std std-ref">Column Transformer with Heterogeneous Data Sources</span></a></span></p>
 </div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This is an example of applying :class:`sklearn.decomposition.NMF` and :class:`sklearn.decomposi..."><div class="figure" id="id2">
 <img alt="../../_images/sphx_glr_plot_topics_extraction_with_nmf_lda_thumb.png" src="../../_images/sphx_glr_plot_topics_extraction_with_nmf_lda_thumb.png" />
@@ -625,12 +631,12 @@ operations.</p>
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/bicluster/plot_bicluster_newsgroups.html#sphx-glr-auto-examples-bicluster-plot-bicluster-newsgroups-py"><span class="std std-ref">Biclustering documents with the Spectral Co-clustering algorithm</span></a></span></p>
 </div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This is an example showing how the scikit-learn can be used to cluster documents by topics usin..."><div class="figure" id="id4">
-<img alt="../../_images/sphx_glr_document_clustering_thumb.png" src="../../_images/sphx_glr_document_clustering_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/document_clustering.html#sphx-glr-auto-examples-text-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></span></p>
+<img alt="../../_images/sphx_glr_plot_document_clustering_thumb.png" src="../../_images/sphx_glr_plot_document_clustering_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/plot_document_clustering.html#sphx-glr-auto-examples-text-plot-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></span></p>
 </div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This is an example showing how scikit-learn can be used to classify documents by topics using a..."><div class="figure" id="id5">
-<img alt="../../_images/sphx_glr_document_classification_20newsgroups_thumb.png" src="../../_images/sphx_glr_document_classification_20newsgroups_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/document_classification_20newsgroups.html#sphx-glr-auto-examples-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></span></p>
+<img alt="../../_images/sphx_glr_plot_document_classification_20newsgroups_thumb.png" src="../../_images/sphx_glr_plot_document_classification_20newsgroups_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/plot_document_classification_20newsgroups.html#sphx-glr-auto-examples-text-plot-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>
@@ -644,7 +650,7 @@ operations.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

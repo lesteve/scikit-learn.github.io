@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_cluster_plot_agglomerative_clustering.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_cluster_plot_agglomerative_clustering.py:
 
@@ -13,17 +17,18 @@ neighbors.
 Two consequences of imposing a connectivity can be seen. First clustering
 with a connectivity matrix is much faster.
 
-Second, when using a connectivity matrix, average and complete linkage are
-unstable and tend to create a few clusters that grow very quickly. Indeed,
-average and complete linkage fight this percolation behavior by considering all
-the distances between two clusters when merging them. The connectivity
-graph breaks this mechanism. This effect is more pronounced for very
-sparse graphs (try decreasing the number of neighbors in
-kneighbors_graph) and with complete linkage. In particular, having a very
-small number of neighbors in the graph, imposes a geometry that is
-close to that of single linkage, which is well known to have this
-percolation instability.
-
+Second, when using a connectivity matrix, single, average and complete
+linkage are unstable and tend to create a few clusters that grow very
+quickly. Indeed, average and complete linkage fight this percolation behavior
+by considering all the distances between two clusters when merging them (
+while single linkage exaggerates the behaviour by considering only the
+shortest distance between clusters). The connectivity graph breaks this
+mechanism for average and complete linkage, making them resemble the more
+brittle single linkage. This effect is more pronounced for very sparse graphs
+(try decreasing the number of neighbors in kneighbors_graph) and with
+complete linkage. In particular, having a very small number of neighbors in
+the graph, imposes a geometry that is close to that of single linkage,
+which is well known to have this percolation instability. 
 
 
 
@@ -33,22 +38,22 @@ percolation instability.
     *
 
       .. image:: /auto_examples/cluster/images/sphx_glr_plot_agglomerative_clustering_001.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/cluster/images/sphx_glr_plot_agglomerative_clustering_002.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/cluster/images/sphx_glr_plot_agglomerative_clustering_003.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/cluster/images/sphx_glr_plot_agglomerative_clustering_004.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
 
 
@@ -88,8 +93,11 @@ percolation instability.
     for connectivity in (None, knn_graph):
         for n_clusters in (30, 3):
             plt.figure(figsize=(10, 4))
-            for index, linkage in enumerate(('average', 'complete', 'ward')):
-                plt.subplot(1, 3, index + 1)
+            for index, linkage in enumerate(('average',
+                                             'complete',
+                                             'ward',
+                                             'single')):
+                plt.subplot(1, 4, index + 1)
                 model = AgglomerativeClustering(linkage=linkage,
                                                 connectivity=connectivity,
                                                 n_clusters=n_clusters)
@@ -97,8 +105,8 @@ percolation instability.
                 model.fit(X)
                 elapsed_time = time.time() - t0
                 plt.scatter(X[:, 0], X[:, 1], c=model.labels_,
-                            cmap=plt.cm.spectral)
-                plt.title('linkage=%s (time %.2fs)' % (linkage, elapsed_time),
+                            cmap=plt.cm.nipy_spectral)
+                plt.title('linkage=%s\n(time %.2fs)' % (linkage, elapsed_time),
                           fontdict=dict(verticalalignment='top'))
                 plt.axis('equal')
                 plt.axis('off')
@@ -111,13 +119,23 @@ percolation instability.
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  1.652 seconds)
+**Total running time of the script:** ( 0 minutes  1.436 seconds)
 
+
+.. _sphx_glr_download_auto_examples_cluster_plot_agglomerative_clustering.py:
 
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/cluster/plot_agglomerative_clustering.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

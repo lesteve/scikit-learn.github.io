@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="sklearn.covariance.MinCovDet" href="sklearn.covariance.MinCovDet.html" />
-    <link rel="prev" title="sklearn.covariance.GraphLassoCV" href="sklearn.covariance.GraphLassoCV.html" />
+    <link rel="prev" title="sklearn.covariance.GraphicalLassoCV" href="sklearn.covariance.GraphicalLassoCV.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -127,14 +130,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="sklearn.covariance.GraphLassoCV.html"
+        <a href="sklearn.covariance.GraphicalLassoCV.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         sklearn.covar...
         </span>
             <span class="hiddenrellink">
-            sklearn.covariance.GraphLassoCV
+            sklearn.covariance.GraphicalLassoCV
             </span>
         </a>
         </div>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.covariance" title="sklearn.covariance"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.covariance</span></code></a>.LedoitWolf<a class="headerlink" href="#sklearn-covariance-ledoitwolf" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.covariance.LedoitWolf">
-<em class="property">class </em><code class="descclassname">sklearn.covariance.</code><code class="descname">LedoitWolf</code><span class="sig-paren">(</span><em>store_precision=True</em>, <em>assume_centered=False</em>, <em>block_size=1000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/covariance/shrunk_covariance_.py#L311"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.covariance.</code><code class="descname">LedoitWolf</code><span class="sig-paren">(</span><em>store_precision=True</em>, <em>assume_centered=False</em>, <em>block_size=1000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/covariance/shrunk_covariance_.py#L307"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf" title="Permalink to this definition">¶</a></dt>
 <dd><p>LedoitWolf Estimator</p>
 <p>Ledoit-Wolf is a particular form of shrinkage, where the shrinkage
 coefficient is computed using O. Ledoit and M. Wolf’s formula as
@@ -255,10 +258,7 @@ optimization and does not affect results.</p>
 </table>
 <p class="rubric">Notes</p>
 <p>The regularised covariance is:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">shrinkage</span><span class="p">)</span><span class="o">*</span><span class="n">cov</span>
-        <span class="o">+</span> <span class="n">shrinkage</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n_features</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
 <p>where mu = trace(cov) / n_features
 and shrinkage is given by the Ledoit and Wolf formula (see References)</p>
 <p class="rubric">References</p>
@@ -284,7 +284,7 @@ February 2004, pages 365-411.</p>
 <tr class="row-even"><td><a class="reference internal" href="#sklearn.covariance.LedoitWolf.get_precision" title="sklearn.covariance.LedoitWolf.get_precision"><code class="xref py py-obj docutils literal"><span class="pre">get_precision</span></code></a>()</td>
 <td>Getter for the precision matrix.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#sklearn.covariance.LedoitWolf.mahalanobis" title="sklearn.covariance.LedoitWolf.mahalanobis"><code class="xref py py-obj docutils literal"><span class="pre">mahalanobis</span></code></a>(observations)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.covariance.LedoitWolf.mahalanobis" title="sklearn.covariance.LedoitWolf.mahalanobis"><code class="xref py py-obj docutils literal"><span class="pre">mahalanobis</span></code></a>(X)</td>
 <td>Computes the squared Mahalanobis distances of given observations.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#sklearn.covariance.LedoitWolf.score" title="sklearn.covariance.LedoitWolf.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X_test[,&nbsp;y])</td>
@@ -297,12 +297,12 @@ February 2004, pages 365-411.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>store_precision=True</em>, <em>assume_centered=False</em>, <em>block_size=1000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/covariance/shrunk_covariance_.py#L368"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>store_precision=True</em>, <em>assume_centered=False</em>, <em>block_size=1000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/covariance/shrunk_covariance_.py#L363"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.error_norm">
-<code class="descname">error_norm</code><span class="sig-paren">(</span><em>comp_cov</em>, <em>norm='frobenius'</em>, <em>scaling=True</em>, <em>squared=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/covariance/empirical_covariance_.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.error_norm" title="Permalink to this definition">¶</a></dt>
+<code class="descname">error_norm</code><span class="sig-paren">(</span><em>comp_cov</em>, <em>norm='frobenius'</em>, <em>scaling=True</em>, <em>squared=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/covariance/empirical_covariance_.py#L215"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.error_norm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the Mean Squared Error between two covariance estimators.
 (In the sense of the Frobenius norm).</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -343,7 +343,7 @@ If False, the error norm is returned.</p>
 
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/covariance/shrunk_covariance_.py#L374"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/covariance/shrunk_covariance_.py#L369"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fits the Ledoit-Wolf shrunk covariance model
 according to the given training data and parameters.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -355,13 +355,13 @@ according to the given training data and parameters.</p>
 <div><p>Training data, where n_samples is the number of samples
 and n_features is the number of features.</p>
 </div></blockquote>
-<p><strong>y</strong> : not used, present for API consistence purpose.</p>
+<p><strong>y</strong></p>
+<blockquote>
+<div><p>not used, present for API consistence purpose.</p>
+</div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self</strong> : object</p>
-<blockquote class="last">
-<div><p>Returns self.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> : object</p>
 </td>
 </tr>
 </tbody>
@@ -370,7 +370,7 @@ and n_features is the number of features.</p>
 
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -395,13 +395,13 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.get_precision">
-<code class="descname">get_precision</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/covariance/empirical_covariance_.py#L140"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.get_precision" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_precision</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/covariance/empirical_covariance_.py#L141"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.get_precision" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter for the precision matrix.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>precision_</strong> : array-like,</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>precision_</strong> : array-like</p>
 <blockquote class="last">
 <div><p>The precision matrix associated to the current covariance object.</p>
 </div></blockquote>
@@ -413,13 +413,13 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.mahalanobis">
-<code class="descname">mahalanobis</code><span class="sig-paren">(</span><em>observations</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/covariance/empirical_covariance_.py#L265"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.mahalanobis" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mahalanobis</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/covariance/empirical_covariance_.py#L267"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.mahalanobis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the squared Mahalanobis distances of given observations.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>observations</strong> : array-like, shape = [n_observations, n_features]</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = [n_samples, n_features]</p>
 <blockquote>
 <div><p>The observations, the Mahalanobis distances of the which we
 compute. Observations are assumed to be drawn from the same
@@ -427,7 +427,7 @@ distribution than the data used in fit.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>mahalanobis_distance</strong> : array, shape = [n_observations,]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dist</strong> : array, shape = [n_samples,]</p>
 <blockquote class="last">
 <div><p>Squared Mahalanobis distances of the observations.</p>
 </div></blockquote>
@@ -439,7 +439,7 @@ distribution than the data used in fit.</p>
 
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X_test</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/covariance/empirical_covariance_.py#L184"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X_test</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/covariance/empirical_covariance_.py#L185"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the log-likelihood of a Gaussian data set with
 <cite>self.covariance_</cite> as an estimator of its covariance matrix.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -453,7 +453,10 @@ the number of samples and n_features is the number of features.
 X_test is assumed to be drawn from the same distribution than
 the data used in fit (including centering).</p>
 </div></blockquote>
-<p><strong>y</strong> : not used, present for API consistence purpose.</p>
+<p><strong>y</strong></p>
+<blockquote>
+<div><p>not used, present for API consistence purpose.</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>res</strong> : float</p>
@@ -469,7 +472,7 @@ estimator of its covariance matrix.</p>
 
 <dl class="method">
 <dt id="sklearn.covariance.LedoitWolf.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.LedoitWolf.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -513,13 +516,13 @@ component of a nested object.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.covariance.LedoitWolf.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="sklearn.covariance.GraphLassoCV.html">Previous
+      <a href="sklearn.covariance.GraphicalLassoCV.html">Previous
       </a>
     </div>
     <div class="buttonNext">

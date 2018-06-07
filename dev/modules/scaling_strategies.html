@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -247,8 +250,8 @@ variables represented as list of Python dicts or
 </div>
 <div class="section" id="incremental-learning">
 <h3>6.1.3. Incremental learning<a class="headerlink" href="#incremental-learning" title="Permalink to this headline">¶</a></h3>
-<p>Finally, for 3. we have a number of options inside scikit-learn. Although all
-algorithms cannot learn incrementally (i.e. without seeing all the instances
+<p>Finally, for 3. we have a number of options inside scikit-learn. Although not
+all algorithms can learn incrementally (i.e. without seeing all the instances
 at once), all estimators implementing the <code class="docutils literal"><span class="pre">partial_fit</span></code> API are candidates.
 Actually, the ability to learn incrementally from a mini-batch of instances
 (sometimes called “online learning”) is key to out-of-core learning as it
@@ -317,11 +320,11 @@ stateless feature extraction routine may be able to cope with new/unseen
 attributes, the incremental learner itself may be unable to cope with
 new/unseen targets classes. In this case you have to pass all the possible
 classes to the first <code class="docutils literal"><span class="pre">partial_fit</span></code> call using the <code class="docutils literal"><span class="pre">classes=</span></code> parameter.</p>
-<p>Another aspect to consider when choosing a proper algorithm is that all of them
-don’t put the same importance on each example over time. Namely, the
+<p>Another aspect to consider when choosing a proper algorithm is that not all of
+them put the same importance on each example over time. Namely, the
 <code class="docutils literal"><span class="pre">Perceptron</span></code> is still sensitive to badly labeled examples even after many
 examples whereas the <code class="docutils literal"><span class="pre">SGD*</span></code> and <code class="docutils literal"><span class="pre">PassiveAggressive*</span></code> families are more
-robust to this kind of artifacts. Conversely, the later also tend to give less
+robust to this kind of artifacts. Conversely, the latter also tend to give less
 importance to remarkably different, yet properly labeled examples when they
 come late in the stream as their learning rate decreases over time.</p>
 </div>
@@ -334,13 +337,13 @@ systems and demonstrates most of the notions discussed above.</p>
 <p>Furthermore, it also shows the evolution of the performance of different
 algorithms with the number of processed examples.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../_images/sphx_glr_plot_out_of_core_classification_001.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../_images/sphx_glr_plot_out_of_core_classification_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
 vectorization is much more expensive than learning itself. From the different
 algorithms, <code class="docutils literal"><span class="pre">MultinomialNB</span></code> is the most expensive, but its overhead can be
 mitigated by increasing the size of the mini-batches (exercise: change
 <code class="docutils literal"><span class="pre">minibatch_size</span></code> to 100 and 10000 in the program and compare).</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../_images/sphx_glr_plot_out_of_core_classification_003.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../_images/sphx_glr_plot_out_of_core_classification_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
 <div class="section" id="notes">
 <h3>6.1.5. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
@@ -366,7 +369,7 @@ footprint can vary dramatically with batch size.</td></tr>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/modules/scaling_strategies.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

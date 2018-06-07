@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_preprocessing_plot_power_transformer.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_preprocessing_plot_power_transformer.py:
 
@@ -19,13 +23,15 @@ Weibull, Gaussian, Uniform, and Bimodal.
 Note that the transformation successfully maps the data to a normal
 distribution when applied to certain datasets, but is ineffective with others.
 This highlights the importance of visualizing the data before and after
-transformation.
+transformation. Also note that while the standardize option is set to False for
+the plot examples, by default, :class:`preprocessing.PowerTransformer` also
+applies zero-mean, unit-variance standardization to the transformed outputs.
 
 
 
 
 .. image:: /auto_examples/preprocessing/images/sphx_glr_plot_power_transformer_001.png
-    :align: center
+    :class: sphx-glr-single-img
 
 
 
@@ -50,7 +56,7 @@ transformation.
     BINS = 100
 
 
-    pt = PowerTransformer(method='box-cox')
+    pt = PowerTransformer(method='box-cox', standardize=False)
     rng = np.random.RandomState(304)
     size = (N_SAMPLES, 1)
 
@@ -70,7 +76,7 @@ transformation.
     loc = 100
     X_gaussian = rng.normal(loc=loc, size=size)
 
-    # uniform distirbution
+    # uniform distribution
     X_uniform = rng.uniform(low=0, high=1, size=size)
 
     # bimodal distribution
@@ -122,13 +128,23 @@ transformation.
     plt.tight_layout()
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  1.402 seconds)
+**Total running time of the script:** ( 0 minutes  1.023 seconds)
 
+
+.. _sphx_glr_download_auto_examples_preprocessing_plot_power_transformer.py:
 
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/preprocessing/plot_power_transformer.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.covariance" title="sklearn.covariance"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.covariance</span></code></a>.oas<a class="headerlink" href="#sklearn-covariance-oas" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.covariance.oas">
-<code class="descclassname">sklearn.covariance.</code><code class="descname">oas</code><span class="sig-paren">(</span><em>X</em>, <em>assume_centered=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/37ce9ae/sklearn/covariance/shrunk_covariance_.py#L409"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.oas" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.covariance.</code><code class="descname">oas</code><span class="sig-paren">(</span><em>X</em>, <em>assume_centered=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/covariance/shrunk_covariance_.py#L404"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.covariance.oas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate covariance with the Oracle Approximating Shrinkage algorithm.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -233,18 +236,10 @@ of the shrunk estimate.</p>
 </table>
 <p class="rubric">Notes</p>
 <p>The regularised (shrunk) covariance is:</p>
-<dl class="docutils">
-<dt>(1 - shrinkage)*cov</dt>
-<dd><ul class="first last simple">
-<li>shrinkage * mu * np.identity(n_features)</li>
-</ul>
-</dd>
-</dl>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
 <p>where mu = trace(cov) / n_features</p>
-<p>The formula we used to implement the OAS
-does not correspond to the one given in the article. It has been taken
-from the MATLAB program available from the author’s webpage
-(<a class="reference external" href="http://tbayes.eecs.umich.edu/yilun/covestimation">http://tbayes.eecs.umich.edu/yilun/covestimation</a>).</p>
+<p>The formula we used to implement the OAS is slightly modified compared
+to the one given in the article. See <a class="reference internal" href="sklearn.covariance.OAS.html#sklearn.covariance.OAS" title="sklearn.covariance.OAS"><code class="xref py py-class docutils literal"><span class="pre">OAS</span></code></a> for more details.</p>
 </dd></dl>
 
 <div class="clearer"></div></div>
@@ -258,7 +253,7 @@ from the MATLAB program available from the author’s webpage
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.covariance.oas.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

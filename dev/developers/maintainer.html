@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -86,6 +88,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -163,6 +166,7 @@
     <ul>
 <li><a class="reference internal" href="#">Maintainer / core-developer information</a><ul>
 <li><a class="reference internal" href="#making-a-release">Making a release</a></li>
+<li><a class="reference internal" href="#the-scikit-learn-org-web-site">The scikit-learn.org web site</a></li>
 <li><a class="reference internal" href="#travis-cron-jobs">Travis Cron jobs</a></li>
 </ul>
 </li>
@@ -190,18 +194,16 @@
 <p>For more information see <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/wiki/How-to-make-a-release">https://github.com/scikit-learn/scikit-learn/wiki/How-to-make-a-release</a></p>
 <ol class="arabic">
 <li><p class="first">Update docs:</p>
-<blockquote>
-<div><ul>
-<li><p class="first">edit the doc/whats_new.rst file to add release title and commit
+<ul>
+<li><p class="first">Edit the doc/whats_new.rst file to add release title and commit
 statistics. You can retrieve commit statistics with:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ git shortlog -ns 0.998..
 </pre></div>
 </div>
 </li>
-<li><p class="first">edit the doc/index.rst to change the ‘News’ entry of the front page.</p>
+<li><p class="first">Edit the doc/index.rst to change the ‘News’ entry of the front page.</p>
 </li>
 </ul>
-</div></blockquote>
 </li>
 <li><p class="first">Update the version number in sklearn/__init__.py, the __version__
 variable</p>
@@ -245,6 +247,15 @@ $ python setup.py sdist fetch_artifacts upload_all
 </li>
 </ol>
 </div>
+<div class="section" id="the-scikit-learn-org-web-site">
+<h2>The scikit-learn.org web site<a class="headerlink" href="#the-scikit-learn-org-web-site" title="Permalink to this headline">¶</a></h2>
+<p>The scikit-learn web site (<a class="reference external" href="http://scikit-learn.org">http://scikit-learn.org</a>) is hosted at GitHub,
+but should rarely be updated manually by pushing to the
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn.github.io">https://github.com/scikit-learn/scikit-learn.github.io</a> repository. Most
+updates can be made by pushing to master (for /dev) or a release branch
+like 0.99.X, from which Circle CI builds and uploads the documentation
+automatically.</p>
+</div>
 <div class="section" id="travis-cron-jobs">
 <h2>Travis Cron jobs<a class="headerlink" href="#travis-cron-jobs" title="Permalink to this headline">¶</a></h2>
 <p>From <a class="reference external" href="https://docs.travis-ci.com/user/cron-jobs">https://docs.travis-ci.com/user/cron-jobs</a>: Travis CI cron jobs work
@@ -262,7 +273,7 @@ to blame the PR author for the Travis failure.</p>
 <p>The definition of what gets run in the Cron job is done in the .travis.yml
 config file, exactly the same way as the other Travis jobs. We use a <code class="docutils literal"><span class="pre">if:</span> <span class="pre">type</span>
 <span class="pre">=</span> <span class="pre">cron</span></code> filter in order for the build to be run only in Cron jobs.</p>
-<p>The branch targetted by the Cron job and the frequency of the Cron job is set
+<p>The branch targeted by the Cron job and the frequency of the Cron job is set
 via the web UI at <a class="reference external" href="https://www.travis-ci.org/scikit-learn/scikit-learn/settings">https://www.travis-ci.org/scikit-learn/scikit-learn/settings</a>.</p>
 </div>
 </div>
@@ -276,7 +287,7 @@ via the web UI at <a class="reference external" href="https://www.travis-ci.org/
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/developers/maintainer.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

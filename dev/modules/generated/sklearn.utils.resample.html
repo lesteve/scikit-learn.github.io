@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="sklearn.utils.safe_indexing" href="sklearn.utils.safe_indexing.html" />
-    <link rel="prev" title="sklearn.utils.indexable" href="sklearn.utils.indexable.html" />
+    <link rel="prev" title="sklearn.utils.murmurhash3_32" href="sklearn.utils.murmurhash3_32.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -127,14 +130,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="sklearn.utils.indexable.html"
+        <a href="sklearn.utils.murmurhash3_32.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         sklearn.utils...
         </span>
             <span class="hiddenrellink">
-            sklearn.utils.indexable
+            sklearn.utils.murmurhash3_32
             </span>
         </a>
         </div>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.utils" title="sklearn.utils"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.utils</span></code></a>.resample<a class="headerlink" href="#sklearn-utils-resample" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.utils.resample">
-<code class="descclassname">sklearn.utils.</code><code class="descname">resample</code><span class="sig-paren">(</span><em>*arrays</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/37ce9ae/sklearn/utils/__init__.py#L167"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.utils.resample" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.utils.</code><code class="descname">resample</code><span class="sig-paren">(</span><em>*arrays</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/utils/__init__.py#L167"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.utils.resample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resample arrays or sparse matrices in a consistent way</p>
 <p>The default strategy implements one step of the bootstrapping
 procedure.</p>
@@ -258,18 +261,18 @@ are not impacted.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">resample</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">X_sparse</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X_sparse</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
-<span class="go">array([[ 1.,  0.],</span>
-<span class="go">       [ 2.,  1.],</span>
-<span class="go">       [ 1.,  0.]])</span>
+<span class="go">array([[1., 0.],</span>
+<span class="go">       [2., 1.],</span>
+<span class="go">       [1., 0.]])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_sparse</span>                   
 <span class="go">&lt;3x2 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
 <span class="go">    with 4 stored elements in Compressed Sparse Row format&gt;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_sparse</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 1.,  0.],</span>
-<span class="go">       [ 2.,  1.],</span>
-<span class="go">       [ 1.,  0.]])</span>
+<span class="go">array([[1., 0.],</span>
+<span class="go">       [2., 1.],</span>
+<span class="go">       [1., 0.]])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
 <span class="go">array([0, 1, 0])</span>
@@ -291,13 +294,13 @@ are not impacted.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.utils.resample.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="sklearn.utils.indexable.html">Previous
+      <a href="sklearn.utils.murmurhash3_32.html">Previous
       </a>
     </div>
     <div class="buttonNext">

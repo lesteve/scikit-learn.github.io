@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_applications_plot_tomography_l1_reconstruction.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_applications_plot_tomography_l1_reconstruction.py:
 
@@ -42,7 +46,7 @@ contributed to fewer projections than the central disk.
 
 
 .. image:: /auto_examples/applications/images/sphx_glr_plot_tomography_l1_reconstruction_001.png
-    :align: center
+    :class: sphx-glr-single-img
 
 
 
@@ -50,6 +54,7 @@ contributed to fewer projections than the central disk.
 
 .. code-block:: python
 
+    from __future__ import division
 
     print(__doc__)
 
@@ -66,7 +71,7 @@ contributed to fewer projections than the central disk.
 
     def _weights(x, dx=1, orig=0):
         x = np.ravel(x)
-        floor_x = np.floor((x - orig) / dx)
+        floor_x = np.floor((x - orig) / dx).astype(np.int64)
         alpha = (x - orig - floor_x * dx) / dx
         return np.hstack((floor_x, floor_x + 1)), np.hstack((1 - alpha, alpha))
 
@@ -128,7 +133,7 @@ contributed to fewer projections than the central disk.
 
     # Generate synthetic images, and projections
     l = 128
-    proj_operator = build_projection_operator(l, l / 7.)
+    proj_operator = build_projection_operator(l, l // 7)
     data = generate_synthetic_data()
     proj = proj_operator * data.ravel()[:, np.newaxis]
     proj += 0.15 * np.random.randn(*proj.shape)
@@ -164,13 +169,23 @@ contributed to fewer projections than the central disk.
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  8.393 seconds)
+**Total running time of the script:** ( 0 minutes  8.940 seconds)
 
+
+.. _sphx_glr_download_auto_examples_applications_plot_tomography_l1_reconstruction.py:
 
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/applications/plot_tomography_l1_reconstruction.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

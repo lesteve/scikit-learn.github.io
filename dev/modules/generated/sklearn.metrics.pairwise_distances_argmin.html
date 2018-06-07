@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.pairwise_distances_argmin<a class="headerlink" href="#sklearn-metrics-pairwise-distances-argmin" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.metrics.pairwise_distances_argmin">
-<code class="descclassname">sklearn.metrics.</code><code class="descname">pairwise_distances_argmin</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em>, <em>axis=1</em>, <em>metric='euclidean'</em>, <em>batch_size=500</em>, <em>metric_kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/metrics/pairwise.py#L389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.pairwise_distances_argmin" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.metrics.</code><code class="descname">pairwise_distances_argmin</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em>, <em>axis=1</em>, <em>metric='euclidean'</em>, <em>batch_size=None</em>, <em>metric_kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/metrics/pairwise.py#L365"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.pairwise_distances_argmin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute minimum distances between one point and a set of points.</p>
 <p>This function computes for each row in X, the index of the row of Y which
 is closest (according to the specified distance).</p>
@@ -254,11 +257,10 @@ metrics.</p>
 </div></blockquote>
 <p><strong>batch_size</strong> : integer</p>
 <blockquote>
-<div><p>To reduce memory consumption over the naive solution, data are
-processed in batches, comprising batch_size rows of X and
-batch_size rows of Y. The default value is quite conservative, but
-can be changed for fine-tuning. The larger the number, the larger the
-memory usage.</p>
+<div><div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.20: </span>Deprecated for removal in 0.22.
+Use sklearn.set_config(working_memory=…) instead.</p>
+</div>
 </div></blockquote>
 <p><strong>metric_kwargs</strong> : dict</p>
 <blockquote>
@@ -302,7 +304,7 @@ memory usage.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.metrics.pairwise_distances_argmin.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

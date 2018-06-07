@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.RidgeClassifier<a class="headerlink" href="#sklearn-linear-model-ridgeclassifier" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.linear_model.RidgeClassifier">
-<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">RidgeClassifier</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>max_iter=None</em>, <em>tol=0.001</em>, <em>class_weight=None</em>, <em>solver='auto'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/ridge.py#L675"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">RidgeClassifier</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>max_iter=None</em>, <em>tol=0.001</em>, <em>class_weight=None</em>, <em>solver='auto'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/linear_model/ridge.py#L671"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Classifier using Ridge regression.</p>
 <p>Read more in the <a class="reference internal" href="../linear_model.html#ridge-regression"><span class="std std-ref">User Guide</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -272,8 +275,8 @@ more appropriate than ‘cholesky’ for large-scale data
 (possibility to set <cite>tol</cite> and <cite>max_iter</cite>).</p>
 </li>
 <li><p class="first">‘lsqr’ uses the dedicated regularized least-squares routine
-scipy.sparse.linalg.lsqr. It is the fastest but may not be available
-in old scipy versions. It also uses an iterative procedure.</p>
+scipy.sparse.linalg.lsqr. It is the fastest and uses an iterative
+procedure.</p>
 </li>
 <li><p class="first">‘sag’ uses a Stochastic Average Gradient descent, and ‘saga’ uses
 its unbiased and more flexible version named SAGA. Both methods
@@ -363,12 +366,12 @@ advantage of the multi-variate response support in Ridge.</p>
 </table>
 <dl class="method">
 <dt id="sklearn.linear_model.RidgeClassifier.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>max_iter=None</em>, <em>tol=0.001</em>, <em>class_weight=None</em>, <em>solver='auto'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/ridge.py#L785"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>fit_intercept=True</em>, <em>normalize=False</em>, <em>copy_X=True</em>, <em>max_iter=None</em>, <em>tol=0.001</em>, <em>class_weight=None</em>, <em>solver='auto'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/linear_model/ridge.py#L782"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RidgeClassifier.decision_function">
-<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/base.py#L278"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.decision_function" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/linear_model/base.py#L278"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.decision_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict confidence scores for samples.</p>
 <p>The confidence score for a sample is the signed distance of that
 sample to the hyperplane.</p>
@@ -396,7 +399,7 @@ class would be predicted.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RidgeClassifier.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/ridge.py#L794"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/linear_model/ridge.py#L791"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit Ridge regression model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -428,7 +431,7 @@ class would be predicted.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RidgeClassifier.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -453,7 +456,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RidgeClassifier.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/linear_model/base.py#L311"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/linear_model/base.py#L311"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict class labels for samples in X.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -477,7 +480,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RidgeClassifier.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L310"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L310"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the mean accuracy on the given test data and labels.</p>
 <p>In multi-label classification, this is the subset accuracy
 which is a harsh metric since you require for each sample that
@@ -512,7 +515,7 @@ each label set be correctly predicted.</p>
 
 <dl class="method">
 <dt id="sklearn.linear_model.RidgeClassifier.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RidgeClassifier.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -533,8 +536,8 @@ component of a nested object.</p>
 <div class="section" id="examples-using-sklearn-linear-model-ridgeclassifier">
 <h2>Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.RidgeClassifier</span></code><a class="headerlink" href="#examples-using-sklearn-linear-model-ridgeclassifier" title="Permalink to this headline">¶</a></h2>
 <div class="sphx-glr-thumbcontainer" tooltip="This is an example showing how scikit-learn can be used to classify documents by topics using a..."><div class="figure" id="id1">
-<img alt="../../_images/sphx_glr_document_classification_20newsgroups_thumb.png" src="../../_images/sphx_glr_document_classification_20newsgroups_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/document_classification_20newsgroups.html#sphx-glr-auto-examples-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></span></p>
+<img alt="../../_images/sphx_glr_plot_document_classification_20newsgroups_thumb.png" src="../../_images/sphx_glr_plot_document_classification_20newsgroups_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/plot_document_classification_20newsgroups.html#sphx-glr-auto-examples-text-plot-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></span></p>
 </div>
 </div><div class="clearer"></div></div>
 </div>
@@ -548,7 +551,7 @@ component of a nested object.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.linear_model.RidgeClassifier.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

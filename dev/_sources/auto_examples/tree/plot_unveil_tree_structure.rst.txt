@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_tree_plot_unveil_tree_structure.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_tree_plot_unveil_tree_structure.py:
 
@@ -25,17 +29,20 @@ show how to retrieve:
 
 .. rst-class:: sphx-glr-script-out
 
- Out::
+ Out:
+
+ .. code-block:: none
 
     The binary tree structure has 5 nodes and has the following tree structure:
-    node=0 test node: go to node 1 if X[:, 3] <= 0.800000011921 else to node 2.
+    node=0 test node: go to node 1 if X[:, 3] <= 0.800000011920929 else to node 2.
             node=1 leaf node.
-            node=2 test node: go to node 3 if X[:, 2] <= 4.94999980927 else to node 4.
+            node=2 test node: go to node 3 if X[:, 2] <= 4.950000047683716 else to node 4.
                     node=3 leaf node.
                     node=4 leaf node.
 
     Rules used to predict sample 0: 
-    decision id node 4 : (X_test[0, -2] (= 5.1) > -2.0)
+    decision id node 0 : (X_test[0, 3] (= 2.4) > 0.800000011920929)
+    decision id node 2 : (X_test[0, 2] (= 5.1) > 4.950000047683716)
 
     The following samples [0, 1] share the node [0 2] in the tree
     It is 40.0 % of all nodes.
@@ -139,7 +146,7 @@ show how to retrieve:
 
     print('Rules used to predict sample %s: ' % sample_id)
     for node_id in node_index:
-        if leave_id[sample_id] != node_id:
+        if leave_id[sample_id] == node_id:
             continue
 
         if (X_test[sample_id, feature[node_id]] <= threshold[node_id]):
@@ -169,10 +176,20 @@ show how to retrieve:
 **Total running time of the script:** ( 0 minutes  0.002 seconds)
 
 
+.. _sphx_glr_download_auto_examples_tree_plot_unveil_tree_structure.py:
+
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/tree/plot_unveil_tree_structure.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

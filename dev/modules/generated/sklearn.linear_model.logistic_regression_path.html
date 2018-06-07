@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="sklearn.linear_model.orthogonal_mp" href="sklearn.linear_model.orthogonal_mp.html" />
-    <link rel="prev" title="sklearn.linear_model.lasso_stability_path" href="sklearn.linear_model.lasso_stability_path.html" />
+    <link rel="prev" title="sklearn.linear_model.lasso_path" href="sklearn.linear_model.lasso_path.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -127,14 +130,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="sklearn.linear_model.lasso_stability_path.html"
+        <a href="sklearn.linear_model.lasso_path.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         sklearn.linea...
         </span>
             <span class="hiddenrellink">
-            sklearn.linear_model.lasso_stability_path
+            sklearn.linear_model.lasso_path
             </span>
         </a>
         </div>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.logistic_regression_path<a class="headerlink" href="#sklearn-linear-model-logistic-regression-path" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.linear_model.logistic_regression_path">
-<code class="descclassname">sklearn.linear_model.</code><code class="descname">logistic_regression_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>pos_class=None</em>, <em>Cs=10</em>, <em>fit_intercept=True</em>, <em>max_iter=100</em>, <em>tol=0.0001</em>, <em>verbose=0</em>, <em>solver='lbfgs'</em>, <em>coef=None</em>, <em>class_weight=None</em>, <em>dual=False</em>, <em>penalty='l2'</em>, <em>intercept_scaling=1.0</em>, <em>multi_class='ovr'</em>, <em>random_state=None</em>, <em>check_input=True</em>, <em>max_squared_sum=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/37ce9ae/sklearn/linear_model/logistic.py#L450"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.logistic_regression_path" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.linear_model.</code><code class="descname">logistic_regression_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>pos_class=None</em>, <em>Cs=10</em>, <em>fit_intercept=True</em>, <em>max_iter=100</em>, <em>tol=0.0001</em>, <em>verbose=0</em>, <em>solver='lbfgs'</em>, <em>coef=None</em>, <em>class_weight=None</em>, <em>dual=False</em>, <em>penalty='l2'</em>, <em>intercept_scaling=1.0</em>, <em>multi_class='ovr'</em>, <em>random_state=None</em>, <em>check_input=True</em>, <em>max_squared_sum=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/linear_model/logistic.py#L450"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.logistic_regression_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a Logistic Regression model for a list of regularization
 parameters.</p>
 <p>This is an implementation that uses the result of the previous model
@@ -300,8 +303,8 @@ To lessen the effect of regularization on synthetic feature weight
 <div><p>Multiclass option can be either ‘ovr’ or ‘multinomial’. If the option
 chosen is ‘ovr’, then a binary problem is fit for each label. Else
 the loss minimised is the multinomial loss fit across
-the entire probability distribution. Works only for the ‘lbfgs’ and
-‘newton-cg’ solvers.</p>
+the entire probability distribution. Does not work for ‘liblinear’
+solver.</p>
 </div></blockquote>
 <p><strong>random_state</strong> : int, RandomState instance or None, optional, default None</p>
 <blockquote>
@@ -366,13 +369,13 @@ with the others since this uses LIBLINEAR which penalizes the intercept.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.linear_model.logistic_regression_path.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="sklearn.linear_model.lasso_stability_path.html">Previous
+      <a href="sklearn.linear_model.lasso_path.html">Previous
       </a>
     </div>
     <div class="buttonNext">

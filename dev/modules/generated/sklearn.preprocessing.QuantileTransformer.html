@@ -30,11 +30,13 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="sklearn.preprocessing.RobustScaler" href="sklearn.preprocessing.RobustScaler.html" />
-    <link rel="prev" title="sklearn.preprocessing.PolynomialFeatures" href="sklearn.preprocessing.PolynomialFeatures.html" />
+    <link rel="prev" title="sklearn.preprocessing.PowerTransformer" href="sklearn.preprocessing.PowerTransformer.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -127,14 +130,14 @@
         <div class="rel">
     
         <div class="rellink">
-        <a href="sklearn.preprocessing.PolynomialFeatures.html"
+        <a href="sklearn.preprocessing.PowerTransformer.html"
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
         sklearn.prepr...
         </span>
             <span class="hiddenrellink">
-            sklearn.preprocessing.PolynomialFeatures
+            sklearn.preprocessing.PowerTransformer
             </span>
         </a>
         </div>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.QuantileTransformer<a class="headerlink" href="#sklearn-preprocessing-quantiletransformer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.preprocessing.QuantileTransformer">
-<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">QuantileTransformer</code><span class="sig-paren">(</span><em>n_quantiles=1000</em>, <em>output_distribution='uniform'</em>, <em>ignore_implicit_zeros=False</em>, <em>subsample=100000</em>, <em>random_state=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L2100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">QuantileTransformer</code><span class="sig-paren">(</span><em>n_quantiles=1000</em>, <em>output_distribution='uniform'</em>, <em>ignore_implicit_zeros=False</em>, <em>subsample=100000</em>, <em>random_state=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L2124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform features using quantiles information.</p>
 <p>This method transforms the features to follow a uniform or a normal
 distribution. Therefore, for a given feature, this transformation tends
@@ -279,13 +282,17 @@ input is already a numpy array).</p>
 <dl class="last docutils">
 <dt><a class="reference internal" href="sklearn.preprocessing.quantile_transform.html#sklearn.preprocessing.quantile_transform" title="sklearn.preprocessing.quantile_transform"><code class="xref py py-obj docutils literal"><span class="pre">quantile_transform</span></code></a></dt>
 <dd>Equivalent function without the estimator API.</dd>
+<dt><a class="reference internal" href="sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-obj docutils literal"><span class="pre">PowerTransformer</span></code></a></dt>
+<dd>Perform mapping to a normal distribution using a power transform.</dd>
 <dt><a class="reference internal" href="sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-obj docutils literal"><span class="pre">StandardScaler</span></code></a></dt>
-<dd>perform standardization that is faster, but less robust to outliers.</dd>
+<dd>Perform standardization that is faster, but less robust to outliers.</dd>
 <dt><a class="reference internal" href="sklearn.preprocessing.RobustScaler.html#sklearn.preprocessing.RobustScaler" title="sklearn.preprocessing.RobustScaler"><code class="xref py py-obj docutils literal"><span class="pre">RobustScaler</span></code></a></dt>
-<dd>perform robust standardization that removes the influence of outliers but does not put outliers and inliers on the same scale.</dd>
+<dd>Perform robust standardization that removes the influence of outliers but does not put outliers and inliers on the same scale.</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
+<p>NaNs are treated as missing values: disregarded in fit, and maintained in
+transform.</p>
 <p>For a comparison of the different scalers, transformers, and normalizers,
 see <a class="reference internal" href="../../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">examples/preprocessing/plot_all_scaling.py</span></a>.</p>
 <p class="rubric">Examples</p>
@@ -327,12 +334,12 @@ see <a class="reference internal" href="../../auto_examples/preprocessing/plot_a
 </table>
 <dl class="method">
 <dt id="sklearn.preprocessing.QuantileTransformer.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_quantiles=1000</em>, <em>output_distribution='uniform'</em>, <em>ignore_implicit_zeros=False</em>, <em>subsample=100000</em>, <em>random_state=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L2182"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_quantiles=1000</em>, <em>output_distribution='uniform'</em>, <em>ignore_implicit_zeros=False</em>, <em>subsample=100000</em>, <em>random_state=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L2211"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.QuantileTransformer.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L2263"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L2294"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the quantiles used for transforming.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -347,10 +354,7 @@ nonnegative if <cite>ignore_implicit_zeros</cite> is False.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self</strong> : object</p>
-<blockquote class="last">
-<div><p>Returns self</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> : object</p>
 </td>
 </tr>
 </tbody>
@@ -359,7 +363,7 @@ nonnegative if <cite>ignore_implicit_zeros</cite> is False.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.QuantileTransformer.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L479"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L482"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit to data, then transform it.</p>
 <p>Fits transformer to X and y with optional parameters fit_params
 and returns a transformed version of X.</p>
@@ -389,7 +393,7 @@ and returns a transformed version of X.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.QuantileTransformer.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -414,7 +418,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.QuantileTransformer.inverse_transform">
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L2450"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L2486"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Back-projection to the original space.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -441,7 +445,7 @@ nonnegative if <cite>ignore_implicit_zeros</cite> is False.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.QuantileTransformer.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -459,7 +463,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.QuantileTransformer.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L2429"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L2465"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.QuantileTransformer.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Feature-wise transformation of the data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -488,7 +492,11 @@ nonnegative if <cite>ignore_implicit_zeros</cite> is False.</p>
 
 <div class="section" id="examples-using-sklearn-preprocessing-quantiletransformer">
 <h2>Examples using <code class="docutils literal"><span class="pre">sklearn.preprocessing.QuantileTransformer</span></code><a class="headerlink" href="#examples-using-sklearn-preprocessing-quantiletransformer" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="Feature 0 (median income in a block) and feature 5 (number of households) of the `California ho..."><div class="figure" id="id1">
+<div class="sphx-glr-thumbcontainer" tooltip="In this example, we give an overview of the :class:`sklearn.compose.TransformedTargetRegressor`..."><div class="figure" id="id1">
+<img alt="../../_images/sphx_glr_plot_transformed_target_thumb.png" src="../../_images/sphx_glr_plot_transformed_target_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_transformed_target.html#sphx-glr-auto-examples-preprocessing-plot-transformed-target-py"><span class="std std-ref">Effect of transforming the targets in regression model</span></a></span></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Feature 0 (median income in a block) and feature 5 (number of households) of the `California ho..."><div class="figure" id="id2">
 <img alt="../../_images/sphx_glr_plot_all_scaling_thumb.png" src="../../_images/sphx_glr_plot_all_scaling_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">Compare the effect of different scalers on data with outliers</span></a></span></p>
 </div>
@@ -504,13 +512,13 @@ nonnegative if <cite>ignore_implicit_zeros</cite> is False.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.preprocessing.QuantileTransformer.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
     
     <div class="buttonPrevious">
-      <a href="sklearn.preprocessing.PolynomialFeatures.html">Previous
+      <a href="sklearn.preprocessing.PowerTransformer.html">Previous
       </a>
     </div>
     <div class="buttonNext">

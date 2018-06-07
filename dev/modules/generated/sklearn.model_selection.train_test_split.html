@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,7 +205,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.model_selection</span></code></a>.train_test_split<a class="headerlink" href="#sklearn-model-selection-train-test-split" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="sklearn.model_selection.train_test_split">
-<code class="descclassname">sklearn.model_selection.</code><code class="descname">train_test_split</code><span class="sig-paren">(</span><em>*arrays</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/model_selection/_split.py#L1920"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.train_test_split" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">sklearn.model_selection.</code><code class="descname">train_test_split</code><span class="sig-paren">(</span><em>*arrays</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/model_selection/_split.py#L1916"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.model_selection.train_test_split" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split arrays or matrices into random train and test subsets</p>
 <p>Quick utility that wraps input validation and
 <code class="docutils literal"><span class="pre">next(ShuffleSplit().split(X,</span> <span class="pre">y))</span></code> and application to input data
@@ -218,7 +221,7 @@ oneliner.</p>
 <div><p>Allowed inputs are lists, numpy arrays, scipy-sparse
 matrices or pandas dataframes.</p>
 </div></blockquote>
-<p><strong>test_size</strong> : float, int, None, optional</p>
+<p><strong>test_size</strong> : float, int or None, optional (default=0.25)</p>
 <blockquote>
 <div><p>If float, should be between 0.0 and 1.0 and represent the proportion
 of the dataset to include in the test split. If int, represents the
@@ -228,7 +231,7 @@ The default will change in version 0.21. It will remain 0.25 only
 if <code class="docutils literal"><span class="pre">train_size</span></code> is unspecified, otherwise it will complement
 the specified <code class="docutils literal"><span class="pre">train_size</span></code>.</p>
 </div></blockquote>
-<p><strong>train_size</strong> : float, int, or None, default None</p>
+<p><strong>train_size</strong> : float, int, or None, (default=None)</p>
 <blockquote>
 <div><p>If float, should be between 0.0 and 1.0 and represent the
 proportion of the dataset to include in the train split. If
@@ -247,7 +250,7 @@ by <cite>np.random</cite>.</p>
 <div><p>Whether or not to shuffle the data before splitting. If shuffle=False
 then stratify must be None.</p>
 </div></blockquote>
-<p><strong>stratify</strong> : array-like or None (default is None)</p>
+<p><strong>stratify</strong> : array-like or None (default=None)</p>
 <blockquote>
 <div><p>If not None, data is split in a stratified fashion, using this as
 the class labels.</p>
@@ -393,11 +396,15 @@ input type.</p>
 <img alt="../../_images/sphx_glr_plot_function_transformer_thumb.png" src="../../_images/sphx_glr_plot_function_transformer_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_function_transformer.html#sphx-glr-auto-examples-preprocessing-plot-function-transformer-py"><span class="std std-ref">Using FunctionTransformer to select columns</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Feature scaling though standardization (or Z-score normalization) can be an important preproces..."><div class="figure" id="id23">
+</div><div class="sphx-glr-thumbcontainer" tooltip="Feature scaling through standardization (or Z-score normalization) can be an important preproce..."><div class="figure" id="id23">
 <img alt="../../_images/sphx_glr_plot_scaling_importance_thumb.png" src="../../_images/sphx_glr_plot_scaling_importance_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_scaling_importance.html#sphx-glr-auto-examples-preprocessing-plot-scaling-importance-py"><span class="std std-ref">Importance of Feature Scaling</span></a></span></p>
 </div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="The decision tree structure can be analysed to gain further insight on the relation between the..."><div class="figure" id="id24">
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example, we give an overview of the :class:`sklearn.compose.TransformedTargetRegressor`..."><div class="figure" id="id24">
+<img alt="../../_images/sphx_glr_plot_transformed_target_thumb.png" src="../../_images/sphx_glr_plot_transformed_target_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_transformed_target.html#sphx-glr-auto-examples-preprocessing-plot-transformed-target-py"><span class="std std-ref">Effect of transforming the targets in regression model</span></a></span></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="The decision tree structure can be analysed to gain further insight on the relation between the..."><div class="figure" id="id25">
 <img alt="../../_images/sphx_glr_plot_unveil_tree_structure_thumb.png" src="../../_images/sphx_glr_plot_unveil_tree_structure_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/tree/plot_unveil_tree_structure.html#sphx-glr-auto-examples-tree-plot-unveil-tree-structure-py"><span class="std std-ref">Understanding the decision tree structure</span></a></span></p>
 </div>
@@ -413,7 +420,7 @@ input type.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.model_selection.train_test_split.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

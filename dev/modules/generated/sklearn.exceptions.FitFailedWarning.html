@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -199,7 +202,7 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.exceptions" title="sklearn.exceptions"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.exceptions</span></code></a>.FitFailedWarning<a class="headerlink" href="#sklearn-exceptions-fitfailedwarning" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.exceptions.FitFailedWarning">
-<em class="property">class </em><code class="descclassname">sklearn.exceptions.</code><code class="descname">FitFailedWarning</code><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/exceptions.py#L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.exceptions.FitFailedWarning" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.exceptions.</code><code class="descname">FitFailedWarning</code><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/474b5e0/sklearn/exceptions.py#L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.exceptions.FitFailedWarning" title="Permalink to this definition">¶</a></dt>
 <dd><p>Warning class used if there is an error while fitting the estimator.</p>
 <p>This Warning is used in meta estimators GridSearchCV and RandomizedSearchCV
 and the cross-validation helper function cross_val_score to warn when there
@@ -222,8 +225,8 @@ is an error while fitting the estimator.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.exceptions</span> <span class="k">import</span> <span class="n">FitFailedWarning</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="n">FitFailedWarning</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gs</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]},</span> <span class="n">error_score</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gs</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]},</span> <span class="n">error_score</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">(</span><span class="n">record</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="n">gs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>   <span class="c1"># This will raise a ValueError since C is &lt; 0</span>
@@ -231,9 +234,9 @@ is an error while fitting the estimator.</p>
 <span class="gp">... </span>        <span class="k">pass</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="p">))</span>
 <span class="gp">... </span>
-<span class="go">FitFailedWarning(&quot;Classifier fit failed. The score on this train-test</span>
-<span class="go">partition for these parameters will be set to 0.000000. Details:</span>
-<span class="go">\nValueError(&#39;Penalty term must be positive; got (C=-2)&#39;,)&quot;,)</span>
+<span class="go">FitFailedWarning(&#39;Estimator fit failed. The score on this train-test</span>
+<span class="go">partition for these parameters will be set to 0.000000.</span>
+<span class="go">Details: \nValueError: Penalty term must be positive; got (C=-2)\n&#39;,)</span>
 </pre></div>
 </div>
 <div class="versionchanged">
@@ -271,7 +274,7 @@ set self.__traceback__ to tb and return self.</p>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.exceptions.FitFailedWarning.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

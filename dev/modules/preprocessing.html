@@ -30,10 +30,12 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4.4. Unsupervised dimensionality reduction" href="unsupervised_reduction.html" />
+    <link rel="next" title="4.4. Imputation of missing values" href="impute.html" />
     <link rel="prev" title="4.2. Feature extraction" href="feature_extraction.html" />
   
   
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -142,14 +145,14 @@
             &nbsp;
             </div>
         <div class="rellink">
-        <a href="unsupervised_reduction.html"
+        <a href="impute.html"
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        4.4. Unsuperv...
+        4.4. Imputati...
         </span>
             <span class="hiddenrellink">
-            4.4. Unsupervised dimensionality reduction
+            4.4. Imputation of missing values
             </span>
         </a>
         </div>
@@ -185,7 +188,11 @@
 <li><a class="reference internal" href="#centering-kernel-matrices">4.3.1.4. Centering kernel matrices</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#non-linear-transformation">4.3.2. Non-linear transformation</a></li>
+<li><a class="reference internal" href="#non-linear-transformation">4.3.2. Non-linear transformation</a><ul>
+<li><a class="reference internal" href="#mapping-to-a-uniform-distribution">4.3.2.1. Mapping to a Uniform distribution</a></li>
+<li><a class="reference internal" href="#mapping-to-a-gaussian-distribution">4.3.2.2. Mapping to a Gaussian distribution</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#normalization">4.3.3. Normalization</a></li>
 <li><a class="reference internal" href="#binarization">4.3.4. Binarization</a><ul>
 <li><a class="reference internal" href="#feature-binarization">4.3.4.1. Feature binarization</a></li>
@@ -258,10 +265,10 @@ operation on a single array-like dataset:</p>
 </div>
 <p>Scaled data has zero mean and unit variance:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">array([ 0.,  0.,  0.])</span>
+<span class="go">array([0., 0., 0.])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">array([ 1.,  1.,  1.])</span>
+<span class="go">array([1., 1., 1.])</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">preprocessing</span></code> module further provides a utility class
@@ -275,10 +282,10 @@ This class is hence suitable for use in the early steps of a
 <span class="go">StandardScaler(copy=True, with_mean=True, with_std=True)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">mean_</span>                                      
-<span class="go">array([ 1. ...,  0. ...,  0.33...])</span>
+<span class="go">array([1. ..., 0. ..., 0.33...])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">scale_</span>                                       
-<span class="go">array([ 0.81...,  0.81...,  1.24...])</span>
+<span class="go">array([0.81..., 0.81..., 1.24...])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>                           
 <span class="go">array([[ 0.  ..., -1.22...,  1.33...],</span>
@@ -313,15 +320,15 @@ standard deviations of features and preserving zero entries in sparse data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">min_max_scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_minmax</span> <span class="o">=</span> <span class="n">min_max_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_minmax</span>
-<span class="go">array([[ 0.5       ,  0.        ,  1.        ],</span>
-<span class="go">       [ 1.        ,  0.5       ,  0.33333333],</span>
-<span class="go">       [ 0.        ,  1.        ,  0.        ]])</span>
+<span class="go">array([[0.5       , 0.        , 1.        ],</span>
+<span class="go">       [1.        , 0.5       , 0.33333333],</span>
+<span class="go">       [0.        , 1.        , 0.        ]])</span>
 </pre></div>
 </div>
 <p>The same instance of the transformer can then be applied to some new test data
 unseen during the fit call: the same scaling and shifting operations will be
 applied to be consistent with the transformation performed on the train data:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">4.</span><span class="p">]])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">4.</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_minmax</span> <span class="o">=</span> <span class="n">min_max_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_minmax</span>
 <span class="go">array([[-1.5       ,  0.        ,  1.66666667]])</span>
@@ -330,10 +337,10 @@ applied to be consistent with the transformation performed on the train data:</p
 <p>It is possible to introspect the scaler attributes to find about the exact
 nature of the transformation learned on the training data:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">min_max_scaler</span><span class="o">.</span><span class="n">scale_</span>                             
-<span class="go">array([ 0.5       ,  0.5       ,  0.33...])</span>
+<span class="go">array([0.5       , 0.5       , 0.33...])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">min_max_scaler</span><span class="o">.</span><span class="n">min_</span>                               
-<span class="go">array([ 0.        ,  0.5       ,  0.33...])</span>
+<span class="go">array([0.        , 0.5       , 0.33...])</span>
 </pre></div>
 </div>
 <p>If <a class="reference internal" href="generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler" title="sklearn.preprocessing.MinMaxScaler"><code class="xref py py-class docutils literal"><span class="pre">MinMaxScaler</span></code></a> is given an explicit <code class="docutils literal"><span class="pre">feature_range=(min,</span> <span class="pre">max)</span></code> the
@@ -363,7 +370,7 @@ that is already centered at zero or sparse data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_maxabs</span>                 
 <span class="go">array([[-1.5, -1. ,  2. ]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">max_abs_scaler</span><span class="o">.</span><span class="n">scale_</span>         
-<span class="go">array([ 2.,  1.,  2.])</span>
+<span class="go">array([2.,  1.,  2.])</span>
 </pre></div>
 </div>
 <p>As with <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal"><span class="pre">scale</span></code></a>, the module further provides convenience functions
@@ -423,20 +430,22 @@ useful in some specific case.</p>
 </div>
 <div class="section" id="centering-kernel-matrices">
 <span id="kernel-centering"></span><h3>4.3.1.4. Centering kernel matrices<a class="headerlink" href="#centering-kernel-matrices" title="Permalink to this headline">¶</a></h3>
-<p>If you have a kernel matrix of a kernel <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> that computes a dot product
-in a feature space defined by function <img class="math" src="../_images/math/4efb887d0d27f3caa83f8913c0426dc73021d3e0.png" alt="phi"/>,
+<p>If you have a kernel matrix of a kernel <span class="math">\(K\)</span> that computes a dot product
+in a feature space defined by function <span class="math">\(phi\)</span>,
 a <a class="reference internal" href="generated/sklearn.preprocessing.KernelCenterer.html#sklearn.preprocessing.KernelCenterer" title="sklearn.preprocessing.KernelCenterer"><code class="xref py py-class docutils literal"><span class="pre">KernelCenterer</span></code></a> can transform the kernel matrix
 so that it contains inner products in the feature space
-defined by <img class="math" src="../_images/math/4efb887d0d27f3caa83f8913c0426dc73021d3e0.png" alt="phi"/> followed by removal of the mean in that space.</p>
+defined by <span class="math">\(phi\)</span> followed by removal of the mean in that space.</p>
 </div>
 </div>
 <div class="section" id="non-linear-transformation">
 <span id="preprocessing-transformer"></span><h2>4.3.2. Non-linear transformation<a class="headerlink" href="#non-linear-transformation" title="Permalink to this headline">¶</a></h2>
-<p>Like scalers, <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> puts each feature into the same
-range or distribution. However, by performing a rank transformation, it smooths
-out unusual distributions and is less influenced by outliers than scaling
-methods. It does, however, distort correlations and distances within and across
-features.</p>
+<div class="section" id="mapping-to-a-uniform-distribution">
+<h3>4.3.2.1. Mapping to a Uniform distribution<a class="headerlink" href="#mapping-to-a-uniform-distribution" title="Permalink to this headline">¶</a></h3>
+<p>Like scalers, <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> puts all features into the same,
+known range or distribution. However, by performing a rank transformation, it
+smooths out unusual distributions and is less influenced by outliers than
+scaling methods. It does, however, distort correlations and distances within
+and across features.</p>
 <p><a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.quantile_transform.html#sklearn.preprocessing.quantile_transform" title="sklearn.preprocessing.quantile_transform"><code class="xref py py-func docutils literal"><span class="pre">quantile_transform</span></code></a> provide a
 non-parametric transformation based on the quantile function to map the data to
 a uniform distribution with values between 0 and 1:</p>
@@ -469,25 +478,68 @@ previously defined:</p>
 <span class="go">array([ 0.01...,  0.25...,  0.46...,  0.60... ,  0.94...])</span>
 </pre></div>
 </div>
-<p>It is also possible to map the transformed data to a normal distribution by
-setting <code class="docutils literal"><span class="pre">output_distribution='normal'</span></code>:</p>
+</div>
+<div class="section" id="mapping-to-a-gaussian-distribution">
+<h3>4.3.2.2. Mapping to a Gaussian distribution<a class="headerlink" href="#mapping-to-a-gaussian-distribution" title="Permalink to this headline">¶</a></h3>
+<p>In many modeling scenarios, normality of the features in a dataset is desirable.
+Power transforms are a family of parametric, monotonic transformations that aim
+to map data from any distribution to as close to a Gaussian distribution as
+possible in order to stabilize variance and minimize skewness.</p>
+<p><a class="reference internal" href="generated/sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-class docutils literal"><span class="pre">PowerTransformer</span></code></a> currently provides one such power transformation,
+the Box-Cox transform. The Box-Cox transform is given by:</p>
+<div class="math">
+\[\begin{split}y_i^{(\lambda)} =
+\begin{cases}
+\dfrac{y_i^\lambda - 1}{\lambda} &amp; \text{if } \lambda \neq 0, \\[8pt]
+\ln{(y_i)} &amp; \text{if } \lambda = 0,
+\end{cases}\end{split}\]</div>
+<p>Box-Cox can only be applied to strictly positive data. The transformation is
+parameterized by <span class="math">\(\lambda\)</span>, which is determined through maximum likelihood
+estimation. Here is an example of using Box-Cox to map samples drawn from a
+lognormal distribution to a normal distribution:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">PowerTransformer</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;box-cox&#39;</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">616</span><span class="p">)</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span>                                         
+<span class="go">array([[1.28..., 1.18..., 0.84...],</span>
+<span class="go">       [0.94..., 1.60..., 0.38...],</span>
+<span class="go">       [1.35..., 0.21..., 1.09...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_lognormal</span><span class="p">)</span>                   
+<span class="go">array([[ 0.49...,  0.17..., -0.15...],</span>
+<span class="go">       [-0.05...,  0.58..., -0.57...],</span>
+<span class="go">       [ 0.69..., -0.84...,  0.10...]])</span>
+</pre></div>
+</div>
+<p>While the above example sets the <cite>standardize</cite> option to <cite>False</cite>,
+<a class="reference internal" href="generated/sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-class docutils literal"><span class="pre">PowerTransformer</span></code></a> will apply zero-mean, unit-variance normalization
+to the transformed output by default.</p>
+<p>Below are examples of Box-Cox applied to various probability distributions.
+Note that when applied to certain distributions, Box-Cox achieves very
+Gaussian-like results, but with others, it is ineffective. This highlights
+the importance of visualizing the data before and after transformation.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/preprocessing/plot_power_transformer.html"><img alt="../_images/sphx_glr_plot_power_transformer_0011.png" src="../_images/sphx_glr_plot_power_transformer_0011.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>It is also possible to map data to a normal distribution using
+<a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal"><span class="pre">QuantileTransformer</span></code></a> by setting <code class="docutils literal"><span class="pre">output_distribution='normal'</span></code>.
+Using the earlier example with the iris dataset:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">QuantileTransformer</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">output_distribution</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span><span class="o">.</span><span class="n">quantiles_</span> 
-<span class="go">array([[ 4.3...,   2...,     1...,     0.1...],</span>
-<span class="go">       [ 4.31...,  2.02...,  1.01...,  0.1...],</span>
-<span class="go">       [ 4.32...,  2.05...,  1.02...,  0.1...],</span>
+<span class="go">array([[4.3...,   2...,     1...,     0.1...],</span>
+<span class="go">       [4.31...,  2.02...,  1.01...,  0.1...],</span>
+<span class="go">       [4.32...,  2.05...,  1.02...,  0.1...],</span>
 <span class="go">       ...,</span>
-<span class="go">       [ 7.84...,  4.34...,  6.84...,  2.5...],</span>
-<span class="go">       [ 7.87...,  4.37...,  6.87...,  2.5...],</span>
-<span class="go">       [ 7.9...,   4.4...,   6.9...,   2.5...]])</span>
+<span class="go">       [7.84...,  4.34...,  6.84...,  2.5...],</span>
+<span class="go">       [7.87...,  4.37...,  6.87...,  2.5...],</span>
+<span class="go">       [7.9...,   4.4...,   6.9...,   2.5...]])</span>
 </pre></div>
 </div>
 <p>Thus the median of the input becomes the mean of the output, centered at 0. The
 normal output is clipped so that the input’s minimum and maximum —
 corresponding to the 1e-7 and 1 - 1e-7 quantiles respectively — do not
 become infinite under the transformation.</p>
+</div>
 </div>
 <div class="section" id="normalization">
 <span id="preprocessing-normalization"></span><h2>4.3.3. Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">¶</a></h2>
@@ -568,17 +620,17 @@ as each sample is treated independently of others:</p>
 <span class="go">Binarizer(copy=True, threshold=0.0)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">binarizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="go">array([[ 1.,  0.,  1.],</span>
-<span class="go">       [ 1.,  0.,  0.],</span>
-<span class="go">       [ 0.,  1.,  0.]])</span>
+<span class="go">array([[1., 0., 1.],</span>
+<span class="go">       [1., 0., 0.],</span>
+<span class="go">       [0., 1., 0.]])</span>
 </pre></div>
 </div>
 <p>It is possible to adjust the threshold of the binarizer:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binarizer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">Binarizer</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">1.1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">binarizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="go">array([[ 0.,  0.,  1.],</span>
-<span class="go">       [ 1.,  0.,  0.],</span>
-<span class="go">       [ 0.,  0.,  0.]])</span>
+<span class="go">array([[0., 0., 1.],</span>
+<span class="go">       [1., 0., 0.],</span>
+<span class="go">       [0., 0., 0.]])</span>
 </pre></div>
 </div>
 <p>As for the <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal"><span class="pre">StandardScaler</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal"><span class="pre">Normalizer</span></code></a> classes, the
@@ -615,7 +667,7 @@ new feature of integers (0 to n_categories - 1):</p>
 <span class="go">CategoricalEncoder(categories=&#39;auto&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
 <span class="go">          encoding=&#39;ordinal&#39;, handle_unknown=&#39;error&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]])</span>
-<span class="go">array([[ 0.,  1.,  1.]])</span>
+<span class="go">array([[0., 1., 1.]])</span>
 </pre></div>
 </div>
 <p>Such integer representation can, however, not be used directly with all
@@ -637,8 +689,8 @@ one of them 1, and all others 0.</p>
 <span class="go">          encoding=&#39;onehot&#39;, handle_unknown=&#39;error&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span>
 <span class="gp">... </span>               <span class="p">[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 1.,  0.,  0.,  1.,  0.,  1.],</span>
-<span class="go">       [ 0.,  1.,  1.,  0.,  0.,  1.]])</span>
+<span class="go">array([[1., 0., 0., 1., 0., 1.],</span>
+<span class="go">       [0., 1., 1., 0., 0., 1.]])</span>
 </pre></div>
 </div>
 <p>By default, the values each feature can take is inferred automatically
@@ -662,7 +714,7 @@ dataset:</p>
 <span class="go">          dtype=&lt;... &#39;numpy.float64&#39;&gt;, encoding=&#39;onehot&#39;,</span>
 <span class="go">          handle_unknown=&#39;error&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Chrome&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 1.,  0.,  0.,  1.,  0.,  0.,  1.,  0.,  0.,  0.]])</span>
+<span class="go">array([[1., 0., 0., 1., 0., 0., 1., 0., 0., 0.]])</span>
 </pre></div>
 </div>
 <p>If there is a possibility that the training data might have missing categorical
@@ -678,7 +730,7 @@ columns for this feature will be all zeros
 <span class="go">CategoricalEncoder(categories=&#39;auto&#39;, dtype=&lt;... &#39;numpy.float64&#39;&gt;,</span>
 <span class="go">          encoding=&#39;onehot&#39;, handle_unknown=&#39;ignore&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Chrome&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="go">array([[ 1.,  0.,  0.,  0.,  0.,  0.]])</span>
+<span class="go">array([[1., 0., 0., 0., 0., 0.]])</span>
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="feature_extraction.html#dict-feature-extraction"><span class="std std-ref">Loading features from dicts</span></a> for categorical features that are represented
@@ -686,51 +738,7 @@ as a dict, not as scalars.</p>
 </div>
 <div class="section" id="imputation-of-missing-values">
 <span id="imputation"></span><h2>4.3.6. Imputation of missing values<a class="headerlink" href="#imputation-of-missing-values" title="Permalink to this headline">¶</a></h2>
-<p>For various reasons, many real world datasets contain missing values, often
-encoded as blanks, NaNs or other placeholders. Such datasets however are
-incompatible with scikit-learn estimators which assume that all values in an
-array are numerical, and that all have and hold meaning. A basic strategy to use
-incomplete datasets is to discard entire rows and/or columns containing missing
-values. However, this comes at the price of losing data which may be valuable
-(even though incomplete). A better strategy is to impute the missing values,
-i.e., to infer them from the known part of the data.</p>
-<p>The <a class="reference internal" href="generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer" title="sklearn.preprocessing.Imputer"><code class="xref py py-class docutils literal"><span class="pre">Imputer</span></code></a> class provides basic strategies for imputing missing
-values, either using the mean, the median or the most frequent value of
-the row or column in which the missing values are located. This class
-also allows for different missing values encodings.</p>
-<p>The following snippet demonstrates how to replace missing values,
-encoded as <code class="docutils literal"><span class="pre">np.nan</span></code>, using the mean value of the columns (axis 0)
-that contain the missing values:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">Imputer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span> <span class="o">=</span> <span class="n">Imputer</span><span class="p">(</span><span class="n">missing_values</span><span class="o">=</span><span class="s1">&#39;NaN&#39;</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
-<span class="go">Imputer(axis=0, copy=True, missing_values=&#39;NaN&#39;, strategy=&#39;mean&#39;, verbose=0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">imp</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>                           
-<span class="go">[[ 4.          2.        ]</span>
-<span class="go"> [ 6.          3.666...]</span>
-<span class="go"> [ 7.          6.        ]]</span>
-</pre></div>
-</div>
-<p>The <a class="reference internal" href="generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer" title="sklearn.preprocessing.Imputer"><code class="xref py py-class docutils literal"><span class="pre">Imputer</span></code></a> class also supports sparse matrices:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">csc_matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span> <span class="o">=</span> <span class="n">Imputer</span><span class="p">(</span><span class="n">missing_values</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="go">Imputer(axis=0, copy=True, missing_values=0, strategy=&#39;mean&#39;, verbose=0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">csc_matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">imp</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>                      
-<span class="go">[[ 4.          2.        ]</span>
-<span class="go"> [ 6.          3.666...]</span>
-<span class="go"> [ 7.          6.        ]]</span>
-</pre></div>
-</div>
-<p>Note that, here, missing values are encoded by 0 and are thus implicitly stored
-in the matrix. This format is thus suitable when there are many more missing
-values than observed values.</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer" title="sklearn.preprocessing.Imputer"><code class="xref py py-class docutils literal"><span class="pre">Imputer</span></code></a> can be used in a Pipeline as a way to build a composite
-estimator that supports imputation. See <a class="reference internal" href="../auto_examples/plot_missing_values.html#sphx-glr-auto-examples-plot-missing-values-py"><span class="std std-ref">Imputing missing values before building an estimator</span></a>.</p>
+<p>Tools for imputing missing values are discussed at <a class="reference internal" href="impute.html#impute"><span class="std std-ref">Imputation of missing values</span></a>.</p>
 </div>
 <div class="section" id="generating-polynomial-features">
 <span id="polynomial-features"></span><h2>4.3.7. Generating polynomial features<a class="headerlink" href="#generating-polynomial-features" title="Permalink to this headline">¶</a></h2>
@@ -744,12 +752,12 @@ estimator that supports imputation. See <a class="reference internal" href="../a
 <span class="go">       [4, 5]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                             
-<span class="go">array([[  1.,   0.,   1.,   0.,   0.,   1.],</span>
-<span class="go">       [  1.,   2.,   3.,   4.,   6.,   9.],</span>
-<span class="go">       [  1.,   4.,   5.,  16.,  20.,  25.]])</span>
+<span class="go">array([[ 1.,  0.,  1.,  0.,  0.,  1.],</span>
+<span class="go">       [ 1.,  2.,  3.,  4.,  6.,  9.],</span>
+<span class="go">       [ 1.,  4.,  5., 16., 20., 25.]])</span>
 </pre></div>
 </div>
-<p>The features of X have been transformed from <img class="math" src="../_images/math/a3467971af74cf4d0d715c8993728c938a210a8d.png" alt="(X_1, X_2)"/> to <img class="math" src="../_images/math/c0f6053cc12189d4a29b94ef5f4ab95ff6d5d564.png" alt="(1, X_1, X_2, X_1^2, X_1X_2, X_2^2)"/>.</p>
+<p>The features of X have been transformed from <span class="math">\((X_1, X_2)\)</span> to <span class="math">\((1, X_1, X_2, X_1^2, X_1X_2, X_2^2)\)</span>.</p>
 <p>In some cases, only interaction terms among features are required, and it can be gotten with the setting <code class="docutils literal"><span class="pre">interaction_only=True</span></code>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>                                                 
@@ -758,12 +766,12 @@ estimator that supports imputation. See <a class="reference internal" href="../a
 <span class="go">       [6, 7, 8]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">interaction_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                             
-<span class="go">array([[   1.,    0.,    1.,    2.,    0.,    0.,    2.,    0.],</span>
-<span class="go">       [   1.,    3.,    4.,    5.,   12.,   15.,   20.,   60.],</span>
-<span class="go">       [   1.,    6.,    7.,    8.,   42.,   48.,   56.,  336.]])</span>
+<span class="go">array([[  1.,   0.,   1.,   2.,   0.,   0.,   2.,   0.],</span>
+<span class="go">       [  1.,   3.,   4.,   5.,  12.,  15.,  20.,  60.],</span>
+<span class="go">       [  1.,   6.,   7.,   8.,  42.,  48.,  56., 336.]])</span>
 </pre></div>
 </div>
-<p>The features of X have been transformed from <img class="math" src="../_images/math/0c25c58cb40d41d9a34486a1e653a578865a172c.png" alt="(X_1, X_2, X_3)"/> to <img class="math" src="../_images/math/9d43c1bb5e85155c5244707ea22930734835c589.png" alt="(1, X_1, X_2, X_3, X_1X_2, X_1X_3, X_2X_3, X_1X_2X_3)"/>.</p>
+<p>The features of X have been transformed from <span class="math">\((X_1, X_2, X_3)\)</span> to <span class="math">\((1, X_1, X_2, X_3, X_1X_2, X_1X_3, X_2X_3, X_1X_2X_3)\)</span>.</p>
 <p>Note that polynomial features are used implicitly in <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_method">kernel methods</a> (e.g., <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA" title="sklearn.decomposition.KernelPCA"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.KernelPCA</span></code></a>) when using polynomial <a class="reference internal" href="svm.html#svm-kernels"><span class="std std-ref">Kernel functions</span></a>.</p>
 <p>See <a class="reference internal" href="../auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py"><span class="std std-ref">Polynomial interpolation</span></a> for Ridge regression using created polynomial features.</p>
 </div>
@@ -778,8 +786,8 @@ a transformer that applies a log transformation in a pipeline, do:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="go">array([[ 0.        ,  0.69314718],</span>
-<span class="go">       [ 1.09861229,  1.38629436]])</span>
+<span class="go">array([[0.        , 0.69314718],</span>
+<span class="go">       [1.09861229, 1.38629436]])</span>
 </pre></div>
 </div>
 <p>You can ensure that <code class="docutils literal"><span class="pre">func</span></code> and <code class="docutils literal"><span class="pre">inverse_func</span></code> are the inverse of each other
@@ -806,7 +814,7 @@ see <a class="reference internal" href="../auto_examples/preprocessing/plot_func
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/modules/preprocessing.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
@@ -816,7 +824,7 @@ see <a class="reference internal" href="../auto_examples/preprocessing/plot_func
       </a>
     </div>
     <div class="buttonNext">
-      <a href="unsupervised_reduction.html">Next
+      <a href="impute.html">Next
       </a>
     </div>
     

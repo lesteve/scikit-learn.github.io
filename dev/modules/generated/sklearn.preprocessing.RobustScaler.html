@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../../tutorial/index.html">Tutorials</a></li>
             <li><a href="../../user_guide.html">User guide</a></li>
             <li><a href="../classes.html">API</a></li>
+            <li><a href="../../glossary.html">Glossary</a></li>
             <li><a href="../../faq.html">FAQ</a></li>
             <li><a href="../../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -202,17 +205,16 @@
 <h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.RobustScaler<a class="headerlink" href="#sklearn-preprocessing-robustscaler" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="sklearn.preprocessing.RobustScaler">
-<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">RobustScaler</code><span class="sig-paren">(</span><em>with_centering=True</em>, <em>with_scaling=True</em>, <em>quantile_range=(25.0</em>, <em>75.0)</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L943"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">RobustScaler</code><span class="sig-paren">(</span><em>with_centering=True</em>, <em>with_scaling=True</em>, <em>quantile_range=(25.0</em>, <em>75.0)</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L957"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scale features using statistics that are robust to outliers.</p>
 <p>This Scaler removes the median and scales the data according to
 the quantile range (defaults to IQR: Interquartile Range).
 The IQR is the range between the 1st quartile (25th quantile)
 and the 3rd quartile (75th quantile).</p>
-<p>Centering and scaling happen independently on each feature (or each
-sample, depending on the <code class="docutils literal"><span class="pre">axis</span></code> argument) by computing the relevant
-statistics on the samples in the training set. Median and  interquartile
-range are then stored to be used on later data using the <code class="docutils literal"><span class="pre">transform</span></code>
-method.</p>
+<p>Centering and scaling happen independently on each feature by
+computing the relevant statistics on the samples in the training
+set. Median and interquartile range are then stored to be used on
+later data using the <code class="docutils literal"><span class="pre">transform</span></code> method.</p>
 <p>Standardization of a dataset is a common requirement for many
 machine learning estimators. Typically this is done by removing the mean
 and scaling to unit variance. However, outliers can often influence the
@@ -284,7 +286,7 @@ returned.</p>
 <p class="rubric">Notes</p>
 <p>For a comparison of the different scalers, transformers, and normalizers,
 see <a class="reference internal" href="../../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">examples/preprocessing/plot_all_scaling.py</span></a>.</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Median_(statistics">https://en.wikipedia.org/wiki/Median_(statistics</a>)
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Median">https://en.wikipedia.org/wiki/Median</a>
 <a class="reference external" href="https://en.wikipedia.org/wiki/Interquartile_range">https://en.wikipedia.org/wiki/Interquartile_range</a></p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -315,12 +317,12 @@ see <a class="reference internal" href="../../auto_examples/preprocessing/plot_a
 </table>
 <dl class="method">
 <dt id="sklearn.preprocessing.RobustScaler.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>with_centering=True</em>, <em>with_scaling=True</em>, <em>quantile_range=(25.0</em>, <em>75.0)</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1020"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>with_centering=True</em>, <em>with_scaling=True</em>, <em>quantile_range=(25.0</em>, <em>75.0)</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1033"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.RobustScaler.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1039"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1052"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the median and quantiles to be used for scaling.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -339,7 +341,7 @@ used for later scaling along the features axis.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.RobustScaler.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L479"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L482"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit to data, then transform it.</p>
 <p>Fits transformer to X and y with optional parameters fit_params
 and returns a transformed version of X.</p>
@@ -369,7 +371,7 @@ and returns a transformed version of X.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.RobustScaler.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L213"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -394,7 +396,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.RobustScaler.inverse_transform">
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1092"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1105"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scale back the data to the original representation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -412,7 +414,7 @@ contained subobjects that are estimators.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.RobustScaler.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/base.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -430,7 +432,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="sklearn.preprocessing.RobustScaler.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/5a185eb/sklearn/preprocessing/data.py#L1065"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/2d7cd0c/sklearn/preprocessing/data.py#L1078"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.RobustScaler.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Center and scale the data.</p>
 <p>Can be called on sparse input, provided that <code class="docutils literal"><span class="pre">RobustScaler</span></code> has been
 fitted to dense input and <code class="docutils literal"><span class="pre">with_centering=False</span></code>.</p>
@@ -468,7 +470,7 @@ fitted to dense input and <code class="docutils literal"><span class="pre">with_
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../../_sources/modules/generated/sklearn.preprocessing.RobustScaler.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">

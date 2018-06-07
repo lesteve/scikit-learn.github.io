@@ -1,4 +1,8 @@
+.. note::
+    :class: sphx-glr-download-link-note
 
+    Click :ref:`here <sphx_glr_download_auto_examples_manifold_plot_lle_digits.py>` to download the full example code or run this example in your browser via Binder
+.. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_auto_examples_manifold_plot_lle_digits.py:
 
@@ -29,72 +33,74 @@ initialization.
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_001.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_002.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_003.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_004.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_005.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_006.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_007.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_008.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_009.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_010.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_011.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_012.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/manifold/images/sphx_glr_plot_lle_digits_013.png
-            :scale: 47
+            :class: sphx-glr-multi-img
 
 
 .. rst-class:: sphx-glr-script-out
 
- Out::
+ Out:
+
+ .. code-block:: none
 
     Computing random projection
     Computing PCA projection
@@ -104,13 +110,13 @@ initialization.
     Computing LLE embedding
     Done. Reconstruction error: 1.63544e-06
     Computing modified LLE embedding
-    Done. Reconstruction error: 0.360529
+    Done. Reconstruction error: 0.36065
     Computing Hessian LLE embedding
-    Done. Reconstruction error: 0.212802
+    Done. Reconstruction error: 0.212799
     Computing LTSA embedding
-    Done. Reconstruction error: 0.212801
+    Done. Reconstruction error: 0.212805
     Computing MDS embedding
-    Done. Stress: 140428674.316512
+    Done. Stress: 148085982.692963
     Computing Totally Random Trees embedding
     Computing Spectral embedding
     Computing t-SNE embedding
@@ -155,14 +161,14 @@ initialization.
         plt.figure()
         ax = plt.subplot(111)
         for i in range(X.shape[0]):
-            plt.text(X[i, 0], X[i, 1], str(digits.target[i]),
+            plt.text(X[i, 0], X[i, 1], str(y[i]),
                      color=plt.cm.Set1(y[i] / 10.),
                      fontdict={'weight': 'bold', 'size': 9})
 
         if hasattr(offsetbox, 'AnnotationBbox'):
             # only print thumbnails with matplotlib > 1.0
             shown_images = np.array([[1., 1.]])  # just something big
-            for i in range(digits.data.shape[0]):
+            for i in range(X.shape[0]):
                 dist = np.sum((X[i] - shown_images) ** 2, 1)
                 if np.min(dist) < 4e-3:
                     # don't show points that are too close
@@ -336,13 +342,23 @@ initialization.
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  22.007 seconds)
+**Total running time of the script:** ( 0 minutes  12.776 seconds)
 
+
+.. _sphx_glr_download_auto_examples_manifold_plot_lle_digits.py:
 
 
 .. only :: html
 
  .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+  .. container:: binder-badge
+
+    .. image:: https://static.mybinder.org/badge.svg
+      :target: https://mybinder.org/v2/gh/scikit-learn/scikit-learn.github.io/master?urlpath=lab/tree/notebooks/auto_examples/manifold/plot_lle_digits.ipynb
+      :width: 150 px
 
 
   .. container:: sphx-glr-download

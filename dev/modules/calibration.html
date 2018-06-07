@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -87,6 +89,7 @@
             <li><a href="../tutorial/index.html">Tutorials</a></li>
             <li><a href="../user_guide.html">User guide</a></li>
             <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../developers/contributing.html">Contributing</a></li>
             <li class="divider"></li>
@@ -277,13 +280,16 @@ in the middle, i.e., 0.5.</p>
 <a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../_images/sphx_glr_plot_calibration_0021.png" src="../_images/sphx_glr_plot_calibration_0021.png" /></a>
 </div>
 <p>The following experiment is performed on an artificial dataset for binary
-classification with 100.000 samples (1.000 of them are used for model fitting)
+classification with 100,000 samples (1,000 of them are used for model fitting)
 with 20 features. Of the 20 features, only 2 are informative and 10 are
 redundant. The figure shows the estimated probabilities obtained with
 logistic regression, a linear support-vector classifier (SVC), and linear SVC with
-both isotonic calibration and sigmoid calibration. The calibration performance
-is evaluated with Brier score <a class="reference internal" href="generated/sklearn.metrics.brier_score_loss.html#sklearn.metrics.brier_score_loss" title="sklearn.metrics.brier_score_loss"><code class="xref py py-func docutils literal"><span class="pre">brier_score_loss</span></code></a>, reported in the legend
-(the smaller the better).</p>
+both isotonic calibration and sigmoid calibration.
+The Brier score is a metric which is a combination of calibration loss and refinement loss,
+<a class="reference internal" href="generated/sklearn.metrics.brier_score_loss.html#sklearn.metrics.brier_score_loss" title="sklearn.metrics.brier_score_loss"><code class="xref py py-func docutils literal"><span class="pre">brier_score_loss</span></code></a>, reported in the legend (the smaller the better).
+Calibration loss is defined as the mean squared deviation from empirical probabilities
+derived from the slope of ROC segments. Refinement loss can be defined as the expected
+optimal loss as measured by the area under the optimal cost curve.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0021.png" src="../_images/sphx_glr_plot_calibration_curve_0021.png" /></a>
 </div>
@@ -383,7 +389,7 @@ Wilks, D. S., 1990a</td></tr>
     </div>
 
     <div class="footer">
-        &copy; 2007 - 2017, scikit-learn developers (BSD License).
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
       <a href="../_sources/modules/calibration.rst.txt" rel="nofollow">Show this page source</a>
     </div>
      <div class="rel">
